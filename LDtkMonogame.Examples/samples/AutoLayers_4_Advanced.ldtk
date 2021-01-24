@@ -14,7 +14,7 @@
 	"defaultGridSize": 16,
 	"bgColor": "#1B2037",
 	"defaultLevelBgColor": "#1B2037",
-	"nextUid": 97,
+	"nextUid": 96,
 	"minifyJson": false,
 	"externalLevels": false,
 	"exportTiled": false,
@@ -26,23 +26,6 @@
 	"worldGridHeight": 256,
 	"defs": {
 		"layers": [
-			{
-				"__type": "Tiles",
-				"identifier": "Tiles",
-				"type": "Tiles",
-				"uid": 96,
-				"gridSize": 8,
-				"displayOpacity": 1,
-				"pxOffsetX": 0,
-				"pxOffsetY": 0,
-				"intGridValues": [{ "identifier": null, "color": "#000000" }],
-				"autoTilesetDefUid": null,
-				"autoRuleGroups": [],
-				"autoSourceLayerDefUid": null,
-				"tilesetDefUid": 9,
-				"tilePivotX": 0,
-				"tilePivotY": 0
-			},
 			{
 				"__type": "IntGrid",
 				"identifier": "IntGrid_layer",
@@ -419,7 +402,7 @@
 						"uid": 73,
 						"name": "Ladders",
 						"active": true,
-						"collapsed": false,
+						"collapsed": true,
 						"rules": [
 							{
 								"uid": 64,
@@ -603,7 +586,7 @@
 						"uid": 75,
 						"name": "Vegetation",
 						"active": true,
-						"collapsed": true,
+						"collapsed": false,
 						"rules": [
 							{
 								"uid": 32,
@@ -716,7 +699,7 @@
 						"uid": 76,
 						"name": "Walls",
 						"active": true,
-						"collapsed": true,
+						"collapsed": false,
 						"rules": [
 							{
 								"uid": 67,
@@ -1109,44 +1092,11 @@
 			"bgColor": null,
 			"bgRelPath": null,
 			"bgPos": null,
-			"bgPivotX": 1,
-			"bgPivotY": 1,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
 			"__bgPos": null,
 			"externalRelPath": null,
 			"layerInstances": [
-				{
-					"__identifier": "Tiles",
-					"__type": "Tiles",
-					"__cWid": 37,
-					"__cHei": 43,
-					"__gridSize": 8,
-					"__opacity": 1,
-					"__pxTotalOffsetX": 0,
-					"__pxTotalOffsetY": 0,
-					"__tilesetDefUid": 9,
-					"__tilesetRelPath": "Cavernas_by_Adam_Saltsman.png",
-					"levelId": 70,
-					"layerDefUid": 96,
-					"pxOffsetX": 0,
-					"pxOffsetY": 0,
-					"intGrid": [],
-					"autoLayerTiles": [],
-					"seed": 991041,
-					"gridTiles": [
-						{ "px": [32,24], "src": [0,128], "f": 0, "t": 192, "d": [115] },
-						{ "px": [64,24], "src": [16,128], "f": 0, "t": 194, "d": [119] },
-						{ "px": [208,24], "src": [16,128], "f": 0, "t": 194, "d": [137] },
-						{ "px": [224,32], "src": [8,128], "f": 0, "t": 193, "d": [176] },
-						{ "px": [256,32], "src": [0,128], "f": 0, "t": 192, "d": [180] },
-						{ "px": [88,40], "src": [0,128], "f": 0, "t": 192, "d": [196] },
-						{ "px": [136,48], "src": [0,128], "f": 0, "t": 192, "d": [239] },
-						{ "px": [192,48], "src": [16,128], "f": 0, "t": 194, "d": [246] },
-						{ "px": [240,48], "src": [0,128], "f": 0, "t": 192, "d": [252] },
-						{ "px": [40,56], "src": [8,128], "f": 0, "t": 193, "d": [264] },
-						{ "px": [200,72], "src": [8,128], "f": 0, "t": 193, "d": [358] }
-					],
-					"entityInstances": []
-				},
 				{
 					"__identifier": "IntGrid_layer",
 					"__type": "IntGrid",

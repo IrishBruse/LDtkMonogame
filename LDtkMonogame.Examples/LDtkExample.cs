@@ -18,6 +18,7 @@ namespace Example
         private Vector3 cameraPosition;
         private Vector3 cameraOrigin;
         private float cameraZoom = 1f;
+
         private readonly int currentLevel = 1;
         private readonly bool[] activeLayers = { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, };
 
@@ -42,7 +43,7 @@ namespace Example
         private void OnWindowResized()
         {
             cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
-            cameraZoom = MathF.Max(1, GraphicsDevice.Viewport.Height / 160);
+            cameraZoom = MathF.Max(1, GraphicsDevice.Viewport.Height / 240);
         }
 
         private void MonogameInitialize()
@@ -50,7 +51,7 @@ namespace Example
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            IsFixedTimeStep = true;
+            IsFixedTimeStep = false;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
 
@@ -78,26 +79,29 @@ namespace Example
 
             if(keyboard.IsKeyDown(Keys.E))
             {
-                cameraZoom += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                cameraZoom += (float)deltaTime;
             }
 
             if(keyboard.IsKeyDown(Keys.Q))
             {
-                cameraZoom -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                cameraZoom -= (float)deltaTime;
             }
 
             if(keyboard.IsKeyDown(Keys.D1) == false && oldKeyboardState.IsKeyDown(Keys.D1) == true)
             {
                 activeLayers[0] = !activeLayers[0];
             }
+
             if(keyboard.IsKeyDown(Keys.D2) == false && oldKeyboardState.IsKeyDown(Keys.D2) == true)
             {
                 activeLayers[1] = !activeLayers[1];
             }
+
             if(keyboard.IsKeyDown(Keys.D3) == false && oldKeyboardState.IsKeyDown(Keys.D3) == true)
             {
                 activeLayers[2] = !activeLayers[2];
             }
+
             if(keyboard.IsKeyDown(Keys.D4) == false && oldKeyboardState.IsKeyDown(Keys.D4) == true)
             {
                 activeLayers[3] = !activeLayers[3];

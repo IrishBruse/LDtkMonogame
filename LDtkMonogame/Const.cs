@@ -13,7 +13,5 @@
         public const string WorldLayoutVertical = "LinearVertical";
         public const string WorldLayoutFree = "Free";
         public const string WorldLayoutGridVania = "GridVania";
-
-
     }
 }
