@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "9fIKsxe5PuKkrBqJHpcwvMDrixHlx88B0MAvFvpTHaak4yV7i7WYDi4ym/7E1eCnwh28np5HIItsrVTAkJp7zQ==",
+  "success": true,
+  "projectFilePath": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame\\LDtkMonogame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Econn\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\Econn\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
