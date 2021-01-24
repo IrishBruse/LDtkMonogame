@@ -130,11 +130,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame\\LDtkMonogame.csproj",
+      "projectUniqueName": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame.csproj",
       "projectName": "LDtkMonogame",
-      "projectPath": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame\\LDtkMonogame.csproj",
+      "projectPath": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame.csproj",
       "packagesPath": "C:\\Users\\Econn\\.nuget\\packages\\",
-      "outputPath": "E:\\Projects\\C#\\LDtkMonogame\\LDtkMonogame\\obj\\",
+      "outputPath": "E:\\Projects\\C#\\LDtkMonogame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
