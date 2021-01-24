@@ -5,6 +5,4 @@
 # Ldtk Monogame
 C# Monogame renderer for https://github.com/deepnight/ldtk
 
-https://www.nuget.org/packages/LDtkMonogame/
-
 Currently Supports LDtk 0.7.0
