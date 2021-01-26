@@ -19,11 +19,11 @@ namespace Example
         private Vector3 cameraOrigin;
         private float cameraZoom = 1f;
 
-        private readonly int currentLevel = 1;
-        private readonly bool[] activeLayers = { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, };
+        private int currentLevel = 3;
 
-        KeyboardState oldKeyboardState;
+        KeyboardState oldKeyboard;
 
+        string filename = "SeparateLevelFiles";
         public LDtkExample()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,7 +34,7 @@ namespace Example
         {
             MonogameInitialize();
 
-            projectFile = new Project(spriteBatch, "samples/Test_file_for_API_showing_all_features.ldtk");
+            projectFile = new Project(spriteBatch, "samples/" + filename + ".ldtk");
             projectFile.Render(currentLevel);
 
             base.Initialize();
@@ -43,7 +43,7 @@ namespace Example
         private void OnWindowResized()
         {
             cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
-            cameraZoom = MathF.Max(1, GraphicsDevice.Viewport.Height / 240);
+            cameraZoom = 2;
         }
 
         private void MonogameInitialize()
@@ -52,6 +52,8 @@ namespace Example
             IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
             IsFixedTimeStep = false;
+
+            Window.Title = filename;
 
             TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
 
@@ -77,37 +79,27 @@ namespace Example
                 cameraZoom = 1;
             }
 
-            if(keyboard.IsKeyDown(Keys.E))
+            if(keyboard.IsKeyDown(Keys.E) == false && oldKeyboard.IsKeyDown(Keys.E))
             {
-                cameraZoom += (float)deltaTime;
+                currentLevel++;
+                if(currentLevel >= projectFile.Levels.Length)
+                {
+                    currentLevel = 0;
+                }
+                projectFile.Render(currentLevel);
             }
 
-            if(keyboard.IsKeyDown(Keys.Q))
+            if(keyboard.IsKeyDown(Keys.Q) == false && oldKeyboard.IsKeyDown(Keys.Q))
             {
-                cameraZoom -= (float)deltaTime;
+                currentLevel--;
+                if(currentLevel < 0)
+                {
+                    currentLevel = projectFile.Levels.Length - 1;
+                }
+                projectFile.Render(currentLevel);
             }
 
-            if(keyboard.IsKeyDown(Keys.D1) == false && oldKeyboardState.IsKeyDown(Keys.D1) == true)
-            {
-                activeLayers[0] = !activeLayers[0];
-            }
-
-            if(keyboard.IsKeyDown(Keys.D2) == false && oldKeyboardState.IsKeyDown(Keys.D2) == true)
-            {
-                activeLayers[1] = !activeLayers[1];
-            }
-
-            if(keyboard.IsKeyDown(Keys.D3) == false && oldKeyboardState.IsKeyDown(Keys.D3) == true)
-            {
-                activeLayers[2] = !activeLayers[2];
-            }
-
-            if(keyboard.IsKeyDown(Keys.D4) == false && oldKeyboardState.IsKeyDown(Keys.D4) == true)
-            {
-                activeLayers[3] = !activeLayers[3];
-            }
-
-            oldKeyboardState = keyboard;
+            oldKeyboard = keyboard;
 
             base.Update(gameTime);
         }
@@ -119,12 +111,14 @@ namespace Example
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
             {
-                for(int i = level.layers.Length - 1; i >= 0; i--)
+                if(level.Background != null)
                 {
-                    if(activeLayers[i] == true)
-                    {
-                        spriteBatch.Draw(level.layers[i], Vector2.Zero, Color.White);
-                    }
+                    spriteBatch.Draw(level.Background.Image, level.Background.TopLeft, level.Background.CropRect, Color.White, 0, Vector2.Zero, level.Background.Scale, SpriteEffects.None, 0);
+                }
+
+                for(int i = level.Layers.Length - 1; i >= 0; i--)
+                {
+                    spriteBatch.Draw(level.Layers[i], Vector2.Zero, Color.White);
                 }
             }
             spriteBatch.End();

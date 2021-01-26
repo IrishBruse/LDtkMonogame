@@ -5,10 +5,10 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "0.7.0",
+		"appVersion": "0.7.1",
 		"url": "https://ldtk.io"
 	},
-	"jsonVersion": "0.7.0",
+	"jsonVersion": "0.7.1",
 	"defaultPivotX": 0.5,
 	"defaultPivotY": 0.5,
 	"defaultGridSize": 16,
@@ -640,6 +640,8 @@
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
 					"intGrid": [
+						{ "coordId": 0, "v": 0 },
+						{ "coordId": 84, "v": 0 },
 						{ "coordId": 1260, "v": 0 },
 						{ "coordId": 1262, "v": 0 },
 						{ "coordId": 1264, "v": 0 },
@@ -711,7 +713,9 @@
 						{ "coordId": 2198, "v": 0 },
 						{ "coordId": 2200, "v": 0 },
 						{ "coordId": 2202, "v": 0 },
-						{ "coordId": 2204, "v": 0 }
+						{ "coordId": 2204, "v": 0 },
+						{ "coordId": 4675, "v": 0 },
+						{ "coordId": 4759, "v": 0 }
 					],
 					"autoLayerTiles": [],
 					"seed": 7676281,
@@ -2131,10 +2135,10 @@
 			"__bgColor": "#373852",
 			"bgColor": null,
 			"bgRelPath": "Inca_back2_by_Kronbits.png",
-			"bgPos": "Contain",
+			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
-			"__bgPos": { "topLeftPx": [36,0], "scale": [1.1428571428571428,1.1428571428571428], "cropRect": [0,0,160,224] },
+			"__bgPos": { "topLeftPx": [0,0], "scale": [1.6,1.6], "cropRect": [0,32,160,160] },
 			"externalRelPath": null,
 			"layerInstances": [
 				{
@@ -2152,7 +2156,7 @@
 					"layerDefUid": 34,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"intGrid": [],
+					"intGrid": [ { "coordId": 0, "v": 0 }, { "coordId": 31, "v": 0 }, { "coordId": 992, "v": 0 }, { "coordId": 1023, "v": 0 } ],
 					"autoLayerTiles": [],
 					"seed": 3866698,
 					"gridTiles": [],

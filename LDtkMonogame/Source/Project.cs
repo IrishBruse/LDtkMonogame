@@ -45,21 +45,41 @@ namespace LDtk
         /// <param name="levelId">The id of the level</param>
         public void Render(int levelId)
         {
+            GraphicsDevice GraphicsDevice = spriteBatch.GraphicsDevice;
+
+
+
             // Cache the Background Color
             Levels[levelId].BgColor = Utility.ConvertStringToColor(json.Levels[levelId].BgColor);
 
-            LayerInstance[] jsonLayerInstances = json.Levels[levelId].LayerInstances;
-            Levels[levelId].layers = new RenderTarget2D[jsonLayerInstances.Length];
+            // The current Level has a background
+            if(json.Levels[levelId].BgRelPath != null)
+            {
+                Levels[levelId].Background = new Background();
 
-            GraphicsDevice GraphicsDevice = spriteBatch.GraphicsDevice;
+                Levels[levelId].Background.Image = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, json.Levels[levelId].BgRelPath));
+
+                long[] topleft = json.Levels[levelId].BgPos.TopLeftPx;
+                Levels[levelId].Background.TopLeft = new Vector2(topleft[0], topleft[1]);
+
+                double[] rect = json.Levels[levelId].BgPos.CropRect;
+                Levels[levelId].Background.CropRect = new Rectangle((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
+
+                var scale = json.Levels[levelId].BgPos.Scale;
+                Levels[levelId].Background.Scale = new Vector2((float)scale[0], (float)scale[1]);
+            }
+
+            LayerInstance[] jsonLayerInstances = json.Levels[levelId].LayerInstances;
+            Levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
+
 
             for(int i = jsonLayerInstances.Length - 1; i >= 0; i--)
             {
                 LayerInstance jsonLayer = jsonLayerInstances[i];
 
-                Levels[levelId].layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                Levels[levelId].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
-                GraphicsDevice.SetRenderTarget(Levels[levelId].layers[i]);
+                GraphicsDevice.SetRenderTarget(Levels[levelId].Layers[i]);
                 Texture2D texture;
 
                 if(jsonLayer.TilesetRelPath != null)
@@ -68,6 +88,7 @@ namespace LDtk
                 }
                 else
                 {
+                    // Create single pixel texture
                     texture = new Texture2D(GraphicsDevice, 1, 1);
                     texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
                 }
@@ -108,7 +129,6 @@ namespace LDtk
                     }
                     else
                     {
-
                         LayerDefinition layerInstance = GetLayerDefinitionFromUid(jsonLayer.LayerDefUid);
 
                         foreach(IntGridValueInstance tile in jsonLayer.IntGrid)
@@ -127,12 +147,12 @@ namespace LDtk
                     case Const.LayerTypeEntities:
                     foreach(EntityInstance entity in jsonLayer.EntityInstances)
                     {
-                        EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
-                        Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
-                        Vector2 size = new Vector2(def.Width, def.Height);
-                        Color color = Utility.ConvertStringToColor(def.Color);
-
-                        spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, size, SpriteEffects.None, 0);
+                        //EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
+                        //Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
+                        //Vector2 size = new Vector2(def.Width, def.Height);
+                        //Color color = Utility.ConvertStringToColor(def.Color);
+                        //
+                        //spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, size, SpriteEffects.None, 0);
                     }
                     break;
 
