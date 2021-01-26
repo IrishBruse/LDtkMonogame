@@ -47,31 +47,42 @@ namespace LDtk
         {
             GraphicsDevice GraphicsDevice = spriteBatch.GraphicsDevice;
 
+            Internal.Level level;
 
-
-            // Cache the Background Color
-            Levels[levelId].BgColor = Utility.ConvertStringToColor(json.Levels[levelId].BgColor);
-
-            // The current Level has a background
-            if(json.Levels[levelId].BgRelPath != null)
+            if(json.ExternalLevels == true)
             {
-                Levels[levelId].Background = new Background();
-
-                Levels[levelId].Background.Image = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, json.Levels[levelId].BgRelPath));
-
-                long[] topleft = json.Levels[levelId].BgPos.TopLeftPx;
-                Levels[levelId].Background.TopLeft = new Vector2(topleft[0], topleft[1]);
-
-                double[] rect = json.Levels[levelId].BgPos.CropRect;
-                Levels[levelId].Background.CropRect = new Rectangle((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
-
-                var scale = json.Levels[levelId].BgPos.Scale;
-                Levels[levelId].Background.Scale = new Vector2((float)scale[0], (float)scale[1]);
+                string path = Path.Combine(absoluteProjectFolder, json.Levels[levelId].ExternalRelPath);
+                level = Newtonsoft.Json.JsonConvert.DeserializeObject<Internal.Level>(File.ReadAllText(path));
+            }
+            else
+            {
+                level = json.Levels[levelId];
             }
 
-            LayerInstance[] jsonLayerInstances = json.Levels[levelId].LayerInstances;
-            Levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
+            // Cache the Background Color
+            Levels[levelId].BgColor = Utility.ConvertStringToColor(level.BgColor);
 
+            // The current Level has a background
+            if(level.BgRelPath != null)
+            {
+                Background background = Levels[levelId].Background;
+
+                background.Image = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, level.BgRelPath));
+
+                long[] topleft = level.BgPos.TopLeftPx;
+                background.TopLeft = new Vector2(topleft[0], topleft[1]);
+
+                double[] rect = level.BgPos.CropRect;
+                background.CropRect = new Rectangle((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
+
+                var scale = level.BgPos.Scale;
+                background.Scale = new Vector2((float)scale[0], (float)scale[1]);
+
+                Levels[levelId].Background = background;
+            }
+
+            LayerInstance[] jsonLayerInstances = level.LayerInstances;
+            Levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
 
             for(int i = jsonLayerInstances.Length - 1; i >= 0; i--)
             {

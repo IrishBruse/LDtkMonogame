@@ -19,11 +19,10 @@ namespace Example
         private Vector3 cameraOrigin;
         private float cameraZoom = 1f;
 
-        private int currentLevel = 3;
+        private int currentLevel = 0;
+        private KeyboardState oldKeyboard;
+        private readonly string filename = "SeparateLevelFiles";
 
-        KeyboardState oldKeyboard;
-
-        string filename = "SeparateLevelFiles";
         public LDtkExample()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -111,7 +110,7 @@ namespace Example
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
             {
-                if(level.Background != null)
+                if(level.Background.Image != null)
                 {
                     spriteBatch.Draw(level.Background.Image, level.Background.TopLeft, level.Background.CropRect, Color.White, 0, Vector2.Zero, level.Background.Scale, SpriteEffects.None, 0);
                 }

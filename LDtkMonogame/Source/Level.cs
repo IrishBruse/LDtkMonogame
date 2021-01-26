@@ -24,7 +24,7 @@ namespace LDtk
     /// <summary>
     /// The background image class
     /// </summary>
-    public class Background
+    public struct Background
     {
         /// <summary>
         /// The croped texture if your settings caused it to
