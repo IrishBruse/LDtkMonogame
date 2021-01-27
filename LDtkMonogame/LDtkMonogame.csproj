@@ -9,11 +9,14 @@
 		<PackageId>LDtkMonogame</PackageId>
 		<Description>LDtk importer for Monogame</Description>
 		<PackageProjectUrl>https://ldtk.io/</PackageProjectUrl>
-		<Version>0.0.1</Version>
+		<Version>0.1.1</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>favicon.png</PackageIcon>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>Added .ldtkl support 
+Added background images</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup>

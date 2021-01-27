@@ -8,35 +8,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LDtk
 {
+    /// <summary>
+    /// The main class for rendering and loading .ldtk and .ldtkl files
+    /// </summary>
     public class Project
     {
         public Level[] Levels { get; private set; }
 
-        private readonly LdtkJson json;
+        private string jsonFilePath;
+        private LdtkJson json;
 
-        private readonly string absoluteProjectFolder;
+        private string absoluteProjectFolder;
         private readonly SpriteBatch spriteBatch;
 
         /// <summary>
         /// <para>Load the LDtk json file.</para>
-        /// Throws <see cref="FileNotFoundException"/> if an invalid 
-        /// file path is passed
+        /// Throws <see cref="FileNotFoundException"/> if an invalid file path is given
         /// </summary>
         /// <param name="spriteBatch">Monogames <see cref="SpriteBatch"/></param>
-        /// <param name="ldtkFile">The path to the file</param>
+        /// <param name="ldtkFile">The path to the .ldtk file</param>
         public Project(SpriteBatch spriteBatch, string ldtkFile)
         {
             this.spriteBatch = spriteBatch;
-
-            // Throw error if file not found
-            if(File.Exists(ldtkFile) == false)
-            {
-                throw new FileNotFoundException("Ldtk project File not found " + ldtkFile);
-            }
-
-            json = LdtkJson.FromJson(File.ReadAllText(ldtkFile));
-            absoluteProjectFolder = Path.GetDirectoryName(Path.GetFullPath(ldtkFile));
-            Levels = new Level[json.Levels.Length];
+            Reload(ldtkFile);
         }
 
         /// <summary>
@@ -47,86 +41,71 @@ namespace LDtk
         {
             GraphicsDevice GraphicsDevice = spriteBatch.GraphicsDevice;
 
-            Internal.Level level;
-
-            if(json.ExternalLevels == true)
+            if(Levels[levelId].Layers == null)
             {
-                string path = Path.Combine(absoluteProjectFolder, json.Levels[levelId].ExternalRelPath);
-                level = Newtonsoft.Json.JsonConvert.DeserializeObject<Internal.Level>(File.ReadAllText(path));
-            }
-            else
-            {
-                level = json.Levels[levelId];
-            }
+                Internal.Level level;
 
-            // Cache the Background Color
-            Levels[levelId].BgColor = Utility.ConvertStringToColor(level.BgColor);
-
-            // The current Level has a background
-            if(level.BgRelPath != null)
-            {
-                Background background = Levels[levelId].Background;
-
-                background.Image = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, level.BgRelPath));
-
-                long[] topleft = level.BgPos.TopLeftPx;
-                background.TopLeft = new Vector2(topleft[0], topleft[1]);
-
-                double[] rect = level.BgPos.CropRect;
-                background.CropRect = new Rectangle((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
-
-                var scale = level.BgPos.Scale;
-                background.Scale = new Vector2((float)scale[0], (float)scale[1]);
-
-                Levels[levelId].Background = background;
-            }
-
-            LayerInstance[] jsonLayerInstances = level.LayerInstances;
-            Levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
-
-            for(int i = jsonLayerInstances.Length - 1; i >= 0; i--)
-            {
-                LayerInstance jsonLayer = jsonLayerInstances[i];
-
-                Levels[levelId].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-
-                GraphicsDevice.SetRenderTarget(Levels[levelId].Layers[i]);
-                Texture2D texture;
-
-                if(jsonLayer.TilesetRelPath != null)
+                if(json.ExternalLevels == true)
                 {
-                    texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, jsonLayer.TilesetRelPath));
+                    string path = Path.Combine(absoluteProjectFolder, json.Levels[levelId].ExternalRelPath);
+                    level = Newtonsoft.Json.JsonConvert.DeserializeObject<Internal.Level>(File.ReadAllText(path));
                 }
                 else
                 {
-                    // Create single pixel texture
-                    texture = new Texture2D(GraphicsDevice, 1, 1);
-                    texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+                    level = json.Levels[levelId];
                 }
 
-                spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+                // Cache the Background Color
+                Levels[levelId].BgColor = Utility.ConvertStringToColor(level.BgColor);
 
-                switch(jsonLayer.Type)
+                // The current Level has a background
+                if(level.BgRelPath != null)
                 {
-                    case Const.LayerTypeTiles:
-                    foreach(TileInstance tile in jsonLayer.GridTiles)
-                    {
-                        if(jsonLayer.TilesetDefUid.HasValue)
-                        {
-                            Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
-                            Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
-                            SpriteEffects mirror = (SpriteEffects)tile.F;
+                    Background background = Levels[levelId].Background;
 
-                            spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                        }
+                    background.Image = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, level.BgRelPath));
+
+                    long[] topleft = level.BgPos.TopLeftPx;
+                    background.TopLeft = new Vector2(topleft[0], topleft[1]);
+
+                    double[] rect = level.BgPos.CropRect;
+                    background.CropRect = new Rectangle((int)rect[0], (int)rect[1], (int)rect[2], (int)rect[3]);
+
+                    var scale = level.BgPos.Scale;
+                    background.Scale = new Vector2((float)scale[0], (float)scale[1]);
+
+                    Levels[levelId].Background = background;
+                }
+
+                LayerInstance[] jsonLayerInstances = level.LayerInstances;
+                Levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
+
+                for(int i = jsonLayerInstances.Length - 1; i >= 0; i--)
+                {
+                    LayerInstance jsonLayer = jsonLayerInstances[i];
+
+                    Levels[levelId].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+
+                    GraphicsDevice.SetRenderTarget(Levels[levelId].Layers[i]);
+                    Texture2D texture;
+
+                    if(jsonLayer.TilesetRelPath != null)
+                    {
+                        texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, jsonLayer.TilesetRelPath));
                     }
-                    break;
-
-                    case Const.LayerTypeIntGrid:
-                    case Const.LayerTypeAutoTile:
-                    if(jsonLayer.AutoLayerTiles.Length > 0)
+                    else
                     {
-                        foreach(TileInstance tile in jsonLayer.AutoLayerTiles)
+                        // Create single pixel texture
+                        texture = new Texture2D(GraphicsDevice, 1, 1);
+                        texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+                    }
+
+                    spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+                    switch(jsonLayer.Type)
+                    {
+                        case Const.LayerTypeTiles:
+                        foreach(TileInstance tile in jsonLayer.GridTiles)
                         {
                             if(jsonLayer.TilesetDefUid.HasValue)
                             {
@@ -137,42 +116,83 @@ namespace LDtk
                                 spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                             }
                         }
-                    }
-                    else
-                    {
-                        LayerDefinition layerInstance = GetLayerDefinitionFromUid(jsonLayer.LayerDefUid);
+                        break;
 
-                        foreach(IntGridValueInstance tile in jsonLayer.IntGrid)
+                        case Const.LayerTypeIntGrid:
+                        case Const.LayerTypeAutoTile:
+                        if(jsonLayer.AutoLayerTiles.Length > 0)
                         {
-                            long x = tile.CoordId % jsonLayer.CWid;
-                            long y = tile.CoordId / jsonLayer.CWid;
+                            foreach(TileInstance tile in jsonLayer.AutoLayerTiles)
+                            {
+                                if(jsonLayer.TilesetDefUid.HasValue)
+                                {
+                                    Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
+                                    Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
+                                    SpriteEffects mirror = (SpriteEffects)tile.F;
 
-                            Vector2 position = new Vector2(x * jsonLayer.GridSize, y * jsonLayer.GridSize);
-                            Color color = Utility.ConvertStringToColor(layerInstance.IntGridValues[tile.V].Color);
-
-                            spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, jsonLayer.GridSize, SpriteEffects.None, 0);
+                                    spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                                }
+                            }
                         }
-                    }
-                    break;
+                        else
+                        {
+                            LayerDefinition layerInstance = GetLayerDefinitionFromUid(jsonLayer.LayerDefUid);
 
-                    case Const.LayerTypeEntities:
-                    foreach(EntityInstance entity in jsonLayer.EntityInstances)
-                    {
-                        //EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
-                        //Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
-                        //Vector2 size = new Vector2(def.Width, def.Height);
-                        //Color color = Utility.ConvertStringToColor(def.Color);
-                        //
-                        //spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, size, SpriteEffects.None, 0);
-                    }
-                    break;
+                            foreach(IntGridValueInstance tile in jsonLayer.IntGrid)
+                            {
+                                long x = tile.CoordId % jsonLayer.CWid;
+                                long y = tile.CoordId / jsonLayer.CWid;
 
-                    default: throw new NotImplementedException(jsonLayer.Type);
+                                Vector2 position = new Vector2(x * jsonLayer.GridSize, y * jsonLayer.GridSize);
+                                Color color = Utility.ConvertStringToColor(layerInstance.IntGridValues[tile.V].Color);
+
+                                spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, jsonLayer.GridSize, SpriteEffects.None, 0);
+                            }
+                        }
+                        break;
+
+                        case Const.LayerTypeEntities:
+                        foreach(EntityInstance entity in jsonLayer.EntityInstances)
+                        {
+                            //EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
+                            //Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
+                            //Vector2 size = new Vector2(def.Width, def.Height);
+                            //Color color = Utility.ConvertStringToColor(def.Color);
+                            //
+                            //spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, size, SpriteEffects.None, 0);
+                        }
+                        break;
+
+                        default: throw new NotImplementedException(jsonLayer.Type);
+                    }
+
+                    spriteBatch.End();
                 }
-
-                spriteBatch.End();
+                GraphicsDevice.SetRenderTarget(null);
             }
-            GraphicsDevice.SetRenderTarget(null);
+        }
+
+        /// <summary>
+        /// <para>Reload the LDtk json file.</para>
+        /// <para><c>Warning</c> make sure to rerender your <see cref="Level"/>'s.</para>
+        /// Throws <see cref="FileNotFoundException"/> if an invalid file path is given
+        /// </summary>
+        public void Reload(string ldtkFile = null)
+        {
+            if(ldtkFile != null)
+            {
+                jsonFilePath = ldtkFile;
+            }
+
+            // Throw error if file not found
+            if(File.Exists(jsonFilePath) == false)
+            {
+                throw new FileNotFoundException("Ldtk project File not found " + ldtkFile);
+            }
+
+            json = LdtkJson.FromJson(File.ReadAllText(jsonFilePath));
+            absoluteProjectFolder = Path.GetDirectoryName(Path.GetFullPath(jsonFilePath));
+            Levels = new Level[json.Levels.Length];
         }
 
         private EntityDefinition GetEntityDefinitionFromUid(long uid)

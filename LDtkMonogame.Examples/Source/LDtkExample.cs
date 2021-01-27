@@ -73,7 +73,7 @@ namespace Example
 
             cameraPosition += new Vector3(h, v, 0) * 100 * (float)deltaTime;
 
-            if(keyboard.IsKeyDown(Keys.R))
+            if(keyboard.IsKeyDown(Keys.T))
             {
                 cameraZoom = 1;
             }
@@ -95,6 +95,12 @@ namespace Example
                 {
                     currentLevel = projectFile.Levels.Length - 1;
                 }
+                projectFile.Render(currentLevel);
+            }
+
+            if(keyboard.IsKeyDown(Keys.R) == false && oldKeyboard.IsKeyDown(Keys.R))
+            {
+                projectFile.Reload();
                 projectFile.Render(currentLevel);
             }
 
