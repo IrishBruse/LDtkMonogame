@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 using LDtk;
 
@@ -6,60 +7,43 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Example
+namespace Examples
 {
-    public class LDtkExample : Game
+    public class LDtkExample : BaseExample
     {
-        private readonly GraphicsDeviceManager graphics;
-        private SpriteBatch spriteBatch;
-        private Project projectFile;
-
         // Camera
         private Vector3 cameraPosition;
         private Vector3 cameraOrigin;
         private float cameraZoom = 1f;
 
+        // LDtk stuff
         private int currentLevel = 0;
-        private KeyboardState oldKeyboard;
-        private readonly string filename = "SeparateLevelFiles";
+        private Project projectFile;
+        private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
 
-        public LDtkExample()
+        Level startLevel;
+        Level[] neighbours;
+
+        public LDtkExample() : base()
         {
-            graphics = new GraphicsDeviceManager(this);
             IsFixedTimeStep = false;
         }
 
         protected override void Initialize()
         {
-            MonogameInitialize();
-
-            projectFile = new Project(spriteBatch, "samples/" + filename + ".ldtk");
-            projectFile.Render(currentLevel);
-
             base.Initialize();
+
+            projectFile = new Project(spriteBatch, LDTK_FILE);
+            projectFile.Load(currentLevel);
+
+            startLevel = projectFile.GetLevel("Level1");
+            neighbours = (from neighbour in startLevel.Neighbours select projectFile.GetLevel(neighbour)).ToArray();
         }
 
-        private void OnWindowResized()
+        public override void OnWindowResized()
         {
             cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
             cameraZoom = 2;
-        }
-
-        private void MonogameInitialize()
-        {
-            Window.AllowUserResizing = true;
-            IsMouseVisible = true;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            IsFixedTimeStep = false;
-
-            Window.Title = filename;
-
-            TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
-
-            graphics.ApplyChanges();
-
-            Window.ClientSizeChanged += (o, e) => OnWindowResized();
-            OnWindowResized();
         }
 
         protected override void Update(GameTime gameTime)
@@ -67,63 +51,37 @@ namespace Example
             double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
 
             KeyboardState keyboard = Keyboard.GetState();
+            MouseState mouse = Mouse.GetState();
 
-            float h = (keyboard.IsKeyDown(Keys.D) ? -1f : 0f) + (keyboard.IsKeyDown(Keys.A) ? 1f : 0f);
-            float v = (keyboard.IsKeyDown(Keys.S) ? -1f : 0f) + (keyboard.IsKeyDown(Keys.W) ? 1f : 0f);
-
-            cameraPosition += new Vector3(h, v, 0) * 100 * (float)deltaTime;
-
-            if(keyboard.IsKeyDown(Keys.T))
+            if(mouse.MiddleButton == ButtonState.Pressed)
             {
-                cameraZoom = 1;
-            }
-
-            if(keyboard.IsKeyDown(Keys.E) == false && oldKeyboard.IsKeyDown(Keys.E))
-            {
-                currentLevel++;
-                if(currentLevel >= projectFile.Levels.Length)
-                {
-                    currentLevel = 0;
-                }
-                projectFile.Render(currentLevel);
-            }
-
-            if(keyboard.IsKeyDown(Keys.Q) == false && oldKeyboard.IsKeyDown(Keys.Q))
-            {
-                currentLevel--;
-                if(currentLevel < 0)
-                {
-                    currentLevel = projectFile.Levels.Length - 1;
-                }
-                projectFile.Render(currentLevel);
-            }
-
-            if(keyboard.IsKeyDown(Keys.R) == false && oldKeyboard.IsKeyDown(Keys.R))
-            {
-                projectFile.Reload();
-                projectFile.Render(currentLevel);
+                Point pos = mouse.Position - oldMouse.Position;
+                cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)deltaTime;
             }
 
             oldKeyboard = keyboard;
+            oldMouse = mouse;
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            Level level = projectFile.Levels[currentLevel];
-            GraphicsDevice.Clear(level.BgColor);
+            GraphicsDevice.Clear(startLevel.BgColor);
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
+            spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
             {
-                if(level.Background.Image != null)
+                for(int i = 0; i < startLevel.Layers.Length; i++)
                 {
-                    spriteBatch.Draw(level.Background.Image, level.Background.TopLeft, level.Background.CropRect, Color.White, 0, Vector2.Zero, level.Background.Scale, SpriteEffects.None, 0);
+                    spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
                 }
 
-                for(int i = level.Layers.Length - 1; i >= 0; i--)
+                for(int i = 0; i < neighbours.Length; i++)
                 {
-                    spriteBatch.Draw(level.Layers[i], Vector2.Zero, Color.White);
+                    for(int j = 0; j < neighbours[i].Layers.Length; j++)
+                    {
+                        spriteBatch.Draw(neighbours[i].Layers[j], neighbours[i].WorldPosition, Color.White);
+                    }
                 }
             }
             spriteBatch.End();

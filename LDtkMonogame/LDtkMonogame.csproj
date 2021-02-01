@@ -8,15 +8,19 @@
 		<Product>LDtk Monogame</Product>
 		<PackageId>LDtkMonogame</PackageId>
 		<Description>LDtk importer for Monogame</Description>
-		<PackageProjectUrl>https://ldtk.io/</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/IrishBruse/LDtkMonogame</PackageProjectUrl>
 		<Version>0.1.1</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>favicon.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>Added .ldtkl support 
-Added background images</PackageReleaseNotes>
+		<PackageReleaseNotes>
+			Changed background images to be the same as a layer
+			Added Entity Support
+
+		</PackageReleaseNotes>
+		<RootNamespace>LDtk</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -25,10 +29,10 @@ Added background images</PackageReleaseNotes>
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\art\favicon.png">
+		<EmbeddedResource Include="..\art\favicon.png">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
-		</None>
+		</EmbeddedResource>
 	</ItemGroup>
 
 </Project>

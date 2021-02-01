@@ -1,0 +1,52 @@
+﻿using System;
+
+using LDtk;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Examples
+{
+    public class NugetExample : BaseExample
+    {
+        // LDtk stuff
+        private Project projectFile;
+        private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
+
+        public NugetExample() : base()
+        {
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+            projectFile = new Project(spriteBatch, LDTK_FILE);
+            projectFile.Load(0);
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            Level level = projectFile.GetLevel("Level1");
+
+            GraphicsDevice.Clear(level.BgColor);
+
+            spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp);
+            {
+                for(int i = 0; i < level.Layers.Length; i++)
+                {
+                    spriteBatch.Draw(level.Layers[i], Vector2.Zero, Color.White);
+                }
+            }
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+    }
+}
