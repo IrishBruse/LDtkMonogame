@@ -15,11 +15,7 @@
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>favicon.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>
-			Changed background images to be the same as a layer
-			Added Entity Support
-
-		</PackageReleaseNotes>
+		<PackageReleaseNotes>Changed background images to be the same as a layer</PackageReleaseNotes>
 		<RootNamespace>LDtk</RootNamespace>
 	</PropertyGroup>
 
