@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://img.shields.io/nuget/v/LDtkMonogame?color=5CB85C" />
   <img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame">
-  <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?color=gree&label=Supports LDtk">
+  <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?color=gree&label=Supports%20LDtk">
   <img src="https://www.fuget.org/packages/LDtkMonogame/badge.svg" />
 </p>
 <p align="center">
