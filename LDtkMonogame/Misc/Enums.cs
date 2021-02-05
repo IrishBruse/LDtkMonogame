@@ -1,6 +1,6 @@
 ﻿namespace LDtk
 {
-    public static class LayerTypeEnum
+    public static class LayerType
     {
         // Layer Types
         public const string Tiles = "Tiles";

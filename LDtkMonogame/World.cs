@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -10,7 +11,7 @@ namespace LDtk
     /// <summary>
     /// The main class for loading .ldtk and .ldtkl files
     /// </summary>
-    public class Project
+    public class World
     {
         public int LevelsCount => levels.Length;
 
@@ -19,8 +20,9 @@ namespace LDtk
         private string jsonFilePath;
         private LDtkJson json;
 
-        private string absoluteProjectFolder;
+        private string projectFolder;
         private readonly SpriteBatch spriteBatch;
+        private readonly GraphicsDevice GraphicsDevice;
 
         /// <summary>
         /// <para>Load the LDtk json file.</para>
@@ -28,9 +30,10 @@ namespace LDtk
         /// </summary>
         /// <param name="spriteBatch">Monogames <see cref="SpriteBatch"/></param>
         /// <param name="ldtkFile">The path to the .ldtk file</param>
-        public Project(SpriteBatch spriteBatch, string ldtkFile)
+        public World(SpriteBatch spriteBatch, string ldtkFile)
         {
             this.spriteBatch = spriteBatch;
+            GraphicsDevice = spriteBatch.GraphicsDevice;
             ReloadProject(ldtkFile);
         }
 
@@ -53,29 +56,29 @@ namespace LDtk
             }
 
             json = LDtkJson.FromJson(File.ReadAllText(jsonFilePath));
-            absoluteProjectFolder = Path.GetDirectoryName(Path.GetFullPath(jsonFilePath));
+            projectFolder = Path.GetDirectoryName(Path.GetFullPath(jsonFilePath));
             levels = new Level[json.Levels.Length];
         }
 
         /// <summary>
         /// This will load and render out the level
+        /// DO not call this inside of a spritebatchBegin/End
         /// </summary>
         /// <param name="index">The id of the level</param>
         public void Load(long index)
         {
-            GraphicsDevice GraphicsDevice = spriteBatch.GraphicsDevice;
             LDtkLevel jsonLevel;
 
-            if(levels[index].Loaded == true)
+            if(levels[index].loaded == true)
             {
                 return;
             }
 
-            levels[index].Loaded = true;
+            levels[index].loaded = true;
 
             if(json.ExternalLevels == true)
             {
-                string path = Path.Combine(absoluteProjectFolder, json.Levels[index].ExternalRelPath);
+                string path = Path.Combine(projectFolder, json.Levels[index].ExternalRelPath);
                 jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<LDtkLevel>(File.ReadAllText(path));
             }
             else
@@ -84,6 +87,9 @@ namespace LDtk
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
+
+            // Set the identifier
+            levels[index].owner = this;
 
             // Set the identifier
             levels[index].Identifier = jsonLevel.Identifier;
@@ -116,7 +122,7 @@ namespace LDtk
                 levels[levelId].Layers[jsonLayerInstances.Length] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayerInstances[0].CWid * jsonLayerInstances[0].GridSize), (int)(jsonLayerInstances[0].CHei * jsonLayerInstances[0].GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
                 GraphicsDevice.SetRenderTarget(levels[levelId].Layers[jsonLayerInstances.Length]);
 
-                texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, jsonLevel.BgRelPath));
+                texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, jsonLevel.BgRelPath));
 
                 spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp);
                 {
@@ -130,7 +136,7 @@ namespace LDtk
             }
         }
 
-        private void LoadAllLayers(long levelId, GraphicsDevice GraphicsDevice, LayerInstance[] jsonLayerInstances)
+        private void LoadAllLayers(long index, GraphicsDevice GraphicsDevice, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
 
@@ -139,36 +145,43 @@ namespace LDtk
             {
                 LayerInstance jsonLayer = jsonLayerInstances[i];
 
-                levels[levelId].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-                GraphicsDevice.SetRenderTarget(levels[levelId].Layers[i]);
+                levels[index].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                GraphicsDevice.SetRenderTarget(levels[index].Layers[i]);
 
                 if(jsonLayer.TilesetRelPath != null)
                 {
-                    texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(absoluteProjectFolder, jsonLayer.TilesetRelPath));
+                    texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, jsonLayer.TilesetRelPath));
                 }
                 else
                 {
                     // Create single pixel texture
                     texture = new Texture2D(GraphicsDevice, 1, 1);
-                    texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+                    texture.SetData(new byte[] { 0xFF, 0x00, 0xFF, 0xFF });
                 }
 
-                if(jsonLayer.Type == LayerTypeEnum.Entities)
+                if(jsonLayer.Type == LayerType.Entities)
                 {
-                    Entity[] entities = new Entity[jsonLayer.EntityInstances.Length];
+                    levels[index].entities = jsonLayer.EntityInstances;
+                    //Entity[] entities = new Entity[jsonLayer.EntityInstances.Length];
 
-                    for(int j = 0; j < jsonLayer.EntityInstances.Length; j++)
-                    {
-                        EntityInstance entity = jsonLayer.EntityInstances[j];
-                        EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
-                        Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
-                        Vector2 size = new Vector2(def.Width, def.Height);
-                        Color color = Utility.ConvertStringToColor(def.Color);
-                        //entity.Pivot
-                        //entities[j]
-                    }
+                    //for(int j = 0; j < jsonLayer.EntityInstances.Length; j++)
+                    //{
+                    //    EntityInstance entity = jsonLayer.EntityInstances[j];
 
-                    levels[levelId].Entities = entities;
+                    //    entities[j].Pivot = new Vector2((float)entity.Pivot[0], (float)entity.Pivot[1]);
+
+                    //    Vector2 position = new Vector2((int)(entity.Px[0] + jsonLayer.PxTotalOffsetX), (int)(entity.Px[1] + jsonLayer.PxTotalOffsetY));
+                    //    entities[j].WorldPosition = position;
+
+                    //    EntityDefinition def = GetEntityDefinitionFromUid(entity.DefUid);
+                    //    Color color = Utility.ConvertStringToColor(def.Color);
+                    //    entities[j].Color = color;
+
+                    //    long[] source = entity.Tile.SrcRect;
+                    //    entities[j].Source = new Rectangle((int)source[0], (int)source[1], (int)source[2], (int)source[3]);
+                    //}
+
+                    //levels[levelId].Entities = entities;
                 }
                 else
                 {
@@ -201,7 +214,7 @@ namespace LDtk
         {
             switch(jsonLayer.Type)
             {
-                case LayerTypeEnum.Tiles:
+                case LayerType.Tiles:
                 foreach(TileInstance tile in jsonLayer.GridTiles)
                 {
                     if(jsonLayer.TilesetDefUid.HasValue)
@@ -215,8 +228,8 @@ namespace LDtk
                 }
                 break;
 
-                case LayerTypeEnum.IntGrid:
-                case LayerTypeEnum.AutoLayer:
+                case LayerType.IntGrid:
+                case LayerType.AutoLayer:
                 if(jsonLayer.AutoLayerTiles.Length > 0)
                 {
                     foreach(TileInstance tile in jsonLayer.AutoLayerTiles)
@@ -231,21 +244,6 @@ namespace LDtk
                         }
                     }
                 }
-                //else
-                //{
-                //    LayerDefinition layerInstance = GetLayerDefinitionFromUid(jsonLayer.LayerDefUid);
-
-                //    foreach(IntGridValueInstance tile in jsonLayer.IntGrid)
-                //    {
-                //        long x = tile.CoordId % jsonLayer.CWid;
-                //        long y = tile.CoordId / jsonLayer.CWid;
-
-                //        Vector2 position = new Vector2(x * jsonLayer.GridSize, y * jsonLayer.GridSize);
-                //        Color color = Utility.ConvertStringToColor(layerInstance.IntGridValues[tile.V].Color);
-
-                //        spriteBatch.Draw(texture, position, null, color, 0, Vector2.Zero, jsonLayer.GridSize, SpriteEffects.None, 0);
-                //    }
-                //}
                 break;
 
                 default: throw new NotImplementedException(jsonLayer.Type);
@@ -262,7 +260,7 @@ namespace LDtk
         {
             for(int i = 0; i < json.Levels.Length; i++)
             {
-                if(levels[i].Loaded)
+                if(levels[i].loaded)
                 {
                     if(levels[i].Uid == uid)
                     {
@@ -296,7 +294,7 @@ namespace LDtk
         {
             for(int i = 0; i < json.Levels.Length; i++)
             {
-                if(levels[i].Loaded)
+                if(levels[i].loaded)
                 {
                     if(levels[i].Identifier == identifier)
                     {
@@ -320,29 +318,7 @@ namespace LDtk
             throw new Exception(identifier + " Level not found Exception!");
         }
 
-        /// <summary>
-        /// Will return the level at index if the level is not loaded it will load it
-        /// </summary>
-        /// <param name="index">Index into array</param>
-        /// <returns>Level or null if outside of bounds</returns>
-        public Level GetEntities(long index)
-        {
-            if(index > 0 || index < levels.Length)
-            {
-                if(levels[index].Loaded == false)
-                {
-                    Load(index);
-                }
-
-                return levels[index];
-            }
-            else
-            {
-                return new Level() { Layers = new RenderTarget2D[0] };
-            }
-        }
-
-        private EntityDefinition GetEntityDefinitionFromUid(long uid)
+        internal EntityDefinition GetEntityDefinitionFromUid(long uid)
         {
             for(int i = 0; i < json.Defs.Entities.Length; i++)
             {
@@ -352,10 +328,10 @@ namespace LDtk
                 }
             }
 
-            return null;
+            throw new Exception(uid + " is not a entity Definition!");
         }
 
-        private LayerDefinition GetLayerDefinitionFromUid(long uid)
+        internal LayerDefinition GetLayerDefinitionFromUid(long uid)
         {
             for(int i = 0; i < json.Defs.Layers.Length; i++)
             {
@@ -365,7 +341,35 @@ namespace LDtk
                 }
             }
 
-            return null;
+            throw new Exception(uid + " is not a layer Definition!");
+        }
+
+        internal TilesetDefinition GetTilesetDefinitionFromUid(long uid)
+        {
+            for(int i = 0; i < json.Defs.Tilesets.Length; i++)
+            {
+                if(json.Defs.Tilesets[i].Uid == uid)
+                {
+                    return json.Defs.Tilesets[i];
+                }
+            }
+
+            throw new Exception(uid + " is not a tileset Definition!");
+        }
+
+        internal Texture2D GetTilesetTextureFromUid(long uid)
+        {
+            for(int i = 0; i < json.Defs.Tilesets.Length; i++)
+            {
+                if(json.Defs.Tilesets[i].Uid == uid)
+                {
+                    var texture = Texture2D.FromFile(GraphicsDevice, Path.GetFullPath(json.Defs.Tilesets[i].RelPath, projectFolder));
+                    texture.Name = Path.GetFileName(json.Defs.Tilesets[i].RelPath);
+                    return texture;
+                }
+            }
+
+            throw new Exception(uid + " is not a tileset Definition!");
         }
     }
 }

@@ -9,12 +9,12 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.7.2",
-	"defaultPivotX": 0,
-	"defaultPivotY": 0,
+	"defaultPivotX": 0.5,
+	"defaultPivotY": 1,
 	"defaultGridSize": 16,
 	"bgColor": "#676877",
 	"defaultLevelBgColor": "#3F3851",
-	"nextUid": 76,
+	"nextUid": 85,
 	"minifyJson": false,
 	"externalLevels": true,
 	"exportTiled": false,
@@ -1003,8 +1003,8 @@
 			{
 				"identifier": "Door",
 				"uid": 52,
-				"width": 16,
-				"height": 16,
+				"width": 56,
+				"height": 56,
 				"color": "#94D9B3",
 				"renderMode": "Tile",
 				"showName": true,
@@ -1015,13 +1015,50 @@
 				"limitBehavior": "DiscardOldOnes",
 				"pivotX": 0.5,
 				"pivotY": 1,
-				"fieldDefs": []
+				"fieldDefs": [
+					{
+						"identifier": "DestinationLevel",
+						"__type": "String",
+						"uid": 79,
+						"type": "F_String",
+						"isArray": false,
+						"canBeNull": false,
+						"arrayMinLength": null,
+						"arrayMaxLength": null,
+						"editorDisplayMode": "Hidden",
+						"editorDisplayPos": "Above",
+						"editorAlwaysShow": false,
+						"min": null,
+						"max": null,
+						"regex": null,
+						"acceptFileTypes": null,
+						"defaultOverride": null
+					},
+					{
+						"identifier": "DestinationDoor",
+						"__type": "Int",
+						"uid": 80,
+						"type": "F_Int",
+						"isArray": false,
+						"canBeNull": false,
+						"arrayMinLength": null,
+						"arrayMaxLength": null,
+						"editorDisplayMode": "Hidden",
+						"editorDisplayPos": "Above",
+						"editorAlwaysShow": false,
+						"min": null,
+						"max": null,
+						"regex": null,
+						"acceptFileTypes": null,
+						"defaultOverride": null
+					}
+				]
 			},
 			{
 				"identifier": "Crate",
 				"uid": 56,
-				"width": 16,
-				"height": 16,
+				"width": 21,
+				"height": 21,
 				"color": "#94D9B3",
 				"renderMode": "Tile",
 				"showName": true,
@@ -1052,7 +1089,7 @@
 						"defaultOverride": { "id": "V_Int", "params": [3] }
 					},
 					{
-						"identifier": "float",
+						"identifier": "dec",
 						"__type": "Float",
 						"uid": 63,
 						"type": "F_Float",
@@ -1091,7 +1128,7 @@
 						}
 					},
 					{
-						"identifier": "string",
+						"identifier": "name",
 						"__type": "String",
 						"uid": 65,
 						"type": "F_String",
@@ -1133,6 +1170,24 @@
 						}
 					},
 					{
+						"identifier": "point",
+						"__type": "Point",
+						"uid": 68,
+						"type": "F_Point",
+						"isArray": false,
+						"canBeNull": true,
+						"arrayMinLength": null,
+						"arrayMaxLength": null,
+						"editorDisplayMode": "Hidden",
+						"editorDisplayPos": "Above",
+						"editorAlwaysShow": false,
+						"min": null,
+						"max": null,
+						"regex": null,
+						"acceptFileTypes": null,
+						"defaultOverride": null
+					},
+					{
 						"identifier": "color",
 						"__type": "Color",
 						"uid": 67,
@@ -1151,12 +1206,12 @@
 						"defaultOverride": null
 					},
 					{
-						"identifier": "point",
-						"__type": "Point",
-						"uid": 68,
-						"type": "F_Point",
+						"identifier": "alphabet",
+						"__type": "LocalEnum.Alphabet",
+						"uid": 82,
+						"type": { "id": "F_Enum", "params": [81] },
 						"isArray": false,
-						"canBeNull": true,
+						"canBeNull": false,
 						"arrayMinLength": null,
 						"arrayMaxLength": null,
 						"editorDisplayMode": "Hidden",
@@ -1173,8 +1228,8 @@
 			{
 				"identifier": "Player",
 				"uid": 70,
-				"width": 16,
-				"height": 16,
+				"width": 32,
+				"height": 32,
 				"color": "#94D9B3",
 				"renderMode": "Tile",
 				"showName": true,
@@ -1259,7 +1314,11 @@
 				}
 			}
 		],
-		"enums": [],
+		"enums": [{ "identifier": "Alphabet", "uid": 81, "values": [
+			{ "id": "A", "tileId": null, "__tileSrcRect": null },
+			{ "id": "B", "tileId": null, "__tileSrcRect": null },
+			{ "id": "C", "tileId": null, "__tileSrcRect": null }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null }],
 		"externalEnums": []
 	},
 	"levels": [
@@ -1298,6 +1357,24 @@
 			"externalRelPath": "LDtkMonogameExample/0001-Level2.ldtkl",
 			"layerInstances": null,
 			"__neighbours": [{ "levelUid": 0, "dir": "w" }]
+		},
+		{
+			"identifier": "Level1b",
+			"uid": 78,
+			"worldX": -832,
+			"worldY": -736,
+			"pxWid": 224,
+			"pxHei": 256,
+			"__bgColor": "#3F3851",
+			"bgColor": null,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__bgPos": null,
+			"externalRelPath": "LDtkMonogameExample/0002-Level1b.ldtkl",
+			"layerInstances": null,
+			"__neighbours": []
 		}
 	]
 }

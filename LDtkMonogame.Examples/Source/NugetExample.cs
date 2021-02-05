@@ -10,7 +10,7 @@ namespace Examples
     public class NugetExample : BaseExample
     {
         // LDtk stuff
-        private Project projectFile;
+        private World projectFile;
         private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
 
         public NugetExample() : base()
@@ -21,7 +21,7 @@ namespace Examples
         {
             base.Initialize();
 
-            projectFile = new Project(spriteBatch, LDTK_FILE);
+            projectFile = new World(spriteBatch, LDTK_FILE);
             projectFile.Load(0);
         }
 

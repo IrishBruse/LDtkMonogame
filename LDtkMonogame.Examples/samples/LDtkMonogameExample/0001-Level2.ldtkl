@@ -45,21 +45,41 @@
 			"entityInstances": [
 				{ "__identifier": "Crate", "__grid": [6,4], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [208,160], "fieldInstances": [
 					{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
-					{ "__identifier": "float", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
+					{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
 					{ "__identifier": "boolean", "__value": true, "__type": "Bool", "defUid": 64, "realEditorValues": [] },
-					{ "__identifier": "string", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
+					{ "__identifier": "name", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
 					{ "__identifier": "multilines", "__value": "test", "__type": "String", "defUid": 66, "realEditorValues": [] },
 					{ "__identifier": "color", "__value": "#000000", "__type": "Color", "defUid": 67, "realEditorValues": [] },
-					{ "__identifier": "point", "__value": null, "__type": "Point", "defUid": 68, "realEditorValues": [] }
+					{ "__identifier": "point", "__value": null, "__type": "Point", "defUid": 68, "realEditorValues": [] },
+					{
+						"__identifier": "alphabet",
+						"__value": "C",
+						"__type": "LocalEnum.Alphabet",
+						"defUid": 82,
+						"realEditorValues": [{
+							"id": "V_String",
+							"params": ["C"]
+						}]
+					}
 				] },
 				{ "__identifier": "Crate", "__grid": [3,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [112,192], "fieldInstances": [
 					{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
-					{ "__identifier": "float", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
+					{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
 					{ "__identifier": "boolean", "__value": true, "__type": "Bool", "defUid": 64, "realEditorValues": [] },
-					{ "__identifier": "string", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
+					{ "__identifier": "name", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
 					{ "__identifier": "multilines", "__value": "test", "__type": "String", "defUid": 66, "realEditorValues": [] },
 					{ "__identifier": "color", "__value": "#000000", "__type": "Color", "defUid": 67, "realEditorValues": [] },
-					{ "__identifier": "point", "__value": null, "__type": "Point", "defUid": 68, "realEditorValues": [] }
+					{ "__identifier": "point", "__value": null, "__type": "Point", "defUid": 68, "realEditorValues": [] },
+					{
+						"__identifier": "alphabet",
+						"__value": "B",
+						"__type": "LocalEnum.Alphabet",
+						"defUid": 82,
+						"realEditorValues": [{
+							"id": "V_String",
+							"params": ["B"]
+						}]
+					}
 				] }
 			]
 		},
