@@ -1,6 +1,6 @@
 ﻿namespace LDtk
 {
-    public static class LayerType
+    internal static class LayerType
     {
         // Layer Types
         public const string Tiles = "Tiles";
@@ -9,7 +9,7 @@
         public const string Entities = "Entities";
     }
 
-    public static class WorldLayoutEnum
+    internal static class WorldLayoutEnum
     {
         // World Layout
         public const string Horizontal = "LinearHorizontal";

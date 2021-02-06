@@ -3,10 +3,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace LDtk
 {
+    /// <summary>
+    /// Sprite Interface
+    /// </summary>
     public interface ISprite
     {
+        /// <summary>
+        /// World position of the sprite
+        /// </summary>
+        /// <value></value>
         public Vector2 Position { get; set; }
+
+        /// <summary>
+        /// The pivot of the sprite
+        /// </summary>
+        /// <value></value>
         public Vector2 Pivot { get; set; }
+
+        /// <summary>
+        /// The texture if specified for the sprite
+        /// </summary>
+        /// <value></value>
         public Texture2D Texture { get; set; }
 
         /// <summary>

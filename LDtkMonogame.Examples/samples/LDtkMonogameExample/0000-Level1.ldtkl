@@ -111,7 +111,7 @@
 						}]
 					}
 				] },
-				{ "__identifier": "Player", "__grid": [2,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 71, "srcRect": [0,0,78,78] }, "defUid": 70, "px": [80,192], "fieldInstances": [] },
+				{ "__identifier": "Player", "__grid": [2,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 71, "srcRect": [78,0,78,78] }, "defUid": 70, "px": [80,192], "fieldInstances": [] },
 				{ "__identifier": "Crate", "__grid": [7,2], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [240,96], "fieldInstances": [
 					{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
 					{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
@@ -254,7 +254,7 @@
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Terrain",
+			"__identifier": "Walls",
 			"__type": "IntGrid",
 			"__cWid": 17,
 			"__cHei": 10,

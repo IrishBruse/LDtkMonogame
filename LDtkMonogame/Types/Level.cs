@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,11 +14,9 @@ namespace LDtk
     public struct Level
     {
         internal bool loaded;
-
         internal World owner;
-
         internal EntityInstance[] entities;
-
+        internal IntGrid[] intGrids;
 
         /// <summary>
         /// The identifier of the level set in ldtk
@@ -42,7 +39,7 @@ namespace LDtk
         public Color BgColor { get; internal set; }
 
         /// <summary>
-        /// Prerendered layer textures created from <see cref="World.Load(int)"/>
+        /// Prerendered layer textures created from <see cref="World.Load(long)"/>
         /// </summary>
         public RenderTarget2D[] Layers { get; internal set; }
 
@@ -52,24 +49,22 @@ namespace LDtk
         public long[] Neighbours { get; internal set; }
 
         /// <summary>
-        /// Sets the class for an entity Definition
+        /// Sets the class for a single entity Definition
         /// <para>Throws <see cref="Exception"/></para>
         /// </summary>
-        /// <param name="identifier">Identifier of the level to get</param>
         /// <returns>A level</returns>
-        public T[] GetEntities<T>() where T : new()
+        public T GetEntity<T>() where T : new()
         {
-            List<T> ents = new List<T>();
-
-            for(int i = 0; i < entities.Length; i++)
+            for (int i = 0; i < entities.Length; i++)
             {
-                if(entities[i].Identifier == typeof(T).Name)
+                if (entities[i].Identifier == typeof(T).Name)
                 {
                     T entity = new T();
 
-                    for(int j = 0; j < entities[i].FieldInstances.Length; j++)
+                    PopulateDefaultEntityFields<T>(entity, entities[i]);
+
+                    for (int j = 0; j < entities[i].FieldInstances.Length; j++)
                     {
-                        PopulateDefaultEntityFields<T>(entity, entities[i]);
 
                         string variableName = entities[i].FieldInstances[j].Identifier;
 
@@ -77,7 +72,7 @@ namespace LDtk
 
                         var field = typeof(T).GetField(variableName);
 
-                        if(field == null)
+                        if (field == null)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
@@ -88,40 +83,120 @@ namespace LDtk
                         // Split any enums
                         string[] variableTypes = entities[i].FieldInstances[j].Type.Split('.');
 
-                        switch(variableTypes[0])
+                        switch (variableTypes[0])
                         {
                             case "Int":
                             case "Float":
                             case "Bool":
                             case "Enum":
                             case "String":
-                            field.SetValue(entity, Convert.ChangeType(entities[i].FieldInstances[j].Value, field.FieldType));
-                            break;
+                                field.SetValue(entity, Convert.ChangeType(entities[i].FieldInstances[j].Value, field.FieldType));
+                                break;
 
                             case "LocalEnum":
-                            field.SetValue(entity, Enum.Parse(field.FieldType, (string)entities[i].FieldInstances[j].Value));
-                            break;
+                                field.SetValue(entity, Enum.Parse(field.FieldType, (string)entities[i].FieldInstances[j].Value));
+                                break;
 
                             case "Color":
-                            field.SetValue(entity, Utility.ConvertStringToColor(((string)entities[i].FieldInstances[j].Value)[1..]));
-                            break;
+                                field.SetValue(entity, Utility.ConvertStringToColor(((string)entities[i].FieldInstances[j].Value)[1..]));
+                                break;
 
                             case "Point":
-                            JToken t = (JToken)entities[i].FieldInstances[j].Value;
-                            Vector2 point;
-                            if(t != null)
-                            {
-                                point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
-                            }
-                            else
-                            {
-                                point = new Vector2(0, 0);
-                            }
-                            field.SetValue(entity, point);
-                            break;
+                                JToken t = (JToken)entities[i].FieldInstances[j].Value;
+                                Vector2 point;
+                                if (t != null)
+                                {
+                                    point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
+                                }
+                                else
+                                {
+                                    point = new Vector2(0, 0);
+                                }
+                                field.SetValue(entity, point);
+                                break;
 
                             default:
-                            throw new Exception("Unknown Variable of type " + entities[i].FieldInstances[j].Type);
+                                throw new Exception("Unknown Variable of type " + entities[i].FieldInstances[j].Type);
+                        }
+                    }
+
+                    return entity;
+                }
+            }
+
+            return new T();
+        }
+
+        /// <summary>
+        /// Sets the class for an entity Definition
+        /// <para>Throws <see cref="Exception"/></para>
+        /// </summary>
+        /// <returns>A level</returns>
+        public T[] GetEntities<T>() where T : new()
+        {
+            List<T> ents = new List<T>();
+
+            for (int i = 0; i < entities.Length; i++)
+            {
+                if (entities[i].Identifier == typeof(T).Name)
+                {
+                    T entity = new T();
+
+                    for (int j = 0; j < entities[i].FieldInstances.Length; j++)
+                    {
+                        PopulateDefaultEntityFields<T>(entity, entities[i]);
+
+                        string variableName = entities[i].FieldInstances[j].Identifier;
+
+                        variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
+
+                        var field = typeof(T).GetField(variableName);
+
+                        if (field == null)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
+                            Console.ResetColor();
+                            continue;
+                        }
+
+                        // Split any enums
+                        string[] variableTypes = entities[i].FieldInstances[j].Type.Split('.');
+
+                        switch (variableTypes[0])
+                        {
+                            case "Int":
+                            case "Float":
+                            case "Bool":
+                            case "Enum":
+                            case "String":
+                                field.SetValue(entity, Convert.ChangeType(entities[i].FieldInstances[j].Value, field.FieldType));
+                                break;
+
+                            case "LocalEnum":
+                                field.SetValue(entity, Enum.Parse(field.FieldType, (string)entities[i].FieldInstances[j].Value));
+                                break;
+
+                            case "Color":
+                                field.SetValue(entity, Utility.ConvertStringToColor(((string)entities[i].FieldInstances[j].Value)[1..]));
+                                break;
+
+                            case "Point":
+                                JToken t = (JToken)entities[i].FieldInstances[j].Value;
+                                Vector2 point;
+                                if (t != null)
+                                {
+                                    point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
+                                }
+                                else
+                                {
+                                    point = new Vector2(0, 0);
+                                }
+                                field.SetValue(entity, point);
+                                break;
+
+                            default:
+                                throw new Exception("Unknown Variable of type " + entities[i].FieldInstances[j].Type);
                         }
                     }
 
@@ -136,7 +211,7 @@ namespace LDtk
         {
             // WorldPosition
             var worldPosition = typeof(T).GetProperty("Position");
-            if(worldPosition != null)
+            if (worldPosition != null)
             {
                 worldPosition.SetValue(entity, new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
             }
@@ -151,7 +226,7 @@ namespace LDtk
 
             // Pivot
             var pivot = typeof(T).GetProperty("Pivot");
-            if(pivot != null)
+            if (pivot != null)
             {
                 pivot.SetValue(entity, new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
             }
@@ -166,7 +241,7 @@ namespace LDtk
 
             // Texture
             var texture = typeof(T).GetProperty("Texture");
-            if(texture != null)
+            if (texture != null)
             {
                 Texture2D tileset = owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid);
                 texture.SetValue(entity, tileset);
@@ -182,7 +257,7 @@ namespace LDtk
 
             // FrameSize
             var frameSize = typeof(T).GetProperty("FrameSize");
-            if(frameSize != null)
+            if (frameSize != null)
             {
                 var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
                 frameSize.SetValue(entity, new Vector2(entityDefinition.Width, entityDefinition.Height));
@@ -195,6 +270,24 @@ namespace LDtk
                 Console.ResetColor();
             }
 #endif
+        }
+
+        /// <summary>
+        /// Gets and intgrid from an identifier
+        /// </summary>
+        /// <param name="identifier">Identifier of intgrid</param>
+        /// <returns>IntGrid</returns>
+        public IntGrid GetIntGrid(string identifier)
+        {
+            for (int i = 0; i < intGrids.Length; i++)
+            {
+                if (intGrids[i].identifier == identifier)
+                {
+                    return intGrids[i];
+                }
+            }
+
+            throw new Exception(identifier + " IntGrid not found!");
         }
     }
 }

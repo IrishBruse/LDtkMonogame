@@ -113,7 +113,7 @@
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Terrain",
+			"__identifier": "Walls",
 			"__type": "IntGrid",
 			"__cWid": 8,
 			"__cHei": 8,

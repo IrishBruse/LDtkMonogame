@@ -8,6 +8,8 @@ using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
+#pragma warning disable 1591
+#pragma warning disable 1570
 namespace LDtk
 {
     /// <summary>
@@ -1120,64 +1122,64 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "EntityTile":
-                return EditorDisplayMode.EntityTile;
+                    return EditorDisplayMode.EntityTile;
                 case "Hidden":
-                return EditorDisplayMode.Hidden;
+                    return EditorDisplayMode.Hidden;
                 case "NameAndValue":
-                return EditorDisplayMode.NameAndValue;
+                    return EditorDisplayMode.NameAndValue;
                 case "PointPath":
-                return EditorDisplayMode.PointPath;
+                    return EditorDisplayMode.PointPath;
                 case "PointStar":
-                return EditorDisplayMode.PointStar;
+                    return EditorDisplayMode.PointStar;
                 case "RadiusGrid":
-                return EditorDisplayMode.RadiusGrid;
+                    return EditorDisplayMode.RadiusGrid;
                 case "RadiusPx":
-                return EditorDisplayMode.RadiusPx;
+                    return EditorDisplayMode.RadiusPx;
                 case "ValueOnly":
-                return EditorDisplayMode.ValueOnly;
+                    return EditorDisplayMode.ValueOnly;
             }
             throw new Exception("Cannot unmarshal type EditorDisplayMode");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (EditorDisplayMode)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case EditorDisplayMode.EntityTile:
-                serializer.Serialize(writer, "EntityTile");
-                return;
+                    serializer.Serialize(writer, "EntityTile");
+                    return;
                 case EditorDisplayMode.Hidden:
-                serializer.Serialize(writer, "Hidden");
-                return;
+                    serializer.Serialize(writer, "Hidden");
+                    return;
                 case EditorDisplayMode.NameAndValue:
-                serializer.Serialize(writer, "NameAndValue");
-                return;
+                    serializer.Serialize(writer, "NameAndValue");
+                    return;
                 case EditorDisplayMode.PointPath:
-                serializer.Serialize(writer, "PointPath");
-                return;
+                    serializer.Serialize(writer, "PointPath");
+                    return;
                 case EditorDisplayMode.PointStar:
-                serializer.Serialize(writer, "PointStar");
-                return;
+                    serializer.Serialize(writer, "PointStar");
+                    return;
                 case EditorDisplayMode.RadiusGrid:
-                serializer.Serialize(writer, "RadiusGrid");
-                return;
+                    serializer.Serialize(writer, "RadiusGrid");
+                    return;
                 case EditorDisplayMode.RadiusPx:
-                serializer.Serialize(writer, "RadiusPx");
-                return;
+                    serializer.Serialize(writer, "RadiusPx");
+                    return;
                 case EditorDisplayMode.ValueOnly:
-                serializer.Serialize(writer, "ValueOnly");
-                return;
+                    serializer.Serialize(writer, "ValueOnly");
+                    return;
             }
             throw new Exception("Cannot marshal type EditorDisplayMode");
         }
@@ -1191,39 +1193,39 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "Above":
-                return EditorDisplayPos.Above;
+                    return EditorDisplayPos.Above;
                 case "Beneath":
-                return EditorDisplayPos.Beneath;
+                    return EditorDisplayPos.Beneath;
                 case "Center":
-                return EditorDisplayPos.Center;
+                    return EditorDisplayPos.Center;
             }
             throw new Exception("Cannot unmarshal type EditorDisplayPos");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (EditorDisplayPos)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case EditorDisplayPos.Above:
-                serializer.Serialize(writer, "Above");
-                return;
+                    serializer.Serialize(writer, "Above");
+                    return;
                 case EditorDisplayPos.Beneath:
-                serializer.Serialize(writer, "Beneath");
-                return;
+                    serializer.Serialize(writer, "Beneath");
+                    return;
                 case EditorDisplayPos.Center:
-                serializer.Serialize(writer, "Center");
-                return;
+                    serializer.Serialize(writer, "Center");
+                    return;
             }
             throw new Exception("Cannot marshal type EditorDisplayPos");
         }
@@ -1237,39 +1239,39 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "DiscardOldOnes":
-                return LimitBehavior.DiscardOldOnes;
+                    return LimitBehavior.DiscardOldOnes;
                 case "MoveLastOne":
-                return LimitBehavior.MoveLastOne;
+                    return LimitBehavior.MoveLastOne;
                 case "PreventAdding":
-                return LimitBehavior.PreventAdding;
+                    return LimitBehavior.PreventAdding;
             }
             throw new Exception("Cannot unmarshal type LimitBehavior");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (LimitBehavior)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case LimitBehavior.DiscardOldOnes:
-                serializer.Serialize(writer, "DiscardOldOnes");
-                return;
+                    serializer.Serialize(writer, "DiscardOldOnes");
+                    return;
                 case LimitBehavior.MoveLastOne:
-                serializer.Serialize(writer, "MoveLastOne");
-                return;
+                    serializer.Serialize(writer, "MoveLastOne");
+                    return;
                 case LimitBehavior.PreventAdding:
-                serializer.Serialize(writer, "PreventAdding");
-                return;
+                    serializer.Serialize(writer, "PreventAdding");
+                    return;
             }
             throw new Exception("Cannot marshal type LimitBehavior");
         }
@@ -1283,44 +1285,44 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "Cross":
-                return RenderMode.Cross;
+                    return RenderMode.Cross;
                 case "Ellipse":
-                return RenderMode.Ellipse;
+                    return RenderMode.Ellipse;
                 case "Rectangle":
-                return RenderMode.Rectangle;
+                    return RenderMode.Rectangle;
                 case "Tile":
-                return RenderMode.Tile;
+                    return RenderMode.Tile;
             }
             throw new Exception("Cannot unmarshal type RenderMode");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (RenderMode)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case RenderMode.Cross:
-                serializer.Serialize(writer, "Cross");
-                return;
+                    serializer.Serialize(writer, "Cross");
+                    return;
                 case RenderMode.Ellipse:
-                serializer.Serialize(writer, "Ellipse");
-                return;
+                    serializer.Serialize(writer, "Ellipse");
+                    return;
                 case RenderMode.Rectangle:
-                serializer.Serialize(writer, "Rectangle");
-                return;
+                    serializer.Serialize(writer, "Rectangle");
+                    return;
                 case RenderMode.Tile:
-                serializer.Serialize(writer, "Tile");
-                return;
+                    serializer.Serialize(writer, "Tile");
+                    return;
             }
             throw new Exception("Cannot marshal type RenderMode");
         }
@@ -1334,34 +1336,34 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "Crop":
-                return TileRenderMode.Crop;
+                    return TileRenderMode.Crop;
                 case "Stretch":
-                return TileRenderMode.Stretch;
+                    return TileRenderMode.Stretch;
             }
             throw new Exception("Cannot unmarshal type TileRenderMode");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (TileRenderMode)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case TileRenderMode.Crop:
-                serializer.Serialize(writer, "Crop");
-                return;
+                    serializer.Serialize(writer, "Crop");
+                    return;
                 case TileRenderMode.Stretch:
-                serializer.Serialize(writer, "Stretch");
-                return;
+                    serializer.Serialize(writer, "Stretch");
+                    return;
             }
             throw new Exception("Cannot marshal type TileRenderMode");
         }
@@ -1375,44 +1377,44 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "AutoLayer":
-                return TypeEnum.AutoLayer;
+                    return TypeEnum.AutoLayer;
                 case "Entities":
-                return TypeEnum.Entities;
+                    return TypeEnum.Entities;
                 case "IntGrid":
-                return TypeEnum.IntGrid;
+                    return TypeEnum.IntGrid;
                 case "Tiles":
-                return TypeEnum.Tiles;
+                    return TypeEnum.Tiles;
             }
             throw new Exception("Cannot unmarshal type TypeEnum");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (TypeEnum)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case TypeEnum.AutoLayer:
-                serializer.Serialize(writer, "AutoLayer");
-                return;
+                    serializer.Serialize(writer, "AutoLayer");
+                    return;
                 case TypeEnum.Entities:
-                serializer.Serialize(writer, "Entities");
-                return;
+                    serializer.Serialize(writer, "Entities");
+                    return;
                 case TypeEnum.IntGrid:
-                serializer.Serialize(writer, "IntGrid");
-                return;
+                    serializer.Serialize(writer, "IntGrid");
+                    return;
                 case TypeEnum.Tiles:
-                serializer.Serialize(writer, "Tiles");
-                return;
+                    serializer.Serialize(writer, "Tiles");
+                    return;
             }
             throw new Exception("Cannot marshal type TypeEnum");
         }
@@ -1426,44 +1428,44 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "Contain":
-                return BgPos.Contain;
+                    return BgPos.Contain;
                 case "Cover":
-                return BgPos.Cover;
+                    return BgPos.Cover;
                 case "CoverDirty":
-                return BgPos.CoverDirty;
+                    return BgPos.CoverDirty;
                 case "Unscaled":
-                return BgPos.Unscaled;
+                    return BgPos.Unscaled;
             }
             throw new Exception("Cannot unmarshal type BgPos");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (BgPos)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case BgPos.Contain:
-                serializer.Serialize(writer, "Contain");
-                return;
+                    serializer.Serialize(writer, "Contain");
+                    return;
                 case BgPos.Cover:
-                serializer.Serialize(writer, "Cover");
-                return;
+                    serializer.Serialize(writer, "Cover");
+                    return;
                 case BgPos.CoverDirty:
-                serializer.Serialize(writer, "CoverDirty");
-                return;
+                    serializer.Serialize(writer, "CoverDirty");
+                    return;
                 case BgPos.Unscaled:
-                serializer.Serialize(writer, "Unscaled");
-                return;
+                    serializer.Serialize(writer, "Unscaled");
+                    return;
             }
             throw new Exception("Cannot marshal type BgPos");
         }
@@ -1477,44 +1479,44 @@ namespace LDtk
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if(reader.TokenType == JsonToken.Null) return null;
+            if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch(value)
+            switch (value)
             {
                 case "Free":
-                return WorldLayout.Free;
+                    return WorldLayout.Free;
                 case "GridVania":
-                return WorldLayout.GridVania;
+                    return WorldLayout.GridVania;
                 case "LinearHorizontal":
-                return WorldLayout.LinearHorizontal;
+                    return WorldLayout.LinearHorizontal;
                 case "LinearVertical":
-                return WorldLayout.LinearVertical;
+                    return WorldLayout.LinearVertical;
             }
             throw new Exception("Cannot unmarshal type WorldLayout");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
         {
-            if(untypedValue == null)
+            if (untypedValue == null)
             {
                 serializer.Serialize(writer, null);
                 return;
             }
             var value = (WorldLayout)untypedValue;
-            switch(value)
+            switch (value)
             {
                 case WorldLayout.Free:
-                serializer.Serialize(writer, "Free");
-                return;
+                    serializer.Serialize(writer, "Free");
+                    return;
                 case WorldLayout.GridVania:
-                serializer.Serialize(writer, "GridVania");
-                return;
+                    serializer.Serialize(writer, "GridVania");
+                    return;
                 case WorldLayout.LinearHorizontal:
-                serializer.Serialize(writer, "LinearHorizontal");
-                return;
+                    serializer.Serialize(writer, "LinearHorizontal");
+                    return;
                 case WorldLayout.LinearVertical:
-                serializer.Serialize(writer, "LinearVertical");
-                return;
+                    serializer.Serialize(writer, "LinearVertical");
+                    return;
             }
             throw new Exception("Cannot marshal type WorldLayout");
         }
@@ -1522,3 +1524,5 @@ namespace LDtk
         public static readonly WorldLayoutConverter Singleton = new WorldLayoutConverter();
     }
 }
+#pragma warning restore 1591
+#pragma warning restore 1570

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Library</OutputType>
 		<TargetFramework>net5.0</TargetFramework>
 		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
@@ -15,7 +16,7 @@
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>favicon.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>entities</PackageReleaseNotes>
+		<PackageReleaseNotes>- Added class/struct based Entities</PackageReleaseNotes>
 		<RootNamespace>LDtk</RootNamespace>
 	</PropertyGroup>
 

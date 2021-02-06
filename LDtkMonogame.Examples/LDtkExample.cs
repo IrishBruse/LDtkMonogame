@@ -12,6 +12,8 @@ namespace Examples
 {
     public class LDtkExample : BaseExample
     {
+        private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
+
         // Camera
         private Vector3 cameraPosition;
         private Vector3 cameraOrigin;
@@ -20,10 +22,13 @@ namespace Examples
         // LDtk stuff
         private readonly int currentLevel = 0;
         private World world;
-        private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
         private Level startLevel;
         private Level[] neighbours;
         private readonly List<ISprite> drawableEntities = new List<ISprite>();
+        Player player;
+        private bool followPlayer = true;
+
+        Texture2D pixelTexture;
 
         public LDtkExample() : base()
         {
@@ -46,25 +51,10 @@ namespace Examples
 
             Crate[] crates = startLevel.GetEntities<Crate>();
 
-            drawableEntities.AddRange(crates);
+            player = startLevel.GetEntity<Player>();
 
-            Console.WriteLine("crates     | " + crates.Length);
-
-            for(int i = 0; i < crates.Length; i++)
-            {
-                Console.WriteLine("Position   | " + crates[i].Position);
-                Console.WriteLine("Pivot      | " + crates[i].Pivot);
-                Console.WriteLine("Texture    | " + crates[i].Texture.Name);
-                Console.WriteLine("FrameSize  | " + crates[i].FrameSize);
-                Console.WriteLine("integer    | " + crates[i].integer);
-                Console.WriteLine("decimal    | " + crates[i].dec);
-                Console.WriteLine("boolean    | " + crates[i].boolean);
-                Console.WriteLine("name       | " + crates[i].name);
-                Console.WriteLine("multilines | " + crates[i].multilines);
-                Console.WriteLine("color      | " + crates[i].color);
-                Console.WriteLine("alphabet   | " + crates[i].alphabet);
-                Console.WriteLine();
-            }
+            pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
+            pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
         }
 
         public override void OnWindowResized()
@@ -80,14 +70,29 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-            if(mouse.MiddleButton == ButtonState.Pressed)
+            if (keyboard.IsKeyDown(Keys.Tab) && oldKeyboard.IsKeyDown(Keys.Tab) == false)
             {
-                Point pos = mouse.Position - oldMouse.Position;
-                cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)deltaTime;
+                followPlayer = !followPlayer;
             }
+
+            if (followPlayer)
+            {
+                cameraPosition = -new Vector3(player.Position, 0);
+            }
+            else
+            {
+                if (mouse.MiddleButton == ButtonState.Pressed)
+                {
+                    Point pos = mouse.Position - oldMouse.Position;
+                    cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)deltaTime;
+                }
+            }
+
+            player.Update(keyboard, oldKeyboard, startLevel, (float)deltaTime);
 
             oldKeyboard = keyboard;
             oldMouse = mouse;
+
 
             base.Update(gameTime);
         }
@@ -101,22 +106,21 @@ namespace Examples
 
             spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
             {
-                for(int i = 0; i < startLevel.Layers.Length; i++)
+                for (int i = 0; i < startLevel.Layers.Length; i++)
                 {
                     spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
                 }
 
-                for(int i = 0; i < neighbours.Length; i++)
+                for (int i = 0; i < neighbours.Length; i++)
                 {
-                    for(int j = 0; j < neighbours[i].Layers.Length; j++)
+                    for (int j = 0; j < neighbours[i].Layers.Length; j++)
                     {
                         spriteBatch.Draw(neighbours[i].Layers[j], neighbours[i].WorldPosition, Color.White);
                     }
                 }
 
-                for(int i = 0; i < drawableEntities.Count; i++)
+                for (int i = 0; i < drawableEntities.Count; i++)
                 {
-                    Vector2 size = new Vector2(drawableEntities[i].Texture.Width, drawableEntities[i].Texture.Height);
                     spriteBatch.Draw(drawableEntities[i].Texture,
                         drawableEntities[i].Position,
                         new Rectangle(0, 0, (int)drawableEntities[i].FrameSize.X, (int)drawableEntities[i].FrameSize.Y),
@@ -124,6 +128,15 @@ namespace Examples
                         0, drawableEntities[i].Pivot * drawableEntities[i].FrameSize, 1,
                         SpriteEffects.None, 0);
                 }
+
+                spriteBatch.Draw(pixelTexture, player.Position, Color.Red);
+
+                spriteBatch.Draw(player.Texture,
+                    player.Position,
+                    new Rectangle(0, 0, (int)player.FrameSize.X, (int)player.FrameSize.Y),
+                    Color.White, 0,
+                    player.Pivot * player.FrameSize, 1,
+                    SpriteEffects.None, 0);
             }
             spriteBatch.End();
 

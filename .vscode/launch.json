@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "justMyCode": false,
+            "suppressJITOptimizations": true,
+            "symbolOptions": {
+                "searchPaths": ["~/LDtkMonogame.Examples/bin/Debug/net5.0"],
+                "searchMicrosoftSymbolServer": false,
+                "searchNuGetOrgSymbolServer": false
+            },
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/net5.0/LDtkMonogame.Examples.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        }
+    ]
+}
