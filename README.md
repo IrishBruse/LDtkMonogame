@@ -1,6 +1,6 @@
 <p align="center">
- <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?color=gree&label=Supports%20LDtk"></a>
-<a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?color=5CB85C" /></a>
+ <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?&label=Supports%20LDtk"></a>
+<a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?" /></a>
 <a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
 </p>
 <p align="center">
@@ -8,9 +8,8 @@
 </p>
 
 # Ldtk Monogame
-C# Monogame renderer for https://github.com/deepnight/ldtk  
-Nuget https://www.nuget.org/packages/LDtkMonogame/  
-Art used in the example by https://pixelfrog-store.itch.io/kings-and-pigs  
+
+Monogame Render for LDtk levels
 
 Example code snippet
 ```csharp
