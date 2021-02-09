@@ -1,7 +1,7 @@
 <p align="center">
-  <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?color=gree&label=Supports%20LDtk">
-  <img src="https://img.shields.io/nuget/v/LDtkMonogame?color=5CB85C" />
-  <img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame">
+ <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?color=gree&label=Supports%20LDtk"></a>
+<a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?color=5CB85C" /></a>
+<a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
 </p>
 <p align="center">
   <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build">
