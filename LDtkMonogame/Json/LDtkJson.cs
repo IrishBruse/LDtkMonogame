@@ -10,7 +10,7 @@ using Newtonsoft.Json.Converters;
 
 #pragma warning disable 1591
 #pragma warning disable 1570
-namespace LDtk
+namespace LDtk.Json
 {
     /// <summary>
     /// This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
@@ -1087,12 +1087,12 @@ namespace LDtk
 
     public partial class LDtkJson
     {
-        public static LDtkJson FromJson(string json) => JsonConvert.DeserializeObject<LDtkJson>(json, LDtk.Converter.Settings);
+        public static LDtkJson FromJson(string json) => JsonConvert.DeserializeObject<LDtkJson>(json, Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this LDtkJson self) => JsonConvert.SerializeObject(self, LDtk.Converter.Settings);
+        public static string ToJson(this LDtkJson self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 
     internal static class Converter

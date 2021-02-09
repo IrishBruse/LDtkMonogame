@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 
 namespace LDtk
@@ -37,12 +38,12 @@ namespace LDtk
         /// </summary>
         /// <param name="position">World pixel coordinates</param>
         /// <returns>Grid position</returns>
-        public Point FromWorldToGridSpace(Vector2 position)
+        public Vector2 FromWorldToGridSpace(Vector2 position)
         {
-            int x = (int)(position.X / tileSize);
-            int y = (int)(position.Y / tileSize);
+            int x = (int)MathF.Floor(position.X / tileSize);
+            int y = (int)MathF.Floor(position.Y / tileSize);
 
-            return new Point(x, y);
+            return new Vector2(x, y);
         }
     }
 }

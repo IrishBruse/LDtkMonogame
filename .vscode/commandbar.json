@@ -1,0 +1,33 @@
+{
+    "skipTerminateQuickPick": true,
+    "skipSwitchToOutput": false,
+    "skipErrorMessage": true,
+    "commands": [
+    {
+        "text": "🧱 Build",
+        "tooltip": "Build Dotnet",
+        "color": "yellow",
+        "command": "dotnet build",
+        "alignment": "right",
+        "skipTerminateQuickPick": false,
+        "priority": 200
+    },
+    {
+        "text": "🧼 Clean",
+        "tooltip": "Clean Dotnet",
+        "color": "yellow",
+        "command": "dotnet clean",
+        "alignment": "right",
+        "skipTerminateQuickPick": false,
+        "priority": 201
+    },
+    {
+        "text": "📦 Pack",
+        "tooltip": "Pack Dotnet",
+        "color": "yellow",
+        "command": "dotnet pack",
+        "alignment": "right",
+        "skipTerminateQuickPick": false,
+        "priority": 202
+    }]
+}

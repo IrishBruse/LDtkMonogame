@@ -63,14 +63,14 @@
 			},
 			{
 				"__type": "IntGrid",
-				"identifier": "Walls",
+				"identifier": "Collisions",
 				"type": "IntGrid",
 				"uid": 2,
 				"gridSize": 32,
 				"displayOpacity": 1,
 				"pxOffsetX": 0,
 				"pxOffsetY": 0,
-				"intGridValues": [{ "identifier": "Wall", "color": "#B77A4C" }],
+				"intGridValues": [ { "identifier": "Wall", "color": "#B77A4C" }, { "identifier": "Platform", "color": "#CB4B4B" }, { "identifier": "Door", "color": "#33CF74" } ],
 				"autoTilesetDefUid": 1,
 				"autoRuleGroups": [
 					{
@@ -484,7 +484,7 @@
 						"uid": 15,
 						"name": "Background",
 						"active": true,
-						"collapsed": false,
+						"collapsed": true,
 						"rules": [
 							{
 								"uid": 46,
@@ -1229,12 +1229,12 @@
 				"identifier": "Player",
 				"uid": 70,
 				"width": 78,
-				"height": 44,
+				"height": 58,
 				"color": "#94D9B3",
 				"renderMode": "Tile",
 				"showName": true,
 				"tilesetId": 71,
-				"tileId": 1,
+				"tileId": 0,
 				"tileRenderMode": "Stretch",
 				"maxPerLevel": 1,
 				"limitBehavior": "MoveLastOne",

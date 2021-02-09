@@ -129,7 +129,7 @@
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Walls",
+			"__identifier": "Collisions",
 			"__type": "IntGrid",
 			"__cWid": 7,
 			"__cHei": 8,

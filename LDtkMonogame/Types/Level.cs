@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -129,9 +129,8 @@ namespace LDtk
 
         /// <summary>
         /// Sets the class for an entity Definition
-        /// <para>Throws <see cref="Exception"/></para>
         /// </summary>
-        /// <returns>A level</returns>
+        /// <typeparam name="T"></typeparam>
         public T[] GetEntities<T>() where T : new()
         {
             List<T> ents = new List<T>();
@@ -273,10 +272,9 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Gets and intgrid from an identifier
+        /// Gets an <see cref="IntGrid"/> from an identifier
         /// </summary>
         /// <param name="identifier">Identifier of intgrid</param>
-        /// <returns>IntGrid</returns>
         public IntGrid GetIntGrid(string identifier)
         {
             for (int i = 0; i < intGrids.Length; i++)

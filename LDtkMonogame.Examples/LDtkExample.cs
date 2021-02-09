@@ -70,6 +70,7 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
+
             if (keyboard.IsKeyDown(Keys.Tab) && oldKeyboard.IsKeyDown(Keys.Tab) == false)
             {
                 followPlayer = !followPlayer;
@@ -87,7 +88,6 @@ namespace Examples
                     cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)deltaTime;
                 }
             }
-
             player.Update(keyboard, oldKeyboard, startLevel, (float)deltaTime);
 
             oldKeyboard = keyboard;
@@ -96,15 +96,16 @@ namespace Examples
 
             base.Update(gameTime);
         }
-
         protected override void Draw(GameTime gameTime)
         {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             GraphicsDevice.Clear(startLevel.BgColor);
 
             Texture2D texture = new Texture2D(GraphicsDevice, 1, 1);
             texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
-            spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
+            spriteBatch.Begin(SpriteSortMode.Texture, blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
             {
                 for (int i = 0; i < startLevel.Layers.Length; i++)
                 {
@@ -129,14 +130,12 @@ namespace Examples
                         SpriteEffects.None, 0);
                 }
 
-                spriteBatch.Draw(pixelTexture, player.Position, Color.Red);
-
                 spriteBatch.Draw(player.Texture,
                     player.Position,
-                    new Rectangle(0, 0, (int)player.FrameSize.X, (int)player.FrameSize.Y),
+                    player.Frame,
                     Color.White, 0,
-                    player.Pivot * player.FrameSize, 1,
-                    SpriteEffects.None, 0);
+                    (player.Pivot * player.FrameSize) + new Vector2(player.fliped ? -8 : 8, -14), 1,
+                    player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
             }
             spriteBatch.End();
 

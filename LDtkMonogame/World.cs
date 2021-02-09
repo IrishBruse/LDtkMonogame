@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

@@ -7,11 +7,7 @@
 	"settings": {
 		"files.exclude": {
 			"*.gitignore": true,
-			"**/.github": true,
-			"**/.vs": true,
-			"**/bin": true,
 			"**/LICENSE": true,
-			"**/obj": true
 		}
 	},
 	"tasks": {

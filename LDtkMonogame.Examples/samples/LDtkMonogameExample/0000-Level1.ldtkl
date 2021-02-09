@@ -111,7 +111,7 @@
 						}]
 					}
 				] },
-				{ "__identifier": "Player", "__grid": [2,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 71, "srcRect": [78,0,78,78] }, "defUid": 70, "px": [80,192], "fieldInstances": [] },
+				{ "__identifier": "Player", "__grid": [2,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 71, "srcRect": [0,0,78,78] }, "defUid": 70, "px": [80,192], "fieldInstances": [] },
 				{ "__identifier": "Crate", "__grid": [7,2], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [240,96], "fieldInstances": [
 					{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
 					{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
@@ -249,12 +249,14 @@
 				{ "px": [384,160], "src": [128,128], "f": 0, "t": 32, "d": [97] },
 				{ "px": [416,160], "src": [160,128], "f": 0, "t": 33, "d": [98] },
 				{ "px": [256,192], "src": [128,32], "f": 0, "t": 11, "d": [110] },
-				{ "px": [416,192], "src": [64,32], "f": 0, "t": 9, "d": [115] }
+				{ "px": [384,192], "src": [64,32], "f": 0, "t": 9, "d": [114] },
+				{ "px": [416,192], "src": [96,32], "f": 0, "t": 10, "d": [115] },
+				{ "px": [256,224], "src": [128,32], "f": 0, "t": 11, "d": [127] }
 			],
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Walls",
+			"__identifier": "Collisions",
 			"__type": "IntGrid",
 			"__cWid": 17,
 			"__cHei": 10,
@@ -314,6 +316,9 @@
 				{ "coordId": 51, "v": 0 },
 				{ "coordId": 52, "v": 0 },
 				{ "coordId": 53, "v": 0 },
+				{ "coordId": 57, "v": 1 },
+				{ "coordId": 58, "v": 1 },
+				{ "coordId": 62, "v": 1 },
 				{ "coordId": 66, "v": 0 },
 				{ "coordId": 67, "v": 0 },
 				{ "coordId": 68, "v": 0 },
@@ -322,6 +327,7 @@
 				{ "coordId": 84, "v": 0 },
 				{ "coordId": 85, "v": 0 },
 				{ "coordId": 86, "v": 0 },
+				{ "coordId": 89, "v": 2 },
 				{ "coordId": 100, "v": 0 },
 				{ "coordId": 101, "v": 0 },
 				{ "coordId": 102, "v": 0 },
@@ -332,6 +338,9 @@
 				{ "coordId": 107, "v": 0 },
 				{ "coordId": 108, "v": 0 },
 				{ "coordId": 109, "v": 0 },
+				{ "coordId": 110, "v": 1 },
+				{ "coordId": 114, "v": 1 },
+				{ "coordId": 115, "v": 1 },
 				{ "coordId": 116, "v": 0 },
 				{ "coordId": 117, "v": 0 },
 				{ "coordId": 118, "v": 0 },
@@ -343,6 +352,7 @@
 				{ "coordId": 124, "v": 0 },
 				{ "coordId": 125, "v": 0 },
 				{ "coordId": 126, "v": 0 },
+				{ "coordId": 127, "v": 1 },
 				{ "coordId": 136, "v": 0 },
 				{ "coordId": 137, "v": 0 },
 				{ "coordId": 138, "v": 0 },
