@@ -37,6 +37,71 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },        
+        {
+            "label": "dotnet restore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },        
+        {
+            "label": "build release netcore31",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "-f",
+                "netcoreapp3.1",
+                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },        
+        {
+            "label": "build release net50",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "-c",
+                "Release",
+                "-f",
+                "net5.0",
+                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "pack",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "run",
+                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "docfx build",
+            "command": "docfx",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/wiki/docfx.json"],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
