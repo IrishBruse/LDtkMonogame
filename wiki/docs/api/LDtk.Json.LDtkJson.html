@@ -1,0 +1,828 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LDtkJson
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LDtkJson
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="LDtk.Json.LDtkJson">
+  
+  
+  <h1 id="LDtk_Json_LDtkJson" data-uid="LDtk.Json.LDtkJson" class="text-break">Class LDtkJson
+  </h1>
+  <div class="markdown level0 summary"><p>This file is a JSON schema of files created by LDtk level editor (<a href="https://ldtk.io">https://ldtk.io</a>).</p>
+<p>This is the root of any Project JSON file. It contains:  - the project settings, - an
+array of levels, - and a definition object (that can probably be safely ignored for most
+users).</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">LDtkJson</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="LDtk.Json.html">LDtk.Json</a></h6>
+  <h6><strong>Assembly</strong>: LDtkMonogame.dll</h6>
+  <h5 id="LDtk_Json_LDtkJson_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LDtkJson</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_BackupLimit.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.BackupLimit%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L27">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_BackupLimit_" data-uid="LDtk.Json.LDtkJson.BackupLimit*"></a>
+  <h4 id="LDtk_Json_LDtkJson_BackupLimit" data-uid="LDtk.Json.LDtkJson.BackupLimit">BackupLimit</h4>
+  <div class="markdown level1 summary"><p>Number of backup files to keep, if the <code>backupOnSave</code> is TRUE</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;backupLimit&quot;)]
+public long BackupLimit { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_BackupOnSave.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.BackupOnSave%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L33">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_BackupOnSave_" data-uid="LDtk.Json.LDtkJson.BackupOnSave*"></a>
+  <h4 id="LDtk_Json_LDtkJson_BackupOnSave" data-uid="LDtk.Json.LDtkJson.BackupOnSave">BackupOnSave</h4>
+  <div class="markdown level1 summary"><p>If TRUE, an extra copy of the project will be created in a sub folder, when saving.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;backupOnSave&quot;)]
+public bool BackupOnSave { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_BgColor.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.BgColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L39">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_BgColor_" data-uid="LDtk.Json.LDtkJson.BgColor*"></a>
+  <h4 id="LDtk_Json_LDtkJson_BgColor" data-uid="LDtk.Json.LDtkJson.BgColor">BgColor</h4>
+  <div class="markdown level1 summary"><p>Project background color</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;bgColor&quot;)]
+public string BgColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_DefaultGridSize.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.DefaultGridSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L45">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_DefaultGridSize_" data-uid="LDtk.Json.LDtkJson.DefaultGridSize*"></a>
+  <h4 id="LDtk_Json_LDtkJson_DefaultGridSize" data-uid="LDtk.Json.LDtkJson.DefaultGridSize">DefaultGridSize</h4>
+  <div class="markdown level1 summary"><p>Default grid size for new layers</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defaultGridSize&quot;)]
+public long DefaultGridSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_DefaultLevelBgColor.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.DefaultLevelBgColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L51">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_DefaultLevelBgColor_" data-uid="LDtk.Json.LDtkJson.DefaultLevelBgColor*"></a>
+  <h4 id="LDtk_Json_LDtkJson_DefaultLevelBgColor" data-uid="LDtk.Json.LDtkJson.DefaultLevelBgColor">DefaultLevelBgColor</h4>
+  <div class="markdown level1 summary"><p>Default background color of levels</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defaultLevelBgColor&quot;)]
+public string DefaultLevelBgColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_DefaultPivotX.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.DefaultPivotX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L57">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_DefaultPivotX_" data-uid="LDtk.Json.LDtkJson.DefaultPivotX*"></a>
+  <h4 id="LDtk_Json_LDtkJson_DefaultPivotX" data-uid="LDtk.Json.LDtkJson.DefaultPivotX">DefaultPivotX</h4>
+  <div class="markdown level1 summary"><p>Default X pivot (0 to 1) for new entities</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defaultPivotX&quot;)]
+public double DefaultPivotX { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_DefaultPivotY.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.DefaultPivotY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L63">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_DefaultPivotY_" data-uid="LDtk.Json.LDtkJson.DefaultPivotY*"></a>
+  <h4 id="LDtk_Json_LDtkJson_DefaultPivotY" data-uid="LDtk.Json.LDtkJson.DefaultPivotY">DefaultPivotY</h4>
+  <div class="markdown level1 summary"><p>Default Y pivot (0 to 1) for new entities</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defaultPivotY&quot;)]
+public double DefaultPivotY { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_Defs.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.Defs%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L69">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_Defs_" data-uid="LDtk.Json.LDtkJson.Defs*"></a>
+  <h4 id="LDtk_Json_LDtkJson_Defs" data-uid="LDtk.Json.LDtkJson.Defs">Defs</h4>
+  <div class="markdown level1 summary"><p>A structure containing all the definitions of this project</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;defs&quot;, NullValueHandling = NullValueHandling.Ignore)]
+public Definitions Defs { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LDtk.Json.Definitions.html">Definitions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_ExportPng.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.ExportPng%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L76">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_ExportPng_" data-uid="LDtk.Json.LDtkJson.ExportPng*"></a>
+  <h4 id="LDtk_Json_LDtkJson_ExportPng" data-uid="LDtk.Json.LDtkJson.ExportPng">ExportPng</h4>
+  <div class="markdown level1 summary"><p>If TRUE, all layers in all levels will also be exported as PNG along with the project
+file (default is FALSE)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;exportPng&quot;)]
+public bool ExportPng { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_ExportTiled.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.ExportTiled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L83">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_ExportTiled_" data-uid="LDtk.Json.LDtkJson.ExportTiled*"></a>
+  <h4 id="LDtk_Json_LDtkJson_ExportTiled" data-uid="LDtk.Json.LDtkJson.ExportTiled">ExportTiled</h4>
+  <div class="markdown level1 summary"><p>If TRUE, a Tiled compatible file will also be generated along with the LDtk JSON file
+(default is FALSE)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;exportTiled&quot;)]
+public bool ExportTiled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_ExternalLevels.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.ExternalLevels%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L90">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_ExternalLevels_" data-uid="LDtk.Json.LDtkJson.ExternalLevels*"></a>
+  <h4 id="LDtk_Json_LDtkJson_ExternalLevels" data-uid="LDtk.Json.LDtkJson.ExternalLevels">ExternalLevels</h4>
+  <div class="markdown level1 summary"><p>If TRUE, one file will be saved for the project (incl. all its definitions) and one file
+in a sub-folder for each level.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;externalLevels&quot;)]
+public bool ExternalLevels { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_JsonVersion.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.JsonVersion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L96">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_JsonVersion_" data-uid="LDtk.Json.LDtkJson.JsonVersion*"></a>
+  <h4 id="LDtk_Json_LDtkJson_JsonVersion" data-uid="LDtk.Json.LDtkJson.JsonVersion">JsonVersion</h4>
+  <div class="markdown level1 summary"><p>File format version</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;jsonVersion&quot;)]
+public string JsonVersion { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_Levels.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.Levels%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L104">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_Levels_" data-uid="LDtk.Json.LDtkJson.Levels*"></a>
+  <h4 id="LDtk_Json_LDtkJson_Levels" data-uid="LDtk.Json.LDtkJson.Levels">Levels</h4>
+  <div class="markdown level1 summary"><p>All levels. The order of this array is only relevant in <code>LinearHorizontal</code> and
+<code>linearVertical</code> world layouts (see <code>worldLayout</code> value). Otherwise, you should refer to
+the <code>worldX</code>,<code>worldY</code> coordinates of each Level.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;levels&quot;)]
+public LDtkLevel[] Levels { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LDtk.Json.LDtkLevel.html">LDtkLevel</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_MinifyJson.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.MinifyJson%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L111">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_MinifyJson_" data-uid="LDtk.Json.LDtkJson.MinifyJson*"></a>
+  <h4 id="LDtk_Json_LDtkJson_MinifyJson" data-uid="LDtk.Json.LDtkJson.MinifyJson">MinifyJson</h4>
+  <div class="markdown level1 summary"><p>If TRUE, the Json is partially minified (no indentation, nor line breaks, default is
+FALSE)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;minifyJson&quot;)]
+public bool MinifyJson { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_NextUid.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.NextUid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L114">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_NextUid_" data-uid="LDtk.Json.LDtkJson.NextUid*"></a>
+  <h4 id="LDtk_Json_LDtkJson_NextUid" data-uid="LDtk.Json.LDtkJson.NextUid">NextUid</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;nextUid&quot;)]
+public long NextUid { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_PngFilePattern.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.PngFilePattern%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L120">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_PngFilePattern_" data-uid="LDtk.Json.LDtkJson.PngFilePattern*"></a>
+  <h4 id="LDtk_Json_LDtkJson_PngFilePattern" data-uid="LDtk.Json.LDtkJson.PngFilePattern">PngFilePattern</h4>
+  <div class="markdown level1 summary"><p>File naming pattern for exported PNGs</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;pngFilePattern&quot;)]
+public string PngFilePattern { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_WorldGridHeight.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.WorldGridHeight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L126">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_WorldGridHeight_" data-uid="LDtk.Json.LDtkJson.WorldGridHeight*"></a>
+  <h4 id="LDtk_Json_LDtkJson_WorldGridHeight" data-uid="LDtk.Json.LDtkJson.WorldGridHeight">WorldGridHeight</h4>
+  <div class="markdown level1 summary"><p>Height of the world grid in pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;worldGridHeight&quot;)]
+public long WorldGridHeight { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_WorldGridWidth.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.WorldGridWidth%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L132">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_WorldGridWidth_" data-uid="LDtk.Json.LDtkJson.WorldGridWidth*"></a>
+  <h4 id="LDtk_Json_LDtkJson_WorldGridWidth" data-uid="LDtk.Json.LDtkJson.WorldGridWidth">WorldGridWidth</h4>
+  <div class="markdown level1 summary"><p>Width of the world grid in pixels.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;worldGridWidth&quot;)]
+public long WorldGridWidth { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_WorldLayout.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.WorldLayout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L139">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_WorldLayout_" data-uid="LDtk.Json.LDtkJson.WorldLayout*"></a>
+  <h4 id="LDtk_Json_LDtkJson_WorldLayout" data-uid="LDtk.Json.LDtkJson.WorldLayout">WorldLayout</h4>
+  <div class="markdown level1 summary"><p>An enum that describes how levels are organized in this project (ie. linearly or in a 2D
+space). Possible values: <code>Free</code>, <code>GridVania</code>, <code>LinearHorizontal</code>, <code>LinearVertical</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonProperty(&quot;worldLayout&quot;, NullValueHandling = NullValueHandling.Ignore)]
+public WorldLayout? WorldLayout { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="LDtk.Json.WorldLayout.html">WorldLayout</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson_FromJson_System_String_.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson.FromJson(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L1090">View Source</a>
+  </span>
+  <a id="LDtk_Json_LDtkJson_FromJson_" data-uid="LDtk.Json.LDtkJson.FromJson*"></a>
+  <h4 id="LDtk_Json_LDtkJson_FromJson_System_String_" data-uid="LDtk.Json.LDtkJson.FromJson(System.String)">FromJson(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static LDtkJson FromJson(string json)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">json</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LDtk.Json.LDtkJson.html">LDtkJson</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="LDtk.Json.Serialize.html#LDtk_Json_Serialize_ToJson_LDtk_Json_LDtkJson_">Serialize.ToJson(LDtkJson)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Json_LDtkJson.md&amp;value=---%0Auid%3A%20LDtk.Json.LDtkJson%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Json/LDtkJson.cs/#L1088" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

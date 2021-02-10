@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace LDtk.Json
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace LDtk.Json
+   ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="LDtk.Json">
+  
+  <h1 id="LDtk_Json" data-uid="LDtk.Json" class="text-break">Namespace LDtk.Json
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="LDtk.Json.Definitions.html">Definitions</a></h4>
+      <section><p>A structure containing all the definitions of this project</p>
+<p>If you're writing your own LDtk importer, you should probably just ignore <em>most</em> stuff in
+the <code>defs</code> section, as it contains data that are mostly important to the editor. To keep
+you away from the <code>defs</code> section and avoid some unnecessary JSON parsing, important data
+from definitions is often duplicated in fields prefixed with a double underscore (eg.
+<code>__identifier</code> or <code>__type</code>).  The 2 only definition types you might need here are
+<strong>Tilesets</strong> and <strong>Enums</strong>.</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.EntityDefinition.html">EntityDefinition</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.EntityInstance.html">EntityInstance</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.EntityInstanceTile.html">EntityInstanceTile</a></h4>
+      <section><p>Optional Tile used to display this entity (it could either be the default Entity tile, or
+some tile provided by a field value, like an Enum).</p>
+<p>Tile data in an Entity instance</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.EnumDefinition.html">EnumDefinition</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.EnumValueDefinition.html">EnumValueDefinition</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.FieldDefinition.html">FieldDefinition</a></h4>
+      <section><p>This section is mostly only intended for the LDtk editor app itself. You can safely
+ignore it.</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.FieldInstance.html">FieldInstance</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.IntGridValueDefinition.html">IntGridValueDefinition</a></h4>
+      <section><p>IntGrid value definition</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.IntGridValueInstance.html">IntGridValueInstance</a></h4>
+      <section><p>IntGrid value instance</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.LayerDefinition.html">LayerDefinition</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.LayerInstance.html">LayerInstance</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.LDtkJson.html">LDtkJson</a></h4>
+      <section><p>This file is a JSON schema of files created by LDtk level editor (<a href="https://ldtk.io">https://ldtk.io</a>).</p>
+<p>This is the root of any Project JSON file. It contains:  - the project settings, - an
+array of levels, - and a definition object (that can probably be safely ignored for most
+users).</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.LDtkLevel.html">LDtkLevel</a></h4>
+      <section><p>This section contains all the level data. It can be found in 2 distinct forms, depending
+on Project current settings:  - If &quot;<em>Separate level files</em>&quot; is <strong>disabled</strong> (default):
+full level data is <em>embedded</em> inside the main Project JSON file, - If &quot;<em>Separate level
+files</em>&quot; is <strong>enabled</strong>: level data is stored in <em>separate</em> standalone <code>.ldtkl</code> files (one
+per level). In this case, the main Project JSON file will still contain most level data,
+except heavy sections, like the <code>layerInstances</code> array (which will be null). The
+<code>externalRelPath</code> string points to the <code>ldtkl</code> file.  A <code>ldtkl</code> file is just a JSON file
+containing exactly what is described below.</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.LevelBackgroundPosition.html">LevelBackgroundPosition</a></h4>
+      <section><p>Position informations of the background image, if there is one.</p>
+<p>Level background image position info</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.NeighbourLevel.html">NeighbourLevel</a></h4>
+      <section><p>Nearby level info</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.Serialize.html">Serialize</a></h4>
+      <section></section>
+      <h4><a class="xref" href="LDtk.Json.TileInstance.html">TileInstance</a></h4>
+      <section><p>This structure represents a single tile from a given Tileset.</p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.TilesetDefinition.html">TilesetDefinition</a></h4>
+      <section><p>The <code>Tileset</code> definition is the most important part among project definitions. It
+contains some extra informations about each integrated tileset. If you only had to parse
+one definition section, that would be the one.</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="LDtk.Json.BgPos.html">BgPos</a></h4>
+      <section><p>An enum defining the way the background image (if any) is positioned on the level. See
+<code>__bgPos</code> for resulting position info. Possible values: <code>Unscaled</code>, <code>Contain</code>, <code>Cover</code>,
+<code>CoverDirty</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.EditorDisplayMode.html">EditorDisplayMode</a></h4>
+      <section><p>Possible values: <code>Hidden</code>, <code>ValueOnly</code>, <code>NameAndValue</code>, <code>EntityTile</code>, <code>PointStar</code>,
+<code>PointPath</code>, <code>RadiusPx</code>, <code>RadiusGrid</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.EditorDisplayPos.html">EditorDisplayPos</a></h4>
+      <section><p>Possible values: <code>Above</code>, <code>Center</code>, <code>Beneath</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.LimitBehavior.html">LimitBehavior</a></h4>
+      <section><p>Possible values: <code>DiscardOldOnes</code>, <code>PreventAdding</code>, <code>MoveLastOne</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.RenderMode.html">RenderMode</a></h4>
+      <section><p>Possible values: <code>Rectangle</code>, <code>Ellipse</code>, <code>Tile</code>, <code>Cross</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.TileRenderMode.html">TileRenderMode</a></h4>
+      <section><p>Possible values: <code>Stretch</code>, <code>Crop</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.TypeEnum.html">TypeEnum</a></h4>
+      <section><p>Type of the layer as Haxe Enum Possible values: <code>IntGrid</code>, <code>Entities</code>, <code>Tiles</code>,
+<code>AutoLayer</code></p>
+</section>
+      <h4><a class="xref" href="LDtk.Json.WorldLayout.html">WorldLayout</a></h4>
+      <section><p>An enum that describes how levels are organized in this project (ie. linearly or in a 2D
+space). Possible values: <code>Free</code>, <code>GridVania</code>, <code>LinearHorizontal</code>, <code>LinearVertical</code></p>
+</section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
