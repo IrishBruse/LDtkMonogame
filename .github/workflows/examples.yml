@@ -1,4 +1,4 @@
-name: Build Package
+name: Build Examples
 
 on:
   push:
