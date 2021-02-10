@@ -4,8 +4,8 @@
 <a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
 </p>
 <p align="center">
-  <img alt="GitHub Package Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Package?label=Package">
-  <img alt="GitHub Examples Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Examples?label=Examples">
+  <img alt="GitHub Package Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Package?label=LDtkMonogame">
+  <img alt="GitHub Examples Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Examples?label=LDtkMonogame.Examples">
 </p>
 
 # LDtk Monogame
