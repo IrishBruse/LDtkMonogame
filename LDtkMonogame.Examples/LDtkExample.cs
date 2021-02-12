@@ -29,6 +29,8 @@ namespace Examples
         private bool followPlayer = true;
 
         Texture2D pixelTexture;
+        Door[] doors;
+        Crate[] crates;
 
         public LDtkExample() : base()
         {
@@ -45,11 +47,16 @@ namespace Examples
             startLevel = world.GetLevel("Level1");
             neighbours = (from neighbour in startLevel.Neighbours select world.GetLevel(neighbour)).ToArray();
 
-            Door[] doors = startLevel.GetEntities<Door>();
+            doors = startLevel.GetEntities<Door>();
+
+            for (int i = 0; i < doors.Length; i++)
+            {
+                doors[i].trigger = new Rect(doors[i].Position.X - 16, doors[i].Position.Y - 32, 32, 32);
+            }
 
             drawableEntities.AddRange(doors);
 
-            Crate[] crates = startLevel.GetEntities<Crate>();
+            crates = startLevel.GetEntities<Crate>();
 
             player = startLevel.GetEntity<Player>();
 
@@ -60,7 +67,7 @@ namespace Examples
         public override void OnWindowResized()
         {
             cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
-            cameraZoom = 2;
+            cameraZoom = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
         }
 
         protected override void Update(GameTime gameTime)
@@ -70,7 +77,6 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-
             if (keyboard.IsKeyDown(Keys.Tab) && oldKeyboard.IsKeyDown(Keys.Tab) == false)
             {
                 followPlayer = !followPlayer;
@@ -78,7 +84,7 @@ namespace Examples
 
             if (followPlayer)
             {
-                cameraPosition = -new Vector3(player.Position, 0);
+                cameraPosition = -new Vector3(player.Position.X, player.Position.Y - 30, 0);
             }
             else
             {
@@ -120,6 +126,16 @@ namespace Examples
                     }
                 }
 
+                for (int i = 0; i < doors.Length; i++)
+                {
+                    if (doors[i].trigger.Contains(player.collider))
+                    {
+                        player.inDoor = true;
+                        doors[i].opening = true;
+                        break;
+                    }
+                }
+
                 for (int i = 0; i < drawableEntities.Count; i++)
                 {
                     spriteBatch.Draw(drawableEntities[i].Texture,
@@ -134,8 +150,8 @@ namespace Examples
                     player.Position,
                     player.Frame,
                     Color.White, 0,
-                    (player.Pivot * player.FrameSize) + new Vector2(player.fliped ? -8 : 8, -14), 1,
-                    player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+                                (player.Pivot * player.FrameSize) + new Vector2(player.fliped ? -8 : 8, -14), 1,
+                                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
             }
             spriteBatch.End();
 

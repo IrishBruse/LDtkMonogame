@@ -54,6 +54,7 @@ namespace Examples
         int animationType;
         bool doorInteraction;
         bool enteringDoor;
+        internal bool inDoor;
 
         public Player()
         {
@@ -193,6 +194,7 @@ namespace Examples
         {
             frameTime += deltaTime;
 
+            // This is awful but its only a demo so it doesnt really matter
             if (frameTime >= .1f)
             {
                 frameTime -= .1f;
@@ -200,6 +202,7 @@ namespace Examples
                 {
                     if (enteringDoor)
                     {
+                        // Enter door
                         if (animationFrame < 7)
                         {
                             animationFrame++;
@@ -213,6 +216,7 @@ namespace Examples
                     }
                     else
                     {
+                        // Exit door
                         if (animationFrame < 6)
                         {
                             animationFrame++;
@@ -228,11 +232,13 @@ namespace Examples
                 {
                     if (grounded == true && oldGrounded == false)
                     {
-                        animationFrame = 5;
+                        animationFrame = 2;
                         animationType = 5;
                     }
                     else if (velocity.X == 0)
                     {
+                        // Idling
+                        animationType = 0;
                         if (animationFrame < 10)
                         {
                             animationFrame++;
@@ -241,10 +247,11 @@ namespace Examples
                         {
                             animationFrame = 0;
                         }
-                        animationType = 0;
                     }
                     else
                     {
+                        // Walk
+                        animationType = 1;
                         if (animationFrame < 7)
                         {
                             animationFrame++;
@@ -253,18 +260,17 @@ namespace Examples
                         {
                             animationFrame = 0;
                         }
-                        animationType = 1;
                     }
 
                 }
                 else if (velocity.Y > 0)
                 {
-                    animationFrame = 4;
+                    animationFrame = 1;
                     animationType = 5;
                 }
-                if (velocity.Y < 0)
+                else if (velocity.Y < 0)
                 {
-                    animationFrame = 3;
+                    animationFrame = 0;
                     animationType = 5;
                 }
 

@@ -100,7 +100,7 @@
             "command": "docfx",
             "type": "process",
             "args": [
-                "${workspaceFolder}/wiki/docfx.json"],
+                "${workspaceFolder}/docfx_project/docfx.json"],
             "problemMatcher": "$msCompile"
         }
     ]

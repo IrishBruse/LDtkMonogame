@@ -47,7 +47,7 @@ spriteBatch.End();
 ```
 Thats all thats needed to render your level everything else is handled by LDtkMonogame
   
-### For a more detailed introduction and on how to use `IntGrids` and `Entities` check out the wiki
+### For a more detailed introduction and on how to use **IntGrids**, **Levels** and **Entities** check out the wiki
 
 [Wiki and Api Documentation](https://irishbruse.github.io/LDtkMonogame/)
 ------------

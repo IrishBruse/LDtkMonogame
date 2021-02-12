@@ -33,5 +33,13 @@ namespace Examples
 
         public string destinationLevel;
         public int destinationDoor;
+
+        public Rect trigger;
+        public bool opening;
+
+        public void Update(float deltaTime)
+        {
+
+        }
     }
 }

@@ -1,25 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!--C Sharp-->
 		<OutputType>Library</OutputType>
 		<TargetFramework>net5.0</TargetFramework>
 		<TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+
+		<!--Nuget Config-->
 		<Authors>Ethan Conneely</Authors>
 		<Product>LDtk Monogame</Product>
 		<PackageId>LDtkMonogame</PackageId>
 		<Description>LDtk importer for Monogame</Description>
 		<PackageProjectUrl>https://github.com/IrishBruse/LDtkMonogame</PackageProjectUrl>
-		<Version>0.1.1</Version>
+		<Version>0.2.0</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>favicon.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>- Added class/struct based Entities</PackageReleaseNotes>
+		<PackageReleaseNotes>
+			- Added class/struct based Entities
+			- Added intgrid support
+			- Added Documentation
+		</PackageReleaseNotes>
 		<RootNamespace>LDtk</RootNamespace>
-	</PropertyGroup>
 
+		<!--Documentation-->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
