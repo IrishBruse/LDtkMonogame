@@ -1,8 +1,9 @@
 body {
     --color-foreground: #ccd5dc;
     --color-background: #1e2229;
+    --color-dark-background: #16181d;
+    --color-border: #2e333f;
     --color-text: #9698ac;
-    --color-navbar-background: #16181d;
     --color-navbar-text: #ffcc00;
 
     font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -37,16 +38,27 @@ a:hover {
 }
 
 header {
-    background-color: var(--color-navbar-background);
+    background-color: transparent;
 }
 
 .footer {
-    background-color: var(--color-navbar-background);
+    background-color: var(--color-dark-background);
     border-width: 0px;
 }
 
-.subnav {
-    background-color: var(--color-background);
+.subnav,
+.subnav .container {
+    background-color: transparent !important;
+}
+
+.subnav .breadcrumb {
+    background-color: var(--color-dark-background);
+    border-radius: 0;
+    padding: 10px 14px;
+}
+
+.sidefilter {
+    visibility: hidden;
 }
 
 .navbar-nav {
@@ -105,8 +117,15 @@ header div.container {
     background-color: transparent !important;
 }
 
+.navbar-form {
+    width: auto;
+    float: inline-end;
+    padding: 0;
+    margin: 0;
+}
+
 .navbar-inverse {
-    background-color: var(--color-navbar-background);
+    background-color: var(--color-dark-background);
     color: var(--color-navbar-text);
     padding: 30px 0;
     font-size: 0.9em;
@@ -151,4 +170,29 @@ header div.container {
 
 #toc {
     background-color: var(--color-background);
+}
+
+.codewrapper pre {
+    background-color: var(--color-dark-background);
+    display: block;
+    color: inherit;
+    box-shadow: 0px 4px 0px rgb(0 0 0 / 30%) inset, 0px 0px 16px rgb(0 0 0 / 30%) inset;
+    padding: 16px;
+    tab-size: 2;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+}
+
+.table,
+.table thead,
+.table tbody,
+.table tr,
+.table td,
+.table th {
+    border-color: var(--color-border) !important;
+    background-color: var(--color-dark-background);
+}
+
+.hljs {
+    color: rgb(150, 152, 172) !important;
 }
