@@ -4,12 +4,133 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
+      "type": "Resource",
+      "source_relative_path": "../art/Icon.bmp",
+      "output": {
+        "resource": {
+          "relative_path": "Icon.bmp"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/Icon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "Icon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/LDtkMonogame Logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "LDtkMonogame Logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/discord.svg",
+      "output": {
+        "resource": {
+          "relative_path": "discord.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/github.svg",
+      "output": {
+        "resource": {
+          "relative_path": "github.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/knight.png",
+      "output": {
+        "resource": {
+          "relative_path": "knight.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/readme/Example Project.gif",
+      "output": {
+        "resource": {
+          "relative_path": "readme/Example Project.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/readme/LDtk to Monogame.png",
+      "output": {
+        "resource": {
+          "relative_path": "readme/LDtk to Monogame.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../art/twitter.svg",
+      "output": {
+        "resource": {
+          "relative_path": "twitter.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "ManagedReference",
       "source_relative_path": "api/LDtk.ISprite.yml",
       "output": {
         ".html": {
           "relative_path": "api/LDtk.ISprite.html",
-          "hash": "zuZ0b68FQ5yDJMmBO67tFg=="
+          "hash": "UCFCZSh2bqwCePNYYV1w6w=="
         }
       },
       "is_incremental": false,
@@ -21,343 +142,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.IntGrid.html",
-          "hash": "SmBv4ffXHpMGi1J6nLG2rQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.BgPos.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.BgPos.html",
-          "hash": "n1z+UBEl/MVNyA0kbPWtgA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.Definitions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.Definitions.html",
-          "hash": "5YpIbf4ICg1XWcs3yK1AOw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EditorDisplayMode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EditorDisplayMode.html",
-          "hash": "sGhQ+hWKr1HLPA7IzaVY+g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EditorDisplayPos.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EditorDisplayPos.html",
-          "hash": "8S3ZsOIDPe0QTRRAB9vQxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EntityDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EntityDefinition.html",
-          "hash": "m2Qk9uO4CvZYzjaIxovR+g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EntityInstance.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EntityInstance.html",
-          "hash": "FzpTbvpaU2odcke/YaJb1g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EntityInstanceTile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EntityInstanceTile.html",
-          "hash": "uty/cAuHj7N7wOHeBafE/A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EnumDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EnumDefinition.html",
-          "hash": "ZBDJmf1eZvP+FnEU4xrlfA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.EnumValueDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.EnumValueDefinition.html",
-          "hash": "Oph4BwU3VjTuLd9Tm2HgzQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.FieldDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.FieldDefinition.html",
-          "hash": "K+dd3yllU/sLsxw3c4umAQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.FieldInstance.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.FieldInstance.html",
-          "hash": "DKMWaAN+rfoclrMI4DLR7A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.IntGridValueDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.IntGridValueDefinition.html",
-          "hash": "03hf8RULm2/N0MUFQC5NbQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.IntGridValueInstance.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.IntGridValueInstance.html",
-          "hash": "xOeJzINA2q3nd+Snz4uWbw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LDtkJson.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LDtkJson.html",
-          "hash": "2Y1uo6rCRKqyadQcVL0ssA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LDtkLevel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LDtkLevel.html",
-          "hash": "XSm3HfEhjadMGp5h24EirA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LayerDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LayerDefinition.html",
-          "hash": "EfzH1ycm/+j758qZBV8bSQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LayerInstance.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LayerInstance.html",
-          "hash": "KBSmIcUAEZfEaupZj0TenA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LevelBackgroundPosition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LevelBackgroundPosition.html",
-          "hash": "z5z4GWkWUAQkEbRinebaCw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.LimitBehavior.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.LimitBehavior.html",
-          "hash": "qyqURIn5IeUYT1a6hRKaxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.NeighbourLevel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.NeighbourLevel.html",
-          "hash": "UFeysnjHGET8kdcBqJAQzA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.RenderMode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.RenderMode.html",
-          "hash": "tgTzh1e8gubp5kRlQsa5WQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.Serialize.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.Serialize.html",
-          "hash": "17poZcOKSzf0GoCpPHxr4A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.TileInstance.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.TileInstance.html",
-          "hash": "bNz5n6GgpB0ulC3MbpSHUQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.TileRenderMode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.TileRenderMode.html",
-          "hash": "I9VRSl46zgwsE/HLrnABbQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.TilesetDefinition.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.TilesetDefinition.html",
-          "hash": "x3jUyxs4neUE8u2BfIrUkA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.TypeEnum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.TypeEnum.html",
-          "hash": "prQUhxYAvytp6wps8y2akA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.WorldLayout.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.WorldLayout.html",
-          "hash": "2xG0HPm2rMzMnIG0GTw6Yw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.Json.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.Json.html",
-          "hash": "FcNXsbHfbuoGvd7P62tYew=="
+          "hash": "tA3uySe4193fdWR+oLMrfg=="
         }
       },
       "is_incremental": false,
@@ -369,7 +154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "Exv2p2uZdMpBWcD4Kcuffw=="
+          "hash": "VcXkGLpP9yCrh7aLnxJ/JQ=="
         }
       },
       "is_incremental": false,
@@ -381,7 +166,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "W+PXl+MKeNLDLMzPIKXPqQ=="
+          "hash": "x+aaDbnXubp0Bml2GlmEuA=="
         }
       },
       "is_incremental": false,
@@ -393,7 +178,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.html",
-          "hash": "gO6hHlicDpeoR6NNAptGyQ=="
+          "hash": "y+JjUcNVDXurWL1Qo8AGMg=="
         }
       },
       "is_incremental": false,
@@ -405,7 +190,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "cja1fT+fK2+OJxeBtuFxzQ=="
+          "hash": "NbJVWgnLsdJYRZpQpJK1Pg=="
         }
       },
       "is_incremental": false,
@@ -417,7 +202,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "vSU/ZCq6jy8Ovw2ZQv4mGg=="
+          "hash": "BSLbGCRUdPwZ3uLHah7veg=="
         }
       },
       "is_incremental": false,
@@ -425,11 +210,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/intro.md",
+      "source_relative_path": "documentation/intro.md",
       "output": {
         ".html": {
-          "relative_path": "articles/intro.html",
-          "hash": "XApku3zXH+MIvguSwVZEHg=="
+          "relative_path": "documentation/intro.html",
+          "hash": "wSLVFncOkSDMWEdZehNuXA=="
         }
       },
       "is_incremental": false,
@@ -437,10 +222,10 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "articles/toc.yml",
+      "source_relative_path": "documentation/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "articles/toc.html",
+          "relative_path": "documentation/toc.html",
           "hash": "gB8AESyvNru97tzIZofEEg=="
         }
       },
@@ -453,7 +238,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "I9oOER6JubuYxRBoKb/ZYg=="
+          "hash": "ztz9EzKQqpV3/pClFthcOg=="
         }
       },
       "is_incremental": false,
@@ -465,7 +250,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "+rHUkRZHZRi5gd1aTU6lJA=="
+          "hash": "QYgnvNB7y0rNQHYYgRQ41w=="
         }
       },
       "is_incremental": false,
@@ -475,24 +260,29 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
+        "skipped_file_count": 0
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 3,
-          "skipped_file_count": 0
+          "skipped_file_count": 3
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 33,
+          "total_file_count": 5,
+          "skipped_file_count": 5
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
@@ -506,8 +296,8 @@
     },
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
