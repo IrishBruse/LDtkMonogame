@@ -9,7 +9,7 @@ The api page should be up to date with the github main branch though
 
 # Preview
 
-![LDtk to Monogame Conversion](/art/readme/LDtk%20to%20Monogame.png "1 to 1 Conversion")
+![LDtk to Monogame Conversion](~/art/readme/LDtk%20to%20Monogame.png "1 to 1 Conversion")
 
 # Example
 
@@ -21,4 +21,4 @@ How to run
 
 You can even edit the .ldtk file and run it again to see the changes
 
-![Example Gameplay](/art/readme/Example%20Project.gif "Gameplay")
+![Example Gameplay](~/art/readme/Example%20Project.gif "Gameplay")

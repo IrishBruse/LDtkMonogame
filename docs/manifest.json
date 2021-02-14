@@ -4,136 +4,15 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
-      "type": "Resource",
-      "source_relative_path": "../art/Icon.bmp",
-      "output": {
-        "resource": {
-          "relative_path": "Icon.bmp"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/Icon.ico",
-      "output": {
-        "resource": {
-          "relative_path": "Icon.ico"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/LDtkMonogame Logo.png",
-      "output": {
-        "resource": {
-          "relative_path": "LDtkMonogame Logo.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/discord.svg",
-      "output": {
-        "resource": {
-          "relative_path": "discord.svg"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/favicon.ico",
-      "output": {
-        "resource": {
-          "relative_path": "favicon.ico"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/favicon.png",
-      "output": {
-        "resource": {
-          "relative_path": "favicon.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/github.svg",
-      "output": {
-        "resource": {
-          "relative_path": "github.svg"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/knight.png",
-      "output": {
-        "resource": {
-          "relative_path": "knight.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/readme/Example Project.gif",
-      "output": {
-        "resource": {
-          "relative_path": "readme/Example Project.gif"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/readme/LDtk to Monogame.png",
-      "output": {
-        "resource": {
-          "relative_path": "readme/LDtk to Monogame.png"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Resource",
-      "source_relative_path": "../art/twitter.svg",
-      "output": {
-        "resource": {
-          "relative_path": "twitter.svg"
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "ManagedReference",
       "source_relative_path": "api/LDtk.ISprite.yml",
       "output": {
         ".html": {
           "relative_path": "api/LDtk.ISprite.html",
-          "hash": "JaSppiDBzaPz/t/QSWShHg=="
+          "hash": "p6Dufl44a+qFRgnL9b+rUQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -142,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.IntGrid.html",
-          "hash": "gFQGNGqmwXBgFqI+kkc6uA=="
+          "hash": "T6y+LNoNIWSMZ+PtFmIhPQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -154,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "WEmkXs1SyTHMDHYqZl2fZw=="
+          "hash": "emm3E5jGtSKcX+3iOHlCVg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -166,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "mnaCNW4jdXlJ4I8YzGr08Q=="
+          "hash": "5d+9j1A2QImL7jMIuHxldg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -178,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.html",
-          "hash": "2gaY9/SJhMLQLiR7KiwI+A=="
+          "hash": "XncJNZWxA4iwwO7myNffiQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -190,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "SCNt/wTmwC4Pt4tpbnjMTg=="
+          "hash": "wtazuBtUKy0gbPXOSt2t7w=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -209,15 +88,125 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "art/Icon.bmp",
+      "output": {
+        "resource": {
+          "relative_path": "art/Icon.bmp"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/LDtkMonogame Logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "art/LDtkMonogame Logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/discord.svg",
+      "output": {
+        "resource": {
+          "relative_path": "art/discord.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "art/favicon.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "art/favicon.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/github.svg",
+      "output": {
+        "resource": {
+          "relative_path": "art/github.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/knight.png",
+      "output": {
+        "resource": {
+          "relative_path": "art/knight.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/readme/Example Project.gif",
+      "output": {
+        "resource": {
+          "relative_path": "art/readme/Example Project.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/readme/LDtk to Monogame.png",
+      "output": {
+        "resource": {
+          "relative_path": "art/readme/LDtk to Monogame.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "art/twitter.svg",
+      "output": {
+        "resource": {
+          "relative_path": "art/twitter.svg"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "documentation/intro.md",
       "output": {
         ".html": {
           "relative_path": "documentation/intro.html",
-          "hash": "miqdMAFXPprWHfFhuV4uoA=="
+          "hash": "cGSS9FUgaOA+NdPoqIusXw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -226,7 +215,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/quickstart.html",
-          "hash": "QERCs9zN+ryafthW3lPlYw=="
+          "hash": "BFvFCoPYKq+nzdCbLmXKRA=="
         }
       },
       "is_incremental": false,
@@ -250,10 +239,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "rf7hBYfMDYn+p6G5yYthVQ=="
+          "hash": "fL56L/vXZrG3IDGq92/M3g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -282,7 +271,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 4,
-          "skipped_file_count": 3
+          "skipped_file_count": 4
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

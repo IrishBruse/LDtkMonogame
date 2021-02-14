@@ -30,9 +30,8 @@
         }],
         "resource": [
         {
-            "src": "../art",
             "files": [
-                "/**"
+                "art/**"
             ]
         }],
         "overwrite": [
