@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Add your introductions here! </title>
+    <title>Quick Start Guide </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Add your introductions here! ">
+    <meta name="title" content="Quick Start Guide ">
     <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -73,8 +73,30 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="add-your-introductions-here">Add your introductions here!</h1>
+<h1 id="quick-start-guide">Quick Start Guide</h1>
 
+<p>The easiest way to start using LDtkMonogame is to import it into the project using nuget</p>
+<p><a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?"></a></p>
+<p>Make sure to import the namespace at the top</p>
+<pre><code class="lang-csharp">using LDtk;
+</code></pre>
+<p>To get started loading ldtk files create a</p>
+<pre><code class="lang-csharp">World ldtkWorld = new World(&quot;Assets/MyProject.ldtk&quot;);
+</code></pre>
+<p>Now just load the level</p>
+<pre><code class="lang-csharp">Level startLevel = ldtkWorld.GetLevel(&quot;Level1&quot;);
+</code></pre>
+<p>Now to render the level we loaded in <code>Draw</code></p>
+<pre><code class="lang-csharp">spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp);
+{
+    for(int i = 0; i &lt; startLevel.Layers.Length; i++)
+    {
+        spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
+    }
+}
+spriteBatch.End();
+</code></pre>
+<h2 id="thats-all-thats-needed-to-render-your-level-everything-else-is-handled-by-ldtkmonogame">Thats all thats needed to render your level everything else is handled by LDtkMonogame</h2>
 </article>
           </div>
           
@@ -83,7 +105,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/docfx_project/documentation/intro.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/docfx_project/documentation/quickstart.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -45,7 +45,7 @@
                 <li><a class="navbar-logo-link" href="https://deepnight.net/"><img src="../knight.png"></a></li>
                 <li><a class="navbar-logo-link" href="https://twitter.com/deepnightfr"><img src="../twitter.svg"></a></li>
                 <li><a class="navbar-logo-link" href="https://github.com/deepnight/ldtk"><img src="../github.svg"></a></li>
-                <li><a class="navbar-logo-link" href="https://github.com/deepnight/ldtk"><img src="../discord.svg"></a></li>
+                <li><a class="navbar-logo-link" href="https://ldtk.io/go/discord"><img src="../discord.svg"></a></li>
               </ol>
             </div>
             <form class="navbar-form navbar-right" role="search" id="search">
@@ -304,11 +304,12 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Level_GetEntities__1.md&amp;value=---%0Auid%3A%20LDtk.Level.GetEntities%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L134">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L137">View Source</a>
   </span>
   <a id="LDtk_Level_GetEntities_" data-uid="LDtk.Level.GetEntities*"></a>
   <h4 id="LDtk_Level_GetEntities__1" data-uid="LDtk.Level.GetEntities``1">GetEntities&lt;T&gt;()</h4>
-  <div class="markdown level1 summary"><p>Sets the class for an entity Definition</p>
+  <div class="markdown level1 summary"><p>Gets the parsed entities from the ldtk json
+If fields are missing they will be logged to the console</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -327,7 +328,8 @@
     <tbody>
       <tr>
         <td>T[]</td>
-        <td></td>
+        <td><p>The entities cast to the class</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -342,7 +344,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">T</span></td>
-        <td></td>
+        <td><p>The class/struct you will use to parse the ldtk entities</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -351,12 +354,13 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Level_GetEntity__1.md&amp;value=---%0Auid%3A%20LDtk.Level.GetEntity%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L56">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L58">View Source</a>
   </span>
   <a id="LDtk_Level_GetEntity_" data-uid="LDtk.Level.GetEntity*"></a>
   <h4 id="LDtk_Level_GetEntity__1" data-uid="LDtk.Level.GetEntity``1">GetEntity&lt;T&gt;()</h4>
-  <div class="markdown level1 summary"><p>Sets the class for a single entity Definition</p>
-<p>Throws <span class="xref">System.Exception</span></p>
+  <div class="markdown level1 summary"><p>Gets the parsed entity from the ldtk json.
+If fields are missing they will be logged to the console.
+The class name must match the entities identifier.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -375,7 +379,7 @@
     <tbody>
       <tr>
         <td><span class="xref">T</span></td>
-        <td><p>A level</p>
+        <td><p>The entity cast to the class</p>
 </td>
       </tr>
     </tbody>
@@ -391,7 +395,8 @@
     <tbody>
       <tr>
         <td><span class="parametername">T</span></td>
-        <td></td>
+        <td><p>The class/struct you will use to parse the ldtk entity</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -400,7 +405,7 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_Level_GetIntGrid_System_String_.md&amp;value=---%0Auid%3A%20LDtk.Level.GetIntGrid(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L278">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/Level.cs/#L281">View Source</a>
   </span>
   <a id="LDtk_Level_GetIntGrid_" data-uid="LDtk.Level.GetIntGrid*"></a>
   <h4 id="LDtk_Level_GetIntGrid_System_String_" data-uid="LDtk.Level.GetIntGrid(System.String)">GetIntGrid(String)</h4>
@@ -424,7 +429,7 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">identifier</span></td>
-        <td><p>Identifier of intgrid</p>
+        <td><p>Identifier of an intgrid</p>
 </td>
       </tr>
     </tbody>

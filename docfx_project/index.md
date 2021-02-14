@@ -1,4 +1,24 @@
-# This is the **HOMEPAGE**.
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-## Quick Start Notes:
-1. Add images to the *images* folder if the file is referencing an image.
+# LDtkMonogame
+LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [Monogame](https://www.monogame.net/) Framework
+
+This is the documentation page for all LDtkMonogame related stuff  
+If you are looking for ldtk documentation thats [here](https://ldtk.io/)
+
+This wiki is still under contruction so alot of documentation and guides are still missing  
+The api page should be up to date with the github main branch though
+
+# Preview
+
+![LDtk to Monogame Conversion](/art/readme/LDtk%20to%20Monogame.png "1 to 1 Conversion")
+
+# Example
+
+This small game example [LDtkMonogame.Examples](https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples) showcases how easy it is to get setup and making levels for your game
+
+How to run
+- Open the solution and hit run in visual studio or
+- `cd` into the `LDtkMonogame.Examples` folder and use `dotnet run` to play the example game
+
+You can even edit the .ldtk file and run it again to see the changes
+
+![Example Gameplay](/art/readme/Example%20Project.gif "Gameplay")

@@ -130,10 +130,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.ISprite.html",
-          "hash": "5oMfh+Eq3pNwOkZbMF7rmQ=="
+          "hash": "JaSppiDBzaPz/t/QSWShHg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -142,10 +142,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.IntGrid.html",
-          "hash": "rOefNhGXsyZr3U/3QV3DJQ=="
+          "hash": "gFQGNGqmwXBgFqI+kkc6uA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -154,10 +154,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "2enfEQTINlJ8/Hvn4WG4Zg=="
+          "hash": "WEmkXs1SyTHMDHYqZl2fZw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -166,10 +166,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "9iMIDMi6BRhoFcgL6DHGRw=="
+          "hash": "mnaCNW4jdXlJ4I8YzGr08Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -178,10 +178,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.html",
-          "hash": "kcdl8J/ikVvGopOrYO3NNQ=="
+          "hash": "2gaY9/SJhMLQLiR7KiwI+A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -190,10 +190,10 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "BukAbYxbxkt6pCRmITY3zQ=="
+          "hash": "SCNt/wTmwC4Pt4tpbnjMTg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -214,7 +214,19 @@
       "output": {
         ".html": {
           "relative_path": "documentation/intro.html",
-          "hash": "Hw9+a0PUvD5PnqyA1VlFrA=="
+          "hash": "miqdMAFXPprWHfFhuV4uoA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/quickstart.html",
+          "hash": "QERCs9zN+ryafthW3lPlYw=="
         }
       },
       "is_incremental": false,
@@ -226,7 +238,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "gB8AESyvNru97tzIZofEEg=="
+          "hash": "n6XMPSz4gZkRmrJ4CA+yPg=="
         }
       },
       "is_incremental": false,
@@ -238,10 +250,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "owfLSRzMj9e8xRqn85IY8g=="
+          "hash": "rf7hBYfMDYn+p6G5yYthVQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -269,7 +281,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 3,
+          "total_file_count": 4,
           "skipped_file_count": 3
         },
         "ManagedReferenceDocumentProcessor": {

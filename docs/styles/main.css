@@ -4,6 +4,7 @@ body {
     --color-dark-background: #16181d;
     --color-border: #2e333f;
     --color-text: #9698ac;
+    --color-text-title: #rgb(115, 127, 157);
     --color-navbar-text: #ffcc00;
 
     font-family: "Roboto", Helvetica, Arial, sans-serif;
@@ -20,11 +21,15 @@ h1,
 h2,
 h3,
 h4,
-h4,
 h5 {
     font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
     font-weight: 100;
     color: var(--color-navbar-text);
+}
+
+h3 {
+    font-size: xx-large;
+    color: var(--color-text-title);
 }
 
 a {
@@ -172,7 +177,7 @@ header div.container {
     background-color: var(--color-background);
 }
 
-.codewrapper pre {
+pre {
     background-color: var(--color-dark-background);
     display: block;
     color: inherit;
@@ -181,6 +186,10 @@ header div.container {
     tab-size: 2;
     border: 1px solid var(--color-border);
     border-radius: 3px;
+}
+
+code {
+    background-color: var(--color-dark-background);
 }
 
 .table,

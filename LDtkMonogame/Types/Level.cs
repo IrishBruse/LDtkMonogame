@@ -49,10 +49,12 @@ namespace LDtk
         public long[] Neighbours { get; internal set; }
 
         /// <summary>
-        /// Sets the class for a single entity Definition
-        /// <para>Throws <see cref="Exception"/></para>
+        /// Gets the parsed entity from the ldtk json.
+        /// If fields are missing they will be logged to the console.
+        /// The class name must match the entities identifier.
         /// </summary>
-        /// <returns>A level</returns>
+        /// <returns>The entity cast to the class</returns>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         public T GetEntity<T>() where T : new()
         {
             for (int i = 0; i < entities.Length; i++)
@@ -65,7 +67,6 @@ namespace LDtk
 
                     for (int j = 0; j < entities[i].FieldInstances.Length; j++)
                     {
-
                         string variableName = entities[i].FieldInstances[j].Identifier;
 
                         variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
@@ -128,9 +129,11 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Sets the class for an entity Definition
+        /// Gets the parsed entities from the ldtk json
+        /// If fields are missing they will be logged to the console
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <returns>The entities cast to the class</returns>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
         public T[] GetEntities<T>() where T : new()
         {
             List<T> ents = new List<T>();
@@ -274,7 +277,7 @@ namespace LDtk
         /// <summary>
         /// Gets an <see cref="IntGrid"/> from an identifier
         /// </summary>
-        /// <param name="identifier">Identifier of intgrid</param>
+        /// <param name="identifier">Identifier of an intgrid</param>
         public IntGrid GetIntGrid(string identifier)
         {
             for (int i = 0; i < intGrids.Length; i++)
