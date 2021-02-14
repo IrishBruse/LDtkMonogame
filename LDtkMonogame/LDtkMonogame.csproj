@@ -16,7 +16,7 @@
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
-		<PackageIcon>favicon.png</PackageIcon>
+		<PackageIcon>Icon.bmp</PackageIcon>
 		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes>
 			- Added class/struct based Entities
@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="..\art\favicon.png">
+		<EmbeddedResource Include="..\art\Icon.bmp">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</EmbeddedResource>
