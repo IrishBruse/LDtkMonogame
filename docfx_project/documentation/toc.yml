@@ -1,4 +1,5 @@
 - name: Introduction
   href: intro.md
-- name: Quick Start
-  href: quickstart.md
+  items:
+    - name: Quick Start
+      href: quickstart.md

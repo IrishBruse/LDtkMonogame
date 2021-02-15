@@ -5,14 +5,14 @@
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.ISprite.yml",
+      "source_relative_path": "api/LDtk.Entity.yml",
       "output": {
         ".html": {
-          "relative_path": "api/LDtk.ISprite.html",
-          "hash": "p6Dufl44a+qFRgnL9b+rUQ=="
+          "relative_path": "api/LDtk.Entity.html",
+          "hash": "HT0Vwo11JQyr3o5Szl04jw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -24,7 +24,7 @@
           "hash": "T6y+LNoNIWSMZ+PtFmIhPQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "emm3E5jGtSKcX+3iOHlCVg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "5d+9j1A2QImL7jMIuHxldg=="
+          "hash": "MjAeQJ304LG+s+pvM25Irg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.html",
-          "hash": "XncJNZWxA4iwwO7myNffiQ=="
+          "hash": "XQR9lGcVwNtzBodE0aqdlw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -72,7 +72,7 @@
           "hash": "wtazuBtUKy0gbPXOSt2t7w=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "BSLbGCRUdPwZ3uLHah7veg=="
+          "hash": "SvHkZxfCpUCwB6g27jzRcA=="
         }
       },
       "is_incremental": false,
@@ -166,10 +166,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "art/readme/Example Project.gif",
+      "source_relative_path": "art/screenshots/Example Project.gif",
       "output": {
         "resource": {
-          "relative_path": "art/readme/Example Project.gif"
+          "relative_path": "art/screenshots/Example Project.gif"
         }
       },
       "is_incremental": false,
@@ -177,10 +177,10 @@
     },
     {
       "type": "Resource",
-      "source_relative_path": "art/readme/LDtk to Monogame.png",
+      "source_relative_path": "art/screenshots/LDtk to Monogame.png",
       "output": {
         "resource": {
-          "relative_path": "art/readme/LDtk to Monogame.png"
+          "relative_path": "art/screenshots/LDtk to Monogame.png"
         }
       },
       "is_incremental": false,
@@ -206,7 +206,7 @@
           "hash": "cGSS9FUgaOA+NdPoqIusXw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -218,7 +218,7 @@
           "hash": "BFvFCoPYKq+nzdCbLmXKRA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -227,7 +227,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "n6XMPSz4gZkRmrJ4CA+yPg=="
+          "hash": "bBUUCbur4Hc8LVP6WIDraw=="
         }
       },
       "is_incremental": false,
@@ -239,7 +239,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "fL56L/vXZrG3IDGq92/M3g=="
+          "hash": "Ghpy+6fjetOi6+Tu1q16Cg=="
         }
       },
       "is_incremental": false,
@@ -271,7 +271,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 4,
-          "skipped_file_count": 4
+          "skipped_file_count": 3
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

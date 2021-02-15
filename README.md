@@ -12,7 +12,7 @@
 LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [Monogame](https://www.monogame.net/) Framework
 
 
-![LDtk to Monogame Conversion](art/readme/LDtk%20to%20Monogame.png "1 to 1 Conversion")
+![LDtk to Monogame Conversion](docfx_project/art/screenshots/LDtk%20to%20Monogame.png "1 to 1 Conversion")
  
 # Quick Start Guide
 The easiest way to start using LDtkMonogame is to import it into the project using nuget  
@@ -62,4 +62,4 @@ This small game example [LDtkMonogame.Examples](https://github.com/IrishBruse/LD
 
 You can even edit the .ldtk file and run it again to see the changes
 
-![Example Gameplay](art/readme/Example%20Project.gif "Gameplay")
+![Example Gameplay](docfx_project/art/screenshots/Example%20Project.gif "Gameplay")

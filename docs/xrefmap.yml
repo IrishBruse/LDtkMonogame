@@ -7,6 +7,36 @@ references:
   commentId: N:LDtk
   fullName: LDtk
   nameWithType: LDtk
+- uid: LDtk.Entity
+  name: Entity
+  href: api/LDtk.Entity.html
+  commentId: T:LDtk.Entity
+  fullName: LDtk.Entity
+  nameWithType: Entity
+- uid: LDtk.Entity.pivot
+  name: pivot
+  href: api/LDtk.Entity.html#LDtk_Entity_pivot
+  commentId: F:LDtk.Entity.pivot
+  fullName: LDtk.Entity.pivot
+  nameWithType: Entity.pivot
+- uid: LDtk.Entity.position
+  name: position
+  href: api/LDtk.Entity.html#LDtk_Entity_position
+  commentId: F:LDtk.Entity.position
+  fullName: LDtk.Entity.position
+  nameWithType: Entity.position
+- uid: LDtk.Entity.size
+  name: size
+  href: api/LDtk.Entity.html#LDtk_Entity_size
+  commentId: F:LDtk.Entity.size
+  fullName: LDtk.Entity.size
+  nameWithType: Entity.size
+- uid: LDtk.Entity.texture
+  name: texture
+  href: api/LDtk.Entity.html#LDtk_Entity_texture
+  commentId: F:LDtk.Entity.texture
+  fullName: LDtk.Entity.texture
+  nameWithType: Entity.texture
 - uid: LDtk.IntGrid
   name: IntGrid
   href: api/LDtk.IntGrid.html
@@ -52,64 +82,6 @@ references:
   isSpec: "True"
   fullName: LDtk.IntGrid.TileSize
   nameWithType: IntGrid.TileSize
-- uid: LDtk.ISprite
-  name: ISprite
-  href: api/LDtk.ISprite.html
-  commentId: T:LDtk.ISprite
-  fullName: LDtk.ISprite
-  nameWithType: ISprite
-- uid: LDtk.ISprite.FrameSize
-  name: FrameSize
-  href: api/LDtk.ISprite.html#LDtk_ISprite_FrameSize
-  commentId: P:LDtk.ISprite.FrameSize
-  fullName: LDtk.ISprite.FrameSize
-  nameWithType: ISprite.FrameSize
-- uid: LDtk.ISprite.FrameSize*
-  name: FrameSize
-  href: api/LDtk.ISprite.html#LDtk_ISprite_FrameSize_
-  commentId: Overload:LDtk.ISprite.FrameSize
-  isSpec: "True"
-  fullName: LDtk.ISprite.FrameSize
-  nameWithType: ISprite.FrameSize
-- uid: LDtk.ISprite.Pivot
-  name: Pivot
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Pivot
-  commentId: P:LDtk.ISprite.Pivot
-  fullName: LDtk.ISprite.Pivot
-  nameWithType: ISprite.Pivot
-- uid: LDtk.ISprite.Pivot*
-  name: Pivot
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Pivot_
-  commentId: Overload:LDtk.ISprite.Pivot
-  isSpec: "True"
-  fullName: LDtk.ISprite.Pivot
-  nameWithType: ISprite.Pivot
-- uid: LDtk.ISprite.Position
-  name: Position
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Position
-  commentId: P:LDtk.ISprite.Position
-  fullName: LDtk.ISprite.Position
-  nameWithType: ISprite.Position
-- uid: LDtk.ISprite.Position*
-  name: Position
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Position_
-  commentId: Overload:LDtk.ISprite.Position
-  isSpec: "True"
-  fullName: LDtk.ISprite.Position
-  nameWithType: ISprite.Position
-- uid: LDtk.ISprite.Texture
-  name: Texture
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Texture
-  commentId: P:LDtk.ISprite.Texture
-  fullName: LDtk.ISprite.Texture
-  nameWithType: ISprite.Texture
-- uid: LDtk.ISprite.Texture*
-  name: Texture
-  href: api/LDtk.ISprite.html#LDtk_ISprite_Texture_
-  commentId: Overload:LDtk.ISprite.Texture
-  isSpec: "True"
-  fullName: LDtk.ISprite.Texture
-  nameWithType: ISprite.Texture
 - uid: LDtk.Level
   name: Level
   href: api/LDtk.Level.html
