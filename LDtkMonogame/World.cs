@@ -22,9 +22,8 @@ namespace LDtk
 
         /// <summary>
         /// <para>Load the LDtk json file.</para>
-        /// Throws <see cref="FileNotFoundException"/> if an invalid file path is given
         /// </summary>
-        /// <param name="spriteBatch">Monogames <see cref="SpriteBatch"/></param>
+        /// <param name="spriteBatch">Monogame's <see cref="SpriteBatch"/></param>
         /// <param name="ldtkFile">The path to the .ldtk file</param>
         public World(SpriteBatch spriteBatch, string ldtkFile)
         {
@@ -36,7 +35,6 @@ namespace LDtk
         /// <summary>
         /// <para>Reload the LDtk json file.</para>
         /// <para><c>Warning</c> make sure to rerender your <see cref="Level"/>'s.</para>
-        /// Throws <see cref="FileNotFoundException"/> if an invalid file path is given
         /// </summary>
         public void ReloadProject(string ldtkFile = null)
         {
@@ -58,7 +56,7 @@ namespace LDtk
 
         /// <summary>
         /// This will load and render out the level
-        /// DO not call this inside of a spritebatchBegin/End
+        /// DO NOT call this inside of a spritebatchBegin/End
         /// </summary>
         /// <param name="index">The id of the level</param>
         public void Load(long index)
@@ -287,7 +285,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(uid + " Level not found Exception!");
+            throw new Exception(uid + " Level not found!");
         }
 
         /// <summary>
@@ -321,7 +319,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(identifier + " Level not found Exception!");
+            throw new Exception(identifier + " Level not found!");
         }
 
         internal EntityDefinition GetEntityDefinitionFromUid(long uid)

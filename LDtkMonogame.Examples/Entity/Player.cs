@@ -1,60 +1,31 @@
 using System;
 using System.Collections.Generic;
 using LDtk;
-using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Examples
 {
-    public class Player : ISprite
+    public class Player : Entity
     {
-        const float Gavity = 175f;
-        float gravityMultiplier;
-
-        public Vector2 position;
-        public Vector2 Position
-        {
-            get => position; set => position = value;
-        }
-
-        Vector2 pivot;
-        public Vector2 Pivot
-        {
-            get => pivot; set => pivot = value;
-        }
-
-        Texture2D texture;
-        public Texture2D Texture
-        {
-            get => texture; set => texture = value;
-        }
-
-        Rectangle frame;
-        public Rectangle Frame
-        {
-            get => frame; set => frame = value;
-        }
-
-        Vector2 frameSize;
-        public Vector2 FrameSize
-        {
-            get => frameSize; set => frameSize = value;
-        }
-
-        float frameTime;
-
+        // LDtk entity fields
         public bool fliped = true;
         public Rect collider;
         public Vector2 velocity;
+        public Rectangle frame;
+
+        const float Gavity = 175f;
+
+        internal bool inDoor;
+        float frameTime;
+        float gravityMultiplier;
         bool grounded;
         bool oldGrounded;
         int animationFrame;
         int animationType;
         bool doorInteraction;
         bool enteringDoor;
-        internal bool inDoor;
+
 
         public Player()
         {
@@ -184,6 +155,10 @@ namespace Examples
                             velocity += cn * new Vector2(MathF.Abs(velocity.X), MathF.Abs(velocity.Y)) * (1 - ct);
                         }
                     }
+                    else if (val == 2)
+                    {
+                        inDoor = true;
+                    }
                 }
             }
 
@@ -276,7 +251,7 @@ namespace Examples
 
                 oldGrounded = grounded;
 
-                frame = new Rectangle(animationFrame * (int)FrameSize.X, animationType * (int)FrameSize.Y, (int)FrameSize.X, (int)FrameSize.Y);
+                frame = new Rectangle(animationFrame * (int)size.X, animationType * (int)size.Y, (int)size.X, (int)size.Y);
             }
 
         }

@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="..\art\Icon.bmp">
+		<EmbeddedResource Include="Icon.bmp">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</EmbeddedResource>

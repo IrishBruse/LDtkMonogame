@@ -212,7 +212,7 @@ namespace LDtk
         private void PopulateDefaultEntityFields<T>(object entity, EntityInstance entityInstance)
         {
             // WorldPosition
-            var worldPosition = typeof(T).GetProperty("Position");
+            var worldPosition = typeof(T).GetField("position");
             if (worldPosition != null)
             {
                 worldPosition.SetValue(entity, new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
@@ -221,13 +221,13 @@ namespace LDtk
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Sprite Field \"Position\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
+                Console.WriteLine($"Error: Sprite Field \"position\" not found add it to {typeof(T).FullName} for full support of LDtk entity or inherit LDtk.Entity class");
                 Console.ResetColor();
             }
 #endif
 
             // Pivot
-            var pivot = typeof(T).GetProperty("Pivot");
+            var pivot = typeof(T).GetField("pivot");
             if (pivot != null)
             {
                 pivot.SetValue(entity, new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
@@ -236,13 +236,13 @@ namespace LDtk
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Sprite Field \"Pivot\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
+                Console.WriteLine($"Error: Sprite Field \"pivot\" not found add it to {typeof(T).FullName} for full support of LDtk entity or inherit LDtk.Entity class");
                 Console.ResetColor();
             }
 #endif
 
             // Texture
-            var texture = typeof(T).GetProperty("Texture");
+            var texture = typeof(T).GetField("texture");
             if (texture != null)
             {
                 Texture2D tileset = owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid);
@@ -252,13 +252,13 @@ namespace LDtk
             else
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"Texture\" not found add it to {typeof(T).FullName} if you need texture support on this entity");
+                Console.WriteLine($"Warning: Sprite Field \"texture\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
                 Console.ResetColor();
             }
 #endif
 
             // FrameSize
-            var frameSize = typeof(T).GetProperty("FrameSize");
+            var frameSize = typeof(T).GetField("size");
             if (frameSize != null)
             {
                 var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
@@ -268,7 +268,7 @@ namespace LDtk
             else
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"FrameSize\" not found add it to {typeof(T).FullName} if you need texture support on this entity");
+                Console.WriteLine($"Warning: Sprite Field \"size\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
                 Console.ResetColor();
             }
 #endif

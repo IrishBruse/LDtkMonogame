@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Examples
 {
-    public class NugetExample : BaseExample
+    public class ApiExample : BaseExample
     {
         // LDtk stuff
         private World projectFile;
         private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
 
-        public NugetExample() : base()
+        public ApiExample() : base()
         {
         }
 
@@ -39,7 +39,7 @@ namespace Examples
 
             spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp);
             {
-                for(int i = 0; i < level.Layers.Length; i++)
+                for (int i = 0; i < level.Layers.Length; i++)
                 {
                     spriteBatch.Draw(level.Layers[i], Vector2.Zero, Color.White);
                 }

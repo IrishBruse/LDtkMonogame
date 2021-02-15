@@ -24,7 +24,7 @@ namespace Examples
         private World world;
         private Level startLevel;
         private Level[] neighbours;
-        private readonly List<ISprite> drawableEntities = new List<ISprite>();
+        private readonly List<Entity> drawableEntities = new List<Entity>();
         Player player;
         private bool followPlayer = true;
 
@@ -51,7 +51,7 @@ namespace Examples
 
             for (int i = 0; i < doors.Length; i++)
             {
-                doors[i].trigger = new Rect(doors[i].Position.X - 16, doors[i].Position.Y - 32, 32, 32);
+                doors[i].trigger = new Rect(doors[i].position.X - 16, doors[i].position.Y - 32, 32, 32);
             }
 
             drawableEntities.AddRange(doors);
@@ -84,7 +84,7 @@ namespace Examples
 
             if (followPlayer)
             {
-                cameraPosition = -new Vector3(player.Position.X, player.Position.Y - 30, 0);
+                cameraPosition = -new Vector3(player.position.X, player.position.Y - 30, 0);
             }
             else
             {
@@ -138,20 +138,20 @@ namespace Examples
 
                 for (int i = 0; i < drawableEntities.Count; i++)
                 {
-                    spriteBatch.Draw(drawableEntities[i].Texture,
-                        drawableEntities[i].Position,
-                        new Rectangle(0, 0, (int)drawableEntities[i].FrameSize.X, (int)drawableEntities[i].FrameSize.Y),
+                    spriteBatch.Draw(drawableEntities[i].texture,
+                        drawableEntities[i].position,
+                        new Rectangle(0, 0, (int)drawableEntities[i].size.X, (int)drawableEntities[i].size.Y),
                         Color.White,
-                        0, drawableEntities[i].Pivot * drawableEntities[i].FrameSize, 1,
+                        0, drawableEntities[i].pivot * drawableEntities[i].size, 1,
                         SpriteEffects.None, 0);
                 }
 
-                spriteBatch.Draw(player.Texture,
-                    player.Position,
-                    player.Frame,
+                spriteBatch.Draw(player.texture,
+                    player.position,
+                    player.frame,
                     Color.White, 0,
-                                (player.Pivot * player.FrameSize) + new Vector2(player.fliped ? -8 : 8, -14), 1,
-                                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+                    (player.pivot * player.size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
+                    player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
             }
             spriteBatch.End();
 
