@@ -13,21 +13,18 @@ namespace Examples
         private World projectFile;
         private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
 
-        public ApiExample() : base()
-        {
-        }
+        public ApiExample() : base() { }
 
         protected override void Initialize()
         {
             base.Initialize();
 
             projectFile = new World(spriteBatch, LDTK_FILE);
-            projectFile.Load(0);
+            projectFile.GetLevel("Level1");
         }
 
         protected override void Update(GameTime gameTime)
         {
-
             base.Update(gameTime);
         }
 

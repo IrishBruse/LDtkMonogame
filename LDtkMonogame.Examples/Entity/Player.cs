@@ -41,7 +41,6 @@ namespace Examples
                 animationFrame = 0;
             }
 
-
             Movement(keyboard, oldKeyboard, deltaTime);
             CollisionDetection(level, deltaTime);
             Animate(deltaTime);

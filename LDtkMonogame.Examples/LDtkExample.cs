@@ -20,7 +20,6 @@ namespace Examples
         private float cameraZoom = 1f;
 
         // LDtk stuff
-        private readonly int currentLevel = 0;
         private World world;
         private Level startLevel;
         private Level[] neighbours;
@@ -42,9 +41,8 @@ namespace Examples
             base.Initialize();
 
             world = new World(spriteBatch, LDTK_FILE);
-            world.Load(currentLevel);
-
             startLevel = world.GetLevel("Level1");
+
             neighbours = (from neighbour in startLevel.Neighbours select world.GetLevel(neighbour)).ToArray();
 
             doors = startLevel.GetEntities<Door>();

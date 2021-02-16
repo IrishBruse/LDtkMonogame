@@ -54,83 +54,115 @@ namespace LDtk
             levels = new Level[json.Levels.Length];
         }
 
-        /// <summary>
-        /// This will load and render out the level
-        /// DO NOT call this inside of a spritebatchBegin/End
-        /// </summary>
-        /// <param name="index">The id of the level</param>
-        public void Load(long index)
-        {
-            LDtkLevel jsonLevel;
 
-            if (levels[index].loaded == true)
+
+        // Level Handling
+        /// <summary>
+        /// Gets the level from the current world
+        /// </summary>
+        /// <param name="uid">Uid of level</param>
+        /// <returns>Level</returns>
+        public Level GetLevel(long uid)
+        {
+            for (int i = 0; i < json.Levels.Length; i++)
             {
-                return;
+                if (json.Levels[i].Uid == uid)
+                {
+                    if (levels[i] == null)
+                    {
+                        LoadLevel(ref levels[i], json.Levels[i]);
+                    }
+                    return levels[i];
+                }
             }
 
-            levels[index].loaded = true;
+            throw new UidException(uid);
+        }
 
+        /// <summary>
+        /// Gets the level from the current world
+        /// </summary>
+        /// <param name="identifier">Identifier of the level to get</param>
+        /// <returns>Level</returns>
+        public Level GetLevel(string identifier)
+        {
+            for (int i = 0; i < json.Levels.Length; i++)
+            {
+                if (json.Levels[i].Identifier == identifier)
+                {
+                    if (levels[i] == null)
+                    {
+                        LoadLevel(ref levels[i], json.Levels[i]);
+                    }
+                    return levels[i];
+                }
+            }
+
+            throw new Exception(identifier + " Level not found!");
+        }
+
+        private void LoadLevel(ref Level level, LDtkLevel jsonLevel)
+        {
             if (json.ExternalLevels == true)
             {
-                string path = Path.Combine(projectFolder, json.Levels[index].ExternalRelPath);
+                string path = Path.Combine(projectFolder, jsonLevel.ExternalRelPath);
                 jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<LDtkLevel>(File.ReadAllText(path));
-            }
-            else
-            {
-                jsonLevel = json.Levels[index];
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
 
-            // Set the identifier
-            levels[index].owner = this;
+            level = new Level();
 
             // Set the identifier
-            levels[index].Identifier = jsonLevel.Identifier;
+            level.owner = this;
+
+            // Set the identifier
+            level.Identifier = jsonLevel.Identifier;
 
             // Cache the Background Color/Clear Color
-            levels[index].BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor);
+            level.BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor);
 
             // Set the world position
-            levels[index].WorldPosition = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY);
+            level.WorldPosition = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY);
 
             // Set the uid
-            levels[index].Uid = jsonLevel.Uid;
+            level.Uid = jsonLevel.Uid;
 
             // Set the world position
             var neighbours = jsonLevel.Neighbours;
-            levels[index].Neighbours = (from neighour in neighbours select neighour.LevelUid).ToArray();
+            level.Neighbours = (from neighour in neighbours select neighour.LevelUid).ToArray();
 
-            LoadBackgroundLayer(index, GraphicsDevice, jsonLayerInstances, jsonLevel);
-            LoadAllLayers(index, GraphicsDevice, jsonLayerInstances);
+            LoadBackgroundLayer(ref level, jsonLevel, jsonLayerInstances);
+            LoadAllLayers(ref level, jsonLayerInstances);
         }
 
-        private void LoadBackgroundLayer(long levelId, GraphicsDevice GraphicsDevice, LayerInstance[] jsonLayerInstances, LDtkLevel jsonLevel)
+        // Layer Handling
+        private void LoadBackgroundLayer(ref Level level, LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
             // Render background as if it was a layer
             if (jsonLevel.BgRelPath != null)
             {
-                levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length + 1];
+                level.Layers = new RenderTarget2D[jsonLayerInstances.Length + 1];
 
-                levels[levelId].Layers[jsonLayerInstances.Length] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayerInstances[0].CWid * jsonLayerInstances[0].GridSize), (int)(jsonLayerInstances[0].CHei * jsonLayerInstances[0].GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-                GraphicsDevice.SetRenderTarget(levels[levelId].Layers[jsonLayerInstances.Length]);
+                level.Layers[jsonLayerInstances.Length] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayerInstances[0].CWid * jsonLayerInstances[0].GridSize), (int)(jsonLayerInstances[0].CHei * jsonLayerInstances[0].GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                GraphicsDevice.SetRenderTarget(level.Layers[jsonLayerInstances.Length]);
 
                 texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, jsonLevel.BgRelPath));
 
                 spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp);
                 {
-                    RenderBackgroundAsLayer(levelId, texture);
+                    RenderBackgroundAsLayer(jsonLevel, texture);
                 }
                 spriteBatch.End();
             }
             else
             {
-                levels[levelId].Layers = new RenderTarget2D[jsonLayerInstances.Length];
+                level.Layers = new RenderTarget2D[jsonLayerInstances.Length];
             }
         }
 
-        private void LoadAllLayers(long index, GraphicsDevice GraphicsDevice, LayerInstance[] jsonLayerInstances)
+        private void LoadAllLayers(ref Level level, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
 
@@ -142,8 +174,8 @@ namespace LDtk
             {
                 LayerInstance jsonLayer = jsonLayerInstances[i];
 
-                levels[index].Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-                GraphicsDevice.SetRenderTarget(levels[index].Layers[i]);
+                level.Layers[i] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayer.CWid * jsonLayer.GridSize), (int)(jsonLayer.CHei * jsonLayer.GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                GraphicsDevice.SetRenderTarget(level.Layers[i]);
 
                 if (jsonLayer.TilesetRelPath != null)
                 {
@@ -158,7 +190,7 @@ namespace LDtk
 
                 if (jsonLayer.Type == LayerType.Entities)
                 {
-                    levels[index].entities = jsonLayer.EntityInstances;
+                    level.entities = jsonLayer.EntityInstances;
                 }
                 else
                 {
@@ -191,22 +223,22 @@ namespace LDtk
                     // Render all renderable layers
                     spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp);
                     {
-                        RenderLayer(index, jsonLayer, texture);
+                        RenderLayer(jsonLayer, texture);
                     }
                     spriteBatch.End();
                 }
             }
 
-            levels[index].intGrids = intGrids.ToArray();
+            level.intGrids = intGrids.ToArray();
 
             GraphicsDevice.SetRenderTarget(null);
         }
 
-        private void RenderBackgroundAsLayer(long index, Texture2D texture)
+        private void RenderBackgroundAsLayer(LDtkLevel jsonLevel, Texture2D texture)
         {
-            long[] topleft = json.Levels[index].BgPos.TopLeftPx;
-            double[] cropRect = json.Levels[index].BgPos.CropRect;
-            double[] scaleBG = json.Levels[index].BgPos.Scale;
+            long[] topleft = jsonLevel.BgPos.TopLeftPx;
+            double[] cropRect = jsonLevel.BgPos.CropRect;
+            double[] scaleBG = jsonLevel.BgPos.Scale;
             Vector2 pos = new Vector2(topleft[0], topleft[1]);
             Rectangle rect = new Rectangle((int)cropRect[0], (int)cropRect[1], (int)cropRect[2], (int)cropRect[3]);
             Vector2 scale = new Vector2((float)scaleBG[0], (float)scaleBG[1]);
@@ -214,114 +246,59 @@ namespace LDtk
             spriteBatch.Draw(texture, pos, rect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
         }
 
-        private void RenderLayer(long index, LayerInstance jsonLayer, Texture2D texture)
+        private void RenderLayer(LayerInstance jsonLayer, Texture2D texture)
         {
             switch (jsonLayer.Type)
             {
                 case LayerType.Tiles:
-                    foreach (TileInstance tile in jsonLayer.GridTiles)
-                    {
-                        if (jsonLayer.TilesetDefUid.HasValue)
-                        {
-                            Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
-                            Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
-                            SpriteEffects mirror = (SpriteEffects)tile.F;
-
-                            spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                        }
-                    }
+                    RenderTileLayer(jsonLayer, texture);
                     break;
 
                 case LayerType.AutoLayer:
                 case LayerType.IntGrid:
-                    if (jsonLayer.AutoLayerTiles.Length > 0)
-                    {
-                        foreach (TileInstance tile in jsonLayer.AutoLayerTiles)
-                        {
-                            if (jsonLayer.TilesetDefUid.HasValue)
-                            {
-                                Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
-                                Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
-                                SpriteEffects mirror = (SpriteEffects)tile.F;
-
-                                spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                            }
-                        }
-                    }
+                    RenderAutoLayer(jsonLayer, texture);
                     break;
 
                 default: throw new NotImplementedException(jsonLayer.Type);
             }
         }
 
-        /// <summary>
-        /// Gets the level from the current world
-        /// <para>Throws <see cref="Exception"/></para>
-        /// </summary>
-        /// <param name="uid">Uid of level</param>
-        /// <returns>Level</returns>
-        public Level GetLevel(long uid)
+        private void RenderAutoLayer(LayerInstance jsonLayer, Texture2D texture)
         {
-            for (int i = 0; i < json.Levels.Length; i++)
+            if (jsonLayer.AutoLayerTiles.Length > 0)
             {
-                if (levels[i].loaded)
+                foreach (TileInstance tile in jsonLayer.AutoLayerTiles)
                 {
-                    if (levels[i].Uid == uid)
+                    if (jsonLayer.TilesetDefUid.HasValue)
                     {
-                        return levels[i];
-                    }
-                }
-                else
-                {
-                    if (json.Levels[i].Uid == uid)
-                    {
-                        Load(i);
+                        Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
+                        Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
+                        SpriteEffects mirror = (SpriteEffects)tile.F;
 
-                        if (levels[i].Uid == uid)
-                        {
-                            return levels[i];
-                        }
+                        spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                     }
                 }
             }
-
-            throw new Exception(uid + " Level not found!");
         }
 
-        /// <summary>
-        /// Gets the level from the current world
-        /// <para>Throws <see cref="Exception"/></para>
-        /// </summary>
-        /// <param name="identifier">Identifier of the level to get</param>
-        /// <returns>A level</returns>
-        public Level GetLevel(string identifier)
+        private void RenderTileLayer(LayerInstance jsonLayer, Texture2D texture)
         {
-            for (int i = 0; i < json.Levels.Length; i++)
+            foreach (TileInstance tile in jsonLayer.GridTiles)
             {
-                if (levels[i].loaded)
+                if (jsonLayer.TilesetDefUid.HasValue)
                 {
-                    if (levels[i].Identifier == identifier)
-                    {
-                        return levels[i];
-                    }
-                }
-                else
-                {
-                    if (json.Levels[i].Identifier == identifier)
-                    {
-                        Load(i);
+                    Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
+                    Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
+                    SpriteEffects mirror = (SpriteEffects)tile.F;
 
-                        if (levels[i].Identifier == identifier)
-                        {
-                            return levels[i];
-                        }
-                    }
+                    spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                 }
             }
-
-            throw new Exception(identifier + " Level not found!");
         }
 
+
+
+        // Json Helper Functions
         internal EntityDefinition GetEntityDefinitionFromUid(long uid)
         {
             for (int i = 0; i < json.Defs.Entities.Length; i++)
@@ -332,7 +309,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(uid + " is not a entity Definition!");
+            throw new UidException(uid);
         }
 
         internal LayerDefinition GetLayerDefinitionFromUid(long uid)
@@ -345,7 +322,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(uid + " is not a layer Definition!");
+            throw new UidException(uid);
         }
 
         internal TilesetDefinition GetTilesetDefinitionFromUid(long uid)
@@ -358,7 +335,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(uid + " is not a tileset Definition!");
+            throw new UidException(uid);
         }
 
         internal Texture2D GetTilesetTextureFromUid(long uid)
@@ -373,7 +350,14 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(uid + " is not a tileset Definition!");
+            throw new UidException(uid);
+        }
+
+        class UidException : Exception
+        {
+            public UidException(long uid) : base(uid + " does not point to a valid json data")
+            {
+            }
         }
     }
 }

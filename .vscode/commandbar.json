@@ -40,5 +40,15 @@
         "alignment": "right",
         "skipTerminateQuickPick": false,
         "priority": 203
+    },
+    {
+        "text": "Open Server",
+        "tooltip": "Live server open Build",
+        "color": "yellow",
+        "command": "extension.liveServer.goOnline|docs/",
+        "commandType": "palette",
+        "alignment": "right",
+        "skipTerminateQuickPick": false,
+        "priority": 203
     }]
 }
