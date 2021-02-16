@@ -1,6 +1,6 @@
 ﻿// Choose example
-#define GameExample
-//#define NugetExample
+// #define GameExample
+#define ApiExample
 
 namespace Examples
 {
@@ -12,8 +12,8 @@ namespace Examples
             new LDtkExample().Run();
 #endif
 
-#if NugetExample
-            new NugetExample().Run();
+#if ApiExample
+            new ApiExample().Run();
 #endif
         }
     }

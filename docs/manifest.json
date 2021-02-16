@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Entity.html",
-          "hash": "O7kT6KV14CyA8Ea1nN885w=="
+          "hash": "faxUV43jwr8mYETrfvnm0A=="
         }
       },
       "is_incremental": false,
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "I0R40RwfE+Nv8q6/XCqXPQ=="
+          "hash": "IZZx7PxPwDYDzMb/WAlKfw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -48,7 +48,7 @@
           "hash": "MYNSl1+s2DhjEmcMpDai4g=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -277,7 +277,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 5,
-          "skipped_file_count": 4
+          "skipped_file_count": 3
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

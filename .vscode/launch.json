@@ -1,5 +1,9 @@
 {
     "version": "0.2.0",
+    "buildOptions": {
+        "debugType": "portable",
+
+    },
     "configurations": [
         {
             "name": "Debug",
@@ -8,7 +12,7 @@
             "symbolOptions": {
                 "searchPaths": ["${workspaceFolder}/LDtkMonogame.Examples/obj/Debug/net5.0/"],
                 "searchMicrosoftSymbolServer": true,
-                "searchNuGetOrgSymbolServer": false
+                "searchNuGetOrgSymbolServer": true
             },
             "preLaunchTask": "build",
             "justMyCode": true,

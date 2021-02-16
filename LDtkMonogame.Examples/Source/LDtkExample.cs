@@ -12,24 +12,21 @@ namespace Examples
 {
     public class LDtkExample : BaseExample
     {
-        private const string LDTK_FILE = "samples/LDtkMonogameExample.ldtk";
-
-        // Camera
-        private Vector3 cameraPosition;
-        private Vector3 cameraOrigin;
-        private float cameraZoom = 1f;
+        private const string LDTK_FILE = "Assets/LDtkMonogameExample.ldtk";
 
         // LDtk stuff
         private World world;
         private Level startLevel;
         private Level[] neighbours;
         private readonly List<Entity> drawableEntities = new List<Entity>();
-        Player player;
-        private bool followPlayer = true;
+        private KeyboardState oldKeyboard;
+        private MouseState oldMouse;
 
+        // Entities
         Texture2D pixelTexture;
         Door[] doors;
         Crate[] crates;
+        Player player;
 
         public LDtkExample() : base()
         {
@@ -75,24 +72,20 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-            if (keyboard.IsKeyDown(Keys.Tab) && oldKeyboard.IsKeyDown(Keys.Tab) == false)
-            {
-                followPlayer = !followPlayer;
-            }
-
-            if (followPlayer)
+            if (freeCam)
             {
                 cameraPosition = -new Vector3(player.position.X, player.position.Y - 30, 0);
             }
-            else
+
+            for (int i = 0; i < doors.Length; i++)
             {
-                if (mouse.MiddleButton == ButtonState.Pressed)
+                if (doors[i].trigger.Contains(player.collider))
                 {
-                    Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)deltaTime;
+                    player.inDoor = true;
+                    doors[i].opening = true;
+                    break;
                 }
             }
-            player.Update(keyboard, oldKeyboard, startLevel, (float)deltaTime);
 
             oldKeyboard = keyboard;
             oldMouse = mouse;
@@ -124,24 +117,9 @@ namespace Examples
                     }
                 }
 
-                for (int i = 0; i < doors.Length; i++)
-                {
-                    if (doors[i].trigger.Contains(player.collider))
-                    {
-                        player.inDoor = true;
-                        doors[i].opening = true;
-                        break;
-                    }
-                }
-
                 for (int i = 0; i < drawableEntities.Count; i++)
                 {
-                    spriteBatch.Draw(drawableEntities[i].texture,
-                        drawableEntities[i].position,
-                        new Rectangle(0, 0, (int)drawableEntities[i].size.X, (int)drawableEntities[i].size.Y),
-                        Color.White,
-                        0, drawableEntities[i].pivot * drawableEntities[i].size, 1,
-                        SpriteEffects.None, 0);
+                    drawableEntities[i].Draw(spriteBatch);
                 }
 
                 spriteBatch.Draw(player.texture,

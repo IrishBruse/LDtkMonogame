@@ -56,68 +56,17 @@ namespace LDtk
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         public T GetEntity<T>() where T : new()
         {
-            for (int i = 0; i < entities.Length; i++)
+            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
             {
-                if (entities[i].Identifier == typeof(T).Name)
+                if (entities[entityIndex].Identifier == typeof(T).Name)
                 {
                     T entity = new T();
 
-                    ParseBaseEntityFields<T>(entity, entities[i]);
+                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
 
-                    for (int j = 0; j < entities[i].FieldInstances.Length; j++)
+                    for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
-                        string variableName = entities[i].FieldInstances[j].Identifier;
-
-                        variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
-
-                        var field = typeof(T).GetField(variableName);
-
-                        if (field == null)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
-                            Console.ResetColor();
-                            continue;
-                        }
-
-                        // Split any enums
-                        string[] variableTypes = entities[i].FieldInstances[j].Type.Split('.');
-
-                        switch (variableTypes[0])
-                        {
-                            case "Int":
-                            case "Float":
-                            case "Bool":
-                            case "Enum":
-                            case "String":
-                                field.SetValue(entity, Convert.ChangeType(entities[i].FieldInstances[j].Value, field.FieldType));
-                                break;
-
-                            case "LocalEnum":
-                                field.SetValue(entity, Enum.Parse(field.FieldType, (string)entities[i].FieldInstances[j].Value));
-                                break;
-
-                            case "Color":
-                                field.SetValue(entity, Utility.ConvertStringToColor(((string)entities[i].FieldInstances[j].Value)[1..]));
-                                break;
-
-                            case "Point":
-                                JToken t = (JToken)entities[i].FieldInstances[j].Value;
-                                Vector2 point;
-                                if (t != null)
-                                {
-                                    point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
-                                }
-                                else
-                                {
-                                    point = new Vector2(0, 0);
-                                }
-                                field.SetValue(entity, point);
-                                break;
-
-                            default:
-                                throw new Exception("Unknown Variable of type " + entities[i].FieldInstances[j].Type);
-                        }
+                        ParseEntityFields<T>(entityIndex, entity, fieldIndex);
                     }
 
                     return entity;
@@ -143,9 +92,9 @@ namespace LDtk
                 {
                     T entity = new T();
 
+                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
                     for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
-                        ParseBaseEntityFields<T>(entity, entities[entityIndex]);
                         ParseEntityFields<T>(entityIndex, entity, fieldIndex);
                     }
 

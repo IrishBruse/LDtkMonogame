@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="samples\**">
+		<None Update="Assets\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>

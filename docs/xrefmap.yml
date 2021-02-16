@@ -13,6 +13,19 @@ references:
   commentId: T:LDtk.Entity
   fullName: LDtk.Entity
   nameWithType: Entity
+- uid: LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  name: Draw(SpriteBatch)
+  href: api/LDtk.Entity.html#LDtk_Entity_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_
+  commentId: M:LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  fullName: LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  nameWithType: Entity.Draw(SpriteBatch)
+- uid: LDtk.Entity.Draw*
+  name: Draw
+  href: api/LDtk.Entity.html#LDtk_Entity_Draw_
+  commentId: Overload:LDtk.Entity.Draw
+  isSpec: "True"
+  fullName: LDtk.Entity.Draw
+  nameWithType: Entity.Draw
 - uid: LDtk.Entity.pivot
   name: pivot
   href: api/LDtk.Entity.html#LDtk_Entity_pivot
