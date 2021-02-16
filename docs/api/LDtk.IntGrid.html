@@ -120,7 +120,7 @@
   </span>
   <a id="LDtk_IntGrid_TileSize_" data-uid="LDtk.IntGrid.TileSize*"></a>
   <h4 id="LDtk_IntGrid_TileSize" data-uid="LDtk.IntGrid.TileSize">TileSize</h4>
-  <div class="markdown level1 summary"><p>Size of</p>
+  <div class="markdown level1 summary"><p>Size of a tile in pixels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -138,7 +138,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td></td>
+        <td><p>Pixels</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -149,11 +150,12 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_IntGrid_FromWorldToGridSpace_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20LDtk.IntGrid.FromWorldToGridSpace(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/IntGrid.cs/#L41">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/Types/IntGrid.cs/#L42">View Source</a>
   </span>
   <a id="LDtk_IntGrid_FromWorldToGridSpace_" data-uid="LDtk.IntGrid.FromWorldToGridSpace*"></a>
   <h4 id="LDtk_IntGrid_FromWorldToGridSpace_Microsoft_Xna_Framework_Vector2_" data-uid="LDtk.IntGrid.FromWorldToGridSpace(Microsoft.Xna.Framework.Vector2)">FromWorldToGridSpace(Vector2)</h4>
-  <div class="markdown level1 summary"><p>Convert from world pixel space to int grid space</p>
+  <div class="markdown level1 summary"><p>Convert from world pixel space to int grid space
+Floors the value based on <a class="xref" href="LDtk.IntGrid.html#LDtk_IntGrid_TileSize">TileSize</a> to an Integer</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -223,12 +225,14 @@
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">x</span></td>
-        <td></td>
+        <td><p>X index</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">y</span></td>
-        <td></td>
+        <td><p>Y index</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -243,7 +247,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int64</span></td>
-        <td><p>Int at grid position otherwise -1 if out of bounds</p>
+        <td><p>Value at position its -1 if out of bounds</p>
 </td>
       </tr>
     </tbody>

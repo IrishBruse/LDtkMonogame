@@ -1,2 +1,3 @@
-# PLACEHOLDER
-TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
+# LDtkMonogame Api
+This is the home to all the C# api documentation refernces  
+All xml comments in the source files are converted to a more easy to read and use format here

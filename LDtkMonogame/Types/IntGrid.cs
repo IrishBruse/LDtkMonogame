@@ -9,9 +9,9 @@ namespace LDtk
     public struct IntGrid
     {
         /// <summary>
-        /// Size of 
+        /// Size of a tile in pixels
         /// </summary>
-        /// <value></value>
+        /// <value>Pixels</value>
         public int TileSize { get => tileSize; }
 
         internal string identifier;
@@ -21,9 +21,9 @@ namespace LDtk
         /// <summary>
         /// Gets the int value at location
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <returns>Int at grid position otherwise -1 if out of bounds</returns>
+        /// <param name="x">X index</param>
+        /// <param name="y">Y index</param>
+        /// <returns>Value at position its -1 if out of bounds</returns>
         public long GetValueAt(int x, int y)
         {
             if (x > 0 && y > 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
@@ -35,6 +35,7 @@ namespace LDtk
 
         /// <summary>
         /// Convert from world pixel space to int grid space
+        /// Floors the value based on <see cref="TileSize"/> to an Integer
         /// </summary>
         /// <param name="position">World pixel coordinates</param>
         /// <returns>Grid position</returns>

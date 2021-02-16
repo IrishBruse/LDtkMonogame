@@ -249,19 +249,6 @@ references:
   isSpec: "True"
   fullName: LDtk.World.GetLevel
   nameWithType: World.GetLevel
-- uid: LDtk.World.Load(System.Int64)
-  name: Load(Int64)
-  href: api/LDtk.World.html#LDtk_World_Load_System_Int64_
-  commentId: M:LDtk.World.Load(System.Int64)
-  fullName: LDtk.World.Load(System.Int64)
-  nameWithType: World.Load(Int64)
-- uid: LDtk.World.Load*
-  name: Load
-  href: api/LDtk.World.html#LDtk_World_Load_
-  commentId: Overload:LDtk.World.Load
-  isSpec: "True"
-  fullName: LDtk.World.Load
-  nameWithType: World.Load
 - uid: LDtk.World.ReloadProject(System.String)
   name: ReloadProject(String)
   href: api/LDtk.World.html#LDtk_World_ReloadProject_System_String_

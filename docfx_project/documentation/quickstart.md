@@ -29,5 +29,3 @@ spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp)
 }
 spriteBatch.End();
 ```
-Thats all thats needed to render your level everything else is handled by LDtkMonogame
-------------
