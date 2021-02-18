@@ -14,6 +14,12 @@ namespace Examples
             spriteBatch.Draw(pixelTexture, rect.WorldPosition, null, color, 0, Vector2.Zero, rect.Size, SpriteEffects.None, 0);
         }
 
+        public static void DrawPoint(this SpriteBatch spriteBatch, Vector2 point, Color color)
+        {
+            CreatePixelTexture(spriteBatch);
+            spriteBatch.Draw(pixelTexture, point, null, color, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 0);
+        }
+
         private static void CreatePixelTexture(SpriteBatch spriteBatch)
         {
             if (pixelTexture == null)

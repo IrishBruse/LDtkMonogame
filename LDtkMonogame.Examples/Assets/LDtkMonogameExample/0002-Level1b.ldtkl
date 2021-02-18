@@ -10,8 +10,8 @@
 	},
 	"identifier": "Level1b",
 	"uid": 78,
-	"worldX": -832,
-	"worldY": -736,
+	"worldX": 0,
+	"worldY": -288,
 	"pxWid": 224,
 	"pxHei": 256,
 	"__bgColor": "#3F3851",
@@ -99,7 +99,11 @@
 							"params": ["A"]
 						}]
 					}
-				] }
+				] },
+				{ "__identifier": "Diamond", "__grid": [1,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 89, "srcRect": [0,0,12,12] }, "defUid": 88, "px": [48,192], "fieldInstances": [] },
+				{ "__identifier": "Diamond", "__grid": [4,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 89, "srcRect": [0,0,12,12] }, "defUid": 88, "px": [144,192], "fieldInstances": [] },
+				{ "__identifier": "Diamond", "__grid": [5,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 89, "srcRect": [0,0,12,12] }, "defUid": 88, "px": [176,192], "fieldInstances": [] },
+				{ "__identifier": "Diamond", "__grid": [2,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 89, "srcRect": [0,0,12,12] }, "defUid": 88, "px": [80,192], "fieldInstances": [] }
 			]
 		},
 		{
@@ -112,7 +116,7 @@
 			"__pxTotalOffsetX": 0,
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 51,
-			"__tilesetRelPath": "Kings and Pigs/14-TileSets/Decorations (32x32).png",
+			"__tilesetRelPath": "Art/Tilesets/Decorations.png",
 			"levelId": 78,
 			"layerDefUid": 50,
 			"pxOffsetX": 0,
@@ -138,7 +142,7 @@
 			"__pxTotalOffsetX": 0,
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 1,
-			"__tilesetRelPath": "Kings and Pigs/14-TileSets/Terrain (32x32).png",
+			"__tilesetRelPath": "Art/Tilesets/Terrain.png",
 			"levelId": 78,
 			"layerDefUid": 2,
 			"pxOffsetX": 0,

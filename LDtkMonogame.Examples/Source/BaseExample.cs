@@ -9,8 +9,8 @@ namespace Examples
     public class BaseExample : Game
     {
         // Camera
-        internal Vector3 cameraPosition;
-        internal Vector3 cameraOrigin;
+        internal Vector2 cameraPosition;
+        internal Vector2 cameraOrigin;
         internal float cameraZoom = 1f;
         internal bool freeCam = true;
 
@@ -49,7 +49,7 @@ namespace Examples
                 if (mouse.MiddleButton == ButtonState.Pressed)
                 {
                     Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += new Vector3(pos.X, pos.Y, 0) * 30 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    cameraPosition += new Vector2(pos.X, pos.Y) * 30 * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
             oldKeyboard = keyboard;
@@ -80,7 +80,7 @@ namespace Examples
 
         public virtual void OnWindowResized()
         {
-            cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
+            cameraOrigin = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
             cameraZoom = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
         }
     }

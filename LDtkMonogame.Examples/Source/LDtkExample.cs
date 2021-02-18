@@ -61,7 +61,7 @@ namespace Examples
 
         public override void OnWindowResized()
         {
-            cameraOrigin = new Vector3(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f, 0);
+            cameraOrigin = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
             cameraZoom = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
         }
 
@@ -74,7 +74,7 @@ namespace Examples
 
             if (freeCam)
             {
-                cameraPosition = -new Vector3(player.position.X, player.position.Y - 30, 0);
+                cameraPosition = -new Vector2(player.position.X, player.position.Y - 30);
             }
 
             for (int i = 0; i < doors.Length; i++)
@@ -102,18 +102,18 @@ namespace Examples
             Texture2D texture = new Texture2D(GraphicsDevice, 1, 1);
             texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
-            spriteBatch.Begin(SpriteSortMode.Texture, blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin));
+            spriteBatch.Begin(SpriteSortMode.Texture, blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
             {
                 for (int i = 0; i < startLevel.Layers.Length; i++)
                 {
-                    spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
+                    spriteBatch.Draw(startLevel.Layers[i], startLevel.Position, Color.White);
                 }
 
                 for (int i = 0; i < neighbours.Length; i++)
                 {
                     for (int j = 0; j < neighbours[i].Layers.Length; j++)
                     {
-                        spriteBatch.Draw(neighbours[i].Layers[j], neighbours[i].WorldPosition, Color.White);
+                        spriteBatch.Draw(neighbours[i].Layers[j], neighbours[i].Position, Color.White);
                     }
                 }
 

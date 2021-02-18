@@ -14,7 +14,7 @@
 	"defaultGridSize": 16,
 	"bgColor": "#676877",
 	"defaultLevelBgColor": "#3F3851",
-	"nextUid": 88,
+	"nextUid": 93,
 	"minifyJson": false,
 	"externalLevels": true,
 	"exportTiled": false,
@@ -1226,6 +1226,23 @@
 				]
 			},
 			{
+				"identifier": "Diamond",
+				"uid": 88,
+				"width": 12,
+				"height": 12,
+				"color": "#94D9B3",
+				"renderMode": "Tile",
+				"showName": true,
+				"tilesetId": 89,
+				"tileId": 0,
+				"tileRenderMode": "Crop",
+				"maxPerLevel": 0,
+				"limitBehavior": "DiscardOldOnes",
+				"pivotX": 0.5,
+				"pivotY": 1,
+				"fieldDefs": []
+			},
+			{
 				"identifier": "Player",
 				"uid": 70,
 				"width": 78,
@@ -1247,7 +1264,7 @@
 			{
 				"identifier": "SunnyLand_by_Ansimuz_extended",
 				"uid": 1,
-				"relPath": "Kings and Pigs/14-TileSets/Terrain (32x32).png",
+				"relPath": "Art/Tilesets/Terrain.png",
 				"pxWid": 608,
 				"pxHei": 416,
 				"tileGridSize": 32,
@@ -1262,7 +1279,7 @@
 			{
 				"identifier": "Decorations_32x32_",
 				"uid": 51,
-				"relPath": "Kings and Pigs/14-TileSets/Decorations (32x32).png",
+				"relPath": "Art/Tilesets/Decorations.png",
 				"pxWid": 224,
 				"pxHei": 192,
 				"tileGridSize": 32,
@@ -1277,7 +1294,7 @@
 			{
 				"identifier": "Door",
 				"uid": 59,
-				"relPath": "Kings and Pigs/Door.png",
+				"relPath": "Art/Door.png",
 				"pxWid": 448,
 				"pxHei": 56,
 				"tileGridSize": 56,
@@ -1289,7 +1306,7 @@
 			{
 				"identifier": "Box",
 				"uid": 60,
-				"relPath": "Kings and Pigs/08-Box/Box.png",
+				"relPath": "Art/Box/Box.png",
 				"pxWid": 42,
 				"pxHei": 21,
 				"tileGridSize": 21,
@@ -1301,7 +1318,7 @@
 			{
 				"identifier": "KingHuman",
 				"uid": 71,
-				"relPath": "Kings and Pigs/KingHuman.png",
+				"relPath": "Art/Characters/KingHuman.png",
 				"pxWid": 858,
 				"pxHei": 348,
 				"tileGridSize": 78,
@@ -1310,8 +1327,20 @@
 				"savedSelections": [],
 				"cachedPixelData": {
 					"opaqueTiles": "0000000000000000000000000000000000000000000011111111111",
-					"averageColors": "2977297729771977297729872987297729771977197729773977397739773977387728672867000000000000144616661867197729772977297719770000000000003baa3aaa297729875dcc2bbb2a990a8700000000000000000000000000000000000000000000000000000000"
+					"averageColors": "2977297729771977297729872987297729771977197729773977397739773977387728672867000000000000155616661867197729772977297704350000000000005dcc3baa297700002a9929771977197700000000000000000000000000000000000000000000000000000000"
 				}
+			},
+			{
+				"identifier": "Diamond",
+				"uid": 89,
+				"relPath": "Art/Diamond.png",
+				"pxWid": 144,
+				"pxHei": 12,
+				"tileGridSize": 12,
+				"spacing": 0,
+				"padding": 0,
+				"savedSelections": [],
+				"cachedPixelData": { "opaqueTiles": "000000000000", "averageColors": "958a958a958a958a958a958a969a969a968a958a4eef2eee" }
 			}
 		],
 		"enums": [{ "identifier": "Alphabet", "uid": 81, "values": [
@@ -1356,13 +1385,13 @@
 			"__bgPos": null,
 			"externalRelPath": "LDtkMonogameExample/0001-Level2.ldtkl",
 			"layerInstances": null,
-			"__neighbours": [{ "levelUid": 0, "dir": "w" }]
+			"__neighbours": [ { "levelUid": 0, "dir": "w" }, { "levelUid": 90, "dir": "e" } ]
 		},
 		{
 			"identifier": "Level1b",
 			"uid": 78,
-			"worldX": -832,
-			"worldY": -736,
+			"worldX": 0,
+			"worldY": -288,
 			"pxWid": 224,
 			"pxHei": 256,
 			"__bgColor": "#3F3851",
@@ -1375,6 +1404,60 @@
 			"externalRelPath": "LDtkMonogameExample/0002-Level1b.ldtkl",
 			"layerInstances": null,
 			"__neighbours": []
+		},
+		{
+			"identifier": "Level3",
+			"uid": 90,
+			"worldX": 800,
+			"worldY": 64,
+			"pxWid": 256,
+			"pxHei": 256,
+			"__bgColor": "#3F3851",
+			"bgColor": null,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__bgPos": null,
+			"externalRelPath": "LDtkMonogameExample/0003-Level3.ldtkl",
+			"layerInstances": null,
+			"__neighbours": [ { "levelUid": 74, "dir": "w" }, { "levelUid": 91, "dir": "s" } ]
+		},
+		{
+			"identifier": "Level4",
+			"uid": 91,
+			"worldX": 800,
+			"worldY": 320,
+			"pxWid": 256,
+			"pxHei": 256,
+			"__bgColor": "#3F3851",
+			"bgColor": null,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__bgPos": null,
+			"externalRelPath": "LDtkMonogameExample/0004-Level4.ldtkl",
+			"layerInstances": null,
+			"__neighbours": [ { "levelUid": 90, "dir": "n" }, { "levelUid": 92, "dir": "s" } ]
+		},
+		{
+			"identifier": "Level5",
+			"uid": 92,
+			"worldX": 800,
+			"worldY": 576,
+			"pxWid": 256,
+			"pxHei": 256,
+			"__bgColor": "#3F3851",
+			"bgColor": null,
+			"bgRelPath": null,
+			"bgPos": null,
+			"bgPivotX": 0.5,
+			"bgPivotY": 0.5,
+			"__bgPos": null,
+			"externalRelPath": "LDtkMonogameExample/0005-Level5.ldtkl",
+			"layerInstances": null,
+			"__neighbours": [{ "levelUid": 91, "dir": "n" }]
 		}
 	]
 }

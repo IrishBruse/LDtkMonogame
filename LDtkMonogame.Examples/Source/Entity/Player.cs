@@ -12,7 +12,6 @@ namespace Examples
         public bool fliped = true;
         public Rect collider;
         public Vector2 velocity;
-        public Rectangle frame;
 
         const float Gavity = 175f;
 
