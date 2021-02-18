@@ -49,9 +49,10 @@ namespace Examples
                 if (mouse.MiddleButton == ButtonState.Pressed)
                 {
                     Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += new Vector2(pos.X, pos.Y) * 30 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    cameraPosition += (new Vector2(pos.X, pos.Y) * 30) / (cameraZoom * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
+
             oldKeyboard = keyboard;
             oldMouse = mouse;
 
