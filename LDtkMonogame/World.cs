@@ -64,19 +64,16 @@ namespace LDtk
         /// <returns>Level</returns>
         public Level GetLevel(long uid)
         {
-            for (int i = 0; i < json.Levels.Length; i++)
+            for (int i = 0; i < levels.Length; i++)
             {
-                if (json.Levels[i].Uid == uid)
+                if (levels[i]?.Uid == uid)
                 {
-                    if (levels[i] == null)
-                    {
-                        LoadLevel(ref levels[i], json.Levels[i]);
-                    }
                     return levels[i];
                 }
             }
 
-            throw new UidException(uid);
+            return null;
+            //throw new UidException(uid);
         }
 
         /// <summary>
@@ -86,6 +83,41 @@ namespace LDtk
         /// <returns>Level</returns>
         public Level GetLevel(string identifier)
         {
+            for (int i = 0; i < levels.Length; i++)
+            {
+                if (levels[i]?.Identifier == identifier)
+                {
+                    return levels[i];
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Prerenders the level for later drawing
+        /// </summary>
+        /// <param name="uid">Uid</param>
+        public void LoadLevel(long uid)
+        {
+            for (int i = 0; i < json.Levels.Length; i++)
+            {
+                if (json.Levels[i].Uid == uid)
+                {
+                    if (levels[i] == null)
+                    {
+                        LoadLevel(ref levels[i], json.Levels[i]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prerenders the level for later drawing
+        /// </summary>
+        /// <param name="identifier">Identifier</param>
+        public void LoadLevel(string identifier)
+        {
             for (int i = 0; i < json.Levels.Length; i++)
             {
                 if (json.Levels[i].Identifier == identifier)
@@ -94,11 +126,8 @@ namespace LDtk
                     {
                         LoadLevel(ref levels[i], json.Levels[i]);
                     }
-                    return levels[i];
                 }
             }
-
-            throw new Exception(identifier + " Level not found!");
         }
 
         private void LoadLevel(ref Level level, LDtkLevel jsonLevel)

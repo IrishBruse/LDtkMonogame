@@ -48,33 +48,9 @@ namespace LDtk
         public RenderTarget2D[] Layers { get; internal set; }
 
         /// <summary>
-        /// The neighbours of the level
+        /// The neighbours uids of the level
         /// </summary>
         public long[] Neighbours { get; internal set; }
-
-        /// <summary>
-        /// Renders the level
-        /// </summary>
-        /// <param name="spriteBatch">The SpriteBatch used to render it</param>
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            for (int i = 0; i < Layers.Length; i++)
-            {
-                spriteBatch.Draw(Layers[i], Position, Color.White);
-            }
-        }
-
-        /// <summary>
-        /// Renders this levels neighbours
-        /// </summary>
-        /// <param name="spriteBatch">The SpriteBatch used to render it</param>
-        public void DrawNeighbours(SpriteBatch spriteBatch)
-        {
-            for (int i = 0; i < Neighbours.Length; i++)
-            {
-                owner.GetLevel(Neighbours[i]).Draw(spriteBatch);
-            }
-        }
 
         /// <summary>
         /// Gets the parsed entity from the ldtk json<br/>
@@ -272,16 +248,6 @@ namespace LDtk
             }
 
             throw new Exception(identifier + " IntGrid not found!");
-        }
-
-        /// <summary>
-        /// Tells if a point is contained in side of the levels bounds
-        /// </summary>
-        /// <param name="point">Point to check</param>
-        /// <returns>If the point is inside the bounds of the level</returns>
-        public bool Contains(Vector2 point)
-        {
-            return (point.X >= Position.X && point.Y >= Position.Y && point.X < Position.X + Size.X && point.Y <= Position.Y + Size.Y);
         }
     }
 }
