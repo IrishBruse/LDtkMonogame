@@ -30,7 +30,12 @@ namespace LDtk
         /// <summary>
         /// World position of the level
         /// </summary>
-        public Vector2 WorldPosition { get; internal set; }
+        public Vector2 Position { get; internal set; }
+
+        /// <summary>
+        /// World size in pixels of the level
+        /// </summary>
+        public Vector2 Size { get; internal set; }
 
         /// <summary>
         /// The clear color for the level
@@ -48,17 +53,42 @@ namespace LDtk
         public long[] Neighbours { get; internal set; }
 
         /// <summary>
-        /// Gets the parsed entity from the ldtk json.
-        /// If fields are missing they will be logged to the console.
-        /// The class name must match the entities identifier.
+        /// Renders the level
         /// </summary>
-        /// <returns>The entity cast to the class</returns>
+        /// <param name="spriteBatch">The SpriteBatch used to render it</param>
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < Layers.Length; i++)
+            {
+                spriteBatch.Draw(Layers[i], Position, Color.White);
+            }
+        }
+
+        /// <summary>
+        /// Renders this levels neighbours
+        /// </summary>
+        /// <param name="spriteBatch">The SpriteBatch used to render it</param>
+        public void DrawNeighbours(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < Neighbours.Length; i++)
+            {
+                owner.GetLevel(Neighbours[i]).Draw(spriteBatch);
+            }
+        }
+
+        /// <summary>
+        /// Gets the parsed entity from the ldtk json<br/>
+        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// The class name must match the entities identifier id one is not specified<br/>
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
-        public T GetEntity<T>() where T : new()
+        /// <returns>The entity cast to the class</returns>
+        public T GetEntity<T>(string identifier = "") where T : new()
         {
             for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
             {
-                if (entities[entityIndex].Identifier == typeof(T).Name)
+                if (entities[entityIndex].Identifier == (identifier == "" ? typeof(T).Name : identifier))
                 {
                     T entity = new T();
 
@@ -77,18 +107,20 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Gets the parsed entities from the ldtk json
-        /// If fields are missing they will be logged to the console
+        /// Gets the parsed entities from the ldtk json<br/>
+        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// The class name must match the entities identifier id one is not specified<br/>
         /// </summary>
-        /// <returns>The entities cast to the class</returns>
+        /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
-        public T[] GetEntities<T>() where T : new()
+        /// <returns>The entities cast to the class</returns>
+        public T[] GetEntities<T>(string identifier = "") where T : new()
         {
             List<T> ents = new List<T>();
 
             for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
             {
-                if (entities[entityIndex].Identifier == typeof(T).Name)
+                if (entities[entityIndex].Identifier == (identifier == "" ? typeof(T).Name : identifier))
                 {
                     T entity = new T();
 
@@ -240,6 +272,16 @@ namespace LDtk
             }
 
             throw new Exception(identifier + " IntGrid not found!");
+        }
+
+        /// <summary>
+        /// Tells if a point is contained in side of the levels bounds
+        /// </summary>
+        /// <param name="point">Point to check</param>
+        /// <returns>If the point is inside the bounds of the level</returns>
+        public bool Contains(Vector2 point)
+        {
+            return (point.X >= Position.X && point.Y >= Position.Y && point.X < Position.X + Size.X && point.Y <= Position.Y + Size.Y);
         }
     }
 }

@@ -55,8 +55,8 @@ namespace LDtk
         }
 
 
-
         // Level Handling
+
         /// <summary>
         /// Gets the level from the current world
         /// </summary>
@@ -123,7 +123,10 @@ namespace LDtk
             level.BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor);
 
             // Set the world position
-            level.WorldPosition = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY);
+            level.Position = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY);
+
+            // Set the world size
+            level.Size = new Vector2(jsonLevel.PxWid, jsonLevel.PxHei);
 
             // Set the uid
             level.Uid = jsonLevel.Uid;
@@ -136,7 +139,9 @@ namespace LDtk
             LoadAllLayers(ref level, jsonLayerInstances);
         }
 
+
         // Layer Handling
+
         private void LoadBackgroundLayer(ref Level level, LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
@@ -297,8 +302,8 @@ namespace LDtk
         }
 
 
-
         // Json Helper Functions
+
         internal EntityDefinition GetEntityDefinitionFromUid(long uid)
         {
             for (int i = 0; i < json.Defs.Entities.Length; i++)
@@ -355,9 +360,7 @@ namespace LDtk
 
         class UidException : Exception
         {
-            public UidException(long uid) : base(uid + " does not point to a valid json data")
-            {
-            }
+            public UidException(long uid) : base(uid + " does not point to a valid json data") { }
         }
     }
 }
