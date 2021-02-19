@@ -16,8 +16,7 @@ namespace Examples
 
         // LDtk stuff
         private World world;
-        private Level startLevel;
-        private Level[] neighbours;
+        private LevelManager levelManager;
         private readonly List<Entity> drawableEntities = new List<Entity>();
         private KeyboardState oldKeyboard;
         private MouseState oldMouse;
@@ -38,11 +37,9 @@ namespace Examples
             base.Initialize();
 
             world = new World(spriteBatch, LDTK_FILE);
-            startLevel = world.GetLevel("Level1");
-
-            neighbours = (from neighbour in startLevel.Neighbours select world.GetLevel(neighbour)).ToArray();
-
-            doors = startLevel.GetEntities<Door>();
+            levelManager = new LevelManager(world);
+            levelManager.SetStarterLevel("Level1");
+            doors = levelManager.CurrentLevel.GetEntities<Door>();
 
             for (int i = 0; i < doors.Length; i++)
             {
@@ -51,9 +48,8 @@ namespace Examples
 
             drawableEntities.AddRange(doors);
 
-            crates = startLevel.GetEntities<Crate>();
-
-            player = startLevel.GetEntity<Player>();
+            crates = levelManager.CurrentLevel.GetEntities<Crate>();
+            player = levelManager.CurrentLevel.GetEntity<Player>();
 
             pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
@@ -67,12 +63,17 @@ namespace Examples
 
         protected override void Update(GameTime gameTime)
         {
-            double deltaTime = gameTime.ElapsedGameTime.TotalSeconds;
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-            if (freeCam)
+            levelManager.SetCenterPoint(player.position);
+            levelManager.Update(deltaTime);
+
+            player.Update(keyboard, oldKeyboard, levelManager.CurrentLevel, deltaTime);
+
+            if (freeCam == false)
             {
                 cameraPosition = -new Vector2(player.position.X, player.position.Y - 30);
             }
@@ -97,29 +98,28 @@ namespace Examples
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            GraphicsDevice.Clear(startLevel.BgColor);
-
-            Texture2D texture = new Texture2D(GraphicsDevice, 1, 1);
-            texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+            levelManager.Clear(GraphicsDevice);
 
             spriteBatch.Begin(SpriteSortMode.Texture, blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
             {
-                for (int i = 0; i < startLevel.Layers.Length; i++)
-                {
-                    spriteBatch.Draw(startLevel.Layers[i], startLevel.Position, Color.White);
-                }
-
-                for (int i = 0; i < neighbours.Length; i++)
-                {
-                    for (int j = 0; j < neighbours[i].Layers.Length; j++)
-                    {
-                        spriteBatch.Draw(neighbours[i].Layers[j], neighbours[i].Position, Color.White);
-                    }
-                }
+                levelManager.Draw(spriteBatch);
 
                 for (int i = 0; i < drawableEntities.Count; i++)
                 {
-                    drawableEntities[i].Draw(spriteBatch);
+                    spriteBatch.Draw(drawableEntities[i].texture,
+                        drawableEntities[i].position,
+                        drawableEntities[i].frame.Width > 0 ? drawableEntities[i].frame : new Rectangle(0, 0, (int)drawableEntities[i].size.X, (int)drawableEntities[i].size.Y),
+                        Color.White,
+                        0,
+                        drawableEntities[i].pivot * drawableEntities[i].size,
+                        1,
+                        SpriteEffects.None,
+                        0);
+                }
+
+                for (int i = 0; i < player.tiles.Count; i++)
+                {
+                    spriteBatch.DrawRect(player.tiles[i].rect, new Color(255, 0, 255, 128));
                 }
 
                 spriteBatch.Draw(player.texture,

@@ -14,7 +14,6 @@ namespace Examples
         // LDtk stuff
         private World world;
 
-        Level level;
         Player player;
         List<Entity> entities = new List<Entity>();
         Entity[] diamonds;
@@ -32,12 +31,12 @@ namespace Examples
             levelManager = new LevelManager(world);
             levelManager.SetStarterLevel("Level1");
 
-            diamonds = level.GetEntities<Entity>("Diamond");
+            diamonds = levelManager.CurrentLevel.GetEntities<Entity>("Diamond");
             entities.AddRange(diamonds);
 
-            entities.AddRange(level.GetEntities<Door>());
-            entities.AddRange(level.GetEntities<Crate>());
-            player = level.GetEntity<Player>();
+            entities.AddRange(levelManager.CurrentLevel.GetEntities<Door>());
+            entities.AddRange(levelManager.CurrentLevel.GetEntities<Crate>());
+            player = levelManager.CurrentLevel.GetEntity<Player>();
         }
 
         protected override void Update(GameTime gameTime)
@@ -58,7 +57,7 @@ namespace Examples
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(level.BgColor);
+            levelManager.Clear(GraphicsDevice);
 
             spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
             {
@@ -68,7 +67,15 @@ namespace Examples
                 // Bulk entity rendering
                 for (int i = 0; i < entities.Count; i++)
                 {
-                    entities[i].Draw(spriteBatch);
+                    spriteBatch.Draw(entities[i].texture,
+                        entities[i].position,
+                        entities[i].frame.Width > 0 ? entities[i].frame : new Rectangle(0, 0, (int)entities[i].size.X, (int)entities[i].size.Y),
+                        Color.White,
+                        0,
+                        entities[i].pivot * entities[i].size,
+                        1,
+                        SpriteEffects.None,
+                        0);
                 }
 
                 // Wiggle

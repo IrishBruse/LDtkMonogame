@@ -13,6 +13,8 @@ namespace Examples
         public Rect collider;
         public Vector2 velocity;
 
+        public List<(Rect rect, long gridValue)> tiles;
+
         const float Gavity = 175f;
 
         internal bool inDoor;
@@ -53,6 +55,7 @@ namespace Examples
             float v = (keyboard.IsKeyDown(Keys.W) ? -1 : 0) + (keyboard.IsKeyDown(Keys.S) ? 1 : 0);
 
             velocity = new Vector2(h * 90, velocity.Y);
+            // velocity = new Vector2(h * 90, v * 90);// velocity.Y);
 
             if ((keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyDown(Keys.Space) == false) && grounded == true)
             {
@@ -91,25 +94,22 @@ namespace Examples
             collider.ParentPosition = position;
 
             IntGrid collisions = level.GetIntGrid("Collisions");
+            Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime)) - level.Position;
+            Vector2 bottomRight = Vector2.Max(collider.WorldPosition + collider.Size, collider.WorldPosition + collider.Size + (velocity * deltaTime)) - level.Position;
 
-            Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime));
-            Vector2 bottomRight = Vector2.Max(collider.WorldPosition + collider.Size,
-            collider.WorldPosition + collider.Size + (velocity * deltaTime));
+            Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
+            Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
 
-            Vector2 topLeftGrid = collisions.FromWorldToGridSpace(topleft);
-            Vector2 bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
+            tiles = new List<(Rect rect, long gridValue)>();
 
-            List<(Rect rect, long gridValue)> tiles = new List<(Rect rect, long gridValue)>();
-
-            for (int x = (int)topLeftGrid.X; x < (int)bottomRightGrid.X; x++)
+            for (int x = topLeftGrid.X; x < bottomRightGrid.X; x++)
             {
-                for (int y = (int)topLeftGrid.Y; y < (int)bottomRightGrid.Y; y++)
+                for (int y = topLeftGrid.Y; y < bottomRightGrid.Y; y++)
                 {
-                    int index = x + ((int)topLeftGrid.X - (int)bottomRightGrid.X) * y;
                     long intGridValue = collisions.GetValueAt(x, y);
                     if (intGridValue >= 0)
                     {
-                        tiles.Add((new Rect(x * collisions.TileSize, y * collisions.TileSize, collisions.TileSize, collisions.TileSize), intGridValue));
+                        tiles.Add((new Rect(level.Position.X + (x * collisions.TileSize), level.Position.Y + (y * collisions.TileSize), collisions.TileSize, collisions.TileSize), intGridValue));
                     }
                 }
             }

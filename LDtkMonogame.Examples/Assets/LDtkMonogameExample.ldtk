@@ -12,7 +12,7 @@
 	"defaultPivotX": 0.5,
 	"defaultPivotY": 1,
 	"defaultGridSize": 16,
-	"bgColor": "#676877",
+	"bgColor": "#3F3851",
 	"defaultLevelBgColor": "#3F3851",
 	"nextUid": 94,
 	"minifyJson": false,

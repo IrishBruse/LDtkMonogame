@@ -1,6 +1,6 @@
 ﻿// Choose example
-// #define GameExample
-#define ApiExample
+#define GameExample
+//#define ApiExample
 
 namespace Examples
 {

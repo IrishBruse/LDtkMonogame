@@ -39,22 +39,5 @@ namespace LDtk
         /// </summary>
         /// <value>The scale of the entity in pixels</value>
         public Rectangle frame;
-
-        /// <summary>
-        /// Renders the entity how you see it in LDtk
-        /// </summary>
-        /// <param name="spriteBatch">The SpriteBatch used to render it</param>
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture,
-                position,
-                frame.Width > 0 ? frame : new Rectangle(0, 0, (int)size.X, (int)size.Y),
-                Color.White,
-                0,
-                pivot * size,
-                1,
-                SpriteEffects.None,
-                0);
-        }
     }
 }

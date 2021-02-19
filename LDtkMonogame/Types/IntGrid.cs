@@ -26,7 +26,7 @@ namespace LDtk
         /// <returns>Value at position its -1 if out of bounds</returns>
         public long GetValueAt(int x, int y)
         {
-            if (x > 0 && y > 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
+            if (x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
             {
                 return grid[x, y];
             }
@@ -39,12 +39,12 @@ namespace LDtk
         /// </summary>
         /// <param name="position">World pixel coordinates</param>
         /// <returns>Grid position</returns>
-        public Vector2 FromWorldToGridSpace(Vector2 position)
+        public Point FromWorldToGridSpace(Vector2 position)
         {
             int x = (int)MathF.Floor(position.X / tileSize);
             int y = (int)MathF.Floor(position.Y / tileSize);
 
-            return new Vector2(x, y);
+            return new Point(x, y);
         }
     }
 }

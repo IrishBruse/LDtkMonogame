@@ -5,8 +5,9 @@ using Microsoft.Xna.Framework;
 
 public class LevelManager
 {
+    public Level CurrentLevel { get; private set; }
+
     World world;
-    Level currentLevel;
     Vector2 center;
 
     public LevelManager(World world)
@@ -17,17 +18,17 @@ public class LevelManager
     public void Update(double deltaTime)
     {
         // Handle leaving a level
-        if (LevelContainsPoint(currentLevel, center) == false)
+        if (LevelContainsPoint(CurrentLevel, center) == false)
         {
-            for (int i = 0; i < currentLevel.Neighbours.Length; i++)
+            for (int i = 0; i < CurrentLevel.Neighbours.Length; i++)
             {
-                Level neighbour = world.GetLevel(currentLevel.Neighbours[i]);
+                Level neighbour = world.GetLevel(CurrentLevel.Neighbours[i]);
                 if (LevelContainsPoint(neighbour, center))
                 {
-                    currentLevel = neighbour;
-                    for (int ii = 0; ii < currentLevel.Neighbours.Length; ii++)
+                    CurrentLevel = neighbour;
+                    for (int ii = 0; ii < CurrentLevel.Neighbours.Length; ii++)
                     {
-                        world.LoadLevel(currentLevel.Neighbours[ii]);
+                        world.LoadLevel(CurrentLevel.Neighbours[ii]);
                     }
                 }
             }
@@ -36,16 +37,16 @@ public class LevelManager
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        for (int i = 0; i < currentLevel.Layers.Length; i++)
+        for (int i = 0; i < CurrentLevel.Layers.Length; i++)
         {
-            spriteBatch.Draw(currentLevel.Layers[i], currentLevel.Position, Color.White);
+            spriteBatch.Draw(CurrentLevel.Layers[i], CurrentLevel.Position, Color.White);
         }
 
-        for (int i = 0; i < currentLevel.Neighbours.Length; i++)
+        for (int i = 0; i < CurrentLevel.Neighbours.Length; i++)
         {
-            Level neighbour = world.GetLevel(currentLevel.Neighbours[i]);
+            Level neighbour = world.GetLevel(CurrentLevel.Neighbours[i]);
 
-            for (int j = 0; j < currentLevel.Layers.Length; j++)
+            for (int j = 0; j < CurrentLevel.Layers.Length; j++)
             {
                 spriteBatch.Draw(neighbour.Layers[j], neighbour.Position, Color.White);
             }
@@ -55,17 +56,22 @@ public class LevelManager
     public void SetStarterLevel(string identifier)
     {
         world.LoadLevel(identifier);
-        currentLevel = world.GetLevel(identifier);
+        CurrentLevel = world.GetLevel(identifier);
 
-        for (int i = 0; i < currentLevel.Neighbours.Length; i++)
+        for (int i = 0; i < CurrentLevel.Neighbours.Length; i++)
         {
-            world.LoadLevel(currentLevel.Neighbours[i]);
+            world.LoadLevel(CurrentLevel.Neighbours[i]);
         }
     }
 
     public void SetCenterPoint(Vector2 center)
     {
         this.center = center;
+    }
+
+    internal void Clear(GraphicsDevice GraphicsDevice)
+    {
+        GraphicsDevice.Clear(CurrentLevel.BgColor);
     }
 
     private bool LevelContainsPoint(Level level, Vector2 point)

@@ -9,15 +9,15 @@ namespace Examples
     public class BaseExample : Game
     {
         // Camera
-        internal Vector2 cameraPosition;
-        internal Vector2 cameraOrigin;
-        internal float cameraZoom = 1f;
-        internal bool freeCam = true;
-
+        protected Vector2 cameraPosition;
+        protected Vector2 cameraOrigin;
+        protected float cameraZoom = 1f;
+        protected bool freeCam = true;
+        protected Texture2D texture;
 
         // Framework
-        internal readonly GraphicsDeviceManager graphics;
-        internal SpriteBatch spriteBatch;
+        protected readonly GraphicsDeviceManager graphics;
+        protected SpriteBatch spriteBatch;
         private KeyboardState oldKeyboard;
         private MouseState oldMouse;
 
@@ -29,6 +29,8 @@ namespace Examples
 
         protected override void Initialize()
         {
+            texture = new Texture2D(GraphicsDevice, 1, 1);
+            texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
             MonogameInitialize();
 
             base.Initialize();
