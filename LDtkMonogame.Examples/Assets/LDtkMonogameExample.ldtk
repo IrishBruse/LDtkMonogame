@@ -70,7 +70,7 @@
 				"displayOpacity": 1,
 				"pxOffsetX": 0,
 				"pxOffsetY": 0,
-				"intGridValues": [ { "identifier": "Wall", "color": "#B77A4C" }, { "identifier": "Platform", "color": "#CB4B4B" }, { "identifier": "Door", "color": "#33CF74" } ],
+				"intGridValues": [ { "identifier": "Wall", "color": "#B77A4C" }, { "identifier": "Platform", "color": "#CB4B4B" } ],
 				"autoTilesetDefUid": 1,
 				"autoRuleGroups": [
 					{
@@ -1262,7 +1262,7 @@
 		],
 		"tilesets": [
 			{
-				"identifier": "SunnyLand_by_Ansimuz_extended",
+				"identifier": "Main_Tileset",
 				"uid": 1,
 				"relPath": "Art/Tilesets/Terrain.png",
 				"pxWid": 608,
@@ -1277,7 +1277,7 @@
 				}
 			},
 			{
-				"identifier": "Decorations_32x32_",
+				"identifier": "Decorations_Tileset",
 				"uid": 51,
 				"relPath": "Art/Tilesets/Decorations.png",
 				"pxWid": 224,
@@ -1320,14 +1320,14 @@
 				"uid": 71,
 				"relPath": "Art/Characters/KingHuman.png",
 				"pxWid": 858,
-				"pxHei": 348,
+				"pxHei": 464,
 				"tileGridSize": 78,
 				"spacing": 0,
 				"padding": 0,
 				"savedSelections": [],
 				"cachedPixelData": {
-					"opaqueTiles": "0000000000000000000000000000000000000000000011111111111",
-					"averageColors": "2977297729771977297729872987297729771977197729773977397739773977387728672867000000000000155616661867197729772977297704350000000000005dcc3baa297700002a9929771977197700000000000000000000000000000000000000000000000000000000"
+					"opaqueTiles": "000000000000000000000000000000000000000000000000000000011111111111",
+					"averageColors": "2977297729771977297729872987297729771977197729773977397739773977387728672867000000000000155616661867197729772977297704350000000000005dcc3baa2977000000000000000000000000000000003977297739771977000000000000000000000000000000000000000000000000000000000000000000000000"
 				}
 			},
 			{

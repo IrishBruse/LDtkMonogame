@@ -8,9 +8,8 @@ namespace Examples
         public string destinationLevel;
         public int destinationDoor;
 
-
-        public Rect trigger;
         public bool opening;
+        public Rect trigger;
 
         public void Update(float deltaTime)
         {

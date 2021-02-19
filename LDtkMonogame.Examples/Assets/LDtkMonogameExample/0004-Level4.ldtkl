@@ -62,7 +62,10 @@
 			"intGrid": [],
 			"autoLayerTiles": [],
 			"seed": 4771729,
-			"gridTiles": [],
+			"gridTiles": [
+				{ "px": [64,128], "src": [128,32], "f": 0, "t": 11, "d": [34] },
+				{ "px": [160,128], "src": [64,32], "f": 0, "t": 9, "d": [37] }
+			],
 			"entityInstances": []
 		},
 		{
@@ -99,6 +102,8 @@
 				{ "coordId": 31, "v": 0 },
 				{ "coordId": 32, "v": 0 },
 				{ "coordId": 33, "v": 0 },
+				{ "coordId": 34, "v": 1 },
+				{ "coordId": 37, "v": 1 },
 				{ "coordId": 38, "v": 0 },
 				{ "coordId": 39, "v": 0 },
 				{ "coordId": 40, "v": 0 },

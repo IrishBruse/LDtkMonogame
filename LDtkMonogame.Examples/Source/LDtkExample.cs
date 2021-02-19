@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 using LDtk;
 
@@ -27,9 +26,12 @@ namespace Examples
         Crate[] crates;
         Player player;
 
+        // Debug
+        bool showCollisions = false;
+
         public LDtkExample() : base()
         {
-            IsFixedTimeStep = false;
+            freeCam = false;
         }
 
         protected override void Initialize()
@@ -71,26 +73,35 @@ namespace Examples
             levelManager.SetCenterPoint(player.position);
             levelManager.Update(deltaTime);
 
-            player.Update(keyboard, oldKeyboard, levelManager.CurrentLevel, deltaTime);
+            player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
+            player.inDoor = false;
+            for (int i = 0; i < doors.Length; i++)
+            {
+                if (player.collider.Contains(doors[i].trigger))
+                {
+                    player.inDoor = true;
+                    break;
+                }
+            }
+
+            if (player.inDoor == false && player.doorInteraction)
+            {
+                player.doorInteraction = false;
+                Console.WriteLine("doorInteraction");
+            }
+
+            if (keyboard.IsKeyDown(Keys.F1) && oldKeyboard.IsKeyDown(Keys.F1) == false)
+            {
+                showCollisions = !showCollisions;
+            }
 
             if (freeCam == false)
             {
                 cameraPosition = -new Vector2(player.position.X, player.position.Y - 30);
             }
 
-            for (int i = 0; i < doors.Length; i++)
-            {
-                if (doors[i].trigger.Contains(player.collider))
-                {
-                    player.inDoor = true;
-                    doors[i].opening = true;
-                    break;
-                }
-            }
-
             oldKeyboard = keyboard;
             oldMouse = mouse;
-
 
             base.Update(gameTime);
         }
@@ -100,7 +111,9 @@ namespace Examples
 
             levelManager.Clear(GraphicsDevice);
 
-            spriteBatch.Begin(SpriteSortMode.Texture, blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
+            Matrix camera = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
+
+            spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: camera);
             {
                 levelManager.Draw(spriteBatch);
 
@@ -117,9 +130,13 @@ namespace Examples
                         0);
                 }
 
-                for (int i = 0; i < player.tiles.Count; i++)
+                // Debugging
+                if (showCollisions)
                 {
-                    spriteBatch.DrawRect(player.tiles[i].rect, new Color(255, 0, 255, 128));
+                    for (int i = 0; i < player.tiles.Count; i++)
+                    {
+                        spriteBatch.DrawRect(player.tiles[i].rect, new Color(255, 0, 255, 128));
+                    }
                 }
 
                 spriteBatch.Draw(player.texture,
@@ -127,7 +144,7 @@ namespace Examples
                     player.frame,
                     Color.White, 0,
                     (player.pivot * player.size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
-                    player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+                    player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0.1f);
             }
             spriteBatch.End();
 

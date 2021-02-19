@@ -9,11 +9,6 @@
             "name": "Debug",
             "type": "coreclr",
             "request": "launch",
-            "symbolOptions": {
-                "searchPaths": ["${workspaceFolder}/LDtkMonogame.Examples/obj/Debug/net5.0/"],
-                "searchMicrosoftSymbolServer": true,
-                "searchNuGetOrgSymbolServer": true
-            },
             "preLaunchTask": "build",
             "justMyCode": true,
             "suppressJITOptimizations": true,

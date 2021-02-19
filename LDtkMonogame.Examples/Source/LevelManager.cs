@@ -37,7 +37,7 @@ public class LevelManager
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        for (int i = 0; i < CurrentLevel.Layers.Length; i++)
+        for (int i = CurrentLevel.Layers.Length - 1; i >= 0; i--)
         {
             spriteBatch.Draw(CurrentLevel.Layers[i], CurrentLevel.Position, Color.White);
         }
@@ -46,7 +46,7 @@ public class LevelManager
         {
             Level neighbour = world.GetLevel(CurrentLevel.Neighbours[i]);
 
-            for (int j = 0; j < CurrentLevel.Layers.Length; j++)
+            for (int j = CurrentLevel.Layers.Length - 1; j >= 0; j--)
             {
                 spriteBatch.Draw(neighbour.Layers[j], neighbour.Position, Color.White);
             }
