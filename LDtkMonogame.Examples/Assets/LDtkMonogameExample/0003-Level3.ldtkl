@@ -42,7 +42,25 @@
 			"autoLayerTiles": [],
 			"seed": 3667078,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [{ "__identifier": "Crate", "__grid": [6,4], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [208,160], "fieldInstances": [
+				{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
+				{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
+				{ "__identifier": "boolean", "__value": true, "__type": "Bool", "defUid": 64, "realEditorValues": [] },
+				{ "__identifier": "name", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
+				{ "__identifier": "multilines", "__value": "test", "__type": "String", "defUid": 66, "realEditorValues": [] },
+				{ "__identifier": "color", "__value": "#000000", "__type": "Color", "defUid": 67, "realEditorValues": [] },
+				{ "__identifier": "point", "__value": null, "__type": "Point", "defUid": 68, "realEditorValues": [] },
+				{
+					"__identifier": "alphabet",
+					"__value": "B",
+					"__type": "LocalEnum.Alphabet",
+					"defUid": 82,
+					"realEditorValues": [{
+						"id": "V_String",
+						"params": ["B"]
+					}]
+				}
+			] }]
 		},
 		{
 			"__identifier": "Tiles",
@@ -63,6 +81,14 @@
 			"autoLayerTiles": [],
 			"seed": 4672288,
 			"gridTiles": [
+				{ "px": [64,32], "src": [32,32], "f": 0, "t": 8, "d": [10] },
+				{ "px": [160,32], "src": [32,32], "f": 0, "t": 8, "d": [13] },
+				{ "px": [64,64], "src": [32,96], "f": 0, "t": 22, "d": [18] },
+				{ "px": [160,64], "src": [32,128], "f": 0, "t": 29, "d": [21] },
+				{ "px": [96,96], "src": [64,96], "f": 0, "t": 23, "d": [27] },
+				{ "px": [128,96], "src": [96,96], "f": 0, "t": 24, "d": [28] },
+				{ "px": [96,128], "src": [64,128], "f": 0, "t": 30, "d": [35] },
+				{ "px": [128,128], "src": [96,128], "f": 0, "t": 31, "d": [36] },
 				{ "px": [64,160], "src": [96,32], "f": 0, "t": 10, "d": [42] },
 				{ "px": [96,160], "src": [96,32], "f": 0, "t": 10, "d": [43] },
 				{ "px": [128,160], "src": [96,32], "f": 0, "t": 10, "d": [44] },

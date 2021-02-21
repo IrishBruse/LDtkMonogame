@@ -18,6 +18,7 @@ namespace LDtk
 
         /// <summary>
         /// The pivot of the texture attached to the entity
+        /// in the range 0-1
         /// </summary>        
         /// <value>Pixel position relative to <see cref="position"/></value>
         public Vector2 pivot;
@@ -34,10 +35,18 @@ namespace LDtk
         /// <value>The scale of the entity in pixels</value>
         public Vector2 size;
 
+#if DEBUG
         /// <summary>
-        /// The current frame of animation
+        /// This is the editor debug color of the entity in ldtk
+        /// </summary>
+        /// <value>The Debug only color</value>
+        public Color editorVisualColor;
+#endif
+
+        /// <summary>
+        /// Optional Tile used to display this entity
         /// </summary>
         /// <value>The scale of the entity in pixels</value>
-        public Rectangle frame;
+        public Rectangle tile;
     }
 }

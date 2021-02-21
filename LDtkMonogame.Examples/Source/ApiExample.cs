@@ -45,7 +45,7 @@ namespace Examples
             for (int i = 0; i < diamonds.Length; i++)
             {
                 int currentFrame = (int)((gameTime.TotalGameTime.TotalSeconds * 10) % 10) * (int)diamonds[i].size.X;
-                diamonds[i].frame = new Rectangle(currentFrame, 0, (int)diamonds[i].size.X, (int)diamonds[i].size.Y);
+                diamonds[i].tile = new Rectangle(currentFrame, 0, (int)diamonds[i].size.X, (int)diamonds[i].size.Y);
                 diamonds[i].position += new Vector2(0, -MathF.Sin((float)gameTime.TotalGameTime.TotalSeconds * 2) * 0.1f);
             }
 
@@ -59,7 +59,7 @@ namespace Examples
         {
             levelManager.Clear(GraphicsDevice);
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(cameraZoom) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0));
             {
                 // Level rendering
                 levelManager.Draw(spriteBatch);
@@ -69,7 +69,7 @@ namespace Examples
                 {
                     spriteBatch.Draw(entities[i].texture,
                         entities[i].position,
-                        entities[i].frame.Width > 0 ? entities[i].frame : new Rectangle(0, 0, (int)entities[i].size.X, (int)entities[i].size.Y),
+                        entities[i].tile.Width > 0 ? entities[i].tile : new Rectangle(0, 0, (int)entities[i].size.X, (int)entities[i].size.Y),
                         Color.White,
                         0,
                         entities[i].pivot * entities[i].size,
@@ -80,12 +80,12 @@ namespace Examples
 
                 // Wiggle
                 player.fliped = gameTime.TotalGameTime.TotalSeconds % 2 < 1;
-                player.frame = new Rectangle(0, 0, (int)player.size.X, (int)player.size.Y);
+                player.tile = new Rectangle(0, 0, (int)player.size.X, (int)player.size.Y);
 
                 // Custom entity rendering
                 spriteBatch.Draw(player.texture,
                     player.position,
-                    player.frame,
+                    player.tile,
                     Color.White, 0,
                     (player.pivot * player.size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
                     player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);

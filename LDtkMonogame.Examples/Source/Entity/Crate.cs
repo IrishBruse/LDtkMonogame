@@ -15,6 +15,7 @@ namespace Examples
         public Vector2 point;
         public Color color;
         public Alphabet alphabet;
+        internal Rect collider;
 
         public enum Alphabet
         {

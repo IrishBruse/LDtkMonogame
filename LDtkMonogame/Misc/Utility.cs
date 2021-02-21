@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 using Microsoft.Xna.Framework;
 
@@ -10,28 +11,30 @@ namespace LDtk
     internal class Utility
     {
         /// <summary>
-        /// Revers hex color string
-        /// ABGR -> RGBA
+        /// Convert ldtk color string into <see cref="Color"/>
         /// </summary>
-        /// <param name="hex">hex color number</param>
+        /// <param name="hex">In LDtk format of #BBGGRR hex</param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint ReverseHex(uint hex)
+        public static Color ConvertStringToColor(string hex)
         {
-            return ((hex & 0x000000ff) << 24) | ((hex & 0x0000ff00) << 8) | ((hex & 0x00ff0000) >> 8) | ((hex & 0xff000000) >> 24);
+            return ConvertStringToColor(hex, 255);
         }
 
         /// <summary>
         /// Convert ldtk color string into <see cref="Color"/>
         /// </summary>
-        /// <param name="hex">In LDtk format of #ABCDEF hex</param>
+        /// <param name="hex">In LDtk format of #BBGGRR hex</param>
+        /// <param name="alpha">Alpha</param>
         /// <returns></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color ConvertStringToColor(string hex)
+        public static Color ConvertStringToColor(string hex, int alpha)
         {
-            if(uint.TryParse(hex[1..] + "FF", System.Globalization.NumberStyles.HexNumber, null, out uint color))
+            if (uint.TryParse(hex.Replace("#", ""), System.Globalization.NumberStyles.HexNumber, null, out uint color))
             {
-                return new Color(ReverseHex(color));
+                byte red = (byte)((color & 0xFF0000) >> 16);
+                byte green = (byte)((color & 0x00FF00) >> 8);
+                byte blue = (byte)((color & 0xFF));
+
+                return new Color(red, green, blue, alpha);
             }
             else
             {

@@ -19,7 +19,7 @@ namespace Examples
 
         internal bool inDoor;
 
-        Animation state;
+        public Animation state;
         private Animation newState;
         int animationFrame;
 
@@ -30,6 +30,7 @@ namespace Examples
         private bool noClip;
         private bool onPlatfrom;
         Vector2 input;
+        internal bool doorTransition;
 
         public Player()
         {
@@ -40,30 +41,34 @@ namespace Examples
         {
             doorInteraction = false;
 
-            if (keyboard.IsKeyDown(Keys.E) && oldKeyboard.IsKeyDown(Keys.E) == false && inDoor == true)
-            {
-                doorInteraction = true;
-                animationFrame = 0;
-            }
-
             if (keyboard.IsKeyDown(Keys.F3) && oldKeyboard.IsKeyDown(Keys.F3) == false)
             {
                 noClip = !noClip;
             }
 
-            Movement(keyboard, oldKeyboard, deltaTime);
+            Movement(keyboard, oldKeyboard, mouse, oldMouse, deltaTime);
             CollisionDetection(level, deltaTime);
             Animate(deltaTime);
 
             position += velocity * deltaTime;
         }
 
-        void Movement(KeyboardState keyboard, KeyboardState oldKeyboard, float deltaTime)
+        void Movement(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, float deltaTime)
         {
             float h = (keyboard.IsKeyDown(Keys.A) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) ? 1 : 0);
             float v = (keyboard.IsKeyDown(Keys.W) ? -1 : 0) + (keyboard.IsKeyDown(Keys.S) ? 1 : 0);
 
             input = new Vector2(h, v);
+
+            if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
+            {
+                ChangeState(Animation.Attack);
+            }
+
+            if (keyboard.IsKeyDown(Keys.E) && oldKeyboard.IsKeyDown(Keys.E) == false && inDoor == true)
+            {
+                ChangeState(Animation.EnterDoor);
+            }
 
             if (noClip == false)
             {
@@ -161,7 +166,7 @@ namespace Examples
                 return a.Value.CompareTo(b.Value);
             });
 
-
+            onPlatfrom = false;
             // Perform collision resolution
             for (int i = 0; i < z.Count; i++)
             {
@@ -206,11 +211,8 @@ namespace Examples
             {
                 animationTimer -= .1f;
 
+                tile = new Rectangle(animationFrame * (int)size.X, (int)state * (int)size.Y, (int)size.X, (int)size.Y);
                 state = newState;
-
-                Console.CursorTop = 0;
-                Console.CursorLeft = 0;
-                Console.WriteLine(state + "            ");
 
                 switch (state)
                 {
@@ -253,7 +255,7 @@ namespace Examples
                         }
                         else
                         {
-                            ChangeState(Animation.ExitDoor);
+                            doorTransition = true;
                         }
                         break;
 
@@ -264,18 +266,19 @@ namespace Examples
                         }
                         else
                         {
-                            ChangeState(Animation.Idle);
+                            SetState(Animation.Idle);
                         }
                         break;
 
                     case Animation.Attack:
+
                         if (animationFrame < 2)
                         {
                             animationFrame++;
                         }
                         else
                         {
-                            ChangeState(Animation.Idle);
+                            SetState(Animation.Idle);
                         }
                         break;
 
@@ -295,18 +298,13 @@ namespace Examples
                         }
                         break;
                 }
-
-                frame = new Rectangle(animationFrame * (int)size.X, (int)state * (int)size.Y, (int)size.X, (int)size.Y);
             }
         }
 
         void ChangeState(Animation state)
         {
-            if (this.state != state)
-            {
-                this.newState = state;
-                animationFrame = 0;
-            }
+            this.newState = state;
+            animationFrame = 0;
         }
 
         void SetState(Animation state)
@@ -315,7 +313,7 @@ namespace Examples
             animationFrame = 0;
         }
 
-        enum Animation
+        public enum Animation
         {
             Idle,
             Walk,

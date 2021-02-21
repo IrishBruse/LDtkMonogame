@@ -55,7 +55,6 @@ namespace LDtk
         /// <summary>
         /// Gets the parsed entity from the ldtk json<br/>
         /// If fields are missing they will be logged to the console in debug mode only<br/>
-        /// The class name must match the entities identifier id one is not specified<br/>
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
@@ -83,9 +82,19 @@ namespace LDtk
         }
 
         /// <summary>
+        /// Gets the parsed entity from the ldtk json<br/>
+        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
+        /// <returns>The entity cast to the <see cref="Entity"/> class</returns>
+        public Entity GetEntity(string identifier)
+        {
+            return GetEntity<Entity>(identifier);
+        }
+
+        /// <summary>
         /// Gets the parsed entities from the ldtk json<br/>
         /// If fields are missing they will be logged to the console in debug mode only<br/>
-        /// The class name must match the entities identifier id one is not specified<br/>
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
@@ -113,6 +122,17 @@ namespace LDtk
             return ents.ToArray();
         }
 
+        /// <summary>
+        /// Gets the parsed entities from the ldtk json<br/>
+        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
+        /// <returns>The entities cast to the class</returns>
+        public Entity[] GetEntities(string identifier)
+        {
+            return GetEntities<Entity>(identifier);
+        }
+
         private void ParseEntityFields<T>(int entityIndex, T entity, int fieldIndex) where T : new()
         {
             string variableName = entities[entityIndex].FieldInstances[fieldIndex].Identifier;
@@ -126,6 +146,7 @@ namespace LDtk
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
                 Console.ResetColor();
+                return;
             }
 
             // Split any enums
@@ -204,8 +225,11 @@ namespace LDtk
             var texture = typeof(T).GetField("texture");
             if (texture != null)
             {
-                Texture2D tileset = owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid);
-                texture.SetValue(entity, tileset);
+                if (entityInstance.Tile != null)
+                {
+                    Texture2D tileset = owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid);
+                    texture.SetValue(entity, tileset);
+                }
             }
 #if DEBUG
             else
@@ -222,6 +246,43 @@ namespace LDtk
             {
                 var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
                 frameSize.SetValue(entity, new Vector2(entityDefinition.Width, entityDefinition.Height));
+            }
+#if DEBUG
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Warning: Sprite Field \"size\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
+                Console.ResetColor();
+            }
+#endif
+
+#if DEBUG
+            // EditorVisualColor
+            var editorVisualColor = typeof(T).GetField("editorVisualColor");
+            if (editorVisualColor != null)
+            {
+                var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
+                editorVisualColor.SetValue(entity, Utility.ConvertStringToColor(entityDefinition.Color, 128));
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Warning: Sprite Field \"editorVisualColor\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
+                Console.ResetColor();
+            }
+#endif
+
+            // FrameSize
+            var tile = typeof(T).GetField("tile");
+            if (tile != null)
+            {
+                var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
+                if (entityDefinition.TilesetId.HasValue)
+                {
+                    var tileDefinition = entityInstance.Tile;
+                    Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
+                    tile.SetValue(entity, rect);
+                }
             }
 #if DEBUG
             else

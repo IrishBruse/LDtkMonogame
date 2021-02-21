@@ -43,29 +43,26 @@
 			"seed": 6580231,
 			"gridTiles": [],
 			"entityInstances": [
-				{ "__identifier": "Door", "__grid": [3,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 59, "srcRect": [0,0,56,56] }, "defUid": 52, "px": [112,192], "fieldInstances": [
-					{
-						"__identifier": "DestinationLevel",
-						"__value": "Level1",
-						"__type": "String",
-						"defUid": 79,
-						"realEditorValues": [{
-							"id": "V_String",
-							"params": ["Level1"]
-						}]
-					},
-					{
-						"__identifier": "DestinationDoor",
-						"__value": 0,
-						"__type": "Int",
-						"defUid": 80,
-						"realEditorValues": [{ "id": "V_Int", "params": [0] }]
-					}
-				] },
+				{ "__identifier": "Door", "__grid": [3,5], "__pivot": [0.5,1], "__tile": { "tilesetUid": 59, "srcRect": [0,0,56,56] }, "defUid": 52, "px": [112,192], "fieldInstances": [{
+					"__identifier": "LevelIdentifier",
+					"__value": "Level1",
+					"__type": "String",
+					"defUid": 79,
+					"realEditorValues": [{
+						"id": "V_String",
+						"params": ["Level1"]
+					}]
+				}] },
 				{ "__identifier": "Crate", "__grid": [1,3], "__pivot": [0.5,1], "__tile": { "tilesetUid": 60, "srcRect": [0,0,21,21] }, "defUid": 56, "px": [48,128], "fieldInstances": [
 					{ "__identifier": "integer", "__value": 3, "__type": "Int", "defUid": 62, "realEditorValues": [] },
 					{ "__identifier": "dec", "__value": 3, "__type": "Float", "defUid": 63, "realEditorValues": [] },
-					{ "__identifier": "boolean", "__value": true, "__type": "Bool", "defUid": 64, "realEditorValues": [] },
+					{
+						"__identifier": "boolean",
+						"__value": true,
+						"__type": "Bool",
+						"defUid": 64,
+						"realEditorValues": [null]
+					},
 					{ "__identifier": "name", "__value": "test", "__type": "String", "defUid": 65, "realEditorValues": [] },
 					{ "__identifier": "multilines", "__value": "test", "__type": "String", "defUid": 66, "realEditorValues": [] },
 					{ "__identifier": "color", "__value": "#000000", "__type": "Color", "defUid": 67, "realEditorValues": [] },

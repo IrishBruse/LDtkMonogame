@@ -11,7 +11,7 @@ namespace Examples
         // Camera
         protected Vector2 cameraPosition;
         protected Vector2 cameraOrigin;
-        protected float cameraZoom = 1f;
+        protected float pixelScale = 1f;
         protected bool freeCam = true;
         protected Texture2D texture;
 
@@ -51,7 +51,7 @@ namespace Examples
                 if (mouse.MiddleButton == ButtonState.Pressed)
                 {
                     Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += (new Vector2(pos.X, pos.Y) * 30) / (cameraZoom * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    cameraPosition += (new Vector2(pos.X, pos.Y) * 30) / (pixelScale * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
 
@@ -72,9 +72,6 @@ namespace Examples
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
 
-            IsFixedTimeStep = true;
-            TargetElapsedTime = TimeSpan.FromSeconds(1d / 60d);
-
             graphics.ApplyChanges();
 
             Window.ClientSizeChanged += (o, e) => OnWindowResized();
@@ -84,7 +81,7 @@ namespace Examples
         public virtual void OnWindowResized()
         {
             cameraOrigin = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
-            cameraZoom = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
+            pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
         }
     }
 }
