@@ -15,8 +15,8 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 3.1
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build LDtkMonogame.Examples/LDtkMonogame.Examples.csproj --no-restore
+        run: dotnet build LDtkMonogame.Examples/LDtkMonogame.Examples.csproj --no-restore -f netcoreapp3.1
