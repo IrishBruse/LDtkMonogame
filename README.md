@@ -13,53 +13,6 @@ LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [
 
 
 ![LDtk to Monogame Conversion](docfx_project/art/screenshots/LDtk%20to%20Monogame.png "1 to 1 Conversion")
- 
-# Quick Start Guide
-The easiest way to start using LDtkMonogame is to import it into the project using nuget  
 
-<a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?" /></a>
-
-Make sure to import the namespace at the top
-```csharp
-using LDtk;
-``` 
-
-To get started loading ldtk files create a  
-```csharp
-World ldtkWorld = new World("Assets/MyProject.ldtk");
-``` 
- 
-Now just load the level
-```csharp
-Level startLevel = ldtkWorld.GetLevel("Level1");
-```  
-
-Now to render the level we loaded in `Draw`
-```csharp
-spriteBatch.Begin(SpriteSortMode.Texture, samplerState: SamplerState.PointClamp);
-{
-    for(int i = 0; i < startLevel.Layers.Length; i++)
-    {
-        spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
-    }
-}
-spriteBatch.End();
-```
-Thats all thats needed to render your level everything else is handled by LDtkMonogame
-  
-### For a more detailed introduction and on how to use **IntGrids**, **Levels** and **Entities** check out the wiki
-
-[Wiki and Api Documentation](https://irishbruse.github.io/LDtkMonogame/)
-------------
-
-# Example
-
-This small game example [LDtkMonogame.Examples](https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples) showcases how easy it is to get setup and making levels for your game
-
-## How to run
-- Open the solution and hit run in visual studio or
-- `cd` into the `LDtkMonogame.Examples` folder and use `dotnet run` to play the example game
-
-You can even edit the .ldtk file and run it again to see the changes
-
-![Example Gameplay](docfx_project/art/screenshots/Example%20Project.gif "Gameplay")
+# Wiki
+## [Check out the Wiki](https://irishbruse.github.io/LDtkMonogame/)
