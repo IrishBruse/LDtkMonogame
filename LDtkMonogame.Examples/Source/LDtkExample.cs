@@ -297,6 +297,7 @@ namespace Examples
                 }
             }
 
+#if DEBUG
             if (showEntityColliders)
             {
                 for (int i = 0; i < doors.Length; i++)
@@ -316,6 +317,7 @@ namespace Examples
 
                 spriteBatch.DrawRect(player.collider, player.editorVisualColor);
             }
+#endif
         }
     }
 }

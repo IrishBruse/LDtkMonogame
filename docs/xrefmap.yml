@@ -13,19 +13,6 @@ references:
   commentId: T:LDtk.Entity
   fullName: LDtk.Entity
   nameWithType: Entity
-- uid: LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
-  name: Draw(SpriteBatch)
-  href: api/LDtk.Entity.html#LDtk_Entity_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_
-  commentId: M:LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
-  fullName: LDtk.Entity.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
-  nameWithType: Entity.Draw(SpriteBatch)
-- uid: LDtk.Entity.Draw*
-  name: Draw
-  href: api/LDtk.Entity.html#LDtk_Entity_Draw_
-  commentId: Overload:LDtk.Entity.Draw
-  isSpec: "True"
-  fullName: LDtk.Entity.Draw
-  nameWithType: Entity.Draw
 - uid: LDtk.Entity.pivot
   name: pivot
   href: api/LDtk.Entity.html#LDtk_Entity_pivot
@@ -50,6 +37,12 @@ references:
   commentId: F:LDtk.Entity.texture
   fullName: LDtk.Entity.texture
   nameWithType: Entity.texture
+- uid: LDtk.Entity.tile
+  name: tile
+  href: api/LDtk.Entity.html#LDtk_Entity_tile
+  commentId: F:LDtk.Entity.tile
+  fullName: LDtk.Entity.tile
+  nameWithType: Entity.tile
 - uid: LDtk.IntGrid
   name: IntGrid
   href: api/LDtk.IntGrid.html
@@ -114,6 +107,12 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.BgColor
   nameWithType: Level.BgColor
+- uid: LDtk.Level.GetEntities(System.String)
+  name: GetEntities(String)
+  href: api/LDtk.Level.html#LDtk_Level_GetEntities_System_String_
+  commentId: M:LDtk.Level.GetEntities(System.String)
+  fullName: LDtk.Level.GetEntities(System.String)
+  nameWithType: Level.GetEntities(String)
 - uid: LDtk.Level.GetEntities*
   name: GetEntities
   href: api/LDtk.Level.html#LDtk_Level_GetEntities_
@@ -121,15 +120,21 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.GetEntities
   nameWithType: Level.GetEntities
-- uid: LDtk.Level.GetEntities``1
-  name: GetEntities<T>()
-  href: api/LDtk.Level.html#LDtk_Level_GetEntities__1
-  commentId: M:LDtk.Level.GetEntities``1
-  name.vb: GetEntities(Of T)()
-  fullName: LDtk.Level.GetEntities<T>()
-  fullName.vb: LDtk.Level.GetEntities(Of T)()
-  nameWithType: Level.GetEntities<T>()
-  nameWithType.vb: Level.GetEntities(Of T)()
+- uid: LDtk.Level.GetEntities``1(System.String)
+  name: GetEntities<T>(String)
+  href: api/LDtk.Level.html#LDtk_Level_GetEntities__1_System_String_
+  commentId: M:LDtk.Level.GetEntities``1(System.String)
+  name.vb: GetEntities(Of T)(String)
+  fullName: LDtk.Level.GetEntities<T>(System.String)
+  fullName.vb: LDtk.Level.GetEntities(Of T)(System.String)
+  nameWithType: Level.GetEntities<T>(String)
+  nameWithType.vb: Level.GetEntities(Of T)(String)
+- uid: LDtk.Level.GetEntity(System.String)
+  name: GetEntity(String)
+  href: api/LDtk.Level.html#LDtk_Level_GetEntity_System_String_
+  commentId: M:LDtk.Level.GetEntity(System.String)
+  fullName: LDtk.Level.GetEntity(System.String)
+  nameWithType: Level.GetEntity(String)
 - uid: LDtk.Level.GetEntity*
   name: GetEntity
   href: api/LDtk.Level.html#LDtk_Level_GetEntity_
@@ -137,15 +142,15 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.GetEntity
   nameWithType: Level.GetEntity
-- uid: LDtk.Level.GetEntity``1
-  name: GetEntity<T>()
-  href: api/LDtk.Level.html#LDtk_Level_GetEntity__1
-  commentId: M:LDtk.Level.GetEntity``1
-  name.vb: GetEntity(Of T)()
-  fullName: LDtk.Level.GetEntity<T>()
-  fullName.vb: LDtk.Level.GetEntity(Of T)()
-  nameWithType: Level.GetEntity<T>()
-  nameWithType.vb: Level.GetEntity(Of T)()
+- uid: LDtk.Level.GetEntity``1(System.String)
+  name: GetEntity<T>(String)
+  href: api/LDtk.Level.html#LDtk_Level_GetEntity__1_System_String_
+  commentId: M:LDtk.Level.GetEntity``1(System.String)
+  name.vb: GetEntity(Of T)(String)
+  fullName: LDtk.Level.GetEntity<T>(System.String)
+  fullName.vb: LDtk.Level.GetEntity(Of T)(System.String)
+  nameWithType: Level.GetEntity<T>(String)
+  nameWithType.vb: Level.GetEntity(Of T)(String)
 - uid: LDtk.Level.GetIntGrid(System.String)
   name: GetIntGrid(String)
   href: api/LDtk.Level.html#LDtk_Level_GetIntGrid_System_String_
@@ -198,6 +203,32 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.Neighbours
   nameWithType: Level.Neighbours
+- uid: LDtk.Level.Position
+  name: Position
+  href: api/LDtk.Level.html#LDtk_Level_Position
+  commentId: P:LDtk.Level.Position
+  fullName: LDtk.Level.Position
+  nameWithType: Level.Position
+- uid: LDtk.Level.Position*
+  name: Position
+  href: api/LDtk.Level.html#LDtk_Level_Position_
+  commentId: Overload:LDtk.Level.Position
+  isSpec: "True"
+  fullName: LDtk.Level.Position
+  nameWithType: Level.Position
+- uid: LDtk.Level.Size
+  name: Size
+  href: api/LDtk.Level.html#LDtk_Level_Size
+  commentId: P:LDtk.Level.Size
+  fullName: LDtk.Level.Size
+  nameWithType: Level.Size
+- uid: LDtk.Level.Size*
+  name: Size
+  href: api/LDtk.Level.html#LDtk_Level_Size_
+  commentId: Overload:LDtk.Level.Size
+  isSpec: "True"
+  fullName: LDtk.Level.Size
+  nameWithType: Level.Size
 - uid: LDtk.Level.Uid
   name: Uid
   href: api/LDtk.Level.html#LDtk_Level_Uid
@@ -211,19 +242,6 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.Uid
   nameWithType: Level.Uid
-- uid: LDtk.Level.WorldPosition
-  name: WorldPosition
-  href: api/LDtk.Level.html#LDtk_Level_WorldPosition
-  commentId: P:LDtk.Level.WorldPosition
-  fullName: LDtk.Level.WorldPosition
-  nameWithType: Level.WorldPosition
-- uid: LDtk.Level.WorldPosition*
-  name: WorldPosition
-  href: api/LDtk.Level.html#LDtk_Level_WorldPosition_
-  commentId: Overload:LDtk.Level.WorldPosition
-  isSpec: "True"
-  fullName: LDtk.Level.WorldPosition
-  nameWithType: Level.WorldPosition
 - uid: LDtk.World
   name: World
   href: api/LDtk.World.html
@@ -236,6 +254,12 @@ references:
   commentId: M:LDtk.World.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.String)
   fullName: LDtk.World.World(Microsoft.Xna.Framework.Graphics.SpriteBatch, System.String)
   nameWithType: World.World(SpriteBatch, String)
+- uid: LDtk.World.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.String,Microsoft.Xna.Framework.Content.ContentManager)
+  name: World(SpriteBatch, String, ContentManager)
+  href: api/LDtk.World.html#LDtk_World__ctor_Microsoft_Xna_Framework_Graphics_SpriteBatch_System_String_Microsoft_Xna_Framework_Content_ContentManager_
+  commentId: M:LDtk.World.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.String,Microsoft.Xna.Framework.Content.ContentManager)
+  fullName: LDtk.World.World(Microsoft.Xna.Framework.Graphics.SpriteBatch, System.String, Microsoft.Xna.Framework.Content.ContentManager)
+  nameWithType: World.World(SpriteBatch, String, ContentManager)
 - uid: LDtk.World.#ctor*
   name: World
   href: api/LDtk.World.html#LDtk_World__ctor_
@@ -262,16 +286,22 @@ references:
   isSpec: "True"
   fullName: LDtk.World.GetLevel
   nameWithType: World.GetLevel
-- uid: LDtk.World.ReloadProject(System.String)
-  name: ReloadProject(String)
-  href: api/LDtk.World.html#LDtk_World_ReloadProject_System_String_
-  commentId: M:LDtk.World.ReloadProject(System.String)
-  fullName: LDtk.World.ReloadProject(System.String)
-  nameWithType: World.ReloadProject(String)
-- uid: LDtk.World.ReloadProject*
-  name: ReloadProject
-  href: api/LDtk.World.html#LDtk_World_ReloadProject_
-  commentId: Overload:LDtk.World.ReloadProject
+- uid: LDtk.World.LoadLevel(System.Int64)
+  name: LoadLevel(Int64)
+  href: api/LDtk.World.html#LDtk_World_LoadLevel_System_Int64_
+  commentId: M:LDtk.World.LoadLevel(System.Int64)
+  fullName: LDtk.World.LoadLevel(System.Int64)
+  nameWithType: World.LoadLevel(Int64)
+- uid: LDtk.World.LoadLevel(System.String)
+  name: LoadLevel(String)
+  href: api/LDtk.World.html#LDtk_World_LoadLevel_System_String_
+  commentId: M:LDtk.World.LoadLevel(System.String)
+  fullName: LDtk.World.LoadLevel(System.String)
+  nameWithType: World.LoadLevel(String)
+- uid: LDtk.World.LoadLevel*
+  name: LoadLevel
+  href: api/LDtk.World.html#LDtk_World_LoadLevel_
+  commentId: Overload:LDtk.World.LoadLevel
   isSpec: "True"
-  fullName: LDtk.World.ReloadProject
-  nameWithType: World.ReloadProject
+  fullName: LDtk.World.LoadLevel
+  nameWithType: World.LoadLevel

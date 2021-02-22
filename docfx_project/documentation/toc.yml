@@ -2,4 +2,24 @@
   href: intro.md
   items:
     - name: Quick Start
-      href: quickstart.md
+      href: Introduction/quickstart.md
+
+- name: Tutorials
+  href: tutorials.md
+  items:
+    - name: Getting Started
+      href: Tutorials/started.md
+
+- name: Changelog
+  href: changelog.md
+  items:
+    - name: 0.3.0
+      href: Changelog/changes-0.3.0.md
+    - name: 0.2.0
+      href: Changelog/changes-0.2.0.md
+    - name: 0.1.1
+      href: Changelog/changes-0.1.1.md
+    - name: 0.1.0
+      href: Changelog/changes-0.1.0.md
+    - name: 0.0.1
+      href: Changelog/changes-0.0.1.md

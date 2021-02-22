@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Entity.html",
-          "hash": "faxUV43jwr8mYETrfvnm0A=="
+          "hash": "NCPnlpYIjMo+1TX4Yc7Low=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.IntGrid.html",
-          "hash": "IsfDMQYEjemoZk1Y2rqJXQ=="
+          "hash": "O6VKt/iVNzkh8y+VQGZQiA=="
         }
       },
       "is_incremental": true,
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "IZZx7PxPwDYDzMb/WAlKfw=="
+          "hash": "q3gzFWpZzmGNVAxf1g9rqw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "MYNSl1+s2DhjEmcMpDai4g=="
+          "hash": "wGfQY8kIA6fAXyqxDvPv5Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -60,7 +60,7 @@
           "hash": "AukLdaZobi3ZxNjTsXZUUg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -199,6 +199,102 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "documentation/Changelog/changes-0.0.1.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Changelog/changes-0.0.1.html",
+          "hash": "pfPNiHh14iPSelQOmKAX2g=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Changelog/changes-0.1.0.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Changelog/changes-0.1.0.html",
+          "hash": "WGuD+fNWd/xfoygPzdW/WA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Changelog/changes-0.1.1.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Changelog/changes-0.1.1.html",
+          "hash": "nB2zdICDzwZjVOdFAPpe5A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Changelog/changes-0.2.0.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Changelog/changes-0.2.0.html",
+          "hash": "AVFzPL9sKIFnsTLkxx1Ilg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Changelog/changes-0.3.0.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Changelog/changes-0.3.0.html",
+          "hash": "UGD8ErLWAdwrSKKZvOM3ZQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Introduction/quickstart.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Introduction/quickstart.html",
+          "hash": "W/lOy2uBQnUcHW/FkGpFHg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/Tutorials/started.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/Tutorials/started.html",
+          "hash": "e9TOrHSPl2RkoQOgYSpIPw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/changelog.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/changelog.html",
+          "hash": "ZHnFSHH2JiBT6vgW8uglQQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "documentation/intro.md",
       "output": {
         ".html": {
@@ -210,27 +306,27 @@
       "version": ""
     },
     {
-      "type": "Conceptual",
-      "source_relative_path": "documentation/quickstart.md",
-      "output": {
-        ".html": {
-          "relative_path": "documentation/quickstart.html",
-          "hash": "lVpmPnPv9n9GEMWgCxMJ/w=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
       "type": "Toc",
       "source_relative_path": "documentation/toc.yml",
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "bBUUCbur4Hc8LVP6WIDraw=="
+          "hash": "dRoswx3cIlmfj16Zpkaujw=="
         }
       },
       "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/tutorials.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/tutorials.html",
+          "hash": "mX+THMTP2LQoBnHnwfe1vw=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -270,14 +366,14 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 4,
-          "skipped_file_count": 4
+          "total_file_count": 12,
+          "skipped_file_count": 12
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 5,
-          "skipped_file_count": 3
+          "skipped_file_count": 5
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
