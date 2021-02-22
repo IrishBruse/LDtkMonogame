@@ -62,7 +62,7 @@ namespace Examples
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
-                ChangeState(Animation.Attack);
+                SetState(Animation.Attack);
             }
 
             if (keyboard.IsKeyDown(Keys.E) && oldKeyboard.IsKeyDown(Keys.E) == false && inDoor == true)
@@ -249,13 +249,15 @@ namespace Examples
                         break;
 
                     case Animation.EnterDoor:
+                        doorTransition = true;
+
                         if (animationFrame < 7)
                         {
                             animationFrame++;
                         }
                         else
                         {
-                            doorTransition = true;
+                            ChangeState(Animation.ExitDoor);
                         }
                         break;
 

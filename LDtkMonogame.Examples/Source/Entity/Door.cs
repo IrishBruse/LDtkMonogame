@@ -1,5 +1,6 @@
 ﻿using System;
 using LDtk;
+using Microsoft.Xna.Framework;
 
 namespace Examples
 {
@@ -16,15 +17,26 @@ namespace Examples
 
         public void Update(float deltaTime)
         {
-            if (opening == true && tile.Location.X < 166)
+            if (opening == true)
             {
-                animationTimer += deltaTime;
-
-                if (animationTimer >= .1f)
+                if (tile.Location.X < 166)
                 {
-                    animationTimer -= .1f;
-                    tile.Offset(56, 0);
+                    animationTimer += deltaTime;
+
+                    if (animationTimer >= .1f)
+                    {
+                        animationTimer -= .1f;
+                        tile.Offset(56, 0);
+                    }
                 }
+                else
+                {
+                    opening = false;
+                }
+            }
+            else
+            {
+                tile.Location = Point.Zero;
             }
         }
     }

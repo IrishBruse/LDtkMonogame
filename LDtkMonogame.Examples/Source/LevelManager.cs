@@ -53,7 +53,7 @@ public class LevelManager
         }
     }
 
-    public void SetStarterLevel(string identifier)
+    public void ChangeLevelTo(string identifier)
     {
         world.LoadLevel(identifier);
         CurrentLevel = world.GetLevel(identifier);

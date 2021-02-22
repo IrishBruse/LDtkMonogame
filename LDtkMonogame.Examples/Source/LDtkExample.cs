@@ -38,15 +38,16 @@ namespace Examples
         public LDtkExample() : base()
         {
             freeCam = false;
+            Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            world = new World(spriteBatch, LDTK_FILE);
+            world = new World(spriteBatch, LDTK_FILE, Content);
             levelManager = new LevelManager(world);
-            levelManager.SetStarterLevel("Level1");
+            levelManager.ChangeLevelTo("Level1");
 
             doors = levelManager.CurrentLevel.GetEntities<Door>();
             for (int i = 0; i < doors.Length; i++)
@@ -69,7 +70,7 @@ namespace Examples
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
             player = new Player();
-            player.texture = Texture2D.FromFile(GraphicsDevice, Path.GetFullPath("Assets/Art/Characters/KingHuman.png"));
+            player.texture = Content.Load<Texture2D>("Art/Characters/KingHuman");
             player.position = startLocation.position;
             player.pivot = startLocation.pivot;
 #if DEBUG
@@ -81,8 +82,8 @@ namespace Examples
             pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
-            fontTexture = Texture2D.FromFile(GraphicsDevice, Path.GetFullPath("Assets/Art/Font.png"));
-            diamondTexture = Texture2D.FromFile(GraphicsDevice, Path.GetFullPath("Assets/Art/Diamond.png"));
+            fontTexture = Content.Load<Texture2D>("Art/Font");
+            diamondTexture = Content.Load<Texture2D>("Art/Diamond");
         }
 
         public override void OnWindowResized()

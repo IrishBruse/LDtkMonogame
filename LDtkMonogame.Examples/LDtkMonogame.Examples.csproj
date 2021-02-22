@@ -9,6 +9,9 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Icon.bmp" />
+		<MonoGameContentReference Include="Content/content.mgcb">
+			<Link>Content/Content.mgcb</Link>
+		</MonoGameContentReference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -18,11 +21,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\LDtkMonogame\LDtkMonogame.csproj" />
 	</ItemGroup>
+
 
 </Project>

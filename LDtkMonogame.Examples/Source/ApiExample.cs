@@ -26,10 +26,10 @@ namespace Examples
         {
             base.Initialize();
 
-            world = new World(spriteBatch, LDTK_FILE);
+            world = new World(spriteBatch, LDTK_FILE, Content);
 
             levelManager = new LevelManager(world);
-            levelManager.SetStarterLevel("Level1");
+            levelManager.ChangeLevelTo("Level1");
 
             diamonds = levelManager.CurrentLevel.GetEntities<Entity>("Diamond");
             entities.AddRange(diamonds);
