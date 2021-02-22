@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 		<EmbeddedResource Include="Icon.bmp" />
-		<MonoGameContentReference Include="Content/content.mgcb">
+		<MonoGameContentReference Include="Content/Content.mgcb">
 			<Link>Content/Content.mgcb</Link>
 		</MonoGameContentReference>
 	</ItemGroup>
