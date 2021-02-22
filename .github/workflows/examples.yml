@@ -19,4 +19,4 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       - name: Build
-        run: dotnet build LDtkMonogame.Examples/LDtkMonogame.Examples.csproj -f net5.0 --no-restore
+        run: dotnet build LDtkMonogame.Examples/LDtkMonogame.Examples.csproj --no-restore
