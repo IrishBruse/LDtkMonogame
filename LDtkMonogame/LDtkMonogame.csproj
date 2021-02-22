@@ -11,18 +11,14 @@
 		<Product>LDtk Monogame</Product>
 		<PackageId>LDtkMonogame</PackageId>
 		<Description>LDtk importer for Monogame</Description>
-		<PackageProjectUrl>https://github.com/IrishBruse/LDtkMonogame</PackageProjectUrl>
-		<Version>0.2.0</Version>
+		<PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
+		<Version>0.3.0</Version>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
 		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
 		<PackageIcon>Icon.bmp</PackageIcon>
 		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>
-			- Added class/struct based Entities
-			- Added intgrid support
-			- Added Documentation
-		</PackageReleaseNotes>
+		<PackageReleaseNotes>Changes on wiki</PackageReleaseNotes>
 		<RootNamespace>LDtk</RootNamespace>
 
 		<!--Documentation-->
