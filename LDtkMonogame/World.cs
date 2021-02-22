@@ -39,7 +39,7 @@ namespace LDtk
         /// </summary>
         /// <param name="spriteBatch">Monogame's <see cref="SpriteBatch"/></param>
         /// <param name="ldtkFile">The path to the .ldtk file</param>
-        /// <param name="content">Wether to use .xnb file or direct image files</param>
+        /// <param name="content">The <see cref="ContentManager"/> used to load <see cref="Texture2D"/> from content</param>
         public World(SpriteBatch spriteBatch, string ldtkFile, ContentManager content)
         {
             this.spriteBatch = spriteBatch;
