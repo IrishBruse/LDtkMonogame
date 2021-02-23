@@ -1,0 +1,15 @@
+# Version 0.2.0
+
+## Added
+- `IntGrid` Class
+- Entities
+  - ISprite Interface
+  
+## Changed
+- Moved Json loading to `LDtk.Json` Namespace
+- `Const` to `Enum` Class
+- `Project` to `World` class
+
+## Removed
+- `Background` Class
+- `LDtk.Internal` Namespace

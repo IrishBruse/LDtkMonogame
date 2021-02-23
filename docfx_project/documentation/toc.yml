@@ -14,12 +14,12 @@
   href: changelog.md
   items:
     - name: 0.3.0
-      href: Changelog/changes-0.3.0.md
+      href: Changelog/0.3.0.md
     - name: 0.2.0
-      href: Changelog/changes-0.2.0.md
+      href: Changelog/0.2.0.md
     - name: 0.1.1
-      href: Changelog/changes-0.1.1.md
+      href: Changelog/0.1.1.md
     - name: 0.1.0
-      href: Changelog/changes-0.1.0.md
+      href: Changelog/0.1.0.md
     - name: 0.0.1
-      href: Changelog/changes-0.0.1.md
+      href: Changelog/0.0.1.md
