@@ -9,6 +9,9 @@
 </p>
 
 # LDtk Monogame
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/81547ddba74a49a898ba19633caf0503)](https://app.codacy.com/gh/IrishBruse/LDtkMonogame?utm_source=github.com&utm_medium=referral&utm_content=IrishBruse/LDtkMonogame&utm_campaign=Badge_Grade_Settings)
+
 LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [Monogame](https://www.monogame.net/) Framework
 
 
