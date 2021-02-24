@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Entity.html",
-          "hash": "NCPnlpYIjMo+1TX4Yc7Low=="
+          "hash": "2XeVEoUUL6zcZePkfKKfcQ=="
         }
       },
       "is_incremental": true,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.IntGrid.html",
-          "hash": "O6VKt/iVNzkh8y+VQGZQiA=="
+          "hash": "vUJGhn0/DrxOH969XsBSWg=="
         }
       },
       "is_incremental": true,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "q3gzFWpZzmGNVAxf1g9rqw=="
+          "hash": "TgWYLPvyVriGlRe6+oQlgg=="
         }
       },
       "is_incremental": true,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "wGfQY8kIA6fAXyqxDvPv5Q=="
+          "hash": "0izPqi85OWJQZ4gjw5fMOQ=="
         }
       },
       "is_incremental": true,
@@ -251,7 +251,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/Changelog/0.3.0.html",
-          "hash": "JUrhBy0ItXolfjVVjgQlkg=="
+          "hash": "Xq+FI7hQlsv69CFVmNG/kg=="
         }
       },
       "is_incremental": true,
