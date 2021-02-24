@@ -74,25 +74,17 @@
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
 
-<p>Make sure to import the namespace at the top</p>
-<pre><code class="lang-csharp">using LDtk;
+<p>To open a ldtk project file you should start by creating a new <code>World</code> object.</p>
+<p>This will load the images from normal files (*.png, *.jpg etc)</p>
+<pre><code class="lang-csharp">World world = new World(spriteBatch, &quot;Assets/MyProject.ldtk&quot;);
 </code></pre>
-<p>To get started loading ldtk files create a</p>
-<pre><code class="lang-csharp">World ldtkWorld = new World(&quot;Assets/MyProject.ldtk&quot;);
+<p>or if you want to use Content/.xnb files you can pass <code>Content</code> to it.</p>
+<pre><code class="lang-csharp">World world = new World(spriteBatch, &quot;Assets/MyProject.ldtk&quot;, Content);
 </code></pre>
-<p>Now just load the level</p>
-<pre><code class="lang-csharp">Level startLevel = ldtkWorld.GetLevel(&quot;Level1&quot;);
-</code></pre>
-<p>Now to render the level we loaded in <code>Draw</code></p>
-<pre><code class="lang-csharp">spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-{
-    for(int i = 0; i &lt; startLevel.Layers.Length; i++)
-    {
-        spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
-    }
-}
-spriteBatch.End();
-</code></pre>
+<p>You will need to make sure your content is in the same relative folders the origonal files in the project.
+If you are unsure check out the example project <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples">here</a>.</p>
+<p>Now that you have a refernce to the world you can use it for loading and getting<br>
+levels you want to use in your game.</p>
 </article>
           </div>
           
@@ -101,7 +93,7 @@ spriteBatch.End();
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/docfx_project/documentation/Tutorials/started.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/docfx_project/documentation/Tutorials/world.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
