@@ -204,10 +204,9 @@ namespace LDtk
                     }
                     field.SetValue(entity, point);
                     break;
-#if DEBUG
+
                 default:
                     throw new FieldInstanceException("Unknown Variable of type " + entities[entityIndex].FieldInstances[fieldIndex].Type);
-#endif
             }
         }
 
