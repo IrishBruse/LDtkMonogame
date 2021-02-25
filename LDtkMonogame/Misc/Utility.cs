@@ -8,7 +8,7 @@ namespace LDtk
     /// <summary>
     /// Utility for parsing ldtk json data into more typed versions
     /// </summary>
-    internal class Utility
+    internal static class Utility
     {
         /// <summary>
         /// Convert ldtk color string into <see cref="Color"/>

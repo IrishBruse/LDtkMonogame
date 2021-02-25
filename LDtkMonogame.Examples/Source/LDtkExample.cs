@@ -52,32 +52,32 @@ namespace Examples
             doors = levelManager.CurrentLevel.GetEntities<Door>();
             for (int i = 0; i < doors.Length; i++)
             {
-                doors[i].collider = new Rect(doors[i].position.X - 16, doors[i].position.Y - 32, 32, 32);
+                doors[i].collider = new Rect(doors[i].Position.X - 16, doors[i].Position.Y - 32, 32, 32);
             }
 
             crates = levelManager.CurrentLevel.GetEntities<Crate>();
             for (int i = 0; i < crates.Length; i++)
             {
-                crates[i].collider = new Rect(crates[i].position.X - 8, crates[i].position.Y - 16, 16, 16);
+                crates[i].collider = new Rect(crates[i].Position.X - 8, crates[i].Position.Y - 16, 16, 16);
             }
 
             diamonds = new List<Diamond>(levelManager.CurrentLevel.GetEntities<Diamond>("Diamond"));
             for (int i = 0; i < diamonds.Count; i++)
             {
-                diamonds[i].collider = new Rect(diamonds[i].position.X - 6, diamonds[i].position.Y - 16, 12, 16);
+                diamonds[i].collider = new Rect(diamonds[i].Position.X - 6, diamonds[i].Position.Y - 16, 12, 16);
             }
 
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
             player = new Player();
-            player.texture = Content.Load<Texture2D>("Art/Characters/KingHuman");
-            player.position = startLocation.position;
-            player.pivot = startLocation.pivot;
+            player.Texture = Content.Load<Texture2D>("Art/Characters/KingHuman");
+            player.Position = startLocation.Position;
+            player.Pivot = startLocation.Pivot;
 #if DEBUG
-            player.editorVisualColor = startLocation.editorVisualColor;
+            player.EditorVisualColor = startLocation.EditorVisualColor;
 #endif
-            player.tile = new Rectangle(0, 0, 78, 58);
-            player.size = new Vector2(78, 58);
+            player.Tile = new Rectangle(0, 0, 78, 58);
+            player.Size = new Vector2(78, 58);
 
             pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
@@ -99,7 +99,7 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-            levelManager.SetCenterPoint(player.position);
+            levelManager.SetCenterPoint(player.Position);
             levelManager.Update(deltaTime);
 
             player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
@@ -122,9 +122,9 @@ namespace Examples
             // Animate all diamonds
             for (int i = 0; i < diamonds.Count; i++)
             {
-                int currentFrame = (int)((gameTime.TotalGameTime.TotalSeconds * 10) % 10) * (int)diamonds[i].size.X;
-                diamonds[i].tile = new Rectangle(currentFrame, 0, (int)diamonds[i].size.X, (int)diamonds[i].size.Y);
-                diamonds[i].position += new Vector2(0, -MathF.Sin((float)gameTime.TotalGameTime.TotalSeconds * 2) * 0.1f);
+                int currentFrame = (int)((gameTime.TotalGameTime.TotalSeconds * 10) % 10) * (int)diamonds[i].Size.X;
+                diamonds[i].Tile = new Rectangle(currentFrame, 0, (int)diamonds[i].Size.X, (int)diamonds[i].Size.Y);
+                diamonds[i].Position += new Vector2(0, -MathF.Sin((float)gameTime.TotalGameTime.TotalSeconds * 2) * 0.1f);
             }
 
             for (int i = 0; i < diamonds.Count; i++)
@@ -158,7 +158,7 @@ namespace Examples
 
             if (freeCam == false)
             {
-                cameraPosition = -new Vector2(player.position.X, player.position.Y - 30);
+                cameraPosition = -new Vector2(player.Position.X, player.Position.Y - 30);
             }
 
             oldKeyboard = keyboard;
@@ -241,12 +241,12 @@ namespace Examples
         {
             for (int i = 0; i < doors.Length; i++)
             {
-                spriteBatch.Draw(doors[i].texture,
-                                        doors[i].position,
-                                        doors[i].tile,
+                spriteBatch.Draw(doors[i].Texture,
+                                        doors[i].Position,
+                                        doors[i].Tile,
                                         Color.White,
                                         0,
-                                        doors[i].pivot * doors[i].size,
+                                        doors[i].Pivot * doors[i].Size,
                                         1,
                                         SpriteEffects.None,
                                         0);
@@ -254,12 +254,12 @@ namespace Examples
 
             for (int i = 0; i < crates.Length; i++)
             {
-                spriteBatch.Draw(crates[i].texture,
-                                        crates[i].position,
-                                        crates[i].tile,
+                spriteBatch.Draw(crates[i].Texture,
+                                        crates[i].Position,
+                                        crates[i].Tile,
                                         Color.White,
                                         0,
-                                        crates[i].pivot * crates[i].size,
+                                        crates[i].Pivot * crates[i].Size,
                                         1,
                                         SpriteEffects.None,
                                         0);
@@ -267,22 +267,22 @@ namespace Examples
 
             for (int i = 0; i < diamonds.Count; i++)
             {
-                spriteBatch.Draw(diamonds[i].texture,
-                                        diamonds[i].position,
-                                        diamonds[i].tile,
+                spriteBatch.Draw(diamonds[i].Texture,
+                                        diamonds[i].Position,
+                                        diamonds[i].Tile,
                                         Color.White,
                                         0,
-                                        diamonds[i].pivot * diamonds[i].size,
+                                        diamonds[i].Pivot * diamonds[i].Size,
                                         1,
                                         SpriteEffects.None,
                                         0);
             }
 
-            spriteBatch.Draw(player.texture,
-                player.position,
-                player.tile,
+            spriteBatch.Draw(player.Texture,
+                player.Position,
+                player.Tile,
                 Color.White, 0,
-                (player.pivot * player.size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
+                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
                 player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0.1f);
         }
 
@@ -302,20 +302,20 @@ namespace Examples
             {
                 for (int i = 0; i < doors.Length; i++)
                 {
-                    spriteBatch.DrawRect(doors[i].collider, doors[i].editorVisualColor);
+                    spriteBatch.DrawRect(doors[i].collider, doors[i].EditorVisualColor);
                 }
 
                 for (int i = 0; i < crates.Length; i++)
                 {
-                    spriteBatch.DrawRect(crates[i].collider, crates[i].editorVisualColor);
+                    spriteBatch.DrawRect(crates[i].collider, crates[i].EditorVisualColor);
                 }
 
                 for (int i = 0; i < diamonds.Count; i++)
                 {
-                    spriteBatch.DrawRect(diamonds[i].collider, diamonds[i].editorVisualColor);
+                    spriteBatch.DrawRect(diamonds[i].collider, diamonds[i].EditorVisualColor);
                 }
 
-                spriteBatch.DrawRect(player.collider, player.editorVisualColor);
+                spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
             }
 #endif
         }

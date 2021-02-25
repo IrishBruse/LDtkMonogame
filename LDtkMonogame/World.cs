@@ -12,7 +12,7 @@ namespace LDtk
     /// <summary>
     /// The main class for loading .ldtk and .ldtkl files
     /// </summary>
-    public class World
+    public partial class World
     {
         private Level[] levels;
         private string jsonFilePath;
@@ -89,7 +89,6 @@ namespace LDtk
             }
 
             return null;
-            //throw new UidException(uid);
         }
 
         /// <summary>
@@ -309,48 +308,29 @@ namespace LDtk
             switch (jsonLayer.Type)
             {
                 case LayerType.Tiles:
-                    RenderTileLayer(jsonLayer, texture);
+                    RenderTilesInLayer(jsonLayer, texture, jsonLayer.GridTiles);
                     break;
 
                 case LayerType.AutoLayer:
                 case LayerType.IntGrid:
-                    RenderAutoLayer(jsonLayer, texture);
+                    if (jsonLayer.AutoLayerTiles.Length > 0)
+                    {
+                        RenderTilesInLayer(jsonLayer, texture, jsonLayer.AutoLayerTiles);
+                    }
                     break;
 
                 default: throw new NotImplementedException(jsonLayer.Type);
             }
         }
 
-        private void RenderAutoLayer(LayerInstance jsonLayer, Texture2D texture)
+        private void RenderTilesInLayer(LayerInstance jsonLayer, Texture2D texture, TileInstance[] gridTiles)
         {
-            if (jsonLayer.AutoLayerTiles.Length > 0)
+            foreach (var tile in gridTiles.Where(tile => jsonLayer.TilesetDefUid.HasValue))
             {
-                foreach (TileInstance tile in jsonLayer.AutoLayerTiles)
-                {
-                    if (jsonLayer.TilesetDefUid.HasValue)
-                    {
-                        Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
-                        Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
-                        SpriteEffects mirror = (SpriteEffects)tile.F;
-
-                        spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                    }
-                }
-            }
-        }
-
-        private void RenderTileLayer(LayerInstance jsonLayer, Texture2D texture)
-        {
-            foreach (TileInstance tile in jsonLayer.GridTiles)
-            {
-                if (jsonLayer.TilesetDefUid.HasValue)
-                {
-                    Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
-                    Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
-                    SpriteEffects mirror = (SpriteEffects)tile.F;
-
-                    spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                }
+                Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
+                Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
+                SpriteEffects mirror = (SpriteEffects)tile.F;
+                spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
             }
         }
 
@@ -367,33 +347,7 @@ namespace LDtk
                 }
             }
 
-            throw new UidException(uid);
-        }
-
-        internal LayerDefinition GetLayerDefinitionFromUid(long uid)
-        {
-            for (int i = 0; i < json.Defs.Layers.Length; i++)
-            {
-                if (json.Defs.Layers[i].Uid == uid)
-                {
-                    return json.Defs.Layers[i];
-                }
-            }
-
-            throw new UidException(uid);
-        }
-
-        internal TilesetDefinition GetTilesetDefinitionFromUid(long uid)
-        {
-            for (int i = 0; i < json.Defs.Tilesets.Length; i++)
-            {
-                if (json.Defs.Tilesets[i].Uid == uid)
-                {
-                    return json.Defs.Tilesets[i];
-                }
-            }
-
-            throw new UidException(uid);
+            throw new UidException("GetEntityDefinitionFromUid(" + uid + ")");
         }
 
         internal Texture2D GetTilesetTextureFromUid(long uid)
@@ -418,12 +372,7 @@ namespace LDtk
                 }
             }
 
-            throw new UidException(uid);
-        }
-
-        class UidException : Exception
-        {
-            public UidException(long uid) : base(uid + " does not point to a valid json data") { }
+            throw new UidException("GetTilesetTextureFromUid(" + uid + ")");
         }
     }
 }

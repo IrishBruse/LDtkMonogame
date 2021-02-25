@@ -19,14 +19,14 @@ namespace Examples
         {
             if (opening == true)
             {
-                if (tile.Location.X < 166)
+                if (Tile.Location.X < 166)
                 {
                     animationTimer += deltaTime;
 
                     if (animationTimer >= .1f)
                     {
                         animationTimer -= .1f;
-                        tile.Offset(56, 0);
+                        Tile.Offset(56, 0);
                     }
                 }
                 else
@@ -36,7 +36,9 @@ namespace Examples
             }
             else
             {
-                tile.Location = Point.Zero;
+                var tile= Tile;
+                tile.Location=Point.Zero;
+                Tile=tile;
             }
         }
     }

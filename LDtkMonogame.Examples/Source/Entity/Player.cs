@@ -50,7 +50,7 @@ namespace Examples
             CollisionDetection(level, deltaTime);
             Animate(deltaTime);
 
-            position += velocity * deltaTime;
+            Position += velocity * deltaTime;
         }
 
         void Movement(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, float deltaTime)
@@ -88,7 +88,7 @@ namespace Examples
             {
                 if (onPlatfrom && keyboard.IsKeyDown(Keys.S))
                 {
-                    position += new Vector2(0, 1);
+                    Position += new Vector2(0, 1);
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace Examples
         {
             grounded = false;
 
-            collider.ParentPosition = position;
+            collider.ParentPosition = Position;
 
             IntGrid collisions = level.GetIntGrid("Collisions");
             Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime)) - level.Position;
@@ -211,7 +211,7 @@ namespace Examples
             {
                 animationTimer -= .1f;
 
-                tile = new Rectangle(animationFrame * (int)size.X, (int)state * (int)size.Y, (int)size.X, (int)size.Y);
+                Tile = new Rectangle(animationFrame * (int)Size.X, (int)state * (int)Size.Y, (int)Size.X, (int)Size.Y);
                 state = newState;
 
                 switch (state)

@@ -6,7 +6,7 @@ namespace LDtk
     /// <summary>
     /// LDtk IntGrid
     /// </summary>
-    public struct IntGrid
+    public class IntGrid
     {
         /// <summary>
         /// Size of a tile in pixels

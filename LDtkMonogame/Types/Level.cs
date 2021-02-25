@@ -52,85 +52,103 @@ namespace LDtk
         /// </summary>
         public long[] Neighbours { get; internal set; }
 
-        /// <summary>
-        /// Gets the parsed entity from the ldtk json<br/>
-        /// If fields are missing they will be logged to the console in debug mode only<br/>
-        /// </summary>
-        /// <param name="identifier">The name of the entity to parse this to</param>
-        /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
-        /// <returns>The entity cast to the class</returns>
-        public T GetEntity<T>(string identifier = "") where T : new()
-        {
-            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
-            {
-                if (entities[entityIndex].Identifier == (identifier == "" ? typeof(T).Name : identifier))
-                {
-                    T entity = new T();
-
-                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
-
-                    for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
-                    {
-                        ParseEntityFields<T>(entityIndex, entity, fieldIndex);
-                    }
-
-                    return entity;
-                }
-            }
-
-            return new T();
-        }
 
         /// <summary>
-        /// Gets the parsed entity from the ldtk json<br/>
-        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// Gets the parsed entity from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <returns>The entity cast to the <see cref="Entity"/> class</returns>
         public Entity GetEntity(string identifier)
         {
-            return GetEntity<Entity>(identifier);
+            return ParseEntities<Entity>(identifier, true)[0];
         }
 
         /// <summary>
-        /// Gets the parsed entities from the ldtk json<br/>
-        /// If fields are missing they will be logged to the console in debug mode only<br/>
-        /// </summary>
-        /// <param name="identifier">The name of the entity to parse this to</param>
-        /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
-        /// <returns>The entities cast to the class</returns>
-        public T[] GetEntities<T>(string identifier = "") where T : new()
-        {
-            List<T> ents = new List<T>();
-
-            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
-            {
-                if (entities[entityIndex].Identifier == (identifier == "" ? typeof(T).Name : identifier))
-                {
-                    T entity = new T();
-
-                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
-                    for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
-                    {
-                        ParseEntityFields<T>(entityIndex, entity, fieldIndex);
-                    }
-
-                    ents.Add(entity);
-                }
-            }
-
-            return ents.ToArray();
-        }
-
-        /// <summary>
-        /// Gets the parsed entities from the ldtk json<br/>
-        /// If fields are missing they will be logged to the console in debug mode only<br/>
+        /// Gets the parsed entities from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <returns>The entities cast to the class</returns>
         public Entity[] GetEntities(string identifier)
         {
-            return GetEntities<Entity>(identifier);
+            return ParseEntities<Entity>(nameof(Entity), false);
+        }
+
+
+        /// <summary>
+        /// Gets the first found parsed entity from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
+        /// <returns>The entity cast to the class</returns>
+        public T GetEntity<T>(string identifier) where T : new()
+        {
+            return ParseEntities<T>(identifier, false)[0];
+        }
+
+        /// <summary>
+        /// Gets the first found parsed entity from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
+        /// </summary>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
+        /// <returns>The entity cast to the class</returns>
+        public T GetEntity<T>() where T : new()
+        {
+            return ParseEntities<T>(nameof(T), true)[0];
+        }
+
+        /// <summary>
+        /// Gets the parsed entities from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
+        /// <returns>The entities cast to the class</returns>
+        public T[] GetEntities<T>(string identifier) where T : new()
+        {
+            return ParseEntities<T>(identifier, false);
+        }
+
+        /// <summary>
+        /// Gets the parsed entities from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
+        /// </summary>
+        /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
+        /// <returns>The entities cast to the class</returns>
+        public T[] GetEntities<T>() where T : new()
+        {
+            return ParseEntities<T>(nameof(T), false);
+        }
+
+
+        private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : new()
+        {
+            List<T> entities = new List<T>();
+
+            for (int entityIndex = 0; entityIndex < this.entities.Length; entityIndex++)
+            {
+                if (this.entities[entityIndex].Identifier == identifier)
+                {
+                    T entity = new T();
+
+                    ParseBaseEntityFields<T>(entity, this.entities[entityIndex]);
+                    for (int fieldIndex = 0; fieldIndex < this.entities[entityIndex].FieldInstances.Length; fieldIndex++)
+                    {
+                        ParseEntityFields(entityIndex, entity, fieldIndex);
+                    }
+
+                    entities.Add(entity);
+
+                    if (breakOnMatch == true)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return entities.ToArray();
         }
 
         private void ParseEntityFields<T>(int entityIndex, T entity, int fieldIndex) where T : new()
@@ -143,9 +161,12 @@ namespace LDtk
 
             if (field == null)
             {
+#if DEBUG
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
                 Console.ResetColor();
+#endif
+
                 return;
             }
 
@@ -183,9 +204,10 @@ namespace LDtk
                     }
                     field.SetValue(entity, point);
                     break;
-
+#if DEBUG
                 default:
-                    throw new Exception("Unknown Variable of type " + entities[entityIndex].FieldInstances[fieldIndex].Type);
+                    throw new FieldInstanceException("Unknown Variable of type " + entities[entityIndex].FieldInstances[fieldIndex].Type);
+#endif
             }
         }
 
@@ -294,6 +316,7 @@ namespace LDtk
 #endif
         }
 
+
         /// <summary>
         /// Gets an <see cref="IntGrid"/> from an identifier
         /// </summary>
@@ -308,7 +331,7 @@ namespace LDtk
                 }
             }
 
-            throw new Exception(identifier + " IntGrid not found!");
+            throw new IntGridNotFoundException(identifier);
         }
     }
 }
