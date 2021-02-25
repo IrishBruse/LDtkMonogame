@@ -12,7 +12,7 @@ namespace LDtk
     /// <summary>
     /// The main class for loading .ldtk and .ldtkl files
     /// </summary>
-    public partial class World
+    public class World
     {
         private Level[] levels;
         private string jsonFilePath;

@@ -125,21 +125,21 @@ namespace LDtk
 
         private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : new()
         {
-            List<T> entities = new List<T>();
+            List<T> parsedEntities = new List<T>();
 
-            for (int entityIndex = 0; entityIndex < this.entities.Length; entityIndex++)
+            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
             {
-                if (this.entities[entityIndex].Identifier == identifier)
+                if (entities[entityIndex].Identifier == identifier)
                 {
                     T entity = new T();
 
-                    ParseBaseEntityFields<T>(entity, this.entities[entityIndex]);
-                    for (int fieldIndex = 0; fieldIndex < this.entities[entityIndex].FieldInstances.Length; fieldIndex++)
+                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
+                    for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
                         ParseEntityFields(entityIndex, entity, fieldIndex);
                     }
 
-                    entities.Add(entity);
+                    parsedEntities.Add(entity);
 
                     if (breakOnMatch == true)
                     {
@@ -148,7 +148,7 @@ namespace LDtk
                 }
             }
 
-            return entities.ToArray();
+            return parsedEntities.ToArray();
         }
 
         private void ParseEntityFields<T>(int entityIndex, T entity, int fieldIndex) where T : new()
