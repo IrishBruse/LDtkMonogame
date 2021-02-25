@@ -8,11 +8,11 @@ If you are looking for ldtk documentation thats [here](https://ldtk.io/)
 This wiki is still under contruction so alot of documentation and guides are still missing  
 The api page should be up to date with the github main branch though
 
-# Preview
+## Preview
 
 ![LDtk to Monogame Conversion](~/art/screenshots/LDtk%20to%20Monogame.png "1 to 1 Conversion")
 
-# Example
+## Example
 
 This small game example [LDtkMonogame.Examples](https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples) showcases how easy it is to get setup and making levels for your game
 
