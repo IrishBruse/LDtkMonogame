@@ -1,4 +1,5 @@
 # LDtkMonogame
+
 LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [Monogame](https://www.monogame.net/) Framework
 
 This is the documentation page for all LDtkMonogame related stuff  
@@ -16,8 +17,9 @@ The api page should be up to date with the github main branch though
 This small game example [LDtkMonogame.Examples](https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples) showcases how easy it is to get setup and making levels for your game
 
 How to run
-- Open the solution and hit run in visual studio or
-- `cd` into the `LDtkMonogame.Examples` folder and use `dotnet run` to play the example game
+
+-   Open the solution and hit run in visual studio or
+-   `cd` into the `LDtkMonogame.Examples` folder and use `dotnet run` to play the example game
 
 You can even edit the .ldtk file and run it again to see the changes
 
