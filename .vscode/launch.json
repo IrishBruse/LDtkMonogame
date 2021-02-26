@@ -8,11 +8,15 @@
         {
             "name": "Debug",
             "type": "coreclr",
-            "request": "launch",
+            "request": "launch","symbolOptions": {
+                "searchPaths": ["${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/"],
+                "searchMicrosoftSymbolServer": false,
+                "searchNuGetOrgSymbolServer": false
+            },
             "preLaunchTask": "build",
             "justMyCode": true,
             "suppressJITOptimizations": true,
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/net5.0/LDtkMonogame.Examples.dll",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/LDtkMonogame.Examples.dll",
             "args": [],
             "cwd": "${workspaceFolder}/LDtkMonogame.Examples",
             "console": "externalTerminal",

@@ -8,10 +8,10 @@
 		"appVersion": "0.7.2",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level1b",
+	"identifier": "Level1a",
 	"uid": 78,
 	"worldX": 0,
-	"worldY": -288,
+	"worldY": -384,
 	"pxWid": 224,
 	"pxHei": 256,
 	"__bgColor": "#3F3851",

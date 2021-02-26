@@ -8,47 +8,41 @@ namespace Examples
 {
     public class Player : Entity
     {
-        // LDtk entity fields
+        const float Gavity = 175f;
+
+        public Animator animator;
         public bool fliped = true;
         public Rect collider;
         public Vector2 velocity;
-
         public List<(Rect rect, long type)> tiles;
+        public Door door;
 
-        const float Gavity = 175f;
-
-        internal bool inDoor;
-
-        public Animation state;
-        private Animation newState;
-        int animationFrame;
-
-        float animationTimer;
-        float gravityMultiplier;
-        bool grounded;
-        public bool doorInteraction;
+        private float gravityMultiplier;
+        private bool grounded;
         private bool noClip;
         private bool onPlatfrom;
-        Vector2 input;
-        internal bool doorTransition;
+        private Vector2 input;
 
         public Player()
         {
             collider = new Rect(-10, -25, 20, 25);
+            animator = new Animator(this);
         }
 
         public void Update(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, Level level, float deltaTime)
         {
-            doorInteraction = false;
-
             if (keyboard.IsKeyDown(Keys.F3) && oldKeyboard.IsKeyDown(Keys.F3) == false)
             {
                 noClip = !noClip;
             }
 
             Movement(keyboard, oldKeyboard, mouse, oldMouse, deltaTime);
-            CollisionDetection(level, deltaTime);
-            Animate(deltaTime);
+            if (noClip == false)
+            {
+                CollisionDetection(level, deltaTime);
+            }
+            animator.SetData(velocity, grounded);
+            animator.Animate(deltaTime);
 
             Position += velocity * deltaTime;
         }
@@ -62,17 +56,17 @@ namespace Examples
 
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
-                SetState(Animation.Attack);
+                animator.SetState(Animator.Animation.Attack);
             }
 
-            if (keyboard.IsKeyDown(Keys.E) && oldKeyboard.IsKeyDown(Keys.E) == false && inDoor == true)
+            if (keyboard.IsKeyDown(Keys.E) && oldKeyboard.IsKeyDown(Keys.E) == false && door != null)
             {
-                ChangeState(Animation.EnterDoor);
+                animator.SetState(Animator.Animation.EnterDoor);
             }
 
             if (noClip == false)
             {
-                if (state == Animation.EnterDoor || state == Animation.ExitDoor)
+                if (animator.CanMove())
                 {
                     h = 0;
                 }
@@ -94,7 +88,7 @@ namespace Examples
                 {
                     grounded = false;
                     velocity = new Vector2(velocity.X, -130);
-                    SetState(Animation.Jump);
+                    animator.SetState(Animator.Animation.Jump);
                 }
             }
 
@@ -201,130 +195,6 @@ namespace Examples
                     }
                 }
             }
-        }
-
-        void Animate(float deltaTime)
-        {
-            animationTimer += deltaTime;
-
-            if (animationTimer >= .1f)
-            {
-                animationTimer -= .1f;
-
-                Tile = new Rectangle(animationFrame * (int)Size.X, (int)state * (int)Size.Y, (int)Size.X, (int)Size.Y);
-                state = newState;
-
-                switch (state)
-                {
-                    case Animation.Idle:
-                        if (animationFrame < 10)
-                        {
-                            animationFrame++;
-                        }
-                        else
-                        {
-                            animationFrame = 0;
-                        }
-
-                        if (input.X != 0)
-                        {
-                            SetState(Animation.Walk);
-                        }
-                        break;
-
-                    case Animation.Walk:
-                        if (animationFrame < 7)
-                        {
-                            animationFrame++;
-                        }
-                        else
-                        {
-                            animationFrame = 0;
-                        }
-
-                        if (input.X == 0)
-                        {
-                            SetState(Animation.Idle);
-                        }
-                        break;
-
-                    case Animation.EnterDoor:
-                        doorTransition = true;
-
-                        if (animationFrame < 7)
-                        {
-                            animationFrame++;
-                        }
-                        else
-                        {
-                            ChangeState(Animation.ExitDoor);
-                        }
-                        break;
-
-                    case Animation.ExitDoor:
-                        if (animationFrame < 6)
-                        {
-                            animationFrame++;
-                        }
-                        else
-                        {
-                            SetState(Animation.Idle);
-                        }
-                        break;
-
-                    case Animation.Attack:
-
-                        if (animationFrame < 2)
-                        {
-                            animationFrame++;
-                        }
-                        else
-                        {
-                            SetState(Animation.Idle);
-                        }
-                        break;
-
-                    case Animation.Jump:
-                        if (grounded == true)
-                        {
-                            ChangeState(Animation.Idle);
-                            animationFrame = 2;
-                        }
-                        else if (velocity.Y > 0)
-                        {
-                            animationFrame = 1;
-                        }
-                        else if (velocity.Y < 0)
-                        {
-                            animationFrame = 0;
-                        }
-                        break;
-                }
-            }
-        }
-
-        void ChangeState(Animation state)
-        {
-            this.newState = state;
-            animationFrame = 0;
-        }
-
-        void SetState(Animation state)
-        {
-            this.newState = this.state = state;
-            animationFrame = 0;
-        }
-
-        public enum Animation
-        {
-            Idle,
-            Walk,
-            EnterDoor,
-            ExitDoor,
-            Attack,
-            Jump,
-            Die,
-            Hurt,
         }
     }
 }

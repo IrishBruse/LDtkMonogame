@@ -22,16 +22,6 @@
         "priority": 201
     },
     {
-        "text": "📦 Pack",
-        "tooltip": "Pack Dotnet",
-        "color": "yellow",
-        "command": "workbench.action.tasks.runTask|dotnet restore,workbench.action.tasks.runTask|build release netcore31,workbench.action.tasks.runTask|build release net50",
-        "commandType": "palette",
-        "alignment": "right",
-        "skipTerminateQuickPick": false,
-        "priority": 202
-    },
-    {
         "text": "🧱 Docfx",
         "tooltip": "Docfx Build",
         "color": "yellow",

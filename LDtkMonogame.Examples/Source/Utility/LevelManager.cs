@@ -2,10 +2,15 @@ using System;
 using Microsoft.Xna.Framework.Graphics;
 using LDtk;
 using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 public class LevelManager
 {
     public Level CurrentLevel { get; private set; }
+
+    public Action<Level> OnEnterNewLevel;
+
+    List<string> levelsVisited = new List<string>();
 
     World world;
     Vector2 center;
@@ -26,6 +31,8 @@ public class LevelManager
                 if (LevelContainsPoint(neighbour, center))
                 {
                     CurrentLevel = neighbour;
+
+                    EnterNewLevel();
                     for (int ii = 0; ii < CurrentLevel.Neighbours.Length; ii++)
                     {
                         world.LoadLevel(CurrentLevel.Neighbours[ii]);
@@ -57,6 +64,7 @@ public class LevelManager
     {
         world.LoadLevel(identifier);
         CurrentLevel = world.GetLevel(identifier);
+        EnterNewLevel();
 
         for (int i = 0; i < CurrentLevel.Neighbours.Length; i++)
         {
@@ -72,6 +80,15 @@ public class LevelManager
     internal void Clear(GraphicsDevice GraphicsDevice)
     {
         GraphicsDevice.Clear(CurrentLevel.BgColor);
+    }
+
+    private void EnterNewLevel()
+    {
+        if (levelsVisited.Contains(CurrentLevel.Identifier) == false)
+        {
+            levelsVisited.Add(CurrentLevel.Identifier);
+            OnEnterNewLevel?.Invoke(CurrentLevel);
+        }
     }
 
     private bool LevelContainsPoint(Level level, Vector2 point)

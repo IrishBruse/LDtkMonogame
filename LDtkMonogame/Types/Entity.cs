@@ -19,6 +19,14 @@ namespace LDtk
         private Vector2 position;
 
         /// <summary>
+        /// Local level position
+        /// </summary>
+        /// <value>Pixel position in the world</value>
+        public Vector2 LevelPosition { get => levelposition; internal set => levelposition = value; }
+
+        private Vector2 levelposition;
+
+        /// <summary>
         /// The pivot of the texture attached to the entity
         /// in the range 0-1
         /// </summary>        

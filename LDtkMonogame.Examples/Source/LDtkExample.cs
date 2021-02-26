@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using LDtk;
 
 using Microsoft.Xna.Framework;
@@ -21,9 +20,9 @@ namespace Examples
 
         // Entities
         private Texture2D pixelTexture;
-        private Door[] doors;
-        private Crate[] crates;
-        private List<Diamond> diamonds;
+        private List<Door> doors = new List<Door>();
+        private List<Crate> crates = new List<Crate>();
+        private List<Diamond> diamonds = new List<Diamond>();
         private Player player;
 
         // UI
@@ -34,6 +33,7 @@ namespace Examples
         // Debug
         private bool showTileColliders = false;
         private bool showEntityColliders;
+        Door destinationDoor;
 
         public LDtkExample() : base()
         {
@@ -47,25 +47,29 @@ namespace Examples
 
             world = new World(spriteBatch, LDTK_FILE, Content);
             levelManager = new LevelManager(world);
+
+            levelManager.OnEnterNewLevel += (level) =>
+            {
+                doors.AddRange(level.GetEntities<Door>());
+                for (int i = 0; i < doors.Count; i++)
+                {
+                    doors[i].collider = new Rect(doors[i].Position.X - 4, doors[i].Position.Y - 2, 8, 4);
+                }
+
+                crates.AddRange(level.GetEntities<Crate>());
+                for (int i = 0; i < crates.Count; i++)
+                {
+                    crates[i].collider = new Rect(crates[i].Position.X - 8, crates[i].Position.Y - 16, 16, 16);
+                }
+
+                diamonds.AddRange(level.GetEntities<Diamond>());
+                for (int i = 0; i < diamonds.Count; i++)
+                {
+                    diamonds[i].collider = new Rect(diamonds[i].Position.X - 6, diamonds[i].Position.Y - 16, 12, 16);
+                }
+            };
+
             levelManager.ChangeLevelTo("Level1");
-
-            doors = levelManager.CurrentLevel.GetEntities<Door>();
-            for (int i = 0; i < doors.Length; i++)
-            {
-                doors[i].collider = new Rect(doors[i].Position.X - 16, doors[i].Position.Y - 32, 32, 32);
-            }
-
-            crates = levelManager.CurrentLevel.GetEntities<Crate>();
-            for (int i = 0; i < crates.Length; i++)
-            {
-                crates[i].collider = new Rect(crates[i].Position.X - 8, crates[i].Position.Y - 16, 16, 16);
-            }
-
-            diamonds = new List<Diamond>(levelManager.CurrentLevel.GetEntities<Diamond>("Diamond"));
-            for (int i = 0; i < diamonds.Count; i++)
-            {
-                diamonds[i].collider = new Rect(diamonds[i].Position.X - 6, diamonds[i].Position.Y - 16, 12, 16);
-            }
 
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
@@ -78,6 +82,14 @@ namespace Examples
 #endif
             player.Tile = new Rectangle(0, 0, 78, 58);
             player.Size = new Vector2(78, 58);
+
+            player.animator.OnEnteredDoor += () =>
+            {
+                player.animator.SetState(Animator.Animation.ExitDoor);
+                levelManager.ChangeLevelTo(player.door.levelIdentifier);
+                destinationDoor = levelManager.CurrentLevel.GetEntity<Door>();
+                player.Position = destinationDoor.Position;
+            };
 
             pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
@@ -99,25 +111,48 @@ namespace Examples
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
+            // Debug/Cheats
+            if (keyboard.IsKeyDown(Keys.F1) && oldKeyboard.IsKeyDown(Keys.F1) == false)
+            {
+                showTileColliders = !showTileColliders;
+            }
+
+            if (keyboard.IsKeyDown(Keys.F2) && oldKeyboard.IsKeyDown(Keys.F2) == false)
+            {
+                showEntityColliders = !showEntityColliders;
+            }
+
+            if (keyboard.IsKeyDown(Keys.F4) && oldKeyboard.IsKeyDown(Keys.F4) == false)
+            {
+                diamondsCollected++;
+            }
+
+            if (keyboard.IsKeyDown(Keys.F5) && oldKeyboard.IsKeyDown(Keys.F5) == false)
+            {
+
+            }
+
             levelManager.SetCenterPoint(player.Position);
             levelManager.Update(deltaTime);
 
-            player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
-            player.inDoor = false;
-            for (int i = 0; i < doors.Length; i++)
+            player.door = null;
+            for (int i = 0; i < doors.Count; i++)
             {
                 doors[i].Update(deltaTime);
 
                 if (player.collider.Contains(doors[i].collider))
                 {
-                    player.inDoor = true;
-                    if (player.doorTransition == true)
+                    player.door = doors[i];
+
+                    if (player.animator.EnteredDoor() == true)
                     {
                         doors[i].opening = true;
                     }
                     break;
                 }
             }
+
+            player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
 
             // Animate all diamonds
             for (int i = 0; i < diamonds.Count; i++)
@@ -136,26 +171,7 @@ namespace Examples
                 }
             }
 
-            if (player.inDoor == false && player.doorInteraction)
-            {
-                player.doorInteraction = false;
-            }
-
-            if (keyboard.IsKeyDown(Keys.F1) && oldKeyboard.IsKeyDown(Keys.F1) == false)
-            {
-                showTileColliders = !showTileColliders;
-            }
-
-            if (keyboard.IsKeyDown(Keys.F4) && oldKeyboard.IsKeyDown(Keys.F4) == false)
-            {
-                diamondsCollected++;
-            }
-
-            if (keyboard.IsKeyDown(Keys.F2) && oldKeyboard.IsKeyDown(Keys.F2) == false)
-            {
-                showEntityColliders = !showEntityColliders;
-            }
-
+            // Follow Player
             if (freeCam == false)
             {
                 cameraPosition = -new Vector2(player.Position.X, player.Position.Y - 30);
@@ -166,6 +182,7 @@ namespace Examples
 
             base.Update(gameTime);
         }
+
         protected override void Draw(GameTime gameTime)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -239,51 +256,31 @@ namespace Examples
 
         private void EntityRendering()
         {
-            for (int i = 0; i < doors.Length; i++)
+            for (int i = 0; i < doors.Count; i++)
             {
-                spriteBatch.Draw(doors[i].Texture,
-                                        doors[i].Position,
-                                        doors[i].Tile,
-                                        Color.White,
-                                        0,
-                                        doors[i].Pivot * doors[i].Size,
-                                        1,
-                                        SpriteEffects.None,
-                                        0);
+                spriteBatch.Draw(doors[i].Texture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0);
             }
 
-            for (int i = 0; i < crates.Length; i++)
+            for (int i = 0; i < crates.Count; i++)
             {
-                spriteBatch.Draw(crates[i].Texture,
-                                        crates[i].Position,
-                                        crates[i].Tile,
-                                        Color.White,
-                                        0,
-                                        crates[i].Pivot * crates[i].Size,
-                                        1,
-                                        SpriteEffects.None,
-                                        0);
+                spriteBatch.Draw(crates[i].Texture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0);
             }
 
             for (int i = 0; i < diamonds.Count; i++)
             {
-                spriteBatch.Draw(diamonds[i].Texture,
-                                        diamonds[i].Position,
-                                        diamonds[i].Tile,
-                                        Color.White,
-                                        0,
-                                        diamonds[i].Pivot * diamonds[i].Size,
-                                        1,
-                                        SpriteEffects.None,
-                                        0);
+                spriteBatch.Draw(diamonds[i].Texture, diamonds[i].Position, diamonds[i].Tile, Color.White, 0, diamonds[i].Pivot * diamonds[i].Size, 1, SpriteEffects.None, 0);
             }
 
-            spriteBatch.Draw(player.Texture,
+            spriteBatch.Draw(
+                player.Texture,
                 player.Position,
                 player.Tile,
-                Color.White, 0,
-                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14), 1,
-                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0.1f);
+                Color.White,
+                0,
+                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14),
+                1,
+                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
+                0.1f);
         }
 
         private void DebugRendering()
@@ -300,12 +297,12 @@ namespace Examples
 #if DEBUG
             if (showEntityColliders)
             {
-                for (int i = 0; i < doors.Length; i++)
+                for (int i = 0; i < doors.Count; i++)
                 {
                     spriteBatch.DrawRect(doors[i].collider, doors[i].EditorVisualColor);
                 }
 
-                for (int i = 0; i < crates.Length; i++)
+                for (int i = 0; i < crates.Count; i++)
                 {
                     spriteBatch.DrawRect(crates[i].collider, crates[i].EditorVisualColor);
                 }

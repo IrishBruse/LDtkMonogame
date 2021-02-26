@@ -72,7 +72,7 @@ namespace LDtk
         /// <returns>The entities cast to the class</returns>
         public Entity[] GetEntities(string identifier)
         {
-            return ParseEntities<Entity>(nameof(Entity), false);
+            return ParseEntities<Entity>(typeof(Entity).Name, false);
         }
 
 
@@ -96,7 +96,7 @@ namespace LDtk
         /// <returns>The entity cast to the class</returns>
         public T GetEntity<T>() where T : new()
         {
-            return ParseEntities<T>(nameof(T), true)[0];
+            return ParseEntities<T>(typeof(T).Name, true)[0];
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace LDtk
         /// <returns>The entities cast to the class</returns>
         public T[] GetEntities<T>() where T : new()
         {
-            return ParseEntities<T>(nameof(T), false);
+            return ParseEntities<T>(typeof(T).Name, false);
         }
 
 
@@ -210,106 +210,45 @@ namespace LDtk
             }
         }
 
-        private void ParseBaseEntityFields<T>(object entity, EntityInstance entityInstance)
+        private void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance)
+        {
+            var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
+
+            ParseBaseField<T>(entity, entityInstance, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
+            ParseBaseField<T>(entity, entityInstance, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
+
+            ParseBaseField<T>(entity, entityInstance, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
+
+            if (entityInstance.Tile != null)
+            {
+                ParseBaseField<T>(entity, entityInstance, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
+            }
+
+            ParseBaseField<T>(entity, entityInstance, "Size", new Vector2(entityDefinition.Width, entityDefinition.Height));
+#if DEBUG
+            ParseBaseField<T>(entity, entityInstance, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
+#endif
+            if (entityDefinition.TilesetId.HasValue)
+            {
+                var tileDefinition = entityInstance.Tile;
+                Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
+                ParseBaseField<T>(entity, entityInstance, "Tile", rect);
+            }
+        }
+
+        void ParseBaseField<T>(T entity, EntityInstance entityInstance, string field, object value)
         {
             // WorldPosition
-            var worldPosition = typeof(T).GetField("position");
-            if (worldPosition != null)
+            var variable = typeof(T).GetProperty(field);
+            if (variable != null)
             {
-                worldPosition.SetValue(entity, new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
+                variable.SetValue(entity, value);
             }
 #if DEBUG
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Sprite Field \"position\" not found add it to {typeof(T).FullName} for full support of LDtk entity or inherit LDtk.Entity class");
-                Console.ResetColor();
-            }
-#endif
-
-            // Pivot
-            var pivot = typeof(T).GetField("pivot");
-            if (pivot != null)
-            {
-                pivot.SetValue(entity, new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
-            }
-#if DEBUG
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Sprite Field \"pivot\" not found add it to {typeof(T).FullName} for full support of LDtk entity or inherit LDtk.Entity class");
-                Console.ResetColor();
-            }
-#endif
-
-            // Texture
-            var texture = typeof(T).GetField("texture");
-            if (texture != null)
-            {
-                if (entityInstance.Tile != null)
-                {
-                    Texture2D tileset = owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid);
-                    texture.SetValue(entity, tileset);
-                }
-            }
-#if DEBUG
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"texture\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
-                Console.ResetColor();
-            }
-#endif
-
-            // FrameSize
-            var frameSize = typeof(T).GetField("size");
-            if (frameSize != null)
-            {
-                var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
-                frameSize.SetValue(entity, new Vector2(entityDefinition.Width, entityDefinition.Height));
-            }
-#if DEBUG
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"size\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
-                Console.ResetColor();
-            }
-#endif
-
-#if DEBUG
-            // EditorVisualColor
-            var editorVisualColor = typeof(T).GetField("editorVisualColor");
-            if (editorVisualColor != null)
-            {
-                var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
-                editorVisualColor.SetValue(entity, Utility.ConvertStringToColor(entityDefinition.Color, 128));
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"editorVisualColor\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
-                Console.ResetColor();
-            }
-#endif
-
-            // FrameSize
-            var tile = typeof(T).GetField("tile");
-            if (tile != null)
-            {
-                var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
-                if (entityDefinition.TilesetId.HasValue)
-                {
-                    var tileDefinition = entityInstance.Tile;
-                    Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
-                    tile.SetValue(entity, rect);
-                }
-            }
-#if DEBUG
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Warning: Sprite Field \"size\" not found add it to {typeof(T).FullName} if you need texture support on this entity or inherit LDtk.Entity class");
+                Console.WriteLine($"Error: Field \"{field}\" not found add it to {typeof(T).FullName}");
                 Console.ResetColor();
             }
 #endif
