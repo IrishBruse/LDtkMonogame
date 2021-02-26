@@ -22,7 +22,7 @@ namespace LDtk
         /// Local level position
         /// </summary>
         /// <value>Pixel position in the world</value>
-        public Vector2 LevelPosition { get => levelposition; internal set => levelposition = value; }
+        public Vector2 LevelPosition { get => levelposition; set => levelposition = value; }
 
         private Vector2 levelposition;
 
