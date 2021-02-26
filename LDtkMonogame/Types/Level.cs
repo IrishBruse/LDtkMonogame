@@ -214,29 +214,29 @@ namespace LDtk
         {
             var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
 
-            ParseBaseField<T>(entity, entityInstance, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
-            ParseBaseField<T>(entity, entityInstance, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
+            ParseBaseField<T>(entity, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
+            ParseBaseField<T>(entity, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
 
-            ParseBaseField<T>(entity, entityInstance, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
+            ParseBaseField<T>(entity, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
 
             if (entityInstance.Tile != null)
             {
-                ParseBaseField<T>(entity, entityInstance, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
+                ParseBaseField<T>(entity, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
             }
 
-            ParseBaseField<T>(entity, entityInstance, "Size", new Vector2(entityDefinition.Width, entityDefinition.Height));
+            ParseBaseField<T>(entity, "Size", new Vector2(entityDefinition.Width, entityDefinition.Height));
 #if DEBUG
-            ParseBaseField<T>(entity, entityInstance, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
+            ParseBaseField<T>(entity, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
 #endif
             if (entityDefinition.TilesetId.HasValue)
             {
                 var tileDefinition = entityInstance.Tile;
                 Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
-                ParseBaseField<T>(entity, entityInstance, "Tile", rect);
+                ParseBaseField<T>(entity, "Tile", rect);
             }
         }
 
-        void ParseBaseField<T>(T entity, EntityInstance entityInstance, string field, object value)
+        void ParseBaseField<T>(T entity, string field, object value)
         {
             // WorldPosition
             var variable = typeof(T).GetProperty(field);
