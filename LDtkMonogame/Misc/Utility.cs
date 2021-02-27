@@ -48,6 +48,7 @@ namespace LDtk
         {
             string variableName = fieldInstance.Identifier;
 
+            // make the first letter lowercase
             variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
 
             var field = typeof(T).GetField(variableName);
@@ -67,23 +68,23 @@ namespace LDtk
 
             switch (variableTypes[0])
             {
-                case "Int":
-                case "Float":
-                case "Bool":
-                case "Enum":
-                case "String":
+                case Field.IntType:
+                case Field.FloatType:
+                case Field.BoolType:
+                case Field.EnumType:
+                case Field.StringType:
                     field.SetValue(entity, Convert.ChangeType(fieldInstance.Value, field.FieldType));
                     break;
 
-                case "LocalEnum":
+                case Field.LocalEnumType:
                     field.SetValue(entity, Enum.Parse(field.FieldType, (string)fieldInstance.Value));
                     break;
 
-                case "Color":
+                case Field.ColorType:
                     field.SetValue(entity, Utility.ConvertStringToColor(((string)fieldInstance.Value)[1..]));
                     break;
 
-                case "Point":
+                case Field.PointType:
                     JToken t = (JToken)fieldInstance.Value;
                     Vector2 point;
                     if (t != null)
