@@ -134,7 +134,7 @@ namespace LDtk
                     ParseBaseEntityFields<T>(entity, entities[entityIndex]);
                     for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
-                        ParseEntityField<T>(entity, entities[entityIndex].FieldInstances[fieldIndex]);
+                        Utility.ParseField(entity, entities[entityIndex].FieldInstances[fieldIndex]);
                     }
 
                     parsedEntities.Add(entity);
@@ -148,65 +148,6 @@ namespace LDtk
 
             return parsedEntities.ToArray();
         }
-
-        private void ParseEntityField<T>(T entity, FieldInstance fieldInstance) where T : Entity, new()
-        {
-            string variableName = fieldInstance.Identifier;
-
-            variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
-
-            var field = typeof(T).GetField(variableName);
-
-            if (field == null)
-            {
-#if DEBUG
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Entity Field \"{variableName}\" not found in {typeof(T).FullName}");
-                Console.ResetColor();
-#endif
-                return;
-            }
-
-            // Split any enums
-            string[] variableTypes = fieldInstance.Type.Split('.');
-
-            switch (variableTypes[0])
-            {
-                case "Int":
-                case "Float":
-                case "Bool":
-                case "Enum":
-                case "String":
-                    field.SetValue(entity, Convert.ChangeType(fieldInstance.Value, field.FieldType));
-                    break;
-
-                case "LocalEnum":
-                    field.SetValue(entity, Enum.Parse(field.FieldType, (string)fieldInstance.Value));
-                    break;
-
-                case "Color":
-                    field.SetValue(entity, Utility.ConvertStringToColor(((string)fieldInstance.Value)[1..]));
-                    break;
-
-                case "Point":
-                    JToken t = (JToken)fieldInstance.Value;
-                    Vector2 point;
-                    if (t != null)
-                    {
-                        point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
-                    }
-                    else
-                    {
-                        point = new Vector2(0, 0);
-                    }
-                    field.SetValue(entity, point);
-                    break;
-
-                default:
-                    throw new FieldInstanceException("Unknown Variable of type " + fieldInstance.Type);
-            }
-        }
-
         private void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance)
         {
             var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
@@ -250,7 +191,6 @@ namespace LDtk
             }
 #endif
         }
-
 
         /// <summary>
         /// Gets an <see cref="IntGrid"/> from an identifier
