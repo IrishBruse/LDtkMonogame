@@ -71,6 +71,9 @@ namespace Examples
 
             levelManager.ChangeLevelTo("Level1");
 
+            Console.WriteLine(levelManager.CurrentLevel.biome);
+            Console.WriteLine(levelManager.CurrentLevel.difficulty);
+
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
             player = new Player();

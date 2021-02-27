@@ -137,7 +137,7 @@ namespace Examples
                 for (int y = topLeftGrid.Y; y < bottomRightGrid.Y; y++)
                 {
                     long intGridValue = collisions.GetValueAt(x, y);
-                    if (intGridValue >= 0)
+                    if (intGridValue > 0)
                     {
                         tiles.Add((new Rect(level.Position.X + (x * collisions.TileSize), level.Position.Y + (y * collisions.TileSize), collisions.TileSize, collisions.TileSize), intGridValue));
                     }
@@ -177,11 +177,11 @@ namespace Examples
 
                     switch (val)
                     {
-                        case 0:
+                        case 1:
                             velocity += cn * new Vector2(MathF.Abs(velocity.X), MathF.Abs(velocity.Y)) * (1 - ct);
                             break;
 
-                        case 1:
+                        case 2:
                             if (cn == new Vector2(0, -1))
                             {
                                 onPlatfrom = true;

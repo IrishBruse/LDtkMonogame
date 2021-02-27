@@ -6,6 +6,7 @@ using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json.Linq;
 
 namespace LDtk
 {
@@ -70,7 +71,6 @@ namespace LDtk
             levels = new Level[json.Levels.Length];
         }
 
-
         // Level Handling
 
         /// <summary>
@@ -80,15 +80,7 @@ namespace LDtk
         /// <returns>Level</returns>
         public Level GetLevel(long uid)
         {
-            for (int i = 0; i < levels.Length; i++)
-            {
-                if (levels[i]?.Uid == uid)
-                {
-                    return levels[i];
-                }
-            }
-
-            return null;
+            return ParseLevel<Level>("", uid);
         }
 
         /// <summary>
@@ -98,16 +90,120 @@ namespace LDtk
         /// <returns>Level</returns>
         public Level GetLevel(string identifier)
         {
+            return ParseLevel<Level>(identifier, -1);
+        }
+
+        /// <summary>
+        /// Gets the level from the current world
+        /// </summary>
+        /// <param name="uid">Uid of level</param>
+        /// <typeparam name="T">Your custom level with the added fields</typeparam>
+        /// <returns>Level</returns>
+        public T GetLevel<T>(long uid) where T : Level, new()
+        {
+            return ParseLevel<T>("", uid);
+        }
+
+        /// <summary>
+        /// Gets the level from the current world
+        /// </summary>
+        /// <param name="identifier">Identifier of the level to get</param>
+        /// <returns>Level</returns>
+        public T GetLevel<T>(string identifier) where T : Level, new()
+        {
+            return ParseLevel<T>(identifier, -1);
+        }
+
+        private T ParseLevel<T>(string identifier, long uid) where T : Level, new()
+        {
             for (int i = 0; i < levels.Length; i++)
             {
-                if (levels[i]?.Identifier == identifier)
+                if (levels[i]?.Identifier == identifier || levels[i]?.Uid == uid)
                 {
-                    return levels[i];
+                    T level = new T();
+
+                    // TODO this is probably not great
+                    level.BgColor = levels[i].BgColor;
+                    level.entities = levels[i].entities;
+                    level.Identifier = levels[i].Identifier;
+                    level.intGrids = levels[i].intGrids;
+                    level.Layers = levels[i].Layers;
+                    level.Neighbours = levels[i].Neighbours;
+                    level.owner = levels[i].owner;
+                    level.Position = levels[i].Position;
+                    level.Size = levels[i].Size;
+
+                    for (int fieldIndex = 0; fieldIndex < json.Levels[i].FieldInstances.Length; fieldIndex++)
+                    {
+                        ParseLevelField(level, json.Levels[i].FieldInstances[fieldIndex]);
+                    }
+
+                    return level;
                 }
             }
 
             return null;
         }
+
+        private void ParseLevelField<T>(T entity, FieldInstance fieldInstance) where T : Level
+        {
+            string variableName = fieldInstance.Identifier;
+
+            variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
+
+            var field = typeof(T).GetField(variableName);
+
+            if (field == null)
+            {
+#if DEBUG
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Error: Level Field \"{variableName}\" not found in {typeof(T).FullName}");
+                Console.ResetColor();
+#endif
+
+                return;
+            }
+
+            // Split any enums
+            string[] variableTypes = fieldInstance.Type.Split('.');
+
+            switch (variableTypes[0])
+            {
+                case "Int":
+                case "Float":
+                case "Bool":
+                case "Enum":
+                case "String":
+                    field.SetValue(entity, Convert.ChangeType(fieldInstance.Value, field.FieldType));
+                    break;
+
+                case "LocalEnum":
+                    field.SetValue(entity, Enum.Parse(field.FieldType, (string)fieldInstance.Value));
+                    break;
+
+                case "Color":
+                    field.SetValue(entity, Utility.ConvertStringToColor(((string)fieldInstance.Value)[1..]));
+                    break;
+
+                case "Point":
+                    JToken t = (JToken)fieldInstance.Value;
+                    Vector2 point;
+                    if (t != null)
+                    {
+                        point = new Vector2(t.First.First.Value<float>(), t.Last.Last.Value<float>());
+                    }
+                    else
+                    {
+                        point = new Vector2(0, 0);
+                    }
+                    field.SetValue(entity, point);
+                    break;
+
+                default:
+                    throw new FieldInstanceException("Unknown Variable of type " + fieldInstance.Type);
+            }
+        }
+
 
         /// <summary>
         /// Prerenders the level for later drawing
@@ -253,28 +349,39 @@ namespace LDtk
                 {
                     if (jsonLayer.Type == LayerType.IntGrid)
                     {
-                        IntGrid grid = new IntGrid();
+                        IntGrid intGrid = new IntGrid();
 
-                        grid.grid = new long[jsonLayer.CWid, jsonLayer.CHei];
-                        grid.identifier = jsonLayer.Identifier;
-                        grid.tileSize = (int)jsonLayer.GridSize;
+                        intGrid.grid = new long[jsonLayer.CWid, jsonLayer.CHei];
+                        intGrid.identifier = jsonLayer.Identifier;
+                        intGrid.tileSize = (int)jsonLayer.GridSize;
 
-                        for (int x = 0; x < jsonLayer.CWid; x++)
+                        if (jsonLayer.IntGridCsv != null)
                         {
-                            for (int y = 0; y < jsonLayer.CHei; y++)
+                            for (int j = 0; j < jsonLayer.IntGridCsv.Length; j++)
                             {
-                                grid.grid[x, y] = -1;
+                                int y = (int)(j / jsonLayer.CWid);
+                                int x = (int)(j - y * jsonLayer.CWid);
+                                intGrid.grid[x, y] = jsonLayer.IntGridCsv[j];
                             }
                         }
-
-                        for (int j = 0; j < jsonLayer.IntGrid.Length; j++)
+                        else
                         {
-                            int y = (int)(jsonLayer.IntGrid[j].CoordId / jsonLayer.CWid);
-                            int x = (int)(jsonLayer.IntGrid[j].CoordId - y * jsonLayer.CWid);
-                            grid.grid[x, y] = jsonLayer.IntGrid[j].V;
-                        }
+                            for (int x = 0; x < jsonLayer.CWid; x++)
+                            {
+                                for (int y = 0; y < jsonLayer.CHei; y++)
+                                {
+                                    intGrid.grid[x, y] = -1;
+                                }
+                            }
 
-                        intGrids.Add(grid);
+                            for (int j = 0; j < jsonLayer.IntGrid.Length; j++)
+                            {
+                                int y = (int)(jsonLayer.IntGrid[j].CoordId / jsonLayer.CWid);
+                                int x = (int)(jsonLayer.IntGrid[j].CoordId - y * jsonLayer.CWid);
+                                intGrid.grid[x, y] = jsonLayer.IntGrid[j].V;
+                            }
+                        }
+                        intGrids.Add(intGrid);
                     }
 
                     // Render all renderable layers

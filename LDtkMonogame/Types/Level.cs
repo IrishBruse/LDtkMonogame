@@ -13,10 +13,6 @@ namespace LDtk
     /// </summary>
     public class Level
     {
-        internal World owner;
-        internal EntityInstance[] entities;
-        internal IntGrid[] intGrids;
-
         /// <summary>
         /// The identifier of the level set in ldtk
         /// </summary>
@@ -52,6 +48,9 @@ namespace LDtk
         /// </summary>
         public long[] Neighbours { get; internal set; }
 
+        internal World owner;
+        internal EntityInstance[] entities;
+        internal IntGrid[] intGrids;
 
         /// <summary>
         /// Gets the parsed entity from the ldtk json
@@ -75,7 +74,6 @@ namespace LDtk
             return ParseEntities<Entity>(typeof(Entity).Name, false);
         }
 
-
         /// <summary>
         /// Gets the first found parsed entity from the ldtk json
         /// If fields are missing they will be logged to the console in debug mode only
@@ -83,7 +81,7 @@ namespace LDtk
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         /// <returns>The entity cast to the class</returns>
-        public T GetEntity<T>(string identifier) where T : new()
+        public T GetEntity<T>(string identifier) where T : Entity, new()
         {
             return ParseEntities<T>(identifier, false)[0];
         }
@@ -94,7 +92,7 @@ namespace LDtk
         /// </summary>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         /// <returns>The entity cast to the class</returns>
-        public T GetEntity<T>() where T : new()
+        public T GetEntity<T>() where T : Entity, new()
         {
             return ParseEntities<T>(typeof(T).Name, true)[0];
         }
@@ -106,7 +104,7 @@ namespace LDtk
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
         /// <returns>The entities cast to the class</returns>
-        public T[] GetEntities<T>(string identifier) where T : new()
+        public T[] GetEntities<T>(string identifier) where T : Entity, new()
         {
             return ParseEntities<T>(identifier, false);
         }
@@ -117,13 +115,13 @@ namespace LDtk
         /// </summary>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
         /// <returns>The entities cast to the class</returns>
-        public T[] GetEntities<T>() where T : new()
+        public T[] GetEntities<T>() where T : Entity, new()
         {
             return ParseEntities<T>(typeof(T).Name, false);
         }
 
 
-        private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : new()
+        private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : Entity, new()
         {
             List<T> parsedEntities = new List<T>();
 
@@ -136,7 +134,7 @@ namespace LDtk
                     ParseBaseEntityFields<T>(entity, entities[entityIndex]);
                     for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
-                        ParseEntityFields(entityIndex, entity, fieldIndex);
+                        ParseEntityField<T>(entity, entities[entityIndex].FieldInstances[fieldIndex]);
                     }
 
                     parsedEntities.Add(entity);
@@ -151,9 +149,9 @@ namespace LDtk
             return parsedEntities.ToArray();
         }
 
-        private void ParseEntityFields<T>(int entityIndex, T entity, int fieldIndex) where T : new()
+        private void ParseEntityField<T>(T entity, FieldInstance fieldInstance) where T : Entity, new()
         {
-            string variableName = entities[entityIndex].FieldInstances[fieldIndex].Identifier;
+            string variableName = fieldInstance.Identifier;
 
             variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
 
@@ -163,15 +161,14 @@ namespace LDtk
             {
 #if DEBUG
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Field \"{variableName}\" not found add it to {typeof(T).FullName} for full support of LDtk entity");
+                Console.WriteLine($"Error: Entity Field \"{variableName}\" not found in {typeof(T).FullName}");
                 Console.ResetColor();
 #endif
-
                 return;
             }
 
             // Split any enums
-            string[] variableTypes = entities[entityIndex].FieldInstances[fieldIndex].Type.Split('.');
+            string[] variableTypes = fieldInstance.Type.Split('.');
 
             switch (variableTypes[0])
             {
@@ -180,19 +177,19 @@ namespace LDtk
                 case "Bool":
                 case "Enum":
                 case "String":
-                    field.SetValue(entity, Convert.ChangeType(entities[entityIndex].FieldInstances[fieldIndex].Value, field.FieldType));
+                    field.SetValue(entity, Convert.ChangeType(fieldInstance.Value, field.FieldType));
                     break;
 
                 case "LocalEnum":
-                    field.SetValue(entity, Enum.Parse(field.FieldType, (string)entities[entityIndex].FieldInstances[fieldIndex].Value));
+                    field.SetValue(entity, Enum.Parse(field.FieldType, (string)fieldInstance.Value));
                     break;
 
                 case "Color":
-                    field.SetValue(entity, Utility.ConvertStringToColor(((string)entities[entityIndex].FieldInstances[fieldIndex].Value)[1..]));
+                    field.SetValue(entity, Utility.ConvertStringToColor(((string)fieldInstance.Value)[1..]));
                     break;
 
                 case "Point":
-                    JToken t = (JToken)entities[entityIndex].FieldInstances[fieldIndex].Value;
+                    JToken t = (JToken)fieldInstance.Value;
                     Vector2 point;
                     if (t != null)
                     {
@@ -206,7 +203,7 @@ namespace LDtk
                     break;
 
                 default:
-                    throw new FieldInstanceException("Unknown Variable of type " + entities[entityIndex].FieldInstances[fieldIndex].Type);
+                    throw new FieldInstanceException("Unknown Variable of type " + fieldInstance.Type);
             }
         }
 
@@ -224,7 +221,7 @@ namespace LDtk
                 ParseBaseField<T>(entity, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
             }
 
-            ParseBaseField<T>(entity, "Size", new Vector2(entityDefinition.Width, entityDefinition.Height));
+            ParseBaseField<T>(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
 #if DEBUG
             ParseBaseField<T>(entity, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
 #endif
