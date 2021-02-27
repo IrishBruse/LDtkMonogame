@@ -19,6 +19,15 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build 3.1
+        run: dotnet build LDtkMonogame/LDtkMonogame.csproj --no-restore -f netcoreapp3.1 -c Release
+        
+      - name: Build 5.0
+        run: dotnet build LDtkMonogame/LDtkMonogame.csproj --no-restore -f net5.0 -c Release
 
       # Publish
       - name: publish on version change
@@ -30,6 +39,4 @@ jobs:
 
           # Format of the git tag, [*] gets replaced with actual version
           TAG_FORMAT: v*
-
-          # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
