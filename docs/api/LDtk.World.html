@@ -124,7 +124,7 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World__ctor_Microsoft_Xna_Framework_Graphics_SpriteBatch_System_String_.md&amp;value=---%0Auid%3A%20LDtk.World.%23ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L30">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L31">View Source</a>
   </span>
   <a id="LDtk_World__ctor_" data-uid="LDtk.World.#ctor*"></a>
   <h4 id="LDtk_World__ctor_Microsoft_Xna_Framework_Graphics_SpriteBatch_System_String_" data-uid="LDtk.World.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.String)">World(SpriteBatch, String)</h4>
@@ -164,7 +164,7 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World__ctor_Microsoft_Xna_Framework_Graphics_SpriteBatch_System_String_Microsoft_Xna_Framework_Content_ContentManager_.md&amp;value=---%0Auid%3A%20LDtk.World.%23ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CSystem.String%2CMicrosoft.Xna.Framework.Content.ContentManager)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L43">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L44">View Source</a>
   </span>
   <a id="LDtk_World__ctor_" data-uid="LDtk.World.#ctor*"></a>
   <h4 id="LDtk_World__ctor_Microsoft_Xna_Framework_Graphics_SpriteBatch_System_String_Microsoft_Xna_Framework_Content_ContentManager_" data-uid="LDtk.World.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.String,Microsoft.Xna.Framework.Content.ContentManager)">World(SpriteBatch, String, ContentManager)</h4>
@@ -262,7 +262,7 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World_GetLevel_System_String_.md&amp;value=---%0Auid%3A%20LDtk.World.GetLevel(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L100">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L91">View Source</a>
   </span>
   <a id="LDtk_World_GetLevel_" data-uid="LDtk.World.GetLevel*"></a>
   <h4 id="LDtk_World_GetLevel_System_String_" data-uid="LDtk.World.GetLevel(System.String)">GetLevel(String)</h4>
@@ -309,10 +309,145 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World_GetLevel__1_System_Int64_.md&amp;value=---%0Auid%3A%20LDtk.World.GetLevel%60%601(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L102">View Source</a>
+  </span>
+  <a id="LDtk_World_GetLevel_" data-uid="LDtk.World.GetLevel*"></a>
+  <h4 id="LDtk_World_GetLevel__1_System_Int64_" data-uid="LDtk.World.GetLevel``1(System.Int64)">GetLevel&lt;T&gt;(Int64)</h4>
+  <div class="markdown level1 summary"><p>Gets the level from the current world</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T GetLevel&lt;T&gt;(long uid)
+
+    where T : Level, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">uid</span></td>
+        <td><p>Uid of level</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>Level</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Your custom level with the added fields</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World_GetLevel__1_System_String_.md&amp;value=---%0Auid%3A%20LDtk.World.GetLevel%60%601(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L112">View Source</a>
+  </span>
+  <a id="LDtk_World_GetLevel_" data-uid="LDtk.World.GetLevel*"></a>
+  <h4 id="LDtk_World_GetLevel__1_System_String_" data-uid="LDtk.World.GetLevel``1(System.String)">GetLevel&lt;T&gt;(String)</h4>
+  <div class="markdown level1 summary"><p>Gets the level from the current world</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T GetLevel&lt;T&gt;(string identifier)
+
+    where T : Level, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">identifier</span></td>
+        <td><p>Identifier of the level to get</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><p>Level</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World_LoadLevel_System_Int64_.md&amp;value=---%0Auid%3A%20LDtk.World.LoadLevel(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L117">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L152">View Source</a>
   </span>
   <a id="LDtk_World_LoadLevel_" data-uid="LDtk.World.LoadLevel*"></a>
   <h4 id="LDtk_World_LoadLevel_System_Int64_" data-uid="LDtk.World.LoadLevel(System.Int64)">LoadLevel(Int64)</h4>
@@ -346,7 +481,7 @@
     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World_LoadLevel_System_String_.md&amp;value=---%0Auid%3A%20LDtk.World.LoadLevel(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L135">View Source</a>
+    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L170">View Source</a>
   </span>
   <a id="LDtk_World_LoadLevel_" data-uid="LDtk.World.LoadLevel*"></a>
   <h4 id="LDtk_World_LoadLevel_System_String_" data-uid="LDtk.World.LoadLevel(System.String)">LoadLevel(String)</h4>
@@ -386,7 +521,7 @@
                     <a href="https://github.com/IrishBruse/LDtkMonogame/new/main/apiSpec/new?filename=LDtk_World.md&amp;value=---%0Auid%3A%20LDtk.World%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtkMonogame/World.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

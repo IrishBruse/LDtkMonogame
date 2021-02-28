@@ -13,36 +13,121 @@ references:
   commentId: T:LDtk.Entity
   fullName: LDtk.Entity
   nameWithType: Entity
-- uid: LDtk.Entity.pivot
-  name: pivot
-  href: api/LDtk.Entity.html#LDtk_Entity_pivot
-  commentId: F:LDtk.Entity.pivot
-  fullName: LDtk.Entity.pivot
-  nameWithType: Entity.pivot
-- uid: LDtk.Entity.position
-  name: position
-  href: api/LDtk.Entity.html#LDtk_Entity_position
-  commentId: F:LDtk.Entity.position
-  fullName: LDtk.Entity.position
-  nameWithType: Entity.position
-- uid: LDtk.Entity.size
-  name: size
-  href: api/LDtk.Entity.html#LDtk_Entity_size
-  commentId: F:LDtk.Entity.size
-  fullName: LDtk.Entity.size
-  nameWithType: Entity.size
-- uid: LDtk.Entity.texture
-  name: texture
-  href: api/LDtk.Entity.html#LDtk_Entity_texture
-  commentId: F:LDtk.Entity.texture
-  fullName: LDtk.Entity.texture
-  nameWithType: Entity.texture
-- uid: LDtk.Entity.tile
-  name: tile
-  href: api/LDtk.Entity.html#LDtk_Entity_tile
-  commentId: F:LDtk.Entity.tile
-  fullName: LDtk.Entity.tile
-  nameWithType: Entity.tile
+- uid: LDtk.Entity.LevelPosition
+  name: LevelPosition
+  href: api/LDtk.Entity.html#LDtk_Entity_LevelPosition
+  commentId: P:LDtk.Entity.LevelPosition
+  fullName: LDtk.Entity.LevelPosition
+  nameWithType: Entity.LevelPosition
+- uid: LDtk.Entity.LevelPosition*
+  name: LevelPosition
+  href: api/LDtk.Entity.html#LDtk_Entity_LevelPosition_
+  commentId: Overload:LDtk.Entity.LevelPosition
+  isSpec: "True"
+  fullName: LDtk.Entity.LevelPosition
+  nameWithType: Entity.LevelPosition
+- uid: LDtk.Entity.Pivot
+  name: Pivot
+  href: api/LDtk.Entity.html#LDtk_Entity_Pivot
+  commentId: P:LDtk.Entity.Pivot
+  fullName: LDtk.Entity.Pivot
+  nameWithType: Entity.Pivot
+- uid: LDtk.Entity.Pivot*
+  name: Pivot
+  href: api/LDtk.Entity.html#LDtk_Entity_Pivot_
+  commentId: Overload:LDtk.Entity.Pivot
+  isSpec: "True"
+  fullName: LDtk.Entity.Pivot
+  nameWithType: Entity.Pivot
+- uid: LDtk.Entity.Position
+  name: Position
+  href: api/LDtk.Entity.html#LDtk_Entity_Position
+  commentId: P:LDtk.Entity.Position
+  fullName: LDtk.Entity.Position
+  nameWithType: Entity.Position
+- uid: LDtk.Entity.Position*
+  name: Position
+  href: api/LDtk.Entity.html#LDtk_Entity_Position_
+  commentId: Overload:LDtk.Entity.Position
+  isSpec: "True"
+  fullName: LDtk.Entity.Position
+  nameWithType: Entity.Position
+- uid: LDtk.Entity.Size
+  name: Size
+  href: api/LDtk.Entity.html#LDtk_Entity_Size
+  commentId: P:LDtk.Entity.Size
+  fullName: LDtk.Entity.Size
+  nameWithType: Entity.Size
+- uid: LDtk.Entity.Size*
+  name: Size
+  href: api/LDtk.Entity.html#LDtk_Entity_Size_
+  commentId: Overload:LDtk.Entity.Size
+  isSpec: "True"
+  fullName: LDtk.Entity.Size
+  nameWithType: Entity.Size
+- uid: LDtk.Entity.Texture
+  name: Texture
+  href: api/LDtk.Entity.html#LDtk_Entity_Texture
+  commentId: P:LDtk.Entity.Texture
+  fullName: LDtk.Entity.Texture
+  nameWithType: Entity.Texture
+- uid: LDtk.Entity.Texture*
+  name: Texture
+  href: api/LDtk.Entity.html#LDtk_Entity_Texture_
+  commentId: Overload:LDtk.Entity.Texture
+  isSpec: "True"
+  fullName: LDtk.Entity.Texture
+  nameWithType: Entity.Texture
+- uid: LDtk.Entity.Tile
+  name: Tile
+  href: api/LDtk.Entity.html#LDtk_Entity_Tile
+  commentId: P:LDtk.Entity.Tile
+  fullName: LDtk.Entity.Tile
+  nameWithType: Entity.Tile
+- uid: LDtk.Entity.Tile*
+  name: Tile
+  href: api/LDtk.Entity.html#LDtk_Entity_Tile_
+  commentId: Overload:LDtk.Entity.Tile
+  isSpec: "True"
+  fullName: LDtk.Entity.Tile
+  nameWithType: Entity.Tile
+- uid: LDtk.FieldInstanceException
+  name: FieldInstanceException
+  href: api/LDtk.FieldInstanceException.html
+  commentId: T:LDtk.FieldInstanceException
+  fullName: LDtk.FieldInstanceException
+  nameWithType: FieldInstanceException
+- uid: LDtk.FieldInstanceException.#ctor
+  name: FieldInstanceException()
+  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor
+  commentId: M:LDtk.FieldInstanceException.#ctor
+  fullName: LDtk.FieldInstanceException.FieldInstanceException()
+  nameWithType: FieldInstanceException.FieldInstanceException()
+- uid: LDtk.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: FieldInstanceException(SerializationInfo, StreamingContext)
+  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: FieldInstanceException.FieldInstanceException(SerializationInfo, StreamingContext)
+- uid: LDtk.FieldInstanceException.#ctor(System.String)
+  name: FieldInstanceException(String)
+  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_String_
+  commentId: M:LDtk.FieldInstanceException.#ctor(System.String)
+  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.String)
+  nameWithType: FieldInstanceException.FieldInstanceException(String)
+- uid: LDtk.FieldInstanceException.#ctor(System.String,System.Exception)
+  name: FieldInstanceException(String, Exception)
+  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.FieldInstanceException.#ctor(System.String,System.Exception)
+  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.String, System.Exception)
+  nameWithType: FieldInstanceException.FieldInstanceException(String, Exception)
+- uid: LDtk.FieldInstanceException.#ctor*
+  name: FieldInstanceException
+  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_
+  commentId: Overload:LDtk.FieldInstanceException.#ctor
+  isSpec: "True"
+  fullName: LDtk.FieldInstanceException.FieldInstanceException
+  nameWithType: FieldInstanceException.FieldInstanceException
 - uid: LDtk.IntGrid
   name: IntGrid
   href: api/LDtk.IntGrid.html
@@ -88,6 +173,43 @@ references:
   isSpec: "True"
   fullName: LDtk.IntGrid.TileSize
   nameWithType: IntGrid.TileSize
+- uid: LDtk.IntGridNotFoundException
+  name: IntGridNotFoundException
+  href: api/LDtk.IntGridNotFoundException.html
+  commentId: T:LDtk.IntGridNotFoundException
+  fullName: LDtk.IntGridNotFoundException
+  nameWithType: IntGridNotFoundException
+- uid: LDtk.IntGridNotFoundException.#ctor
+  name: IntGridNotFoundException()
+  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor
+  commentId: M:LDtk.IntGridNotFoundException.#ctor
+  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException()
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException()
+- uid: LDtk.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: IntGridNotFoundException(SerializationInfo, StreamingContext)
+  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(SerializationInfo, StreamingContext)
+- uid: LDtk.IntGridNotFoundException.#ctor(System.String)
+  name: IntGridNotFoundException(String)
+  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_String_
+  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.String)
+  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.String)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String)
+- uid: LDtk.IntGridNotFoundException.#ctor(System.String,System.Exception)
+  name: IntGridNotFoundException(String, Exception)
+  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.String,System.Exception)
+  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.String, System.Exception)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String, Exception)
+- uid: LDtk.IntGridNotFoundException.#ctor*
+  name: IntGridNotFoundException
+  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_
+  commentId: Overload:LDtk.IntGridNotFoundException.#ctor
+  isSpec: "True"
+  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException
 - uid: LDtk.Level
   name: Level
   href: api/LDtk.Level.html
@@ -120,6 +242,15 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.GetEntities
   nameWithType: Level.GetEntities
+- uid: LDtk.Level.GetEntities``1
+  name: GetEntities<T>()
+  href: api/LDtk.Level.html#LDtk_Level_GetEntities__1
+  commentId: M:LDtk.Level.GetEntities``1
+  name.vb: GetEntities(Of T)()
+  fullName: LDtk.Level.GetEntities<T>()
+  fullName.vb: LDtk.Level.GetEntities(Of T)()
+  nameWithType: Level.GetEntities<T>()
+  nameWithType.vb: Level.GetEntities(Of T)()
 - uid: LDtk.Level.GetEntities``1(System.String)
   name: GetEntities<T>(String)
   href: api/LDtk.Level.html#LDtk_Level_GetEntities__1_System_String_
@@ -142,6 +273,15 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.GetEntity
   nameWithType: Level.GetEntity
+- uid: LDtk.Level.GetEntity``1
+  name: GetEntity<T>()
+  href: api/LDtk.Level.html#LDtk_Level_GetEntity__1
+  commentId: M:LDtk.Level.GetEntity``1
+  name.vb: GetEntity(Of T)()
+  fullName: LDtk.Level.GetEntity<T>()
+  fullName.vb: LDtk.Level.GetEntity(Of T)()
+  nameWithType: Level.GetEntity<T>()
+  nameWithType.vb: Level.GetEntity(Of T)()
 - uid: LDtk.Level.GetEntity``1(System.String)
   name: GetEntity<T>(String)
   href: api/LDtk.Level.html#LDtk_Level_GetEntity__1_System_String_
@@ -242,6 +382,43 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.Uid
   nameWithType: Level.Uid
+- uid: LDtk.UidException
+  name: UidException
+  href: api/LDtk.UidException.html
+  commentId: T:LDtk.UidException
+  fullName: LDtk.UidException
+  nameWithType: UidException
+- uid: LDtk.UidException.#ctor
+  name: UidException()
+  href: api/LDtk.UidException.html#LDtk_UidException__ctor
+  commentId: M:LDtk.UidException.#ctor
+  fullName: LDtk.UidException.UidException()
+  nameWithType: UidException.UidException()
+- uid: LDtk.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: UidException(SerializationInfo, StreamingContext)
+  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.UidException.UidException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: UidException.UidException(SerializationInfo, StreamingContext)
+- uid: LDtk.UidException.#ctor(System.String)
+  name: UidException(String)
+  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_String_
+  commentId: M:LDtk.UidException.#ctor(System.String)
+  fullName: LDtk.UidException.UidException(System.String)
+  nameWithType: UidException.UidException(String)
+- uid: LDtk.UidException.#ctor(System.String,System.Exception)
+  name: UidException(String, Exception)
+  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.UidException.#ctor(System.String,System.Exception)
+  fullName: LDtk.UidException.UidException(System.String, System.Exception)
+  nameWithType: UidException.UidException(String, Exception)
+- uid: LDtk.UidException.#ctor*
+  name: UidException
+  href: api/LDtk.UidException.html#LDtk_UidException__ctor_
+  commentId: Overload:LDtk.UidException.#ctor
+  isSpec: "True"
+  fullName: LDtk.UidException.UidException
+  nameWithType: UidException.UidException
 - uid: LDtk.World
   name: World
   href: api/LDtk.World.html
@@ -286,6 +463,24 @@ references:
   isSpec: "True"
   fullName: LDtk.World.GetLevel
   nameWithType: World.GetLevel
+- uid: LDtk.World.GetLevel``1(System.Int64)
+  name: GetLevel<T>(Int64)
+  href: api/LDtk.World.html#LDtk_World_GetLevel__1_System_Int64_
+  commentId: M:LDtk.World.GetLevel``1(System.Int64)
+  name.vb: GetLevel(Of T)(Int64)
+  fullName: LDtk.World.GetLevel<T>(System.Int64)
+  fullName.vb: LDtk.World.GetLevel(Of T)(System.Int64)
+  nameWithType: World.GetLevel<T>(Int64)
+  nameWithType.vb: World.GetLevel(Of T)(Int64)
+- uid: LDtk.World.GetLevel``1(System.String)
+  name: GetLevel<T>(String)
+  href: api/LDtk.World.html#LDtk_World_GetLevel__1_System_String_
+  commentId: M:LDtk.World.GetLevel``1(System.String)
+  name.vb: GetLevel(Of T)(String)
+  fullName: LDtk.World.GetLevel<T>(System.String)
+  fullName.vb: LDtk.World.GetLevel(Of T)(System.String)
+  nameWithType: World.GetLevel<T>(String)
+  nameWithType.vb: World.GetLevel(Of T)(String)
 - uid: LDtk.World.LoadLevel(System.Int64)
   name: LoadLevel(Int64)
   href: api/LDtk.World.html#LDtk_World_LoadLevel_System_Int64_
