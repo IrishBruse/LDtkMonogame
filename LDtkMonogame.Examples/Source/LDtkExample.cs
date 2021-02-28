@@ -71,9 +71,6 @@ namespace Examples
 
             levelManager.ChangeLevelTo("Level1");
 
-            Console.WriteLine(levelManager.CurrentLevel.biome);
-            Console.WriteLine(levelManager.CurrentLevel.difficulty);
-
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
             player = new Player();
@@ -137,6 +134,7 @@ namespace Examples
 
             levelManager.SetCenterPoint(player.Position);
             levelManager.Update(deltaTime);
+            player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
 
             player.door = null;
             for (int i = 0; i < doors.Count; i++)
@@ -155,22 +153,31 @@ namespace Examples
                 }
             }
 
-            player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
-
-            // Animate all diamonds
-            for (int i = 0; i < diamonds.Count; i++)
+            for (int i = 0; i < crates.Count; i++)
             {
-                int currentFrame = (int)((gameTime.TotalGameTime.TotalSeconds * 10) % 10) * (int)diamonds[i].Size.X;
-                diamonds[i].Tile = new Rectangle(currentFrame, 0, (int)diamonds[i].Size.X, (int)diamonds[i].Size.Y);
-                diamonds[i].Position += new Vector2(0, -MathF.Sin((float)gameTime.TotalGameTime.TotalSeconds * 2) * 0.1f);
+                crates[i].Update(deltaTime);
+
+                if (player.attack.Contains(crates[i].collider) && player.attacking == true)
+                {
+                    crates[i].Damage();
+                }
             }
 
-            for (int i = 0; i < diamonds.Count; i++)
+            for (int i = diamonds.Count - 1; i >= 0; i--)
             {
-                if (diamonds[i].collider.Contains(player.collider))
+                diamonds[i].Update(deltaTime, (float)gameTime.TotalGameTime.TotalSeconds);
+
+                if (diamonds[i].delete == true)
                 {
-                    diamondsCollected++;
                     diamonds.Remove(diamonds[i]);
+                }
+                else if (diamonds[i].collected == false)
+                {
+                    if (diamonds[i].collider.Contains(player.collider))
+                    {
+                        diamondsCollected++;
+                        diamonds[i].collected = true;
+                    }
                 }
             }
 
@@ -269,11 +276,6 @@ namespace Examples
                 spriteBatch.Draw(crates[i].Texture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0);
             }
 
-            for (int i = 0; i < diamonds.Count; i++)
-            {
-                spriteBatch.Draw(diamonds[i].Texture, diamonds[i].Position, diamonds[i].Tile, Color.White, 0, diamonds[i].Pivot * diamonds[i].Size, 1, SpriteEffects.None, 0);
-            }
-
             spriteBatch.Draw(
                 player.Texture,
                 player.Position,
@@ -284,6 +286,11 @@ namespace Examples
                 1,
                 player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
                 0.1f);
+
+            for (int i = 0; i < diamonds.Count; i++)
+            {
+                spriteBatch.Draw(diamonds[i].Texture, diamonds[i].Position, diamonds[i].Tile, Color.White, 0, diamonds[i].Pivot * diamonds[i].Size, 1, SpriteEffects.None, 0);
+            }
         }
 
         private void DebugRendering()
@@ -316,6 +323,7 @@ namespace Examples
                 }
 
                 spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
+                spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
             }
 #endif
         }

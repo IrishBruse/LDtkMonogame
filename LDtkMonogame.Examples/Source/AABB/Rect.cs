@@ -8,7 +8,7 @@ namespace Examples
         public Vector2 ParentPosition { get; set; }
         public Vector2 Size { get; set; }
 
-        Vector2 Origin { get; set; }
+        public Vector2 Origin { get; set; }
 
         public Vector2 WorldPosition { get => Origin + ParentPosition; }
         public Vector2 Center { get => WorldPosition + (Size / 2); }

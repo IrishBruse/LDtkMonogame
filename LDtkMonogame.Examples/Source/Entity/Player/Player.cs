@@ -13,6 +13,7 @@ namespace Examples
         public Animator animator;
         public bool fliped = true;
         public Rect collider;
+        public Rect attack;
         public Vector2 velocity;
         public List<(Rect rect, long type)> tiles;
         public Door door;
@@ -22,10 +23,12 @@ namespace Examples
         private bool noClip;
         private bool onPlatfrom;
         private Vector2 input;
+        internal bool attacking;
 
         public Player()
         {
             collider = new Rect(-10, -25, 20, 25);
+            attack = new Rect(20, -30, 20, 40);
             animator = new Animator(this);
         }
 
@@ -35,6 +38,10 @@ namespace Examples
             {
                 noClip = !noClip;
             }
+
+            attack.ParentPosition = collider.ParentPosition = Position;
+
+            attack.Origin = new Vector2(fliped ? 20 : -20 - attack.Size.X, attack.Origin.Y);
 
             Movement(keyboard, oldKeyboard, mouse, oldMouse, deltaTime);
             if (noClip == false)
@@ -53,9 +60,10 @@ namespace Examples
             float v = (keyboard.IsKeyDown(Keys.W) ? -1 : 0) + (keyboard.IsKeyDown(Keys.S) ? 1 : 0);
 
             input = new Vector2(h, v);
-
+            attacking = false;
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
+                attacking = true;
                 animator.SetState(Animator.Animation.Attack);
             }
 
@@ -120,8 +128,6 @@ namespace Examples
         void CollisionDetection(Level level, float deltaTime)
         {
             grounded = false;
-
-            collider.ParentPosition = Position;
 
             IntGrid collisions = level.GetIntGrid("Collisions");
             Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime)) - level.Position;
