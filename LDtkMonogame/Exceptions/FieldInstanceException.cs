@@ -1,4 +1,4 @@
-namespace LDtk
+namespace LDtk.Exceptions
 {
     /// <summary>
     /// Unknown FieldInstance Exception

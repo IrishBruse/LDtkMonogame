@@ -17,11 +17,47 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.FieldInstanceException.yml",
+      "source_relative_path": "api/LDtk.Exceptions.FieldInstanceException.yml",
       "output": {
         ".html": {
-          "relative_path": "api/LDtk.FieldInstanceException.html",
-          "hash": "fQUKFDvHWVl/T1+S00NWYQ=="
+          "relative_path": "api/LDtk.Exceptions.FieldInstanceException.html",
+          "hash": "fDtyDI3p9/Nm/bzSA5H+QA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/LDtk.Exceptions.IntGridNotFoundException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/LDtk.Exceptions.IntGridNotFoundException.html",
+          "hash": "5bjGGDf/r1kCY7TsqT3Isg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/LDtk.Exceptions.UidException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/LDtk.Exceptions.UidException.html",
+          "hash": "OY3bIfSYOBrtglpuLjaHcA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/LDtk.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/LDtk.Exceptions.html",
+          "hash": "m/qA4Xs6tMD/FzspmHETdA=="
         }
       },
       "is_incremental": true,
@@ -41,35 +77,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.IntGridNotFoundException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.IntGridNotFoundException.html",
-          "hash": "4SsLs6wW3Mb9s17h82znIA=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/LDtk.Level.yml",
       "output": {
         ".html": {
           "relative_path": "api/LDtk.Level.html",
-          "hash": "KiK1uLFJpAh9dCBTCykfUg=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/LDtk.UidException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/LDtk.UidException.html",
-          "hash": "nKyUFWeTOwhUQF1NsqQBrQ=="
+          "hash": "RIvL4cXd7wcodNWeI3rj3Q=="
         }
       },
       "is_incremental": true,
@@ -81,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.World.html",
-          "hash": "LELK2b/2YIZuZBwY8g06Uw=="
+          "hash": "gkqGXyoop4SDkJlEJeah6g=="
         }
       },
       "is_incremental": true,
@@ -93,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/LDtk.html",
-          "hash": "/aYyPU6OL5GlIEtweC8eqA=="
+          "hash": "Vz2R4ELZ1zjXkaic+q4e9w=="
         }
       },
       "is_incremental": true,
@@ -117,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "pkoHfrI+CO1/yW6iTJ3wxw=="
+          "hash": "xmYqTZDd+DPbGYtdkM8DZA=="
         }
       },
       "is_incremental": false,
@@ -468,8 +480,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 8,
-          "skipped_file_count": 8
+          "total_file_count": 9,
+          "skipped_file_count": 9
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using LDtk.Exceptions;
 using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json.Linq;

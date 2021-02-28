@@ -91,43 +91,123 @@ references:
   isSpec: "True"
   fullName: LDtk.Entity.Tile
   nameWithType: Entity.Tile
-- uid: LDtk.FieldInstanceException
+- uid: LDtk.Exceptions
+  name: LDtk.Exceptions
+  href: api/LDtk.Exceptions.html
+  commentId: N:LDtk.Exceptions
+  fullName: LDtk.Exceptions
+  nameWithType: LDtk.Exceptions
+- uid: LDtk.Exceptions.FieldInstanceException
   name: FieldInstanceException
-  href: api/LDtk.FieldInstanceException.html
-  commentId: T:LDtk.FieldInstanceException
-  fullName: LDtk.FieldInstanceException
+  href: api/LDtk.Exceptions.FieldInstanceException.html
+  commentId: T:LDtk.Exceptions.FieldInstanceException
+  fullName: LDtk.Exceptions.FieldInstanceException
   nameWithType: FieldInstanceException
-- uid: LDtk.FieldInstanceException.#ctor
+- uid: LDtk.Exceptions.FieldInstanceException.#ctor
   name: FieldInstanceException()
-  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor
-  commentId: M:LDtk.FieldInstanceException.#ctor
-  fullName: LDtk.FieldInstanceException.FieldInstanceException()
+  href: api/LDtk.Exceptions.FieldInstanceException.html#LDtk_Exceptions_FieldInstanceException__ctor
+  commentId: M:LDtk.Exceptions.FieldInstanceException.#ctor
+  fullName: LDtk.Exceptions.FieldInstanceException.FieldInstanceException()
   nameWithType: FieldInstanceException.FieldInstanceException()
-- uid: LDtk.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+- uid: LDtk.Exceptions.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
   name: FieldInstanceException(SerializationInfo, StreamingContext)
-  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
-  commentId: M:LDtk.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  href: api/LDtk.Exceptions.FieldInstanceException.html#LDtk_Exceptions_FieldInstanceException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.Exceptions.FieldInstanceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.Exceptions.FieldInstanceException.FieldInstanceException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
   nameWithType: FieldInstanceException.FieldInstanceException(SerializationInfo, StreamingContext)
-- uid: LDtk.FieldInstanceException.#ctor(System.String)
+- uid: LDtk.Exceptions.FieldInstanceException.#ctor(System.String)
   name: FieldInstanceException(String)
-  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_String_
-  commentId: M:LDtk.FieldInstanceException.#ctor(System.String)
-  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.String)
+  href: api/LDtk.Exceptions.FieldInstanceException.html#LDtk_Exceptions_FieldInstanceException__ctor_System_String_
+  commentId: M:LDtk.Exceptions.FieldInstanceException.#ctor(System.String)
+  fullName: LDtk.Exceptions.FieldInstanceException.FieldInstanceException(System.String)
   nameWithType: FieldInstanceException.FieldInstanceException(String)
-- uid: LDtk.FieldInstanceException.#ctor(System.String,System.Exception)
+- uid: LDtk.Exceptions.FieldInstanceException.#ctor(System.String,System.Exception)
   name: FieldInstanceException(String, Exception)
-  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_System_String_System_Exception_
-  commentId: M:LDtk.FieldInstanceException.#ctor(System.String,System.Exception)
-  fullName: LDtk.FieldInstanceException.FieldInstanceException(System.String, System.Exception)
+  href: api/LDtk.Exceptions.FieldInstanceException.html#LDtk_Exceptions_FieldInstanceException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.Exceptions.FieldInstanceException.#ctor(System.String,System.Exception)
+  fullName: LDtk.Exceptions.FieldInstanceException.FieldInstanceException(System.String, System.Exception)
   nameWithType: FieldInstanceException.FieldInstanceException(String, Exception)
-- uid: LDtk.FieldInstanceException.#ctor*
+- uid: LDtk.Exceptions.FieldInstanceException.#ctor*
   name: FieldInstanceException
-  href: api/LDtk.FieldInstanceException.html#LDtk_FieldInstanceException__ctor_
-  commentId: Overload:LDtk.FieldInstanceException.#ctor
+  href: api/LDtk.Exceptions.FieldInstanceException.html#LDtk_Exceptions_FieldInstanceException__ctor_
+  commentId: Overload:LDtk.Exceptions.FieldInstanceException.#ctor
   isSpec: "True"
-  fullName: LDtk.FieldInstanceException.FieldInstanceException
+  fullName: LDtk.Exceptions.FieldInstanceException.FieldInstanceException
   nameWithType: FieldInstanceException.FieldInstanceException
+- uid: LDtk.Exceptions.IntGridNotFoundException
+  name: IntGridNotFoundException
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html
+  commentId: T:LDtk.Exceptions.IntGridNotFoundException
+  fullName: LDtk.Exceptions.IntGridNotFoundException
+  nameWithType: IntGridNotFoundException
+- uid: LDtk.Exceptions.IntGridNotFoundException.#ctor
+  name: IntGridNotFoundException()
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html#LDtk_Exceptions_IntGridNotFoundException__ctor
+  commentId: M:LDtk.Exceptions.IntGridNotFoundException.#ctor
+  fullName: LDtk.Exceptions.IntGridNotFoundException.IntGridNotFoundException()
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException()
+- uid: LDtk.Exceptions.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: IntGridNotFoundException(SerializationInfo, StreamingContext)
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html#LDtk_Exceptions_IntGridNotFoundException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.Exceptions.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.Exceptions.IntGridNotFoundException.IntGridNotFoundException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(SerializationInfo, StreamingContext)
+- uid: LDtk.Exceptions.IntGridNotFoundException.#ctor(System.String)
+  name: IntGridNotFoundException(String)
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html#LDtk_Exceptions_IntGridNotFoundException__ctor_System_String_
+  commentId: M:LDtk.Exceptions.IntGridNotFoundException.#ctor(System.String)
+  fullName: LDtk.Exceptions.IntGridNotFoundException.IntGridNotFoundException(System.String)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String)
+- uid: LDtk.Exceptions.IntGridNotFoundException.#ctor(System.String,System.Exception)
+  name: IntGridNotFoundException(String, Exception)
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html#LDtk_Exceptions_IntGridNotFoundException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.Exceptions.IntGridNotFoundException.#ctor(System.String,System.Exception)
+  fullName: LDtk.Exceptions.IntGridNotFoundException.IntGridNotFoundException(System.String, System.Exception)
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String, Exception)
+- uid: LDtk.Exceptions.IntGridNotFoundException.#ctor*
+  name: IntGridNotFoundException
+  href: api/LDtk.Exceptions.IntGridNotFoundException.html#LDtk_Exceptions_IntGridNotFoundException__ctor_
+  commentId: Overload:LDtk.Exceptions.IntGridNotFoundException.#ctor
+  isSpec: "True"
+  fullName: LDtk.Exceptions.IntGridNotFoundException.IntGridNotFoundException
+  nameWithType: IntGridNotFoundException.IntGridNotFoundException
+- uid: LDtk.Exceptions.UidException
+  name: UidException
+  href: api/LDtk.Exceptions.UidException.html
+  commentId: T:LDtk.Exceptions.UidException
+  fullName: LDtk.Exceptions.UidException
+  nameWithType: UidException
+- uid: LDtk.Exceptions.UidException.#ctor
+  name: UidException()
+  href: api/LDtk.Exceptions.UidException.html#LDtk_Exceptions_UidException__ctor
+  commentId: M:LDtk.Exceptions.UidException.#ctor
+  fullName: LDtk.Exceptions.UidException.UidException()
+  nameWithType: UidException.UidException()
+- uid: LDtk.Exceptions.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: UidException(SerializationInfo, StreamingContext)
+  href: api/LDtk.Exceptions.UidException.html#LDtk_Exceptions_UidException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:LDtk.Exceptions.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: LDtk.Exceptions.UidException.UidException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: UidException.UidException(SerializationInfo, StreamingContext)
+- uid: LDtk.Exceptions.UidException.#ctor(System.String)
+  name: UidException(String)
+  href: api/LDtk.Exceptions.UidException.html#LDtk_Exceptions_UidException__ctor_System_String_
+  commentId: M:LDtk.Exceptions.UidException.#ctor(System.String)
+  fullName: LDtk.Exceptions.UidException.UidException(System.String)
+  nameWithType: UidException.UidException(String)
+- uid: LDtk.Exceptions.UidException.#ctor(System.String,System.Exception)
+  name: UidException(String, Exception)
+  href: api/LDtk.Exceptions.UidException.html#LDtk_Exceptions_UidException__ctor_System_String_System_Exception_
+  commentId: M:LDtk.Exceptions.UidException.#ctor(System.String,System.Exception)
+  fullName: LDtk.Exceptions.UidException.UidException(System.String, System.Exception)
+  nameWithType: UidException.UidException(String, Exception)
+- uid: LDtk.Exceptions.UidException.#ctor*
+  name: UidException
+  href: api/LDtk.Exceptions.UidException.html#LDtk_Exceptions_UidException__ctor_
+  commentId: Overload:LDtk.Exceptions.UidException.#ctor
+  isSpec: "True"
+  fullName: LDtk.Exceptions.UidException.UidException
+  nameWithType: UidException.UidException
 - uid: LDtk.IntGrid
   name: IntGrid
   href: api/LDtk.IntGrid.html
@@ -173,43 +253,6 @@ references:
   isSpec: "True"
   fullName: LDtk.IntGrid.TileSize
   nameWithType: IntGrid.TileSize
-- uid: LDtk.IntGridNotFoundException
-  name: IntGridNotFoundException
-  href: api/LDtk.IntGridNotFoundException.html
-  commentId: T:LDtk.IntGridNotFoundException
-  fullName: LDtk.IntGridNotFoundException
-  nameWithType: IntGridNotFoundException
-- uid: LDtk.IntGridNotFoundException.#ctor
-  name: IntGridNotFoundException()
-  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor
-  commentId: M:LDtk.IntGridNotFoundException.#ctor
-  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException()
-  nameWithType: IntGridNotFoundException.IntGridNotFoundException()
-- uid: LDtk.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  name: IntGridNotFoundException(SerializationInfo, StreamingContext)
-  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
-  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
-  nameWithType: IntGridNotFoundException.IntGridNotFoundException(SerializationInfo, StreamingContext)
-- uid: LDtk.IntGridNotFoundException.#ctor(System.String)
-  name: IntGridNotFoundException(String)
-  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_String_
-  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.String)
-  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.String)
-  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String)
-- uid: LDtk.IntGridNotFoundException.#ctor(System.String,System.Exception)
-  name: IntGridNotFoundException(String, Exception)
-  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_System_String_System_Exception_
-  commentId: M:LDtk.IntGridNotFoundException.#ctor(System.String,System.Exception)
-  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException(System.String, System.Exception)
-  nameWithType: IntGridNotFoundException.IntGridNotFoundException(String, Exception)
-- uid: LDtk.IntGridNotFoundException.#ctor*
-  name: IntGridNotFoundException
-  href: api/LDtk.IntGridNotFoundException.html#LDtk_IntGridNotFoundException__ctor_
-  commentId: Overload:LDtk.IntGridNotFoundException.#ctor
-  isSpec: "True"
-  fullName: LDtk.IntGridNotFoundException.IntGridNotFoundException
-  nameWithType: IntGridNotFoundException.IntGridNotFoundException
 - uid: LDtk.Level
   name: Level
   href: api/LDtk.Level.html
@@ -382,43 +425,6 @@ references:
   isSpec: "True"
   fullName: LDtk.Level.Uid
   nameWithType: Level.Uid
-- uid: LDtk.UidException
-  name: UidException
-  href: api/LDtk.UidException.html
-  commentId: T:LDtk.UidException
-  fullName: LDtk.UidException
-  nameWithType: UidException
-- uid: LDtk.UidException.#ctor
-  name: UidException()
-  href: api/LDtk.UidException.html#LDtk_UidException__ctor
-  commentId: M:LDtk.UidException.#ctor
-  fullName: LDtk.UidException.UidException()
-  nameWithType: UidException.UidException()
-- uid: LDtk.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  name: UidException(SerializationInfo, StreamingContext)
-  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
-  commentId: M:LDtk.UidException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
-  fullName: LDtk.UidException.UidException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
-  nameWithType: UidException.UidException(SerializationInfo, StreamingContext)
-- uid: LDtk.UidException.#ctor(System.String)
-  name: UidException(String)
-  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_String_
-  commentId: M:LDtk.UidException.#ctor(System.String)
-  fullName: LDtk.UidException.UidException(System.String)
-  nameWithType: UidException.UidException(String)
-- uid: LDtk.UidException.#ctor(System.String,System.Exception)
-  name: UidException(String, Exception)
-  href: api/LDtk.UidException.html#LDtk_UidException__ctor_System_String_System_Exception_
-  commentId: M:LDtk.UidException.#ctor(System.String,System.Exception)
-  fullName: LDtk.UidException.UidException(System.String, System.Exception)
-  nameWithType: UidException.UidException(String, Exception)
-- uid: LDtk.UidException.#ctor*
-  name: UidException
-  href: api/LDtk.UidException.html#LDtk_UidException__ctor_
-  commentId: Overload:LDtk.UidException.#ctor
-  isSpec: "True"
-  fullName: LDtk.UidException.UidException
-  nameWithType: UidException.UidException
 - uid: LDtk.World
   name: World
   href: api/LDtk.World.html

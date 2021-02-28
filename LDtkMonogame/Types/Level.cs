@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-using Newtonsoft.Json.Linq;
+using LDtk.Exceptions;
 
 namespace LDtk
 {
