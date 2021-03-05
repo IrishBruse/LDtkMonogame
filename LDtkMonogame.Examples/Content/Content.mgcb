@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\LDtkMonogame.ContentPipeline\bin\Debug\netcoreapp3.1\LDtkMonogame.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -73,7 +74,7 @@
 /processorParam:TextureFormat=Color
 /build:../Assets/Art/Door.png;Art/Door.png
 
-#begin ../Assets/Art/Font.png
+#begin ../Assets/Art/Gui/Diamond.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,7 +84,43 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Font.png;Art/Font.png
+/build:../Assets/Art/Gui/Diamond.png;Art/Gui/Diamond.png
+
+#begin ../Assets/Art/Gui/Font.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/Art/Gui/Font.png;Art/Gui/Font.png
+
+#begin ../Assets/Art/Gui/Heart.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/Art/Gui/Heart.png;Art/Gui/Heart.png
+
+#begin ../Assets/Art/Gui/Live Bar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:../Assets/Art/Gui/Live Bar.png;Art/Gui/Live Bar.png
 
 #begin ../Assets/Art/Tilesets/Decorations.png
 /importer:TextureImporter
@@ -108,4 +145,3 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../Assets/Art/Tilesets/Terrain.png;Art/Tilesets/Terrain.png
-
