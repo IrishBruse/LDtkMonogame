@@ -94,8 +94,8 @@ namespace Examples
             pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
-            fontTexture = Content.Load<Texture2D>("Art/Font");
-            diamondTexture = Content.Load<Texture2D>("Art/Diamond");
+            fontTexture = Content.Load<Texture2D>("Art/Gui/Font");
+            diamondTexture = Content.Load<Texture2D>("Art/Gui/Diamond");
         }
 
         public override void OnWindowResized()
@@ -201,7 +201,7 @@ namespace Examples
 
             Matrix camera = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
 
-            spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp, transformMatrix: camera);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera);
             {
                 levelManager.Draw(spriteBatch);
                 EntityRendering();

@@ -188,6 +188,7 @@ namespace Examples
                             break;
 
                         case 2:
+                        case 3:
                             if (cn == new Vector2(0, -1))
                             {
                                 onPlatfrom = true;
@@ -196,8 +197,7 @@ namespace Examples
                             break;
 
                         default:
-                            Console.WriteLine(val + " is an unhandled intgrid type");
-                            break;
+                            throw new Exception(val + " is an unhandled intgrid type");
                     }
                 }
             }
