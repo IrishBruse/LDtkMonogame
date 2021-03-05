@@ -325,7 +325,7 @@ namespace LDtk
                     }
 
                     // Render all renderable layers
-                    spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp);
+                    spriteBatch.Begin(samplerState: SamplerState.PointClamp);
                     {
                         RenderLayer(jsonLayer, texture);
                     }
