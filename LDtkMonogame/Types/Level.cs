@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using LDtk.Exceptions;
 using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using LDtk.Exceptions;
 
 namespace LDtk
 {
@@ -70,7 +70,7 @@ namespace LDtk
         /// <returns>The entities cast to the class</returns>
         public Entity[] GetEntities(string identifier)
         {
-            return ParseEntities<Entity>(typeof(Entity).Name, false);
+            return ParseEntities<Entity>(identifier, false);
         }
 
         /// <summary>

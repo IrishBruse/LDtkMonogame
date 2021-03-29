@@ -1292,6 +1292,8 @@ namespace LDtk.Json
                     return EditorDisplayMode.RadiusPx;
                 case "ValueOnly":
                     return EditorDisplayMode.ValueOnly;
+                default:
+                    break;
             }
             throw new Exception("Cannot unmarshal type EditorDisplayMode");
         }
@@ -1345,16 +1347,13 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "Above":
-                    return EditorDisplayPos.Above;
-                case "Beneath":
-                    return EditorDisplayPos.Beneath;
-                case "Center":
-                    return EditorDisplayPos.Center;
-            }
-            throw new Exception("Cannot unmarshal type EditorDisplayPos");
+                "Above" => EditorDisplayPos.Above,
+                "Beneath" => EditorDisplayPos.Beneath,
+                "Center" => EditorDisplayPos.Center,
+                _ => throw new Exception("Cannot unmarshal type EditorDisplayPos"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1391,28 +1390,19 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "LangC":
-                    return TextLangageMode.LangC;
-                case "LangHaxe":
-                    return TextLangageMode.LangHaxe;
-                case "LangJS":
-                    return TextLangageMode.LangJs;
-                case "LangJson":
-                    return TextLangageMode.LangJson;
-                case "LangLua":
-                    return TextLangageMode.LangLua;
-                case "LangMarkdown":
-                    return TextLangageMode.LangMarkdown;
-                case "LangPython":
-                    return TextLangageMode.LangPython;
-                case "LangRuby":
-                    return TextLangageMode.LangRuby;
-                case "LangXml":
-                    return TextLangageMode.LangXml;
-            }
-            throw new Exception("Cannot unmarshal type TextLangageMode");
+                "LangC" => TextLangageMode.LangC,
+                "LangHaxe" => TextLangageMode.LangHaxe,
+                "LangJS" => TextLangageMode.LangJs,
+                "LangJson" => TextLangageMode.LangJson,
+                "LangLua" => TextLangageMode.LangLua,
+                "LangMarkdown" => TextLangageMode.LangMarkdown,
+                "LangPython" => TextLangageMode.LangPython,
+                "LangRuby" => TextLangageMode.LangRuby,
+                "LangXml" => TextLangageMode.LangXml,
+                _ => throw new Exception("Cannot unmarshal type TextLangageMode"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1467,16 +1457,13 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "DiscardOldOnes":
-                    return LimitBehavior.DiscardOldOnes;
-                case "MoveLastOne":
-                    return LimitBehavior.MoveLastOne;
-                case "PreventAdding":
-                    return LimitBehavior.PreventAdding;
-            }
-            throw new Exception("Cannot unmarshal type LimitBehavior");
+                "DiscardOldOnes" => LimitBehavior.DiscardOldOnes,
+                "MoveLastOne" => LimitBehavior.MoveLastOne,
+                "PreventAdding" => LimitBehavior.PreventAdding,
+                _ => throw new Exception("Cannot unmarshal type LimitBehavior"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1513,16 +1500,13 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "PerLayer":
-                    return LimitScope.PerLayer;
-                case "PerLevel":
-                    return LimitScope.PerLevel;
-                case "PerWorld":
-                    return LimitScope.PerWorld;
-            }
-            throw new Exception("Cannot unmarshal type LimitScope");
+                "PerLayer" => LimitScope.PerLayer,
+                "PerLevel" => LimitScope.PerLevel,
+                "PerWorld" => LimitScope.PerWorld,
+                _ => throw new Exception("Cannot unmarshal type LimitScope"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1559,18 +1543,14 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "Cross":
-                    return RenderMode.Cross;
-                case "Ellipse":
-                    return RenderMode.Ellipse;
-                case "Rectangle":
-                    return RenderMode.Rectangle;
-                case "Tile":
-                    return RenderMode.Tile;
-            }
-            throw new Exception("Cannot unmarshal type RenderMode");
+                "Cross" => RenderMode.Cross,
+                "Ellipse" => RenderMode.Ellipse,
+                "Rectangle" => RenderMode.Rectangle,
+                "Tile" => RenderMode.Tile,
+                _ => throw new Exception("Cannot unmarshal type RenderMode"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1610,14 +1590,12 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "Crop":
-                    return TileRenderMode.Crop;
-                case "Stretch":
-                    return TileRenderMode.Stretch;
-            }
-            throw new Exception("Cannot unmarshal type TileRenderMode");
+                "Crop" => TileRenderMode.Crop,
+                "Stretch" => TileRenderMode.Stretch,
+                _ => throw new Exception("Cannot unmarshal type TileRenderMode"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1651,18 +1629,14 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "AutoLayer":
-                    return TypeEnum.AutoLayer;
-                case "Entities":
-                    return TypeEnum.Entities;
-                case "IntGrid":
-                    return TypeEnum.IntGrid;
-                case "Tiles":
-                    return TypeEnum.Tiles;
-            }
-            throw new Exception("Cannot unmarshal type TypeEnum");
+                "AutoLayer" => TypeEnum.AutoLayer,
+                "Entities" => TypeEnum.Entities,
+                "IntGrid" => TypeEnum.IntGrid,
+                "Tiles" => TypeEnum.Tiles,
+                _ => throw new Exception("Cannot unmarshal type TypeEnum"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1702,14 +1676,12 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "DiscardPreCsvIntGrid":
-                    return Flag.DiscardPreCsvIntGrid;
-                case "IgnoreBackupSuggest":
-                    return Flag.IgnoreBackupSuggest;
-            }
-            throw new Exception("Cannot unmarshal type Flag");
+                "DiscardPreCsvIntGrid" => Flag.DiscardPreCsvIntGrid,
+                "IgnoreBackupSuggest" => Flag.IgnoreBackupSuggest,
+                _ => throw new Exception("Cannot unmarshal type Flag"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1743,18 +1715,14 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "Contain":
-                    return BgPos.Contain;
-                case "Cover":
-                    return BgPos.Cover;
-                case "CoverDirty":
-                    return BgPos.CoverDirty;
-                case "Unscaled":
-                    return BgPos.Unscaled;
-            }
-            throw new Exception("Cannot unmarshal type BgPos");
+                "Contain" => BgPos.Contain,
+                "Cover" => BgPos.Cover,
+                "CoverDirty" => BgPos.CoverDirty,
+                "Unscaled" => BgPos.Unscaled,
+                _ => throw new Exception("Cannot unmarshal type BgPos"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
@@ -1794,18 +1762,14 @@ namespace LDtk.Json
         {
             if (reader.TokenType == JsonToken.Null) return null;
             var value = serializer.Deserialize<string>(reader);
-            switch (value)
+            return value switch
             {
-                case "Free":
-                    return WorldLayout.Free;
-                case "GridVania":
-                    return WorldLayout.GridVania;
-                case "LinearHorizontal":
-                    return WorldLayout.LinearHorizontal;
-                case "LinearVertical":
-                    return WorldLayout.LinearVertical;
-            }
-            throw new Exception("Cannot unmarshal type WorldLayout");
+                "Free" => WorldLayout.Free,
+                "GridVania" => WorldLayout.GridVania,
+                "LinearHorizontal" => WorldLayout.LinearHorizontal,
+                "LinearVertical" => WorldLayout.LinearVertical,
+                _ => throw new Exception("Cannot unmarshal type WorldLayout"),
+            };
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)

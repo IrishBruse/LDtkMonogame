@@ -49,7 +49,7 @@ namespace LDtk
             string variableName = fieldInstance.Identifier;
 
             // make the first letter lowercase
-            variableName = char.ToLower(variableName[0]) + variableName.Substring(1);
+            variableName = char.ToLower(variableName[0]) + variableName[1..];
 
             var field = typeof(T).GetField(variableName);
 

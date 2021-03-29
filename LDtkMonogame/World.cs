@@ -120,18 +120,18 @@ namespace LDtk
             {
                 if (levels[i]?.Identifier == identifier || levels[i]?.Uid == uid)
                 {
-                    T level = new T();
-
-                    // TODO this is probably not great
-                    level.BgColor = levels[i].BgColor;
-                    level.entities = levels[i].entities;
-                    level.Identifier = levels[i].Identifier;
-                    level.intGrids = levels[i].intGrids;
-                    level.Layers = levels[i].Layers;
-                    level.Neighbours = levels[i].Neighbours;
-                    level.owner = levels[i].owner;
-                    level.Position = levels[i].Position;
-                    level.Size = levels[i].Size;
+                    T level = new T
+                    {
+                        BgColor = levels[i].BgColor,
+                        entities = levels[i].entities,
+                        Identifier = levels[i].Identifier,
+                        intGrids = levels[i].intGrids,
+                        Layers = levels[i].Layers,
+                        Neighbours = levels[i].Neighbours,
+                        owner = levels[i].owner,
+                        Position = levels[i].Position,
+                        Size = levels[i].Size
+                    };
 
                     for (int fieldIndex = 0; fieldIndex < json.Levels[i].FieldInstances.Length; fieldIndex++)
                     {
@@ -191,25 +191,25 @@ namespace LDtk
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
 
-            level = new Level();
+            level = new Level
+            {
+                owner = this,
 
-            // Set the identifier
-            level.owner = this;
+                // Set the identifier
+                Identifier = jsonLevel.Identifier,
 
-            // Set the identifier
-            level.Identifier = jsonLevel.Identifier;
+                // Cache the Background Color/Clear Color
+                BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor),
 
-            // Cache the Background Color/Clear Color
-            level.BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor);
+                // Set the world position
+                Position = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY),
 
-            // Set the world position
-            level.Position = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY);
+                // Set the world size
+                Size = new Vector2(jsonLevel.PxWid, jsonLevel.PxHei),
 
-            // Set the world size
-            level.Size = new Vector2(jsonLevel.PxWid, jsonLevel.PxHei);
-
-            // Set the uid
-            level.Uid = jsonLevel.Uid;
+                // Set the uid
+                Uid = jsonLevel.Uid
+            };
 
             // Set the world position
             var neighbours = jsonLevel.Neighbours;
@@ -221,7 +221,6 @@ namespace LDtk
 
 
         // Layer Handling
-
         private void LoadBackgroundLayer(ref Level level, LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
@@ -289,11 +288,12 @@ namespace LDtk
                 {
                     if (jsonLayer.Type == LayerType.IntGrid)
                     {
-                        IntGrid intGrid = new IntGrid();
-
-                        intGrid.grid = new long[jsonLayer.CWid, jsonLayer.CHei];
-                        intGrid.identifier = jsonLayer.Identifier;
-                        intGrid.tileSize = (int)jsonLayer.GridSize;
+                        IntGrid intGrid = new IntGrid
+                        {
+                            grid = new long[jsonLayer.CWid, jsonLayer.CHei],
+                            identifier = jsonLayer.Identifier,
+                            tileSize = (int)jsonLayer.GridSize
+                        };
 
                         if (jsonLayer.IntGridCsv != null)
                         {
