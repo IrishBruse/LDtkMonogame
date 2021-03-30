@@ -21,6 +21,8 @@
 - name: Changelog
   href: changelog.md
   items:
+    - name: 0.3.1
+      href: Changelog/0.3.1.md
     - name: 0.3.0
       href: Changelog/0.3.0.md
     - name: 0.2.0
