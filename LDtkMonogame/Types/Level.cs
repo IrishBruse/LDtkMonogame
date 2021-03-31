@@ -130,7 +130,7 @@ namespace LDtk
                 {
                     T entity = new T();
 
-                    ParseBaseEntityFields<T>(entity, entities[entityIndex]);
+                    ParseBaseEntityFields(entity, entities[entityIndex]);
                     for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
                     {
                         Utility.ParseField(entity, entities[entityIndex].FieldInstances[fieldIndex]);
@@ -151,25 +151,25 @@ namespace LDtk
         {
             var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
 
-            ParseBaseField<T>(entity, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
-            ParseBaseField<T>(entity, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
+            ParseBaseField(entity, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
+            ParseBaseField(entity, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
 
-            ParseBaseField<T>(entity, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
+            ParseBaseField(entity, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
 
             if (entityInstance.Tile != null)
             {
-                ParseBaseField<T>(entity, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
+                ParseBaseField(entity, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
             }
 
-            ParseBaseField<T>(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
+            ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
 #if DEBUG
-            ParseBaseField<T>(entity, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
+            ParseBaseField(entity, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
 #endif
             if (entityDefinition.TilesetId.HasValue)
             {
                 var tileDefinition = entityInstance.Tile;
                 Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
-                ParseBaseField<T>(entity, "Tile", rect);
+                ParseBaseField(entity, "Tile", rect);
             }
         }
 
