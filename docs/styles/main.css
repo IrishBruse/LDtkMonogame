@@ -66,6 +66,10 @@ header {
     visibility: hidden;
 }
 
+.contribution-link {
+    background-color: transparent !important;
+}
+
 .navbar-nav {
     border-bottom-color: var(--color-navbar-text);
 }

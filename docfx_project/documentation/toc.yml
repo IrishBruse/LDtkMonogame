@@ -3,6 +3,8 @@
   items:
     - name: Quick Start
       href: Introduction/quickstart.md
+    - name: Examples
+      href: Introduction/examples.md
 
 - name: Tutorials
   href: tutorials.md
@@ -13,8 +15,6 @@
       href: Tutorials/level.md
     - name: IntGrid
       href: Tutorials/intgrid.md
-    - name: Entites
-      href: Tutorials/entities.md
     - name: Entity
       href: Tutorials/entity.md
 

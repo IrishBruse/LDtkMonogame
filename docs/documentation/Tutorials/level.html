@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>WIP </title>
+    <title>Level </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="WIP ">
-    <meta name="generator" content="docfx 2.56.6.0">
+    <meta name="title" content="Level ">
+    <meta name="generator" content="docfx 2.56.7.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -73,8 +73,25 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="wip">WIP</h1>
+<h1 id="level">Level</h1>
 
+<p>Level's hold all the data for each individual level and include the tiles and all the layers including <code>Entities</code>, <code>Intgrids</code> and <code>Autotiles</code>.
+You can get levels from the world class you instantiated before by calling</p>
+<pre><code class="lang-csharp">Level myLevel = world.GetLevel(&quot;Level1&quot;);
+</code></pre>
+<p>Now with <code>myLevel</code> you can access all the ldtk layers inside of it using the functions
+check the api docs for all the functions and what they do</p>
+<p>If your level has custom fields you will need to inherit from <code>Level</code>
+and add the custom fields</p>
+<pre><code class="lang-csharp">public class CustomizedLevel : Level
+{
+    public string biome;
+    public int difficulty;
+}
+</code></pre>
+<p>To load your <code>CustomizedLevel</code> you load a level like normal but also pass it your level class</p>
+<pre><code class="lang-csharp">CustomizedLevel customizedLevel = world.GetLevel&lt;CustomizedLevel&gt;(&quot;Level1&quot;);
+</code></pre>
 </article>
           </div>
           

@@ -6,7 +6,6 @@ This is the documentation page for all LDtkMonogame related stuff
 If you are looking for ldtk documentation thats [here](https://ldtk.io/)
 
 This wiki is still under contruction so alot of documentation and guides are still missing  
-The api page should be up to date with the github main branch though
 
 ## Preview
 

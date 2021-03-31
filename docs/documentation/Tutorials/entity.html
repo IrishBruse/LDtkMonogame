@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>WIP </title>
+    <title>Entity </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="WIP ">
-    <meta name="generator" content="docfx 2.56.6.0">
+    <meta name="title" content="Entity ">
+    <meta name="generator" content="docfx 2.56.7.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -73,8 +73,30 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="wip">WIP</h1>
+<h1 id="entity">Entity</h1>
 
+<p>Entities are contained inside the level and are returned from the various <code>GetEntity/GetEntities</code> functions check the api docs for more information.</p>
+<p>Similar to levels entities can have custom fields you handle that data in the same way by creating a custom inherited class from Entity</p>
+<pre><code class="lang-csharp">public class Door : Entity
+{
+    // LDtk entity fields
+    public string levelIdentifier;
+    public int destinationDoor;
+}
+</code></pre>
+<p>To load your <code>Door</code> you load a level like normal but also pass it your level class</p>
+<pre><code class="lang-csharp">Door[] doors = level.GetEntities&lt;Door&gt;();
+</code></pre>
+<p>If you dont want to inherit from a class you can create the entity fields in your class and the parser will load the data into the field aslong as they have the correct names</p>
+<ul>
+<li><code>Position</code></li>
+<li><code>LevelPosition</code></li>
+<li><code>Pivot</code></li>
+<li><code>Texture</code> (Optional)</li>
+<li><code>Size</code></li>
+<li><code>EditorVisualColor</code> (Debug Only)</li>
+<li><code>Tile</code> (Optional)</li>
+</ul>
 </article>
           </div>
           

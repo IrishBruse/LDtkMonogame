@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>World </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
-    <meta name="generator" content="docfx 2.56.6.0">
+    <meta name="title" content="World ">
+    <meta name="generator" content="docfx 2.56.7.0">
     
     <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -73,17 +73,18 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="world">World</h1>
 
-<p>To open a ldtk project file you should start by creating a new <code>World</code> object.</p>
-<p>This will load the images from normal files (_.png, _.jpg etc)</p>
+<p>To open a ldtk project file you should start by creating a new <code>World</code> object as this is what hold all the data to a ldtk project.</p>
+<p>This will load the images from normal files (*.png, *.jpg etc)</p>
 <pre><code class="lang-csharp">World world = new World(spriteBatch, &quot;Assets/MyProject.ldtk&quot;);
 </code></pre>
 <p>or if you want to use Content/.xnb files you can pass <code>Content</code> to it.</p>
 <pre><code class="lang-csharp">World world = new World(spriteBatch, &quot;Assets/MyProject.ldtk&quot;, Content);
 </code></pre>
-<p>You will need to make sure your content is in the same relative folders the origonal files in the project.
-If you are unsure check out the example project <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples">here</a>.</p>
-<p>Now that you have a refernce to the world you can use it for loading and getting<br>
+<p>You will need to make sure your content is in the same relative folders as the origonal files in the project.
+If you are unsure check out the example project <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples/Platformer/">here</a>.</p>
+<p>Now that you have a reference to the world you can use it for handling<br>
 levels you want to use in your game.</p>
 </article>
           </div>
