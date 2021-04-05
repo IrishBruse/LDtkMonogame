@@ -14,6 +14,12 @@ namespace LDtk
         /// <value>Pixels</value>
         public int TileSize { get => tileSize; }
 
+        /// <summary>
+        /// The underlying values of the int grid
+        /// </summary>
+        /// <value>Integer</value>
+        public long[,] Values { get => grid; }
+
         internal string identifier;
         internal long[,] grid;
         internal int tileSize;
