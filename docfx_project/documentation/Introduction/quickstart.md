@@ -35,7 +35,7 @@ spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 {
     for(int i = 0; i < startLevel.Layers.Length; i++)
     {
-        spriteBatch.Draw(startLevel.Layers[i], startLevel.WorldPosition, Color.White);
+        spriteBatch.Draw(startLevel.Layers[i], startLevel.Position, Color.White);
     }
 
     for (int i = 0; i < entities.Count; i++)
