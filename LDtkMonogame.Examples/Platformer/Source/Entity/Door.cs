@@ -1,8 +1,6 @@
-﻿using System;
-using LDtk;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class Door : Entity
     {
@@ -36,9 +34,9 @@ namespace Examples
             }
             else
             {
-                var tile= Tile;
-                tile.Location=Point.Zero;
-                Tile=tile;
+                var tile = Tile;
+                tile.Location = Point.Zero;
+                Tile = tile;
             }
         }
     }

@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
-    public class LDtkExample : BaseExample
+    public class PlatformerGame : BaseExample
     {
         private const string LDTK_FILE = "Assets/LDtkMonogameExample.ldtk";
 
@@ -20,9 +20,9 @@ namespace Examples
 
         // Entities
         private Texture2D pixelTexture;
-        private List<Door> doors = new List<Door>();
-        private List<Crate> crates = new List<Crate>();
-        private List<Diamond> diamonds = new List<Diamond>();
+        private readonly List<Door> doors = new List<Door>();
+        private readonly List<Crate> crates = new List<Crate>();
+        private readonly List<Diamond> diamonds = new List<Diamond>();
         private Player player;
 
         // UI
@@ -35,7 +35,7 @@ namespace Examples
         private bool showEntityColliders;
         Door destinationDoor;
 
-        public LDtkExample() : base()
+        public PlatformerGame() : base()
         {
             freeCam = false;
             Content.RootDirectory = "Content";
@@ -73,15 +73,17 @@ namespace Examples
 
             Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
 
-            player = new Player();
-            player.Texture = Content.Load<Texture2D>("Art/Characters/KingHuman");
-            player.Position = startLocation.Position;
-            player.Pivot = startLocation.Pivot;
+            player = new Player
+            {
+                Texture = Content.Load<Texture2D>("Art/Characters/KingHuman"),
+                Position = startLocation.Position,
+                Pivot = startLocation.Pivot,
 #if DEBUG
-            player.EditorVisualColor = startLocation.EditorVisualColor;
+                EditorVisualColor = startLocation.EditorVisualColor,
 #endif
-            player.Tile = new Rectangle(0, 0, 78, 58);
-            player.Size = new Vector2(78, 58);
+                Tile = new Rectangle(0, 0, 78, 58),
+                Size = new Vector2(78, 58)
+            };
 
             player.animator.OnEnteredDoor += () =>
             {
@@ -133,7 +135,7 @@ namespace Examples
             }
 
             levelManager.SetCenterPoint(player.Position);
-            levelManager.Update(deltaTime);
+            levelManager.Update();
             player.Update(keyboard, oldKeyboard, mouse, oldMouse, levelManager.CurrentLevel, deltaTime);
 
             player.door = null;
@@ -195,8 +197,6 @@ namespace Examples
 
         protected override void Draw(GameTime gameTime)
         {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             levelManager.Clear(GraphicsDevice);
 
             Matrix camera = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
@@ -224,9 +224,9 @@ namespace Examples
 
                 // Digit hundreds
 
-                int units = (int)(diamondsCollected % 10);
-                int tens = (int)((diamondsCollected / 10) % 10);
-                int hundreds = (int)((diamondsCollected / 100) % 10);
+                int units = diamondsCollected % 10;
+                int tens = diamondsCollected / 10 % 10;
+                int hundreds = diamondsCollected / 100 % 10;
 
                 spriteBatch.Draw(fontTexture,
                     new Vector2(12, 1) * pixelScale * 2,

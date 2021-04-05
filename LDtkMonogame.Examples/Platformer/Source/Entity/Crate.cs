@@ -1,9 +1,8 @@
-﻿using System;
-using LDtk;
+﻿using LDtk;
 
 using Microsoft.Xna.Framework;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class Crate : Entity
     {

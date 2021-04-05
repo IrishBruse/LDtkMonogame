@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\LDtkMonogame.ContentPipeline\bin\Debug\netcoreapp3.1\LDtkMonogame.ContentPipeline.dll
+/reference:..\..\..\LDtkMonogame.ContentPipeline\bin\Debug\netcoreapp3.1\LDtkMonogame.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -145,3 +145,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:../Assets/Art/Tilesets/Terrain.png;Art/Tilesets/Terrain.png
+
+#begin ../Assets/LDtkMonogameExample.ldtk
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:../Assets/LDtkMonogameExample.ldtk;LDtkMonogameExample.ldtk
+

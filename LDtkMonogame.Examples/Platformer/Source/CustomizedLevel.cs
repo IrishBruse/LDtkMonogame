@@ -1,6 +1,4 @@
-using LDtk;
-
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class CustomizedLevel : Level
     {

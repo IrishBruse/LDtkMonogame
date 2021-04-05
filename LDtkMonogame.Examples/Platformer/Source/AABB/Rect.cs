@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class Rect
     {

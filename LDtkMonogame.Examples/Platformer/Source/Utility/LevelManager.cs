@@ -1,28 +1,25 @@
 using System;
-using Microsoft.Xna.Framework.Graphics;
-using LDtk;
-using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class LevelManager
     {
         public CustomizedLevel CurrentLevel { get; private set; }
 
         public Action<Level> OnEnterNewLevel;
-
-        List<string> levelsVisited = new List<string>();
-
-        World world;
-        Vector2 center;
+        private readonly List<string> levelsVisited = new List<string>();
+        private readonly World world;
+        private Vector2 center;
 
         public LevelManager(World world)
         {
             this.world = world;
         }
 
-        public void Update(double deltaTime)
+        public void Update()
         {
             // Handle leaving a level
             if (LevelContainsPoint(CurrentLevel, center) == false)

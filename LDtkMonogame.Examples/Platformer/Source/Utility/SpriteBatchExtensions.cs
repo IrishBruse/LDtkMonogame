@@ -1,8 +1,7 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public static class SpriteBatchExtensions
     {

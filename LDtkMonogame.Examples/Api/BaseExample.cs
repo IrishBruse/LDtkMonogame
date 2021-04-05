@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Examples
+namespace LDtk.Examples.Api
 {
     public class BaseExample : Game
     {
@@ -51,7 +51,7 @@ namespace Examples
                 if (mouse.MiddleButton == ButtonState.Pressed)
                 {
                     Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += (new Vector2(pos.X, pos.Y) * 30) / (pixelScale * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    cameraPosition += new Vector2(pos.X, pos.Y) * 30 / (pixelScale * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
             }
 

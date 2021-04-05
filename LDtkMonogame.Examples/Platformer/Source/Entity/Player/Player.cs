@@ -4,7 +4,7 @@ using LDtk;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class Player : Entity
     {
@@ -22,7 +22,6 @@ namespace Examples
         private bool grounded;
         private bool noClip;
         private bool onPlatfrom;
-        private Vector2 input;
         internal bool attacking;
 
         public Player()
@@ -59,7 +58,6 @@ namespace Examples
             float h = (keyboard.IsKeyDown(Keys.A) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) ? 1 : 0);
             float v = (keyboard.IsKeyDown(Keys.W) ? -1 : 0) + (keyboard.IsKeyDown(Keys.S) ? 1 : 0);
 
-            input = new Vector2(h, v);
             attacking = false;
             if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released)
             {
@@ -170,11 +168,11 @@ namespace Examples
             // Perform collision resolution
             for (int i = 0; i < z.Count; i++)
             {
-                (Rect rect, long type) cell = tiles[z[i].Key];
+                (Rect rect, long type) = tiles[z[i].Key];
 
-                if (collider.Cast(velocity, cell.rect, out Vector2 cp, out Vector2 cn, out float ct, deltaTime))
+                if (collider.Cast(velocity, rect, out Vector2 cp, out Vector2 cn, out float ct, deltaTime))
                 {
-                    long val = cell.type;
+                    long val = type;
 
                     if (cn == new Vector2(0, -1))
                     {

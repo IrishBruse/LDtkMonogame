@@ -2,7 +2,7 @@ using System;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-namespace Examples
+namespace LDtk.Examples.Platformer
 {
     public class Animator
     {
@@ -10,10 +10,8 @@ namespace Examples
 
         private float animationTimer;
         private int animationFrame;
-        private Entity parent;
-        private Animation state;
-        private Animation oldState;
-        private Vector2 velocity;
+        private readonly Entity parent;
+        private Animation state; private Vector2 velocity;
         private bool grounded;
         private Animation delayedState = Animation.None;
         private int delayedFrames = -1;
@@ -30,8 +28,6 @@ namespace Examples
             if (animationTimer >= .1f)
             {
                 animationTimer -= .1f;
-
-                oldState = state;
 
                 parent.Tile = new Rectangle(animationFrame * (int)parent.Size.X, (int)state * (int)parent.Size.Y, (int)parent.Size.X, (int)parent.Size.Y);
 
