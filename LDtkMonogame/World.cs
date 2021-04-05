@@ -63,7 +63,7 @@ namespace LDtk
             // Throw error if file not found
             if (File.Exists(jsonFilePath) == false)
             {
-                throw new FileNotFoundException("Ldtk project File not found " + ldtkFile);
+                throw new FileNotFoundException("Ldtk project File not found " + Path.GetFullPath(ldtkFile));
             }
 
             json = LDtkJson.FromJson(File.ReadAllText(jsonFilePath));
@@ -135,7 +135,7 @@ namespace LDtk
 
                     for (int fieldIndex = 0; fieldIndex < json.Levels[i].FieldInstances.Length; fieldIndex++)
                     {
-                        Utility.ParseField(level, json.Levels[i].FieldInstances[fieldIndex]);
+                        Parser.ParseField(level, json.Levels[i].FieldInstances[fieldIndex]);
                     }
 
                     return level;
@@ -199,7 +199,7 @@ namespace LDtk
                 Identifier = jsonLevel.Identifier,
 
                 // Cache the Background Color/Clear Color
-                BgColor = Utility.ConvertStringToColor(jsonLevel.BgColor),
+                BgColor = Parser.ParseStringToColor(jsonLevel.BgColor),
 
                 // Set the world position
                 Position = new Vector2(jsonLevel.WorldX, jsonLevel.WorldY),

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LDtk.Exceptions;
 using LDtk.Json;
 using Microsoft.Xna.Framework;
@@ -63,17 +62,6 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Gets the parsed entities from the ldtk json
-        /// If fields are missing they will be logged to the console in debug mode only
-        /// </summary>
-        /// <param name="identifier">The name of the entity to parse this to</param>
-        /// <returns>The entities cast to the class</returns>
-        public Entity[] GetEntities(string identifier)
-        {
-            return ParseEntities<Entity>(identifier, false);
-        }
-
-        /// <summary>
         /// Gets the first found parsed entity from the ldtk json
         /// If fields are missing they will be logged to the console in debug mode only
         /// </summary>
@@ -91,9 +79,21 @@ namespace LDtk
         /// </summary>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         /// <returns>The entity cast to the class</returns>
-        public T GetEntity<T>() where T : Entity, new()
+        public T GetEntity<T>() where T : new()
         {
             return ParseEntities<T>(typeof(T).Name, true)[0];
+        }
+
+
+        /// <summary>
+        /// Gets the parsed entities from the ldtk json
+        /// If fields are missing they will be logged to the console in debug mode only
+        /// </summary>
+        /// <param name="identifier">The name of the entity to parse this to</param>
+        /// <returns>The entities cast to the class</returns>
+        public Entity[] GetEntities(string identifier)
+        {
+            return ParseEntities<Entity>(identifier, false);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace LDtk
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
         /// <returns>The entities cast to the class</returns>
-        public T[] GetEntities<T>(string identifier) where T : Entity, new()
+        public T[] GetEntities<T>(string identifier) where T : new()
         {
             return ParseEntities<T>(identifier, false);
         }
@@ -114,81 +114,9 @@ namespace LDtk
         /// </summary>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entities</typeparam>
         /// <returns>The entities cast to the class</returns>
-        public T[] GetEntities<T>() where T : Entity, new()
+        public T[] GetEntities<T>() where T : new()
         {
             return ParseEntities<T>(typeof(T).Name, false);
-        }
-
-
-        private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : Entity, new()
-        {
-            List<T> parsedEntities = new List<T>();
-
-            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
-            {
-                if (entities[entityIndex].Identifier == identifier)
-                {
-                    T entity = new T();
-
-                    ParseBaseEntityFields(entity, entities[entityIndex]);
-                    for (int fieldIndex = 0; fieldIndex < entities[entityIndex].FieldInstances.Length; fieldIndex++)
-                    {
-                        Utility.ParseField(entity, entities[entityIndex].FieldInstances[fieldIndex]);
-                    }
-
-                    parsedEntities.Add(entity);
-
-                    if (breakOnMatch == true)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            return parsedEntities.ToArray();
-        }
-        private void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance)
-        {
-            var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
-
-            ParseBaseField(entity, "Position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
-            ParseBaseField(entity, "LevelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
-
-            ParseBaseField(entity, "Pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
-
-            if (entityInstance.Tile != null)
-            {
-                ParseBaseField(entity, "Texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
-            }
-
-            ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
-#if DEBUG
-            ParseBaseField(entity, "EditorVisualColor", Utility.ConvertStringToColor(entityDefinition.Color, 128));
-#endif
-            if (entityDefinition.TilesetId.HasValue)
-            {
-                var tileDefinition = entityInstance.Tile;
-                Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
-                ParseBaseField(entity, "Tile", rect);
-            }
-        }
-
-        void ParseBaseField<T>(T entity, string field, object value)
-        {
-            // WorldPosition
-            var variable = typeof(T).GetProperty(field);
-            if (variable != null)
-            {
-                variable.SetValue(entity, value);
-            }
-#if DEBUG
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Field \"{field}\" not found add it to {typeof(T).FullName}");
-                Console.ResetColor();
-            }
-#endif
         }
 
         /// <summary>
@@ -206,6 +134,57 @@ namespace LDtk
             }
 
             throw new IntGridNotFoundException(identifier);
+        }
+
+        private T[] ParseEntities<T>(string identifier, bool breakOnMatch) where T : new()
+        {
+            List<T> parsedEntities = new List<T>();
+
+            for (int entityIndex = 0; entityIndex < entities.Length; entityIndex++)
+            {
+                if (entities[entityIndex].Identifier == identifier)
+                {
+                    T entity = new T();
+                    var entityInstance = entities[entityIndex];
+
+                    var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
+
+                    Parser.ParseBaseField(entity, "position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
+                    Parser.ParseBaseField(entity, "levelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
+
+                    Parser.ParseBaseField(entity, "pivot", new Vector2((float)entityInstance.Pivot[0], (float)entityInstance.Pivot[1]));
+
+                    if (entityInstance.Tile != null)
+                    {
+                        Parser.ParseBaseField(entity, "texture", owner.GetTilesetTextureFromUid(entityInstance.Tile.TilesetUid));
+                    }
+
+                    Parser.ParseBaseField(entity, "size", new Vector2(entityInstance.Width, entityInstance.Height));
+#if DEBUG
+                    Parser.ParseBaseField(entity, "editorVisualColor", Parser.ParseStringToColor(entityDefinition.Color, 128));
+#endif
+                    if (entityDefinition.TilesetId.HasValue)
+                    {
+                        var tileDefinition = entityInstance.Tile;
+                        Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
+                        Parser.ParseBaseField(entity, "tile", rect);
+                    }
+
+                    for (int fieldIndex = 0; fieldIndex < entityInstance.FieldInstances.Length; fieldIndex++)
+                    {
+                        Parser.ParseField(entity, entityInstance.FieldInstances[fieldIndex]);
+                    }
+
+                    parsedEntities.Add(entity);
+
+                    if (breakOnMatch == true)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return parsedEntities.ToArray();
         }
     }
 }
