@@ -6,7 +6,18 @@
     },
     "configurations": [
         {
-            "name": "Debug",
+            "name": "Launch Api Example",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Api/",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/Api/bin/Debug/net5.0/Api.dll",
+            "args": [],
+            "stopAtEntry": false,
+            "console": "externalTerminal",
+        },        
+        {
+            "name": "Launch Platformer Example",
             "type": "coreclr",
             "request": "launch","symbolOptions": {
                 "searchPaths": ["${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/"],
@@ -14,19 +25,22 @@
                 "searchNuGetOrgSymbolServer": false
             },
             "preLaunchTask": "build",
-            "justMyCode": true,
-            "suppressJITOptimizations": true,
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples",
             "program": "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/LDtkMonogame.Examples.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples",
             "console": "externalTerminal",
             "stopAtEntry": false
         },
         {
-            "name": ".NET Core Attach",
+            "name": "Launch Quickstart Example",
             "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/bin/Debug/net5.0/Quickstart.dll>",
+            "args": [],
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/",
+            "stopAtEntry": false,
+            "console": "internalConsole"
         }
     ]
 }
