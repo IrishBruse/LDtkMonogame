@@ -25,8 +25,8 @@
                 "searchNuGetOrgSymbolServer": false
             },
             "preLaunchTask": "build",
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/LDtkMonogame.Examples.dll",
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
             "args": [],
             "console": "externalTerminal",
             "stopAtEntry": false
@@ -36,9 +36,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
+            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/",
             "program": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/bin/Debug/net5.0/Quickstart.dll>",
             "args": [],
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/",
             "stopAtEntry": false,
             "console": "internalConsole"
         }
