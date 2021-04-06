@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame.ContentPipeline", "LDtkMonogame.ContentPipeline\LDtkMonogame.ContentPipeline.csproj", "{20AF0CED-5BB5-4516-8D34-A1A6F66BE9DC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame", "LDtkMonogame\LDtkMonogame.csproj", "{ED775220-9938-4833-AA11-207B0DAF9B92}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickstart", "LDtkMonogame.Examples\Quickstart\Quickstart.csproj", "{D7C57435-8C53-4F84-AB64-85108D7A5F0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LDtkMonogame.Examples", "LDtkMonogame.Examples", "{862A1BA4-9A41-40A6-B431-890A4F0BE180}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformerExample", "LDtkMonogame.Examples\Platformer\PlatformerExample.csproj", "{4B73B916-3883-439E-A464-A451D2F07D47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "LDtkMonogame.Examples\Platformer\Platformer.csproj", "{4B73B916-3883-439E-A464-A451D2F07D47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "LDtkMonogame.Examples\Api\Api.csproj", "{1DCD84CA-65EE-4C38-90BA-FC1E41029398}"
 EndProject
@@ -49,10 +47,6 @@ Global
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20AF0CED-5BB5-4516-8D34-A1A6F66BE9DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20AF0CED-5BB5-4516-8D34-A1A6F66BE9DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20AF0CED-5BB5-4516-8D34-A1A6F66BE9DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20AF0CED-5BB5-4516-8D34-A1A6F66BE9DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
