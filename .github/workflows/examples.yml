@@ -18,6 +18,8 @@ jobs:
           dotnet-version: 3.1
       - name: Restore dependencies
         run: dotnet restore
+      - name: Content Extension dll
+        run: dotnet build LDtkMonogame.ContentPipeline/LDtkMonogame.ContentPipeline.csproj -f netcoreapp3.1
       - name: Api
         run: dotnet build LDtkMonogame.Examples/Api/Api.csproj --no-restore -f netcoreapp3.1
       - name: Platformer
