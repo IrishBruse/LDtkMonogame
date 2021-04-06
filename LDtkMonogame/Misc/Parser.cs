@@ -122,12 +122,27 @@ namespace LDtk
                 case Field.PointType:
                     if (fieldInstance.Value != null)
                     {
-                        Vector2 vector = JsonConvert.DeserializeObject<LDtkPoint>(fieldInstance.Value.ToString());
-                        field.SetValue(entity, vector);
+                        if (field.FieldType == typeof(Vector2))
+                        {
+                            Vector2 vector = JsonConvert.DeserializeObject<LDtkPoint>(fieldInstance.Value.ToString());
+                            field.SetValue(entity, vector);
+                        }
+                        else if (field.FieldType == typeof(Point))
+                        {
+                            Point point = JsonConvert.DeserializeObject<LDtkPoint>(fieldInstance.Value.ToString());
+                            field.SetValue(entity, point);
+                        }
                     }
                     else
                     {
-                        field.SetValue(entity, Vector2.Zero);
+                        if (field.FieldType == typeof(Vector2))
+                        {
+                            field.SetValue(entity, Vector2.Zero);
+                        }
+                        else if (field.FieldType == typeof(Point))
+                        {
+                            field.SetValue(entity, Point.Zero);
+                        }
                     }
                     break;
 
@@ -169,6 +184,7 @@ namespace LDtk
 #endif
         }
 
+#pragma warning disable CS0649
         class LDtkPoint
         {
             [JsonProperty()]
@@ -176,6 +192,8 @@ namespace LDtk
             [JsonProperty()]
             public int cy;
             public static implicit operator Vector2(LDtkPoint p) => new Vector2(p.cx, p.cy);
+            public static implicit operator Point(LDtkPoint p) => new Point(p.cx, p.cy);
         }
+#pragma warning restore CS0649
     }
 }
