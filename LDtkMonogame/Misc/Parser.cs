@@ -120,14 +120,21 @@ namespace LDtk
                     break;
 
                 case Field.PointType:
-                    Point point = JsonConvert.DeserializeObject<LDtkPoint>(fieldInstance.Value.ToString());
-                    field.SetValue(entity, point);
+                    if (fieldInstance.Value != null)
+                    {
+                        Vector2 vector = JsonConvert.DeserializeObject<LDtkPoint>(fieldInstance.Value.ToString());
+                        field.SetValue(entity, vector);
+                    }
+                    else
+                    {
+                        field.SetValue(entity, Vector2.Zero);
+                    }
                     break;
 
                 case Field.PointArrayType:
                     List<LDtkPoint> points = JsonConvert.DeserializeObject<List<LDtkPoint>>(fieldInstance.Value.ToString());
 
-                    Point[] pointArray = new Point[fieldInstance.RealEditorValues.Length];
+                    Vector2[] pointArray = new Vector2[fieldInstance.RealEditorValues.Length];
 
                     for (int i = 0; i < points.Count; i++)
                     {
@@ -168,7 +175,7 @@ namespace LDtk
             public int cx;
             [JsonProperty()]
             public int cy;
-            public static implicit operator Point(LDtkPoint p) => new Point(p.cx, p.cy);
+            public static implicit operator Vector2(LDtkPoint p) => new Vector2(p.cx, p.cy);
         }
     }
 }
