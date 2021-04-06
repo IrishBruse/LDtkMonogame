@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Api
@@ -16,7 +15,7 @@ namespace LDtk.Examples.Api
         public string filePath;
         public int[] array_Integer;
         public SomeEnum[] array_Enum;
-        public Point[] array_points;
+        public Vector2[] array_points;
         public string[] array_multilines;
 
         public override string ToString()

@@ -14,8 +14,6 @@ namespace LDtk.Examples.Api
         IntGrid intGrid8px;
         IntGrid intGridClassic;
 
-        Texture2D pixelTexture;
-
         public ApiGame() : base() { }
 
         protected override void Initialize()
@@ -53,9 +51,6 @@ namespace LDtk.Examples.Api
                 Console.WriteLine(rectRegions[i].ToString());
                 Console.WriteLine();
             }
-
-            pixelTexture = new Texture2D(GraphicsDevice, 1, 1);
-            pixelTexture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
         }
 
         protected override void Update(GameTime gameTime)
@@ -85,7 +80,7 @@ namespace LDtk.Examples.Api
                     {
                         if (intGrid8px.Values[x, y] != 0)
                         {
-                            spriteBatch.Draw(pixelTexture, new Rectangle(new Point(x * intGrid8px.TileSize, y * intGrid8px.TileSize), new Point(1 * intGrid8px.TileSize, 1 * intGrid8px.TileSize)), Color.White);
+                            spriteBatch.Draw(texture, new Rectangle(new Point(x * intGrid8px.TileSize, y * intGrid8px.TileSize), new Point(1 * intGrid8px.TileSize, 1 * intGrid8px.TileSize)), Color.White);
                         }
                     }
                 }
@@ -98,25 +93,10 @@ namespace LDtk.Examples.Api
                         if (intGridClassic.Values[x, y] != 0 && intGridClassic.Values[x, y] != 3)
                         {
                             Color col = intGridClassic.Values[x, y] == 1 ? Color.Black : Color.CornflowerBlue;
-                            spriteBatch.Draw(pixelTexture, new Rectangle(new Point(x * intGridClassic.TileSize, y * intGridClassic.TileSize), new Point(1 * intGridClassic.TileSize, 1 * intGridClassic.TileSize)), col);
+                            spriteBatch.Draw(texture, new Rectangle(new Point(x * intGridClassic.TileSize, y * intGridClassic.TileSize), new Point(1 * intGridClassic.TileSize, 1 * intGridClassic.TileSize)), col);
                         }
                     }
                 }
-
-
-                // // Bulk entity rendering
-                // for (int i = 0; i < entities.Count; i++)
-                // {
-                //     spriteBatch.Draw(entities[i].Texture,
-                //         entities[i].Position,
-                //         entities[i].Tile.Width > 0 ? entities[i].Tile : new Rectangle(0, 0, (int)entities[i].Size.X, (int)entities[i].Size.Y),
-                //         Color.White,
-                //         0,
-                //         entities[i].Pivot * entities[i].Size,
-                //         1,
-                //         SpriteEffects.None,
-                //         0);
-                // }
             }
             spriteBatch.End();
 

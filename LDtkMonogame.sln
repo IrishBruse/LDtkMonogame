@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "LDtkMonogame.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "LDtkMonogame.Examples\Api\Api.csproj", "{1DCD84CA-65EE-4C38-90BA-FC1E41029398}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame.ContentPipeline", "LDtkMonogame.ContentPipeline\LDtkMonogame.ContentPipeline.csproj", "{330EC38E-A5AB-4E94-B784-99778FF7AC0F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DCD84CA-65EE-4C38-90BA-FC1E41029398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{330EC38E-A5AB-4E94-B784-99778FF7AC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330EC38E-A5AB-4E94-B784-99778FF7AC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330EC38E-A5AB-4E94-B784-99778FF7AC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330EC38E-A5AB-4E94-B784-99778FF7AC0F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
