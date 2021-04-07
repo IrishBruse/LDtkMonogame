@@ -10,8 +10,6 @@ namespace LDtk.Examples.Platformer
 {
     public class PlatformerGame : BaseExample
     {
-        private const string LDTK_FILE = "Assets/LDtkMonogameExample.ldtk";
-
         // LDtk stuff
         private World world;
         private LevelManager levelManager;
@@ -45,7 +43,9 @@ namespace LDtk.Examples.Platformer
         {
             base.Initialize();
 
-            world = new World(spriteBatch, LDTK_FILE, Content);
+            world = Content.Load<World>("LDtkMonogameExample");
+            world.spriteBatch = spriteBatch;
+            world.GraphicsDevice = GraphicsDevice;
             levelManager = new LevelManager(world);
 
             levelManager.OnEnterNewLevel += (level) =>

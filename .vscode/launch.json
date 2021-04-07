@@ -11,7 +11,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Api/",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/Api/bin/Debug/net5.0/Api.dll",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/Api/bin/Debug/netcoreapp3.1/Api.dll",
             "args": [],
             "stopAtEntry": false,
             "console": "externalTerminal",

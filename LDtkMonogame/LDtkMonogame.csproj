@@ -16,7 +16,7 @@
 		<PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
-		<PackageTags>LDtk, Monogame, Level Editor</PackageTags>
+		<PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
 		<PackageIcon>../Icon.png</PackageIcon>
 		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes>Changes on wiki</PackageReleaseNotes>
@@ -29,13 +29,6 @@
 	<ItemGroup>
 		<PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</EmbeddedResource>
 	</ItemGroup>
 
 </Project>

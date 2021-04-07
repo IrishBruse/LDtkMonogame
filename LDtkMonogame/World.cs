@@ -16,58 +16,27 @@ namespace LDtk
     public class World
     {
         private Level[] levels;
-        private string jsonFilePath;
         private LDtkJson json;
-        private string projectFolder;
-        private readonly SpriteBatch spriteBatch;
+        public SpriteBatch spriteBatch;
+        public GraphicsDevice GraphicsDevice;
         private readonly ContentManager Content;
-        private readonly GraphicsDevice GraphicsDevice;
 
         /// <summary>
         /// <para>Load the LDtk json file.</para>
         /// </summary>
-        /// <param name="spriteBatch">Monogame's <see cref="SpriteBatch"/></param>
-        /// <param name="ldtkFile">The path to the .ldtk file</param>
-        public World(SpriteBatch spriteBatch, string ldtkFile)
+        public World(string json, ContentManager Content)
         {
-            this.spriteBatch = spriteBatch;
-            GraphicsDevice = spriteBatch.GraphicsDevice;
-            ReloadProject(ldtkFile);
-        }
-
-        /// <summary>
-        /// <para>Load the LDtk json file.</para>
-        /// </summary>
-        /// <param name="spriteBatch">Monogame's <see cref="SpriteBatch"/></param>
-        /// <param name="ldtkFile">The path to the .ldtk file</param>
-        /// <param name="content">The <see cref="ContentManager"/> used to load <see cref="Texture2D"/> from content</param>
-        public World(SpriteBatch spriteBatch, string ldtkFile, ContentManager content)
-        {
-            this.spriteBatch = spriteBatch;
-            this.Content = content;
-            GraphicsDevice = spriteBatch.GraphicsDevice;
-            ReloadProject(ldtkFile);
+            this.Content = Content;
+            ReloadProject(json);
         }
 
         /// <summary>
         /// <para>Reload the LDtk json file.</para>
         /// <para><c>Warning</c> make sure to rerender your <see cref="Level"/>'s.</para>
         /// </summary>
-        void ReloadProject(string ldtkFile = null)
+        void ReloadProject(string jsonContents)
         {
-            if (ldtkFile != null)
-            {
-                jsonFilePath = ldtkFile;
-            }
-
-            // Throw error if file not found
-            if (File.Exists(jsonFilePath) == false)
-            {
-                throw new FileNotFoundException("Ldtk project File not found " + Path.GetFullPath(ldtkFile));
-            }
-
-            json = LDtkJson.FromJson(File.ReadAllText(jsonFilePath));
-            projectFolder = Path.GetDirectoryName(Path.GetFullPath(jsonFilePath));
+            json = LDtkJson.FromJson(jsonContents);
             levels = new Level[json.Levels.Length];
         }
 
@@ -185,8 +154,7 @@ namespace LDtk
         {
             if (json.ExternalLevels == true)
             {
-                string path = Path.Combine(projectFolder, jsonLevel.ExternalRelPath);
-                jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<LDtkLevel>(File.ReadAllText(path));
+                jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<LDtkLevel>(File.ReadAllText(jsonLevel.ExternalRelPath));
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
@@ -232,7 +200,7 @@ namespace LDtk
                 level.Layers[jsonLayerInstances.Length] = new RenderTarget2D(GraphicsDevice, (int)(jsonLayerInstances[0].CWid * jsonLayerInstances[0].GridSize), (int)(jsonLayerInstances[0].CHei * jsonLayerInstances[0].GridSize), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
                 GraphicsDevice.SetRenderTarget(level.Layers[jsonLayerInstances.Length]);
 
-                texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, jsonLevel.BgRelPath));
+                texture = Texture2D.FromFile(GraphicsDevice, jsonLevel.BgRelPath);
 
                 spriteBatch.Begin(blendState: BlendState.NonPremultiplied, samplerState: SamplerState.PointClamp);
                 {
@@ -270,7 +238,7 @@ namespace LDtk
                     }
                     else
                     {
-                        texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, jsonLayer.TilesetRelPath));
+                        texture = Texture2D.FromFile(GraphicsDevice, jsonLayer.TilesetRelPath);
                     }
                 }
                 else
@@ -412,7 +380,7 @@ namespace LDtk
                     }
                     else
                     {
-                        var texture = Texture2D.FromFile(GraphicsDevice, Path.Combine(projectFolder, json.Defs.Tilesets[i].RelPath));
+                        var texture = Texture2D.FromFile(GraphicsDevice, json.Defs.Tilesets[i].RelPath);
                         texture.Name = Path.GetFileName(json.Defs.Tilesets[i].RelPath);
                         return texture;
                     }

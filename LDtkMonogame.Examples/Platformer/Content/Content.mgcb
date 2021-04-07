@@ -14,7 +14,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../Assets/Art/Box/Box Pieces.png
+#begin Art/Box/Box Pieces.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -24,9 +24,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Box/Box Pieces.png;Art/Box/Box Pieces.png
+/build:Art/Box/Box Pieces.png
 
-#begin ../Assets/Art/Box/Box.png
+#begin Art/Box/Box.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -36,9 +36,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Box/Box.png;Art/Box/Box.png
+/build:Art/Box/Box.png
 
-#begin ../Assets/Art/Characters/KingHuman.png
+#begin Art/Characters/KingHuman.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -48,9 +48,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Characters/KingHuman.png;Art/Characters/KingHuman.png
+/build:Art/Characters/KingHuman.png
 
-#begin ../Assets/Art/Diamond.png
+#begin Art/Diamond.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -60,9 +60,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Diamond.png;Art/Diamond.png
+/build:Art/Diamond.png
 
-#begin ../Assets/Art/Door.png
+#begin Art/Door.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -72,9 +72,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Door.png;Art/Door.png
+/build:Art/Door.png
 
-#begin ../Assets/Art/Gui/Diamond.png
+#begin Art/Gui/Diamond.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -84,9 +84,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Gui/Diamond.png;Art/Gui/Diamond.png
+/build:Art/Gui/Diamond.png
 
-#begin ../Assets/Art/Gui/Font.png
+#begin Art/Gui/Font.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,9 +96,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Gui/Font.png;Art/Gui/Font.png
+/build:Art/Gui/Font.png
 
-#begin ../Assets/Art/Gui/Heart.png
+#begin Art/Gui/Heart.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -108,9 +108,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Gui/Heart.png;Art/Gui/Heart.png
+/build:Art/Gui/Heart.png
 
-#begin ../Assets/Art/Gui/Live Bar.png
+#begin Art/Gui/Live Bar.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -120,9 +120,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Gui/Live Bar.png;Art/Gui/Live Bar.png
+/build:Art/Gui/Live Bar.png
 
-#begin ../Assets/Art/Tilesets/Decorations.png
+#begin Art/Tilesets/Decorations.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -132,9 +132,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Tilesets/Decorations.png;Art/Tilesets/Decorations.png
+/build:Art/Tilesets/Decorations.png
 
-#begin ../Assets/Art/Tilesets/Terrain.png
+#begin Art/Tilesets/Terrain.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -144,10 +144,50 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:../Assets/Art/Tilesets/Terrain.png;Art/Tilesets/Terrain.png
+/build:Art/Tilesets/Terrain.png
 
-#begin ../Assets/LDtkMonogameExample.ldtk
+#begin LDtkMonogameExample.ldtk
 /importer:LDtkImporter
 /processor:LDtkProcessor
-/build:../Assets/LDtkMonogameExample.ldtk;LDtkMonogameExample.ldtk
+/build:LDtkMonogameExample.ldtk
+
+#begin LDtkMonogameExample/0000-Level1.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0000-Level1.ldtkl
+
+#begin LDtkMonogameExample/0001-Level2.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0001-Level2.ldtkl
+
+#begin LDtkMonogameExample/0002-Level1a.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0002-Level1a.ldtkl
+
+#begin LDtkMonogameExample/0003-Level3.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0003-Level3.ldtkl
+
+#begin LDtkMonogameExample/0004-Level3a.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0004-Level3a.ldtkl
+
+#begin LDtkMonogameExample/0005-Level3b.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0005-Level3b.ldtkl
+
+#begin LDtkMonogameExample/0006-Level4.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0006-Level4.ldtkl
+
+#begin LDtkMonogameExample/0007-Level4a.ldtkl
+/importer:LDtkImporter
+/processor:LDtkProcessor
+/build:LDtkMonogameExample/0007-Level4a.ldtkl
 

@@ -14,13 +14,18 @@ namespace LDtk.Examples.Api
         IntGrid intGrid8px;
         IntGrid intGridClassic;
 
-        public ApiGame() : base() { }
+        public ApiGame() : base()
+        {
+            Content.RootDirectory = "Content";
+        }
 
         protected override void Initialize()
         {
             base.Initialize();
 
-            world = new World(spriteBatch, "Assets/Test_file_for_API_showing_all_features.ldtk");
+            world = Content.Load<World>("Test_file_for_API_showing_all_features");
+            world.spriteBatch = spriteBatch;
+            world.GraphicsDevice = GraphicsDevice;
 
             world.LoadLevel("Level1");
             myLevel = world.GetLevel<CustomLevel>("Level1");
