@@ -19,7 +19,13 @@ LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [
 
 ## Sceenshots
 
+Comparison
 ![LDtk to Monogame Conversion](docfx_project/art/screenshots/LDtk%20to%20Monogame.png "1 to 1 Conversion")
-![LDtk to Monogame Conversion](docfx_project/art/screenshots/Example%20Project.gif "1 to 1 Conversion")
+
+Platformer Example
+![Platformer Example](docfx_project/art/screenshots/Example%20Project.gif "Platformer Example")
+
+Entity Support
+![Entity Support](docfx_project/art/screenshots/Entity%20Support.png "Entity Support")
 
 [Kings and pigs Art by pixelfrog](https://pixelfrog-assets.itch.io/kings-and-pigs)
