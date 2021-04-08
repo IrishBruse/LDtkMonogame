@@ -9,7 +9,7 @@ namespace LDtk
     /// <summary>
     /// Abstracted version of ldtk's level
     /// </summary>
-    public class Level
+    public class LDtkLevel
     {
         /// <summary>
         /// The identifier of the level set in ldtk
@@ -37,7 +37,7 @@ namespace LDtk
         public Color BgColor { get; internal set; }
 
         /// <summary>
-        /// Prerendered layer textures created from <see cref="World.GetLevel(string)"/>
+        /// Prerendered layer textures created from <see cref="LDtkWorld.GetLevel(string)"/>
         /// </summary>
         public RenderTarget2D[] Layers { get; internal set; }
 
@@ -46,19 +46,19 @@ namespace LDtk
         /// </summary>
         public long[] Neighbours { get; internal set; }
 
-        internal World owner;
+        internal LDtkWorld owner;
         internal EntityInstance[] entities;
-        internal IntGrid[] intGrids;
+        internal LDtkIntGrid[] intGrids;
 
         /// <summary>
         /// Gets the parsed entity from the ldtk json
         /// If fields are missing they will be logged to the console in debug mode only
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
-        /// <returns>The entity cast to the <see cref="Entity"/> class</returns>
-        public Entity GetEntity(string identifier)
+        /// <returns>The entity cast to the <see cref="LDtkEntity"/> class</returns>
+        public LDtkEntity GetEntity(string identifier)
         {
-            return ParseEntities<Entity>(identifier, true)[0];
+            return ParseEntities<LDtkEntity>(identifier, true)[0];
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace LDtk
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <typeparam name="T">The class/struct you will use to parse the ldtk entity</typeparam>
         /// <returns>The entity cast to the class</returns>
-        public T GetEntity<T>(string identifier) where T : Entity, new()
+        public T GetEntity<T>(string identifier) where T : LDtkEntity, new()
         {
             return ParseEntities<T>(identifier, false)[0];
         }
@@ -91,9 +91,9 @@ namespace LDtk
         /// </summary>
         /// <param name="identifier">The name of the entity to parse this to</param>
         /// <returns>The entities cast to the class</returns>
-        public Entity[] GetEntities(string identifier)
+        public LDtkEntity[] GetEntities(string identifier)
         {
-            return ParseEntities<Entity>(identifier, false);
+            return ParseEntities<LDtkEntity>(identifier, false);
         }
 
         /// <summary>
@@ -120,10 +120,10 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Gets an <see cref="IntGrid"/> from an identifier
+        /// Gets an <see cref="LDtkIntGrid"/> from an identifier
         /// </summary>
         /// <param name="identifier">Identifier of an intgrid</param>
-        public IntGrid GetIntGrid(string identifier)
+        public LDtkIntGrid GetIntGrid(string identifier)
         {
             for (int i = 0; i < intGrids.Length; i++)
             {

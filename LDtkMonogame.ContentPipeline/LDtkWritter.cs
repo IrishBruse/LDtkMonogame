@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 namespace LDtk.ContentPipeline
 {
     [ContentTypeWriter]
-    public class LDtkWritter : ContentTypeWriter<LDtkJson>
+    public class LDtkWritter : ContentTypeWriter<LDtkProject>
     {
-        protected override void Write(ContentWriter output, LDtkJson json)
+        protected override void Write(ContentWriter output, LDtkProject json)
         {
             try
             {

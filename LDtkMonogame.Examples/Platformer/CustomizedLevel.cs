@@ -1,6 +1,6 @@
 namespace LDtk.Examples.Platformer
 {
-    public class CustomizedLevel : Level
+    public class CustomizedLevel : LDtkLevel
     {
         public string biome;
         public int difficulty;

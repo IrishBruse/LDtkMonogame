@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Reflection;
 using LDtk.Exceptions;
 using LDtk.Json;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace LDtk
 {
@@ -168,7 +165,7 @@ namespace LDtk
         {
             // WorldPosition
             var variable = typeof(T).GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) ??
-                    typeof(Entity).GetField(field, BindingFlags.Instance | BindingFlags.NonPublic);
+                    typeof(LDtkEntity).GetField(field, BindingFlags.Instance | BindingFlags.NonPublic);
 
             if (variable != null)
             {
@@ -195,5 +192,30 @@ namespace LDtk
             public static implicit operator Point(LDtkPoint p) => new Point(p.cx, p.cy);
         }
 #pragma warning restore CS0649
+
+        /// <summary>
+        /// Entity and Level Field
+        /// </summary>
+        internal static class Field
+        {
+            public const string IntType = "Int";
+            public const string IntArrayType = "Array<Int>";
+            public const string FloatType = "Float";
+            public const string FloatArrayType = "Array<Float>";
+            public const string BoolType = "Bool";
+            public const string BoolArrayType = "Array<Bool>";
+            public const string EnumType = "Enum";
+            public const string EnumArrayType = "Array<Enum>";
+            public const string LocalEnumType = "LocalEnum";
+            public const string LocalEnumArrayType = "Array<LocalEnum>";
+            public const string StringType = "String";
+            public const string StringArrayType = "Array<String>";
+            public const string FilePathType = "FilePath";
+            public const string FilePathArrayType = "Array<FilePath>";
+            public const string ColorType = "Color";
+            public const string ColorArrayType = "Array<Color>";
+            public const string PointType = "Point";
+            public const string PointArrayType = "Array<Point>";
+        }
     }
 }

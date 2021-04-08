@@ -19,7 +19,7 @@ namespace LDtk.Json
     /// array of levels, - and a definition object (that can probably be safely ignored for most
     /// users).
     /// </summary>
-    public partial class LDtkJson
+    public partial class LDtkProject
     {
         /// <summary>
         /// Number of backup files to keep, if the `backupOnSave` is TRUE
@@ -1232,14 +1232,14 @@ namespace LDtk.Json
     /// </summary>
     public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
 
-    public partial class LDtkJson
+    public partial class LDtkProject
     {
-        public static LDtkJson FromJson(string json) => JsonConvert.DeserializeObject<LDtkJson>(json, Converter.Settings);
+        public static LDtkProject FromJson(string json) => JsonConvert.DeserializeObject<LDtkProject>(json, Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this LDtkJson self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this LDtkProject self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 
     internal static class Converter

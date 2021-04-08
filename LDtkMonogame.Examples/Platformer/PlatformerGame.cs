@@ -11,7 +11,7 @@ namespace LDtk.Examples.Platformer
     public class PlatformerGame : BaseExample
     {
         // LDtk stuff
-        private World world;
+        private LDtkWorld world;
         private LevelManager levelManager;
         private KeyboardState oldKeyboard;
         private MouseState oldMouse;
@@ -43,7 +43,7 @@ namespace LDtk.Examples.Platformer
         {
             base.Initialize();
 
-            world = Content.Load<World>("LDtkMonogameExample");
+            world = Content.Load<LDtkWorld>("LDtkMonogameExample");
             world.spriteBatch = spriteBatch;
             world.GraphicsDevice = GraphicsDevice;
             levelManager = new LevelManager(world);
@@ -71,7 +71,7 @@ namespace LDtk.Examples.Platformer
 
             levelManager.ChangeLevelTo("Level1");
 
-            Entity startLocation = levelManager.CurrentLevel.GetEntity<Entity>("PlayerSpawn");
+            LDtkEntity startLocation = levelManager.CurrentLevel.GetEntity<LDtkEntity>("PlayerSpawn");
 
             player = new Player
             {

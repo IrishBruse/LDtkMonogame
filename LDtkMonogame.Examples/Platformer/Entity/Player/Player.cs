@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace LDtk.Examples.Platformer
 {
-    public class Player : Entity
+    public class Player : LDtkEntity
     {
         const float Gavity = 175f;
 
@@ -31,7 +31,7 @@ namespace LDtk.Examples.Platformer
             animator = new Animator(this);
         }
 
-        public void Update(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, Level level, float deltaTime)
+        public void Update(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, LDtkLevel level, float deltaTime)
         {
             if (keyboard.IsKeyDown(Keys.F3) && oldKeyboard.IsKeyDown(Keys.F3) == false)
             {
@@ -123,11 +123,11 @@ namespace LDtk.Examples.Platformer
             }
         }
 
-        void CollisionDetection(Level level, float deltaTime)
+        void CollisionDetection(LDtkLevel level, float deltaTime)
         {
             grounded = false;
 
-            IntGrid collisions = level.GetIntGrid("Collisions");
+            LDtkIntGrid collisions = level.GetIntGrid("Collisions");
             Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime)) - level.Position;
             Vector2 bottomRight = Vector2.Max(collider.WorldPosition + collider.Size, collider.WorldPosition + collider.Size + (velocity * deltaTime)) - level.Position;
 

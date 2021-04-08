@@ -2,7 +2,7 @@
 
 namespace LDtk.Examples.Platformer
 {
-    public class Door : Entity
+    public class Door : LDtkEntity
     {
         // LDtk entity fields
         public string levelIdentifier;

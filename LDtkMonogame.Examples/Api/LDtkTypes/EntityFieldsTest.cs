@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Api
 {
-    public partial class EntityFieldsTest : Entity
+    public partial class EntityFieldsTest : LDtkEntity
     {
         public int integer;
         public float floatingPoint;

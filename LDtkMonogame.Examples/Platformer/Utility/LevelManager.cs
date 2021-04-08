@@ -9,12 +9,12 @@ namespace LDtk.Examples.Platformer
     {
         public CustomizedLevel CurrentLevel { get; private set; }
 
-        public Action<Level> OnEnterNewLevel;
+        public Action<LDtkLevel> OnEnterNewLevel;
         private readonly List<string> levelsVisited = new List<string>();
-        private readonly World world;
+        private readonly LDtkWorld world;
         private Vector2 center;
 
-        public LevelManager(World world)
+        public LevelManager(LDtkWorld world)
         {
             this.world = world;
         }
@@ -90,7 +90,7 @@ namespace LDtk.Examples.Platformer
             }
         }
 
-        private bool LevelContainsPoint(Level level, Vector2 point)
+        private bool LevelContainsPoint(LDtkLevel level, Vector2 point)
         {
             return
                 point.X >= level.Position.X &&

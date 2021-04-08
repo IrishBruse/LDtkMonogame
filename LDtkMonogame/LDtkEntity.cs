@@ -8,7 +8,7 @@ namespace LDtk
     /// Use this if you just want to draw a bunch of entities
     /// You can make an array of this class and draw them all together easily
     /// </summary>
-    public class Entity
+    public class LDtkEntity
     {
         /// <summary>
         /// World position of the entity

@@ -13,10 +13,10 @@ namespace LDtk
     /// <summary>
     /// The main class for loading .ldtk and .ldtkl files
     /// </summary>
-    public class World
+    public class LDtkWorld
     {
-        private Level[] levels;
-        private LDtkJson json;
+        private LDtkLevel[] levels;
+        private LDtkProject json;
         public SpriteBatch spriteBatch;
         public GraphicsDevice GraphicsDevice;
         private readonly ContentManager Content;
@@ -24,7 +24,7 @@ namespace LDtk
         /// <summary>
         /// <para>Load the LDtk json file.</para>
         /// </summary>
-        public World(string json, ContentManager Content)
+        public LDtkWorld(string json, ContentManager Content)
         {
             this.Content = Content;
             ReloadProject(json);
@@ -32,12 +32,12 @@ namespace LDtk
 
         /// <summary>
         /// <para>Reload the LDtk json file.</para>
-        /// <para><c>Warning</c> make sure to rerender your <see cref="Level"/>'s.</para>
+        /// <para><c>Warning</c> make sure to rerender your <see cref="LDtkLevel"/>'s.</para>
         /// </summary>
         void ReloadProject(string jsonContents)
         {
-            json = LDtkJson.FromJson(jsonContents);
-            levels = new Level[json.Levels.Length];
+            json = LDtkProject.FromJson(jsonContents);
+            levels = new LDtkLevel[json.Levels.Length];
         }
 
         // Level Handling
@@ -47,9 +47,9 @@ namespace LDtk
         /// </summary>
         /// <param name="uid">Uid of level</param>
         /// <returns>Level</returns>
-        public Level GetLevel(long uid)
+        public LDtkLevel GetLevel(long uid)
         {
-            return ParseLevel<Level>("", uid);
+            return ParseLevel<LDtkLevel>("", uid);
         }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace LDtk
         /// </summary>
         /// <param name="identifier">Identifier of the level to get</param>
         /// <returns>Level</returns>
-        public Level GetLevel(string identifier)
+        public LDtkLevel GetLevel(string identifier)
         {
-            return ParseLevel<Level>(identifier, -1);
+            return ParseLevel<LDtkLevel>(identifier, -1);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace LDtk
         /// <param name="uid">Uid of level</param>
         /// <typeparam name="T">Your custom level with the added fields</typeparam>
         /// <returns>Level</returns>
-        public T GetLevel<T>(long uid) where T : Level, new()
+        public T GetLevel<T>(long uid) where T : LDtkLevel, new()
         {
             return ParseLevel<T>("", uid);
         }
@@ -78,12 +78,12 @@ namespace LDtk
         /// </summary>
         /// <param name="identifier">Identifier of the level to get</param>
         /// <returns>Level</returns>
-        public T GetLevel<T>(string identifier) where T : Level, new()
+        public T GetLevel<T>(string identifier) where T : LDtkLevel, new()
         {
             return ParseLevel<T>(identifier, -1);
         }
 
-        private T ParseLevel<T>(string identifier, long uid) where T : Level, new()
+        private T ParseLevel<T>(string identifier, long uid) where T : LDtkLevel, new()
         {
             for (int i = 0; i < levels.Length; i++)
             {
@@ -150,16 +150,16 @@ namespace LDtk
             }
         }
 
-        private void LoadLevel(ref Level level, LDtkLevel jsonLevel)
+        private void LoadLevel(ref LDtkLevel level, Json.LDtkLevel jsonLevel)
         {
             if (json.ExternalLevels == true)
             {
-                jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<LDtkLevel>(File.ReadAllText(jsonLevel.ExternalRelPath));
+                jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<Json.LDtkLevel>(File.ReadAllText(jsonLevel.ExternalRelPath));
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
 
-            level = new Level
+            level = new LDtkLevel
             {
                 owner = this,
 
@@ -189,7 +189,7 @@ namespace LDtk
 
 
         // Layer Handling
-        private void LoadBackgroundLayer(ref Level level, LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
+        private void LoadBackgroundLayer(ref LDtkLevel level, Json.LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
             // Render background as if it was a layer
@@ -214,12 +214,12 @@ namespace LDtk
             }
         }
 
-        private void LoadAllLayers(ref Level level, LayerInstance[] jsonLayerInstances)
+        private void LoadAllLayers(ref LDtkLevel level, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
 
             // Process intgrids
-            List<IntGrid> intGrids = new List<IntGrid>();
+            List<LDtkIntGrid> intGrids = new List<LDtkIntGrid>();
 
             // Render Tile, Auto and Int grid layers
             for (int i = jsonLayerInstances.Length - 1; i >= 0; i--)
@@ -256,7 +256,7 @@ namespace LDtk
                 {
                     if (jsonLayer.Type == LayerType.IntGrid)
                     {
-                        IntGrid intGrid = new IntGrid
+                        LDtkIntGrid intGrid = new LDtkIntGrid
                         {
                             grid = new long[jsonLayer.CWid, jsonLayer.CHei],
                             identifier = jsonLayer.Identifier,
@@ -306,7 +306,7 @@ namespace LDtk
             GraphicsDevice.SetRenderTarget(null);
         }
 
-        private void RenderBackgroundAsLayer(LDtkLevel jsonLevel, Texture2D texture)
+        private void RenderBackgroundAsLayer(Json.LDtkLevel jsonLevel, Texture2D texture)
         {
             long[] topleft = jsonLevel.BgPos.TopLeftPx;
             double[] cropRect = jsonLevel.BgPos.CropRect;
@@ -388,6 +388,17 @@ namespace LDtk
             }
 
             throw new UidException("GetTilesetTextureFromUid(" + uid + ")");
+        }
+
+        /// <summary>
+        /// Layer Types
+        /// </summary>
+        internal static class LayerType
+        {
+            public const string Tiles = "Tiles";
+            public const string IntGrid = "IntGrid";
+            public const string AutoLayer = "AutoLayer";
+            public const string Entities = "Entities";
         }
     }
 }

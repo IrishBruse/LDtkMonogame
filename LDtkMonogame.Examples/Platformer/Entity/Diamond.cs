@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Platformer
 {
-    public class Diamond : Entity
+    public class Diamond : LDtkEntity
     {
         public Rect collider;
 

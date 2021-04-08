@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Platformer
 {
-    public class Crate : Entity
+    public class Crate : LDtkEntity
     {
         // LDtk entity fields
         public int integer;

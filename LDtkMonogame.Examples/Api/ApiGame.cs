@@ -9,10 +9,10 @@ namespace LDtk.Examples.Api
     public class ApiGame : BaseExample
     {
         // LDtk stuff
-        private World world;
+        private LDtkWorld world;
         private CustomLevel myLevel;
-        IntGrid intGrid8px;
-        IntGrid intGridClassic;
+        LDtkIntGrid intGrid8px;
+        LDtkIntGrid intGridClassic;
 
         public ApiGame() : base()
         {
@@ -23,7 +23,7 @@ namespace LDtk.Examples.Api
         {
             base.Initialize();
 
-            world = Content.Load<World>("Test_file_for_API_showing_all_features");
+            world = Content.Load<LDtkWorld>("Test_file_for_API_showing_all_features");
             world.spriteBatch = spriteBatch;
             world.GraphicsDevice = GraphicsDevice;
 

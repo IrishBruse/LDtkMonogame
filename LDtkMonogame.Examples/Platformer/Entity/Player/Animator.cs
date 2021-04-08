@@ -10,13 +10,13 @@ namespace LDtk.Examples.Platformer
 
         private float animationTimer;
         private int animationFrame;
-        private readonly Entity parent;
+        private readonly LDtkEntity parent;
         private Animation state; private Vector2 velocity;
         private bool grounded;
         private Animation delayedState = Animation.None;
         private int delayedFrames = -1;
 
-        public Animator(Entity parent)
+        public Animator(LDtkEntity parent)
         {
             this.parent = parent;
         }
