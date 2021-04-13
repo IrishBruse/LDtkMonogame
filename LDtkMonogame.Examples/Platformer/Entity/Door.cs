@@ -10,12 +10,11 @@ namespace LDtk.Examples.Platformer
 
         public bool opening;
         public Rect collider;
-
-        float animationTimer;
+        private float animationTimer;
 
         public void Update(float deltaTime)
         {
-            if (opening == true)
+            if (opening)
             {
                 if (Tile.Location.X < 166)
                 {
@@ -34,7 +33,7 @@ namespace LDtk.Examples.Platformer
             }
             else
             {
-                var tile = Tile;
+                Rectangle tile = Tile;
                 tile.Location = Point.Zero;
                 Tile = tile;
             }

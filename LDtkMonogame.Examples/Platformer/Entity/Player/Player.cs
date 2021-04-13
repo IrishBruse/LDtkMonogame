@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using LDtk;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,7 +7,7 @@ namespace LDtk.Examples.Platformer
 {
     public class Player : LDtkEntity
     {
-        const float Gavity = 175f;
+        private const float Gavity = 175f;
 
         public Animator animator;
         public bool fliped = true;
@@ -53,7 +52,7 @@ namespace LDtk.Examples.Platformer
             Position += velocity * deltaTime;
         }
 
-        void Movement(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, float deltaTime)
+        private void Movement(KeyboardState keyboard, KeyboardState oldKeyboard, MouseState mouse, MouseState oldMouse, float deltaTime)
         {
             float h = (keyboard.IsKeyDown(Keys.A) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) ? 1 : 0);
             float v = (keyboard.IsKeyDown(Keys.W) ? -1 : 0) + (keyboard.IsKeyDown(Keys.S) ? 1 : 0);
@@ -84,7 +83,7 @@ namespace LDtk.Examples.Platformer
                 velocity = new Vector2(h * 90, v * 90);
             }
 
-            if ((keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyDown(Keys.Space) == false) && grounded == true)
+            if (keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyDown(Keys.Space) == false && grounded)
             {
                 if (onPlatfrom && keyboard.IsKeyDown(Keys.S))
                 {
@@ -99,18 +98,7 @@ namespace LDtk.Examples.Platformer
             }
 
             // falling
-            if (velocity.Y > 0)
-            {
-                gravityMultiplier = 3f;
-            }// high jump
-            else if (velocity.Y < 0 && !keyboard.IsKeyDown(Keys.Space))
-            {
-                gravityMultiplier = 1.5f;
-            }
-            else
-            {
-                gravityMultiplier = 1;
-            }
+            gravityMultiplier = velocity.Y > 0 ? 3f : velocity.Y < 0 && !keyboard.IsKeyDown(Keys.Space) ? 1.5f : 1;
 
             if (noClip == false)
             {
@@ -123,7 +111,7 @@ namespace LDtk.Examples.Platformer
             }
         }
 
-        void CollisionDetection(LDtkLevel level, float deltaTime)
+        private void CollisionDetection(LDtkLevel level, float deltaTime)
         {
             grounded = false;
 

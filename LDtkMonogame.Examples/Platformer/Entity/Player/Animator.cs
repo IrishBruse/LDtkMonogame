@@ -1,5 +1,4 @@
 using System;
-using LDtk;
 using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Platformer
@@ -114,7 +113,7 @@ namespace LDtk.Examples.Platformer
                         break;
 
                     case Animation.Jump:
-                        if (grounded == true)
+                        if (grounded)
                         {
                             SetStateDelayed(Animation.Idle);
                             animationFrame = 2;
@@ -127,6 +126,16 @@ namespace LDtk.Examples.Platformer
                         {
                             animationFrame = 0;
                         }
+                        break;
+                    case Animation.None:
+                        break;
+                    case Animation.Land:
+                        break;
+                    case Animation.Die:
+                        break;
+                    case Animation.Hurt:
+                        break;
+                    default:
                         break;
                 }
             }

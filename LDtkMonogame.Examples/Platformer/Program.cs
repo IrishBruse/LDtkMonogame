@@ -1,8 +1,8 @@
 ﻿namespace LDtk.Examples.Platformer
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             using PlatformerGame game = new PlatformerGame();
             game.Run();

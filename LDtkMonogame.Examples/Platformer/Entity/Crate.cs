@@ -1,5 +1,4 @@
-﻿using LDtk;
-
+﻿
 using Microsoft.Xna.Framework;
 
 namespace LDtk.Examples.Platformer
@@ -16,10 +15,8 @@ namespace LDtk.Examples.Platformer
         public Color color;
         public Alphabet alphabet;
         public Rect collider;
-
-        bool damaged;
-
-        float timer;
+        private bool damaged;
+        private float timer;
 
         public enum Alphabet
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using LDtk;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,14 +23,14 @@ namespace LDtk.Examples.Platformer
         private Player player;
 
         // UI
-        Texture2D diamondTexture;
-        Texture2D fontTexture;
-        int diamondsCollected;
+        private Texture2D diamondTexture;
+        private Texture2D fontTexture;
+        private int diamondsCollected;
 
         // Debug
         private bool showTileColliders = false;
         private bool showEntityColliders;
-        Door destinationDoor;
+        private Door destinationDoor;
 
         public PlatformerGame() : base()
         {
@@ -147,7 +146,7 @@ namespace LDtk.Examples.Platformer
                 {
                     player.door = doors[i];
 
-                    if (player.animator.EnteredDoor() == true)
+                    if (player.animator.EnteredDoor())
                     {
                         doors[i].opening = true;
                     }
@@ -159,7 +158,7 @@ namespace LDtk.Examples.Platformer
             {
                 crates[i].Update(deltaTime);
 
-                if (player.attack.Contains(crates[i].collider) && player.attacking == true)
+                if (player.attack.Contains(crates[i].collider) && player.attacking)
                 {
                     crates[i].Damage();
                 }
@@ -169,9 +168,9 @@ namespace LDtk.Examples.Platformer
             {
                 diamonds[i].Update(deltaTime, (float)gameTime.TotalGameTime.TotalSeconds);
 
-                if (diamonds[i].delete == true)
+                if (diamonds[i].delete)
                 {
-                    diamonds.Remove(diamonds[i]);
+                    _ = diamonds.Remove(diamonds[i]);
                 }
                 else if (diamonds[i].collected == false)
                 {

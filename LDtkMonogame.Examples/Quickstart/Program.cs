@@ -2,9 +2,9 @@
 
 namespace LDtk.Examples.Quickstart
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Hello World!");
         }

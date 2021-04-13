@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,8 +10,8 @@ namespace LDtk.Examples.Api
         // LDtk stuff
         private LDtkWorld world;
         private CustomLevel myLevel;
-        LDtkIntGrid intGrid8px;
-        LDtkIntGrid intGridClassic;
+        private LDtkIntGrid intGrid8px;
+        private LDtkIntGrid intGridClassic;
 
         public ApiGame() : base()
         {
@@ -33,7 +32,7 @@ namespace LDtk.Examples.Api
             intGridClassic = myLevel.GetIntGrid("IntGrid_classic");
             Console.WriteLine(myLevel.Identifier + " desc :\n" + myLevel.desc);
 
-            var entityFieldsTests = myLevel.GetEntities<EntityFieldsTest>();
+            EntityFieldsTest[] entityFieldsTests = myLevel.GetEntities<EntityFieldsTest>();
             Console.WriteLine("EntityFieldsTests:");
             for (int i = 0; i < entityFieldsTests.Length; i++)
             {
@@ -41,7 +40,7 @@ namespace LDtk.Examples.Api
                 Console.WriteLine();
             }
 
-            var labels = myLevel.GetEntities<Label>("Labels");
+            Label[] labels = myLevel.GetEntities<Label>("Labels");
             Console.WriteLine("Labels:");
             for (int i = 0; i < labels.Length; i++)
             {
@@ -49,7 +48,7 @@ namespace LDtk.Examples.Api
                 Console.WriteLine();
             }
 
-            var rectRegions = myLevel.GetEntities<RectRegion>();
+            RectRegion[] rectRegions = myLevel.GetEntities<RectRegion>();
             Console.WriteLine("RectRegions:");
             for (int i = 0; i < rectRegions.Length; i++)
             {
@@ -68,7 +67,7 @@ namespace LDtk.Examples.Api
         {
             GraphicsDevice.Clear(myLevel.BgColor);
 
-            var mat = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
+            Matrix mat = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: mat);
             {

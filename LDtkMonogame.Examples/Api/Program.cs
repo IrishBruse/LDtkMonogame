@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace LDtk.Examples.Api
+﻿namespace LDtk.Examples.Api
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             using ApiGame game = new ApiGame();
             game.Run();

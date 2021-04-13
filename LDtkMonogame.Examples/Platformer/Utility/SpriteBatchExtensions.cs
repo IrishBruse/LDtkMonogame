@@ -5,7 +5,7 @@ namespace LDtk.Examples.Platformer
 {
     public static class SpriteBatchExtensions
     {
-        static Texture2D pixelTexture;
+        private static Texture2D pixelTexture;
 
         public static void DrawRect(this SpriteBatch spriteBatch, Rect rect, Color color)
         {

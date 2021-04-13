@@ -54,7 +54,7 @@
 /build:RPG Graphics Icons by 7Soul's.png
 
 #begin Test_file_for_API_showing_all_features.ldtk
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkWorldImporter
+/processor:LDtkWorldProcessor
 /build:Test_file_for_API_showing_all_features.ldtk
 

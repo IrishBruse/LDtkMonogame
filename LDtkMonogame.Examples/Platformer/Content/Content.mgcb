@@ -147,47 +147,47 @@
 /build:Art/Tilesets/Terrain.png
 
 #begin LDtkMonogameExample.ldtk
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkWorldImporter
+/processor:LDtkWorldProcessor
 /build:LDtkMonogameExample.ldtk
 
 #begin LDtkMonogameExample/0000-Level1.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0000-Level1.ldtkl
 
 #begin LDtkMonogameExample/0001-Level2.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0001-Level2.ldtkl
 
 #begin LDtkMonogameExample/0002-Level1a.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0002-Level1a.ldtkl
 
 #begin LDtkMonogameExample/0003-Level3.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0003-Level3.ldtkl
 
 #begin LDtkMonogameExample/0004-Level3a.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0004-Level3a.ldtkl
 
 #begin LDtkMonogameExample/0005-Level3b.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0005-Level3b.ldtkl
 
 #begin LDtkMonogameExample/0006-Level4.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0006-Level4.ldtkl
 
 #begin LDtkMonogameExample/0007-Level4a.ldtkl
-/importer:LDtkImporter
-/processor:LDtkProcessor
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
 /build:LDtkMonogameExample/0007-Level4a.ldtkl
 

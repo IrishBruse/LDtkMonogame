@@ -9,11 +9,11 @@ namespace LDtk.Examples.Platformer
 
         public bool collected;
         public bool delete;
-        float timer;
+        private float timer;
 
         public void Update(float deltaTime, float totalTime)
         {
-            if (collected == true)
+            if (collected)
             {
                 if ((9 + (int)(timer / 0.1f)) < 12)
                 {
@@ -27,7 +27,7 @@ namespace LDtk.Examples.Platformer
             }
             else
             {
-                int currentFrame = (int)((totalTime * 10) % 10) * (int)Size.X;
+                int currentFrame = (int)(totalTime * 10 % 10) * (int)Size.X;
                 Tile = new Rectangle(currentFrame, 0, (int)Size.X, (int)Size.Y);
                 Position += new Vector2(0, -MathF.Sin((float)totalTime * 2) * 0.1f);
             }

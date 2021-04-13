@@ -10,32 +10,30 @@ namespace LDtk.Examples.Platformer
 
         public Vector2 Origin { get; set; }
 
-        public Vector2 WorldPosition { get => Origin + ParentPosition; }
-        public Vector2 Center { get => WorldPosition + (Size / 2); }
+        public Vector2 WorldPosition => Origin + ParentPosition;
+        public Vector2 Center => WorldPosition + (Size / 2);
 
         public Rect(Vector2 topleftCorner, Vector2 size)
         {
-            this.Origin = topleftCorner;
-            this.Size = size;
+            Origin = topleftCorner;
+            Size = size;
         }
 
         public Rect(float left, float top, float width, float height)
         {
-            this.Origin = new Vector2(left, top);
-            this.Size = new Vector2(width, height);
+            Origin = new Vector2(left, top);
+            Size = new Vector2(width, height);
         }
 
         public bool Contains(Vector2 point)
         {
-            return (point.X >= WorldPosition.X && point.Y >= WorldPosition.Y && point.X < WorldPosition.X + Size.X && point.Y <= WorldPosition.Y + Size.Y);
+            return point.X >= WorldPosition.X && point.Y >= WorldPosition.Y && point.X < WorldPosition.X + Size.X && point.Y <= WorldPosition.Y + Size.Y;
         }
 
         public bool Contains(Rect r2)
         {
-            return (
-                WorldPosition.X < r2.WorldPosition.X + r2.Size.X && WorldPosition.X + Size.X > r2.WorldPosition.X &&
-                WorldPosition.Y < r2.WorldPosition.Y + r2.Size.Y && WorldPosition.Y + Size.Y > r2.WorldPosition.Y
-                );
+            return WorldPosition.X < r2.WorldPosition.X + r2.Size.X && WorldPosition.X + Size.X > r2.WorldPosition.X &&
+                WorldPosition.Y < r2.WorldPosition.Y + r2.Size.Y && WorldPosition.Y + Size.Y > r2.WorldPosition.Y;
         }
 
 
@@ -83,30 +81,11 @@ namespace LDtk.Examples.Platformer
                 return false;
             }
 
-            contactPoint = rayOrigin + hitNear * rayDirection;
+            contactPoint = rayOrigin + (hitNear * rayDirection);
 
-            if (near.X > near.Y)
-            {
-                if (invdir.X < 0)
-                {
-                    contactNormal = new Vector2(1, 0);
-                }
-                else
-                {
-                    contactNormal = new Vector2(-1, 0);
-                }
-            }
-            else
-            {
-                if (invdir.Y < 0)
-                {
-                    contactNormal = new Vector2(0, 1);
-                }
-                else
-                {
-                    contactNormal = new Vector2(0, -1);
-                }
-            }
+            contactNormal = near.X > near.Y
+                ? invdir.X < 0 ? new Vector2(1, 0) : new Vector2(-1, 0)
+                : invdir.Y < 0 ? new Vector2(0, 1) : new Vector2(0, -1);
 
             return true;
         }
@@ -123,13 +102,9 @@ namespace LDtk.Examples.Platformer
                 return false;
             }
 
-            Rect expandedTarget = new Rect(target.WorldPosition - Size / 2, target.Size + Size);
+            Rect expandedTarget = new Rect(target.WorldPosition - (Size / 2), target.Size + Size);
 
-            if (expandedTarget.RayCast(Center, direction * deltaTime, out contactPoint, out contactNormal, out hitNear))
-            {
-                return (hitNear >= 0f && hitNear < 1f);
-            }
-            return false;
+            return expandedTarget.RayCast(Center, direction * deltaTime, out contactPoint, out contactNormal, out hitNear) && hitNear >= 0f && hitNear < 1f;
         }
     }
 }
