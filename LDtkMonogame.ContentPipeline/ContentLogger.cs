@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline
 {
-    public class ContentLogger
+    public static class ContentLogger
     {
         public static ContentBuildLogger Logger { get; set; }
 

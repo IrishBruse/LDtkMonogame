@@ -19,7 +19,7 @@ namespace LDtk.ContentPipeline
             catch (Exception e)
             {
                 context.Logger.LogImportantMessage(e.StackTrace);
-                throw e;
+                throw;
             }
         }
     }

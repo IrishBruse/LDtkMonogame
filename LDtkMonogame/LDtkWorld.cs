@@ -150,7 +150,6 @@ namespace LDtk
             {
                 string externalLevel = jsonLevel.ExternalRelPath[0..^6];
                 jsonLevel = Content.Load<Level>(externalLevel);
-                // Newtonsoft.Json.JsonConvert.DeserializeObject<Level>(File.ReadAllText());
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;

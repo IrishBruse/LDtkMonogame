@@ -76,12 +76,10 @@ namespace LDtk
             {
                 if (arrayEndIndex != -1)
                 {
-                    string enumType = variableType[enumTypeIndex..arrayEndIndex];
                     variableType = variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex);
                 }
                 else
                 {
-                    string enumType = variableType[enumTypeIndex..];
                     variableType = variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
                 }
             }
@@ -184,9 +182,9 @@ namespace LDtk
 #pragma warning disable CS0649
         private class LDtkPoint
         {
-            [JsonProperty()]
+            [JsonProperty]
             public int cx;
-            [JsonProperty()]
+            [JsonProperty]
             public int cy;
             public static implicit operator Vector2(LDtkPoint p)
             {
