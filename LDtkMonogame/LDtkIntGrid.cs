@@ -12,13 +12,13 @@ namespace LDtk
         /// Size of a tile in pixels
         /// </summary>
         /// <value>Pixels</value>
-        public int TileSize { get => tileSize; }
+        public int TileSize => tileSize;
 
         /// <summary>
         /// The underlying values of the int grid
         /// </summary>
         /// <value>Integer</value>
-        public long[,] Values { get => grid; }
+        public long[,] Values => grid;
 
         internal string identifier;
         internal long[,] grid;
@@ -32,11 +32,7 @@ namespace LDtk
         /// <returns>Value at position its -1 if out of bounds</returns>
         public long GetValueAt(int x, int y)
         {
-            if (x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
-            {
-                return grid[x, y];
-            }
-            return -1;
+            return x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1) ? grid[x, y] : -1;
         }
 
         /// <summary>

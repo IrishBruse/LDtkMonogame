@@ -145,9 +145,9 @@ namespace LDtk
                 if (entities[entityIndex].Identifier == identifier)
                 {
                     T entity = new T();
-                    var entityInstance = entities[entityIndex];
+                    EntityInstance entityInstance = entities[entityIndex];
 
-                    var entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
+                    EntityDefinition entityDefinition = owner.GetEntityDefinitionFromUid(entityInstance.DefUid);
 
                     Parser.ParseBaseField(entity, "position", new Vector2(entityInstance.Px[0], entityInstance.Px[1]) + Position);
                     Parser.ParseBaseField(entity, "levelPosition", new Vector2(entityInstance.Px[0], entityInstance.Px[1]));
@@ -165,7 +165,7 @@ namespace LDtk
 #endif
                     if (entityDefinition.TilesetId.HasValue)
                     {
-                        var tileDefinition = entityInstance.Tile;
+                        EntityInstanceTile tileDefinition = entityInstance.Tile;
                         Rectangle rect = new Rectangle((int)tileDefinition.SrcRect[0], (int)tileDefinition.SrcRect[1], (int)tileDefinition.SrcRect[2], (int)tileDefinition.SrcRect[3]);
                         Parser.ParseBaseField(entity, "tile", rect);
                     }
@@ -177,7 +177,7 @@ namespace LDtk
 
                     parsedEntities.Add(entity);
 
-                    if (breakOnMatch == true)
+                    if (breakOnMatch)
                     {
                         break;
                     }

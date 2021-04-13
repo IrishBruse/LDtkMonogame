@@ -121,7 +121,7 @@ namespace LDtk.Json
         /// the `worldX`,`worldY` coordinates of each Level.
         /// </summary>
         [JsonProperty("levels")]
-        public LDtkLevel[] Levels { get; set; }
+        public Level[] Levels { get; set; }
 
         /// <summary>
         /// If TRUE, the Json is partially minified (no indentation, nor line breaks, default is
@@ -715,7 +715,7 @@ namespace LDtk.Json
     /// `externalRelPath` string points to the `ldtkl` file.  A `ldtkl` file is just a JSON file
     /// containing exactly what is described below.
     /// </summary>
-    public partial class LDtkLevel
+    public partial class Level
     {
         /// <summary>
         /// Background color of the level (same as `bgColor`, except the default value is
@@ -1234,12 +1234,18 @@ namespace LDtk.Json
 
     public partial class LDtkProject
     {
-        public static LDtkProject FromJson(string json) => JsonConvert.DeserializeObject<LDtkProject>(json, Converter.Settings);
+        public static LDtkProject FromJson(string json)
+        {
+            return JsonConvert.DeserializeObject<LDtkProject>(json, Converter.Settings);
+        }
     }
 
     public static class Serialize
     {
-        public static string ToJson(this LDtkProject self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this LDtkProject self)
+        {
+            return JsonConvert.SerializeObject(self, Converter.Settings);
+        }
     }
 
     internal static class Converter
@@ -1268,12 +1274,19 @@ namespace LDtk.Json
 
     internal class EditorDisplayModeConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(EditorDisplayMode) || t == typeof(EditorDisplayMode?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(EditorDisplayMode) || t == typeof(EditorDisplayMode?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             switch (value)
             {
                 case "EntityTile":
@@ -1305,7 +1318,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (EditorDisplayMode)untypedValue;
+            EditorDisplayMode value = (EditorDisplayMode)untypedValue;
             switch (value)
             {
                 case EditorDisplayMode.EntityTile:
@@ -1332,6 +1345,8 @@ namespace LDtk.Json
                 case EditorDisplayMode.ValueOnly:
                     serializer.Serialize(writer, "ValueOnly");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type EditorDisplayMode");
         }
@@ -1341,12 +1356,19 @@ namespace LDtk.Json
 
     internal class EditorDisplayPosConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(EditorDisplayPos) || t == typeof(EditorDisplayPos?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(EditorDisplayPos) || t == typeof(EditorDisplayPos?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "Above" => EditorDisplayPos.Above,
@@ -1363,7 +1385,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (EditorDisplayPos)untypedValue;
+            EditorDisplayPos value = (EditorDisplayPos)untypedValue;
             switch (value)
             {
                 case EditorDisplayPos.Above:
@@ -1375,6 +1397,8 @@ namespace LDtk.Json
                 case EditorDisplayPos.Center:
                     serializer.Serialize(writer, "Center");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type EditorDisplayPos");
         }
@@ -1384,12 +1408,19 @@ namespace LDtk.Json
 
     internal class TextLangageModeConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(TextLangageMode) || t == typeof(TextLangageMode?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(TextLangageMode) || t == typeof(TextLangageMode?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "LangC" => TextLangageMode.LangC,
@@ -1412,7 +1443,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (TextLangageMode)untypedValue;
+            TextLangageMode value = (TextLangageMode)untypedValue;
             switch (value)
             {
                 case TextLangageMode.LangC:
@@ -1442,6 +1473,8 @@ namespace LDtk.Json
                 case TextLangageMode.LangXml:
                     serializer.Serialize(writer, "LangXml");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type TextLangageMode");
         }
@@ -1451,12 +1484,19 @@ namespace LDtk.Json
 
     internal class LimitBehaviorConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(LimitBehavior) || t == typeof(LimitBehavior?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(LimitBehavior) || t == typeof(LimitBehavior?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "DiscardOldOnes" => LimitBehavior.DiscardOldOnes,
@@ -1473,7 +1513,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (LimitBehavior)untypedValue;
+            LimitBehavior value = (LimitBehavior)untypedValue;
             switch (value)
             {
                 case LimitBehavior.DiscardOldOnes:
@@ -1485,6 +1525,8 @@ namespace LDtk.Json
                 case LimitBehavior.PreventAdding:
                     serializer.Serialize(writer, "PreventAdding");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type LimitBehavior");
         }
@@ -1494,12 +1536,19 @@ namespace LDtk.Json
 
     internal class LimitScopeConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(LimitScope) || t == typeof(LimitScope?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(LimitScope) || t == typeof(LimitScope?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "PerLayer" => LimitScope.PerLayer,
@@ -1516,7 +1565,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (LimitScope)untypedValue;
+            LimitScope value = (LimitScope)untypedValue;
             switch (value)
             {
                 case LimitScope.PerLayer:
@@ -1528,6 +1577,8 @@ namespace LDtk.Json
                 case LimitScope.PerWorld:
                     serializer.Serialize(writer, "PerWorld");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type LimitScope");
         }
@@ -1537,12 +1588,19 @@ namespace LDtk.Json
 
     internal class RenderModeConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(RenderMode) || t == typeof(RenderMode?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(RenderMode) || t == typeof(RenderMode?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "Cross" => RenderMode.Cross,
@@ -1560,7 +1618,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (RenderMode)untypedValue;
+            RenderMode value = (RenderMode)untypedValue;
             switch (value)
             {
                 case RenderMode.Cross:
@@ -1575,6 +1633,8 @@ namespace LDtk.Json
                 case RenderMode.Tile:
                     serializer.Serialize(writer, "Tile");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type RenderMode");
         }
@@ -1584,12 +1644,19 @@ namespace LDtk.Json
 
     internal class TileRenderModeConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(TileRenderMode) || t == typeof(TileRenderMode?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(TileRenderMode) || t == typeof(TileRenderMode?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "Crop" => TileRenderMode.Crop,
@@ -1605,7 +1672,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (TileRenderMode)untypedValue;
+            TileRenderMode value = (TileRenderMode)untypedValue;
             switch (value)
             {
                 case TileRenderMode.Crop:
@@ -1614,6 +1681,8 @@ namespace LDtk.Json
                 case TileRenderMode.Stretch:
                     serializer.Serialize(writer, "Stretch");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type TileRenderMode");
         }
@@ -1623,12 +1692,19 @@ namespace LDtk.Json
 
     internal class TypeEnumConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(TypeEnum) || t == typeof(TypeEnum?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(TypeEnum) || t == typeof(TypeEnum?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "AutoLayer" => TypeEnum.AutoLayer,
@@ -1646,7 +1722,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (TypeEnum)untypedValue;
+            TypeEnum value = (TypeEnum)untypedValue;
             switch (value)
             {
                 case TypeEnum.AutoLayer:
@@ -1661,6 +1737,8 @@ namespace LDtk.Json
                 case TypeEnum.Tiles:
                     serializer.Serialize(writer, "Tiles");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type TypeEnum");
         }
@@ -1670,12 +1748,19 @@ namespace LDtk.Json
 
     internal class FlagConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(Flag) || t == typeof(Flag?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(Flag) || t == typeof(Flag?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "DiscardPreCsvIntGrid" => Flag.DiscardPreCsvIntGrid,
@@ -1691,7 +1776,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (Flag)untypedValue;
+            Flag value = (Flag)untypedValue;
             switch (value)
             {
                 case Flag.DiscardPreCsvIntGrid:
@@ -1700,6 +1785,8 @@ namespace LDtk.Json
                 case Flag.IgnoreBackupSuggest:
                     serializer.Serialize(writer, "IgnoreBackupSuggest");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type Flag");
         }
@@ -1709,12 +1796,19 @@ namespace LDtk.Json
 
     internal class BgPosConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(BgPos) || t == typeof(BgPos?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(BgPos) || t == typeof(BgPos?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "Contain" => BgPos.Contain,
@@ -1732,7 +1826,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (BgPos)untypedValue;
+            BgPos value = (BgPos)untypedValue;
             switch (value)
             {
                 case BgPos.Contain:
@@ -1747,6 +1841,8 @@ namespace LDtk.Json
                 case BgPos.Unscaled:
                     serializer.Serialize(writer, "Unscaled");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type BgPos");
         }
@@ -1756,12 +1852,19 @@ namespace LDtk.Json
 
     internal class WorldLayoutConverter : JsonConverter
     {
-        public override bool CanConvert(Type t) => t == typeof(WorldLayout) || t == typeof(WorldLayout?);
+        public override bool CanConvert(Type t)
+        {
+            return t == typeof(WorldLayout) || t == typeof(WorldLayout?);
+        }
 
         public override object ReadJson(JsonReader reader, Type t, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null) return null;
-            var value = serializer.Deserialize<string>(reader);
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
+
+            string value = serializer.Deserialize<string>(reader);
             return value switch
             {
                 "Free" => WorldLayout.Free,
@@ -1779,7 +1882,7 @@ namespace LDtk.Json
                 serializer.Serialize(writer, null);
                 return;
             }
-            var value = (WorldLayout)untypedValue;
+            WorldLayout value = (WorldLayout)untypedValue;
             switch (value)
             {
                 case WorldLayout.Free:
@@ -1794,6 +1897,8 @@ namespace LDtk.Json
                 case WorldLayout.LinearVertical:
                     serializer.Serialize(writer, "LinearVertical");
                     return;
+                default:
+                    break;
             }
             throw new Exception("Cannot marshal type WorldLayout");
         }

@@ -18,7 +18,7 @@ namespace LDtk
         /// </summary>
         /// <param name="hex">In LDtk format of #BBGGRR hex</param>
         /// <returns></returns>
-        public static Color ParseStringToColor(string hex)
+        internal static Color ParseStringToColor(string hex)
         {
             return ParseStringToColor(hex, 255);
         }
@@ -29,13 +29,13 @@ namespace LDtk
         /// <param name="hex">In LDtk format of #BBGGRR hex</param>
         /// <param name="alpha">Alpha</param>
         /// <returns></returns>
-        public static Color ParseStringToColor(string hex, int alpha)
+        internal static Color ParseStringToColor(string hex, int alpha)
         {
             if (uint.TryParse(hex.Replace("#", ""), System.Globalization.NumberStyles.HexNumber, null, out uint color))
             {
                 byte red = (byte)((color & 0xFF0000) >> 16);
                 byte green = (byte)((color & 0x00FF00) >> 8);
-                byte blue = (byte)((color & 0xFF));
+                byte blue = (byte)(color & 0xFF);
 
                 return new Color(red, green, blue, alpha);
             }
@@ -46,14 +46,14 @@ namespace LDtk
         }
 
 
-        public static void ParseField<T>(T entity, FieldInstance fieldInstance) where T : new()
+        internal static void ParseField<T>(T entity, FieldInstance fieldInstance) where T : new()
         {
             string variableName = fieldInstance.Identifier;
 
             // make the first letter lowercase
             variableName = char.ToLower(variableName[0]) + variableName[1..];
 
-            var field = typeof(T).GetField(variableName);
+            FieldInfo field = typeof(T).GetField(variableName);
 
             if (field == null)
             {
@@ -104,7 +104,7 @@ namespace LDtk
                 case Field.StringArrayType:
                 case Field.FilePathArrayType:
                 case Field.LocalEnumArrayType:
-                    var primativeArrayValues = JsonConvert.DeserializeObject(fieldInstance.Value.ToString(), field.FieldType);
+                    object primativeArrayValues = JsonConvert.DeserializeObject(fieldInstance.Value.ToString(), field.FieldType);
                     field.SetValue(entity, Convert.ChangeType(primativeArrayValues, field.FieldType));
                     break;
 
@@ -161,10 +161,10 @@ namespace LDtk
             }
         }
 
-        public static void ParseBaseField<T>(T entity, string field, object value)
+        internal static void ParseBaseField<T>(T entity, string field, object value)
         {
             // WorldPosition
-            var variable = typeof(T).GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) ??
+            FieldInfo variable = typeof(T).GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic) ??
                     typeof(LDtkEntity).GetField(field, BindingFlags.Instance | BindingFlags.NonPublic);
 
             if (variable != null)
@@ -182,21 +182,28 @@ namespace LDtk
         }
 
 #pragma warning disable CS0649
-        class LDtkPoint
+        private class LDtkPoint
         {
             [JsonProperty()]
             public int cx;
             [JsonProperty()]
             public int cy;
-            public static implicit operator Vector2(LDtkPoint p) => new Vector2(p.cx, p.cy);
-            public static implicit operator Point(LDtkPoint p) => new Point(p.cx, p.cy);
+            public static implicit operator Vector2(LDtkPoint p)
+            {
+                return new Vector2(p.cx, p.cy);
+            }
+
+            public static implicit operator Point(LDtkPoint p)
+            {
+                return new Point(p.cx, p.cy);
+            }
         }
 #pragma warning restore CS0649
 
         /// <summary>
         /// Entity and Level Field
         /// </summary>
-        internal static class Field
+        private static class Field
         {
             public const string IntType = "Int";
             public const string IntArrayType = "Array<Int>";

@@ -15,28 +15,22 @@ namespace LDtk
     /// </summary>
     public class LDtkWorld
     {
-        private LDtkLevel[] levels;
-        private LDtkProject json;
+        private readonly LDtkLevel[] levels;
+        private readonly LDtkProject json;
+#pragma warning disable CS1591
+
         public SpriteBatch spriteBatch;
         public GraphicsDevice GraphicsDevice;
+#pragma warning restore CS1591
         private readonly ContentManager Content;
 
         /// <summary>
-        /// <para>Load the LDtk json file.</para>
+        /// Load the LDtk json file
         /// </summary>
-        public LDtkWorld(string json, ContentManager Content)
+        internal LDtkWorld(string jsonContent, ContentManager Content)
         {
             this.Content = Content;
-            ReloadProject(json);
-        }
-
-        /// <summary>
-        /// <para>Reload the LDtk json file.</para>
-        /// <para><c>Warning</c> make sure to rerender your <see cref="LDtkLevel"/>'s.</para>
-        /// </summary>
-        void ReloadProject(string jsonContents)
-        {
-            json = LDtkProject.FromJson(jsonContents);
+            json = LDtkProject.FromJson(jsonContent);
             levels = new LDtkLevel[json.Levels.Length];
         }
 
@@ -150,11 +144,13 @@ namespace LDtk
             }
         }
 
-        private void LoadLevel(ref LDtkLevel level, Json.LDtkLevel jsonLevel)
+        private void LoadLevel(ref LDtkLevel level, Level jsonLevel)
         {
-            if (json.ExternalLevels == true)
+            if (json.ExternalLevels)
             {
-                jsonLevel = Newtonsoft.Json.JsonConvert.DeserializeObject<Json.LDtkLevel>(File.ReadAllText(jsonLevel.ExternalRelPath));
+                string externalLevel = jsonLevel.ExternalRelPath[0..^6];
+                jsonLevel = Content.Load<Level>(externalLevel);
+                // Newtonsoft.Json.JsonConvert.DeserializeObject<Level>(File.ReadAllText());
             }
 
             LayerInstance[] jsonLayerInstances = jsonLevel.LayerInstances;
@@ -180,7 +176,7 @@ namespace LDtk
             };
 
             // Set the world position
-            var neighbours = jsonLevel.Neighbours;
+            NeighbourLevel[] neighbours = jsonLevel.Neighbours;
             level.Neighbours = (from neighour in neighbours select neighour.LevelUid).ToArray();
 
             LoadBackgroundLayer(ref level, jsonLevel, jsonLayerInstances);
@@ -189,7 +185,7 @@ namespace LDtk
 
 
         // Layer Handling
-        private void LoadBackgroundLayer(ref LDtkLevel level, Json.LDtkLevel jsonLevel, LayerInstance[] jsonLayerInstances)
+        private void LoadBackgroundLayer(ref LDtkLevel level, Level jsonLevel, LayerInstance[] jsonLayerInstances)
         {
             Texture2D texture;
             // Render background as if it was a layer
@@ -268,7 +264,7 @@ namespace LDtk
                             for (int j = 0; j < jsonLayer.IntGridCsv.Length; j++)
                             {
                                 int y = (int)(j / jsonLayer.CWid);
-                                int x = (int)(j - y * jsonLayer.CWid);
+                                int x = (int)(j - (y * jsonLayer.CWid));
                                 intGrid.grid[x, y] = jsonLayer.IntGridCsv[j];
                             }
                         }
@@ -285,7 +281,7 @@ namespace LDtk
                             for (int j = 0; j < jsonLayer.IntGrid.Length; j++)
                             {
                                 int y = (int)(jsonLayer.IntGrid[j].CoordId / jsonLayer.CWid);
-                                int x = (int)(jsonLayer.IntGrid[j].CoordId - y * jsonLayer.CWid);
+                                int x = (int)(jsonLayer.IntGrid[j].CoordId - (y * jsonLayer.CWid));
                                 intGrid.grid[x, y] = jsonLayer.IntGrid[j].V;
                             }
                         }
@@ -306,7 +302,7 @@ namespace LDtk
             GraphicsDevice.SetRenderTarget(null);
         }
 
-        private void RenderBackgroundAsLayer(Json.LDtkLevel jsonLevel, Texture2D texture)
+        private void RenderBackgroundAsLayer(Level jsonLevel, Texture2D texture)
         {
             long[] topleft = jsonLevel.BgPos.TopLeftPx;
             double[] cropRect = jsonLevel.BgPos.CropRect;
@@ -340,7 +336,7 @@ namespace LDtk
 
         private void RenderTilesInLayer(LayerInstance jsonLayer, Texture2D texture, TileInstance[] gridTiles)
         {
-            foreach (var tile in gridTiles.Where(tile => jsonLayer.TilesetDefUid.HasValue))
+            foreach (TileInstance tile in gridTiles.Where(tile => jsonLayer.TilesetDefUid.HasValue))
             {
                 Vector2 position = new Vector2((int)(tile.Px[0] + jsonLayer.PxTotalOffsetX), (int)(tile.Px[1] + jsonLayer.PxTotalOffsetY));
                 Rectangle rect = new Rectangle((int)tile.Src[0], (int)tile.Src[1], (int)jsonLayer.GridSize, (int)jsonLayer.GridSize);
@@ -374,13 +370,13 @@ namespace LDtk
                     if (Content != null)
                     {
                         string file = Path.ChangeExtension(json.Defs.Tilesets[i].RelPath, null);
-                        var texture = Content.Load<Texture2D>(file);
+                        Texture2D texture = Content.Load<Texture2D>(file);
                         texture.Name = Path.GetFileName(json.Defs.Tilesets[i].RelPath);
                         return texture;
                     }
                     else
                     {
-                        var texture = Texture2D.FromFile(GraphicsDevice, json.Defs.Tilesets[i].RelPath);
+                        Texture2D texture = Texture2D.FromFile(GraphicsDevice, json.Defs.Tilesets[i].RelPath);
                         texture.Name = Path.GetFileName(json.Defs.Tilesets[i].RelPath);
                         return texture;
                     }
