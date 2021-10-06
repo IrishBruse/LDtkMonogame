@@ -5,16 +5,16 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 namespace LDtk.ContentPipeline
 {
     [ContentProcessor(DisplayName = "LDtk Processor")]
-    public class LDtkWorldProcessor : ContentProcessor<string, LDtkProject>
+    public class LDtkWorldProcessor : ContentProcessor<string, LDtkFile>
     {
-        public override LDtkProject Process(string input, ContentProcessorContext context)
+        public override LDtkFile Process(string input, ContentProcessorContext context)
         {
             try
             {
                 ContentLogger.Logger = context.Logger;
                 ContentLogger.LogMessage($"Processing");
 
-                return LDtkProject.FromJson(input);
+                return System.Text.Json.JsonSerializer.Deserialize<LDtkFile>(input);
             }
             catch (Exception ex)
             {

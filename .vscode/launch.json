@@ -2,29 +2,29 @@
     "version": "0.2.0",
     "buildOptions": {
         "debugType": "portable",
-
     },
     "configurations": [
         {
             "name": "Launch Api Example",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Api/",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/Api/bin/Debug/netcoreapp3.1/Api.dll",
+            "cwd": "${workspaceFolder}/Api/",
+            "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp3.1/Api.dll",
             "args": [],
             "stopAtEntry": false,
             "console": "externalTerminal",
-        },        
+        },
         {
             "name": "Launch Platformer Example",
             "type": "coreclr",
-            "request": "launch","symbolOptions": {
-                "searchPaths": ["${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/"],
+            "request": "launch",
+            "symbolOptions": {
+                "searchPaths": [
+                    "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/"
+                ],
                 "searchMicrosoftSymbolServer": false,
                 "searchNuGetOrgSymbolServer": false
             },
-            "preLaunchTask": "build",
             "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/",
             "program": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
             "args": [],
@@ -35,9 +35,8 @@
             "name": "Launch Quickstart Example",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
             "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/bin/Debug/net5.0/Quickstart.dll>",
+            "program": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/bin/Debug/netcoreapp3.1/Quickstart.dll>",
             "args": [],
             "stopAtEntry": false,
             "console": "internalConsole"

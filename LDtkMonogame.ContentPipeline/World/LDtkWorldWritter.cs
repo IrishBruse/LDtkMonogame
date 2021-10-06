@@ -6,14 +6,14 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 namespace LDtk.ContentPipeline
 {
     [ContentTypeWriter]
-    public class LDtkWorldWritter : ContentTypeWriter<LDtkProject>
+    public class LDtkWorldWritter : ContentTypeWriter<LDtkFile>
     {
-        protected override void Write(ContentWriter output, LDtkProject json)
+        protected override void Write(ContentWriter output, LDtkFile json)
         {
             try
             {
                 ContentLogger.LogMessage($"Writting");
-                output.Write(json.ToJson());
+                output.Write(System.Text.Json.JsonSerializer.Serialize(json));
             }
             catch (Exception ex)
             {
