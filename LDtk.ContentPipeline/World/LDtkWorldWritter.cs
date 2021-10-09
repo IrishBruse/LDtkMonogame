@@ -6,13 +6,14 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 namespace LDtk.ContentPipeline
 {
     [ContentTypeWriter]
-    public class LDtkWorldWritter : ContentTypeWriter<LDtkFile>
+    public class LDtkWorldWritter : ContentTypeWriter<LDtkWorld>
     {
-        protected override void Write(ContentWriter output, LDtkFile json)
+        protected override void Write(ContentWriter output, LDtkWorld json)
         {
             try
             {
                 ContentLogger.LogMessage($"Writting");
+                // TODO: binary serialize this eventually
                 output.Write(System.Text.Json.JsonSerializer.Serialize(json));
             }
             catch (Exception ex)
@@ -26,7 +27,7 @@ namespace LDtk.ContentPipeline
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
         {
-            return "LDtk.ContentPipeline.LDtkWorldReader, LDtkMonogame";
+            return "LDtk.ContentPipeline.LDtkFileReader, LDtk";
         }
     }
 }

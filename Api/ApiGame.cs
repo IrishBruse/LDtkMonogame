@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text.Json;
-using LDtk.Json;
+﻿using LDtk.Json;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace LDtk.Examples.Api
 {
@@ -24,12 +20,8 @@ namespace LDtk.Examples.Api
         {
             base.Initialize();
 
-            var world = Content.Load<LDtkFile>("Test_file_for_API_showing_all_features");
-            // var world = JsonSerializer.Deserialize<Json.LDtkFile>(File.ReadAllText("Test_file_for_API_showing_all_features.ldtk"));
-
-            Console.WriteLine(world.Levels[0]);
-
-
+            // var ldtkFile = Content.Load<LDtkWorld>("Test_file_for_API_showing_all_features");
+            var ldtkFile = LDtkWorld.LoadWorld("./Content/Test_file_for_API_showing_all_features.ldtk");
 
             // world.spriteBatch = spriteBatch;
             // world.GraphicsDevice = GraphicsDevice;

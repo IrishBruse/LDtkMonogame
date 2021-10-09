@@ -32,8 +32,6 @@ namespace LDtk.Examples.Api
             texture = new Texture2D(GraphicsDevice, 1, 1);
             texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
             MonogameInitialize();
-
-            base.Initialize();
         }
 
         protected override void Update(GameTime gameTime)
@@ -57,8 +55,6 @@ namespace LDtk.Examples.Api
 
             oldKeyboard = keyboard;
             oldMouse = mouse;
-
-            base.Update(gameTime);
         }
 
         private void MonogameInitialize()

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame", "LDtkMonogame\LDtkMonogame.csproj", "{02A81345-1A27-496D-AF2B-AE02E9A16514}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame.ContentPipeline", "LDtkMonogame.ContentPipeline\LDtkMonogame.ContentPipeline.csproj", "{D8BF2425-92BC-4829-BF34-A667426344BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk", "LDtk\LDtk.csproj", "{02A81345-1A27-496D-AF2B-AE02E9A16514}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{4FD0070B-4A80-46D5-97EE-578E44C97B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtkMonogame.Renderer", "LDtkMonogame.Renderer\LDtkMonogame.Renderer.csproj", "{086F6516-E15E-4413-8A26-7812245EE0BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Renderer", "LDtk.Renderer\LDtk.Renderer.csproj", "{086F6516-E15E-4413-8A26-7812245EE0BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{834A1B90-2866-11EC-A133-A543CC166FDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.ContentPipeline", "LDtk.ContentPipeline\LDtk.ContentPipeline.csproj", "{F4704E8B-4A1C-40EF-A772-350A30852324}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,18 +38,6 @@ Global
 		{02A81345-1A27-496D-AF2B-AE02E9A16514}.Release|x64.Build.0 = Release|Any CPU
 		{02A81345-1A27-496D-AF2B-AE02E9A16514}.Release|x86.ActiveCfg = Release|Any CPU
 		{02A81345-1A27-496D-AF2B-AE02E9A16514}.Release|x86.Build.0 = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|x64.Build.0 = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Debug|x86.Build.0 = Debug|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|x64.ActiveCfg = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|x64.Build.0 = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|x86.ActiveCfg = Release|Any CPU
-		{D8BF2425-92BC-4829-BF34-A667426344BD}.Release|x86.Build.0 = Release|Any CPU
 		{6DDF7E73-8EB9-4FC9-802C-1D3336F07447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6DDF7E73-8EB9-4FC9-802C-1D3336F07447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DDF7E73-8EB9-4FC9-802C-1D3336F07447}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -84,7 +74,20 @@ Global
 		{086F6516-E15E-4413-8A26-7812245EE0BF}.Release|x64.Build.0 = Release|Any CPU
 		{086F6516-E15E-4413-8A26-7812245EE0BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{086F6516-E15E-4413-8A26-7812245EE0BF}.Release|x86.Build.0 = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|x64.Build.0 = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4704E8B-4A1C-40EF-A772-350A30852324}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{4FD0070B-4A80-46D5-97EE-578E44C97B47} = {834A1B90-2866-11EC-A133-A543CC166FDE}
 	EndGlobalSection
 EndGlobal

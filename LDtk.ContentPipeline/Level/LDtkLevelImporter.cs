@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline
 {
-    [ContentImporter(".ldtkl", DisplayName = "LDtk World Importer", DefaultProcessor = "LDtkLevelProcessor")]
+    [ContentImporter(".ldtkl", DisplayName = "LDtk Level Importer", DefaultProcessor = "LDtkLevelProcessor")]
     public class LDtkLevelImporter : ContentImporter<string>
     {
         public override string Import(string filename, ContentImporterContext context)

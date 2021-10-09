@@ -1,45 +1,24 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "buildOptions": {
-        "debugType": "portable",
-    },
     "configurations": [
         {
-            "name": "Launch Api Example",
+            "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
-            "cwd": "${workspaceFolder}/Api/",
+            "preLaunchTask": "build",
             "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp3.1/Api.dll",
             "args": [],
-            "stopAtEntry": false,
-            "console": "externalTerminal",
-        },
-        {
-            "name": "Launch Platformer Example",
-            "type": "coreclr",
-            "request": "launch",
-            "symbolOptions": {
-                "searchPaths": [
-                    "${workspaceFolder}/LDtkMonogame.Examples/bin/Debug/netcoreapp3.1/"
-                ],
-                "searchMicrosoftSymbolServer": false,
-                "searchNuGetOrgSymbolServer": false
-            },
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
-            "args": [],
+            "cwd": "${workspaceFolder}/Api",
             "console": "externalTerminal",
             "stopAtEntry": false
         },
         {
-            "name": "Launch Quickstart Example",
+            "name": ".NET Core Attach",
             "type": "coreclr",
-            "request": "launch",
-            "cwd": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/",
-            "program": "${workspaceFolder}/LDtkMonogame.Examples/Quickstart/bin/Debug/netcoreapp3.1/Quickstart.dll>",
-            "args": [],
-            "stopAtEntry": false,
-            "console": "internalConsole"
+            "request": "attach"
         }
     ]
 }

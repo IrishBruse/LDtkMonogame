@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?&label=WIP%20LDtk&color=yellow"></a>
+  <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?&label=LDtk&color=yellow"></a>
   <a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?" /></a>
   <a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
 </p>
@@ -18,7 +18,7 @@ LDtk Monogame is a [LDtk](https://ldtk.io) project loader and renderer for the [
 
 ## Sceenshots
 
-Comparison
+<!-- Comparison
 ![LDtk to Monogame Conversion](docfx_project/art/screenshots/LDtk%20to%20Monogame.png "1 to 1 Conversion")
 
 Platformer Example
@@ -27,4 +27,4 @@ Platformer Example
 Entity Support
 ![Entity Support](docfx_project/art/screenshots/Entity%20Support.png "Entity Support")
 
-[Kings and pigs Art by pixelfrog](https://pixelfrog-assets.itch.io/kings-and-pigs)
+[Kings and pigs Art by pixelfrog](https://pixelfrog-assets.itch.io/kings-and-pigs) -->

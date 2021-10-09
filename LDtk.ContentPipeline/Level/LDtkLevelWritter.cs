@@ -6,14 +6,15 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 namespace LDtk.ContentPipeline
 {
     [ContentTypeWriter]
-    public class LDtkLevelWritter : ContentTypeWriter<Level>
+    public class LDtkLevelWritter : ContentTypeWriter<LDtkLevel>
     {
-        protected override void Write(ContentWriter output, Level json)
+        protected override void Write(ContentWriter output, LDtkLevel json)
         {
             try
             {
                 ContentLogger.LogMessage($"Writting");
-                output.Write(Newtonsoft.Json.JsonConvert.SerializeObject(json));
+                // TODO: binary serialize this eventually
+                output.Write(System.Text.Json.JsonSerializer.Serialize(json));
             }
             catch (Exception ex)
             {
@@ -26,7 +27,7 @@ namespace LDtk.ContentPipeline
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
         {
-            return "LDtk.ContentPipeline.LDtkLevelReader, LDtkMonogame";
+            return "LDtk.ContentPipeline.LDtkLevelReader, LDtk";
         }
     }
 }

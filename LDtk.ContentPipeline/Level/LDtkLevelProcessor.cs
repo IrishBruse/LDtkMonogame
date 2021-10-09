@@ -1,24 +1,26 @@
 ﻿using System;
+using System.Diagnostics;
 using LDtk.Json;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline
 {
-    [ContentProcessor(DisplayName = "LDtk Processor")]
-    public class LDtkLevelProcessor : ContentProcessor<string, Level>
+    [ContentProcessor(DisplayName = "LDtk Level Processor")]
+    public class LDtkLevelProcessor : ContentProcessor<string, LDtkLevel>
     {
-        public override Level Process(string input, ContentProcessorContext context)
+        public override LDtkLevel Process(string input, ContentProcessorContext context)
         {
             try
             {
                 ContentLogger.Logger = context.Logger;
                 ContentLogger.LogMessage($"Processing");
 
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<Level>(input);
+                Debug.Print(input);
+
+                return System.Text.Json.JsonSerializer.Deserialize<LDtkLevel>(input, LDtkWorld.SerializeOptions);
             }
             catch (Exception ex)
             {
-                context.Logger.LogImportantMessage("Test");
                 context.Logger.LogImportantMessage(ex.Message);
                 throw;
             }

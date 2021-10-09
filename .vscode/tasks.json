@@ -2,19 +2,41 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "docfx build",
-            "command": "docfx",
+            "label": "build",
+            "command": "dotnet",
             "type": "process",
             "args": [
-                "${workspaceFolder}/docfx_project/docfx.json"
+                "build",
+                "${workspaceFolder}/Api/Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Regenerate QuickType Json",
-            "type": "shell",
-            "command": "quicktype -l cs --no-ignore-json-refs --alphabetize-properties --namespace LDtk.Json --src-lang schema -o ${workspaceFolder}/LDtkMonogame/Json/LDtkFile.cs https://ldtk.io/files/JSON_SCHEMA.json",
-            "problemMatcher": []
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Api/Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/Api/Api.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

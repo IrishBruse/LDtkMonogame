@@ -1,11 +1,18 @@
-using Rect = Microsoft.Xna.Framework.Rectangle;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
+// 0.9.3
 
 #pragma warning disable 1591, 1570, IDE1006
 namespace LDtk.Json
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Text.Json;
     using System.Text.Json.Serialization;
+
+    using Color = Microsoft.Xna.Framework.Color;
+    using Rect = Microsoft.Xna.Framework.Rectangle;
+    using Vector2 = Microsoft.Xna.Framework.Vector2;
+    using Vector2Int = Microsoft.Xna.Framework.Point;
 
     /// <summary>
     /// This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
@@ -14,13 +21,13 @@ namespace LDtk.Json
     /// array of levels, - a group of definitions (that can probably be safely ignored for most
     /// users).
     /// </summary>
-    public partial class LDtkFile
+    public partial class LDtkWorld
     {
         /// <summary>
         /// Project background color
         /// </summary>
         [JsonPropertyName("bgColor")]
-        public string BgColor { get; set; }
+        public Color BgColor { get; set; }
 
         /// <summary>
         /// A structure containing all the definitions of this project
@@ -47,7 +54,7 @@ namespace LDtk.Json
         /// the `worldX`,`worldY` coordinates of each Level.
         /// </summary>
         [JsonPropertyName("levels")]
-        public Level[] Levels { get; set; }
+        public LDtkLevel[] Levels { get; set; }
 
         /// <summary>
         /// Height of the world grid in pixels.
@@ -67,6 +74,23 @@ namespace LDtk.Json
         /// </summary>
         [JsonPropertyName("worldLayout")]
         public WorldLayout WorldLayout { get; set; }
+
+
+        public static readonly JsonSerializerOptions SerializeOptions = new JsonSerializerOptions
+        {
+            Converters ={
+                new JsonStringEnumConverter(),
+                new ColorConverter(),
+                new RectConverter(),
+                new Vector2Converter(),
+                new Vector2IntConverter(),
+            }
+        };
+
+        public static LDtkWorld LoadWorld(string filePath)
+        {
+            return JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(filePath), SerializeOptions);
+        }
     }
 
     /// <summary>
@@ -119,7 +143,7 @@ namespace LDtk.Json
         /// Base entity color
         /// </summary>
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public Color Color { get; set; }
 
         /// <summary>
         /// Pixel height
@@ -310,7 +334,7 @@ namespace LDtk.Json
     public partial class IntGridValueDefinition
     {
         [JsonPropertyName("color")]
-        public string Color { get; set; }
+        public Color Color { get; set; }
 
         /// <summary>
         /// Unique String identifier
@@ -419,14 +443,14 @@ namespace LDtk.Json
     /// `externalRelPath` string points to the `ldtkl` file.  A `ldtkl` file is just a JSON file
     /// containing exactly what is described below.
     /// </summary>
-    public partial class Level
+    public partial class LDtkLevel
     {
         /// <summary>
         /// Background color of the level (same as `bgColor`, except the default value is
         /// automatically used here if its value is `null`)
         /// </summary>
         [JsonPropertyName("__bgColor")]
-        public string __BgColor { get; set; }
+        public Color __BgColor { get; set; }
 
         /// <summary>
         /// The *optional* relative path to the level background image.
@@ -590,7 +614,7 @@ namespace LDtk.Json
         /// and IntGrid values start at 1. This array size is `__cWid` x `__cHei` cells.
         /// </summary>
         [JsonPropertyName("intGridCsv")]
-        public long[] IntGridCsv { get; set; }
+        public Vector2Int IntGridCsv { get; set; }
 
         /// <summary>
         /// Reference the Layer definition UID
@@ -685,13 +709,13 @@ namespace LDtk.Json
         /// layer offsets, if they exist!
         /// </summary>
         [JsonPropertyName("px")]
-        public Vector2 Px { get; set; }
+        public Vector2Int Px { get; set; }
 
         /// <summary>
         /// Pixel coordinates of the tile in the **tileset** (`[x,y]` format)
         /// </summary>
         [JsonPropertyName("src")]
-        public Vector2 Src { get; set; }
+        public Vector2Int Src { get; set; }
 
         /// <summary>
         /// The *Tile ID* in the corresponding tileset.
@@ -718,7 +742,7 @@ namespace LDtk.Json
         /// Grid-based coordinates (`[x,y]` format)
         /// </summary>
         [JsonPropertyName("__grid")]
-        public Vector2 __Grid { get; set; }
+        public Vector2Int __Grid { get; set; }
 
         /// <summary>
         /// Entity height in pixels. For non-resizable entities, it will be the same as Entity
@@ -744,7 +768,7 @@ namespace LDtk.Json
         /// optional layer offsets, if they exist!
         /// </summary>
         [JsonPropertyName("px")]
-        public Vector2 Px { get; set; }
+        public Vector2Int Px { get; set; }
 
         /// <summary>
         /// Optional Tile used to display this entity (it could either be the default Entity tile, or
@@ -814,6 +838,154 @@ namespace LDtk.Json
         public long LevelUid { get; set; }
     }
 
+    class ColorConverter : JsonConverter<Color>
+    {
+        public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            string str = reader.GetString();
+            if (str.StartsWith('#'))
+            {
+                uint col = Convert.ToUInt32(str[1..], 16);
+                return new Color(col);
+            }
+
+            throw new Exception(str);
+        }
+
+        public override void Write(Utf8JsonWriter writer, Color val, JsonSerializerOptions options)
+        {
+            Color value = val;
+            string str = "#" + value.R.ToString("X") + value.G.ToString("X") + value.B.ToString("X");
+            writer.WriteStringValue(str);
+        }
+    }
+
+    class RectConverter : JsonConverter<Rect>
+    {
+        public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+            {
+                throw new JsonException();
+            }
+
+            var value = new List<int>();
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndArray)
+                {
+                    return new Rect(value[0], value[1], value[2], value[3]);
+                }
+
+                if (reader.TokenType != JsonTokenType.Number)
+                {
+                    throw new JsonException();
+                }
+
+                int element = reader.GetInt32();
+                value.Add(element);
+            }
+
+            throw new JsonException();
+        }
+
+        public override void Write(Utf8JsonWriter writer, Rect val, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            writer.WriteNumberValue(val.X);
+            writer.WriteNumberValue(val.Y);
+            writer.WriteNumberValue(val.Width);
+            writer.WriteNumberValue(val.Height);
+            writer.WriteEndArray();
+        }
+    }
+
+    class Vector2Converter : JsonConverter<Vector2>
+    {
+        public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+            {
+                throw new JsonException();
+            }
+
+            var value = new List<float>();
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndArray)
+                {
+                    return new Vector2(value[0], value[1]);
+                }
+
+                if (reader.TokenType != JsonTokenType.Number)
+                {
+                    throw new JsonException();
+                }
+
+                float element = reader.GetSingle();
+                value.Add(element);
+            }
+
+            throw new JsonException();
+        }
+
+        public override void Write(Utf8JsonWriter writer, Vector2 val, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            writer.WriteNumberValue(val.X);
+            writer.WriteNumberValue(val.Y);
+            writer.WriteEndArray();
+        }
+    }
+
+    class Vector2IntConverter : JsonConverter<Vector2Int>
+    {
+        public override Vector2Int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartArray)
+            {
+                throw new JsonException();
+            }
+
+            var value = new List<int>();
+
+            while (reader.Read())
+            {
+                if (reader.TokenType == JsonTokenType.EndArray)
+                {
+                    if (value.Count > 0)
+                    {
+                        return new Vector2Int(value[0], value[1]);
+                    }
+                    else
+                    {
+                        return new Vector2Int();
+                    }
+                }
+
+                if (reader.TokenType != JsonTokenType.Number)
+                {
+                    throw new JsonException();
+                }
+
+                int element = reader.GetInt32();
+                value.Add(element);
+            }
+
+            throw new JsonException();
+        }
+
+        public override void Write(Utf8JsonWriter writer, Vector2Int val, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            writer.WriteNumberValue(val.X);
+            writer.WriteNumberValue(val.Y);
+            writer.WriteEndArray();
+        }
+    }
+
     public enum BgPos { Contain, Cover, CoverDirty, Unscaled };
 
     /// <summary>
@@ -821,6 +993,9 @@ namespace LDtk.Json
     /// space). Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`
     /// </summary>
     public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
+
+    // Converters for the enums
+
 }
 #pragma warning restore 1591, 1570, IDE1006
 

@@ -11,67 +11,67 @@
 #-------------------------------- References --------------------------------#
 
 /reference:..\..\LDtkMonogame.ContentPipeline\bin\Debug\netcoreapp3.1\LDtkMonogame.ContentPipeline.dll
+/reference:..\..\LDtk.ContentPipeline\bin\Debug\netcoreapp3.1\LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Beach by deepnight.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Beach by deepnight.png
+# #begin Beach by deepnight.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /build:Beach by deepnight.png
 
-#begin Inca_front_by_Kronbits-extended.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Inca_front_by_Kronbits-extended.png
+# #begin Inca_front_by_Kronbits-extended.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /build:Inca_front_by_Kronbits-extended.png
 
-#begin RPG Graphics Icons by 7Soul's.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:RPG Graphics Icons by 7Soul's.png
+# #begin RPG Graphics Icons by 7Soul's.png
+# /importer:TextureImporter
+# /processor:TextureProcessor
+# /processorParam:ColorKeyColor=255,0,255,255
+# /processorParam:ColorKeyEnabled=True
+# /processorParam:GenerateMipmaps=False
+# /processorParam:PremultiplyAlpha=True
+# /processorParam:ResizeToPowerOfTwo=False
+# /processorParam:MakeSquare=False
+# /processorParam:TextureFormat=Color
+# /build:RPG Graphics Icons by 7Soul's.png
 
-#begin Test_file_for_API_showing_all_features.ldtk
-/importer:LDtkLevelImporter
-/processor:LDtkLevelProcessor
-/build:Test_file_for_API_showing_all_features.ldtk
+# #begin Test_file_for_API_showing_all_features.ldtk
+# /importer:LDtkWorldImporter
+# /processor:LDtkWorldProcessor
+# /build:Test_file_for_API_showing_all_features.ldtk
 
-#begin Test_file_for_API_showing_all_features/0000-Level1.ldtkl
-/importer:LDtkLevelImporter
-/processor:
-/build:Test_file_for_API_showing_all_features/0000-Level1.ldtkl
+# #begin Test_file_for_API_showing_all_features/0000-Level1.ldtkl
+# /importer:LDtkLevelImporter
+# /processor:LDtkLevelProcessor
+# /build:Test_file_for_API_showing_all_features/0000-Level1.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0001-Level2.ldtkl
-/importer:LDtkLevelImporter
-/processor:
-/build:Test_file_for_API_showing_all_features/0001-Level2.ldtkl
+# #begin Test_file_for_API_showing_all_features/0001-Level2.ldtkl
+# /importer:LDtkLevelImporter
+# /processor:LDtkLevelProcessor
+# /build:Test_file_for_API_showing_all_features/0001-Level2.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0002-Level3.ldtkl
-/importer:LDtkLevelImporter
-/processor:
-/build:Test_file_for_API_showing_all_features/0002-Level3.ldtkl
+# #begin Test_file_for_API_showing_all_features/0002-Level3.ldtkl
+# /importer:LDtkLevelImporter
+# /processor:LDtkLevelProcessor
+# /build:Test_file_for_API_showing_all_features/0002-Level3.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0003-Level4.ldtkl
-/importer:LDtkLevelImporter
-/processor:
-/build:Test_file_for_API_showing_all_features/0003-Level4.ldtkl
-
+# #begin Test_file_for_API_showing_all_features/0003-Level4.ldtkl
+# /importer:LDtkLevelImporter
+# /processor:LDtkLevelProcessor
+# /build:Test_file_for_API_showing_all_features/0003-Level4.ldtkl
