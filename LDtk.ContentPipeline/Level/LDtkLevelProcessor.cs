@@ -14,8 +14,6 @@ namespace LDtk.ContentPipeline
                 ContentLogger.Logger = context.Logger;
                 ContentLogger.LogMessage($"Processing");
 
-                Debug.Print(input);
-
                 return System.Text.Json.JsonSerializer.Deserialize<LDtkLevel>(input, LDtkWorld.SerializeOptions);
             }
             catch (Exception ex)

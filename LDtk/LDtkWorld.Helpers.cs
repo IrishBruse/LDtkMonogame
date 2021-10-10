@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 using Microsoft.Xna.Framework.Content;
@@ -45,25 +46,32 @@ namespace LDtk
                     continue;
                 }
 
-                if (ExternalLevels == true)
-                {
-                    string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
-                    if (Content != null)
-                    {
-                        return Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
-                    }
-                    else
-                    {
-                        return JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(path), SerializeOptions);
-                    }
-                }
-                else
+                if (ExternalLevels == false)
                 {
                     return Levels[i];
                 }
+
+                string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
+                if (Content != null)
+                {
+                    return Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
+                }
+                else
+                {
+                    return JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(path), SerializeOptions);
+                }
             }
 
-            return new LDtkLevel();
+            throw new LevelNotFoundException($"Could not find {identifier} Level in {this}.", new Exception());
         }
+
+
+    }
+    class LevelNotFoundException : Exception
+    {
+        public LevelNotFoundException() : base() { }
+        public LevelNotFoundException(string message) : base(message) { }
+        public LevelNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+
     }
 }

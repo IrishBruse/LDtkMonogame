@@ -17,7 +17,6 @@ namespace LDtk.ContentPipeline
             }
             catch (Exception ex)
             {
-                ContentLogger.LogMessage("Test");
                 ContentLogger.LogMessage(ex.Message);
                 ContentLogger.LogMessage(ex.StackTrace);
                 throw;

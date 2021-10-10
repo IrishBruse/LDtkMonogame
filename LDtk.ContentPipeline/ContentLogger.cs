@@ -8,7 +8,9 @@ namespace LDtk.ContentPipeline
 
         public static void LogMessage(string message)
         {
+#if false
             Logger?.LogMessage(message);
+#endif
         }
     }
 }

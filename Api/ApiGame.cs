@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Text.Json;
+using Comora;
 using LDtk;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Examples.Api
 {
@@ -13,6 +15,11 @@ namespace Examples.Api
         // private LDtkIntGrid intGrid8px;
         // private LDtkIntGrid intGridClassic;
 
+        LDtkWorld testWorld;
+        LDtkLevel level1;
+
+        Camera camera;
+
         public ApiGame() : base()
         {
             Content.RootDirectory = "Content";
@@ -22,11 +29,13 @@ namespace Examples.Api
         {
             base.Initialize();
 
-            var ldtkWorld = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
-            var ldtkLevel = ldtkWorld.LoadLevel("Level1", Content);
+            camera = new Camera(GraphicsDevice);
 
-            Console.WriteLine(ldtkLevel.WorldX);
-            Console.WriteLine(ldtkLevel.WorldY);
+            testWorld = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
+            level1 = testWorld.LoadLevel("Level1", Content);
+
+            Console.WriteLine(level1.WorldX);
+            Console.WriteLine(level1.WorldY);
 
             // world.spriteBatch = spriteBatch;
             // world.GraphicsDevice = GraphicsDevice;
@@ -64,49 +73,51 @@ namespace Examples.Api
 
         protected override void Update(GameTime gameTime)
         {
+            camera.Update(gameTime);
+
+            camera.Position = Mouse.GetState().Position.ToVector2();
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            // GraphicsDevice.Clear(myLevel.BgColor);
+            GraphicsDevice.Clear(level1.__BgColor);
 
-            // Matrix mat = Matrix.CreateTranslation(cameraPosition.X, cameraPosition.Y, 0) * Matrix.CreateScale(pixelScale) * Matrix.CreateTranslation(cameraOrigin.X, cameraOrigin.Y, 0);
+            spriteBatch.Begin(camera);
+            {
+                // // Draw Levels layers
+                // for (int i = 0; i < myLevel.Layers.Length; i++)
+                // {
+                //     spriteBatch.Draw(myLevel.Layers[i], myLevel.Position, Color.White);
+                // }
 
-            // spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: mat);
-            // {
-            //     // Draw Levels layers
-            //     for (int i = 0; i < myLevel.Layers.Length; i++)
-            //     {
-            //         spriteBatch.Draw(myLevel.Layers[i], myLevel.Position, Color.White);
-            //     }
+                // // Rendering int grid
+                // for (int x = 0; x < intGrid8px.Values.GetLength(0); x++)
+                // {
+                //     for (int y = 0; y < intGrid8px.Values.GetLength(1); y++)
+                //     {
+                //         if (intGrid8px.Values[x, y] != 0)
+                //         {
+                //             spriteBatch.Draw(texture, new Rectangle(new Point(x * intGrid8px.TileSize, y * intGrid8px.TileSize), new Point(1 * intGrid8px.TileSize, 1 * intGrid8px.TileSize)), Color.White);
+                //         }
+                //     }
+                // }
 
-            //     // Rendering int grid
-            //     for (int x = 0; x < intGrid8px.Values.GetLength(0); x++)
-            //     {
-            //         for (int y = 0; y < intGrid8px.Values.GetLength(1); y++)
-            //         {
-            //             if (intGrid8px.Values[x, y] != 0)
-            //             {
-            //                 spriteBatch.Draw(texture, new Rectangle(new Point(x * intGrid8px.TileSize, y * intGrid8px.TileSize), new Point(1 * intGrid8px.TileSize, 1 * intGrid8px.TileSize)), Color.White);
-            //             }
-            //         }
-            //     }
-
-            //     // Rendering int grid
-            //     for (int x = 0; x < intGridClassic.Values.GetLength(0); x++)
-            //     {
-            //         for (int y = 0; y < intGridClassic.Values.GetLength(1); y++)
-            //         {
-            //             if (intGridClassic.Values[x, y] != 0 && intGridClassic.Values[x, y] != 3)
-            //             {
-            //                 Color col = intGridClassic.Values[x, y] == 1 ? Color.Black : Color.CornflowerBlue;
-            //                 spriteBatch.Draw(texture, new Rectangle(new Point(x * intGridClassic.TileSize, y * intGridClassic.TileSize), new Point(1 * intGridClassic.TileSize, 1 * intGridClassic.TileSize)), col);
-            //             }
-            //         }
-            //     }
-            // }
-            // spriteBatch.End();
+                // // Rendering int grid
+                // for (int x = 0; x < intGridClassic.Values.GetLength(0); x++)
+                // {
+                //     for (int y = 0; y < intGridClassic.Values.GetLength(1); y++)
+                //     {
+                //         if (intGridClassic.Values[x, y] != 0 && intGridClassic.Values[x, y] != 3)
+                //         {
+                //             Color col = intGridClassic.Values[x, y] == 1 ? Color.Black : Color.CornflowerBlue;
+                //             spriteBatch.Draw(texture, new Rectangle(new Point(x * intGridClassic.TileSize, y * intGridClassic.TileSize), new Point(1 * intGridClassic.TileSize, 1 * intGridClassic.TileSize)), col);
+                //         }
+                //     }
+                // }
+            }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }

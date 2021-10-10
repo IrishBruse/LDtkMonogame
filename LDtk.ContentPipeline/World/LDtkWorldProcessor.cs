@@ -17,7 +17,6 @@ namespace LDtk.ContentPipeline
             }
             catch (Exception ex)
             {
-                context.Logger.LogImportantMessage("Test");
                 context.Logger.LogImportantMessage(ex.Message);
                 throw;
             }
