@@ -1,5 +1,4 @@
 ﻿using System;
-using LDtk.Json;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
@@ -14,7 +13,7 @@ namespace LDtk.ContentPipeline
             {
                 ContentLogger.LogMessage($"Writting");
                 // TODO: binary serialize this eventually
-                output.Write(System.Text.Json.JsonSerializer.Serialize(json));
+                output.Write(System.Text.Json.JsonSerializer.Serialize(json, LDtkWorld.SerializeOptions));
             }
             catch (Exception ex)
             {

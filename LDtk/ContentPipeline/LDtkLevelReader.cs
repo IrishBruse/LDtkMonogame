@@ -1,6 +1,4 @@
-using LDtk.Json;
 using Microsoft.Xna.Framework.Content;
-
 namespace LDtk.ContentPipeline
 {
 #pragma warning disable CS1591

@@ -1,5 +1,4 @@
 ﻿using System;
-using LDtk.Json;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline

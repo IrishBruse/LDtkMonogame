@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace LDtk.Examples.Api
+namespace Examples.Api
 {
     public class BaseExample : Game
     {

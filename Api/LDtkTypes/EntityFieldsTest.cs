@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace LDtk.Examples.Api
+namespace Examples.Api
 {
     public partial class EntityFieldsTest// : LDtkEntity
     {

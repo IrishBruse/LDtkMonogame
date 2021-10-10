@@ -1,11 +1,10 @@
 // 0.9.3
 
 #pragma warning disable 1591, 1570, IDE1006
-namespace LDtk.Json
+namespace LDtk
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
@@ -15,11 +14,7 @@ namespace LDtk.Json
     using Vector2Int = Microsoft.Xna.Framework.Point;
 
     /// <summary>
-    /// This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
-    ///
-    /// This is the root of any Project JSON file. It contains:  - the project settings, - an
-    /// array of levels, - a group of definitions (that can probably be safely ignored for most
-    /// users).
+    /// The main class that contains all the project related info
     /// </summary>
     public partial class LDtkWorld
     {
@@ -86,11 +81,6 @@ namespace LDtk.Json
                 new Vector2IntConverter(),
             }
         };
-
-        public static LDtkWorld LoadWorld(string filePath)
-        {
-            return JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(filePath), SerializeOptions);
-        }
     }
 
     /// <summary>
@@ -852,9 +842,8 @@ namespace LDtk.Json
             throw new Exception(str);
         }
 
-        public override void Write(Utf8JsonWriter writer, Color val, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
         {
-            Color value = val;
             string str = "#" + value.R.ToString("X") + value.G.ToString("X") + value.B.ToString("X");
             writer.WriteStringValue(str);
         }

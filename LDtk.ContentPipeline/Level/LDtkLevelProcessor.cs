@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using LDtk.Json;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline

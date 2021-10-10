@@ -11,9 +11,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!-- <MonoGameContentReference Include="Content/Content.mgcb">
+		<MonoGameContentReference Include="Content/Content.mgcb">
 			<Link>Content/Content.mgcb</Link>
-		</MonoGameContentReference> -->
+		</MonoGameContentReference>
 	</ItemGroup>
 
 	<ItemGroup>

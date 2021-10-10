@@ -1,7 +1,9 @@
-﻿using LDtk.Json;
+﻿using System;
+using System.Text.Json;
+using LDtk;
 using Microsoft.Xna.Framework;
 
-namespace LDtk.Examples.Api
+namespace Examples.Api
 {
     public class ApiGame : BaseExample
     {
@@ -20,8 +22,11 @@ namespace LDtk.Examples.Api
         {
             base.Initialize();
 
-            // var ldtkFile = Content.Load<LDtkWorld>("Test_file_for_API_showing_all_features");
-            var ldtkFile = LDtkWorld.LoadWorld("./Content/Test_file_for_API_showing_all_features.ldtk");
+            var ldtkWorld = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
+            var ldtkLevel = ldtkWorld.LoadLevel("Level1", Content);
+
+            Console.WriteLine(ldtkLevel.WorldX);
+            Console.WriteLine(ldtkLevel.WorldY);
 
             // world.spriteBatch = spriteBatch;
             // world.GraphicsDevice = GraphicsDevice;

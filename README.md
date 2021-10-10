@@ -8,8 +8,6 @@
   <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples"> <img alt="GitHub Examples Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Examples?label=LDtkMonogame.Examples"></a>
 </p>
 
----
-
 <h1 align="center">
-    <a href="https://irishbruse.github.io/LDtkMonogame/documentation/Introduction/quickstart.html">Check out the Wiki</a>
+    <a href="https://irishbruse.github.io/LDtkMonogame/">Check out the Wiki</a>
 </h1>

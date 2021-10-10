@@ -1,4 +1,4 @@
-namespace LDtk.Examples.Api
+namespace Examples.Api
 {
     public enum SomeEnum
     {
