@@ -55,13 +55,13 @@ namespace LDtk
         /// Height of the world grid in pixels.
         /// </summary>
         [JsonPropertyName("worldGridHeight")]
-        public long WorldGridHeight { get; set; }
+        int WorldGridHeight { get; set; }
 
         /// <summary>
         /// Width of the world grid in pixels.
         /// </summary>
         [JsonPropertyName("worldGridWidth")]
-        public long WorldGridWidth { get; set; }
+        int WorldGridWidth { get; set; }
 
         /// <summary>
         /// An enum that describes how levels are organized in this project (ie. linearly or in a 2D
@@ -89,7 +89,7 @@ namespace LDtk
     /// If you're writing your own LDtk importer, you should probably just ignore *most* stuff in
     /// the `defs` section, as it contains data that are mostly important to the editor. To keep
     /// you away from the `defs` section and avoid some unnecessary JSON parsing, important data
-    /// from definitions is often duplicated in fields prefixed with a double underscore (eg.
+    /// from definitions is often duplicated in fields prefixed with a float underscore (eg.
     /// `__identifier` or `__type`).  The 2 only definition types you might need here are
     /// **Tilesets** and **Enums**.
     /// </summary>
@@ -139,7 +139,7 @@ namespace LDtk
         /// Pixel height
         /// </summary>
         [JsonPropertyName("height")]
-        public long Height { get; set; }
+        public int Height { get; set; }
 
         /// <summary>
         /// Unique String identifier
@@ -151,37 +151,37 @@ namespace LDtk
         /// Pivot X coordinate (from 0 to 1.0)
         /// </summary>
         [JsonPropertyName("pivotX")]
-        public double PivotX { get; set; }
+        public float PivotX { get; set; }
 
         /// <summary>
         /// Pivot Y coordinate (from 0 to 1.0)
         /// </summary>
         [JsonPropertyName("pivotY")]
-        public double PivotY { get; set; }
+        public float PivotY { get; set; }
 
         /// <summary>
         /// Tile ID used for optional tile display
         /// </summary>
         [JsonPropertyName("tileId")]
-        public long? TileId { get; set; }
+        public int? TileId { get; set; }
 
         /// <summary>
         /// Tileset ID used for optional tile display
         /// </summary>
         [JsonPropertyName("tilesetId")]
-        public long? TilesetId { get; set; }
+        public int? TilesetId { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         [JsonPropertyName("uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// Pixel width
         /// </summary>
         [JsonPropertyName("width")]
-        public long Width { get; set; }
+        public int Width { get; set; }
     }
 
     public partial class EnumDefinition
@@ -196,7 +196,7 @@ namespace LDtk
         /// Tileset UID if provided
         /// </summary>
         [JsonPropertyName("iconTilesetUid")]
-        public long? IconTilesetUid { get; set; }
+        public int? IconTilesetUid { get; set; }
 
         /// <summary>
         /// Unique String identifier
@@ -208,7 +208,7 @@ namespace LDtk
         /// Unique Int identifier
         /// </summary>
         [JsonPropertyName("uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// All possible enum values, with their optional Tile infos.
@@ -223,7 +223,7 @@ namespace LDtk
         /// Optional color
         /// </summary>
         [JsonPropertyName("color")]
-        public long Color { get; set; }
+        public int Color { get; set; }
 
         /// <summary>
         /// Enum value
@@ -235,20 +235,20 @@ namespace LDtk
         /// The optional ID of the tile
         /// </summary>
         [JsonPropertyName("tileId")]
-        public long? TileId { get; set; }
+        public int? TileId { get; set; }
 
         /// <summary>
         /// An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
         /// height ]`
         /// </summary>
         [JsonPropertyName("__tileSrcRect")]
-        public Rect __TileSrcRect { get; set; }
+        public Rect _TileSrcRect { get; set; }
     }
 
     public partial class LayerDefinition
     {
         [JsonPropertyName("autoSourceLayerDefUid")]
-        public long? AutoSourceLayerDefUid { get; set; }
+        public int? AutoSourceLayerDefUid { get; set; }
 
         /// <summary>
         /// Reference to the Tileset UID being used by this auto-layer rules. WARNING: some layer
@@ -256,19 +256,19 @@ namespace LDtk
         /// the `__tilesetDefUid` value from layer instances.
         /// </summary>
         [JsonPropertyName("autoTilesetDefUid")]
-        public long? AutoTilesetDefUid { get; set; }
+        public int? AutoTilesetDefUid { get; set; }
 
         /// <summary>
         /// Opacity of the layer (0 to 1.0)
         /// </summary>
         [JsonPropertyName("displayOpacity")]
-        public double DisplayOpacity { get; set; }
+        public float DisplayOpacity { get; set; }
 
         /// <summary>
         /// Width and height of the grid in pixels
         /// </summary>
         [JsonPropertyName("gridSize")]
-        public long GridSize { get; set; }
+        public int GridSize { get; set; }
 
         /// <summary>
         /// Unique String identifier
@@ -288,14 +288,14 @@ namespace LDtk
         /// optional offset)
         /// </summary>
         [JsonPropertyName("pxOffsetX")]
-        public long PxOffsetX { get; set; }
+        public int PxOffsetX { get; set; }
 
         /// <summary>
         /// Y offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
         /// optional offset)
         /// </summary>
         [JsonPropertyName("pxOffsetY")]
-        public long PxOffsetY { get; set; }
+        public int PxOffsetY { get; set; }
 
         /// <summary>
         /// Reference to the Tileset UID being used by this Tile layer. WARNING: some layer
@@ -303,19 +303,19 @@ namespace LDtk
         /// the `__tilesetDefUid` value from layer instances.
         /// </summary>
         [JsonPropertyName("tilesetDefUid")]
-        public long? TilesetDefUid { get; set; }
+        public int? TilesetDefUid { get; set; }
 
         /// <summary>
         /// Type of the layer (*IntGrid, Entities, Tiles or AutoLayer*)
         /// </summary>
         [JsonPropertyName("__type")]
-        public string __Type { get; set; }
+        public string _Type { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         [JsonPropertyName("uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
     }
 
     /// <summary>
@@ -336,7 +336,7 @@ namespace LDtk
         /// The IntGrid value itself
         /// </summary>
         [JsonPropertyName("value")]
-        public long Value { get; set; }
+        public int Value { get; set; }
     }
 
     /// <summary>
@@ -350,13 +350,13 @@ namespace LDtk
         /// Grid-based height
         /// </summary>
         [JsonPropertyName("__cHei")]
-        public long __CHei { get; set; }
+        public int _CHei { get; set; }
 
         /// <summary>
         /// Grid-based width
         /// </summary>
         [JsonPropertyName("__cWid")]
-        public long __CWid { get; set; }
+        public int _CWid { get; set; }
 
         /// <summary>
         /// An array of custom tile metadata
@@ -381,19 +381,19 @@ namespace LDtk
         /// Distance in pixels from image borders
         /// </summary>
         [JsonPropertyName("padding")]
-        public long Padding { get; set; }
+        public int Padding { get; set; }
 
         /// <summary>
         /// Image height in pixels
         /// </summary>
         [JsonPropertyName("pxHei")]
-        public long PxHei { get; set; }
+        public int PxHei { get; set; }
 
         /// <summary>
         /// Image width in pixels
         /// </summary>
         [JsonPropertyName("pxWid")]
-        public long PxWid { get; set; }
+        public int PxWid { get; set; }
 
         /// <summary>
         /// Path to the source file, relative to the current project JSON file
@@ -405,22 +405,22 @@ namespace LDtk
         /// Space in pixels between all tiles
         /// </summary>
         [JsonPropertyName("spacing")]
-        public long Spacing { get; set; }
+        public int Spacing { get; set; }
 
         /// <summary>
         /// Optional Enum definition UID used for this tileset meta-data
         /// </summary>
         [JsonPropertyName("tagsSourceEnumUid")]
-        public long? TagsSourceEnumUid { get; set; }
+        public int? TagsSourceEnumUid { get; set; }
 
         [JsonPropertyName("tileGridSize")]
-        public long TileGridSize { get; set; }
+        public int TileGridSize { get; set; }
 
         /// <summary>
         /// Unique Intidentifier
         /// </summary>
         [JsonPropertyName("uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
     }
 
     /// <summary>
@@ -440,7 +440,7 @@ namespace LDtk
         /// automatically used here if its value is `null`)
         /// </summary>
         [JsonPropertyName("__bgColor")]
-        public Color __BgColor { get; set; }
+        public Color _BgColor { get; set; }
 
         /// <summary>
         /// The *optional* relative path to the level background image.
@@ -489,37 +489,37 @@ namespace LDtk
         /// the linear horizontal/vertical layout.
         /// </summary>
         [JsonPropertyName("__neighbours")]
-        public NeighbourLevel[] __Neighbours { get; set; }
+        public NeighbourLevel[] _Neighbours { get; set; }
 
         /// <summary>
         /// Height of the level in pixels
         /// </summary>
         [JsonPropertyName("pxHei")]
-        public long PxHei { get; set; }
+        int PxHei { get; set; }
 
         /// <summary>
         /// Width of the level in pixels
         /// </summary>
         [JsonPropertyName("pxWid")]
-        public long PxWid { get; set; }
+        int PxWid { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         [JsonPropertyName("uid")]
-        public long Uid { get; set; }
+        public int Uid { get; set; }
 
         /// <summary>
         /// World X coordinate in pixels
         /// </summary>
         [JsonPropertyName("worldX")]
-        public long WorldX { get; set; }
+        int WorldX { get; set; }
 
         /// <summary>
         /// World Y coordinate in pixels
         /// </summary>
         [JsonPropertyName("worldY")]
-        public long WorldY { get; set; }
+        int WorldY { get; set; }
     }
 
     public partial class FieldInstance
@@ -528,26 +528,26 @@ namespace LDtk
         /// Reference of the **Field definition** UID
         /// </summary>
         [JsonPropertyName("defUid")]
-        public long DefUid { get; set; }
+        public int DefUid { get; set; }
 
         /// <summary>
         /// Field definition identifier
         /// </summary>
         [JsonPropertyName("__identifier")]
-        public string __Identifier { get; set; }
+        public string _Identifier { get; set; }
 
         /// <summary>
         /// Type of the field, such as `Int`, `Float`, `Enum(my_enum_name)`, `Bool`, etc.
         /// </summary>
         [JsonPropertyName("__type")]
-        public string __Type { get; set; }
+        public string _Type { get; set; }
 
         /// <summary>
         /// Actual value of the field instance. The value type may vary, depending on `__type`
         /// (Integer, Boolean, String etc.)<br/>  It can also be an `Array` of those same types.
         /// </summary>
         [JsonPropertyName("__value")]
-        public object __Value { get; set; }
+        public object _Value { get; set; }
     }
 
     public partial class LayerInstance
@@ -565,13 +565,13 @@ namespace LDtk
         /// Grid-based height
         /// </summary>
         [JsonPropertyName("__cHei")]
-        public long __CHei { get; set; }
+        public int _CHei { get; set; }
 
         /// <summary>
         /// Grid-based width
         /// </summary>
         [JsonPropertyName("__cWid")]
-        public long __CWid { get; set; }
+        public int _CWid { get; set; }
 
         [JsonPropertyName("entityInstances")]
         public EntityInstance[] EntityInstances { get; set; }
@@ -580,7 +580,7 @@ namespace LDtk
         /// Grid size
         /// </summary>
         [JsonPropertyName("__gridSize")]
-        public long __GridSize { get; set; }
+        public int _GridSize { get; set; }
 
         [JsonPropertyName("gridTiles")]
         public TileInstance[] GridTiles { get; set; }
@@ -589,7 +589,7 @@ namespace LDtk
         /// Layer definition identifier
         /// </summary>
         [JsonPropertyName("__identifier")]
-        public string __Identifier { get; set; }
+        public string _Identifier { get; set; }
 
         /// <summary>
         /// **WARNING**: this deprecated value will be *removed* completely on version 0.10.0+
@@ -610,69 +610,69 @@ namespace LDtk
         /// Reference the Layer definition UID
         /// </summary>
         [JsonPropertyName("layerDefUid")]
-        public long LayerDefUid { get; set; }
+        public int LayerDefUid { get; set; }
 
         /// <summary>
         /// Reference to the UID of the level containing this layer instance
         /// </summary>
         [JsonPropertyName("levelId")]
-        public long LevelId { get; set; }
+        public int LevelId { get; set; }
 
         /// <summary>
         /// Layer opacity as Float [0-1]
         /// </summary>
         [JsonPropertyName("__opacity")]
-        public double __Opacity { get; set; }
+        public float _Opacity { get; set; }
 
         /// <summary>
         /// This layer can use another tileset by overriding the tileset UID here.
         /// </summary>
         [JsonPropertyName("overrideTilesetUid")]
-        public long? OverrideTilesetUid { get; set; }
+        public int? OverrideTilesetUid { get; set; }
 
         /// <summary>
         /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
         /// the `LayerDef` optional offset, see `__pxTotalOffsetX`)
         /// </summary>
         [JsonPropertyName("pxOffsetX")]
-        public long PxOffsetX { get; set; }
+        public int PxOffsetX { get; set; }
 
         /// <summary>
         /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
         /// the `LayerDef` optional offset, see `__pxTotalOffsetY`)
         /// </summary>
         [JsonPropertyName("pxOffsetY")]
-        public long PxOffsetY { get; set; }
+        public int PxOffsetY { get; set; }
 
         /// <summary>
         /// Total layer X pixel offset, including both instance and definition offsets.
         /// </summary>
         [JsonPropertyName("__pxTotalOffsetX")]
-        public long __PxTotalOffsetX { get; set; }
+        public int _PxTotalOffsetX { get; set; }
 
         /// <summary>
         /// Total layer Y pixel offset, including both instance and definition offsets.
         /// </summary>
         [JsonPropertyName("__pxTotalOffsetY")]
-        public long __PxTotalOffsetY { get; set; }
+        public int _PxTotalOffsetY { get; set; }
 
         /// <summary>
         /// The definition UID of corresponding Tileset, if any.
         /// </summary>
         [JsonPropertyName("__tilesetDefUid")]
-        public long? __TilesetDefUid { get; set; }
+        public int? _TilesetDefUid { get; set; }
 
         /// <summary>
         /// The relative path to corresponding Tileset, if any.
         /// </summary>
         [JsonPropertyName("__tilesetRelPath")]
-        public string __TilesetRelPath { get; set; }
+        public string _TilesetRelPath { get; set; }
 
         /// <summary>
         /// Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
         /// </summary>
         [JsonPropertyName("__type")]
-        public string __Type { get; set; }
+        public LayerType _Type { get; set; }
 
         /// <summary>
         /// Layer instance visibility
@@ -692,7 +692,7 @@ namespace LDtk
         /// only), f=2 (Y flip only), f=3 (both flips)
         /// </summary>
         [JsonPropertyName("f")]
-        public long F { get; set; }
+        public int F { get; set; }
 
         /// <summary>
         /// Pixel coordinates of the tile in the **layer** (`[x,y]` format). Don't forget optional
@@ -711,7 +711,7 @@ namespace LDtk
         /// The *Tile ID* in the corresponding tileset.
         /// </summary>
         [JsonPropertyName("t")]
-        public long T { get; set; }
+        public int T { get; set; }
     }
 
     public partial class EntityInstance
@@ -720,7 +720,7 @@ namespace LDtk
         /// Reference of the **Entity definition** UID
         /// </summary>
         [JsonPropertyName("defUid")]
-        public long DefUid { get; set; }
+        public int DefUid { get; set; }
 
         /// <summary>
         /// An array of all custom fields and their values.
@@ -732,26 +732,26 @@ namespace LDtk
         /// Grid-based coordinates (`[x,y]` format)
         /// </summary>
         [JsonPropertyName("__grid")]
-        public Vector2Int __Grid { get; set; }
+        public Vector2Int _Grid { get; set; }
 
         /// <summary>
         /// Entity height in pixels. For non-resizable entities, it will be the same as Entity
         /// definition.
         /// </summary>
         [JsonPropertyName("height")]
-        public long Height { get; set; }
+        public int Height { get; set; }
 
         /// <summary>
         /// Entity definition identifier
         /// </summary>
         [JsonPropertyName("__identifier")]
-        public string __Identifier { get; set; }
+        public string _Identifier { get; set; }
 
         /// <summary>
         /// Pivot coordinates  (`[x,y]` format, values are from 0 to 1) of the Entity
         /// </summary>
         [JsonPropertyName("__pivot")]
-        public Vector2 __Pivot { get; set; }
+        public Vector2 _Pivot { get; set; }
 
         /// <summary>
         /// Pixel coordinates (`[x,y]` format) in current level coordinate space. Don't forget
@@ -765,14 +765,14 @@ namespace LDtk
         /// some tile provided by a field value, like an Enum).
         /// </summary>
         [JsonPropertyName("__tile")]
-        public EntityInstanceTile __Tile { get; set; }
+        public EntityInstanceTile _Tile { get; set; }
 
         /// <summary>
         /// Entity width in pixels. For non-resizable entities, it will be the same as Entity
         /// definition.
         /// </summary>
         [JsonPropertyName("width")]
-        public long Width { get; set; }
+        public int Width { get; set; }
     }
 
     /// <summary>
@@ -791,7 +791,7 @@ namespace LDtk
         /// Tileset ID
         /// </summary>
         [JsonPropertyName("tilesetUid")]
-        public long TilesetUid { get; set; }
+        public int TilesetUid { get; set; }
     }
 
     /// <summary>
@@ -803,13 +803,13 @@ namespace LDtk
         /// Coordinate ID in the layer grid
         /// </summary>
         [JsonPropertyName("coordId")]
-        public long CoordId { get; set; }
+        public int CoordId { get; set; }
 
         /// <summary>
         /// IntGrid value
         /// </summary>
         [JsonPropertyName("v")]
-        public long V { get; set; }
+        public int V { get; set; }
     }
 
     /// <summary>
@@ -825,154 +825,7 @@ namespace LDtk
         public string Dir { get; set; }
 
         [JsonPropertyName("levelUid")]
-        public long LevelUid { get; set; }
-    }
-
-    class ColorConverter : JsonConverter<Color>
-    {
-        public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            string str = reader.GetString();
-            if (str.StartsWith('#'))
-            {
-                uint col = Convert.ToUInt32(str[1..], 16);
-                return new Color(col);
-            }
-
-            throw new Exception(str);
-        }
-
-        public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
-        {
-            string str = "#" + value.R.ToString("X") + value.G.ToString("X") + value.B.ToString("X");
-            writer.WriteStringValue(str);
-        }
-    }
-
-    class RectConverter : JsonConverter<Rect>
-    {
-        public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-
-            var value = new List<int>();
-
-            while (reader.Read())
-            {
-                if (reader.TokenType == JsonTokenType.EndArray)
-                {
-                    return new Rect(value[0], value[1], value[2], value[3]);
-                }
-
-                if (reader.TokenType != JsonTokenType.Number)
-                {
-                    throw new JsonException();
-                }
-
-                int element = reader.GetInt32();
-                value.Add(element);
-            }
-
-            throw new JsonException();
-        }
-
-        public override void Write(Utf8JsonWriter writer, Rect val, JsonSerializerOptions options)
-        {
-            writer.WriteStartArray();
-            writer.WriteNumberValue(val.X);
-            writer.WriteNumberValue(val.Y);
-            writer.WriteNumberValue(val.Width);
-            writer.WriteNumberValue(val.Height);
-            writer.WriteEndArray();
-        }
-    }
-
-    class Vector2Converter : JsonConverter<Vector2>
-    {
-        public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-
-            var value = new List<float>();
-
-            while (reader.Read())
-            {
-                if (reader.TokenType == JsonTokenType.EndArray)
-                {
-                    return new Vector2(value[0], value[1]);
-                }
-
-                if (reader.TokenType != JsonTokenType.Number)
-                {
-                    throw new JsonException();
-                }
-
-                float element = reader.GetSingle();
-                value.Add(element);
-            }
-
-            throw new JsonException();
-        }
-
-        public override void Write(Utf8JsonWriter writer, Vector2 val, JsonSerializerOptions options)
-        {
-            writer.WriteStartArray();
-            writer.WriteNumberValue(val.X);
-            writer.WriteNumberValue(val.Y);
-            writer.WriteEndArray();
-        }
-    }
-
-    class Vector2IntConverter : JsonConverter<Vector2Int>
-    {
-        public override Vector2Int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-
-            var value = new List<int>();
-
-            while (reader.Read())
-            {
-                if (reader.TokenType == JsonTokenType.EndArray)
-                {
-                    if (value.Count > 0)
-                    {
-                        return new Vector2Int(value[0], value[1]);
-                    }
-                    else
-                    {
-                        return new Vector2Int();
-                    }
-                }
-
-                if (reader.TokenType != JsonTokenType.Number)
-                {
-                    throw new JsonException();
-                }
-
-                int element = reader.GetInt32();
-                value.Add(element);
-            }
-
-            throw new JsonException();
-        }
-
-        public override void Write(Utf8JsonWriter writer, Vector2Int val, JsonSerializerOptions options)
-        {
-            writer.WriteStartArray();
-            writer.WriteNumberValue(val.X);
-            writer.WriteNumberValue(val.Y);
-            writer.WriteEndArray();
-        }
+        public int LevelUid { get; set; }
     }
 
     public enum BgPos { Contain, Cover, CoverDirty, Unscaled };
@@ -983,8 +836,11 @@ namespace LDtk
     /// </summary>
     public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
 
-    // Converters for the enums
-
+    /// <summary>
+    /// Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
+    /// `AutoLayer`
+    /// </summary>
+    public enum LayerType { IntGrid, Entities, Tiles, AutoLayer };
 }
 #pragma warning restore 1591, 1570, IDE1006
 
@@ -1033,12 +889,6 @@ namespace LDtk
     /// Defines how tileIds array is used Possible values: `Single`, `Stamp`
     /// </summary>
     public enum TileMode { Single, Stamp };
-
-    /// <summary>
-    /// Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
-    /// `AutoLayer`
-    /// </summary>
-    public enum TypeEnum { AutoLayer, Entities, IntGrid, Tiles };
 
     public enum Flag { DiscardPreCsvIntGrid, IgnoreBackupSuggest };
 
