@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Text.Json;
 using Comora;
 using LDtk;
+using LDtk.Renderer;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,14 +10,13 @@ namespace Examples.Api
 {
     public class ApiGame : BaseExample
     {
-        // // LDtk stuff
-        // private LDtkWorld world;
-        // private CustomLevel myLevel;
+        // LDtk stuff
+
+        LDtkWorld world;
+        LDtkLevel level1;
+        LDtkRenderer renderer;
         // private LDtkIntGrid intGrid8px;
         // private LDtkIntGrid intGridClassic;
-
-        LDtkWorld testWorld;
-        LDtkLevel level1;
 
         Camera camera;
 
@@ -28,14 +28,17 @@ namespace Examples.Api
         protected override void Initialize()
         {
             base.Initialize();
+            Window.Title = "LDtkMonogame - Api";
 
             camera = new Camera(GraphicsDevice);
+            renderer = new LDtkRenderer(spriteBatch);
 
-            testWorld = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
-            level1 = testWorld.LoadLevel("Level1", Content);
+            world = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
+            level1 = world.LoadLevel("Level1", Content);
 
-            Console.WriteLine(level1.WorldX);
-            Console.WriteLine(level1.WorldY);
+            renderer.PrerenderLevel(level1);
+
+            Console.WriteLine(level1.Position);
 
             // world.spriteBatch = spriteBatch;
             // world.GraphicsDevice = GraphicsDevice;
@@ -82,15 +85,12 @@ namespace Examples.Api
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(level1.__BgColor);
+            GraphicsDevice.Clear(level1._BgColor);
 
             spriteBatch.Begin(camera);
             {
-                // // Draw Levels layers
-                // for (int i = 0; i < myLevel.Layers.Length; i++)
-                // {
-                //     spriteBatch.Draw(myLevel.Layers[i], myLevel.Position, Color.White);
-                // }
+                // Draw Levels layers
+                renderer.RenderLevel(level1);
 
                 // // Rendering int grid
                 // for (int x = 0; x < intGrid8px.Values.GetLength(0); x++)

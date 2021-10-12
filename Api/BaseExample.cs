@@ -13,7 +13,7 @@ namespace Examples.Api
         protected Vector2 cameraOrigin;
         protected float pixelScale = 1f;
         protected bool freeCam = true;
-        protected Texture2D texture;
+        protected Texture2D pixel;
 
         // Framework
         protected readonly GraphicsDeviceManager graphics;
@@ -29,8 +29,8 @@ namespace Examples.Api
 
         protected override void Initialize()
         {
-            texture = new Texture2D(GraphicsDevice, 1, 1);
-            texture.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+            pixel = new Texture2D(GraphicsDevice, 1, 1);
+            pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
             MonogameInitialize();
         }
 
@@ -63,7 +63,7 @@ namespace Examples.Api
             IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Window.Title = "LDtkMonogame";
+
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;

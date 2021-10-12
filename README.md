@@ -9,5 +9,5 @@
 </p>
 
 <h1 align="center">
-    <a href="https://irishbruse.github.io/LDtkMonogame/">Check out the Wiki</a>
+    <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a>
 </h1>
