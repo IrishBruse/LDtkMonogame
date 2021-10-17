@@ -1,38 +1,27 @@
-using Microsoft.Xna.Framework;
+// This file was automatically generated, any modifications will be lost!
 
-namespace Examples.Api
+namespace LDtkTypes
 {
-    public partial class EntityFieldsTest// : LDtkEntity
+    public class EntityFieldsTest
     {
-        public int integer;
-        public float floatingPoint;
-        public bool boolean;
-        public string string_singleLine;
-        public string string_multiLines;
-        public SomeEnum someEnum;
-        public Color color;
-        public Point point;
-        public string filePath;
-        public int[] array_Integer;
-        public SomeEnum[] array_Enum;
-        public Vector2[] array_points;
-        public string[] array_multilines;
-
-        public override string ToString()
-        {
-            return integer + "\n" +
-            floatingPoint + "\n" +
-            boolean + "\n" +
-            string_singleLine + "\n" +
-            string_multiLines + "\n" +
-            someEnum + "\n" +
-            color + "\n" +
-            point + "\n" +
-            filePath + "\n" +
-            string.Join(",", array_Integer) + "\n" +
-            string.Join(",", array_Enum) + "\n" +
-            string.Join(",", array_points) + "\n" +
-            string.Join(",", array_multilines);
-        }
+        public int Integer { get; set; }
+        public float FloatingPoint { get; set; }
+        public bool Boolean { get; set; }
+        public string String_singleLine { get; set; }
+        public string String_multiLines { get; set; }
+        public SomeEnum SomeEnum { get; set; }
+        public int[] Color { get; set; }
+        public float[] Point { get; set; }
+        public string FilePath { get; set; }
+        public int[] Array_Integer { get; set; }
+        public SomeEnum[] Array_Enum { get; set; }
+        public float[][] Array_points { get; set; }
+        public string[] Array_multilines { get; set; }
+        public long Uid { get; set; }
+        public string Identifier { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public float[] Position { get; set; }
+        public float[] Pivot { get; set; }
     }
 }

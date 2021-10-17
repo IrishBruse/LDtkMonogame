@@ -2,15 +2,14 @@
 
 namespace LDtkTypes
 {
-    public class RectRegion
+    public class MyLevelClass
     {
-        public SomeEnum SomeEnum { get; set; }
-        public int Integer { get; set; }
+        public string desc { get; set; }
         public long Uid { get; set; }
         public string Identifier { get; set; }
+        public float[] WorldCoords { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
-        public float[] Position { get; set; }
-        public float[] Pivot { get; set; }
+        public object[] Entities { get; set; }
     }
 }

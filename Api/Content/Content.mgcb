@@ -54,6 +54,8 @@
 #begin Test_file_for_API_showing_all_features.ldtk
 /importer:LDtkWorldImporter
 /processor:LDtkWorldProcessor
+/processorParam:GenerateEntities=True
+/processorParam:LDtkNamespace=LDtkTypes
 /build:Test_file_for_API_showing_all_features.ldtk
 
 #begin Test_file_for_API_showing_all_features/0000-Level1.ldtkl
@@ -75,3 +77,4 @@
 /importer:LDtkLevelImporter
 /processor:LDtkLevelProcessor
 /build:Test_file_for_API_showing_all_features/0003-Level4.ldtkl
+

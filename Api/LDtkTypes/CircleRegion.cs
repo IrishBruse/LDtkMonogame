@@ -1,34 +1,16 @@
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+// This file was automatically generated, any modifications will be lost!
 
-namespace Examples.Api
+namespace LDtkTypes
 {
     public class CircleRegion
     {
-        public Vector2 position;
-        public Vector2 levelPosition;
-        public Vector2 pivot;
-        public Texture2D texture;
-        public Vector2 size;
-#if DEBUG
-        public Color editorVisualColor;
-#endif
-        public Rectangle tile;
-        public SomeEnum someEnum;
-        public string text;
-
-        public override string ToString()
-        {
-            return
-            position + "\n" +
-            levelPosition + "\n" +
-            pivot + "\n" +
-            texture?.Name + "\n" +
-            size + "\n" +
-            editorVisualColor + "\n" +
-            tile + "\n" +
-            someEnum + "\n" +
-            text + "\n";
-        }
+        public SomeEnum SomeEnum { get; set; }
+        public string text { get; set; }
+        public long Uid { get; set; }
+        public string Identifier { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        public float[] Position { get; set; }
+        public float[] Pivot { get; set; }
     }
 }

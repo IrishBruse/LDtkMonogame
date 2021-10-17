@@ -2,10 +2,10 @@
 
 namespace LDtkTypes
 {
-    public class RectRegion
+    public class Labels
     {
-        public SomeEnum SomeEnum { get; set; }
-        public int Integer { get; set; }
+        public string text { get; set; }
+        public int[] color { get; set; }
         public long Uid { get; set; }
         public string Identifier { get; set; }
         public float Width { get; set; }
