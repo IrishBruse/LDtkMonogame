@@ -20,8 +20,8 @@ namespace LDtk.Generator
                 "Int" => "int",
                 "Float" => "float",
                 "Bool" => "bool",
-                "Point" => "float[]",
-                "Color" => "int[]",
+                "Point" => "Point",
+                "Color" => "Color",
                 _ => "string",
             };
         }

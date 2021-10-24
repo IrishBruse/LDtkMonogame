@@ -56,6 +56,7 @@
 /processor:LDtkWorldProcessor
 /processorParam:GenerateEntities=True
 /processorParam:LDtkNamespace=LDtkTypes
+/processorParam:LevelClassName=MyLevelClass
 /build:Test_file_for_API_showing_all_features.ldtk
 
 #begin Test_file_for_API_showing_all_features/0000-Level1.ldtkl

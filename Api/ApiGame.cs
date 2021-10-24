@@ -2,7 +2,7 @@
 using Comora;
 using LDtk;
 using LDtk.Renderer;
-
+using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,11 +12,11 @@ namespace Examples.Api
     {
         // LDtk stuff
 
-        LDtkWorld world;
-        LDtkLevel level1;
-        LDtkRenderer renderer;
-        // private LDtkIntGrid intGrid8px;
-        // private LDtkIntGrid intGridClassic;
+        private LDtkWorld world;
+        private LDtkLevel level;
+        private LDtkRenderer renderer;
+        private LDtkIntGrid intGrid8px;
+        private LDtkIntGrid intGridClassic;
 
         Camera camera;
 
@@ -31,26 +31,24 @@ namespace Examples.Api
             Window.Title = "LDtkMonogame - Api";
 
             camera = new Camera(GraphicsDevice);
-            renderer = new LDtkRenderer(spriteBatch);
+            renderer = new LDtkRenderer(spriteBatch, Content);
 
             world = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
-            level1 = world.LoadLevel("Level1", Content);
 
-            renderer.PrerenderLevel(level1);
+            level = world.LoadLevel("Level1", Content);
 
-            Console.WriteLine(level1.Position);
+            MyLevelClass levelFields = level.GetCustomFields<MyLevelClass>();
 
-            // world.spriteBatch = spriteBatch;
-            // world.GraphicsDevice = GraphicsDevice;
+            renderer.PrerenderLevel(level);
 
-            // world.LoadLevel("Level1");
-            // myLevel = world.GetLevel<CustomLevel>("Level1");
-            // intGrid8px = myLevel.GetIntGrid("IntGrid_8px_grid");
-            // intGridClassic = myLevel.GetIntGrid("IntGrid_classic");
-            // Console.WriteLine(myLevel.Identifier + " desc :\n" + myLevel.desc);
+            intGrid8px = level.GetIntGrid("IntGrid_8px_grid");
+            intGridClassic = level.GetIntGrid("IntGrid_classic");
 
-            // EntityFieldsTest[] entityFieldsTests = myLevel.GetEntities<EntityFieldsTest>();
+            Console.WriteLine(level.Identifier + " desc :\n" + levelFields.desc);
+
+            // EntityFieldsTest[] entityFieldsTests = level.GetEntities<EntityFieldsTest>();
             // Console.WriteLine("EntityFieldsTests:");
+
             // for (int i = 0; i < entityFieldsTests.Length; i++)
             // {
             //     Console.WriteLine(entityFieldsTests[i].ToString());
@@ -85,37 +83,38 @@ namespace Examples.Api
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(level1._BgColor);
+            GraphicsDevice.Clear(level._BgColor);
 
             spriteBatch.Begin(camera);
             {
                 // Draw Levels layers
-                renderer.RenderLevel(level1);
+                renderer.RenderLevel(level);
 
-                // // Rendering int grid
-                // for (int x = 0; x < intGrid8px.Values.GetLength(0); x++)
-                // {
-                //     for (int y = 0; y < intGrid8px.Values.GetLength(1); y++)
-                //     {
-                //         if (intGrid8px.Values[x, y] != 0)
-                //         {
-                //             spriteBatch.Draw(texture, new Rectangle(new Point(x * intGrid8px.TileSize, y * intGrid8px.TileSize), new Point(1 * intGrid8px.TileSize, 1 * intGrid8px.TileSize)), Color.White);
-                //         }
-                //     }
-                // }
+                // Rendering int grid
+                for (int x = 0; x < intGrid8px.Values.GetLength(0); x++)
+                {
+                    for (int y = 0; y < intGrid8px.Values.GetLength(1); y++)
+                    {
+                        if (intGrid8px.Values[x, y] != 0)
+                        {
+                            spriteBatch.Draw(pixel, new Rectangle(x * intGrid8px.TileSize, y * intGrid8px.TileSize, intGrid8px.TileSize, intGrid8px.TileSize), Color.LightGreen);
+                        }
+                    }
+                }
 
-                // // Rendering int grid
-                // for (int x = 0; x < intGridClassic.Values.GetLength(0); x++)
-                // {
-                //     for (int y = 0; y < intGridClassic.Values.GetLength(1); y++)
-                //     {
-                //         if (intGridClassic.Values[x, y] != 0 && intGridClassic.Values[x, y] != 3)
-                //         {
-                //             Color col = intGridClassic.Values[x, y] == 1 ? Color.Black : Color.CornflowerBlue;
-                //             spriteBatch.Draw(texture, new Rectangle(new Point(x * intGridClassic.TileSize, y * intGridClassic.TileSize), new Point(1 * intGridClassic.TileSize, 1 * intGridClassic.TileSize)), col);
-                //         }
-                //     }
-                // }
+                // Rendering int grid
+                for (int x = 0; x < intGridClassic.Values.GetLength(0); x++)
+                {
+                    for (int y = 0; y < intGridClassic.Values.GetLength(1); y++)
+                    {
+                        // 3 is used in the autotile layer
+                        if (intGridClassic.Values[x, y] != 0 && intGridClassic.Values[x, y] != 3)
+                        {
+                            Color col = intGridClassic.Values[x, y] == 1 ? Color.Black : Color.SkyBlue;
+                            spriteBatch.Draw(pixel, new Rectangle(x * intGridClassic.TileSize, y * intGridClassic.TileSize, intGridClassic.TileSize, intGridClassic.TileSize), col);
+                        }
+                    }
+                }
             }
             spriteBatch.End();
 

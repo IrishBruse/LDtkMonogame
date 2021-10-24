@@ -10,18 +10,18 @@ namespace LDtk.Generator
             entity.Fields.Add(new CompilationUnitField("Identifier", "string"));
             entity.Fields.Add(new CompilationUnitField("Width", "float"));
             entity.Fields.Add(new CompilationUnitField("Height", "float"));
-            entity.Fields.Add(new CompilationUnitField("Position", "float[]"));
-            entity.Fields.Add(new CompilationUnitField("Pivot", "float[]"));
+            entity.Fields.Add(new CompilationUnitField("Position", "Vector2"));
+            entity.Fields.Add(new CompilationUnitField("Pivot", "Vector2"));
         }
 
         public virtual void CustomizeLevel(CompilationUnitClass level, LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
         {
-            level.Fields.Add(new CompilationUnitField("Uid", "long"));
-            level.Fields.Add(new CompilationUnitField("Identifier", "string"));
-            level.Fields.Add(new CompilationUnitField("WorldCoords", "float[]"));
-            level.Fields.Add(new CompilationUnitField("Width", "float"));
-            level.Fields.Add(new CompilationUnitField("Height", "float"));
-            level.Fields.Add(new CompilationUnitField("Entities", "object[]"));
+            // level.Fields.Add(new CompilationUnitField("Uid", "long"));
+            // level.Fields.Add(new CompilationUnitField("Identifier", "string"));
+            // level.Fields.Add(new CompilationUnitField("WorldCoords", "Vector2"));
+            // level.Fields.Add(new CompilationUnitField("Width", "float"));
+            // level.Fields.Add(new CompilationUnitField("Height", "float"));
+            // level.Fields.Add(new CompilationUnitField("Entities", "object[]"));
         }
 
     }

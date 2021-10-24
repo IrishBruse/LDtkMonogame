@@ -3,7 +3,6 @@
 #pragma warning disable 1591, 1570, IDE1006
 namespace LDtk
 {
-    using System;
     using System.Collections.Generic;
     using System.Text.Json;
     using System.Text.Json.Serialization;
@@ -121,6 +120,12 @@ namespace LDtk
         public LayerDefinition[] Layers { get; set; }
 
         /// <summary>
+        /// An array containing all custom fields available to all levels.
+        /// </summary>
+        [JsonPropertyName("levelFields")]
+        public FieldDefinition[] LevelFields { get; set; }
+
+        /// <summary>
         /// All tilesets
         /// </summary>
         [JsonPropertyName("tilesets")]
@@ -134,6 +139,12 @@ namespace LDtk
         /// </summary>
         [JsonPropertyName("color")]
         public Color Color { get; set; }
+
+        /// <summary>
+        /// Array of field definitions
+        /// </summary>
+        [JsonPropertyName("fieldDefs")]
+        public FieldDefinition[] FieldDefs { get; set; }
 
         /// <summary>
         /// Pixel height
@@ -423,105 +434,6 @@ namespace LDtk
         public int Uid { get; set; }
     }
 
-    /// <summary>
-    /// This section contains all the level data. It can be found in 2 distinct forms, depending
-    /// on Project current settings:  - If "*Separate level files*" is **disabled** (default):
-    /// full level data is *embedded* inside the main Project JSON file, - If "*Separate level
-    /// files*" is **enabled**: level data is stored in *separate* standalone `.ldtkl` files (one
-    /// per level). In this case, the main Project JSON file will still contain most level data,
-    /// except heavy sections, like the `layerInstances` array (which will be null). The
-    /// `externalRelPath` string points to the `ldtkl` file.  A `ldtkl` file is just a JSON file
-    /// containing exactly what is described below.
-    /// </summary>
-    public partial class LDtkLevel
-    {
-        /// <summary>
-        /// Background color of the level (same as `bgColor`, except the default value is
-        /// automatically used here if its value is `null`)
-        /// </summary>
-        [JsonPropertyName("__bgColor")]
-        public Color _BgColor { get; set; }
-
-        /// <summary>
-        /// The *optional* relative path to the level background image.
-        /// </summary>
-        [JsonPropertyName("bgRelPath")]
-        public string BgRelPath { get; set; }
-
-        /// <summary>
-        /// This value is not null if the project option "*Save levels separately*" is enabled. In
-        /// this case, this **relative** path points to the level Json file.
-        /// </summary>
-        [JsonPropertyName("externalRelPath")]
-        public string ExternalRelPath { get; set; }
-
-        /// <summary>
-        /// An array containing this level custom field values.
-        /// </summary>
-        [JsonPropertyName("fieldInstances")]
-        public FieldInstance[] FieldInstances { get; set; }
-
-        /// <summary>
-        /// Unique String identifier
-        /// </summary>
-        [JsonPropertyName("identifier")]
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// An array containing all Layer instances. **IMPORTANT**: if the project option "*Save
-        /// levels separately*" is enabled, this field will be `null`.<br/>  This array is **sorted
-        /// in display order**: the 1st layer is the top-most and the last is behind.
-        /// </summary>
-        [JsonPropertyName("layerInstances")]
-        public LayerInstance[] LayerInstances { get; set; }
-
-        /// <summary>
-        /// An enum defining the way the background image (if any) is positioned on the level. See
-        /// `__bgPos` for resulting position info. Possible values: &lt;`null`&gt;, `Unscaled`,
-        /// `Contain`, `Cover`, `CoverDirty`
-        /// </summary>
-        [JsonPropertyName("bgPos")]
-        public BgPos? LevelBgPos { get; set; }
-
-        /// <summary>
-        /// An array listing all other levels touching this one on the world map. In "linear" world
-        /// layouts, this array is populated with previous/next levels in array, and `dir` depends on
-        /// the linear horizontal/vertical layout.
-        /// </summary>
-        [JsonPropertyName("__neighbours")]
-        public NeighbourLevel[] _Neighbours { get; set; }
-
-        /// <summary>
-        /// Height of the level in pixels
-        /// </summary>
-        [JsonPropertyName("pxHei")]
-        int PxHei { get; set; }
-
-        /// <summary>
-        /// Width of the level in pixels
-        /// </summary>
-        [JsonPropertyName("pxWid")]
-        int PxWid { get; set; }
-
-        /// <summary>
-        /// Unique Int identifier
-        /// </summary>
-        [JsonPropertyName("uid")]
-        public int Uid { get; set; }
-
-        /// <summary>
-        /// World X coordinate in pixels
-        /// </summary>
-        [JsonPropertyName("worldX")]
-        int WorldX { get; set; }
-
-        /// <summary>
-        /// World Y coordinate in pixels
-        /// </summary>
-        [JsonPropertyName("worldY")]
-        int WorldY { get; set; }
-    }
-
     public partial class FieldInstance
     {
         /// <summary>
@@ -548,6 +460,12 @@ namespace LDtk
         /// </summary>
         [JsonPropertyName("__value")]
         public object _Value { get; set; }
+
+        /// <summary>
+        /// Editor internal raw values
+        /// </summary>
+        [JsonPropertyName("realEditorValues")]
+        public object[] RealEditorValues { get; set; }
     }
 
     public partial class LayerInstance
@@ -592,19 +510,12 @@ namespace LDtk
         public string _Identifier { get; set; }
 
         /// <summary>
-        /// **WARNING**: this deprecated value will be *removed* completely on version 0.10.0+
-        /// Replaced by: `intGridCsv`
-        /// </summary>
-        [JsonPropertyName("intGrid")]
-        public IntGridValueInstance[] IntGrid { get; set; }
-
-        /// <summary>
         /// A list of all values in the IntGrid layer, stored from left to right, and top to bottom
         /// (ie. first row from left to right, followed by second row, etc). `0` means "empty cell"
         /// and IntGrid values start at 1. This array size is `__cWid` x `__cHei` cells.
         /// </summary>
         [JsonPropertyName("intGridCsv")]
-        public Vector2Int IntGridCsv { get; set; }
+        public int[] IntGridCsv { get; set; }
 
         /// <summary>
         /// Reference the Layer definition UID
@@ -828,6 +739,121 @@ namespace LDtk
         public int LevelUid { get; set; }
     }
 
+    /// <summary>
+    /// This section is mostly only intended for the LDtk editor app itself. You can safely
+    /// ignore it.
+    /// </summary>
+    public partial class FieldDefinition
+    {
+        /// <summary>
+        /// Human readable value type (eg. `Int`, `Float`, `Point`, etc.). If the field is an array,
+        /// this field will look like `Array<...>` (eg. `Array<Int>`, `Array<Point>` etc.)
+        /// </summary>
+        [JsonPropertyName("__type")]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Optional list of accepted file extensions for FilePath value type. Includes the dot:
+        /// `.ext`
+        /// </summary>
+        [JsonPropertyName("acceptFileTypes")]
+        public string[] AcceptFileTypes { get; set; }
+
+        /// <summary>
+        /// Array max length
+        /// </summary>
+        [JsonPropertyName("arrayMaxLength")]
+        public long? ArrayMaxLength { get; set; }
+
+        /// <summary>
+        /// Array min length
+        /// </summary>
+        [JsonPropertyName("arrayMinLength")]
+        public long? ArrayMinLength { get; set; }
+
+        /// <summary>
+        /// TRUE if the value can be null. For arrays, TRUE means it can contain null values
+        /// (exception: array of Points can't have null values).
+        /// </summary>
+        [JsonPropertyName("canBeNull")]
+        public bool CanBeNull { get; set; }
+
+        /// <summary>
+        /// Default value if selected value is null or invalid.
+        /// </summary>
+        [JsonPropertyName("defaultOverride")]
+        public object DefaultOverride { get; set; }
+
+        [JsonPropertyName("editorAlwaysShow")]
+        public bool EditorAlwaysShow { get; set; }
+
+        [JsonPropertyName("editorCutLongValues")]
+        public bool EditorCutLongValues { get; set; }
+
+        /// <summary>
+        /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `Points`,
+        /// `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`
+        /// </summary>
+        [JsonPropertyName("editorDisplayMode")]
+        public EditorDisplayMode EditorDisplayMode { get; set; }
+
+        /// <summary>
+        /// Possible values: `Above`, `Center`, `Beneath`
+        /// </summary>
+        [JsonPropertyName("editorDisplayPos")]
+        public EditorDisplayPos EditorDisplayPos { get; set; }
+
+        /// <summary>
+        /// Unique String identifier
+        /// </summary>
+        [JsonPropertyName("identifier")]
+        public string Identifier { get; set; }
+
+        /// <summary>
+        /// TRUE if the value is an array of multiple values
+        /// </summary>
+        [JsonPropertyName("isArray")]
+        public bool IsArray { get; set; }
+
+        /// <summary>
+        /// Max limit for value, if applicable
+        /// </summary>
+        [JsonPropertyName("max")]
+        public double? Max { get; set; }
+
+        /// <summary>
+        /// Min limit for value, if applicable
+        /// </summary>
+        [JsonPropertyName("min")]
+        public double? Min { get; set; }
+
+        /// <summary>
+        /// Optional regular expression that needs to be matched to accept values. Expected format:
+        /// `/some_reg_ex/g`, with optional "i" flag.
+        /// </summary>
+        [JsonPropertyName("regex")]
+        public string Regex { get; set; }
+
+        /// <summary>
+        /// Possible values: &lt;`null`&gt;, `LangPython`, `LangRuby`, `LangJS`, `LangLua`, `LangC`,
+        /// `LangHaxe`, `LangMarkdown`, `LangJson`, `LangXml`
+        /// </summary>
+        [JsonPropertyName("textLanguageMode")]
+        public TextLanguageMode? TextLanguageMode { get; set; }
+
+        /// <summary>
+        /// Internal type enum
+        /// </summary>
+        [JsonPropertyName("type")]
+        public object FieldDefinitionType { get; set; }
+
+        /// <summary>
+        /// Unique Int identifier
+        /// </summary>
+        [JsonPropertyName("uid")]
+        public long Uid { get; set; }
+    }
+
     public enum BgPos { Contain, Cover, CoverDirty, Unscaled };
 
     /// <summary>
@@ -841,10 +867,6 @@ namespace LDtk
     /// `AutoLayer`
     /// </summary>
     public enum LayerType { IntGrid, Entities, Tiles, AutoLayer };
-}
-#pragma warning restore 1591, 1570, IDE1006
-
-/*
 
     /// <summary>
     /// Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `Points`,
@@ -859,42 +881,5 @@ namespace LDtk
 
     public enum TextLanguageMode { LangC, LangHaxe, LangJs, LangJson, LangLua, LangMarkdown, LangPython, LangRuby, LangXml };
 
-    /// <summary>
-    /// Possible values: `DiscardOldOnes`, `PreventAdding`, `MoveLastOne`
-    /// </summary>
-    public enum LimitBehavior { DiscardOldOnes, MoveLastOne, PreventAdding };
-
-    /// <summary>
-    /// If TRUE, the maxCount is a "per world" limit, if FALSE, it's a "per level". Possible
-    /// values: `PerLayer`, `PerLevel`, `PerWorld`
-    /// </summary>
-    public enum LimitScope { PerLayer, PerLevel, PerWorld };
-
-    /// <summary>
-    /// Possible values: `Rectangle`, `Ellipse`, `Tile`, `Cross`
-    /// </summary>
-    public enum RenderMode { Cross, Ellipse, Rectangle, Tile };
-
-    /// <summary>
-    /// Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`
-    /// </summary>
-    public enum TileRenderMode { Cover, FitInside, Repeat, Stretch };
-
-    /// <summary>
-    /// Checker mode Possible values: `None`, `Horizontal`, `Vertical`
-    /// </summary>
-    public enum Checker { Horizontal, None, Vertical };
-
-    /// <summary>
-    /// Defines how tileIds array is used Possible values: `Single`, `Stamp`
-    /// </summary>
-    public enum TileMode { Single, Stamp };
-
-    public enum Flag { DiscardPreCsvIntGrid, IgnoreBackupSuggest };
-
-    /// <summary>
-    /// "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
-    /// `OneImagePerLevel`
-    /// </summary>
-    public enum ImageExportMode { None, OneImagePerLayer, OneImagePerLevel };
-*/
+}
+#pragma warning restore 1591, 1570, IDE1006
