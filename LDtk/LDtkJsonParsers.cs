@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Color = Microsoft.Xna.Framework.Color;
+using Point = Microsoft.Xna.Framework.Point;
 using Rect = Microsoft.Xna.Framework.Rectangle;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
-using Vector2Int = Microsoft.Xna.Framework.Point;
 
 namespace LDtk
 {
@@ -110,9 +110,9 @@ namespace LDtk
         }
     }
 
-    class Vector2IntConverter : JsonConverter<Vector2Int>
+    class PointConverter : JsonConverter<Point>
     {
-        public override Vector2Int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -127,11 +127,11 @@ namespace LDtk
                 {
                     if (value.Count > 0)
                     {
-                        return new Vector2Int(value[0], value[1]);
+                        return new Point(value[0], value[1]);
                     }
                     else
                     {
-                        return new Vector2Int();
+                        return new Point();
                     }
                 }
 
@@ -147,7 +147,54 @@ namespace LDtk
             throw new JsonException();
         }
 
-        public override void Write(Utf8JsonWriter writer, Vector2Int val, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Point val, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            writer.WriteNumberValue(val.X);
+            writer.WriteNumberValue(val.Y);
+            writer.WriteEndArray();
+        }
+    }
+
+    class CxCyConverter : JsonConverter<Point>
+    {
+        public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            if (reader.TokenType != JsonTokenType.StartObject)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            int cx = reader.GetInt32();
+
+            reader.Read();
+
+            if (reader.TokenType != JsonTokenType.PropertyName)
+            {
+                throw new JsonException();
+            }
+
+            reader.Read();
+            int cy = reader.GetInt32();
+
+            reader.Read();
+            if (reader.TokenType != JsonTokenType.EndObject)
+            {
+                throw new JsonException();
+            }
+
+            return new Point(cx, cy);
+        }
+
+        public override void Write(Utf8JsonWriter writer, Point val, JsonSerializerOptions options)
         {
             writer.WriteStartArray();
             writer.WriteNumberValue(val.X);

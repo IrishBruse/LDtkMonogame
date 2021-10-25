@@ -6,11 +6,10 @@ namespace LDtk
     using System.Collections.Generic;
     using System.Text.Json;
     using System.Text.Json.Serialization;
-
     using Color = Microsoft.Xna.Framework.Color;
+    using Point = Microsoft.Xna.Framework.Point;
     using Rect = Microsoft.Xna.Framework.Rectangle;
     using Vector2 = Microsoft.Xna.Framework.Vector2;
-    using Vector2Int = Microsoft.Xna.Framework.Point;
 
     /// <summary>
     /// The main class that contains all the project related info
@@ -77,7 +76,7 @@ namespace LDtk
                 new ColorConverter(),
                 new RectConverter(),
                 new Vector2Converter(),
-                new Vector2IntConverter(),
+                new PointConverter(),
             }
         };
     }
@@ -610,13 +609,13 @@ namespace LDtk
         /// layer offsets, if they exist!
         /// </summary>
         [JsonPropertyName("px")]
-        public Vector2Int Px { get; set; }
+        public Point Px { get; set; }
 
         /// <summary>
         /// Pixel coordinates of the tile in the **tileset** (`[x,y]` format)
         /// </summary>
         [JsonPropertyName("src")]
-        public Vector2Int Src { get; set; }
+        public Point Src { get; set; }
 
         /// <summary>
         /// The *Tile ID* in the corresponding tileset.
@@ -643,7 +642,7 @@ namespace LDtk
         /// Grid-based coordinates (`[x,y]` format)
         /// </summary>
         [JsonPropertyName("__grid")]
-        public Vector2Int _Grid { get; set; }
+        public Point _Grid { get; set; }
 
         /// <summary>
         /// Entity height in pixels. For non-resizable entities, it will be the same as Entity
@@ -669,7 +668,7 @@ namespace LDtk
         /// optional layer offsets, if they exist!
         /// </summary>
         [JsonPropertyName("px")]
-        public Vector2Int Px { get; set; }
+        public Point Px { get; set; }
 
         /// <summary>
         /// Optional Tile used to display this entity (it could either be the default Entity tile, or

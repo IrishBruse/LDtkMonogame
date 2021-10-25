@@ -8,7 +8,7 @@
 		"appVersion": "0.9.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level2",
+	"identifier": "Level_1",
 	"uid": 32,
 	"worldX": 0,
 	"worldY": 600,
@@ -16,23 +16,14 @@
 	"pxHei": 256,
 	"__bgColor": "#6E6F8B",
 	"bgColor": null,
-	"useAutoIdentifier": false,
+	"useAutoIdentifier": true,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,
 	"bgPivotY": 0.5,
 	"__bgPos": null,
 	"externalRelPath": null,
-	"fieldInstances": [{
-		"__identifier": "desc",
-		"__value": "test",
-		"__type": "String",
-		"defUid": 38,
-		"realEditorValues": [{
-			"id": "V_String",
-			"params": ["test"]
-		}]
-	}],
+	"fieldInstances": [{ "__identifier": "desc", "__value": null, "__type": "String", "defUid": 38, "realEditorValues": [] }],
 	"layerInstances": [
 		{
 			"__identifier": "Entities",
@@ -75,7 +66,7 @@
 							"realEditorValues": [{ "id": "V_Int", "params": [2] }]
 						},
 						{
-							"__identifier": "FloatingPoint",
+							"__identifier": "Float",
 							"__value": 2.5,
 							"__type": "Float",
 							"defUid": 17,
@@ -112,7 +103,7 @@
 							}]
 						},
 						{
-							"__identifier": "SomeEnum",
+							"__identifier": "Enum",
 							"__value": "D",
 							"__type": "LocalEnum.SomeEnum",
 							"defUid": 22,
@@ -140,18 +131,42 @@
 						{ "__identifier": "Array_points", "__value": [], "__type": "Array<Point>", "defUid": 30, "realEditorValues": [] },
 						{
 							"__identifier": "FilePath",
-							"__value": "Test_file_for_API_showing_all_features.ldtk",
+							"__value": "README.md",
 							"__type": "FilePath",
 							"defUid": 35,
 							"realEditorValues": [{
 								"id": "V_String",
-								"params": ["Test_file_for_API_showing_all_features.ldtk"]
+								"params": ["README.md"]
 							}]
 						},
 						{ "__identifier": "Array_multilines", "__value": [], "__type": "Array<String>", "defUid": 37, "realEditorValues": [] }
 					]
 				}
 			]
+		},
+		{
+			"__identifier": "Entities2",
+			"__type": "Entities",
+			"__cWid": 16,
+			"__cHei": 16,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"levelId": 32,
+			"layerDefUid": 45,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 8712936,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": []
 		},
 		{
 			"__identifier": "IntGrid_8px_grid",

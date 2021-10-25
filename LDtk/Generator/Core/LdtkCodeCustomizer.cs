@@ -8,9 +8,8 @@ namespace LDtk.Generator
         {
             entity.Fields.Add(new CompilationUnitField("Uid", "long"));
             entity.Fields.Add(new CompilationUnitField("Identifier", "string"));
-            entity.Fields.Add(new CompilationUnitField("Width", "float"));
-            entity.Fields.Add(new CompilationUnitField("Height", "float"));
-            entity.Fields.Add(new CompilationUnitField("Position", "Vector2"));
+            entity.Fields.Add(new CompilationUnitField("Size", "Vector2"));
+            entity.Fields.Add(new CompilationUnitField("Position", "Point"));
             entity.Fields.Add(new CompilationUnitField("Pivot", "Vector2"));
         }
 

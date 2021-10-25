@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using LDtk.Exceptions;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 using Vector2Int = Microsoft.Xna.Framework.Point;
 
 namespace LDtk
@@ -67,6 +68,63 @@ namespace LDtk
         }
 
         /// <summary>
+        /// Gets the first entity it finds of type T in the current level
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public T GetEntity<T>() where T : new()
+        {
+            var entities = ParseEntities<T>(typeof(T).Name);
+
+            if (entities.Length == 1)
+            {
+                return entities[0];
+            }
+            else
+            {
+                throw new EntityNotFoundException($"Could not find one entity with identifier {typeof(T).Name}");
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of entities of type T in the current level
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public T[] GetEntities<T>() where T : new()
+        {
+            var entities = ParseEntities<T>(typeof(T).Name);
+
+            if (entities.Length > 0)
+            {
+                return entities;
+            }
+            else
+            {
+                throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
+            }
+        }
+
+        /// <summary>
+        /// Gets a collection of entities of type T in the current level
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public T[] GetEntities<T>(string identifier) where T : new()
+        {
+            var entities = ParseEntities<T>(identifier);
+
+            if (entities.Length > 0)
+            {
+                return entities;
+            }
+            else
+            {
+                throw new EntityNotFoundException($"Could not find entity with identifier {identifier}");
+            }
+        }
+
+        /// <summary>
         /// Gets the custom fields of the level
         /// </summary>
         /// <typeparam name="T">The custom level type generated from compiling the level</typeparam>
@@ -80,6 +138,59 @@ namespace LDtk
             }
 
             return levelFields;
+        }
+
+        private T[] ParseEntities<T>(string identifier) where T : new()
+        {
+            List<T> parsedEntities = new List<T>();
+
+            for (int i = 0; i < LayerInstances.Length; i++)
+            {
+                if (LayerInstances[i]._Type == LayerType.Entities)
+                {
+                    for (int entityIndex = 0; entityIndex < LayerInstances[i].EntityInstances.Length; entityIndex++)
+                    {
+                        if (LayerInstances[i].EntityInstances[entityIndex]._Identifier == identifier)
+                        {
+                            T entity = new T();
+                            EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
+
+                            LDtkFieldParser.ParseBaseField(entity, "Position", entityInstance.Px + Position);
+                            // LDtkFieldParser.ParseBaseField(entity, "levelPosition", entityInstance.Px);
+
+                            LDtkFieldParser.ParseBaseField(entity, "Pivot", entityInstance._Pivot);
+
+                            if (entityInstance._Tile != null)
+                            {
+                                // LDtkFieldParser.ParseBaseField(entity, "texture", owner.GetTilesetTextureFromUid(entityInstance._Tile.TilesetUid));
+                            }
+
+                            LDtkFieldParser.ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
+#if DEBUG
+                            // LDtkFieldParser.ParseBaseField(entity, "editorVisualColor", entityDefinition.Color);
+#endif
+                            if (entityInstance._Tile != null)
+                            {
+                                EntityInstanceTile tileDefinition = entityInstance._Tile;
+                                Rectangle rect = tileDefinition.SrcRect;
+                                LDtkFieldParser.ParseBaseField(entity, "tile", rect);
+                            }
+
+                            for (int fieldIndex = 0; fieldIndex < entityInstance.FieldInstances.Length; fieldIndex++)
+                            {
+                                LDtkFieldParser.Parse(entity, entityInstance.FieldInstances[fieldIndex]);
+                            }
+
+                            parsedEntities.Add(entity);
+                        }
+                    }
+
+                    return parsedEntities.ToArray();
+                }
+
+            }
+
+            return parsedEntities.ToArray();
         }
     }
 }

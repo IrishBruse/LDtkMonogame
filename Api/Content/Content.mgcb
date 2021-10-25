@@ -59,23 +59,23 @@
 /processorParam:LevelClassName=MyLevelClass
 /build:Test_file_for_API_showing_all_features.ldtk
 
-#begin Test_file_for_API_showing_all_features/0000-Level1.ldtkl
+#begin Test_file_for_API_showing_all_features/0000-Level_0.ldtkl
 /importer:LDtkLevelImporter
 /processor:LDtkLevelProcessor
-/build:Test_file_for_API_showing_all_features/0000-Level1.ldtkl
+/build:Test_file_for_API_showing_all_features/0000-Level_0.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0001-Level2.ldtkl
+#begin Test_file_for_API_showing_all_features/0001-Level_1.ldtkl
 /importer:LDtkLevelImporter
 /processor:LDtkLevelProcessor
-/build:Test_file_for_API_showing_all_features/0001-Level2.ldtkl
+/build:Test_file_for_API_showing_all_features/0001-Level_1.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0002-Level3.ldtkl
+#begin Test_file_for_API_showing_all_features/0002-Level_2.ldtkl
 /importer:LDtkLevelImporter
 /processor:LDtkLevelProcessor
-/build:Test_file_for_API_showing_all_features/0002-Level3.ldtkl
+/build:Test_file_for_API_showing_all_features/0002-Level_2.ldtkl
 
-#begin Test_file_for_API_showing_all_features/0003-Level4.ldtkl
+#begin Test_file_for_API_showing_all_features/0003-Level_3.ldtkl
 /importer:LDtkLevelImporter
 /processor:LDtkLevelProcessor
-/build:Test_file_for_API_showing_all_features/0003-Level4.ldtkl
+/build:Test_file_for_API_showing_all_features/0003-Level_3.ldtkl
 

@@ -8,7 +8,7 @@
 		"appVersion": "0.9.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level1",
+	"identifier": "Level_0",
 	"uid": 0,
 	"worldX": 0,
 	"worldY": 0,
@@ -16,7 +16,7 @@
 	"pxHei": 568,
 	"__bgColor": "#6E6F8B",
 	"bgColor": null,
-	"useAutoIdentifier": false,
+	"useAutoIdentifier": true,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,
@@ -146,7 +146,7 @@
 							"realEditorValues": [{ "id": "V_Int", "params": [1] }]
 						},
 						{
-							"__identifier": "FloatingPoint",
+							"__identifier": "Float",
 							"__value": 1.5,
 							"__type": "Float",
 							"defUid": 17,
@@ -180,13 +180,13 @@
 							}]
 						},
 						{
-							"__identifier": "SomeEnum",
-							"__value": "C",
+							"__identifier": "Enum",
+							"__value": "A",
 							"__type": "LocalEnum.SomeEnum",
 							"defUid": 22,
 							"realEditorValues": [{
 								"id": "V_String",
-								"params": ["C"]
+								"params": ["A"]
 							}]
 						},
 						{
@@ -250,12 +250,12 @@
 						},
 						{
 							"__identifier": "FilePath",
-							"__value": "Test_file_for_API_showing_all_features.ldtk",
+							"__value": "README.md",
 							"__type": "FilePath",
 							"defUid": 35,
 							"realEditorValues": [{
 								"id": "V_String",
-								"params": ["Test_file_for_API_showing_all_features.ldtk"]
+								"params": ["README.md"]
 							}]
 						},
 						{
@@ -410,6 +410,30 @@
 					]
 				}
 			]
+		},
+		{
+			"__identifier": "Entities2",
+			"__type": "Entities",
+			"__cWid": 43,
+			"__cHei": 36,
+			"__gridSize": 16,
+			"__opacity": 1,
+			"__pxTotalOffsetX": 0,
+			"__pxTotalOffsetY": 0,
+			"__tilesetDefUid": null,
+			"__tilesetRelPath": null,
+			"levelId": 0,
+			"layerDefUid": 45,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"visible": true,
+			"optionalRules": [],
+			"intGridCsv": [],
+			"autoLayerTiles": [],
+			"seed": 1859369,
+			"overrideTilesetUid": null,
+			"gridTiles": [],
+			"entityInstances": []
 		},
 		{
 			"__identifier": "IntGrid_8px_grid",

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
 
@@ -12,12 +13,30 @@ namespace LDtk
     /// </summary>
     internal static class LDtkFieldParser
     {
+        internal static Color ParseStringToColor(string hex)
+        {
+            return ParseStringToColor(hex, 255);
+        }
+
+        internal static Color ParseStringToColor(string hex, int alpha)
+        {
+            if (uint.TryParse(hex.Replace("#", ""), System.Globalization.NumberStyles.HexNumber, null, out uint color))
+            {
+                byte red = (byte)((color & 0xFF0000) >> 16);
+                byte green = (byte)((color & 0x00FF00) >> 8);
+                byte blue = (byte)(color & 0xFF);
+
+                return new Color(red, green, blue, alpha);
+            }
+            else
+            {
+                return new Color(0xFF00FFFF);
+            }
+        }
+
         internal static void Parse<T>(T entity, FieldInstance fieldInstance) where T : new()
         {
             string variableName = fieldInstance._Identifier;
-
-            // make the first letter lowercase
-            variableName = char.ToLower(variableName[0]) + variableName[1..];
 
             var field = typeof(T).GetProperty(variableName);
 
@@ -63,16 +82,16 @@ namespace LDtk
                 case Field.StringArrayType:
                 case Field.FilePathArrayType:
                 case Field.LocalEnumArrayType:
-                    object primativeArrayValues = JsonSerializer.Deserialize(fieldInstance._Value.ToString(), field.PropertyType);
+                    object primativeArrayValues = JsonSerializer.Deserialize(fieldInstance._Value.ToString(), field.PropertyType, new JsonSerializerOptions() { Converters = { new JsonStringEnumConverter() } });
                     field.SetValue(entity, Convert.ChangeType(primativeArrayValues, field.PropertyType));
                     break;
 
                 case Field.LocalEnumType:
-                    field.SetValue(entity, Enum.Parse(field.PropertyType, (string)fieldInstance._Value));
+                    field.SetValue(entity, Enum.Parse(field.PropertyType, fieldInstance._Value.ToString()));
                     break;
 
                 case Field.ColorType:
-                    field.SetValue(entity, fieldInstance._Value);
+                    field.SetValue(entity, ParseStringToColor(fieldInstance._Value.ToString()));
                     break;
 
                 case Field.PointType:
@@ -85,7 +104,7 @@ namespace LDtk
                         }
                         else if (field.PropertyType == typeof(Point))
                         {
-                            Point point = (Point)fieldInstance._Value;
+                            Point point = JsonSerializer.Deserialize<Point>(fieldInstance._Value.ToString(), new JsonSerializerOptions() { Converters = { new CxCyConverter() } });
                             field.SetValue(entity, point);
                         }
                     }
@@ -103,9 +122,9 @@ namespace LDtk
                     break;
 
                 case Field.PointArrayType:
-                    List<Point> points = JsonSerializer.Deserialize<List<Point>>(fieldInstance._Value.ToString());
+                    List<Point> points = JsonSerializer.Deserialize<List<Point>>(fieldInstance._Value.ToString(), new JsonSerializerOptions() { Converters = { new CxCyConverter() } });
 
-                    field.SetValue(entity, points);
+                    field.SetValue(entity, points.ToArray());
                     break;
 
                 default:
@@ -116,20 +135,18 @@ namespace LDtk
         internal static void ParseBaseField<T>(T entity, string field, object value)
         {
             // WorldPosition
-            FieldInfo variable = typeof(T).GetField(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            PropertyInfo variable = typeof(T).GetProperty(field, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             if (variable != null)
             {
                 variable.SetValue(entity, value);
             }
-#if DEBUG
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"Error: Base Field \"{field}\" not found add it to {typeof(T).FullName}");
-                Console.ResetColor();
-            }
+#if DEBUG
+                throw new Exception();
 #endif
+            }
         }
 
         /// <summary>

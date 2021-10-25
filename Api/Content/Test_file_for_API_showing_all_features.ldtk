@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 45,
+	"nextUid": 46,
 	"worldLayout": "LinearVertical",
 	"worldGridWidth": 256,
 	"worldGridHeight": 256,
@@ -35,6 +35,25 @@
 			"identifier": "Entities",
 			"type": "Entities",
 			"uid": 13,
+			"gridSize": 16,
+			"displayOpacity": 1,
+			"pxOffsetX": 0,
+			"pxOffsetY": 0,
+			"requiredTags": [],
+			"excludedTags": [],
+			"intGridValues": [{ "value": 1, "identifier": null, "color": "#000000" }],
+			"autoTilesetDefUid": null,
+			"autoRuleGroups": [],
+			"autoSourceLayerDefUid": null,
+			"tilesetDefUid": null,
+			"tilePivotX": 0,
+			"tilePivotY": 0
+		},
+		{
+			"__type": "Entities",
+			"identifier": "Entities2",
+			"type": "Entities",
+			"uid": 45,
 			"gridSize": 16,
 			"displayOpacity": 1,
 			"pxOffsetX": 0,
@@ -328,7 +347,7 @@
 					"textLanguageMode": null
 				},
 				{
-					"identifier": "FloatingPoint",
+					"identifier": "Float",
 					"__type": "Float",
 					"uid": 17,
 					"type": "F_Float",
@@ -408,7 +427,7 @@
 					"textLanguageMode": null
 				},
 				{
-					"identifier": "SomeEnum",
+					"identifier": "Enum",
 					"__type": "LocalEnum.SomeEnum",
 					"uid": 22,
 					"type": { "id": "F_Enum", "params": [21] },
@@ -565,7 +584,7 @@
 					"regex": null,
 					"acceptFileTypes": null,
 					"defaultOverride": null,
-					"textLanguageMode": "LangC"
+					"textLanguageMode": "LangXml"
 				}
 			]
 		},
@@ -771,7 +790,7 @@
 		{
 			"__cWid": 20,
 			"__cHei": 14,
-			"identifier": "Inca_front_by_Kronbits_extended2",
+			"identifier": "Inca_front_by_Kronbits_extended",
 			"uid": 2,
 			"relPath": "Inca_front_by_Kronbits-extended.png",
 			"pxWid": 320,
@@ -845,7 +864,7 @@
 	] },
 	"levels": [
 		{
-			"identifier": "Level1",
+			"identifier": "Level_0",
 			"uid": 0,
 			"worldX": 0,
 			"worldY": 0,
@@ -853,13 +872,13 @@
 			"pxHei": 568,
 			"__bgColor": "#6E6F8B",
 			"bgColor": null,
-			"useAutoIdentifier": false,
+			"useAutoIdentifier": true,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
 			"__bgPos": null,
-			"externalRelPath": "Test_file_for_API_showing_all_features/0000-Level1.ldtkl",
+			"externalRelPath": "Test_file_for_API_showing_all_features/0000-Level_0.ldtkl",
 			"fieldInstances": [{
 				"__identifier": "desc",
 				"__value": "This file can be used to check if an API supports LDtk file format properly. \n\nIt uses all important LDtk features.",
@@ -876,7 +895,7 @@
 			"__neighbours": [{ "levelUid": 32, "dir": "s" }]
 		},
 		{
-			"identifier": "Level2",
+			"identifier": "Level_1",
 			"uid": 32,
 			"worldX": 0,
 			"worldY": 600,
@@ -884,28 +903,19 @@
 			"pxHei": 256,
 			"__bgColor": "#6E6F8B",
 			"bgColor": null,
-			"useAutoIdentifier": false,
+			"useAutoIdentifier": true,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
 			"__bgPos": null,
-			"externalRelPath": "Test_file_for_API_showing_all_features/0001-Level2.ldtkl",
-			"fieldInstances": [{
-				"__identifier": "desc",
-				"__value": "test",
-				"__type": "String",
-				"defUid": 38,
-				"realEditorValues": [{
-					"id": "V_String",
-					"params": ["test"]
-				}]
-			}],
+			"externalRelPath": "Test_file_for_API_showing_all_features/0001-Level_1.ldtkl",
+			"fieldInstances": [{ "__identifier": "desc", "__value": null, "__type": "String", "defUid": 38, "realEditorValues": [] }],
 			"layerInstances": null,
 			"__neighbours": [ { "levelUid": 33, "dir": "s" }, { "levelUid": 0, "dir": "n" } ]
 		},
 		{
-			"identifier": "Level3",
+			"identifier": "Level_2",
 			"uid": 33,
 			"worldX": 0,
 			"worldY": 888,
@@ -913,19 +923,19 @@
 			"pxHei": 160,
 			"__bgColor": "#6E6F8B",
 			"bgColor": null,
-			"useAutoIdentifier": false,
+			"useAutoIdentifier": true,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
 			"__bgPos": null,
-			"externalRelPath": "Test_file_for_API_showing_all_features/0002-Level3.ldtkl",
+			"externalRelPath": "Test_file_for_API_showing_all_features/0002-Level_2.ldtkl",
 			"fieldInstances": [{ "__identifier": "desc", "__value": null, "__type": "String", "defUid": 38, "realEditorValues": [] }],
 			"layerInstances": null,
 			"__neighbours": [ { "levelUid": 36, "dir": "s" }, { "levelUid": 32, "dir": "n" } ]
 		},
 		{
-			"identifier": "Level4",
+			"identifier": "Level_3",
 			"uid": 36,
 			"worldX": 0,
 			"worldY": 1080,
@@ -933,13 +943,13 @@
 			"pxHei": 192,
 			"__bgColor": "#6E6F8B",
 			"bgColor": null,
-			"useAutoIdentifier": false,
+			"useAutoIdentifier": true,
 			"bgRelPath": "Beach by deepnight.png",
 			"bgPos": "Cover",
 			"bgPivotX": 0.5,
 			"bgPivotY": 0.5,
 			"__bgPos": { "topLeftPx": [0,0], "scale": [0.85,0.85], "cropRect": [0,7.058823529411768,320,225.88235294117646] },
-			"externalRelPath": "Test_file_for_API_showing_all_features/0003-Level4.ldtkl",
+			"externalRelPath": "Test_file_for_API_showing_all_features/0003-Level_3.ldtkl",
 			"fieldInstances": [{
 				"__identifier": "desc",
 				"__value": "Level background image",

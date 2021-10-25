@@ -100,7 +100,7 @@ namespace LDtk
                 return Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
             }
 
-            throw new LevelNotFoundException($"Could not Content.Load {identifier} Level in {this}.");
+            throw new LevelNotFoundException($"Could not Content.Load `{identifier}` in {this}.");
         }
     }
 }
