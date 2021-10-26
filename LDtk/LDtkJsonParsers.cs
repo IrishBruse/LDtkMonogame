@@ -37,6 +37,11 @@ namespace LDtk
     {
         public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
+            if (reader.TokenType == JsonTokenType.Null)
+            {
+                return default;
+            }
+
             if (reader.TokenType != JsonTokenType.StartArray)
             {
                 throw new JsonException();
@@ -65,12 +70,24 @@ namespace LDtk
 
         public override void Write(Utf8JsonWriter writer, Rect val, JsonSerializerOptions options)
         {
-            writer.WriteStartArray();
-            writer.WriteNumberValue(val.X);
-            writer.WriteNumberValue(val.Y);
-            writer.WriteNumberValue(val.Width);
-            writer.WriteNumberValue(val.Height);
-            writer.WriteEndArray();
+            if (val == null)
+            {
+                writer.WriteStartArray();
+                writer.WriteNumberValue(0);
+                writer.WriteNumberValue(0);
+                writer.WriteNumberValue(0);
+                writer.WriteNumberValue(0);
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteStartArray();
+                writer.WriteNumberValue(val.X);
+                writer.WriteNumberValue(val.Y);
+                writer.WriteNumberValue(val.Width);
+                writer.WriteNumberValue(val.Height);
+                writer.WriteEndArray();
+            }
         }
     }
 

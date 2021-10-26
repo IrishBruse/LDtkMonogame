@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build api",
+            "label": "build Api",
             "command": "dotnet",
             "type": "process",
             "args": [
@@ -13,6 +13,21 @@
             ],
             "problemMatcher": [
                 "$msCompile"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "build Platformer",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}\\Platformer\\Platformer.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": [
+                "$msCompile",
             ],
             "group": "build"
         },

@@ -34,36 +34,11 @@ namespace Examples.Api
             MonogameInitialize();
         }
 
-        protected override void Update(GameTime gameTime)
-        {
-            KeyboardState keyboard = Keyboard.GetState();
-            MouseState mouse = Mouse.GetState();
-
-            if (keyboard.IsKeyDown(Keys.Tab) && oldKeyboard.IsKeyDown(Keys.Tab) == false)
-            {
-                freeCam = !freeCam;
-            }
-
-            if (freeCam)
-            {
-                if (mouse.MiddleButton == ButtonState.Pressed)
-                {
-                    Point pos = mouse.Position - oldMouse.Position;
-                    cameraPosition += new Vector2(pos.X, pos.Y) * 30 / (pixelScale * 0.5f) * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                }
-            }
-
-            oldKeyboard = keyboard;
-            oldMouse = mouse;
-        }
-
         private void MonogameInitialize()
         {
             Window.AllowUserResizing = true;
             IsMouseVisible = true;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
 
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;

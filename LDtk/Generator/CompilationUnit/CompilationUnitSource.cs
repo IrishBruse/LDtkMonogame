@@ -55,6 +55,8 @@ namespace LDtk.Generator
             if (cs.GeneratedFileHeader != null)
                 code.AppendLine(cs.GeneratedFileHeader);
 
+            code.AppendLine("#pragma warning disable IDE1006");
+
             foreach (string use in imports)
             {
                 code.AppendLine($"using {use};");
@@ -62,6 +64,9 @@ namespace LDtk.Generator
 
             code.AppendLine();
             code.Append(verbatimSrc.ToString());
+
+            code.AppendLine("#pragma warning restore IDE1006");
+
             return code.ToString();
         }
     }

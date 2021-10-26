@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": "Debug Api",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build api",
+            "preLaunchTask": "build Api",
             "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp3.1/Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Api",
@@ -16,9 +16,15 @@
             "stopAtEntry": false
         },
         {
-            "name": ".NET Core Attach",
+            "name": "Debug Platformer",
             "type": "coreclr",
-            "request": "attach"
+            "request": "launch",
+            "preLaunchTask": "build Platformer",
+            "program": "${workspaceFolder}/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Platformer",
+            "console": "externalTerminal",
+            "stopAtEntry": false
         }
     ]
 }
