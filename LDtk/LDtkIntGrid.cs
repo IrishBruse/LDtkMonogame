@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace LDtk
@@ -12,27 +13,32 @@ namespace LDtk
         /// Size of a tile in pixels
         /// </summary>
         /// <value>Pixels</value>
-        public int TileSize => tileSize;
+        public int TileSize { get => tileSize; }
 
         /// <summary>
         /// The underlying values of the int grid
         /// </summary>
         /// <value>Integer</value>
-        public int[,] Values => grid;
+        public int[,] Values { get => grid; }
 
-        internal string identifier;
         internal int[,] grid;
         internal int tileSize;
+        internal Dictionary<int, Color> colors = new Dictionary<int, Color>();
 
         /// <summary>
         /// Gets the int value at location
         /// </summary>
         /// <param name="x">X index</param>
         /// <param name="y">Y index</param>
-        /// <returns>Value at position its -1 if out of bounds</returns>
+        /// <returns>Value at position</returns>
         public long GetValueAt(int x, int y)
         {
-            return x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1) ? grid[x, y] : -1;
+            // Inside bounds
+            if (x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
+            {
+                return grid[x, y];
+            }
+            return -1;
         }
 
         /// <summary>
@@ -47,6 +53,21 @@ namespace LDtk
             int y = (int)MathF.Floor(position.Y / tileSize);
 
             return new Point(x, y);
+        }
+
+        /// <summary>
+        /// Returns the color from the intgrid value set in ldtk
+        /// </summary>
+        /// <param name="value">Intgrid value</param>
+        /// <returns>Color of intgrid cell value</returns>
+        public Color GetColorFromValue(int value)
+        {
+            if (colors.TryGetValue(value, out Color col))
+            {
+                return col;
+            }
+
+            return Color.HotPink;
         }
     }
 }

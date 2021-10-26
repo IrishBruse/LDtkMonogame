@@ -18,11 +18,5 @@ namespace LDtk.Exceptions
         /// Generic Uid Exception
         /// </summary>
         public UidException(string message, System.Exception inner) : base(message, inner) { }
-        /// <summary>
-        /// Generic Uid Exception
-        /// </summary>
-        protected UidException(
-            System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }

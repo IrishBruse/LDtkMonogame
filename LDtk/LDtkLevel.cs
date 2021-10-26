@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
 using Vector2Int = Microsoft.Xna.Framework.Point;
@@ -8,6 +9,11 @@ namespace LDtk
 {
     public partial class LDtkLevel
     {
+        /// <summary>
+        /// The parent world of this level
+        /// </summary>
+        public LDtkWorld parent;
+
         /// <summary>
         /// World coordinate in pixels
         /// </summary>
@@ -40,11 +46,18 @@ namespace LDtk
                     continue;
                 }
 
+                var intgridValues = parent.GetIntgridValueDefinitions(layer._Identifier);
+                Dictionary<int, Color> colors = new Dictionary<int, Color>();
+                for (int j = 0; j < intgridValues.Length; j++)
+                {
+                    colors.Add(intgridValues[j].Value, intgridValues[j].Color);
+                }
+
                 LDtkIntGrid intGrid = new LDtkIntGrid()
                 {
                     grid = new int[layer._CWid, layer._CHei],
-                    identifier = layer._Identifier,
-                    tileSize = layer._GridSize
+                    tileSize = layer._GridSize,
+                    colors = colors,
                 };
 
                 if (layer.IntGridCsv != null)
@@ -93,16 +106,7 @@ namespace LDtk
         /// <exception cref="NotImplementedException"></exception>
         public T[] GetEntities<T>() where T : new()
         {
-            var entities = ParseEntities<T>(typeof(T).Name);
-
-            if (entities.Length > 0)
-            {
-                return entities;
-            }
-            else
-            {
-                throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
-            }
+            return ParseEntities<T>(typeof(T).Name);
         }
 
         /// <summary>
@@ -112,16 +116,7 @@ namespace LDtk
         /// <exception cref="NotImplementedException"></exception>
         public T[] GetEntities<T>(string identifier) where T : new()
         {
-            var entities = ParseEntities<T>(identifier);
-
-            if (entities.Length > 0)
-            {
-                return entities;
-            }
-            else
-            {
-                throw new EntityNotFoundException($"Could not find entity with identifier {identifier}");
-            }
+            return ParseEntities<T>(identifier);
         }
 
         /// <summary>

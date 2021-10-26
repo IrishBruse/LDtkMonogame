@@ -72,7 +72,10 @@ namespace LDtk
                 case Field.FloatType:
                 case Field.StringType:
                 case Field.FilePathType:
-                    field.SetValue(entity, Convert.ChangeType(fieldInstance._Value.ToString(), field.PropertyType));
+                    if (fieldInstance._Value != null)
+                    {
+                        field.SetValue(entity, Convert.ChangeType(fieldInstance._Value.ToString(), field.PropertyType));
+                    }
                     break;
 
                 case Field.IntArrayType:

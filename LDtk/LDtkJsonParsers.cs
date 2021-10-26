@@ -16,8 +16,11 @@ namespace LDtk
             string str = reader.GetString();
             if (str.StartsWith('#'))
             {
-                uint col = Convert.ToUInt32(str[1..], 16);
-                return new Color(col);
+                byte r = Convert.ToByte(str[1..3], 16);
+                byte g = Convert.ToByte(str[3..5], 16);
+                byte b = Convert.ToByte(str[5..7], 16);
+                var color = new Color(r, g, b, (byte)255);
+                return color;
             }
 
             throw new Exception(str);
@@ -25,7 +28,7 @@ namespace LDtk
 
         public override void Write(Utf8JsonWriter writer, Color value, JsonSerializerOptions options)
         {
-            string str = "#" + value.R.ToString("X") + value.G.ToString("X") + value.B.ToString("X");
+            string str = "#" + value.R.ToString("X2") + value.G.ToString("X2") + value.B.ToString("X2");
             writer.WriteStringValue(str);
         }
     }

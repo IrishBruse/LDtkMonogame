@@ -15,12 +15,6 @@ namespace LDtk.Generator
 
         public virtual void CustomizeLevel(CompilationUnitClass level, LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
         {
-            // level.Fields.Add(new CompilationUnitField("Uid", "long"));
-            // level.Fields.Add(new CompilationUnitField("Identifier", "string"));
-            // level.Fields.Add(new CompilationUnitField("WorldCoords", "Vector2"));
-            // level.Fields.Add(new CompilationUnitField("Width", "float"));
-            // level.Fields.Add(new CompilationUnitField("Height", "float"));
-            // level.Fields.Add(new CompilationUnitField("Entities", "object[]"));
         }
 
     }

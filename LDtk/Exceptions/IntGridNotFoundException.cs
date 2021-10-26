@@ -1,3 +1,5 @@
+using System;
+
 namespace LDtk.Exceptions
 {
     /// <summary>
@@ -17,12 +19,6 @@ namespace LDtk.Exceptions
         /// <summary>
         /// IntGrid NotFound Exception
         /// </summary>
-        public IntGridNotFoundException(string message, System.Exception inner) : base(message, inner) { }
-        /// <summary>
-        /// IntGrid NotFound Exception
-        /// </summary>
-        protected IntGridNotFoundException(
-            System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        public IntGridNotFoundException(string message, Exception inner) : base(message, inner) { }
     }
 }

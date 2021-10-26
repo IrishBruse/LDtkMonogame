@@ -56,6 +56,8 @@ namespace LDtk
         /// <exception cref="LevelNotFoundException"></exception>
         public LDtkLevel LoadLevel(string identifier)
         {
+            LDtkLevel level = null;
+
             for (int i = 0; i < Levels.Length; i++)
             {
                 if (Levels[i].Identifier != identifier)
@@ -65,12 +67,20 @@ namespace LDtk
 
                 if (ExternalLevels == false)
                 {
-                    return Levels[i];
+                    level = Levels[i];
+                    break;
                 }
 
                 string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
 
-                return JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(path), SerializeOptions);
+                level = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(path), SerializeOptions);
+                break;
+            }
+
+            if (level != null)
+            {
+                level.parent = this;
+                return level;
             }
 
             throw new LevelNotFoundException($"Could not find {identifier} Level in {this}.");
@@ -84,6 +94,8 @@ namespace LDtk
         /// <returns>LDtkWorld</returns>
         public LDtkLevel LoadLevel(string identifier, ContentManager Content)
         {
+            LDtkLevel level = null;
+
             for (int i = 0; i < Levels.Length; i++)
             {
                 if (Levels[i].Identifier != identifier)
@@ -93,14 +105,46 @@ namespace LDtk
 
                 if (ExternalLevels == false)
                 {
-                    return Levels[i];
+                    level = Levels[i];
+                    break;
                 }
 
                 string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
-                return Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
+                level = Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
+                break;
+            }
+
+            if (level != null)
+            {
+                level.parent = this;
+                return level;
             }
 
             throw new LevelNotFoundException($"Could not Content.Load `{identifier}` in {this}.");
+        }
+
+        /// <summary>
+        /// Gets the intgrid value definitions
+        /// </summary>
+        /// <param name="identifier">leyer identifier</param>
+        /// <returns></returns>
+        /// <exception cref="FieldInstanceException"></exception>
+        public IntGridValueDefinition[] GetIntgridValueDefinitions(string identifier)
+        {
+            for (int i = 0; i < Defs.Layers.Length; i++)
+            {
+                if (Defs.Layers[i].Identifier != identifier)
+                {
+                    continue;
+                }
+
+                if (Defs.Layers[i]._Type == LayerType.IntGrid)
+                {
+                    return Defs.Layers[i].IntGridValues;
+                }
+            }
+
+            throw new FieldInstanceException();
         }
     }
 }

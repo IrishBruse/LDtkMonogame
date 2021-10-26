@@ -4,19 +4,19 @@ namespace LDtk.Exceptions
     /// Unknown FieldInstance Exception
     /// </summary>
     [System.Serializable]
-    public class FieldInstanceException : System.Exception
+    public class DefinitionException : System.Exception
     {
         /// <summary>
         /// Unknown FieldInstance Exception
         /// </summary>
-        public FieldInstanceException() { }
+        public DefinitionException() { }
         /// <summary>
         /// Unknown FieldInstance Exception
         /// </summary>
-        public FieldInstanceException(string message) : base(message) { }
+        public DefinitionException(string message) : base(message) { }
         /// <summary>
         /// Unknown FieldInstance Exception
         /// </summary>
-        public FieldInstanceException(string message, System.Exception inner) : base(message, inner) { }
+        public DefinitionException(string message, System.Exception inner) : base(message, inner) { }
     }
 }

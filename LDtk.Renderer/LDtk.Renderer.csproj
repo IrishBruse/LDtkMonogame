@@ -2,10 +2,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LDtk\LDtk.csproj" />
+
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <!--Documentation-->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

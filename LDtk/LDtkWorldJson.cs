@@ -316,10 +316,10 @@ namespace LDtk
         public int? TilesetDefUid { get; set; }
 
         /// <summary>
-        /// Type of the layer (*IntGrid, Entities, Tiles or AutoLayer*)
+        /// Type of the layer (IntGrid, Entities, Tiles or AutoLayer)
         /// </summary>
         [JsonPropertyName("__type")]
-        public string _Type { get; set; }
+        public LayerType _Type { get; set; }
 
         /// <summary>
         /// Unique Int identifier
