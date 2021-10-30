@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
-using Vector2Int = Microsoft.Xna.Framework.Point;
 
 namespace LDtk
 {
@@ -17,12 +16,14 @@ namespace LDtk
         /// <summary>
         /// World coordinate in pixels
         /// </summary>
-        public Vector2Int Position => new Vector2Int(WorldX, WorldY);
+        [JsonIgnore]
+        public Point Position => new Point(WorldX, WorldY);
 
         /// <summary>
         /// World coordinate in pixels
         /// </summary>
-        public Vector2Int Size => new Vector2Int(PxWid, PxHei);
+        [JsonIgnore]
+        public Point Size => new Point(PxWid, PxHei);
 
         /// <summary>
         /// Gets an intgrid in a <see cref="LDtkLevel"/>
@@ -150,7 +151,7 @@ namespace LDtk
                             T entity = new T();
                             EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
 
-                            LDtkFieldParser.ParseBaseField(entity, "Position", entityInstance.Px + Position);
+                            LDtkFieldParser.ParseBaseField(entity, "Position", (entityInstance.Px + Position).ToVector2());
                             // LDtkFieldParser.ParseBaseField(entity, "levelPosition", entityInstance.Px);
 
                             LDtkFieldParser.ParseBaseField(entity, "Pivot", entityInstance._Pivot);

@@ -1,8 +1,9 @@
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using LDtk.Exceptions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Vector2Int = Microsoft.Xna.Framework.Point;
 
 namespace LDtk
 {
@@ -11,7 +12,8 @@ namespace LDtk
         /// <summary>
         /// Size of the world grid in pixels.
         /// </summary>
-        public Vector2Int WorldGridSize => new Vector2Int((int)WorldGridWidth, (int)WorldGridHeight);
+        [JsonIgnore]
+        public Point WorldGridSize => new Point(WorldGridWidth, WorldGridHeight);
 
         private string RootFolder;
 
@@ -85,6 +87,84 @@ namespace LDtk
 
             throw new LevelNotFoundException($"Could not find {identifier} Level in {this}.");
         }
+
+        /// <summary>
+        /// Loads the ldtkl world file from disk directly or from the embeded one depending on if externalLevels is set
+        /// </summary>
+        /// <param name="uid">The Levels uid</param>
+        /// <returns><see cref="LDtkLevel"/></returns>
+        /// <exception cref="LevelNotFoundException"></exception>
+        public LDtkLevel LoadLevel(int uid)
+        {
+            LDtkLevel level = null;
+
+            for (int i = 0; i < Levels.Length; i++)
+            {
+                if (Levels[i].Uid != uid)
+                {
+                    continue;
+                }
+
+                if (ExternalLevels == false)
+                {
+                    level = Levels[i];
+                    break;
+                }
+
+                string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
+
+                level = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(path), SerializeOptions);
+                break;
+            }
+
+            if (level != null)
+            {
+                level.parent = this;
+                return level;
+            }
+
+            throw new LevelNotFoundException($"Could not find {uid} Level in {this}.");
+        }
+
+
+
+        /// <summary>
+        /// Loads the ldtkl world file from disk directly or from the embeded one depending on if externalLevels is set
+        /// </summary>
+        /// <param name="uid">The Levels uid</param>
+        /// <returns><see cref="LDtkLevel"/></returns>
+        /// <exception cref="LevelNotFoundException"></exception>
+        public LDtkLevel LoadLevel(int uid, ContentManager Content)
+        {
+            LDtkLevel level = null;
+
+            for (int i = 0; i < Levels.Length; i++)
+            {
+                if (Levels[i].Uid != uid)
+                {
+                    continue;
+                }
+
+                if (ExternalLevels == false)
+                {
+                    level = Levels[i];
+                    break;
+                }
+
+                string path = Path.Join(RootFolder, Levels[i].ExternalRelPath);
+                level = Content.Load<LDtkLevel>(path.Replace(".ldtkl", ""));
+                break;
+            }
+
+            if (level != null)
+            {
+                level.parent = this;
+                return level;
+            }
+
+            throw new LevelNotFoundException($"Could not find {uid} Level in {this}.");
+        }
+
 
         /// <summary>
         /// Loads the ldtkl world file from disk directly or from the embeded one depending on if externalLevels is set

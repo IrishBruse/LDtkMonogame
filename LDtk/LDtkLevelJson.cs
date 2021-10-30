@@ -95,13 +95,13 @@ namespace LDtk
         /// World X coordinate in pixels
         /// </summary>
         [JsonPropertyName("worldX")]
-        private int WorldX { get; set; }
+        public int WorldX { get; set; }
 
         /// <summary>
         /// World Y coordinate in pixels
         /// </summary>
         [JsonPropertyName("worldY")]
-        private int WorldY { get; set; }
+        public int WorldY { get; set; }
     }
 
 }

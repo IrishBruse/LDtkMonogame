@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -58,11 +57,7 @@ namespace LDtk.Renderer
         {
             if (prerenderedLevels.ContainsKey(level.Identifier))
             {
-#if DEBUG
-                Console.WriteLine();
-#else
                 return;
-#endif
             }
 
             RenderedLevel renderLevel = new RenderedLevel();
@@ -146,6 +141,7 @@ namespace LDtk.Renderer
         /// <param name="level"></param>
         public void RenderLevel(LDtkLevel level)
         {
+            //TODO add tryget
             var prerenderedLevel = prerenderedLevels[level.Identifier];
             for (int i = 0; i < prerenderedLevel.layers.Length; i++)
             {

@@ -8,7 +8,7 @@ namespace LDtk
     using System.Text.Json.Serialization;
     using Color = Microsoft.Xna.Framework.Color;
     using Point = Microsoft.Xna.Framework.Point;
-    using Rect = Microsoft.Xna.Framework.Rectangle;
+    using Rectangle = Microsoft.Xna.Framework.Rectangle;
     using Vector2 = Microsoft.Xna.Framework.Vector2;
 
     /// <summary>
@@ -252,7 +252,7 @@ namespace LDtk
         /// height ]`
         /// </summary>
         [JsonPropertyName("__tileSrcRect")]
-        public Rect _TileSrcRect { get; set; }
+        public Rectangle _TileSrcRect { get; set; }
     }
 
     public partial class LayerDefinition
@@ -695,7 +695,7 @@ namespace LDtk
         /// height ]`
         /// </summary>
         [JsonPropertyName("srcRect")]
-        public Rect SrcRect { get; set; }
+        public Rectangle SrcRect { get; set; }
 
         /// <summary>
         /// Tileset ID
