@@ -11,7 +11,6 @@ namespace Examples.Platformer
     public class Player : PlayerSpawn
     {
         private const float Gavity = 175f;
-        public Texture2D texture;
         public Animator animator;
         public bool fliped = true;
         public Rect collider;

@@ -169,7 +169,7 @@ namespace LDtk
                             {
                                 EntityInstanceTile tileDefinition = entityInstance._Tile;
                                 Rectangle rect = tileDefinition.SrcRect;
-                                LDtkFieldParser.ParseBaseField(entity, "tile", rect);
+                                LDtkFieldParser.ParseBaseField(entity, "Tile", rect);
                             }
 
                             for (int fieldIndex = 0; fieldIndex < entityInstance.FieldInstances.Length; fieldIndex++)

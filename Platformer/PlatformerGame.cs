@@ -27,6 +27,11 @@ namespace Examples.Platformer
 
         Camera camera;
 
+        Texture2D doorTexture;
+        Texture2D boxTexture;
+        Texture2D diamondTexture;
+        Texture2D playerTexture;
+
         public PlatformerGame() : base()
         {
             Content.RootDirectory = "Content";
@@ -42,13 +47,21 @@ namespace Examples.Platformer
             world = LDtkWorld.LoadWorld("LDtkMonogameExample", Content);
 
             levelManager = new LevelManager(world, spriteBatch, Content);
+
+            levelManager.OnEnterNewLevel += (level) =>
+            {
+                var doorArray = level.GetEntities<Door>();
+                doors.AddRange(doorArray);
+                crates.AddRange(level.GetEntities<Crate>());
+                diamonds.AddRange(level.GetEntities<Diamond>());
+            };
+
             levelManager.ChangeLevelTo("Level1");
 
             var spawnPoint = levelManager.CurrentLevel.GetEntity<PlayerSpawn>();
 
             player = new Player
             {
-                texture = Content.Load<Texture2D>("Art/Characters/KingHuman"),
                 Position = spawnPoint.Position,
                 Pivot = spawnPoint.Pivot,
 #if DEBUG
@@ -57,6 +70,11 @@ namespace Examples.Platformer
                 Tile = new Rectangle(0, 0, 78, 58),
                 Size = new Vector2(78, 58)
             };
+
+            doorTexture = Content.Load<Texture2D>("Art/Door");
+            playerTexture = Content.Load<Texture2D>("Art/Characters/KingHuman");
+            boxTexture = Content.Load<Texture2D>("Art/Box/Box");
+            diamondTexture = Content.Load<Texture2D>("Art/Diamond");
         }
 
         protected override void Update(GameTime gameTime)
@@ -81,7 +99,8 @@ namespace Examples.Platformer
                 // diamondsCollected++;
             }
 
-            camera.Position = Mouse.GetState().Position.ToVector2();
+            camera.Position = player.Position;
+            camera.Zoom = 2;
             camera.Update(gameTime);
 
             levelManager.MoveTo(player.Position);
@@ -97,10 +116,14 @@ namespace Examples.Platformer
         {
             GraphicsDevice.Clear(levelManager.CurrentLevel._BgColor);
 
-            spriteBatch.Begin(camera);
+            spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             {
                 levelManager.Draw();
-                spriteBatch.Draw(player.texture, player.Position, player.Tile, Color.White, 0,
+
+                EntityRendering();
+                DebugRendering();
+
+                spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
                 (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14),
                 1,
                 player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
@@ -109,6 +132,34 @@ namespace Examples.Platformer
             spriteBatch.End();
         }
 
+        private void EntityRendering()
+        {
+            for (int i = 0; i < doors.Count; i++)
+            {
+                spriteBatch.Draw(doorTexture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0);
+            }
+
+            for (int i = 0; i < crates.Count; i++)
+            {
+                spriteBatch.Draw(boxTexture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0);
+            }
+
+            spriteBatch.Draw(
+                playerTexture,
+                player.Position,
+                player.Tile,
+                Color.White,
+                0,
+                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14),
+                1,
+                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
+                0.1f);
+
+            for (int i = 0; i < diamonds.Count; i++)
+            {
+                spriteBatch.Draw(diamondTexture, diamonds[i].Position, diamonds[i].Tile, Color.White, 0, diamonds[i].Pivot * diamonds[i].Size, 1, SpriteEffects.None, 0);
+            }
+        }
 
         private void DebugRendering()
         {
@@ -121,30 +172,26 @@ namespace Examples.Platformer
                 }
             }
 
-#if DEBUG
             if (showEntityColliders)
             {
                 for (int i = 0; i < doors.Count; i++)
                 {
-                    spriteBatch.DrawRect(doors[i].Tile, doors[i].colo);
+                    spriteBatch.DrawRect(new Rect(doors[i].Position, doors[i].Size), doors[i].Color);
                 }
 
-                for (int i = 0; i < crates.Count; i++)
-                {
-                    spriteBatch.DrawRect(crates[i].Tile, crates[i].EditorVisualColor);
-                }
+                // for (int i = 0; i < crates.Count; i++)
+                // {
+                //     spriteBatch.DrawRect(crates[i].Tile, crates[i].EditorVisualColor);
+                // }
 
-                for (int i = 0; i < diamonds.Count; i++)
-                {
-                    spriteBatch.DrawRect(diamonds[i].Tile, diamonds[i].EditorVisualColor);
-                }
+                // for (int i = 0; i < diamonds.Count; i++)
+                // {
+                //     spriteBatch.DrawRect(diamonds[i].Tile, diamonds[i].EditorVisualColor);
+                // }
 
-                spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
-                spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
+                // spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
+                // spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
             }
-#endif
         }
-
-
     }
 }

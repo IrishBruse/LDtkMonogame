@@ -132,6 +132,7 @@ namespace LDtk
         /// Loads the ldtkl world file from disk directly or from the embeded one depending on if externalLevels is set
         /// </summary>
         /// <param name="uid">The Levels uid</param>
+        /// <param name="Content">Content Pipeline</param>
         /// <returns><see cref="LDtkLevel"/></returns>
         /// <exception cref="LevelNotFoundException"></exception>
         public LDtkLevel LoadLevel(int uid, ContentManager Content)
