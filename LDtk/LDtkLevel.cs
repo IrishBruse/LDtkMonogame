@@ -151,6 +151,8 @@ namespace LDtk
                             T entity = new T();
                             EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
 
+                            EntityDefinition entityDefinition = parent.GetEntityDefinitionFromUid(entityInstance.DefUid);
+
                             LDtkFieldParser.ParseBaseField(entity, "Position", (entityInstance.Px + Position).ToVector2());
                             // LDtkFieldParser.ParseBaseField(entity, "levelPosition", entityInstance.Px);
 
@@ -163,7 +165,7 @@ namespace LDtk
 
                             LDtkFieldParser.ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
 #if DEBUG
-                            // LDtkFieldParser.ParseBaseField(entity, "editorVisualColor", entityDefinition.Color);
+                            LDtkFieldParser.ParseBaseField(entity, "EditorVisualColor", entityDefinition.Color);
 #endif
                             if (entityInstance._Tile != null)
                             {

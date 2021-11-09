@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,7 +16,11 @@ namespace LDtk
         [JsonIgnore]
         public Point WorldGridSize => new Point(WorldGridWidth, WorldGridHeight);
 
-        private string RootFolder;
+        /// <summary>
+        /// The absolute folder that the world is located in.
+        /// Used to absolute relative addresses of textures
+        /// </summary>
+        public string RootFolder;
 
         /// <summary>
         /// Loads the ldtk world file from disk directly
@@ -24,9 +29,9 @@ namespace LDtk
         /// <returns>LDtkWorld</returns>
         public static LDtkWorld LoadWorld(string filePath)
         {
-            LDtkWorld world = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(filePath + ".ldtk"), SerializeOptions);
+            LDtkWorld world = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(filePath), SerializeOptions);
 
-            world.RootFolder = Path.GetDirectoryName(filePath);
+            world.RootFolder = Path.GetFullPath(Path.GetDirectoryName(filePath));
             return world;
         }
 
@@ -164,6 +169,25 @@ namespace LDtk
             }
 
             throw new LevelNotFoundException($"Could not find {uid} Level in {this}.");
+        }
+
+        /// <summary>
+        /// Gets the entity definition form a uid
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns>EntityDefinition</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public EntityDefinition GetEntityDefinitionFromUid(int uid)
+        {
+            for (int i = 0; i < Defs.Entities.Length; i++)
+            {
+                if (Defs.Entities[i].Uid == uid)
+                {
+                    return Defs.Entities[i];
+                }
+            }
+
+            return null;
         }
 
 

@@ -42,6 +42,10 @@ namespace LDtk
         public string JsonVersion { get; set; }
 
         /// <summary>
+        /// <para>
+        /// This holds the same levels that are returned from the LoadLevel Method but behaviour may be weird if external levels is on
+        /// and the parent field will not be populated if used before LoadLevel is called.
+        /// </para>
         /// All levels. The order of this array is only relevant in `LinearHorizontal` and
         /// `linearVertical` world layouts (see `worldLayout` value). Otherwise, you should refer to
         /// the `worldX`,`worldY` coordinates of each Level.
@@ -53,13 +57,13 @@ namespace LDtk
         /// Height of the world grid in pixels.
         /// </summary>
         [JsonPropertyName("worldGridHeight")]
-        int WorldGridHeight { get; set; }
+        public int WorldGridHeight { get; set; }
 
         /// <summary>
         /// Width of the world grid in pixels.
         /// </summary>
         [JsonPropertyName("worldGridWidth")]
-        int WorldGridWidth { get; set; }
+        public int WorldGridWidth { get; set; }
 
         /// <summary>
         /// An enum that describes how levels are organized in this project (ie. linearly or in a 2D

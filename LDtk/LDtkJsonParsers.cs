@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using Color = Microsoft.Xna.Framework.Color;
 using Point = Microsoft.Xna.Framework.Point;
 using Rect = Microsoft.Xna.Framework.Rectangle;
@@ -70,24 +71,12 @@ namespace LDtk
 
         public override void Write(Utf8JsonWriter writer, Rect val, JsonSerializerOptions options)
         {
-            if (val == null)
-            {
-                writer.WriteStartArray();
-                writer.WriteNumberValue(0);
-                writer.WriteNumberValue(0);
-                writer.WriteNumberValue(0);
-                writer.WriteNumberValue(0);
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteStartArray();
-                writer.WriteNumberValue(val.X);
-                writer.WriteNumberValue(val.Y);
-                writer.WriteNumberValue(val.Width);
-                writer.WriteNumberValue(val.Height);
-                writer.WriteEndArray();
-            }
+            writer.WriteStartArray();
+            writer.WriteNumberValue(val.X);
+            writer.WriteNumberValue(val.Y);
+            writer.WriteNumberValue(val.Width);
+            writer.WriteNumberValue(val.Height);
+            writer.WriteEndArray();
         }
     }
 

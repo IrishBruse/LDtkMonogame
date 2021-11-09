@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 
 namespace LDtk
@@ -49,8 +50,8 @@ namespace LDtk
         /// <returns>Grid position</returns>
         public Point FromWorldToGridSpace(Vector2 position)
         {
-            int x = (int)MathF.Floor(position.X / tileSize);
-            int y = (int)MathF.Floor(position.Y / tileSize);
+            int x = (int)Math.Floor(position.X / tileSize);
+            int y = (int)Math.Floor(position.Y / tileSize);
 
             return new Point(x, y);
         }

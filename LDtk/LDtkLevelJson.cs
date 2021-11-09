@@ -77,13 +77,13 @@ namespace LDtk
         /// Height of the level in pixels
         /// </summary>
         [JsonPropertyName("pxHei")]
-        private int PxHei { get; set; }
+        public int PxHei { get; set; }
 
         /// <summary>
         /// Width of the level in pixels
         /// </summary>
         [JsonPropertyName("pxWid")]
-        private int PxWid { get; set; }
+        public int PxWid { get; set; }
 
         /// <summary>
         /// Unique Int identifier
