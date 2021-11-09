@@ -1,9 +1,13 @@
 ﻿using System;
+using System.IO;
+using System.Text.Json;
 using Comora;
 using LDtk;
+using LDtk.Generator;
 using LDtk.Renderer;
 using LDtkTypes;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Examples.Api
@@ -35,7 +39,7 @@ namespace Examples.Api
             // Load world you can pass content here if you plan on using it
             world = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
 
-            level = world.LoadLevel("Level_3", Content);
+            level = world.LoadLevel("Level_0", Content);
 
             // Prerender the level to speed up rendering
             renderer.PrerenderLevel(level);
@@ -45,6 +49,27 @@ namespace Examples.Api
 
             MyLevelClass levelFields = level.GetCustomFields<MyLevelClass>();
             PrintEntities(levelFields);
+
+
+
+
+            LdtkGeneratorContext ctx = new LdtkGeneratorContext();
+            ctx.LevelClassName = "MyLevelClass";
+            ctx.TypeConverter = new LdtkTypeConverter();
+            ctx.CodeSettings.Namespace = "LDtkTypes";
+
+            SourceGeneratorOutput fOut = new SourceGeneratorOutput();
+
+            LdtkCodeGenerator cg = new LdtkCodeGenerator();
+
+            LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText("C:\\Users\\Econn\\Desktop\\Kenney Shooter\\World.ldtk"), LDtkWorld.SerializeOptions);
+
+            cg.GenerateCode(ldtkWorld, ctx, fOut);
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(fOut.TextOutput);
         }
 
         private void PrintEntities(MyLevelClass levelFields)
@@ -65,7 +90,7 @@ namespace Examples.Api
                 if (entityFieldsTests[i].Array_Enum.Length > 0)
                     Console.WriteLine(entityFieldsTests[i].Array_points[0]);
                 Console.WriteLine(entityFieldsTests[i].Boolean);
-                Console.WriteLine(entityFieldsTests[i].Color);
+                Console.WriteLine(entityFieldsTests[i].EditorVisualColor);
                 Console.WriteLine(entityFieldsTests[i].Enum);
                 Console.WriteLine(entityFieldsTests[i].FilePath);
                 Console.WriteLine(entityFieldsTests[i].Float);
@@ -103,9 +128,9 @@ namespace Examples.Api
 
         protected override void Update(GameTime gameTime)
         {
+            camera.Zoom = 2;
+            camera.Position = level.Position.ToVector2() + (level.Size.ToVector2() / 2f);
             camera.Update(gameTime);
-
-            camera.Position = Mouse.GetState().Position.ToVector2();
 
             base.Update(gameTime);
         }
@@ -114,10 +139,10 @@ namespace Examples.Api
         {
             GraphicsDevice.Clear(level._BgColor);
 
-            spriteBatch.Begin(camera);
+            spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             {
                 // Draw Levels layers
-                renderer.RenderLevel(level);
+                renderer.RenderPrerenderedLevel(level);
 
                 // Rendering int grid
                 renderer.RenderIntGrid(intGrid8px);

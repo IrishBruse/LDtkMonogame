@@ -77,7 +77,9 @@
 								"id": "V_String",
 								"params": ["C"]
 							}]
-						}
+						},
+						{ "__identifier": "Damaged", "__value": false, "__type": "Bool", "defUid": 179, "realEditorValues": [] },
+						{ "__identifier": "Timer", "__value": 0, "__type": "Float", "defUid": 180, "realEditorValues": [] }
 					]
 				},
 				{
@@ -106,7 +108,9 @@
 								"id": "V_String",
 								"params": ["B"]
 							}]
-						}
+						},
+						{ "__identifier": "Damaged", "__value": false, "__type": "Bool", "defUid": 179, "realEditorValues": [] },
+						{ "__identifier": "Timer", "__value": 0, "__type": "Float", "defUid": 180, "realEditorValues": [] }
 					]
 				},
 				{
@@ -118,7 +122,7 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [48,224],
-					"fieldInstances": []
+					"fieldInstances": [{ "__identifier": "Timer", "__value": 0, "__type": "Float", "defUid": 181, "realEditorValues": [] }]
 				},
 				{
 					"__identifier": "Diamond",
@@ -129,7 +133,7 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [112,160],
-					"fieldInstances": []
+					"fieldInstances": [{ "__identifier": "Timer", "__value": 0, "__type": "Float", "defUid": 181, "realEditorValues": [] }]
 				}
 			]
 		},

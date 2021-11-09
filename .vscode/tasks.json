@@ -2,12 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build Api",
+            "label": "build",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}\\Api\\Api.csproj",
+                "${workspaceFolder}\\LDtkMonogame.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -15,21 +15,6 @@
                 "$msCompile"
             ],
             "group": "build"
-        },
-        {
-            "label": "build Platformer",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}\\Platformer\\Platformer.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": [
-                "$msCompile",
-            ],
-            "group": "build"
-        },
+        }
     ]
 }

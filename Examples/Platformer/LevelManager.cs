@@ -45,13 +45,7 @@ namespace LDtk.Examples.Platformer
 
                     if (LevelContainsPoint(neighbour, center))
                     {
-                        CurrentLevel = neighbour;
-
-                        EnterNewLevel();
-                        for (int ii = 0; ii < CurrentLevel._Neighbours.Length; ii++)
-                        {
-                            world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid);
-                        }
+                        ChangeLevelTo(neighbour.Identifier);
                     }
                 }
             }
@@ -59,13 +53,12 @@ namespace LDtk.Examples.Platformer
 
         public void Draw()
         {
-            renderer.RenderLevel(CurrentLevel);
+            renderer.RenderPrerenderedLevel(CurrentLevel);
 
             for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
             {
                 LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid, Content);
-
-                renderer.RenderLevel(neighbour);
+                renderer.RenderPrerenderedLevel(neighbour);
             }
         }
 
@@ -74,11 +67,18 @@ namespace LDtk.Examples.Platformer
             if (Content != null)
             {
                 CurrentLevel = world.LoadLevel(identifier, Content);
-                renderer.PrerenderLevel(CurrentLevel);
             }
             else
             {
                 CurrentLevel = world.LoadLevel(identifier);
+            }
+
+            renderer.PrerenderLevel(CurrentLevel);
+
+            for (int ii = 0; ii < CurrentLevel._Neighbours.Length; ii++)
+            {
+                var neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid, Content);
+                renderer.PrerenderLevel(neighbourLevel);
             }
 
             EnterNewLevel();
@@ -87,11 +87,6 @@ namespace LDtk.Examples.Platformer
         public void MoveTo(Vector2 center)
         {
             this.center = center;
-        }
-
-        internal void Clear(GraphicsDevice GraphicsDevice)
-        {
-            GraphicsDevice.Clear(CurrentLevel._BgColor);
         }
 
         private void EnterNewLevel()
@@ -108,7 +103,7 @@ namespace LDtk.Examples.Platformer
             return
                 point.X >= level.Position.X &&
                 point.Y >= level.Position.Y &&
-                point.X < level.Position.X + level.Size.X &&
+                point.X <= level.Position.X + level.Size.X &&
                 point.Y <= level.Position.Y + level.Size.Y;
         }
     }

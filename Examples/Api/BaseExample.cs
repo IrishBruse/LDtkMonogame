@@ -18,8 +18,6 @@ namespace Examples.Api
         // Framework
         protected readonly GraphicsDeviceManager graphics;
         protected SpriteBatch spriteBatch;
-        private KeyboardState oldKeyboard;
-        private MouseState oldMouse;
 
         public BaseExample()
         {

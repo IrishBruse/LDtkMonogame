@@ -8,10 +8,10 @@
             "name": "Debug Api",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build Api",
-            "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp3.1/Api.dll",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Examples/Api/bin/Debug/netcoreapp3.1/Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Api",
+            "cwd": "${workspaceFolder}/Examples/Api/",
             "console": "externalTerminal",
             "stopAtEntry": false
         },
@@ -19,10 +19,21 @@
             "name": "Debug Platformer",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build Platformer",
-            "program": "${workspaceFolder}/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Examples/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Platformer",
+            "cwd": "${workspaceFolder}/Examples/Platformer/",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug Shooter",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Examples/Kenney Shooter/bin/Debug/netcoreapp3.1/Shooter.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Examples/Kenney Shooter/",
             "console": "externalTerminal",
             "stopAtEntry": false
         }
