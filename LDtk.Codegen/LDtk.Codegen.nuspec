@@ -1,0 +1,21 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <!-- Required elements-->
+        <Version>0.4.0</Version>
+        <Authors>Ethan Conneely</Authors>
+        <Product>LDtk Monogame</Product>
+        <PackageId>LDtkMonogame.Codegen</PackageId>
+        <Description>LDtk importer for Monogame</Description>
+        <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
+        <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
+        <PackageIcon>../Icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
+        <RootNamespace>LDtk.Codegen</RootNamespace>
+        <!-- Optional elements -->
+        <!-- ... -->
+    </metadata>
+    <!-- Optional 'files' node -->
+</package>

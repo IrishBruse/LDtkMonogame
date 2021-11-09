@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Text.Json;
 using Comora;
 using LDtk;
-using LDtk.Generator;
 using LDtk.Renderer;
 using LDtkTypes;
 using Microsoft.Xna.Framework;
@@ -16,10 +13,8 @@ namespace Examples.Api
     {
         // LDtk stuff
         private LDtkWorld world;
-        private LDtkLevel level;
+        private LDtkLevel[] levels;
         private LDtkRenderer renderer;
-        private LDtkIntGrid intGrid8px;
-        private LDtkIntGrid intGridClassic;
 
         Camera camera;
 
@@ -39,41 +34,21 @@ namespace Examples.Api
             // Load world you can pass content here if you plan on using it
             world = LDtkWorld.LoadWorld("Test_file_for_API_showing_all_features", Content);
 
-            level = world.LoadLevel("Level_0", Content);
+            levels = new LDtkLevel[world.Levels.Length];
+            for (int i = 0; i < world.Levels.Length; i++)
+            {
+                levels[i] = world.LoadLevel("Level_" + i, Content);
 
-            // Prerender the level to speed up rendering
-            renderer.PrerenderLevel(level);
+                // Prerender the level to speed up rendering
+                renderer.PrerenderLevel(levels[i]);
 
-            intGrid8px = level.GetIntGrid("IntGrid_8px_grid");
-            intGridClassic = level.GetIntGrid("IntGrid_classic");
-
-            MyLevelClass levelFields = level.GetCustomFields<MyLevelClass>();
-            PrintEntities(levelFields);
-
-
-
-
-            LdtkGeneratorContext ctx = new LdtkGeneratorContext();
-            ctx.LevelClassName = "MyLevelClass";
-            ctx.TypeConverter = new LdtkTypeConverter();
-            ctx.CodeSettings.Namespace = "LDtkTypes";
-
-            SourceGeneratorOutput fOut = new SourceGeneratorOutput();
-
-            LdtkCodeGenerator cg = new LdtkCodeGenerator();
-
-            LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText("C:\\Users\\Econn\\Desktop\\Kenney Shooter\\World.ldtk"), LDtkWorld.SerializeOptions);
-
-            cg.GenerateCode(ldtkWorld, ctx, fOut);
-
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine(fOut.TextOutput);
+                PrintEntities(levels[i]);
+            }
         }
 
-        private void PrintEntities(MyLevelClass levelFields)
+        private void PrintEntities(LDtkLevel level)
         {
+            MyLevelClass levelFields = level.GetCustomFields<MyLevelClass>();
             Console.WriteLine(level.Identifier + " desc :\n" + levelFields.desc);
 
             EntityFieldsTest[] entityFieldsTests = level.GetEntities<EntityFieldsTest>();
@@ -129,7 +104,7 @@ namespace Examples.Api
         protected override void Update(GameTime gameTime)
         {
             camera.Zoom = 2;
-            camera.Position = level.Position.ToVector2() + (level.Size.ToVector2() / 2f);
+            camera.Position = Mouse.GetState().Position.ToVector2();
             camera.Update(gameTime);
 
             base.Update(gameTime);
@@ -137,20 +112,25 @@ namespace Examples.Api
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(level._BgColor);
+            GraphicsDevice.Clear(world.BgColor);
 
-            spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+            for (int i = 0; i < world.Levels.Length; i++)
             {
-                // Draw Levels layers
-                renderer.RenderPrerenderedLevel(level);
+                spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+                {
+                    // Draw Levels layers
+                    renderer.RenderPrerenderedLevel(levels[i]);
 
-                // Rendering int grid
-                renderer.RenderIntGrid(intGrid8px);
+                    // a good idea would be to cache these intgrids
+                    // Rendering int grid
+                    renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_8px_grid"));
 
-                // Rendering int grid
-                renderer.RenderIntGrid(intGridClassic, 3);
+                    // Rendering int grid
+                    renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_classic"), 3);
+                }
+                spriteBatch.End();
+
             }
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }

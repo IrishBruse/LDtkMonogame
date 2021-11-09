@@ -19,7 +19,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\LDtk\LDtk.csproj" />
-	  <ProjectReference Include="..\..\LDtk.Renderer\LDtk.Renderer.csproj" />
 	</ItemGroup>
 
 </Project>

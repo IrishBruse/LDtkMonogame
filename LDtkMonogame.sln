@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk", "LDtk\LDtk.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Examples\Api\Api.csproj", "{4FD0070B-4A80-46D5-97EE-578E44C97B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Renderer", "LDtk.Renderer\LDtk.Renderer.csproj", "{086F6516-E15E-4413-8A26-7812245EE0BF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{834A1B90-2866-11EC-A133-A543CC166FDE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.ContentPipeline", "LDtk.ContentPipeline\LDtk.ContentPipeline.csproj", "{F4704E8B-4A1C-40EF-A772-350A30852324}"
