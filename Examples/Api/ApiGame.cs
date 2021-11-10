@@ -104,7 +104,7 @@ namespace Examples.Api
         protected override void Update(GameTime gameTime)
         {
             camera.Zoom = 2;
-            camera.Position = Mouse.GetState().Position.ToVector2();
+            camera.Position = new Vector2(levels[0].PxWid / 2, Math.Clamp(-Mouse.GetState().ScrollWheelValue, 0, 10000));
             camera.Update(gameTime);
 
             base.Update(gameTime);
@@ -118,15 +118,15 @@ namespace Examples.Api
             {
                 spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
                 {
-                    // Draw Levels layers
-                    renderer.RenderPrerenderedLevel(levels[i]);
-
                     // a good idea would be to cache these intgrids
                     // Rendering int grid
                     renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_8px_grid"));
 
                     // Rendering int grid
-                    renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_classic"), 3);
+                    renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_classic"));
+
+                    // Draw Levels layers
+                    renderer.RenderPrerenderedLevel(levels[i]);
                 }
                 spriteBatch.End();
 

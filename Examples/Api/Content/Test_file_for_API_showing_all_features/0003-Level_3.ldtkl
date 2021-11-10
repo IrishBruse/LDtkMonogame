@@ -18,10 +18,10 @@
 	"bgColor": null,
 	"useAutoIdentifier": true,
 	"bgRelPath": "Beach by deepnight.png",
-	"bgPos": "Cover",
-	"bgPivotX": 0.5,
+	"bgPos": "Contain",
+	"bgPivotX": 1,
 	"bgPivotY": 0.5,
-	"__bgPos": { "topLeftPx": [0,0], "scale": [0.85,0.85], "cropRect": [0,7.058823529411768,320,225.88235294117646] },
+	"__bgPos": { "topLeftPx": [16,0], "scale": [0.8,0.8], "cropRect": [0,0,320,240] },
 	"externalRelPath": null,
 	"fieldInstances": [{
 		"__identifier": "desc",
