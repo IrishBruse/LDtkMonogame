@@ -17,8 +17,9 @@ namespace LDtk.Generator
                 extends = $" : {BaseClass}";
             }
 
+            source.AddLine($"using LDtk;");
             source.AddLine($"using Microsoft.Xna.Framework;");
-            source.AddLine($"");
+            source.AddLine("");
             source.AddLine($"public class {Name}{extends}");
             source.StartBlock();
 

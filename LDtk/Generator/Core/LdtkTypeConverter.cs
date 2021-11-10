@@ -8,7 +8,7 @@ namespace LDtk.Generator
             return null;
         }
 
-        protected string GetCSharpTypeFor(string ldtkType)
+        protected static string GetCSharpTypeFor(string ldtkType)
         {
             if (ldtkType.StartsWith("LocalEnum"))
             {

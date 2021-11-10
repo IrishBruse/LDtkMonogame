@@ -63,7 +63,7 @@ namespace LDtk.Generator
             }
 
             code.AppendLine();
-            code.Append(verbatimSrc.ToString());
+            code.Append(verbatimSrc);
 
             code.AppendLine("#pragma warning restore IDE1006");
 

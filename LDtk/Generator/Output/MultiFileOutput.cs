@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 #pragma warning disable CS1591
@@ -6,6 +7,7 @@ namespace LDtk.Generator
     public class MultiFileOutput : ICodeOutput
     {
         public string OutputDir { get; set; }
+        public bool PrintFragments { get; set; }
 
         public void OutputCode(List<CompilationUnitFragment> fragments, LdtkGeneratorContext ctx)
         {
@@ -20,6 +22,11 @@ namespace LDtk.Generator
 
                 CompilationUnitSource source = new CompilationUnitSource(ctx.CodeSettings);
                 cuFile.Render(source);
+
+                if (PrintFragments == true)
+                {
+                    Console.WriteLine("    Generating -> " + fragment.Name + ".cs");
+                }
 
                 string filePath = OutputDir + "/" + fragment.Name + ".cs";
                 File.WriteAllText(filePath, source.GetSourceCode());
