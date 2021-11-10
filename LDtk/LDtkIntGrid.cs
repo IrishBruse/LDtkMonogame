@@ -14,20 +14,24 @@ namespace LDtk
         /// Size of a tile in pixels
         /// </summary>
         /// <value>Pixels</value>
-        public int TileSize { get => tileSize; }
+        public int TileSize { get; set; }
 
         /// <summary>
         /// The underlying values of the int grid
         /// </summary>
         /// <value>Integer</value>
-        public int[,] Values { get => grid; }
+        public int[,] Values { get; set; }
 
-        internal int[,] grid;
-        internal int tileSize;
+        /// <summary>
+        /// Worldspace start Position of the intgrid
+        /// </summary>
+        /// <value>Pixels</value>
+        public Point WorldPosition { get; set; }
+
         internal Dictionary<int, Color> colors = new Dictionary<int, Color>();
 
         /// <summary>
-        /// Gets the int value at location
+        /// Gets the int value at location and return 0 if out of bounds
         /// </summary>
         /// <param name="x">X index</param>
         /// <param name="y">Y index</param>
@@ -35,11 +39,11 @@ namespace LDtk
         public long GetValueAt(int x, int y)
         {
             // Inside bounds
-            if (x >= 0 && y >= 0 && x < grid.GetLength(0) && y < grid.GetLength(1))
+            if (x >= 0 && y >= 0 && x < Values.GetLength(0) && y < Values.GetLength(1))
             {
-                return grid[x, y];
+                return Values[x, y];
             }
-            return -1;
+            return 0;
         }
 
         /// <summary>
@@ -50,8 +54,8 @@ namespace LDtk
         /// <returns>Grid position</returns>
         public Point FromWorldToGridSpace(Vector2 position)
         {
-            int x = (int)Math.Floor(position.X / tileSize);
-            int y = (int)Math.Floor(position.Y / tileSize);
+            int x = (int)Math.Floor(position.X / TileSize);
+            int y = (int)Math.Floor(position.Y / TileSize);
 
             return new Point(x, y);
         }

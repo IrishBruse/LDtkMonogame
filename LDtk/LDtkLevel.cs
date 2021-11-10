@@ -56,8 +56,9 @@ namespace LDtk
 
                 LDtkIntGrid intGrid = new LDtkIntGrid()
                 {
-                    grid = new int[layer._CWid, layer._CHei],
-                    tileSize = layer._GridSize,
+                    Values = new int[layer._CWid, layer._CHei],
+                    WorldPosition = Position,
+                    TileSize = layer._GridSize,
                     colors = colors,
                 };
 
@@ -67,7 +68,7 @@ namespace LDtk
                     {
                         int y = j / layer._CWid;
                         int x = j - (y * layer._CWid);
-                        intGrid.grid[x, y] = layer.IntGridCsv[j];
+                        intGrid.Values[x, y] = layer.IntGridCsv[j];
                     }
                 }
                 else

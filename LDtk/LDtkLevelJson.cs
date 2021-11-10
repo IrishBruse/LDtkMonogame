@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.Xna.Framework;
 using Color = Microsoft.Xna.Framework.Color;
 
 #pragma warning disable 1591, 1570, IDE1006
@@ -23,6 +24,20 @@ namespace LDtk
         /// </summary>
         [JsonPropertyName("__bgColor")]
         public Color _BgColor { get; set; }
+
+        /// <summary>
+        /// Background color of the level (same as `bgColor`, except the default value is
+        /// automatically used here if its value is `null`)
+        /// </summary>
+        [JsonPropertyName("__bgPos")]
+        public LevelBackgroundPosition _BgPos { get; set; }
+        /// <summary>
+        /// An array listing all other levels touching this one on the world map. In "linear" world
+        /// layouts, this array is populated with previous/next levels in array, and `dir` depends on
+        /// the linear horizontal/vertical layout.
+        /// </summary>
+        [JsonPropertyName("__neighbours")]
+        public NeighbourLevel[] _Neighbours { get; set; }
 
         /// <summary>
         /// The *optional* relative path to the level background image.
@@ -66,14 +81,6 @@ namespace LDtk
         public BgPos? LevelBgPos { get; set; }
 
         /// <summary>
-        /// An array listing all other levels touching this one on the world map. In "linear" world
-        /// layouts, this array is populated with previous/next levels in array, and `dir` depends on
-        /// the linear horizontal/vertical layout.
-        /// </summary>
-        [JsonPropertyName("__neighbours")]
-        public NeighbourLevel[] _Neighbours { get; set; }
-
-        /// <summary>
         /// Height of the level in pixels
         /// </summary>
         [JsonPropertyName("pxHei")]
@@ -102,6 +109,34 @@ namespace LDtk
         /// </summary>
         [JsonPropertyName("worldY")]
         public int WorldY { get; set; }
+    }
+
+    /// <summary>
+    /// Level background image position info
+    /// </summary>
+    public partial class LevelBackgroundPosition
+    {
+        /// <summary>
+        /// An array of 4 float values describing the cropped sub-rectangle of the displayed
+        /// background image. This cropping happens when original is larger than the level bounds.
+        /// Array format: `[ cropX, cropY, cropWidth, cropHeight ]`
+        /// </summary>
+        [JsonPropertyName("cropRect")]
+        public Rectangle CropRect { get; set; }
+
+        /// <summary>
+        /// An array containing the `[scaleX,scaleY]` values of the **cropped** background image,
+        /// depending on `bgPos` option.
+        /// </summary>
+        [JsonPropertyName("scale")]
+        public Vector2 Scale { get; set; }
+
+        /// <summary>
+        /// An array containing the `[x,y]` pixel coordinates of the top-left corner of the
+        /// **cropped** background image, depending on `bgPos` option.
+        /// </summary>
+        [JsonPropertyName("topLeftPx")]
+        public Point TopLeftPx { get; set; }
     }
 
 }
