@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using LDtk;
 using LDtkTypes;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Examples.Platformer
@@ -41,7 +40,7 @@ namespace Examples.Platformer
             Tile = new Rectangle(0, 0, 78, 58);
             Size = new Vector2(78, 58);
 
-            collider = new Rect(Vector2.Zero, new Vector2(20, 25), Pivot);
+            collider = new Rect(Vector2.Zero, new Vector2(20, 30), Pivot);
             attack = new Rect(Vector2.Zero, new Vector2(20, 40), Vector2.One * .5f);
             animator = new Animator(this);
         }

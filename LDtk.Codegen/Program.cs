@@ -25,9 +25,11 @@ namespace LDtk.Codegen
 
         private static void Run(Options options)
         {
-            LdtkGeneratorContext ctx = new LdtkGeneratorContext();
-            ctx.LevelClassName = options.LevelClassName;
-            ctx.TypeConverter = new LdtkTypeConverter();
+            LdtkGeneratorContext ctx = new LdtkGeneratorContext
+            {
+                LevelClassName = options.LevelClassName,
+                TypeConverter = new LdtkTypeConverter()
+            };
             ctx.CodeSettings.Namespace = options.Namespace;
 
             ICodeOutput output;
@@ -36,16 +38,20 @@ namespace LDtk.Codegen
 
             if (options.SingleFile)
             {
-                var singleFileOutput = new SingleFileOutput();
-                singleFileOutput.OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output));
-                singleFileOutput.Filename = Path.GetFileNameWithoutExtension(options.Input);
+                var singleFileOutput = new SingleFileOutput
+                {
+                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output)),
+                    Filename = Path.GetFileNameWithoutExtension(options.Input)
+                };
                 output = singleFileOutput;
             }
             else
             {
-                var multiFileOutput = new MultiFileOutput();
-                multiFileOutput.PrintFragments = true;
-                multiFileOutput.OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Input));
+                var multiFileOutput = new MultiFileOutput
+                {
+                    PrintFragments = true,
+                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Input))
+                };
                 output = multiFileOutput;
             }
 
