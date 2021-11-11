@@ -1,6 +1,6 @@
 ﻿namespace Examples.Api
 {
-    internal class Program
+    static class Program
     {
         private static void Main()
         {

@@ -211,7 +211,7 @@
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Collisions",
+			"__identifier": "Level",
 			"__type": "IntGrid",
 			"__cWid": 7,
 			"__cHei": 7,

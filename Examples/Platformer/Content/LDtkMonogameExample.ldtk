@@ -70,7 +70,7 @@
 		},
 		{
 			"__type": "IntGrid",
-			"identifier": "Collisions",
+			"identifier": "Level",
 			"type": "IntGrid",
 			"uid": 2,
 			"gridSize": 32,
@@ -1179,7 +1179,7 @@
 			"limitScope": "PerWorld",
 			"limitBehavior": "PreventAdding",
 			"pivotX": 0.5,
-			"pivotY": 1,
+			"pivotY": 0.5,
 			"fieldDefs": []
 		},
 		{
@@ -1282,7 +1282,7 @@
 			"hollow": false,
 			"color": "#EFEF58",
 			"renderMode": "Tile",
-			"showName": true,
+			"showName": false,
 			"tilesetId": 60,
 			"tileId": 0,
 			"tileRenderMode": "Stretch",

@@ -19,8 +19,8 @@ namespace Examples.Platformer
         private MouseState oldMouse;
 
         private Player player;
-        private bool showTileColliders = false;
-        private bool showEntityColliders = false;
+        private bool showTileColliders;
+        private bool showEntityColliders;
 
         private readonly List<Door> doors = new List<Door>();
         private readonly List<Crate> crates = new List<Crate>();
@@ -65,14 +65,7 @@ namespace Examples.Platformer
 
             var spawnPoint = levelManager.CurrentLevel.GetEntity<PlayerSpawn>();
 
-            player = new Player
-            {
-                Position = spawnPoint.Position,
-                Pivot = spawnPoint.Pivot,
-                EditorVisualColor = spawnPoint.EditorVisualColor,
-                Tile = new Rectangle(0, 0, 78, 58),
-                Size = new Vector2(78, 58)
-            };
+            player = new Player(spawnPoint);
 
             player.animator.OnEnteredDoor += () =>
             {
@@ -135,7 +128,7 @@ namespace Examples.Platformer
         {
             for (int i = diamonds.Count - 1; i >= 0; i--)
             {
-                if (player.collider.Contains(diamonds[i].Position))
+                if (player.collider.Contains(new Rect(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
                 {
                     diamondsCollected++;
 
@@ -146,7 +139,7 @@ namespace Examples.Platformer
                     }
                     else
                     {
-                        _ = diamonds.Remove(diamonds[i]);
+                        diamonds.Remove(diamonds[i]);
                         return;
                     }
                 }
@@ -174,7 +167,7 @@ namespace Examples.Platformer
                     }
                 }
 
-                if (player.attack.Contains(crates[i].Position) && player.attacking)
+                if (player.attack.Contains(new Rect(crates[i].Position, crates[i].Size, crates[i].Pivot)) && player.attacking)
                 {
                     crates[i].Damaged = true;
                     crates[i].Tile = new Rectangle(1 * (int)crates[i].Size.X, 0, (int)crates[i].Size.X, (int)crates[i].Size.Y);
@@ -212,7 +205,7 @@ namespace Examples.Platformer
                     doors[i].Tile = tile;
                 }
 
-                if (player.collider.Contains(doors[i].Position))
+                if (new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).Contains(player.collider))
                 {
                     player.door = doors[i];
 
@@ -234,13 +227,14 @@ namespace Examples.Platformer
                 levelManager.Draw();
 
                 EntityRendering();
-                DebugRendering();
 
                 spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
-                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14),
+                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, 0),
                 1,
                 player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
                 0.1f);
+
+                DebugRendering();
             }
             spriteBatch.End();
 
@@ -259,12 +253,12 @@ namespace Examples.Platformer
                     SpriteEffects.None,
                     0);
 
-                // Digit hundreds
 
                 int units = diamondsCollected % 10;
                 int tens = diamondsCollected / 10 % 10;
                 int hundreds = diamondsCollected / 100 % 10;
 
+                // Digit hundreds
                 spriteBatch.Draw(fontTexture,
                     new Vector2(14, 2) * pixelScale * 2,
                     new Rectangle(6 * hundreds, 0, 6, 8),
@@ -305,23 +299,14 @@ namespace Examples.Platformer
             for (int i = 0; i < doors.Count; i++)
             {
                 spriteBatch.Draw(doorTexture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawPoint(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).TopLeft, Color.Black);
+                spriteBatch.DrawPoint(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).BottomRight, Color.Black);
             }
 
             for (int i = 0; i < crates.Count; i++)
             {
                 spriteBatch.Draw(boxTexture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0);
             }
-
-            spriteBatch.Draw(
-                playerTexture,
-                player.Position,
-                player.Tile,
-                Color.White,
-                0,
-                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, -14),
-                1,
-                player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
-                0.1f);
 
             for (int i = 0; i < diamonds.Count; i++)
             {
@@ -344,21 +329,30 @@ namespace Examples.Platformer
             {
                 for (int i = 0; i < doors.Count; i++)
                 {
-                    spriteBatch.DrawRect(new Rect(doors[i].Position - (doors[i].Size / 2f), doors[i].Size), doors[i].EditorVisualColor);
+                    spriteBatch.DrawRect(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].EditorVisualColor);
+                    spriteBatch.DrawPoint(doors[i].Position, Color.Black);
                 }
 
                 for (int i = 0; i < crates.Count; i++)
                 {
-                    spriteBatch.DrawRect(new Rect(crates[i].Position - (crates[i].Size / 2f), crates[i].Size), crates[i].EditorVisualColor);
+                    spriteBatch.DrawRect(new Rect(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].EditorVisualColor);
+                    spriteBatch.DrawPoint(crates[i].Position, Color.Black);
                 }
 
                 for (int i = 0; i < diamonds.Count; i++)
                 {
-                    spriteBatch.DrawRect(new Rect(diamonds[i].Position - (diamonds[i].Size / 2f), diamonds[i].Size), diamonds[i].EditorVisualColor);
+                    spriteBatch.DrawRect(new Rect(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].EditorVisualColor);
+                    spriteBatch.DrawPoint(diamonds[i].Position, Color.Black);
                 }
 
                 spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
+                spriteBatch.DrawPoint(player.collider.TopLeft, Color.Black);
+                spriteBatch.DrawPoint(player.collider.BottomRight, Color.Black);
+
+
+                spriteBatch.DrawPoint(player.Position, Color.Black);
                 spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
+                spriteBatch.DrawPoint(player.attack.Position, Color.Black);
             }
         }
     }

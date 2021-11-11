@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Examples.Platformer
 {
-    public class Player : PlayerSpawn
+    public class Player : ILDtkEntity
     {
         private const float Gavity = 175f;
         public Animator animator;
@@ -25,10 +25,24 @@ namespace Examples.Platformer
         private bool onPlatfrom;
         internal bool attacking;
 
-        public Player()
+        public long Uid { get; set; }
+        public string Identifier { get; set; }
+        public Vector2 Size { get; set; }
+        public Vector2 Position { get; set; }
+        public Vector2 Pivot { get; set; }
+        public Rectangle Tile { get; set; }
+        public Color EditorVisualColor { get; set; }
+
+        public Player(PlayerSpawn spawn)
         {
-            collider = new Rect(-10, -25, 20, 25);
-            attack = new Rect(20, -30, 20, 40);
+            Position = spawn.Position;
+            Pivot = spawn.Pivot;
+            EditorVisualColor = spawn.EditorVisualColor;
+            Tile = new Rectangle(0, 0, 78, 58);
+            Size = new Vector2(78, 58);
+
+            collider = new Rect(Vector2.Zero, new Vector2(20, 25), Pivot);
+            attack = new Rect(Vector2.Zero, new Vector2(20, 40), Vector2.One * .5f);
             animator = new Animator(this);
         }
 
@@ -39,9 +53,8 @@ namespace Examples.Platformer
                 noClip = !noClip;
             }
 
-            attack.ParentPosition = collider.ParentPosition = Position;
-
-            attack.Origin = new Vector2(fliped ? 20 : -20 - attack.Size.X, attack.Origin.Y);
+            attack.Position = collider.Position = Position;
+            attack.Position = Position + new Vector2(fliped ? 30 : -30, 0);
 
             Movement(keyboard, oldKeyboard, mouse, oldMouse, deltaTime);
             if (noClip == false)
@@ -117,9 +130,9 @@ namespace Examples.Platformer
         {
             grounded = false;
 
-            LDtkIntGrid collisions = level.GetIntGrid("Collisions");
-            Vector2 topleft = Vector2.Min(collider.WorldPosition, collider.WorldPosition + (velocity * deltaTime)) - level.Position.ToVector2();
-            Vector2 bottomRight = Vector2.Max(collider.WorldPosition + collider.Size, collider.WorldPosition + collider.Size + (velocity * deltaTime)) - level.Position.ToVector2();
+            LDtkIntGrid collisions = level.GetIntGrid("Level");
+            Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + (velocity * deltaTime)) - level.Position.ToVector2();
+            Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + (velocity * deltaTime)) - level.Position.ToVector2();
 
             Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
             Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
@@ -133,7 +146,7 @@ namespace Examples.Platformer
                     long intGridValue = collisions.GetValueAt(x, y);
                     if (intGridValue > 0)
                     {
-                        tiles.Add((new Rect(level.Position.X + (x * collisions.TileSize), level.Position.Y + (y * collisions.TileSize), collisions.TileSize, collisions.TileSize), intGridValue));
+                        tiles.Add((new Rect(level.Position.ToVector2() + new Vector2(x * collisions.TileSize, y * collisions.TileSize), new Vector2(collisions.TileSize), Vector2.Zero), intGridValue));
                     }
                 }
             }

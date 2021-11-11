@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Comora;
 using LDtk;
 using LDtk.Renderer;
@@ -15,10 +16,11 @@ namespace Examples.Api
         private LDtkWorld world;
         private LDtkLevel[] levels;
         private LDtkRenderer renderer;
+        readonly List<RectRegion> rects = new List<RectRegion>();
 
         Camera camera;
 
-        public ApiGame() : base()
+        public ApiGame()
         {
             Content.RootDirectory = "Content";
         }
@@ -39,6 +41,8 @@ namespace Examples.Api
             {
                 levels[i] = world.LoadLevel("Level_" + i, Content);
 
+                rects.AddRange(levels[i].GetEntities<RectRegion>());
+
                 // Prerender the level to speed up rendering
                 renderer.PrerenderLevel(levels[i]);
 
@@ -57,13 +61,21 @@ namespace Examples.Api
             for (int i = 0; i < entityFieldsTests.Length; i++)
             {
                 if (entityFieldsTests[i].Array_Enum.Length > 0)
+                {
                     Console.WriteLine(entityFieldsTests[i].Array_Enum[0]);
-                if (entityFieldsTests[i].Array_Enum.Length > 0)
+                }
+                if (entityFieldsTests[i].Array_Integer.Length > 0)
+                {
                     Console.WriteLine(entityFieldsTests[i].Array_Integer[0]);
-                if (entityFieldsTests[i].Array_Enum.Length > 0)
+                }
+                if (entityFieldsTests[i].Array_multilines.Length > 0)
+                {
                     Console.WriteLine(entityFieldsTests[i].Array_multilines[0]);
-                if (entityFieldsTests[i].Array_Enum.Length > 0)
+                }
+                if (entityFieldsTests[i].Array_points.Length > 0)
+                {
                     Console.WriteLine(entityFieldsTests[i].Array_points[0]);
+                }
                 Console.WriteLine(entityFieldsTests[i].Boolean);
                 Console.WriteLine(entityFieldsTests[i].EditorVisualColor);
                 Console.WriteLine(entityFieldsTests[i].Enum);
@@ -104,7 +116,7 @@ namespace Examples.Api
         protected override void Update(GameTime gameTime)
         {
             camera.Zoom = 2;
-            camera.Position = new Vector2(levels[0].PxWid / 2, Math.Clamp(-Mouse.GetState().ScrollWheelValue, 0, 10000));
+            camera.Position = new Vector2(levels[0].PxWid / 2, Math.Clamp(-Mouse.GetState().ScrollWheelValue, 0, 1000));
             camera.Update(gameTime);
 
             base.Update(gameTime);
@@ -118,6 +130,11 @@ namespace Examples.Api
             {
                 spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
                 {
+                    for (int j = 0; j < rects.Count; j++)
+                    {
+                        spriteBatch.Draw(pixel, rects[j].Position, null, rects[j].EditorVisualColor, 0, rects[j].Pivot, rects[j].Size, SpriteEffects.None, 0);
+                    }
+
                     // a good idea would be to cache these intgrids
                     // Rendering int grid
                     renderer.RenderIntGrid(levels[i].GetIntGrid("IntGrid_8px_grid"));

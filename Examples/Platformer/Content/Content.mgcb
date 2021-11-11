@@ -149,9 +149,6 @@
 #begin LDtkMonogameExample.ldtk
 /importer:LDtkWorldImporter
 /processor:LDtkWorldProcessor
-/processorParam:GenerateEntities=True
-/processorParam:LDtkNamespace=LDtkTypes
-/processorParam:LevelClassName=MyLevelClass
 /build:LDtkMonogameExample.ldtk
 
 #begin LDtkMonogameExample/0000-Level1.ldtkl

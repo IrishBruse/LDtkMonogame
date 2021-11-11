@@ -82,7 +82,7 @@
 			"entityInstances": []
 		},
 		{
-			"__identifier": "Collisions",
+			"__identifier": "Level",
 			"__type": "IntGrid",
 			"__cWid": 8,
 			"__cHei": 8,

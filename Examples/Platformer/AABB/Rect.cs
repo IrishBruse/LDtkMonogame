@@ -5,37 +5,37 @@ namespace Examples.Platformer
 {
     public class Rect
     {
-        public Vector2 ParentPosition { get; set; }
+        public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
+        public Vector2 Pivot { get; set; }
 
-        public Vector2 Origin { get; set; }
+        public Vector2 TopLeft => Position - (Size * Pivot);
+        public Vector2 BottomRight => Position + (Size * (Vector2.One - Pivot));
 
-        public Vector2 WorldPosition => Origin + ParentPosition;
-        public Vector2 Center => WorldPosition + (Size / 2);
-
-        public Rect(Vector2 topleftCorner, Vector2 size)
+        public Rect(Vector2 position, Vector2 size, Vector2 pivot)
         {
-            Origin = topleftCorner;
+            Position = position;
             Size = size;
-        }
-
-        public Rect(float left, float top, float width, float height)
-        {
-            Origin = new Vector2(left, top);
-            Size = new Vector2(width, height);
+            Pivot = pivot;
         }
 
         public bool Contains(Vector2 point)
         {
-            return point.X >= WorldPosition.X && point.Y >= WorldPosition.Y && point.X < WorldPosition.X + Size.X && point.Y <= WorldPosition.Y + Size.Y;
+            return point.X >= TopLeft.X
+                && point.X <= BottomRight.X
+                && point.Y >= TopLeft.Y
+                && point.Y <= BottomRight.Y;
         }
 
-        public bool Contains(Rect r2)
+        public bool Contains(Rect rect)
         {
-            return WorldPosition.X < r2.WorldPosition.X + r2.Size.X && WorldPosition.X + Size.X > r2.WorldPosition.X &&
-                WorldPosition.Y < r2.WorldPosition.Y + r2.Size.Y && WorldPosition.Y + Size.Y > r2.WorldPosition.Y;
-        }
+            var inside = Contains(rect.TopLeft)
+                      || Contains(rect.BottomRight)
+                      || Contains(new Vector2(rect.TopLeft.X, rect.BottomRight.Y))
+                      || Contains(new Vector2(rect.BottomRight.X, rect.TopLeft.Y));
 
+            return inside;
+        }
 
         public bool RayCast(Vector2 rayOrigin, Vector2 rayDirection, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear)
         {
@@ -45,8 +45,8 @@ namespace Examples.Platformer
 
             Vector2 invdir = new Vector2(1f / rayDirection.X, 1f / rayDirection.Y);
 
-            Vector2 near = (WorldPosition - rayOrigin) * invdir;
-            Vector2 far = (WorldPosition + Size - rayOrigin) * invdir;
+            Vector2 near = (TopLeft - rayOrigin) * invdir;
+            Vector2 far = (BottomRight - rayOrigin) * invdir;
 
             if (float.IsNaN(near.X) || float.IsNaN(near.Y) || float.IsNaN(far.X) || float.IsNaN(far.Y))
             {
@@ -90,7 +90,6 @@ namespace Examples.Platformer
             return true;
         }
 
-
         public bool Cast(Vector2 direction, Rect target, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear, float deltaTime)
         {
             contactPoint = default;
@@ -102,9 +101,9 @@ namespace Examples.Platformer
                 return false;
             }
 
-            Rect expandedTarget = new Rect(target.WorldPosition - (Size / 2), target.Size + Size);
+            Rect expandedTarget = new Rect(target.Position - (Size / 2f), target.Size + Size, target.Pivot);
 
-            return expandedTarget.RayCast(Center, direction * deltaTime, out contactPoint, out contactNormal, out hitNear) && hitNear >= 0f && hitNear < 1f;
+            return expandedTarget.RayCast(Position, direction * deltaTime, out contactPoint, out contactNormal, out hitNear) && hitNear >= 0f && hitNear < 1f;
         }
     }
 }

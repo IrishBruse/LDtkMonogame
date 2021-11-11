@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Examples.Platformer
 {
@@ -10,7 +11,7 @@ namespace Examples.Platformer
         public static void DrawRect(this SpriteBatch spriteBatch, Rect rect, Color color)
         {
             CreatePixelTexture(spriteBatch);
-            spriteBatch.Draw(pixelTexture, rect.WorldPosition, null, color, 0, Vector2.Zero, rect.Size, SpriteEffects.None, 0);
+            spriteBatch.Draw(pixelTexture, rect.Position, null, color, 0, rect.Pivot, rect.Size, SpriteEffects.None, 0);
         }
 
         public static void DrawPoint(this SpriteBatch spriteBatch, Vector2 point, Color color)
