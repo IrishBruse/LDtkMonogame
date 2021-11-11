@@ -18,7 +18,7 @@ namespace LDtk.Codegen
         {
             if (errs.IsVersion())
             {
-                Console.WriteLine("Supports LDtk version " + Constants.LDtkMinVersionSupported);
+                Console.WriteLine("Supports LDtk version " + Constants.SupportedLDtkVersion);
                 return;
             }
         }
