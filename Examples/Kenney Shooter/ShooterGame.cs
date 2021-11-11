@@ -36,7 +36,7 @@ namespace Examples.Api
             camera = new Camera(GraphicsDevice);
             renderer = new LDtkRenderer(spriteBatch);
 
-            world = LDtkWorld.LoadWorld("C:\\Users\\Econn\\Desktop\\Kenney Shooter\\World.ldtk");
+            world = LDtkWorld.LoadWorld("Kenney Shooter\\World.ldtk");
             levels = new LDtkLevel[world.Levels.Length];
             for (int i = 0; i < world.Levels.Length; i++)
             {
