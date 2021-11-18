@@ -11,6 +11,7 @@ namespace LDtk.Codegen
     {
         public static void Main(string[] args)
         {
+            Console.WriteLine("-- LDtk Codegen --");
             Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
         }
 
@@ -34,7 +35,7 @@ namespace LDtk.Codegen
 
             ICodeOutput output;
 
-            Console.WriteLine(Path.GetFileNameWithoutExtension(options.Input));
+            // Console.WriteLine(Path.GetFileNameWithoutExtension(options.Input));
 
             if (options.SingleFile)
             {
@@ -50,7 +51,7 @@ namespace LDtk.Codegen
                 var multiFileOutput = new MultiFileOutput
                 {
                     PrintFragments = true,
-                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Input))
+                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output))
                 };
                 output = multiFileOutput;
             }
@@ -78,5 +79,8 @@ namespace LDtk.Codegen
 
         [Option("singlefile", Required = false, Default = false, HelpText = "Output all the LDtk files into a single file.")]
         public bool SingleFile { get; set; }
+
+        [Option("pointAsVector2", Required = false, Default = false, HelpText = "If the entity has a point or point array convert it to vector2")]
+        public bool PointAsVector2 { get; set; }
     }
 }

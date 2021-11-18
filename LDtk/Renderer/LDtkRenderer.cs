@@ -12,6 +12,7 @@ namespace LDtk.Renderer
     /// <summary>
     /// Renderer for the ldtkWorld, ldtkLevel, intgrids and entities.
     /// This can all be done in your own class if you want to reimplement it and customize it differently
+    /// this one is mostly here to get you up and running quickly.
     /// </summary>
     public class LDtkRenderer
     {
@@ -189,7 +190,7 @@ namespace LDtk.Renderer
         }
 
         /// <summary>
-        /// Render the level directly without prerendering the layers
+        /// Render the level directly without prerendering the layers alot slower than prerendering
         /// </summary>
         /// <param name="level"></param>
         public void RenderLevel(LDtkLevel level)
@@ -233,9 +234,50 @@ namespace LDtk.Renderer
         /// <summary>
         /// Renders the entity with the tile it includes
         /// </summary>
+        /// <param name="entity">The entity you want to render</param>
+        /// <param name="texture">The spritesheet/texture for rendering the entity</param>
         public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity
         {
             spriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+        }
+
+        /// <summary>
+        /// Renders the entity with the tile it includes
+        /// </summary>
+        /// <param name="entity">The entity you want to render</param>
+        /// <param name="texture">The spritesheet/texture for rendering the entity</param>
+        /// <param name="flipDirection">The direction to flip the entity when rendering</param>
+        public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection) where T : ILDtkEntity
+        {
+            spriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+        }
+
+        /// <summary>
+        /// Renders the entity with the tile it includes
+        /// </summary>
+        /// <param name="entity">The entity you want to render</param>
+        /// <param name="texture">The spritesheet/texture for rendering the entity</param>
+        /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
+        public void RenderEntity<T>(T entity, Texture2D texture, int animationFrame) where T : ILDtkEntity
+        {
+            var animatedTile = entity.Tile;
+            animatedTile.Offset(animatedTile.Width * animationFrame, 0);
+            spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+        }
+
+
+        /// <summary>
+        /// Renders the entity with the tile it includes
+        /// </summary>
+        /// <param name="entity">The entity you want to render</param>
+        /// <param name="texture">The spritesheet/texture for rendering the entity</param>
+        /// <param name="flipDirection">The direction to flip the entity when rendering</param>
+        /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
+        public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection, int animationFrame) where T : ILDtkEntity
+        {
+            var animatedTile = entity.Tile;
+            animatedTile.Offset(animatedTile.Width * animationFrame, 0);
+            spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
         }
 
         #endregion

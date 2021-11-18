@@ -13,5 +13,8 @@
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
         <RootNamespace>LDtk</RootNamespace>
+
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>ldtkgen</ToolCommandName>
     </metadata>
 </package>

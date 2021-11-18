@@ -42,7 +42,7 @@ namespace LDtk
 
             if (field == null)
             {
-                throw new FieldInstanceException($"Error: Field \"{variableName}\" not found in {typeof(T).FullName}");
+                throw new FieldInstanceException($"Error: Field \"{variableName}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
             }
 
             // Split any enums

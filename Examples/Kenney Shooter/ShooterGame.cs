@@ -1,7 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Comora;
 using LDtk;
 using LDtk.Renderer;
+using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,10 +17,10 @@ namespace Examples.Api
         LDtkWorld world;
         LDtkLevel[] levels;
         LDtkRenderer renderer;
-        // readonly List<Bee> bees = new List<Bee>();
-        // readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
-        // readonly List<Slug> slugs = new List<Slug>();
-        // readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
+        readonly List<Bee> bees = new List<Bee>();
+        readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
+        readonly List<Slug> slugs = new List<Slug>();
+        readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
 
         Camera camera;
 
@@ -42,10 +45,10 @@ namespace Examples.Api
             {
                 levels[i] = world.LoadLevel(world.Levels[i].Identifier);
 
-                // bees.AddRange(levels[i].GetEntities<Bee>());
-                // blue_bees.AddRange(levels[i].GetEntities<Blue_Bee>());
-                // slugs.AddRange(levels[i].GetEntities<Slug>());
-                // guns.AddRange(levels[i].GetEntities<Gun_Pickup>());
+                bees.AddRange(levels[i].GetEntities<Bee>());
+                blue_bees.AddRange(levels[i].GetEntities<Blue_Bee>());
+                slugs.AddRange(levels[i].GetEntities<Slug>());
+                guns.AddRange(levels[i].GetEntities<Gun_Pickup>());
 
                 renderer.PrerenderLevel(levels[i]);
             }
@@ -57,9 +60,27 @@ namespace Examples.Api
         {
             camera.Update(gameTime);
 
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
+
             var center = levels[0].Position.ToVector2() + (levels[0].Size.ToVector2() / 2f);
-            camera.Zoom = 4;
             camera.Position = Mouse.GetState().Position.ToVector2() + center;
+            camera.Zoom = 4;
+
+            for (int i = 0; i < guns.Count; i++)
+            {
+                guns[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1.5f) * .1f);
+            }
+
+            for (int i = 0; i < bees.Count; i++)
+            {
+                bees[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1f) * .13f);
+            }
+
+            for (int i = 0; i < blue_bees.Count; i++)
+            {
+                blue_bees[i].Position = MoveTowards(blue_bees[i].Position, Vector2.Zero, deltaTime * 20);
+            }
 
             base.Update(gameTime);
         }
@@ -76,15 +97,45 @@ namespace Examples.Api
                     renderer.RenderPrerenderedLevel(levels[i]);
                 }
 
-                // for (int i = 0; i < slugs.Count; i++)
-                // {
-                //     renderer.RenderEntity(slugs[i], spriteSheet);
-                // }
+                // Draw Entities
+                for (int i = 0; i < slugs.Count; i++)
+                {
+                    renderer.RenderEntity(slugs[i], spriteSheet, slugs[i].Flip ? 1 : 0);
+                }
+
+                for (int i = 0; i < bees.Count; i++)
+                {
+                    renderer.RenderEntity(bees[i], spriteSheet, bees[i].Flip ? 1 : 0);
+                }
+
+                for (int i = 0; i < blue_bees.Count; i++)
+                {
+                    renderer.RenderEntity(blue_bees[i], spriteSheet, (SpriteEffects)(blue_bees[i].Flip ? 1 : 0), (int)(gameTime.TotalGameTime.TotalSeconds % .5f / .25f));
+                }
+
+                for (int i = 0; i < guns.Count; i++)
+                {
+                    renderer.RenderEntity(guns[i], spriteSheet);
+                }
             }
             spriteBatch.End();
-            GraphicsDevice.SetRenderTarget(null);
 
             base.Draw(gameTime);
+        }
+
+        public static Vector2 MoveTowards(Vector2 start, Vector2 end, float maxDistanceDelta)
+        {
+            float diffX = end.X - start.X;
+            float diffY = end.Y - start.Y;
+
+            float sqDist = diffX * diffX + diffY * diffY;
+
+            if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
+                return end;
+
+            float dist = MathF.Sqrt(sqDist);
+
+            return new Vector2(start.X + diffX / dist * maxDistanceDelta, start.Y + diffY / dist * maxDistanceDelta);
         }
     }
 }

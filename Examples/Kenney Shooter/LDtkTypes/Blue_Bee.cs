@@ -1,12 +1,15 @@
 // This file was automatically generated, any modifications will be lost!
+#pragma warning disable IDE1006
 
 namespace LDtkTypes
 {
     using LDtk;
     using Microsoft.Xna.Framework;
     
-    public class Gun_Pickup : ILDtkEntity
+    public class Blue_Bee : ILDtkEntity
     {
+        public bool Flip { get; set; }
+        public Point[] Wander { get; set; }
         public long Uid { get; set; }
         public string Identifier { get; set; }
         public Vector2 Size { get; set; }
@@ -16,3 +19,4 @@ namespace LDtkTypes
         public Color EditorVisualColor { get; set; }
     }
 }
+#pragma warning restore IDE1006

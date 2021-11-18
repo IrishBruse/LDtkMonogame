@@ -1,8 +1,10 @@
 #pragma warning disable CS1591
+
 namespace LDtk.Generator
 {
     public class LdtkTypeConverter
     {
+        public bool PointIsVector2 { get; set; }
         public virtual string GetArrayImport()
         {
             return null;
@@ -33,6 +35,12 @@ namespace LDtk.Generator
                 baseType = baseType[6..^1];
 
             string declType = GetCSharpTypeFor(baseType);
+
+            // TODO: check dis
+            if (declType == "Point" && PointIsVector2)
+            {
+                declType = "Vector2";
+            }
 
             if (fieldDefinition.IsArray)
                 declType += "[]";
