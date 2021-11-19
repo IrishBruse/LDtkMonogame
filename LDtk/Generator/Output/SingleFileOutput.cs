@@ -12,10 +12,12 @@ namespace LDtk.Generator
         {
             Directory.CreateDirectory(OutputDir);
 
-            CompilationUnit cu = new CompilationUnit();
-            cu.Name = Filename;
-            cu.Namespace = ctx.CodeSettings.Namespace;
-            cu.Fragments = fragments;
+            CompilationUnit cu = new CompilationUnit
+            {
+                Name = Filename,
+                Namespace = ctx.CodeSettings.Namespace,
+                Fragments = fragments
+            };
 
             CompilationUnitSource source = new CompilationUnitSource(ctx.CodeSettings);
             cu.Render(source);

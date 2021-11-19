@@ -26,16 +26,19 @@ namespace LDtk.Codegen
 
         private static void Run(Options options)
         {
+            var typeConverter = new LdtkTypeConverter
+            {
+                PointAsVector2 = options.PointAsVector2
+            };
+
             LdtkGeneratorContext ctx = new LdtkGeneratorContext
             {
                 LevelClassName = options.LevelClassName,
-                TypeConverter = new LdtkTypeConverter()
+                TypeConverter = typeConverter
             };
             ctx.CodeSettings.Namespace = options.Namespace;
 
             ICodeOutput output;
-
-            // Console.WriteLine(Path.GetFileNameWithoutExtension(options.Input));
 
             if (options.SingleFile)
             {
@@ -74,13 +77,13 @@ namespace LDtk.Codegen
         [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into.")]
         public string Namespace { get; set; }
 
-        [Option("levelclassname", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file.")]
+        [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file.")]
         public string LevelClassName { get; set; }
 
-        [Option("singlefile", Required = false, Default = false, HelpText = "Output all the LDtk files into a single file.")]
+        [Option("SingleFile", Required = false, Default = false, HelpText = "Output all the LDtk files into a single file.")]
         public bool SingleFile { get; set; }
 
-        [Option("pointAsVector2", Required = false, Default = false, HelpText = "If the entity has a point or point array convert it to vector2")]
+        [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
         public bool PointAsVector2 { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Examples.Api
         LDtkWorld world;
         LDtkLevel[] levels;
         LDtkRenderer renderer;
-        readonly List<Bee> bees = new List<Bee>();
+        readonly List<Bee> yellow_bees = new List<Bee>();
         readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
         readonly List<Slug> slugs = new List<Slug>();
         readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
@@ -45,7 +45,7 @@ namespace Examples.Api
             {
                 levels[i] = world.LoadLevel(world.Levels[i].Identifier);
 
-                bees.AddRange(levels[i].GetEntities<Bee>());
+                yellow_bees.AddRange(levels[i].GetEntities<Bee>());
                 blue_bees.AddRange(levels[i].GetEntities<Blue_Bee>());
                 slugs.AddRange(levels[i].GetEntities<Slug>());
                 guns.AddRange(levels[i].GetEntities<Gun_Pickup>());
@@ -72,9 +72,9 @@ namespace Examples.Api
                 guns[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1.5f) * .1f);
             }
 
-            for (int i = 0; i < bees.Count; i++)
+            for (int i = 0; i < yellow_bees.Count; i++)
             {
-                bees[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1f) * .13f);
+                yellow_bees[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1f) * .13f);
             }
 
             for (int i = 0; i < blue_bees.Count; i++)
@@ -103,9 +103,9 @@ namespace Examples.Api
                     renderer.RenderEntity(slugs[i], spriteSheet, slugs[i].Flip ? 1 : 0);
                 }
 
-                for (int i = 0; i < bees.Count; i++)
+                for (int i = 0; i < yellow_bees.Count; i++)
                 {
-                    renderer.RenderEntity(bees[i], spriteSheet, bees[i].Flip ? 1 : 0);
+                    renderer.RenderEntity(yellow_bees[i], spriteSheet, yellow_bees[i].Flip ? 1 : 0);
                 }
 
                 for (int i = 0; i < blue_bees.Count; i++)

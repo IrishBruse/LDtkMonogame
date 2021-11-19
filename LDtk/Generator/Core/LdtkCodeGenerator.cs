@@ -33,8 +33,10 @@ namespace LDtk.Generator
 
         public virtual CompilationUnitEnum GenerateEnum(EnumDefinition enumDefinition, LdtkGeneratorContext ctx)
         {
-            CompilationUnitEnum enumFragment = new CompilationUnitEnum();
-            enumFragment.Name = enumDefinition.Identifier;
+            CompilationUnitEnum enumFragment = new CompilationUnitEnum
+            {
+                Name = enumDefinition.Identifier
+            };
 
             foreach (EnumValueDefinition evd in enumDefinition.Values)
             {
@@ -46,8 +48,10 @@ namespace LDtk.Generator
 
         public virtual CompilationUnitClass GenerateEntity(EntityDefinition ed, LdtkGeneratorContext ctx)
         {
-            CompilationUnitClass classFragment = new CompilationUnitClass();
-            classFragment.Name = ed.Identifier;
+            CompilationUnitClass classFragment = new CompilationUnitClass
+            {
+                Name = ed.Identifier
+            };
 
             foreach (FieldDefinition fd in ed.FieldDefs)
             {
@@ -59,8 +63,10 @@ namespace LDtk.Generator
 
         public virtual CompilationUnitClass GenerateLevel(LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
         {
-            CompilationUnitClass levelClass = new CompilationUnitClass();
-            levelClass.Name = ctx.LevelClassName;
+            CompilationUnitClass levelClass = new CompilationUnitClass
+            {
+                Name = ctx.LevelClassName
+            };
 
             foreach (FieldDefinition fd in ldtkJson.Defs.LevelFields)
             {

@@ -129,10 +129,7 @@ namespace LDtk
         {
             T levelFields = new T();
 
-            for (int i = 0; i < FieldInstances.Length; i++)
-            {
-                LDtkFieldParser.Parse(levelFields, FieldInstances[i]);
-            }
+            LDtkFieldParser.Parse(levelFields, this);
 
             return levelFields;
         }
@@ -155,15 +152,7 @@ namespace LDtk
                             EntityDefinition entityDefinition = parent.GetEntityDefinitionFromUid(entityInstance.DefUid);
 
                             LDtkFieldParser.ParseBaseField(entity, "Position", (entityInstance.Px + Position).ToVector2());
-                            // LDtkFieldParser.ParseBaseField(entity, "levelPosition", entityInstance.Px);
-
                             LDtkFieldParser.ParseBaseField(entity, "Pivot", entityInstance._Pivot);
-
-                            if (entityInstance._Tile != null)
-                            {
-                                // LDtkFieldParser.ParseBaseField(entity, "texture", owner.GetTilesetTextureFromUid(entityInstance._Tile.TilesetUid));
-                            }
-
                             LDtkFieldParser.ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
 #if DEBUG
                             LDtkFieldParser.ParseBaseField(entity, "EditorVisualColor", entityDefinition.Color);
@@ -175,10 +164,7 @@ namespace LDtk
                                 LDtkFieldParser.ParseBaseField(entity, "Tile", rect);
                             }
 
-                            for (int fieldIndex = 0; fieldIndex < entityInstance.FieldInstances.Length; fieldIndex++)
-                            {
-                                LDtkFieldParser.Parse(entity, entityInstance.FieldInstances[fieldIndex]);
-                            }
+                            LDtkFieldParser.Parse(entity, this);
 
                             parsedEntities.Add(entity);
                         }

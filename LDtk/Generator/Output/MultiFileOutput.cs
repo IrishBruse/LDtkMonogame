@@ -15,9 +15,11 @@ namespace LDtk.Generator
 
             foreach (CompilationUnitFragment fragment in fragments)
             {
-                CompilationUnit cuFile = new CompilationUnit();
-                cuFile.Namespace = ctx.CodeSettings.Namespace;
-                cuFile.Name = fragment.Name;
+                CompilationUnit cuFile = new CompilationUnit
+                {
+                    Namespace = ctx.CodeSettings.Namespace,
+                    Name = fragment.Name
+                };
                 cuFile.Fragments.Add(fragment);
 
                 CompilationUnitSource source = new CompilationUnitSource(ctx.CodeSettings);

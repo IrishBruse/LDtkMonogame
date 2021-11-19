@@ -1,10 +1,10 @@
-#pragma warning disable CS1591
+#pragma warning disable CS1591, IDE0057
 
 namespace LDtk.Generator
 {
     public class LdtkTypeConverter
     {
-        public bool PointIsVector2 { get; set; }
+        public bool PointAsVector2 { get; set; }
         public virtual string GetArrayImport()
         {
             return null;
@@ -14,7 +14,7 @@ namespace LDtk.Generator
         {
             if (ldtkType.StartsWith("LocalEnum"))
             {
-                return ldtkType[10..];
+                return ldtkType.Substring(10);
             }
 
             return ldtkType switch
@@ -32,12 +32,11 @@ namespace LDtk.Generator
         {
             string baseType = fieldDefinition.Type;
             if (fieldDefinition.IsArray)
-                baseType = baseType[6..^1];
+                baseType = baseType.Substring(6, baseType.Length - 1);
 
             string declType = GetCSharpTypeFor(baseType);
 
-            // TODO: check dis
-            if (declType == "Point" && PointIsVector2)
+            if (declType == "Point" && PointAsVector2)
             {
                 declType = "Vector2";
             }
@@ -50,10 +49,12 @@ namespace LDtk.Generator
 
         public CompilationUnitField ToCompilationUnitField(FieldDefinition fieldDefinition, LdtkGeneratorContext ctx)
         {
-            CompilationUnitField field = new CompilationUnitField();
-            field.Name = fieldDefinition.Identifier;
-            field.Type = GetDeclaringTypeFor(fieldDefinition, ctx);
-            field.Visibility = CompilationUnitField.FieldVisibility.Public;
+            CompilationUnitField field = new CompilationUnitField
+            {
+                Name = fieldDefinition.Identifier,
+                Type = GetDeclaringTypeFor(fieldDefinition, ctx),
+                Visibility = CompilationUnitField.FieldVisibility.Public
+            };
 
             if (fieldDefinition.IsArray)
                 field.RequiredImport = GetArrayImport();
@@ -62,4 +63,4 @@ namespace LDtk.Generator
         }
     }
 }
-#pragma warning restore CS1591
+#pragma warning restore CS1591, IDE0057

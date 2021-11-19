@@ -8,6 +8,20 @@
   <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples"> <img alt="GitHub Examples Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Examples?label=LDtkMonogame.Examples"></a>
 </p>
 
+---
+
 <h1 align="center">
     <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a>
 </h1>
+
+## Build instructions
+
+This is build instructions for the LDtk library not for your game.
+Game instructions are on the wiki link above.
+
+`LDtk.Codegen` & `LDtk.ContentPipeline` need to be built before the examples  
+as the examples depend on them.
+
+You can just run `build.bat` 
+it will build everything in the correct order and from then on unless  
+you make changes to `Codegen` or `ContentPipeline` building like normal should work
