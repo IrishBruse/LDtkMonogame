@@ -1,6 +1,4 @@
 using System;
-using LDtk.Renderer;
-using LDtkTypes;
 using Microsoft.Xna.Framework;
 
 namespace Examples.Platformer

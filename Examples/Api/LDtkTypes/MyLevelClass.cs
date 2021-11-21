@@ -3,9 +3,7 @@
 
 namespace LDtkTypes
 {
-    using LDtk;
-    using Microsoft.Xna.Framework;
-    
+
     public class MyLevelClass
     {
         public string desc { get; set; }
