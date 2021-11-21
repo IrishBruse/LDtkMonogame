@@ -29,7 +29,9 @@ namespace LDtk.Codegen
         public override void Render(CompilationUnitSource source)
         {
             if (RequiredImport != null)
+            {
                 source.Using(RequiredImport);
+            }
 
             string vStr = "";
             if (Visibility.HasValue)

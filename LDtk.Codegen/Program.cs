@@ -65,7 +65,7 @@ namespace LDtk.Codegen
         }
     }
 
-    class Options
+    internal class Options
     {
         [Option('i', "input", Required = true, HelpText = "Input LDtk world file.")]
         public string Input { get; set; }

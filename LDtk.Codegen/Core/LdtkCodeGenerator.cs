@@ -19,14 +19,18 @@ public class LdtkCodeGenerator
             fragments.Add(entity);
 
             if (ctx.CodeCustomizer != null)
+            {
                 ctx.CodeCustomizer.CustomizeEntity(entity, ed, ctx);
+            }
         }
 
         CompilationUnitClass level = GenerateLevel(ldtkJson, ctx);
         fragments.Add(level);
 
         if (ctx.CodeCustomizer != null)
+        {
             ctx.CodeCustomizer.CustomizeLevel(level, ldtkJson, ctx);
+        }
 
         output.OutputCode(fragments, ctx);
     }

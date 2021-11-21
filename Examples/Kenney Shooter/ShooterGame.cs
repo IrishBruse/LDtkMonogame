@@ -14,17 +14,15 @@ namespace Examples.Api
     public class ApiGame : BaseExample
     {
         // LDtk stuff
-        LDtkWorld world;
-        LDtkLevel[] levels;
-        LDtkRenderer renderer;
-        readonly List<Bee> yellow_bees = new List<Bee>();
-        readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
-        readonly List<Slug> slugs = new List<Slug>();
-        readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
-
-        Camera camera;
-
-        Texture2D spriteSheet;
+        private LDtkWorld world;
+        private LDtkLevel[] levels;
+        private LDtkRenderer renderer;
+        private readonly List<Bee> yellow_bees = new List<Bee>();
+        private readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
+        private readonly List<Slug> slugs = new List<Slug>();
+        private readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
+        private Camera camera;
+        private Texture2D spriteSheet;
 
         public ApiGame() : base()
         {
@@ -141,7 +139,9 @@ namespace Examples.Api
             float sqDist = diffX * diffX + diffY * diffY;
 
             if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
+            {
                 return end;
+            }
 
             float dist = MathF.Sqrt(sqDist);
 

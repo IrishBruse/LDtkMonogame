@@ -16,12 +16,11 @@ namespace LDtk.Renderer
     /// </summary>
     public class LDtkRenderer
     {
-        static Texture2D pixel;
-
-        readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
-        readonly SpriteBatch spriteBatch;
-        readonly GraphicsDevice GraphicsDevice;
-        readonly ContentManager Content;
+        private static Texture2D pixel;
+        private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
+        private readonly SpriteBatch spriteBatch;
+        private readonly GraphicsDevice GraphicsDevice;
+        private readonly ContentManager Content;
 
         /// <summary>
         /// This is used to intizialize the renderer for use with direct file loading
@@ -133,6 +132,10 @@ namespace LDtk.Renderer
                                 spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                             }
                         }
+                        break;
+                    case LayerType.Entities:
+                        break;
+                    default:
                         break;
                 }
             }
@@ -282,7 +285,7 @@ namespace LDtk.Renderer
 
         #endregion
 
-        struct RenderedLevel
+        private struct RenderedLevel
         {
             public Texture2D[] layers;
         }

@@ -21,7 +21,9 @@ namespace LDtk.Codegen
         public void Using(string package)
         {
             if (package == null)
+            {
                 return;
+            }
 
             imports.Add(package);
         }
@@ -53,7 +55,9 @@ namespace LDtk.Codegen
             StringBuilder code = new StringBuilder();
 
             if (cs.GeneratedFileHeader != null)
+            {
                 code.AppendLine(cs.GeneratedFileHeader);
+            }
 
             code.AppendLine("#pragma warning disable IDE1006");
 

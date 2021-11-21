@@ -11,7 +11,7 @@ namespace LDtk;
 /// <summary>
 /// Utility for parsing ldtk json data into more typed versions
 /// </summary>
-static class LDtkFieldParser
+internal static class LDtkFieldParser
 {
     /// <summary>
     /// Using Reflections parse the fields in the json/<paramref name="fields"/> into <paramref name="level"/>
@@ -38,7 +38,7 @@ static class LDtkFieldParser
         ParseCustomFields(entity, fields, level);
     }
 
-    static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
+    private static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
     {
         for (int i = 0; i < fields.Length; i++)
         {
@@ -170,12 +170,12 @@ static class LDtkFieldParser
     }
 
     // Helpers
-    static Color ParseStringToColor(string hex)
+    private static Color ParseStringToColor(string hex)
     {
         return ParseStringToColor(hex, 255);
     }
 
-    static Color ParseStringToColor(string hex, int alpha)
+    private static Color ParseStringToColor(string hex, int alpha)
     {
         if (uint.TryParse(hex.Replace("#", ""), System.Globalization.NumberStyles.HexNumber, null, out uint color))
         {
@@ -191,7 +191,7 @@ static class LDtkFieldParser
         }
     }
 
-    static void ParseBaseField<T>(T entity, string fieldName, object value)
+    private static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
         PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 

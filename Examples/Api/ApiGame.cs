@@ -16,9 +16,8 @@ namespace Examples.Api
         private LDtkWorld world;
         private LDtkLevel[] levels;
         private LDtkRenderer renderer;
-        readonly List<RectRegion> rects = new List<RectRegion>();
-
-        Camera camera;
+        private readonly List<RectRegion> rects = new List<RectRegion>();
+        private Camera camera;
 
         public ApiGame()
         {

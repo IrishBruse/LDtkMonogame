@@ -18,7 +18,7 @@ namespace LDtk.Examples.Platformer
         public ContentManager Content;
 
         private Vector2 center;
-        readonly LDtkRenderer renderer;
+        private readonly LDtkRenderer renderer;
 
         public LevelManager(LDtkWorld world, SpriteBatch spriteBatch)
         {

@@ -25,16 +25,13 @@ namespace Examples.Platformer
         private readonly List<Door> doors = new List<Door>();
         private readonly List<Crate> crates = new List<Crate>();
         private readonly List<Diamond> diamonds = new List<Diamond>();
-
-        int diamondsCollected;
-
-        Camera camera;
-
-        Texture2D doorTexture;
-        Texture2D boxTexture;
-        Texture2D diamondTexture;
-        Texture2D fontTexture;
-        Texture2D playerTexture;
+        private int diamondsCollected;
+        private Camera camera;
+        private Texture2D doorTexture;
+        private Texture2D boxTexture;
+        private Texture2D diamondTexture;
+        private Texture2D fontTexture;
+        private Texture2D playerTexture;
 
         public PlatformerGame() : base()
         {

@@ -10,7 +10,7 @@ using Vector2 = Microsoft.Xna.Framework.Vector2;
 
 namespace LDtk
 {
-    class ColorConverter : JsonConverter<Color>
+    internal class ColorConverter : JsonConverter<Color>
     {
         public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -34,7 +34,7 @@ namespace LDtk
         }
     }
 
-    class RectConverter : JsonConverter<Rect>
+    internal class RectConverter : JsonConverter<Rect>
     {
         public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -80,7 +80,7 @@ namespace LDtk
         }
     }
 
-    class Vector2Converter : JsonConverter<Vector2>
+    internal class Vector2Converter : JsonConverter<Vector2>
     {
         public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -119,7 +119,7 @@ namespace LDtk
         }
     }
 
-    class PointConverter : JsonConverter<Point>
+    internal class PointConverter : JsonConverter<Point>
     {
         public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -165,7 +165,7 @@ namespace LDtk
         }
     }
 
-    class CxCyConverter : JsonConverter<Point>
+    internal class CxCyConverter : JsonConverter<Point>
     {
         public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

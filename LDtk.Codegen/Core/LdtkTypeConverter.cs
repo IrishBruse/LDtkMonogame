@@ -31,7 +31,9 @@ public class LdtkTypeConverter
     {
         string baseType = fieldDefinition.Type;
         if (fieldDefinition.IsArray)
+        {
             baseType = baseType.Substring(6, baseType.Length - 1);
+        }
 
         string declType = GetCSharpTypeFor(baseType);
 
@@ -41,7 +43,9 @@ public class LdtkTypeConverter
         }
 
         if (fieldDefinition.IsArray)
+        {
             declType += "[]";
+        }
 
         return declType;
     }
@@ -56,7 +60,9 @@ public class LdtkTypeConverter
         };
 
         if (fieldDefinition.IsArray)
+        {
             field.RequiredImport = GetArrayImport();
+        }
 
         return field;
     }
