@@ -1,5 +1,5 @@
-#pragma warning disable CS1591
-namespace LDtk.Generator
+
+namespace LDtk.Codegen
 {
     public class CompilationUnitField : CompilationUnitFragment
     {
@@ -21,7 +21,7 @@ namespace LDtk.Generator
 
         public CompilationUnitField(string name, string type, string requiredImport = null, FieldVisibility visibility = FieldVisibility.Public)
         {
-            Name = name;
+            base.name = name;
             Type = type;
             Visibility = visibility;
             RequiredImport = requiredImport;
@@ -37,8 +37,7 @@ namespace LDtk.Generator
                 vStr = Visibility.GetValueOrDefault().ToString().ToLower();
             }
 
-            source.AddLine($"{vStr} {Type} {Name} {{ get; set; }}");
+            source.AddLine($"{vStr} {Type} {name} {{ get; set; }}");
         }
     }
 }
-#pragma warning restore CS1591

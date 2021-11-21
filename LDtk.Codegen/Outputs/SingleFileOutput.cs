@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
-#pragma warning disable CS1591
-namespace LDtk.Generator
+
+namespace LDtk.Codegen
 {
     public class SingleFileOutput : ICodeOutput
     {
@@ -14,7 +14,7 @@ namespace LDtk.Generator
 
             CompilationUnit cu = new CompilationUnit
             {
-                Name = Filename,
+                name = Filename,
                 Namespace = ctx.CodeSettings.Namespace,
                 Fragments = fragments
             };
@@ -29,4 +29,3 @@ namespace LDtk.Generator
     }
 
 }
-#pragma warning restore CS1591

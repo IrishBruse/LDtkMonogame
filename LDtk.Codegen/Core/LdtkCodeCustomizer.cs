@@ -1,5 +1,5 @@
-#pragma warning disable CS1591
-namespace LDtk.Generator
+
+namespace LDtk.Codegen
 {
     public class LdtkCodeCustomizer
     {
@@ -21,4 +21,3 @@ namespace LDtk.Generator
         }
     }
 }
-#pragma warning restore CS1591

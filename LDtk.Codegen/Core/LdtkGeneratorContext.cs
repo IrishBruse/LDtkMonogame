@@ -1,6 +1,6 @@
 using System;
-#pragma warning disable CS1591
-namespace LDtk.Generator
+
+namespace LDtk.Codegen
 {
     public class CodeSettings
     {
