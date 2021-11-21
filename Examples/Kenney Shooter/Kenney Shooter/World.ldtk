@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 113,
+	"nextUid": 115,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 32,
 	"worldGridHeight": 32,
@@ -703,8 +703,8 @@
 			]
 		},
 		{
-			"identifier": "Bee",
-			"uid": 101,
+			"identifier": "Gun_Pickup",
+			"uid": 107,
 			"tags": [],
 			"width": 16,
 			"height": 16,
@@ -714,59 +714,18 @@
 			"fillOpacity": 1,
 			"lineOpacity": 1,
 			"hollow": false,
-			"color": "#F3DB1F",
+			"color": "#4BE060",
 			"renderMode": "Tile",
-			"showName": false,
+			"showName": true,
 			"tilesetId": 2,
-			"tileId": 8,
+			"tileId": 7,
 			"tileRenderMode": "FitInside",
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
 			"pivotY": 1,
-			"fieldDefs": [
-				{
-					"identifier": "Flip",
-					"__type": "Bool",
-					"uid": 111,
-					"type": "F_Bool",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
-				{
-					"identifier": "Wander",
-					"__type": "Array<Point>",
-					"uid": 102,
-					"type": "F_Point",
-					"isArray": true,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "PointPathLoop",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				}
-			]
+			"fieldDefs": []
 		},
 		{
 			"identifier": "Blue_Bee",
@@ -835,8 +794,8 @@
 			]
 		},
 		{
-			"identifier": "Gun_Pickup",
-			"uid": 107,
+			"identifier": "Bee",
+			"uid": 101,
 			"tags": [],
 			"width": 16,
 			"height": 16,
@@ -846,18 +805,59 @@
 			"fillOpacity": 1,
 			"lineOpacity": 1,
 			"hollow": false,
-			"color": "#94D9B3",
+			"color": "#F3DB1F",
 			"renderMode": "Tile",
-			"showName": true,
+			"showName": false,
 			"tilesetId": 2,
-			"tileId": 7,
+			"tileId": 8,
 			"tileRenderMode": "FitInside",
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
-			"pivotY": 0.5,
-			"fieldDefs": []
+			"pivotY": 1,
+			"fieldDefs": [
+				{
+					"identifier": "Flip",
+					"__type": "Bool",
+					"uid": 111,
+					"type": "F_Bool",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "Wander",
+					"__type": "Array<Point>",
+					"uid": 102,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPathLoop",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1279,17 +1279,6 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "Gun_Pickup",
-							"__grid": [10,10],
-							"__pivot": [0.5,0.5],
-							"__tile": { "tilesetUid": 2, "srcRect": [0,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 107,
-							"px": [173,161],
-							"fieldInstances": []
-						},
-						{
 							"__identifier": "Slug",
 							"__grid": [16,11],
 							"__pivot": [0.5,1],
@@ -1375,28 +1364,31 @@
 						},
 						{
 							"__identifier": "Blue_Bee",
-							"__grid": [13,9],
+							"__grid": [17,7],
 							"__pivot": [0.5,1],
 							"__tile": { "tilesetUid": 2, "srcRect": [48,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 105,
-							"px": [222,160],
+							"px": [286,128],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [ { "cx": 23, "cy": 9 }, { "cx": 23, "cy": 10 }, { "cx": 13, "cy": 10 } ],
+									"__value": [ { "cx": 23, "cy": 7 }, { "cx": 23, "cy": 10 }, { "cx": 13, "cy": 10 }, { "cx": 13, "cy": 7 } ],
 									"__type": "Array<Point>",
 									"defUid": 106,
 									"realEditorValues": [ {
 										"id": "V_String",
-										"params": ["23,9"]
+										"params": ["23,7"]
 									}, {
 										"id": "V_String",
 										"params": ["23,10"]
 									}, {
 										"id": "V_String",
 										"params": ["13,10"]
+									}, {
+										"id": "V_String",
+										"params": ["13,7"]
 									} ]
 								},
 								{
@@ -1410,6 +1402,17 @@
 									}]
 								}
 							]
+						},
+						{
+							"__identifier": "Gun_Pickup",
+							"__grid": [10,11],
+							"__pivot": [0.5,1],
+							"__tile": { "tilesetUid": 2, "srcRect": [0,16,16,16] },
+							"width": 16,
+							"height": 16,
+							"defUid": 107,
+							"px": [171,178],
+							"fieldInstances": []
 						}
 					]
 				},

@@ -79,7 +79,7 @@ namespace Examples.Api
 
             for (int i = 0; i < blue_bees.Count; i++)
             {
-                blue_bees[i].Position = MoveTowards(blue_bees[i].Position, Vector2.Zero, deltaTime * 20);
+                blue_bees[i].Position = MoveTowards(blue_bees[i].Position, blue_bees[i].Wander[0].ToVector2(), deltaTime * 20);// 20 pixels per second
             }
 
             base.Update(gameTime);
@@ -97,25 +97,32 @@ namespace Examples.Api
                     renderer.RenderPrerenderedLevel(levels[i]);
                 }
 
+                int currentAnimationFrame = (int)(gameTime.TotalGameTime.TotalSeconds % .5f / .25f);
+
                 // Draw Entities
                 for (int i = 0; i < slugs.Count; i++)
                 {
-                    renderer.RenderEntity(slugs[i], spriteSheet, slugs[i].Flip ? 1 : 0);
+                    renderer.RenderEntity(slugs[i], spriteSheet, (SpriteEffects)(slugs[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
                 }
 
                 for (int i = 0; i < yellow_bees.Count; i++)
                 {
-                    renderer.RenderEntity(yellow_bees[i], spriteSheet, yellow_bees[i].Flip ? 1 : 0);
+                    renderer.RenderEntity(yellow_bees[i], spriteSheet, (SpriteEffects)(yellow_bees[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
                 }
 
                 for (int i = 0; i < blue_bees.Count; i++)
                 {
-                    renderer.RenderEntity(blue_bees[i], spriteSheet, (SpriteEffects)(blue_bees[i].Flip ? 1 : 0), (int)(gameTime.TotalGameTime.TotalSeconds % .5f / .25f));
+                    renderer.RenderEntity(blue_bees[i], spriteSheet, (SpriteEffects)(blue_bees[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
                 }
 
                 for (int i = 0; i < guns.Count; i++)
                 {
                     renderer.RenderEntity(guns[i], spriteSheet);
+                }
+
+                for (int i = 0; i < blue_bees[0].Wander.Length; i++)
+                {
+                    spriteBatch.Draw(pixel, blue_bees[0].Wander[i].ToVector2(), Color.Red);
                 }
             }
             spriteBatch.End();
@@ -123,10 +130,13 @@ namespace Examples.Api
             base.Draw(gameTime);
         }
 
-        public static Vector2 MoveTowards(Vector2 start, Vector2 end, float maxDistanceDelta)
+        /// <summary>
+        /// Magic lerp that doesnt use start position but instead uses current position and <paramref name="maxDistanceDelta"/>
+        /// </summary>
+        public static Vector2 MoveTowards(Vector2 current, Vector2 end, float maxDistanceDelta)
         {
-            float diffX = end.X - start.X;
-            float diffY = end.Y - start.Y;
+            float diffX = end.X - current.X;
+            float diffY = end.Y - current.Y;
 
             float sqDist = diffX * diffX + diffY * diffY;
 
@@ -135,7 +145,7 @@ namespace Examples.Api
 
             float dist = MathF.Sqrt(sqDist);
 
-            return new Vector2(start.X + diffX / dist * maxDistanceDelta, start.Y + diffY / dist * maxDistanceDelta);
+            return new Vector2(current.X + diffX / dist * maxDistanceDelta, current.Y + diffY / dist * maxDistanceDelta);
         }
     }
 }

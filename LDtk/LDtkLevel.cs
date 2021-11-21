@@ -11,22 +11,22 @@ namespace LDtk
         /// <summary>
         /// The parent world of this level
         /// </summary>
-        public LDtkWorld parent;
+        public LDtkWorld Parent { get; set; }
 
         /// <summary>
-        /// World coordinate in pixels
+        /// World Position of the level in pixels
         /// </summary>
         [JsonIgnore]
         public Point Position => new Point(WorldX, WorldY);
 
         /// <summary>
-        /// World coordinate in pixels
+        /// World size of the level in pixels
         /// </summary>
         [JsonIgnore]
         public Point Size => new Point(PxWid, PxHei);
 
         /// <summary>
-        /// Gets an intgrid in a <see cref="LDtkLevel"/>
+        /// Gets an intgrid with the <paramref name="identifier"/> in a <see cref="LDtkLevel"/>
         /// </summary>
         /// <param name="identifier"></param>
         /// <returns><see cref="LDtkIntGrid"/></returns>
@@ -47,7 +47,7 @@ namespace LDtk
                     continue;
                 }
 
-                var intgridValues = parent.GetIntgridValueDefinitions(layer._Identifier);
+                var intgridValues = Parent.GetIntgridValueDefinitions(layer._Identifier);
                 Dictionary<int, Color> colors = new Dictionary<int, Color>();
                 for (int j = 0; j < intgridValues.Length; j++)
                 {
@@ -86,7 +86,7 @@ namespace LDtk
         /// Gets the first entity it finds of type T in the current level
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="EntityNotFoundException"></exception>
         public T GetEntity<T>() where T : new()
         {
             var entities = ParseEntities<T>(typeof(T).Name);
@@ -102,20 +102,20 @@ namespace LDtk
         }
 
         /// <summary>
-        /// Gets a collection of entities of type T in the current level
+        /// Gets a collection of entities of type <typeparamref name="T"/> in the current level
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="EntityNotFoundException"></exception>
         public T[] GetEntities<T>() where T : new()
         {
             return ParseEntities<T>(typeof(T).Name);
         }
 
         /// <summary>
-        /// Gets a collection of entities of type T in the current level
+        /// Gets a collection of entities of type <typeparamref name="T"/> with <paramref name="identifier"/> in the current level
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="EntityNotFoundException"></exception>
         public T[] GetEntities<T>(string identifier) where T : new()
         {
             return ParseEntities<T>(identifier);
@@ -125,11 +125,13 @@ namespace LDtk
         /// Gets the custom fields of the level
         /// </summary>
         /// <typeparam name="T">The custom level type generated from compiling the level</typeparam>
+        /// <exception cref="FieldNotFoundException"></exception>
+        /// <returns>Custom Fields for this level</returns>
         public T GetCustomFields<T>() where T : new()
         {
             T levelFields = new T();
 
-            LDtkFieldParser.Parse(levelFields, this);
+            LDtkFieldParser.ParseCustomLevelFields(levelFields, FieldInstances);
 
             return levelFields;
         }
@@ -149,22 +151,8 @@ namespace LDtk
                             T entity = new T();
                             EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
 
-                            EntityDefinition entityDefinition = parent.GetEntityDefinitionFromUid(entityInstance.DefUid);
-
-                            LDtkFieldParser.ParseBaseField(entity, "Position", (entityInstance.Px + Position).ToVector2());
-                            LDtkFieldParser.ParseBaseField(entity, "Pivot", entityInstance._Pivot);
-                            LDtkFieldParser.ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
-#if DEBUG
-                            LDtkFieldParser.ParseBaseField(entity, "EditorVisualColor", entityDefinition.Color);
-#endif
-                            if (entityInstance._Tile != null)
-                            {
-                                EntityInstanceTile tileDefinition = entityInstance._Tile;
-                                Rectangle rect = tileDefinition.SrcRect;
-                                LDtkFieldParser.ParseBaseField(entity, "Tile", rect);
-                            }
-
-                            LDtkFieldParser.Parse(entity, this);
+                            LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);
+                            LDtkFieldParser.ParseCustomEntityFields(entity, entityInstance.FieldInstances, this);
 
                             parsedEntities.Add(entity);
                         }
@@ -172,7 +160,6 @@ namespace LDtk
 
                     return parsedEntities.ToArray();
                 }
-
             }
 
             return parsedEntities.ToArray();

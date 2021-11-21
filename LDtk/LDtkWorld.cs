@@ -86,7 +86,7 @@ namespace LDtk
 
             if (level != null)
             {
-                level.parent = this;
+                level.Parent = this;
                 return level;
             }
 
@@ -124,7 +124,7 @@ namespace LDtk
 
             if (level != null)
             {
-                level.parent = this;
+                level.Parent = this;
                 return level;
             }
 
@@ -164,7 +164,7 @@ namespace LDtk
 
             if (level != null)
             {
-                level.parent = this;
+                level.Parent = this;
                 return level;
             }
 
@@ -221,7 +221,7 @@ namespace LDtk
 
             if (level != null)
             {
-                level.parent = this;
+                level.Parent = this;
                 return level;
             }
 
@@ -233,7 +233,7 @@ namespace LDtk
         /// </summary>
         /// <param name="identifier">leyer identifier</param>
         /// <returns></returns>
-        /// <exception cref="FieldInstanceException"></exception>
+        /// <exception cref="FieldNotFoundException"></exception>
         public IntGridValueDefinition[] GetIntgridValueDefinitions(string identifier)
         {
             for (int i = 0; i < Defs.Layers.Length; i++)
@@ -249,7 +249,7 @@ namespace LDtk
                 }
             }
 
-            throw new FieldInstanceException();
+            throw new FieldNotFoundException();
         }
     }
 }

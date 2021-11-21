@@ -5,7 +5,6 @@ using Color = Microsoft.Xna.Framework.Color;
 #pragma warning disable 1591, 1570, IDE1006
 namespace LDtk
 {
-
     /// <summary>
     /// This section contains all the level data. It can be found in 2 distinct forms, depending
     /// on Project current settings:  - If "*Separate level files*" is **disabled** (default):

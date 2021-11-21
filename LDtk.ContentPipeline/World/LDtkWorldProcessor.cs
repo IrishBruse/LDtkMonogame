@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.IO;
-using LDtk.Generator;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 namespace LDtk.ContentPipeline

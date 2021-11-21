@@ -161,7 +161,7 @@ namespace LDtk.Renderer
         {
             if (Content == null)
             {
-                return Texture2D.FromFile(GraphicsDevice, Path.Combine(level.parent.RootFolder, path));
+                return Texture2D.FromFile(GraphicsDevice, Path.Combine(level.Parent.RootFolder, path));
             }
             else
             {
