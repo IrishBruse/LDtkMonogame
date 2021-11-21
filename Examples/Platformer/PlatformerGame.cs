@@ -63,7 +63,7 @@ namespace Examples.Platformer
 
             levelManager.ChangeLevelTo("Level1");
 
-            var spawnPoint = levelManager.CurrentLevel.GetEntity<PlayerSpawn>();
+            PlayerSpawn spawnPoint = levelManager.CurrentLevel.GetEntity<PlayerSpawn>();
 
             player = new Player(spawnPoint);
 

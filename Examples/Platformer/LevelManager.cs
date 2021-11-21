@@ -77,7 +77,7 @@ namespace LDtk.Examples.Platformer
 
             for (int ii = 0; ii < CurrentLevel._Neighbours.Length; ii++)
             {
-                var neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid, Content);
+                LDtkLevel neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid, Content);
                 renderer.PrerenderLevel(neighbourLevel);
             }
 

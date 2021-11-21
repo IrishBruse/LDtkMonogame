@@ -20,7 +20,7 @@ namespace LDtk
                 byte r = Convert.ToByte(str[1..3], 16);
                 byte g = Convert.ToByte(str[3..5], 16);
                 byte b = Convert.ToByte(str[5..7], 16);
-                var color = new Color(r, g, b, (byte)255);
+                Color color = new Color(r, g, b, (byte)255);
                 return color;
             }
 
@@ -48,7 +48,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            var value = new List<int>();
+            List<int> value = new List<int>();
 
             while (reader.Read())
             {
@@ -89,7 +89,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            var value = new List<float>();
+            List<float> value = new List<float>();
 
             while (reader.Read())
             {
@@ -128,7 +128,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            var value = new List<int>();
+            List<int> value = new List<int>();
 
             while (reader.Read())
             {

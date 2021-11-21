@@ -47,7 +47,7 @@ namespace LDtk
                     continue;
                 }
 
-                var intgridValues = Parent.GetIntgridValueDefinitions(layer._Identifier);
+                IntGridValueDefinition[] intgridValues = Parent.GetIntgridValueDefinitions(layer._Identifier);
                 Dictionary<int, Color> colors = new Dictionary<int, Color>();
                 for (int j = 0; j < intgridValues.Length; j++)
                 {
@@ -89,7 +89,7 @@ namespace LDtk
         /// <exception cref="EntityNotFoundException"></exception>
         public T GetEntity<T>() where T : new()
         {
-            var entities = ParseEntities<T>(typeof(T).Name);
+            T[] entities = ParseEntities<T>(typeof(T).Name);
 
             if (entities.Length == 1)
             {

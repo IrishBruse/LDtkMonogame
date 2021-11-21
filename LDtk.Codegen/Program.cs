@@ -25,7 +25,7 @@ namespace LDtk.Codegen
 
         private static void Run(Options options)
         {
-            var typeConverter = new LdtkTypeConverter
+            LdtkTypeConverter typeConverter = new LdtkTypeConverter
             {
                 PointAsVector2 = options.PointAsVector2
             };
@@ -41,7 +41,7 @@ namespace LDtk.Codegen
 
             if (options.SingleFile)
             {
-                var singleFileOutput = new SingleFileOutput
+                SingleFileOutput singleFileOutput = new SingleFileOutput
                 {
                     OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output)),
                     Filename = Path.GetFileNameWithoutExtension(options.Input)
@@ -50,7 +50,7 @@ namespace LDtk.Codegen
             }
             else
             {
-                var multiFileOutput = new MultiFileOutput
+                MultiFileOutput multiFileOutput = new MultiFileOutput
                 {
                     PrintFragments = true,
                     OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output))

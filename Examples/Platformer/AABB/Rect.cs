@@ -29,7 +29,7 @@ namespace Examples.Platformer
 
         public bool Contains(Rect rect)
         {
-            var inside = Contains(rect.TopLeft)
+            bool inside = Contains(rect.TopLeft)
                       || Contains(rect.BottomRight)
                       || Contains(new Vector2(rect.TopLeft.X, rect.BottomRight.Y))
                       || Contains(new Vector2(rect.BottomRight.X, rect.TopLeft.Y));

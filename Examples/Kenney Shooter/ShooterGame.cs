@@ -63,7 +63,7 @@ namespace Examples.Api
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
-            var center = levels[0].Position.ToVector2() + (levels[0].Size.ToVector2() / 2f);
+            Vector2 center = levels[0].Position.ToVector2() + (levels[0].Size.ToVector2() / 2f);
             camera.Position = Mouse.GetState().Position.ToVector2() + center;
             camera.Zoom = 4;
 

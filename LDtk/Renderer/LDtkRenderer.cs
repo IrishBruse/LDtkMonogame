@@ -103,7 +103,7 @@ namespace LDtk.Renderer
 
                 int width = layer._CWid * layer._GridSize;
                 int height = layer._CHei * layer._GridSize;
-                var renderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
                 GraphicsDevice.SetRenderTarget(renderTarget);
                 layers.Add(renderTarget);
@@ -144,7 +144,7 @@ namespace LDtk.Renderer
         {
             Texture2D texture = GetTexture(level, level.BgRelPath);
 
-            var layer = new RenderTarget2D(GraphicsDevice, level.PxWid, level.PxHei, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            RenderTarget2D layer = new RenderTarget2D(GraphicsDevice, level.PxWid, level.PxHei, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             GraphicsDevice.SetRenderTarget(layer);
             {
@@ -195,7 +195,7 @@ namespace LDtk.Renderer
         /// <param name="level"></param>
         public void RenderLevel(LDtkLevel level)
         {
-            var layers = RenderLayers(level);
+            Texture2D[] layers = RenderLayers(level);
 
             for (int i = 0; i < layers.Length; i++)
             {
@@ -260,7 +260,7 @@ namespace LDtk.Renderer
         /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
         public void RenderEntity<T>(T entity, Texture2D texture, int animationFrame) where T : ILDtkEntity
         {
-            var animatedTile = entity.Tile;
+            Rectangle animatedTile = entity.Tile;
             animatedTile.Offset(animatedTile.Width * animationFrame, 0);
             spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
         }
@@ -275,7 +275,7 @@ namespace LDtk.Renderer
         /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
         public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection, int animationFrame) where T : ILDtkEntity
         {
-            var animatedTile = entity.Tile;
+            Rectangle animatedTile = entity.Tile;
             animatedTile.Offset(animatedTile.Width * animationFrame, 0);
             spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
         }

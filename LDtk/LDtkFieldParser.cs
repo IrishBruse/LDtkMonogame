@@ -45,7 +45,7 @@ static class LDtkFieldParser
             FieldInstance fieldInstance = fields[i];
             string variableName = fieldInstance._Identifier;
 
-            var variableDef = typeof(T).GetProperty(variableName);
+            PropertyInfo variableDef = typeof(T).GetProperty(variableName);
 
             if (variableDef == null)
             {
@@ -193,7 +193,7 @@ static class LDtkFieldParser
 
     static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
-        var variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         if (variableDef == null)
         {

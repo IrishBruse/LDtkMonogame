@@ -5,8 +5,8 @@ namespace LDtk.Exceptions
     /// <summary>
     /// IntGrid NotFound Exception
     /// </summary>
-    [System.Serializable]
-    public class IntGridNotFoundException : System.Exception
+    [Serializable]
+    public class IntGridNotFoundException : Exception
     {
         /// <summary>
         /// IntGrid NotFound Exception
