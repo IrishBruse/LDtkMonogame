@@ -9,13 +9,13 @@ namespace Examples.Platformer
 
         private float animationTimer;
         private int animationFrame;
-        private readonly Player parent;
+        private readonly PlayerController parent;
         private Animation state; private Vector2 velocity;
         private bool grounded;
         private Animation delayedState = Animation.None;
         private int delayedFrames = -1;
 
-        public Animator(Player parent)
+        public Animator(PlayerController parent)
         {
             this.parent = parent;
         }

@@ -20,7 +20,9 @@ namespace LDtk
                 byte r = Convert.ToByte(str[1..3], 16);
                 byte g = Convert.ToByte(str[3..5], 16);
                 byte b = Convert.ToByte(str[5..7], 16);
-                Color color = new(r, g, b, 255);
+#pragma warning disable IDE0090
+                Color color = new Color(r, g, b, (byte)255);
+#pragma warning restore IDE0090
                 return color;
             }
 

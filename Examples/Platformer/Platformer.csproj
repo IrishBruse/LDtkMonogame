@@ -26,6 +26,10 @@
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     </ItemGroup>
 
+    <Target Name="Codegen" BeforeTargets="BeforeBuild">
+        <Exec Command="..\..\LDtk.Codegen\bin\Debug\netcoreapp3.1\LDtk.Codegen.exe -i Content/LDtkMonogameExample.ldtk" />
+    </Target>
+
     <ItemGroup>
         <ProjectReference Include="..\..\LDtk\LDtk.csproj" />
     </ItemGroup>

@@ -31,9 +31,23 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Examples/Kenney Shooter/bin/Debug/netcoreapp3.1/Shooter.dll",
+            "program": "${workspaceFolder}/Examples/Shooter/bin/Debug/netcoreapp3.1/Shooter.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Examples/Kenney Shooter/",
+            "cwd": "${workspaceFolder}/Examples/Shooter/",
+            "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug Codegen",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/LDtk.Codegen/bin/Debug/netcoreapp3.1/LDtk.Codegen.dll",
+            "args": [
+                "-i",
+                "../Examples/Api/Content/Test_file_for_API_showing_all_features.ldtk"
+            ],
+            "cwd": "${workspaceFolder}/LDtk.Codegen/",
             "console": "externalTerminal",
             "stopAtEntry": false
         }

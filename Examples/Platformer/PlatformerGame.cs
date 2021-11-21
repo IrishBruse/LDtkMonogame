@@ -18,7 +18,7 @@ namespace Examples.Platformer
         private KeyboardState oldKeyboard;
         private MouseState oldMouse;
 
-        private Player player;
+        private PlayerController player;
         private bool showTileColliders;
         private bool showEntityColliders;
 
@@ -62,7 +62,7 @@ namespace Examples.Platformer
 
             PlayerSpawn spawnPoint = levelManager.CurrentLevel.GetEntity<PlayerSpawn>();
 
-            player = new Player(spawnPoint);
+            player = new PlayerController(spawnPoint);
 
             player.animator.OnEnteredDoor += () =>
             {

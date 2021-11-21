@@ -32,7 +32,8 @@ public class LdtkTypeConverter
         string baseType = fieldDefinition.Type;
         if (fieldDefinition.IsArray)
         {
-            baseType = baseType.Substring(6, baseType.Length - 1);
+            int size = baseType.Length - 1 - 6;
+            baseType = baseType.Substring(6, size);
         }
 
         string declType = GetCSharpTypeFor(baseType);

@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{83
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "Examples\Platformer\Platformer.csproj", "{651026C7-3DA7-425E-A325-90C510667409}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shooter", "Examples\Kenney Shooter\Shooter.csproj", "{5BF2DD2D-6168-4863-BAC0-1B9426C84C91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shooter", "Examples\Shooter\Shooter.csproj", "{5BF2DD2D-6168-4863-BAC0-1B9426C84C91}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Codegen", "LDtk.Codegen\LDtk.Codegen.csproj", "{4DFB625B-176C-49E3-9675-31CB16DE3477}"
 EndProject

@@ -32,12 +32,12 @@ namespace Examples.Api
         protected override void Initialize()
         {
             base.Initialize();
-            Window.Title = "LDtkMonogame - Kenney Shooter";
+            Window.Title = "LDtkMonogame - Shooter";
 
             camera = new Camera(GraphicsDevice);
             renderer = new LDtkRenderer(spriteBatch);
 
-            world = LDtkWorld.LoadWorld("Kenney Shooter\\World.ldtk");
+            world = LDtkWorld.LoadWorld("Data\\World.ldtk");
             levels = new LDtkLevel[world.Levels.Length];
             for (int i = 0; i < world.Levels.Length; i++)
             {

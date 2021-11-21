@@ -51,7 +51,7 @@ namespace Examples.Api
 
         private void PrintEntities(LDtkLevel level)
         {
-            MyLevelClass levelFields = level.GetCustomFields<MyLevelClass>();
+            LDtkLevelData levelFields = level.GetCustomFields<LDtkLevelData>();
             Console.WriteLine(level.Identifier + " desc :\n" + levelFields.desc);
 
             EntityFieldsTest[] entityFieldsTests = level.GetEntities<EntityFieldsTest>();
