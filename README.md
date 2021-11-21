@@ -17,11 +17,14 @@
 ## Build instructions
 
 This is build instructions for the LDtk library not for your game.
+
 Game instructions are on the wiki link above.
 
-`LDtk.Codegen` & `LDtk.ContentPipeline` need to be built before the examples  
+`LDtk.Codegen` & `LDtk.ContentPipeline` need to be built before the examples
 as the examples depend on them.
 
-You can just run `build.bat` 
-it will build everything in the correct order and from then on unless  
-you make changes to `Codegen` or `ContentPipeline` building like normal should work
+You can just run `build.bat`
+it will build everything in the correct order and from then on unless
+you make changes to `LDtk.Codegen` or `LDtk.ContentPipeline` building like normal should work
+
+Ignore any error produced from the build.bat
