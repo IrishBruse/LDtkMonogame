@@ -1,11 +1,11 @@
 // This file was automatically generated, any modifications will be lost!
+using LDtk;
+using Microsoft.Xna.Framework;
+
 #pragma warning disable IDE1006
 
 namespace LDtkTypes
 {
-    using LDtk;
-    using Microsoft.Xna.Framework;
-    
     public class Diamond : ILDtkEntity
     {
         public float Timer { get; set; }

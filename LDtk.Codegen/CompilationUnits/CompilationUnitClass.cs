@@ -1,7 +1,7 @@
-namespace LDtk.Codegen;
 
 using System.Collections.Generic;
 
+namespace LDtk.Codegen;
 public class CompilationUnitClass : CompilationUnitFragment
 {
     public string BaseClass { get; set; } = null;

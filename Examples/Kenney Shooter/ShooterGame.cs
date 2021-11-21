@@ -136,7 +136,7 @@ namespace Examples.Api
             float diffX = end.X - current.X;
             float diffY = end.Y - current.Y;
 
-            float sqDist = diffX * diffX + diffY * diffY;
+            float sqDist = (diffX * diffX) + (diffY * diffY);
 
             if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
             {
@@ -145,7 +145,7 @@ namespace Examples.Api
 
             float dist = MathF.Sqrt(sqDist);
 
-            return new Vector2(current.X + diffX / dist * maxDistanceDelta, current.Y + diffY / dist * maxDistanceDelta);
+            return new Vector2(current.X + (diffX / dist * maxDistanceDelta), current.Y + (diffY / dist * maxDistanceDelta));
         }
     }
 }
