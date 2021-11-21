@@ -14,7 +14,7 @@ namespace LDtk
         /// Size of the world grid in pixels.
         /// </summary>
         [JsonIgnore]
-        public Point WorldGridSize => new Point(WorldGridWidth, WorldGridHeight);
+        public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
 
         /// <summary>
         /// The absolute folder that the world is located in.

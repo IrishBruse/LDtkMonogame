@@ -52,7 +52,7 @@ public class LdtkTypeConverter
 
     public CompilationUnitField ToCompilationUnitField(FieldDefinition fieldDefinition, LdtkGeneratorContext ctx)
     {
-        CompilationUnitField field = new CompilationUnitField
+        CompilationUnitField field = new()
         {
             name = fieldDefinition.Identifier,
             Type = GetDeclaringTypeFor(fieldDefinition, ctx),

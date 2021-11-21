@@ -12,14 +12,14 @@ namespace LDtk.Codegen
         {
             Directory.CreateDirectory(OutputDir);
 
-            CompilationUnit cu = new CompilationUnit
+            CompilationUnit cu = new()
             {
                 name = Filename,
                 Namespace = ctx.CodeSettings.Namespace,
                 Fragments = fragments
             };
 
-            CompilationUnitSource source = new CompilationUnitSource(ctx.CodeSettings);
+            CompilationUnitSource source = new(ctx.CodeSettings);
             cu.Render(source);
 
             string filePath = OutputDir + "/" + Filename;

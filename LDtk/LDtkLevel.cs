@@ -17,13 +17,13 @@ namespace LDtk
         /// World Position of the level in pixels
         /// </summary>
         [JsonIgnore]
-        public Point Position => new Point(WorldX, WorldY);
+        public Point Position => new(WorldX, WorldY);
 
         /// <summary>
         /// World size of the level in pixels
         /// </summary>
         [JsonIgnore]
-        public Point Size => new Point(PxWid, PxHei);
+        public Point Size => new(PxWid, PxHei);
 
         /// <summary>
         /// Gets an intgrid with the <paramref name="identifier"/> in a <see cref="LDtkLevel"/>
@@ -48,13 +48,13 @@ namespace LDtk
                 }
 
                 IntGridValueDefinition[] intgridValues = Parent.GetIntgridValueDefinitions(layer._Identifier);
-                Dictionary<int, Color> colors = new Dictionary<int, Color>();
+                Dictionary<int, Color> colors = new();
                 for (int j = 0; j < intgridValues.Length; j++)
                 {
                     colors.Add(intgridValues[j].Value, intgridValues[j].Color);
                 }
 
-                LDtkIntGrid intGrid = new LDtkIntGrid()
+                LDtkIntGrid intGrid = new()
                 {
                     Values = new int[layer._CWid, layer._CHei],
                     WorldPosition = Position,
@@ -129,7 +129,7 @@ namespace LDtk
         /// <returns>Custom Fields for this level</returns>
         public T GetCustomFields<T>() where T : new()
         {
-            T levelFields = new T();
+            T levelFields = new();
 
             LDtkFieldParser.ParseCustomLevelFields(levelFields, FieldInstances);
 
@@ -138,7 +138,7 @@ namespace LDtk
 
         private T[] ParseEntities<T>(string identifier) where T : new()
         {
-            List<T> parsedEntities = new List<T>();
+            List<T> parsedEntities = new();
 
             for (int i = 0; i < LayerInstances.Length; i++)
             {
@@ -148,7 +148,7 @@ namespace LDtk
                     {
                         if (LayerInstances[i].EntityInstances[entityIndex]._Identifier == identifier)
                         {
-                            T entity = new T();
+                            T entity = new();
                             EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
 
                             LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);

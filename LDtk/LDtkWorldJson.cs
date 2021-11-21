@@ -73,7 +73,7 @@ namespace LDtk
         public WorldLayout WorldLayout { get; set; }
 
 
-        public static readonly JsonSerializerOptions SerializeOptions = new JsonSerializerOptions
+        public static readonly JsonSerializerOptions SerializeOptions = new()
         {
             Converters ={
                 new JsonStringEnumConverter(),

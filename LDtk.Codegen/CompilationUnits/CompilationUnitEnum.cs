@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CompilationUnitEnum : CompilationUnitFragment
 {
-    public List<string> Literals = new List<string>();
+    public List<string> Literals = new();
 
     public override void Render(CompilationUnitSource source)
     {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CompilationUnitClass : CompilationUnitFragment
 {
     public string BaseClass { get; set; } = null;
-    public List<CompilationUnitField> Fields = new List<CompilationUnitField>();
+    public List<CompilationUnitField> Fields = new();
 
     public override void Render(CompilationUnitSource source)
     {

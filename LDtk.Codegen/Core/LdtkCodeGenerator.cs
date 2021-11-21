@@ -6,7 +6,7 @@ public class LdtkCodeGenerator
 {
     public virtual void GenerateCode(LDtkWorld ldtkJson, LdtkGeneratorContext ctx, ICodeOutput output)
     {
-        List<CompilationUnitFragment> fragments = new List<CompilationUnitFragment>();
+        List<CompilationUnitFragment> fragments = new();
 
         foreach (EnumDefinition ed in ldtkJson.Defs.Enums)
         {
@@ -37,7 +37,7 @@ public class LdtkCodeGenerator
 
     public virtual CompilationUnitEnum GenerateEnum(EnumDefinition enumDefinition, LdtkGeneratorContext ctx)
     {
-        CompilationUnitEnum enumFragment = new CompilationUnitEnum
+        CompilationUnitEnum enumFragment = new()
         {
             name = enumDefinition.Identifier
         };
@@ -52,7 +52,7 @@ public class LdtkCodeGenerator
 
     public virtual CompilationUnitClass GenerateEntity(EntityDefinition ed, LdtkGeneratorContext ctx)
     {
-        CompilationUnitClass classFragment = new CompilationUnitClass
+        CompilationUnitClass classFragment = new()
         {
             name = ed.Identifier
         };
@@ -67,7 +67,7 @@ public class LdtkCodeGenerator
 
     public virtual CompilationUnitClass GenerateLevel(LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
     {
-        CompilationUnitClass levelClass = new CompilationUnitClass
+        CompilationUnitClass levelClass = new()
         {
             name = ctx.LevelClassName
         };

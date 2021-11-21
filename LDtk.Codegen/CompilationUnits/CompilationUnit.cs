@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CompilationUnit : CompilationUnitFragment
 {
     public string Namespace;
-    public List<CompilationUnitFragment> Fragments = new List<CompilationUnitFragment>();
+    public List<CompilationUnitFragment> Fragments = new();
 
     public override void Render(CompilationUnitSource source)
     {

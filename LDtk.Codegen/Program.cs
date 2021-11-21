@@ -25,12 +25,12 @@ namespace LDtk.Codegen
 
         private static void Run(Options options)
         {
-            LdtkTypeConverter typeConverter = new LdtkTypeConverter
+            LdtkTypeConverter typeConverter = new()
             {
                 PointAsVector2 = options.PointAsVector2
             };
 
-            LdtkGeneratorContext ctx = new LdtkGeneratorContext
+            LdtkGeneratorContext ctx = new()
             {
                 LevelClassName = options.LevelClassName,
                 TypeConverter = typeConverter
@@ -41,7 +41,7 @@ namespace LDtk.Codegen
 
             if (options.SingleFile)
             {
-                SingleFileOutput singleFileOutput = new SingleFileOutput
+                SingleFileOutput singleFileOutput = new()
                 {
                     OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output)),
                     Filename = Path.GetFileNameWithoutExtension(options.Input)
@@ -50,7 +50,7 @@ namespace LDtk.Codegen
             }
             else
             {
-                MultiFileOutput multiFileOutput = new MultiFileOutput
+                MultiFileOutput multiFileOutput = new()
                 {
                     PrintFragments = true,
                     OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output))
@@ -60,7 +60,7 @@ namespace LDtk.Codegen
 
             LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(options.Input), LDtkWorld.SerializeOptions);
 
-            LdtkCodeGenerator cg = new LdtkCodeGenerator();
+            LdtkCodeGenerator cg = new();
             cg.GenerateCode(ldtkWorld, ctx, output);
         }
     }

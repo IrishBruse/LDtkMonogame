@@ -15,7 +15,7 @@ public class MultiFileOutput : ICodeOutput
 
         foreach (CompilationUnitFragment fragment in fragments)
         {
-            CompilationUnit cuFile = new CompilationUnit
+            CompilationUnit cuFile = new()
             {
                 Namespace = ctx.CodeSettings.Namespace,
                 name = fragment.name
@@ -23,10 +23,10 @@ public class MultiFileOutput : ICodeOutput
 
             cuFile.Fragments.Add(fragment);
 
-            CompilationUnitSource source = new CompilationUnitSource(ctx.CodeSettings);
+            CompilationUnitSource source = new(ctx.CodeSettings);
             cuFile.Render(source);
 
-            if (PrintFragments == true)
+            if (PrintFragments)
             {
                 Console.WriteLine("Generating -> " + fragment.name + ".cs");
             }

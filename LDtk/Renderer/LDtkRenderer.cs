@@ -17,7 +17,7 @@ namespace LDtk.Renderer
     public class LDtkRenderer
     {
         private static Texture2D pixel;
-        private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
+        private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new();
         private readonly SpriteBatch spriteBatch;
         private readonly GraphicsDevice GraphicsDevice;
         private readonly ContentManager Content;
@@ -62,7 +62,7 @@ namespace LDtk.Renderer
                 return;
             }
 
-            RenderedLevel renderLevel = new RenderedLevel();
+            RenderedLevel renderLevel = new();
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             {
@@ -76,7 +76,7 @@ namespace LDtk.Renderer
 
         private Texture2D[] RenderLayers(LDtkLevel level)
         {
-            List<Texture2D> layers = new List<Texture2D>();
+            List<Texture2D> layers = new();
 
             if (level.BgRelPath != null)
             {
@@ -102,7 +102,7 @@ namespace LDtk.Renderer
 
                 int width = layer._CWid * layer._GridSize;
                 int height = layer._CHei * layer._GridSize;
-                RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                RenderTarget2D renderTarget = new(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
                 GraphicsDevice.SetRenderTarget(renderTarget);
                 layers.Add(renderTarget);
@@ -113,8 +113,8 @@ namespace LDtk.Renderer
                     case LayerType.Tiles:
                         foreach (TileInstance tile in layer.GridTiles.Where(tile => layer._TilesetDefUid.HasValue))
                         {
-                            Vector2 position = new Vector2(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
-                            Rectangle rect = new Rectangle(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
+                            Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
+                            Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                             SpriteEffects mirror = (SpriteEffects)tile.F;
                             spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                         }
@@ -126,8 +126,8 @@ namespace LDtk.Renderer
                         {
                             foreach (TileInstance tile in layer.AutoLayerTiles.Where(tile => layer._TilesetDefUid.HasValue))
                             {
-                                Vector2 position = new Vector2(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
-                                Rectangle rect = new Rectangle(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
+                                Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
+                                Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                                 SpriteEffects mirror = (SpriteEffects)tile.F;
                                 spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                             }
@@ -147,7 +147,7 @@ namespace LDtk.Renderer
         {
             Texture2D texture = GetTexture(level, level.BgRelPath);
 
-            RenderTarget2D layer = new RenderTarget2D(GraphicsDevice, level.PxWid, level.PxHei, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            RenderTarget2D layer = new(GraphicsDevice, level.PxWid, level.PxHei, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             GraphicsDevice.SetRenderTarget(layer);
             {
