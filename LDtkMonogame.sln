@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "Examples\Plat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shooter", "Examples\Kenney Shooter\Shooter.csproj", "{5BF2DD2D-6168-4863-BAC0-1B9426C84C91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Codegen", "LDtk.Codegen\LDtk.Codegen.csproj", "{4DFB625B-176C-49E3-9675-31CB16DE3477}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.ContentPipeline", "LDtk.ContentPipeline\LDtk.ContentPipeline.csproj", "{973040D3-BFB7-4E34-AA08-4AD79741B97E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +114,30 @@ Global
 		{70ED873E-B832-44F8-A9D9-B320A2EAC811}.Release|x64.Build.0 = Release|Any CPU
 		{70ED873E-B832-44F8-A9D9-B320A2EAC811}.Release|x86.ActiveCfg = Release|Any CPU
 		{70ED873E-B832-44F8-A9D9-B320A2EAC811}.Release|x86.Build.0 = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|x64.Build.0 = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Debug|x86.Build.0 = Debug|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|x64.ActiveCfg = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|x64.Build.0 = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|x86.ActiveCfg = Release|Any CPU
+		{4DFB625B-176C-49E3-9675-31CB16DE3477}.Release|x86.Build.0 = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|x64.Build.0 = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Debug|x86.Build.0 = Debug|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|x64.ActiveCfg = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|x64.Build.0 = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|x86.ActiveCfg = Release|Any CPU
+		{973040D3-BFB7-4E34-AA08-4AD79741B97E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5BF2DD2D-6168-4863-BAC0-1B9426C84C91} = {834A1B90-2866-11EC-A133-A543CC166FDE}
