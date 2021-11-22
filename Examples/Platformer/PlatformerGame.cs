@@ -144,7 +144,7 @@ namespace Examples.Platformer
                 {
                     int currentFrame = (int)(totalTime * 10 % 10) * (int)diamonds[i].Size.X;
                     diamonds[i].Tile = new Rectangle(currentFrame, 0, (int)diamonds[i].Size.X, (int)diamonds[i].Size.Y);
-                    diamonds[i].Position += new Vector2(0, -MathF.Sin((float)totalTime * 2) * 0.1f);
+                    diamonds[i].Position += new Vector2(0, -MathF.Sin(totalTime * 2) * 0.1f);
                 }
             }
         }
@@ -347,8 +347,8 @@ namespace Examples.Platformer
                 spriteBatch.DrawPoint(player.collider.BottomRight, Color.Black);
 
 
-                spriteBatch.DrawPoint(player.Position, Color.Black);
                 spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
+                spriteBatch.DrawPoint(player.Position, Color.Black);
                 spriteBatch.DrawPoint(player.attack.Position, Color.Black);
             }
         }

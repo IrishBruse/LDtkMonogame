@@ -20,7 +20,7 @@ namespace LDtk
         /// The absolute folder that the world is located in.
         /// Used to absolute relative addresses of textures
         /// </summary>
-        public string RootFolder;
+        public string RootFolder { get; set; }
 
         /// <summary>
         /// Loads the ldtk world file from disk directly
@@ -130,8 +130,6 @@ namespace LDtk
 
             throw new LevelNotFoundException($"Could not find {uid} Level in {this}.");
         }
-
-
 
         /// <summary>
         /// Loads the ldtkl world file from disk directly or from the embeded one depending on if externalLevels is set

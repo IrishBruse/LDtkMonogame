@@ -16,16 +16,24 @@ namespace LDtk.Codegen
 
         public CompilationUnitField()
         {
-
         }
 
-        public CompilationUnitField(string name, string type, string requiredImport = null, FieldVisibility visibility = FieldVisibility.Public)
+        public CompilationUnitField(string name, string type, string requiredImport, FieldVisibility visibility)
         {
             base.name = name;
             Type = type;
             Visibility = visibility;
             RequiredImport = requiredImport;
         }
+
+        public CompilationUnitField(string name, string type)
+        {
+            base.name = name;
+            Type = type;
+            Visibility = FieldVisibility.Public;
+            RequiredImport = null;
+        }
+
         public override void Render(CompilationUnitSource source)
         {
             if (RequiredImport != null)
