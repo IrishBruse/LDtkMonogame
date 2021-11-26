@@ -138,8 +138,8 @@ internal static class LDtkFieldParser
 
                     for (int j = 0; j < points.Count; j++)
                     {
-                        points[j] += level.Position;
                         points[j] = new Point(points[j].X * gridSize, points[j].Y * gridSize);
+                        points[j] += level.Position;
                     }
 
                     variableDef.SetValue(classFields, points.ToArray());
