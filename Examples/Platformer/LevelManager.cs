@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using LDtk;
 using LDtk.Renderer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace LDtk.Examples.Platformer
+namespace Platformer
 {
     public class LevelManager
     {

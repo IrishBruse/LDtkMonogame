@@ -1,5 +1,4 @@
-
-namespace LDtk.Codegen
+namespace LDtk.Codegen.CompilationUnits
 {
     public class CompilationUnitField : CompilationUnitFragment
     {

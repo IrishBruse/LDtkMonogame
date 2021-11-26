@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
-namespace LDtk.ContentPipeline
+namespace LDtk.ContentPipeline.Level
 {
     [ContentProcessor(DisplayName = "LDtk Level Processor")]
     public class LDtkLevelProcessor : ContentProcessor<string, LDtkLevel>

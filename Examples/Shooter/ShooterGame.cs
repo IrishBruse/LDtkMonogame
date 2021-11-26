@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Examples.Api
+namespace Shooter
 {
     public class ApiGame : BaseExample
     {
@@ -61,7 +61,7 @@ namespace Examples.Api
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
-            Vector2 center = levels[0].Position.ToVector2() + (levels[0].Size.ToVector2() / 2f);
+            Vector2 center = levels[0].Position.ToVector2() + levels[0].Size.ToVector2() / 2f;
             camera.Position = Mouse.GetState().Position.ToVector2() + center;
             camera.Zoom = 4;
 
@@ -136,16 +136,16 @@ namespace Examples.Api
             float diffX = end.X - current.X;
             float diffY = end.Y - current.Y;
 
-            float sqDist = (diffX * diffX) + (diffY * diffY);
+            float sqDist = diffX * diffX + diffY * diffY;
 
-            if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
+            if (sqDist == 0 || maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta)
             {
                 return end;
             }
 
             float dist = MathF.Sqrt(sqDist);
 
-            return new Vector2(current.X + (diffX / dist * maxDistanceDelta), current.Y + (diffY / dist * maxDistanceDelta));
+            return new Vector2(current.X + diffX / dist * maxDistanceDelta, current.Y + diffY / dist * maxDistanceDelta);
         }
     }
 }

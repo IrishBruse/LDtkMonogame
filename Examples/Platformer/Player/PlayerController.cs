@@ -4,8 +4,9 @@ using LDtk;
 using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Platformer.AABB;
 
-namespace Examples.Platformer
+namespace Platformer.Player
 {
     public class PlayerController : ILDtkEntity
     {
@@ -130,11 +131,11 @@ namespace Examples.Platformer
             grounded = false;
 
             LDtkIntGrid collisions = level.GetIntGrid("Level");
-            Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + (velocity * deltaTime)) - level.Position.ToVector2();
-            Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + (velocity * deltaTime)) - level.Position.ToVector2();
+            Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + velocity * deltaTime) - level.Position.ToVector2();
+            Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + velocity * deltaTime) - level.Position.ToVector2();
 
             Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
-            Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
+            Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + Vector2.One * collisions.TileSize);
 
             tiles = new List<(Rect rect, long type)>();
 

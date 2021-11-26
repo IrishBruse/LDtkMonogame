@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using CommandLine;
+using LDtk.Codegen.Core;
+using LDtk.Codegen.Outputs;
 
 namespace LDtk.Codegen
 {

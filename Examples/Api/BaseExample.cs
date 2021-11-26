@@ -3,7 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Examples.Api
+namespace Api
 {
     public class BaseExample : Game
     {

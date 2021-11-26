@@ -1,6 +1,8 @@
 #pragma warning disable IDE0057
 
-namespace LDtk.Codegen;
+using LDtk.Codegen.CompilationUnits;
+
+namespace LDtk.Codegen.Core;
 public class LdtkTypeConverter
 {
     public bool PointAsVector2 { get; set; }

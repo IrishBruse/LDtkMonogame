@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-namespace LDtk.Codegen;
+namespace LDtk.Codegen.CompilationUnits;
 public class CompilationUnit : CompilationUnitFragment
 {
     public string Namespace;

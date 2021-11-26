@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-namespace LDtk.Codegen;
+namespace LDtk.Codegen.CompilationUnits;
 public class CompilationUnitEnum : CompilationUnitFragment
 {
     public List<string> Literals = new();

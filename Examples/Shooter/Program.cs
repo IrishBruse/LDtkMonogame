@@ -1,4 +1,4 @@
-﻿namespace Examples.Api
+﻿namespace Shooter
 {
     internal class Program
     {

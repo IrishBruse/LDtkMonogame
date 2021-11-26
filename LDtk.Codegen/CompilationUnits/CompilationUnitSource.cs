@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Text;
+using LDtk.Codegen.Core;
 
-namespace LDtk.Codegen
+namespace LDtk.Codegen.CompilationUnits
 {
     public class CompilationUnitSource
     {

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using LDtk.Codegen.CompilationUnits;
+using LDtk.Codegen.Outputs;
 
-namespace LDtk.Codegen;
+namespace LDtk.Codegen.Core;
 
 public class LdtkCodeGenerator
 {

@@ -1,4 +1,4 @@
-﻿namespace Examples.Platformer
+﻿namespace Platformer
 {
     internal class Program
     {

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
+using LDtk.Codegen.CompilationUnits;
+using LDtk.Codegen.Core;
 
-namespace LDtk.Codegen
+namespace LDtk.Codegen.Outputs
 {
     public class SingleFileOutput : ICodeOutput
     {

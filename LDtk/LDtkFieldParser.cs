@@ -1,12 +1,12 @@
-﻿using System;
+﻿namespace LDtk;
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
-
-namespace LDtk;
 
 /// <summary>
 /// Utility for parsing ldtk json data into more typed versions

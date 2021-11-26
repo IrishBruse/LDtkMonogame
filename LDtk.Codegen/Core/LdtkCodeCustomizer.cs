@@ -1,5 +1,6 @@
+using LDtk.Codegen.CompilationUnits;
 
-namespace LDtk.Codegen
+namespace LDtk.Codegen.Core
 {
     public class LdtkCodeCustomizer
     {

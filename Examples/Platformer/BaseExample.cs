@@ -1,8 +1,7 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Examples.Platformer
+namespace Platformer
 {
     public class BaseExample : Game
     {

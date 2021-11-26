@@ -1,4 +1,4 @@
-namespace LDtk.Codegen;
+namespace LDtk.Codegen.CompilationUnits;
 
 public abstract class CompilationUnitFragment
 {

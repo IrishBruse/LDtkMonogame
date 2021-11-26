@@ -1,6 +1,6 @@
 using System;
 
-namespace LDtk.Codegen
+namespace LDtk.Codegen.Core
 {
     public class CodeSettings
     {

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
 
-namespace LDtk.ContentPipeline
+namespace LDtk.ContentPipeline.Level
 {
     [ContentTypeWriter]
     public class LDtkLevelWritter : ContentTypeWriter<LDtkLevel>

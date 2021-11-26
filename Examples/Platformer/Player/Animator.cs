@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace Examples.Platformer
+namespace Platformer.Player
 {
     public class Animator
     {

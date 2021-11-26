@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using Comora;
 using LDtk;
-using LDtk.Examples.Platformer;
 using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Platformer;
+using Platformer.AABB;
+using Platformer.Player;
 
-namespace Examples.Platformer
+namespace Platformer
 {
     public class PlatformerGame : BaseExample
     {
@@ -129,7 +131,7 @@ namespace Examples.Platformer
                 {
                     diamondsCollected++;
 
-                    if ((9 + (int)(diamonds[i].Timer / 0.1f)) < 12)
+                    if (9 + (int)(diamonds[i].Timer / 0.1f) < 12)
                     {
                         diamonds[i].Timer += deltaTime;
                         diamonds[i].Tile = new Rectangle((9 + (int)(diamonds[i].Timer / 0.1f)) * (int)diamonds[i].Size.X, 0, (int)diamonds[i].Size.X, (int)diamonds[i].Size.Y);
@@ -226,7 +228,7 @@ namespace Examples.Platformer
                 EntityRendering();
 
                 spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
-                (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, 0),
+                player.Pivot * player.Size + new Vector2(player.fliped ? -8 : 8, 0),
                 1,
                 player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
                 0.1f);

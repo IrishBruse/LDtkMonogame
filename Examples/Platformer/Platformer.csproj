@@ -4,7 +4,6 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <ApplicationIcon>Icon.ico</ApplicationIcon>
-        <RootNamespace>Examples</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

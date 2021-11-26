@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace Examples.Platformer
+namespace Platformer.AABB
 {
     public class Rect
     {
@@ -9,8 +9,8 @@ namespace Examples.Platformer
         public Vector2 Size { get; set; }
         public Vector2 Pivot { get; set; }
 
-        public Vector2 TopLeft => Position - (Size * Pivot);
-        public Vector2 BottomRight => Position + (Size * (Vector2.One - Pivot));
+        public Vector2 TopLeft => Position - Size * Pivot;
+        public Vector2 BottomRight => Position + Size * (Vector2.One - Pivot);
 
         public Rect(Vector2 position, Vector2 size, Vector2 pivot)
         {
@@ -81,7 +81,7 @@ namespace Examples.Platformer
                 return false;
             }
 
-            contactPoint = rayOrigin + (hitNear * rayDirection);
+            contactPoint = rayOrigin + hitNear * rayDirection;
 
             contactNormal = near.X > near.Y
                 ? invdir.X < 0 ? new Vector2(1, 0) : new Vector2(-1, 0)
@@ -101,7 +101,7 @@ namespace Examples.Platformer
                 return false;
             }
 
-            Rect expandedTarget = new Rect(target.Position - (Size / 2f), target.Size + Size, target.Pivot);
+            Rect expandedTarget = new Rect(target.Position - Size / 2f, target.Size + Size, target.Pivot);
 
             return expandedTarget.RayCast(Position, direction * deltaTime, out contactPoint, out contactNormal, out hitNear) && hitNear >= 0f && hitNear < 1f;
         }
