@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Comora;
 using LDtk;
@@ -115,7 +115,7 @@ namespace Api
         protected override void Update(GameTime gameTime)
         {
             camera.Zoom = 2;
-            camera.Position = new Vector2(levels[0].PxWid / 2, Math.Clamp(-Mouse.GetState().ScrollWheelValue, 0, 1000));
+            camera.Position = Mouse.GetState().Position.ToVector2() + new Vector2(0, 300);
             camera.Update(gameTime);
 
             base.Update(gameTime);
