@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 115,
+	"nextUid": 118,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 32,
 	"worldGridHeight": 32,
@@ -699,6 +699,26 @@
 					"acceptFileTypes": null,
 					"defaultOverride": null,
 					"textLanguageMode": null
+				},
+				{
+					"identifier": "Target",
+					"__type": "Int",
+					"uid": 115,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
 				}
 			]
 		},
@@ -790,6 +810,26 @@
 					"acceptFileTypes": null,
 					"defaultOverride": null,
 					"textLanguageMode": null
+				},
+				{
+					"identifier": "Target",
+					"__type": "Int",
+					"uid": 116,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
 				}
 			]
 		},
@@ -847,6 +887,26 @@
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "PointPathLoop",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null
+				},
+				{
+					"identifier": "Target",
+					"__type": "Int",
+					"uid": 117,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
 					"editorDisplayPos": "Above",
 					"editorAlwaysShow": false,
 					"editorCutLongValues": true,
@@ -943,46 +1003,53 @@
 					"entityInstances": [
 						{
 							"__identifier": "Slug",
-							"__grid": [11,8],
+							"__grid": [15,8],
 							"__pivot": [0.5,1],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 98,
-							"px": [186,144],
+							"px": [250,144],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [{ "cx": 19, "cy": 8 }],
+									"__value": [ { "cx": 19, "cy": 8 }, { "cx": 11, "cy": 8 } ],
 									"__type": "Array<Point>",
 									"defUid": 100,
-									"realEditorValues": [{
+									"realEditorValues": [ {
 										"id": "V_String",
 										"params": ["19,8"]
-									}]
+									}, {
+										"id": "V_String",
+										"params": ["11,8"]
+									} ]
 								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] }
+								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] },
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
 							]
 						},
 						{
 							"__identifier": "Slug",
-							"__grid": [8,6],
+							"__grid": [6,6],
 							"__pivot": [0.5,1],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 98,
-							"px": [136,112],
+							"px": [104,112],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [{ "cx": 4, "cy": 6 }],
+									"__value": [ { "cx": 4, "cy": 6 }, { "cx": 8, "cy": 6 } ],
 									"__type": "Array<Point>",
 									"defUid": 100,
-									"realEditorValues": [{
+									"realEditorValues": [ {
 										"id": "V_String",
 										"params": ["4,6"]
-									}]
+									}, {
+										"id": "V_String",
+										"params": ["8,6"]
+									} ]
 								},
 								{
 									"__identifier": "Flip",
@@ -993,7 +1060,8 @@
 										"id": "V_Bool",
 										"params": [ true ]
 									}]
-								}
+								},
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1031,7 +1099,8 @@
 										"id": "V_Bool",
 										"params": [ true ]
 									}]
-								}
+								},
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 117, "realEditorValues": [] }
 							]
 						}
 					]
@@ -1280,23 +1349,26 @@
 					"entityInstances": [
 						{
 							"__identifier": "Slug",
-							"__grid": [16,11],
+							"__grid": [15,11],
 							"__pivot": [0.5,1],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 98,
-							"px": [264,192],
+							"px": [248,192],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [{ "cx": 14, "cy": 11 }],
+									"__value": [ { "cx": 14, "cy": 11 }, { "cx": 16, "cy": 11 } ],
 									"__type": "Array<Point>",
 									"defUid": 100,
-									"realEditorValues": [{
+									"realEditorValues": [ {
 										"id": "V_String",
 										"params": ["14,11"]
-									}]
+									}, {
+										"id": "V_String",
+										"params": ["16,11"]
+									} ]
 								},
 								{
 									"__identifier": "Flip",
@@ -1307,7 +1379,8 @@
 										"id": "V_Bool",
 										"params": [ true ]
 									}]
-								}
+								},
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1322,15 +1395,19 @@
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [{ "cx": 20, "cy": 11 }],
+									"__value": [ { "cx": 20, "cy": 11 }, { "cx": 18, "cy": 11 } ],
 									"__type": "Array<Point>",
 									"defUid": 100,
-									"realEditorValues": [{
+									"realEditorValues": [ {
 										"id": "V_String",
 										"params": ["20,11"]
-									}]
+									}, {
+										"id": "V_String",
+										"params": ["18,11"]
+									} ]
 								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] }
+								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] },
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1359,7 +1436,8 @@
 										"params": ["23,9"]
 									} ]
 								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 111, "realEditorValues": [] }
+								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 111, "realEditorValues": [] },
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 117, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1400,7 +1478,8 @@
 										"id": "V_Bool",
 										"params": [ true ]
 									}]
-								}
+								},
+								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 116, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1431,7 +1510,7 @@
 					"layerDefUid": 54,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": true,
+					"visible": false,
 					"optionalRules": [],
 					"intGrid": [
 						{ "coordId": 154, "v": 1 },

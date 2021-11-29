@@ -17,7 +17,7 @@ namespace LDtk.Renderer
     public class LDtkRenderer
     {
         private static Texture2D pixel;
-        private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new();
+        private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
         private readonly SpriteBatch spriteBatch;
         private readonly GraphicsDevice GraphicsDevice;
         private readonly ContentManager Content;
@@ -62,7 +62,7 @@ namespace LDtk.Renderer
                 return;
             }
 
-            RenderedLevel renderLevel = new();
+            RenderedLevel renderLevel = new RenderedLevel();
 
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             {
@@ -76,7 +76,7 @@ namespace LDtk.Renderer
 
         private Texture2D[] RenderLayers(LDtkLevel level)
         {
-            List<Texture2D> layers = new();
+            List<Texture2D> layers = new List<Texture2D>();
 
             if (level.BgRelPath != null)
             {
@@ -102,7 +102,7 @@ namespace LDtk.Renderer
 
                 int width = layer._CWid * layer._GridSize;
                 int height = layer._CHei * layer._GridSize;
-                RenderTarget2D renderTarget = new(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+                RenderTarget2D renderTarget = new RenderTarget2D(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
                 GraphicsDevice.SetRenderTarget(renderTarget);
                 layers.Add(renderTarget);

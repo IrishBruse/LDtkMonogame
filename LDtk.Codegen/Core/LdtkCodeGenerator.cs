@@ -8,7 +8,7 @@ public class LdtkCodeGenerator
 {
     public virtual void GenerateCode(LDtkWorld ldtkJson, LdtkGeneratorContext ctx, ICodeOutput output)
     {
-        List<CompilationUnitFragment> fragments = new();
+        List<CompilationUnitFragment> fragments = new List<CompilationUnitFragment>();
 
         foreach (EnumDefinition ed in ldtkJson.Defs.Enums)
         {

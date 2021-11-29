@@ -50,7 +50,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            List<int> value = new();
+            List<int> value = new List<int>();
 
             while (reader.Read())
             {
@@ -91,7 +91,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            List<float> value = new();
+            List<float> value = new List<float>();
 
             while (reader.Read())
             {
@@ -130,7 +130,7 @@ namespace LDtk
                 throw new JsonException();
             }
 
-            List<int> value = new();
+            List<int> value = new List<int>();
 
             while (reader.Read())
             {

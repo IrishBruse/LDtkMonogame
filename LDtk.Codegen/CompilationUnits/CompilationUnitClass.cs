@@ -5,7 +5,7 @@ namespace LDtk.Codegen.CompilationUnits;
 public class CompilationUnitClass : CompilationUnitFragment
 {
     public string BaseClass { get; set; } = null;
-    public List<CompilationUnitField> Fields = new();
+    public List<CompilationUnitField> Fields = new List<CompilationUnitField>();
 
     public override void Render(CompilationUnitSource source)
     {

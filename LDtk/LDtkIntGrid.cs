@@ -28,7 +28,7 @@ namespace LDtk
         /// <value>Pixels</value>
         public Point WorldPosition { get; set; }
 
-        internal Dictionary<int, Color> colors = new();
+        internal Dictionary<int, Color> colors = new Dictionary<int, Color>();
 
         /// <summary>
         /// Gets the int value at location and return 0 if out of bounds
@@ -56,7 +56,6 @@ namespace LDtk
         {
             int x = (int)Math.Floor(position.X / TileSize);
             int y = (int)Math.Floor(position.Y / TileSize);
-
             return new Point(x, y);
         }
 

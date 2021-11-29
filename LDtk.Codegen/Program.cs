@@ -62,7 +62,7 @@ namespace LDtk.Codegen
 
             LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(options.Input), LDtkWorld.SerializeOptions);
 
-            LdtkCodeGenerator cg = new();
+            LdtkCodeGenerator cg = new LdtkCodeGenerator();
             cg.GenerateCode(ldtkWorld, ctx, output);
         }
     }

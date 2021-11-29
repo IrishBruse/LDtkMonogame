@@ -53,7 +53,7 @@ namespace LDtk.Codegen.CompilationUnits
 
         public string GetSourceCode()
         {
-            StringBuilder code = new();
+            StringBuilder code = new StringBuilder();
 
             if (cs.GeneratedFileHeader != null)
             {

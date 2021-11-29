@@ -5,7 +5,7 @@ namespace LDtk.Codegen.CompilationUnits;
 public class CompilationUnit : CompilationUnitFragment
 {
     public string Namespace;
-    public List<CompilationUnitFragment> Fragments = new();
+    public List<CompilationUnitFragment> Fragments = new List<CompilationUnitFragment>();
 
     public override void Render(CompilationUnitSource source)
     {
