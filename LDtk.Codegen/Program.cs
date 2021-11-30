@@ -27,6 +27,15 @@ namespace LDtk.Codegen
 
         private static void Run(Options options)
         {
+            string outputDirectory = Path.GetDirectoryName(Path.GetFullPath(options.Output));
+
+            string[] files = Directory.GetFiles(outputDirectory);
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                File.Delete(files[i]);
+            }
+
             LdtkTypeConverter typeConverter = new()
             {
                 PointAsVector2 = options.PointAsVector2
@@ -45,7 +54,7 @@ namespace LDtk.Codegen
             {
                 SingleFileOutput singleFileOutput = new()
                 {
-                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output)),
+                    OutputDir = outputDirectory,
                     Filename = Path.GetFileNameWithoutExtension(options.Input)
                 };
                 output = singleFileOutput;
@@ -55,7 +64,7 @@ namespace LDtk.Codegen
                 MultiFileOutput multiFileOutput = new()
                 {
                     PrintFragments = true,
-                    OutputDir = Path.GetDirectoryName(Path.GetFullPath(options.Output))
+                    OutputDir = outputDirectory,
                 };
                 output = multiFileOutput;
             }
