@@ -16,9 +16,12 @@ namespace LDtk.Renderer
     /// </summary>
     public class LDtkRenderer
     {
+        /// <summary>
+        /// The spritebatch used for rendering with this Renderer
+        /// </summary>
+        public SpriteBatch SpriteBatch { get; set; }
         private static Texture2D pixel;
         private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
-        private readonly SpriteBatch spriteBatch;
         private readonly GraphicsDevice GraphicsDevice;
         private readonly ContentManager Content;
 
@@ -28,7 +31,7 @@ namespace LDtk.Renderer
         /// <param name="spriteBatch"></param>
         public LDtkRenderer(SpriteBatch spriteBatch)
         {
-            this.spriteBatch = spriteBatch;
+            SpriteBatch = spriteBatch;
             GraphicsDevice = spriteBatch.GraphicsDevice;
 
             if (pixel == null)
@@ -64,11 +67,11 @@ namespace LDtk.Renderer
 
             RenderedLevel renderLevel = new RenderedLevel();
 
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             {
                 renderLevel.layers = RenderLayers(level);
             }
-            spriteBatch.End();
+            SpriteBatch.End();
 
             prerenderedLevels.Add(level.Identifier, renderLevel);
             GraphicsDevice.SetRenderTarget(null);
@@ -116,7 +119,7 @@ namespace LDtk.Renderer
                             Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                             Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                             SpriteEffects mirror = (SpriteEffects)tile.F;
-                            spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                            SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                         }
                         break;
 
@@ -129,7 +132,7 @@ namespace LDtk.Renderer
                                 Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                                 Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                                 SpriteEffects mirror = (SpriteEffects)tile.F;
-                                spriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                                SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                             }
                         }
                         break;
@@ -153,7 +156,7 @@ namespace LDtk.Renderer
             {
                 LevelBackgroundPosition bg = level._BgPos;
                 Vector2 pos = bg.TopLeftPx.ToVector2();
-                spriteBatch.Draw(texture, pos, bg.CropRect, Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+                SpriteBatch.Draw(texture, pos, bg.CropRect, Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
             }
             GraphicsDevice.SetRenderTarget(null);
 
@@ -183,7 +186,7 @@ namespace LDtk.Renderer
             {
                 for (int i = 0; i < prerenderedLevel.layers.Length; i++)
                 {
-                    spriteBatch.Draw(prerenderedLevel.layers[i], level.Position.ToVector2(), Color.White);
+                    SpriteBatch.Draw(prerenderedLevel.layers[i], level.Position.ToVector2(), Color.White);
                 }
             }
             else
@@ -202,7 +205,7 @@ namespace LDtk.Renderer
 
             for (int i = 0; i < layers.Length; i++)
             {
-                spriteBatch.Draw(layers[i], level.Position.ToVector2(), Color.White);
+                SpriteBatch.Draw(layers[i], level.Position.ToVector2(), Color.White);
             }
         }
 
@@ -224,7 +227,7 @@ namespace LDtk.Renderer
 
                         int spriteX = intGrid.WorldPosition.X + (x * intGrid.TileSize);
                         int spriteY = intGrid.WorldPosition.Y + (y * intGrid.TileSize);
-                        spriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, col, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
+                        SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, col, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
                     }
                 }
             }
@@ -241,7 +244,7 @@ namespace LDtk.Renderer
         /// <param name="texture">The spritesheet/texture for rendering the entity</param>
         public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity
         {
-            spriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+            SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
         }
 
         /// <summary>
@@ -252,7 +255,7 @@ namespace LDtk.Renderer
         /// <param name="flipDirection">The direction to flip the entity when rendering</param>
         public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection) where T : ILDtkEntity
         {
-            spriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+            SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
         }
 
         /// <summary>
@@ -265,7 +268,7 @@ namespace LDtk.Renderer
         {
             Rectangle animatedTile = entity.Tile;
             animatedTile.Offset(animatedTile.Width * animationFrame, 0);
-            spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+            SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
         }
 
 
@@ -280,7 +283,7 @@ namespace LDtk.Renderer
         {
             Rectangle animatedTile = entity.Tile;
             animatedTile.Offset(animatedTile.Width * animationFrame, 0);
-            spriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+            SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
         }
 
         #endregion

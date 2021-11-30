@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -140,6 +141,7 @@ internal static class LDtkFieldParser
                     {
                         points[j] = new Point(points[j].X * gridSize, points[j].Y * gridSize);
                         points[j] += level.Position;
+                        points[j] += new Point(gridSize / 2);
                     }
 
                     variableDef.SetValue(classFields, points.ToArray());
@@ -177,7 +179,7 @@ internal static class LDtkFieldParser
 
     private static Color ParseStringToColor(string hex, int alpha)
     {
-        if (uint.TryParse(hex.Replace("#", ""), System.Globalization.NumberStyles.HexNumber, null, out uint color))
+        if (uint.TryParse(hex.Replace("#", ""), NumberStyles.HexNumber, null, out uint color))
         {
             byte red = (byte)((color & 0xFF0000) >> 16);
             byte green = (byte)((color & 0x00FF00) >> 8);
