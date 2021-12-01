@@ -1,52 +1,51 @@
-namespace LDtk.Codegen.CompilationUnits
+namespace LDtk.Codegen.CompilationUnits;
+
+public class CompilationUnitField : CompilationUnitFragment
 {
-    public class CompilationUnitField : CompilationUnitFragment
+    public enum FieldVisibility
     {
-        public enum FieldVisibility
+        Private,
+        Protected,
+        Public,
+    }
+
+    public string type;
+    public string requiredImport;
+    public FieldVisibility? visibility;
+
+    public CompilationUnitField()
+    {
+    }
+
+    public CompilationUnitField(string name, string type, string requiredImport, FieldVisibility visibility)
+    {
+        base.name = name;
+        this.type = type;
+        this.visibility = visibility;
+        this.requiredImport = requiredImport;
+    }
+
+    public CompilationUnitField(string name, string type)
+    {
+        base.name = name;
+        this.type = type;
+        visibility = FieldVisibility.Public;
+        requiredImport = null;
+    }
+
+    public override void Render(CompilationUnitSource source)
+    {
+        if (requiredImport != null)
         {
-            Private,
-            Protected,
-            Public,
+            source.Using(requiredImport);
         }
 
-        public string Type;
-        public string RequiredImport;
-        public FieldVisibility? Visibility;
-
-        public CompilationUnitField()
+        string vStr = "";
+        if (visibility.HasValue)
         {
+            vStr = visibility.GetValueOrDefault().ToString().ToLower();
         }
 
-        public CompilationUnitField(string name, string type, string requiredImport, FieldVisibility visibility)
-        {
-            base.name = name;
-            Type = type;
-            Visibility = visibility;
-            RequiredImport = requiredImport;
-        }
-
-        public CompilationUnitField(string name, string type)
-        {
-            base.name = name;
-            Type = type;
-            Visibility = FieldVisibility.Public;
-            RequiredImport = null;
-        }
-
-        public override void Render(CompilationUnitSource source)
-        {
-            if (RequiredImport != null)
-            {
-                source.Using(RequiredImport);
-            }
-
-            string vStr = "";
-            if (Visibility.HasValue)
-            {
-                vStr = Visibility.GetValueOrDefault().ToString().ToLower();
-            }
-
-            source.AddLine($"{vStr} {Type} {name} {{ get; set; }}");
-        }
+        source.AddLine($"{vStr} {type} {name} {{ get; set; }}");
     }
 }

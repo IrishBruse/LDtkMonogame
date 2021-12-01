@@ -12,11 +12,6 @@ public class LDtkLevelReader : ContentTypeReader<LDtkLevel>
     /// </summary>
     protected override LDtkLevel Read(ContentReader input, LDtkLevel existingInstance)
     {
-        if (existingInstance != null)
-        {
-            return existingInstance;
-        }
-
-        return System.Text.Json.JsonSerializer.Deserialize<LDtkLevel>(input.ReadString(), LDtkWorld.SerializeOptions);
+        return existingInstance ?? System.Text.Json.JsonSerializer.Deserialize<LDtkLevel>(input.ReadString(), LDtkWorld.SerializeOptions);
     }
 }

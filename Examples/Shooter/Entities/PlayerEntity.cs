@@ -1,10 +1,9 @@
-namespace Shooter.Entities;
-
 using LDtk.Renderer;
-using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shooter.LDtkTypes;
 
+namespace Shooter.Entities;
 public class PlayerEntity
 {
     public Vector2 Position { get => data.Position; set => data.Position = value; }
@@ -12,7 +11,6 @@ public class PlayerEntity
     private readonly Player data;
     private readonly Texture2D texture;
     private readonly LDtkRenderer renderer;
-
 
     public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer)
     {

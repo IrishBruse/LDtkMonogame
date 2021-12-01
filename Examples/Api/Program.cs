@@ -1,11 +1,10 @@
-﻿namespace Api
+﻿namespace Api;
+
+internal static class Program
 {
-    internal static class Program
+    private static void Main()
     {
-        private static void Main()
-        {
-            using ApiGame game = new ApiGame();
-            game.Run();
-        }
+        using ApiGame game = new ApiGame();
+        game.Run();
     }
 }

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 
 namespace LDtk.Codegen.CompilationUnits;
+
 public class CompilationUnitClass : CompilationUnitFragment
 {
     public string BaseClass { get; set; } = null;
-    public List<CompilationUnitField> Fields = new List<CompilationUnitField>();
+    public List<CompilationUnitField> fields = new();
 
     public override void Render(CompilationUnitSource source)
     {
@@ -21,10 +22,11 @@ public class CompilationUnitClass : CompilationUnitFragment
         source.AddLine($"public class {name}{extends}");
         source.StartBlock();
 
-        foreach (CompilationUnitField field in Fields)
+        foreach (CompilationUnitField field in fields)
         {
             field.Render(source);
         }
+
         source.EndBlock();
     }
 }

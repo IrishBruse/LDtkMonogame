@@ -3,53 +3,52 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Api
+namespace Api;
+
+public class BaseExample : Game
 {
-    public class BaseExample : Game
+    // Camera
+    protected Vector2 cameraPosition;
+    protected Vector2 cameraOrigin;
+    protected float pixelScale = 1f;
+    protected bool freeCam = true;
+    protected Texture2D pixel;
+
+    // Framework
+    protected readonly GraphicsDeviceManager graphics;
+    protected SpriteBatch spriteBatch;
+
+    public BaseExample()
     {
-        // Camera
-        protected Vector2 cameraPosition;
-        protected Vector2 cameraOrigin;
-        protected float pixelScale = 1f;
-        protected bool freeCam = true;
-        protected Texture2D pixel;
+        graphics = new GraphicsDeviceManager(this);
+        IsFixedTimeStep = false;
+    }
 
-        // Framework
-        protected readonly GraphicsDeviceManager graphics;
-        protected SpriteBatch spriteBatch;
+    protected override void Initialize()
+    {
+        pixel = new Texture2D(GraphicsDevice, 1, 1);
+        pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+        MonogameInitialize();
+    }
 
-        public BaseExample()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            IsFixedTimeStep = false;
-        }
+    private void MonogameInitialize()
+    {
+        Window.AllowUserResizing = true;
+        IsMouseVisible = true;
+        spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        protected override void Initialize()
-        {
-            pixel = new Texture2D(GraphicsDevice, 1, 1);
-            pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
-            MonogameInitialize();
-        }
+        graphics.PreferredBackBufferWidth = 1280;
+        graphics.PreferredBackBufferHeight = 720;
 
-        private void MonogameInitialize()
-        {
-            Window.AllowUserResizing = true;
-            IsMouseVisible = true;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+        graphics.ApplyChanges();
 
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+        Window.ClientSizeChanged += (o, e) => OnWindowResized();
+        OnWindowResized();
+    }
 
-            graphics.ApplyChanges();
-
-            Window.ClientSizeChanged += (o, e) => OnWindowResized();
-            OnWindowResized();
-        }
-
-        public virtual void OnWindowResized()
-        {
-            cameraOrigin = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
-            pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
-        }
+    public virtual void OnWindowResized()
+    {
+        cameraOrigin = new Vector2(GraphicsDevice.Viewport.Width / 2f, GraphicsDevice.Viewport.Height / 2f);
+        pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 250, 1);
     }
 }

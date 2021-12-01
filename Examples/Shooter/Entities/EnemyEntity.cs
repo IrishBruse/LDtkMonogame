@@ -1,10 +1,9 @@
-namespace Shooter.Entities;
-
 using LDtk.Renderer;
-using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Shooter.LDtkTypes;
 
+namespace Shooter.Entities;
 public class EnemyEntity
 {
     private readonly Enemy data;

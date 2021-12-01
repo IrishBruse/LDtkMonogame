@@ -12,11 +12,6 @@ public class LDtkFileReader : ContentTypeReader<LDtkWorld>
     /// </summary>
     protected override LDtkWorld Read(ContentReader input, LDtkWorld existingInstance)
     {
-        if (existingInstance != null)
-        {
-            return existingInstance;
-        }
-
-        return System.Text.Json.JsonSerializer.Deserialize<LDtkWorld>(input.ReadString(), LDtkWorld.SerializeOptions);
+        return existingInstance ?? System.Text.Json.JsonSerializer.Deserialize<LDtkWorld>(input.ReadString(), LDtkWorld.SerializeOptions);
     }
 }

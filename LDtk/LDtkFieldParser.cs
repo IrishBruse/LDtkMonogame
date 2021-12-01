@@ -1,6 +1,4 @@
-﻿namespace LDtk;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
@@ -9,6 +7,7 @@ using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
 
+namespace LDtk;
 /// <summary>
 /// Utility for parsing ldtk json data into more typed versions
 /// </summary>
@@ -61,14 +60,9 @@ internal static class LDtkFieldParser
 
             if (enumTypeIndex != -1)
             {
-                if (arrayEndIndex != -1)
-                {
-                    variableType = variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex);
-                }
-                else
-                {
-                    variableType = variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
-                }
+                variableType = arrayEndIndex != -1
+                    ? variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex)
+                    : variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
             }
 
             switch (variableType)
@@ -83,6 +77,7 @@ internal static class LDtkFieldParser
                     {
                         variableDef.SetValue(classFields, Convert.ChangeType(fieldInstance._Value.ToString(), variableDef.PropertyType));
                     }
+
                     break;
 
                 case Field.IntArrayType:
@@ -130,6 +125,7 @@ internal static class LDtkFieldParser
                             variableDef.SetValue(classFields, Point.Zero);
                         }
                     }
+
                     break;
 
                 case Field.PointArrayType:
@@ -153,7 +149,6 @@ internal static class LDtkFieldParser
             }
         }
     }
-
 
     public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
     {

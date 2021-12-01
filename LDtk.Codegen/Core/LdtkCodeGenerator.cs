@@ -46,7 +46,7 @@ public class LdtkCodeGenerator
 
         foreach (EnumValueDefinition evd in enumDefinition.Values)
         {
-            enumFragment.Literals.Add(evd.Id);
+            enumFragment.literals.Add(evd.Id);
         }
 
         return enumFragment;
@@ -61,7 +61,7 @@ public class LdtkCodeGenerator
 
         foreach (FieldDefinition fd in ed.FieldDefs)
         {
-            classFragment.Fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
+            classFragment.fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
         }
 
         return classFragment;
@@ -76,7 +76,7 @@ public class LdtkCodeGenerator
 
         foreach (FieldDefinition fd in ldtkJson.Defs.LevelFields)
         {
-            levelClass.Fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
+            levelClass.fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
         }
 
         return levelClass;

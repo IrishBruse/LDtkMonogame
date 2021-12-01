@@ -1,8 +1,7 @@
-namespace Shooter;
-
 using System;
 using Microsoft.Xna.Framework;
 
+namespace Shooter;
 internal static class Extensions
 {
 
@@ -14,9 +13,9 @@ internal static class Extensions
         float diffX = end.X - current.X;
         float diffY = end.Y - current.Y;
 
-        float sqDist = diffX * diffX + diffY * diffY;
+        float sqDist = (diffX * diffX) + (diffY * diffY);
 
-        if (sqDist == 0 || maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta)
+        if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
         {
             done = true;
             return end;
@@ -25,6 +24,6 @@ internal static class Extensions
         float dist = MathF.Sqrt(sqDist);
 
         done = false;
-        return new Vector2(current.X + diffX / dist * maxDistanceDelta, current.Y + diffY / dist * maxDistanceDelta);
+        return new Vector2(current.X + (diffX / dist * maxDistanceDelta), current.Y + (diffY / dist * maxDistanceDelta));
     }
 }

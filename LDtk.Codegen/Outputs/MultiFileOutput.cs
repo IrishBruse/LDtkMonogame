@@ -13,17 +13,17 @@ public class MultiFileOutput : ICodeOutput
 
     public void OutputCode(List<CompilationUnitFragment> fragments, LdtkGeneratorContext ctx)
     {
-        Directory.CreateDirectory(OutputDir);
+        _ = Directory.CreateDirectory(OutputDir);
 
         foreach (CompilationUnitFragment fragment in fragments)
         {
             CompilationUnit cuFile = new()
             {
-                Namespace = ctx.CodeSettings.Namespace,
+                classNamespace = ctx.CodeSettings.Namespace,
                 name = fragment.name
             };
 
-            cuFile.Fragments.Add(fragment);
+            cuFile.fragments.Add(fragment);
 
             CompilationUnitSource source = new(ctx.CodeSettings);
             cuFile.Render(source);

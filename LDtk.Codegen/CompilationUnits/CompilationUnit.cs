@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 
 namespace LDtk.Codegen.CompilationUnits;
+
 public class CompilationUnit : CompilationUnitFragment
 {
-    public string Namespace;
-    public List<CompilationUnitFragment> Fragments = new List<CompilationUnitFragment>();
+    public string classNamespace;
+    public List<CompilationUnitFragment> fragments = new List<CompilationUnitFragment>();
 
     public override void Render(CompilationUnitSource source)
     {
-        if (Namespace != null)
+        if (classNamespace != null)
         {
-            source.AddLine($"namespace {Namespace}");
+            source.AddLine($"namespace {classNamespace}");
             source.StartBlock();
         }
 
-        foreach (CompilationUnitFragment fragment in Fragments)
+        foreach (CompilationUnitFragment fragment in fragments)
         {
             fragment.Render(source);
         }
 
-        if (Namespace != null)
+        if (classNamespace != null)
         {
             source.EndBlock();
         }

@@ -1,11 +1,10 @@
-﻿namespace Platformer
+﻿namespace Platformer;
+
+internal class Program
 {
-    internal class Program
+    private static void Main()
     {
-        private static void Main()
-        {
-            using PlatformerGame game = new PlatformerGame();
-            game.Run();
-        }
+        using PlatformerGame game = new PlatformerGame();
+        game.Run();
     }
 }

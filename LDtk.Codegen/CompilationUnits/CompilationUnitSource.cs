@@ -2,77 +2,77 @@ using System.Collections.Generic;
 using System.Text;
 using LDtk.Codegen.Core;
 
-namespace LDtk.Codegen.CompilationUnits
+namespace LDtk.Codegen.CompilationUnits;
+
+public class CompilationUnitSource
 {
-    public class CompilationUnitSource
+    private readonly StringBuilder verbatimSrc;
+    private int currIndent;
+    private readonly CodeSettings cs;
+    private readonly SortedSet<string> imports;
+
+    public CompilationUnitSource(CodeSettings cs)
     {
-        private readonly StringBuilder verbatimSrc;
-        private int currIndent;
-        private readonly CodeSettings cs;
-        private readonly SortedSet<string> imports;
+        this.cs = cs;
+        verbatimSrc = new StringBuilder();
+        currIndent = 0;
+        imports = new SortedSet<string>();
+    }
 
-        public CompilationUnitSource(CodeSettings cs)
+    public void Using(string package)
+    {
+        if (package == null)
         {
-            this.cs = cs;
-            verbatimSrc = new StringBuilder();
-            currIndent = 0;
-            imports = new SortedSet<string>();
+            return;
         }
 
-        public void Using(string package)
-        {
-            if (package == null)
-            {
-                return;
-            }
+        _ = imports.Add(package);
+    }
 
-            imports.Add(package);
+    public void AddLine(string line)
+    {
+        for (int i = 0; i < currIndent; i++)
+        {
+            _ = verbatimSrc.Append(cs.IndentString);
         }
 
-        public void AddLine(string line)
+        _ = verbatimSrc.Append(line);
+        _ = verbatimSrc.Append(cs.NewLine);
+    }
+
+    public void StartBlock()
+    {
+        AddLine("{");
+        currIndent++;
+    }
+
+    public void EndBlock()
+    {
+        currIndent--;
+        AddLine("}");
+    }
+
+    public string GetSourceCode()
+    {
+        StringBuilder code = new StringBuilder();
+
+        if (cs.GeneratedFileHeader != null)
         {
-            for (int i = 0; i < currIndent; i++)
-            {
-                verbatimSrc.Append(cs.IndentString);
-            }
-            verbatimSrc.Append(line);
-            verbatimSrc.Append(cs.NewLine);
+            _ = code.AppendLine(cs.GeneratedFileHeader);
         }
 
-        public void StartBlock()
+        _ = code.AppendLine("#pragma warning disable IDE1006");
+
+        foreach (string use in imports)
         {
-            AddLine("{");
-            currIndent++;
+            _ = code.AppendLine($"using {use};");
         }
 
-        public void EndBlock()
-        {
-            currIndent--;
-            AddLine("}");
-        }
+        _ = code.AppendLine();
+        _ = code.Append(verbatimSrc);
 
-        public string GetSourceCode()
-        {
-            StringBuilder code = new StringBuilder();
+        _ = code.AppendLine("#pragma warning restore IDE1006");
 
-            if (cs.GeneratedFileHeader != null)
-            {
-                code.AppendLine(cs.GeneratedFileHeader);
-            }
-
-            code.AppendLine("#pragma warning disable IDE1006");
-
-            foreach (string use in imports)
-            {
-                code.AppendLine($"using {use};");
-            }
-
-            code.AppendLine();
-            code.Append(verbatimSrc);
-
-            code.AppendLine("#pragma warning restore IDE1006");
-
-            return code.ToString();
-        }
+        return code.ToString();
     }
 }

@@ -13,20 +13,17 @@ public class LdtkTypeConverter
 
     protected static string GetCSharpTypeFor(string ldtkType)
     {
-        if (ldtkType.StartsWith("LocalEnum"))
-        {
-            return ldtkType.Substring(10);
-        }
-
-        return ldtkType switch
-        {
-            "Int" => "int",
-            "Float" => "float",
-            "Bool" => "bool",
-            "Point" => "Point",
-            "Color" => "Color",
-            _ => "string",
-        };
+        return ldtkType.StartsWith("LocalEnum")
+            ? ldtkType.Substring(10)
+            : ldtkType switch
+            {
+                "Int" => "int",
+                "Float" => "float",
+                "Bool" => "bool",
+                "Point" => "Point",
+                "Color" => "Color",
+                _ => "string",
+            };
     }
 
     public virtual string GetDeclaringTypeFor(FieldDefinition fieldDefinition, LdtkGeneratorContext ctx)
@@ -58,13 +55,13 @@ public class LdtkTypeConverter
         CompilationUnitField field = new()
         {
             name = fieldDefinition.Identifier,
-            Type = GetDeclaringTypeFor(fieldDefinition, ctx),
-            Visibility = CompilationUnitField.FieldVisibility.Public
+            type = GetDeclaringTypeFor(fieldDefinition, ctx),
+            visibility = CompilationUnitField.FieldVisibility.Public
         };
 
         if (fieldDefinition.IsArray)
         {
-            field.RequiredImport = GetArrayImport();
+            field.requiredImport = GetArrayImport();
         }
 
         return field;

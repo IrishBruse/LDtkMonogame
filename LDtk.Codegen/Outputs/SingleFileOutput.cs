@@ -3,31 +3,29 @@ using System.IO;
 using LDtk.Codegen.CompilationUnits;
 using LDtk.Codegen.Core;
 
-namespace LDtk.Codegen.Outputs
+namespace LDtk.Codegen.Outputs;
+
+public class SingleFileOutput : ICodeOutput
 {
-    public class SingleFileOutput : ICodeOutput
+    public string OutputDir { get; set; }
+    public string Filename { get; set; }
+
+    public void OutputCode(List<CompilationUnitFragment> fragments, LdtkGeneratorContext ctx)
     {
-        public string OutputDir { get; set; }
-        public string Filename { get; set; }
+        _ = Directory.CreateDirectory(OutputDir);
 
-        public void OutputCode(List<CompilationUnitFragment> fragments, LdtkGeneratorContext ctx)
+        CompilationUnit cu = new()
         {
-            Directory.CreateDirectory(OutputDir);
+            name = Filename,
+            classNamespace = ctx.CodeSettings.Namespace,
+            fragments = fragments
+        };
 
-            CompilationUnit cu = new()
-            {
-                name = Filename,
-                Namespace = ctx.CodeSettings.Namespace,
-                Fragments = fragments
-            };
+        CompilationUnitSource source = new(ctx.CodeSettings);
+        cu.Render(source);
 
-            CompilationUnitSource source = new(ctx.CodeSettings);
-            cu.Render(source);
+        string filePath = OutputDir + "/" + Filename;
+        File.WriteAllText(filePath, source.GetSourceCode());
 
-            string filePath = OutputDir + "/" + Filename;
-            File.WriteAllText(filePath, source.GetSourceCode());
-
-        }
     }
-
 }

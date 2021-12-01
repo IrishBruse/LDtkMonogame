@@ -1,39 +1,38 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Platformer
+namespace Platformer;
+
+public class BaseExample : Game
 {
-    public class BaseExample : Game
+    protected Texture2D pixel;
+
+    // Framework
+    protected readonly GraphicsDeviceManager graphics;
+    protected SpriteBatch spriteBatch;
+
+    public BaseExample()
     {
-        protected Texture2D pixel;
+        graphics = new GraphicsDeviceManager(this);
+        IsFixedTimeStep = false;
+    }
 
-        // Framework
-        protected readonly GraphicsDeviceManager graphics;
-        protected SpriteBatch spriteBatch;
+    protected override void Initialize()
+    {
+        pixel = new Texture2D(GraphicsDevice, 1, 1);
+        pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+        MonogameInitialize();
+    }
 
-        public BaseExample()
-        {
-            graphics = new GraphicsDeviceManager(this);
-            IsFixedTimeStep = false;
-        }
+    private void MonogameInitialize()
+    {
+        Window.AllowUserResizing = true;
+        IsMouseVisible = true;
+        spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        protected override void Initialize()
-        {
-            pixel = new Texture2D(GraphicsDevice, 1, 1);
-            pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
-            MonogameInitialize();
-        }
+        graphics.PreferredBackBufferWidth = 1280;
+        graphics.PreferredBackBufferHeight = 720;
 
-        private void MonogameInitialize()
-        {
-            Window.AllowUserResizing = true;
-            IsMouseVisible = true;
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
-
-            graphics.ApplyChanges();
-        }
+        graphics.ApplyChanges();
     }
 }

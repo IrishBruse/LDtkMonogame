@@ -1,17 +1,16 @@
-﻿namespace Shooter;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using Comora;
 using LDtk;
 using LDtk.Renderer;
-using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Shooter.Entities;
+using Shooter.LDtkTypes;
 
+namespace Shooter;
 public class ShooterGame : Game
 {
     // LDtk stuff
@@ -119,7 +118,6 @@ public class ShooterGame : Game
 
         player.Update(deltaTime);
 
-
         oldKeyboard = Keyboard.GetState();
 
         base.Update(gameTime);
@@ -152,6 +150,7 @@ public class ShooterGame : Game
                 renderer.RenderEntity(guns[i], spriteSheet);
             }
         }
+
         spriteBatch.End();
 
         base.Draw(gameTime);
