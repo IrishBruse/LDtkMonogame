@@ -1,12 +1,10 @@
-﻿namespace Shooter
-{
-    internal class Program
-    {
-        private static void Main()
-        {
+﻿namespace Shooter;
 
-            using ApiGame game = new ApiGame();
-            game.Run();
-        }
+internal class Program
+{
+    private static void Main()
+    {
+        using ShooterGame game = new ShooterGame();
+        game.Run();
     }
 }

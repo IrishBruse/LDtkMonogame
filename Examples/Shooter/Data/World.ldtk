@@ -9,7 +9,7 @@
 		"url": "https://ldtk.io"
 	},
 	"jsonVersion": "0.9.3",
-	"nextUid": 118,
+	"nextUid": 121,
 	"worldLayout": "GridVania",
 	"worldGridWidth": 32,
 	"worldGridHeight": 32,
@@ -637,7 +637,7 @@
 		}
 	], "entities": [
 		{
-			"identifier": "Slug",
+			"identifier": "Enemy",
 			"uid": 98,
 			"tags": [],
 			"width": 16,
@@ -648,38 +648,18 @@
 			"fillOpacity": 1,
 			"lineOpacity": 1,
 			"hollow": false,
-			"color": "#D64F1B",
+			"color": "#FF6B19",
 			"renderMode": "Tile",
 			"showName": false,
 			"tilesetId": 2,
-			"tileId": 12,
+			"tileId": 8,
 			"tileRenderMode": "FitInside",
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
-			"pivotY": 1,
+			"pivotY": 0.5,
 			"fieldDefs": [
-				{
-					"identifier": "Flip",
-					"__type": "Bool",
-					"uid": 110,
-					"type": "F_Bool",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
 				{
 					"identifier": "Wander",
 					"__type": "Array<Point>",
@@ -701,15 +681,15 @@
 					"textLanguageMode": null
 				},
 				{
-					"identifier": "Target",
-					"__type": "Int",
-					"uid": 115,
-					"type": "F_Int",
+					"identifier": "Type",
+					"__type": "LocalEnum.EnemyType",
+					"uid": 119,
+					"type": { "id": "F_Enum", "params": [118] },
 					"isArray": false,
 					"canBeNull": false,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
+					"editorDisplayMode": "EntityTile",
 					"editorDisplayPos": "Above",
 					"editorAlwaysShow": false,
 					"editorCutLongValues": true,
@@ -736,7 +716,7 @@
 			"hollow": false,
 			"color": "#4BE060",
 			"renderMode": "Tile",
-			"showName": true,
+			"showName": false,
 			"tilesetId": 2,
 			"tileId": 7,
 			"tileRenderMode": "FitInside",
@@ -748,8 +728,8 @@
 			"fieldDefs": []
 		},
 		{
-			"identifier": "Blue_Bee",
-			"uid": 105,
+			"identifier": "Player",
+			"uid": 120,
 			"tags": [],
 			"width": 16,
 			"height": 16,
@@ -759,165 +739,18 @@
 			"fillOpacity": 1,
 			"lineOpacity": 1,
 			"hollow": false,
-			"color": "#33CBDE",
+			"color": "#94D9B3",
 			"renderMode": "Tile",
 			"showName": false,
 			"tilesetId": 2,
-			"tileId": 10,
+			"tileId": 5,
 			"tileRenderMode": "FitInside",
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
+			"maxCount": 1,
+			"limitScope": "PerWorld",
+			"limitBehavior": "PreventAdding",
 			"pivotX": 0.5,
 			"pivotY": 1,
-			"fieldDefs": [
-				{
-					"identifier": "Flip",
-					"__type": "Bool",
-					"uid": 112,
-					"type": "F_Bool",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
-				{
-					"identifier": "Wander",
-					"__type": "Array<Point>",
-					"uid": 106,
-					"type": "F_Point",
-					"isArray": true,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "PointPathLoop",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
-				{
-					"identifier": "Target",
-					"__type": "Int",
-					"uid": 116,
-					"type": "F_Int",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				}
-			]
-		},
-		{
-			"identifier": "Bee",
-			"uid": 101,
-			"tags": [],
-			"width": 16,
-			"height": 16,
-			"resizableX": false,
-			"resizableY": false,
-			"keepAspectRatio": false,
-			"fillOpacity": 1,
-			"lineOpacity": 1,
-			"hollow": false,
-			"color": "#F3DB1F",
-			"renderMode": "Tile",
-			"showName": false,
-			"tilesetId": 2,
-			"tileId": 8,
-			"tileRenderMode": "FitInside",
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
-			"pivotX": 0.5,
-			"pivotY": 1,
-			"fieldDefs": [
-				{
-					"identifier": "Flip",
-					"__type": "Bool",
-					"uid": 111,
-					"type": "F_Bool",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
-				{
-					"identifier": "Wander",
-					"__type": "Array<Point>",
-					"uid": 102,
-					"type": "F_Point",
-					"isArray": true,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "PointPathLoop",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				},
-				{
-					"identifier": "Target",
-					"__type": "Int",
-					"uid": 117,
-					"type": "F_Int",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null
-				}
-			]
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -955,9 +788,13 @@
 			"enumTags": [],
 			"customData": [],
 			"savedSelections": [],
-			"cachedPixelData": { "opaqueTiles": "00000000000000", "averageColors": "77ac77ac67ac2fc54fc763be72be2c544ec93db747bd46bd3e533e54" }
+			"cachedPixelData": { "opaqueTiles": "00000000000000", "averageColors": "77ac77ac67ac2fc54fc762be72be2c544ec93db747bd46bd3e533e54" }
 		}
-	], "enums": [], "externalEnums": [], "levelFields": [] },
+	], "enums": [{ "identifier": "EnemyType", "uid": 118, "values": [
+		{ "id": "YellowBee", "tileId": 8, "color": 15649945, "__tileSrcRect": [16,16,16,16] },
+		{ "id": "BlueBee", "tileId": 10, "color": 7846877, "__tileSrcRect": [48,16,16,16] },
+		{ "id": "Slug", "tileId": 12, "color": 15619379, "__tileSrcRect": [80,16,16,16] }
+	], "iconTilesetUid": 2, "externalRelPath": null, "externalFileChecksum": null }], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
@@ -1002,14 +839,14 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "Slug",
-							"__grid": [15,8],
-							"__pivot": [0.5,1],
+							"__identifier": "Enemy",
+							"__grid": [11,8],
+							"__pivot": [0.5,0.5],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 98,
-							"px": [250,144],
+							"px": [185,136],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
@@ -1024,83 +861,51 @@
 										"params": ["11,8"]
 									} ]
 								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] },
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
+								{
+									"__identifier": "Type",
+									"__value": "Slug",
+									"__type": "LocalEnum.EnemyType",
+									"defUid": 119,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Slug"]
+									}]
+								}
 							]
 						},
 						{
-							"__identifier": "Slug",
-							"__grid": [6,6],
-							"__pivot": [0.5,1],
+							"__identifier": "Enemy",
+							"__grid": [4,6],
+							"__pivot": [0.5,0.5],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 98,
-							"px": [104,112],
+							"px": [73,104],
 							"fieldInstances": [
 								{
 									"__identifier": "Wander",
-									"__value": [ { "cx": 4, "cy": 6 }, { "cx": 8, "cy": 6 } ],
+									"__value": [ { "cx": 8, "cy": 6 }, { "cx": 4, "cy": 6 } ],
 									"__type": "Array<Point>",
 									"defUid": 100,
 									"realEditorValues": [ {
 										"id": "V_String",
-										"params": ["4,6"]
-									}, {
-										"id": "V_String",
 										"params": ["8,6"]
+									}, {
+										"id": "V_String",
+										"params": ["4,6"]
 									} ]
 								},
 								{
-									"__identifier": "Flip",
-									"__value": true,
-									"__type": "Bool",
-									"defUid": 110,
+									"__identifier": "Type",
+									"__value": "Slug",
+									"__type": "LocalEnum.EnemyType",
+									"defUid": 119,
 									"realEditorValues": [{
-										"id": "V_Bool",
-										"params": [ true ]
+										"id": "V_String",
+										"params": ["Slug"]
 									}]
-								},
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "Bee",
-							"__grid": [16,7],
-							"__pivot": [0.5,1],
-							"__tile": { "tilesetUid": 2, "srcRect": [16,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 101,
-							"px": [264,125],
-							"fieldInstances": [
-								{
-									"__identifier": "Wander",
-									"__value": [ { "cx": 16, "cy": 3 }, { "cx": 11, "cy": 3 }, { "cx": 11, "cy": 7 } ],
-									"__type": "Array<Point>",
-									"defUid": 102,
-									"realEditorValues": [ {
-										"id": "V_String",
-										"params": ["16,3"]
-									}, {
-										"id": "V_String",
-										"params": ["11,3"]
-									}, {
-										"id": "V_String",
-										"params": ["11,7"]
-									} ]
-								},
-								{
-									"__identifier": "Flip",
-									"__value": true,
-									"__type": "Bool",
-									"defUid": 111,
-									"realEditorValues": [{
-										"id": "V_Bool",
-										"params": [ true ]
-									}]
-								},
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 117, "realEditorValues": [] }
+								}
 							]
 						}
 					]
@@ -1348,141 +1153,6 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "Slug",
-							"__grid": [15,11],
-							"__pivot": [0.5,1],
-							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 98,
-							"px": [248,192],
-							"fieldInstances": [
-								{
-									"__identifier": "Wander",
-									"__value": [ { "cx": 14, "cy": 11 }, { "cx": 16, "cy": 11 } ],
-									"__type": "Array<Point>",
-									"defUid": 100,
-									"realEditorValues": [ {
-										"id": "V_String",
-										"params": ["14,11"]
-									}, {
-										"id": "V_String",
-										"params": ["16,11"]
-									} ]
-								},
-								{
-									"__identifier": "Flip",
-									"__value": true,
-									"__type": "Bool",
-									"defUid": 110,
-									"realEditorValues": [{
-										"id": "V_Bool",
-										"params": [ true ]
-									}]
-								},
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "Slug",
-							"__grid": [18,11],
-							"__pivot": [0.5,1],
-							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 98,
-							"px": [298,192],
-							"fieldInstances": [
-								{
-									"__identifier": "Wander",
-									"__value": [ { "cx": 20, "cy": 11 }, { "cx": 18, "cy": 11 } ],
-									"__type": "Array<Point>",
-									"defUid": 100,
-									"realEditorValues": [ {
-										"id": "V_String",
-										"params": ["20,11"]
-									}, {
-										"id": "V_String",
-										"params": ["18,11"]
-									} ]
-								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 110, "realEditorValues": [] },
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 115, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "Bee",
-							"__grid": [23,10],
-							"__pivot": [0.5,1],
-							"__tile": { "tilesetUid": 2, "srcRect": [16,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 101,
-							"px": [377,171],
-							"fieldInstances": [
-								{
-									"__identifier": "Wander",
-									"__value": [ { "cx": 13, "cy": 10 }, { "cx": 13, "cy": 9 }, { "cx": 23, "cy": 9 } ],
-									"__type": "Array<Point>",
-									"defUid": 102,
-									"realEditorValues": [ {
-										"id": "V_String",
-										"params": ["13,10"]
-									}, {
-										"id": "V_String",
-										"params": ["13,9"]
-									}, {
-										"id": "V_String",
-										"params": ["23,9"]
-									} ]
-								},
-								{ "__identifier": "Flip", "__value": false, "__type": "Bool", "defUid": 111, "realEditorValues": [] },
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 117, "realEditorValues": [] }
-							]
-						},
-						{
-							"__identifier": "Blue_Bee",
-							"__grid": [17,7],
-							"__pivot": [0.5,1],
-							"__tile": { "tilesetUid": 2, "srcRect": [48,16,16,16] },
-							"width": 16,
-							"height": 16,
-							"defUid": 105,
-							"px": [286,128],
-							"fieldInstances": [
-								{
-									"__identifier": "Wander",
-									"__value": [ { "cx": 23, "cy": 7 }, { "cx": 23, "cy": 10 }, { "cx": 13, "cy": 10 }, { "cx": 13, "cy": 7 } ],
-									"__type": "Array<Point>",
-									"defUid": 106,
-									"realEditorValues": [ {
-										"id": "V_String",
-										"params": ["23,7"]
-									}, {
-										"id": "V_String",
-										"params": ["23,10"]
-									}, {
-										"id": "V_String",
-										"params": ["13,10"]
-									}, {
-										"id": "V_String",
-										"params": ["13,7"]
-									} ]
-								},
-								{
-									"__identifier": "Flip",
-									"__value": true,
-									"__type": "Bool",
-									"defUid": 112,
-									"realEditorValues": [{
-										"id": "V_Bool",
-										"params": [ true ]
-									}]
-								},
-								{ "__identifier": "Target", "__value": 0, "__type": "Int", "defUid": 116, "realEditorValues": [] }
-							]
-						},
-						{
 							"__identifier": "Gun_Pickup",
 							"__grid": [10,11],
 							"__pivot": [0.5,1],
@@ -1491,6 +1161,153 @@
 							"height": 16,
 							"defUid": 107,
 							"px": [171,178],
+							"fieldInstances": []
+						},
+						{
+							"__identifier": "Enemy",
+							"__grid": [15,11],
+							"__pivot": [0.5,0.5],
+							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
+							"width": 16,
+							"height": 16,
+							"defUid": 98,
+							"px": [247,184],
+							"fieldInstances": [
+								{
+									"__identifier": "Wander",
+									"__value": [ { "cx": 16, "cy": 11 }, { "cx": 14, "cy": 11 } ],
+									"__type": "Array<Point>",
+									"defUid": 100,
+									"realEditorValues": [ {
+										"id": "V_String",
+										"params": ["16,11"]
+									}, {
+										"id": "V_String",
+										"params": ["14,11"]
+									} ]
+								},
+								{
+									"__identifier": "Type",
+									"__value": "Slug",
+									"__type": "LocalEnum.EnemyType",
+									"defUid": 119,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Slug"]
+									}]
+								}
+							]
+						},
+						{
+							"__identifier": "Enemy",
+							"__grid": [19,11],
+							"__pivot": [0.5,0.5],
+							"__tile": { "tilesetUid": 2, "srcRect": [80,16,16,16] },
+							"width": 16,
+							"height": 16,
+							"defUid": 98,
+							"px": [313,184],
+							"fieldInstances": [
+								{
+									"__identifier": "Wander",
+									"__value": [ { "cx": 18, "cy": 11 }, { "cx": 20, "cy": 11 } ],
+									"__type": "Array<Point>",
+									"defUid": 100,
+									"realEditorValues": [ {
+										"id": "V_String",
+										"params": ["18,11"]
+									}, {
+										"id": "V_String",
+										"params": ["20,11"]
+									} ]
+								},
+								{
+									"__identifier": "Type",
+									"__value": "Slug",
+									"__type": "LocalEnum.EnemyType",
+									"defUid": 119,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["Slug"]
+									}]
+								}
+							]
+						},
+						{
+							"__identifier": "Enemy",
+							"__grid": [28,6],
+							"__pivot": [0.5,0.5],
+							"__tile": { "tilesetUid": 2, "srcRect": [16,16,16,16] },
+							"width": 16,
+							"height": 16,
+							"defUid": 98,
+							"px": [456,98],
+							"fieldInstances": [
+								{
+									"__identifier": "Wander",
+									"__value": [
+										{ "cx": 28, "cy": 10 },
+										{ "cx": 29, "cy": 10 },
+										{ "cx": 31, "cy": 5 },
+										{ "cx": 34, "cy": 3 },
+										{ "cx": 35, "cy": 3 },
+										{ "cx": 37, "cy": 3 },
+										{ "cx": 29, "cy": 2 }
+									],
+									"__type": "Array<Point>",
+									"defUid": 100,
+									"realEditorValues": [
+										{
+											"id": "V_String",
+											"params": ["28,10"]
+										},
+										{
+											"id": "V_String",
+											"params": ["29,10"]
+										},
+										{
+											"id": "V_String",
+											"params": ["31,5"]
+										},
+										{
+											"id": "V_String",
+											"params": ["34,3"]
+										},
+										{
+											"id": "V_String",
+											"params": ["35,3"]
+										},
+										{
+											"id": "V_String",
+											"params": ["37,3"]
+										},
+										{
+											"id": "V_String",
+											"params": ["29,2"]
+										}
+									]
+								},
+								{
+									"__identifier": "Type",
+									"__value": "YellowBee",
+									"__type": "LocalEnum.EnemyType",
+									"defUid": 119,
+									"realEditorValues": [{
+										"id": "V_String",
+										"params": ["YellowBee"]
+									}]
+								}
+							]
+						},
+						{
+							"__identifier": "Player",
+							"__grid": [3,8],
+							"__pivot": [0.5,1],
+							"__tile": { "tilesetUid": 2, "srcRect": [80,0,16,16] },
+							"width": 16,
+							"height": 16,
+							"defUid": 120,
+							"px": [59,144],
 							"fieldInstances": []
 						}
 					]
@@ -1510,7 +1327,7 @@
 					"layerDefUid": 54,
 					"pxOffsetX": 0,
 					"pxOffsetY": 0,
-					"visible": false,
+					"visible": true,
 					"optionalRules": [],
 					"intGrid": [
 						{ "coordId": 154, "v": 1 },

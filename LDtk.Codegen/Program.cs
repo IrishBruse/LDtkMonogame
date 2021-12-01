@@ -36,12 +36,12 @@ namespace LDtk.Codegen
                 File.Delete(files[i]);
             }
 
-            LdtkTypeConverter typeConverter = new()
+            LdtkTypeConverter typeConverter = new LdtkTypeConverter()
             {
                 PointAsVector2 = options.PointAsVector2
             };
 
-            LdtkGeneratorContext ctx = new()
+            LdtkGeneratorContext ctx = new LdtkGeneratorContext()
             {
                 LevelClassName = options.LevelClassName,
                 TypeConverter = typeConverter

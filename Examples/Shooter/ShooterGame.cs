@@ -10,103 +10,124 @@ using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Shooter.Entities;
 
-public class ApiGame : BaseExample
+public class ShooterGame : Game
 {
     // LDtk stuff
     private LDtkWorld world;
     private LDtkLevel[] levels;
     private LDtkRenderer renderer;
-    private readonly List<Bee> yellow_bees = new List<Bee>();
-    private readonly List<Blue_Bee> blue_bees = new List<Blue_Bee>();
-    private readonly List<Slug> slugs = new List<Slug>();
+    private readonly List<EnemyEntity> enemies = new List<EnemyEntity>();
     private readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
+    private PlayerEntity player;
+
     private Camera camera;
     private Texture2D spriteSheet;
 
-    public ApiGame() : base()
+    public static bool DebugF1 = false;
+    public static bool DebugF2 = false;
+    public static bool DebugF3 = false;
+
+    // Monogame Stuff
+    SpriteBatch spriteBatch;
+    readonly GraphicsDeviceManager graphics;
+    float pixelScale = 1f;
+    public static Texture2D Pixel { get; set; }
+    KeyboardState oldKeyboard;
+
+    public ShooterGame()
     {
-        Content.RootDirectory = "Content";
+        graphics = new GraphicsDeviceManager(this);
+    }
+
+    void MonogameInitialize()
+    {
+        Window.Title = "LDtkMonogame - Shooter";
+
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        Window.AllowUserResizing = true;
+        IsMouseVisible = true;
+        IsFixedTimeStep = false;
+
+        graphics.PreferredBackBufferWidth = 1280;
+        graphics.PreferredBackBufferHeight = 720;
+        graphics.ApplyChanges();
+
+        Window.ClientSizeChanged += (o, e) =>
+        {
+            pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 180, 1);
+        };
+        pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 180, 1);
+
+        Pixel = new Texture2D(GraphicsDevice, 1, 1);
+        Pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
     }
 
     protected override void Initialize()
     {
-        base.Initialize();
-        Window.Title = "LDtkMonogame - Shooter";
+        MonogameInitialize();
 
         camera = new Camera(GraphicsDevice);
         renderer = new LDtkRenderer(spriteBatch);
 
         world = LDtkWorld.LoadWorld("Data\\World.ldtk");
         levels = new LDtkLevel[world.Levels.Length];
+
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(world.RootFolder, "Characters.png"));
+
         for (int i = 0; i < world.Levels.Length; i++)
         {
             levels[i] = world.LoadLevel(world.Levels[i].Identifier);
 
-            yellow_bees.AddRange(levels[i].GetEntities<Bee>());
-            blue_bees.AddRange(levels[i].GetEntities<Blue_Bee>());
-            slugs.AddRange(levels[i].GetEntities<Slug>());
+            foreach (var enemy in levels[i].GetEntities<Enemy>())
+            {
+                enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
+            }
+
             guns.AddRange(levels[i].GetEntities<Gun_Pickup>());
 
             renderer.PrerenderLevel(levels[i]);
         }
 
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(world.RootFolder, "Characters.png"));
+        var playerData = world.Levels[1].GetEntity<Player>();
+        player = new PlayerEntity(playerData, spriteSheet, renderer);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        camera.Update(gameTime);
+        DebugInput(oldKeyboard);
 
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
         float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
-        Vector2 center = levels[0].Position.ToVector2() + levels[0].Size.ToVector2() / 2f;
-        camera.Position = Mouse.GetState().Position.ToVector2() + center;
-        camera.Zoom = 4;
+        camera.Update(gameTime);
+        camera.Position = player.Position;
+        camera.Zoom = pixelScale;
 
         for (int i = 0; i < guns.Count; i++)
         {
             guns[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1.5f) * .1f);
         }
 
-        for (int i = 0; i < yellow_bees.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            yellow_bees[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1f) * .13f);
+            enemies[i].Update(deltaTime);
         }
 
-        for (int i = 0; i < blue_bees.Count; i++)
-        {
-            blue_bees[i].Position = MoveTowards(blue_bees[i].Position, blue_bees[i].Wander[blue_bees[i].Target].ToVector2(), deltaTime * 20, out bool done);// 20 pixels per second
-            if (done)
-            {
-                blue_bees[i].Target = (blue_bees[i].Target + 1) % blue_bees[i].Wander.Length;
-            }
-        }
+        player.Update(deltaTime);
 
-        for (int i = 0; i < yellow_bees.Count; i++)
-        {
-            yellow_bees[i].Position = MoveTowards(yellow_bees[i].Position, yellow_bees[i].Wander[yellow_bees[i].Target].ToVector2(), deltaTime * 20, out bool done);// 20 pixels per second
-            if (done)
-            {
-                yellow_bees[i].Target = (yellow_bees[i].Target + 1) % yellow_bees[i].Wander.Length;
-            }
-        }
 
-        for (int i = 0; i < slugs.Count; i++)
-        {
-            slugs[i].Position = MoveTowards(slugs[i].Position, slugs[i].Wander[slugs[i].Target].ToVector2(), deltaTime * 20, out bool done);// 20 pixels per second
-            if (done)
-            {
-                slugs[i].Target = (slugs[i].Target + 1) % slugs[i].Wander.Length;
-            }
-        }
+        oldKeyboard = Keyboard.GetState();
 
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
+        float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
+
         GraphicsDevice.Clear(world.BgColor);
 
         spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
@@ -117,43 +138,17 @@ public class ApiGame : BaseExample
                 renderer.RenderPrerenderedLevel(levels[i]);
             }
 
-            int currentAnimationFrame = (int)(gameTime.TotalGameTime.TotalSeconds % .5f / .25f);
+            player.Draw(totalTime);
 
             // Draw Entities
-            for (int i = 0; i < slugs.Count; i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                renderer.RenderEntity(slugs[i], spriteSheet, (SpriteEffects)(slugs[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
-            }
-
-            for (int i = 0; i < yellow_bees.Count; i++)
-            {
-                renderer.RenderEntity(yellow_bees[i], spriteSheet, (SpriteEffects)(yellow_bees[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
-            }
-
-            for (int i = 0; i < blue_bees.Count; i++)
-            {
-                renderer.RenderEntity(blue_bees[i], spriteSheet, (SpriteEffects)(blue_bees[i].Flip ? 1 : 0), (currentAnimationFrame + i) % 2);
+                enemies[i].Draw(totalTime);
             }
 
             for (int i = 0; i < guns.Count; i++)
             {
                 renderer.RenderEntity(guns[i], spriteSheet);
-            }
-
-            for (int i = 0; i < yellow_bees.Count; i++)
-            {
-                for (int j = 0; j < yellow_bees[i].Wander.Length; j++)
-                {
-                    spriteBatch.Draw(pixel, yellow_bees[i].Wander[j].ToVector2(), yellow_bees[i].EditorVisualColor);
-                }
-            }
-
-            for (int i = 0; i < blue_bees.Count; i++)
-            {
-                for (int j = 0; j < blue_bees[i].Wander.Length; j++)
-                {
-                    spriteBatch.Draw(pixel, blue_bees[i].Wander[j].ToVector2(), blue_bees[i].EditorVisualColor);
-                }
             }
         }
         spriteBatch.End();
@@ -161,25 +156,21 @@ public class ApiGame : BaseExample
         base.Draw(gameTime);
     }
 
-    /// <summary>
-    /// Magic lerp that doesnt use start position but instead uses current position and <paramref name="maxDistanceDelta"/>
-    /// </summary>
-    public static Vector2 MoveTowards(Vector2 current, Vector2 end, float maxDistanceDelta, out bool done)
+    void DebugInput(KeyboardState old)
     {
-        float diffX = end.X - current.X;
-        float diffY = end.Y - current.Y;
-
-        float sqDist = diffX * diffX + diffY * diffY;
-
-        if (sqDist == 0 || maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta)
+        if (old.IsKeyUp(Keys.F1) && Keyboard.GetState().IsKeyDown(Keys.F1))
         {
-            done = true;
-            return end;
+            DebugF1 = !DebugF1;
         }
 
-        float dist = MathF.Sqrt(sqDist);
+        if (old.IsKeyUp(Keys.F2) && Keyboard.GetState().IsKeyDown(Keys.F2))
+        {
+            DebugF2 = !DebugF2;
+        }
 
-        done = false;
-        return new Vector2(current.X + diffX / dist * maxDistanceDelta, current.Y + diffY / dist * maxDistanceDelta);
+        if (old.IsKeyUp(Keys.F3) && Keyboard.GetState().IsKeyDown(Keys.F3))
+        {
+            DebugF3 = !DebugF3;
+        }
     }
 }

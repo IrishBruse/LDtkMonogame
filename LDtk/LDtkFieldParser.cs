@@ -135,6 +135,7 @@ internal static class LDtkFieldParser
                 case Field.PointArrayType:
                     List<Point> points = JsonSerializer.Deserialize<List<Point>>(fieldInstance._Value.ToString(), new JsonSerializerOptions() { Converters = { new CxCyConverter() } });
 
+                    // TODO: check all layers
                     int gridSize = level.LayerInstances[0]._GridSize;
 
                     for (int j = 0; j < points.Count; j++)

@@ -91,13 +91,13 @@ namespace LDtk
         {
             T[] entities = ParseEntities<T>(typeof(T).Name);
 
-            if (entities.Length == 1)
+            if (entities.Length != 0)
             {
                 return entities[0];
             }
             else
             {
-                throw new EntityNotFoundException($"Could not find one entity with identifier {typeof(T).Name}");
+                throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
             }
         }
 
