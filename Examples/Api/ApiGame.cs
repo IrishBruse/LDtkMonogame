@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Api.LDtkTypes;
 using Comora;
 using LDtk;
 using LDtk.Renderer;
+using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,7 +16,7 @@ public class ApiGame : BaseExample
     private LDtkWorld world;
     private LDtkLevel[] levels;
     private LDtkRenderer renderer;
-    private readonly List<RectRegion> rects = new();
+    private readonly List<RectRegion> rects = new List<RectRegion>();
     private Camera camera;
 
     public ApiGame()

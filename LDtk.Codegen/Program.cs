@@ -13,7 +13,7 @@ public class Program
     public static void Main(string[] args)
     {
         Console.WriteLine("-- LDtk Codegen --");
-        _ = Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
+        Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
     private static void HandleParseError(IEnumerable<Error> errs)
@@ -29,7 +29,7 @@ public class Program
     {
         string outputDirectory = Path.GetDirectoryName(Path.GetFullPath(options.Output));
 
-        _ = Directory.CreateDirectory(outputDirectory);
+        Directory.CreateDirectory(outputDirectory);
 
         string[] files = Directory.GetFiles(outputDirectory);
 
@@ -54,7 +54,7 @@ public class Program
 
         if (options.SingleFile)
         {
-            SingleFileOutput singleFileOutput = new()
+            SingleFileOutput singleFileOutput = new SingleFileOutput()
             {
                 OutputDir = outputDirectory,
                 Filename = Path.GetFileNameWithoutExtension(options.Input)
@@ -63,7 +63,7 @@ public class Program
         }
         else
         {
-            MultiFileOutput multiFileOutput = new()
+            MultiFileOutput multiFileOutput = new MultiFileOutput()
             {
                 PrintFragments = true,
                 OutputDir = outputDirectory,

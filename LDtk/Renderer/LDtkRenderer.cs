@@ -21,7 +21,7 @@ public class LDtkRenderer
     /// </summary>
     public SpriteBatch SpriteBatch { get; set; }
     private static Texture2D pixel;
-    private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new();
+    private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
     private readonly GraphicsDevice graphicsDevice;
     private readonly ContentManager content;
 
@@ -65,7 +65,7 @@ public class LDtkRenderer
             return;
         }
 
-        RenderedLevel renderLevel = new();
+        RenderedLevel renderLevel = new RenderedLevel();
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         {
@@ -80,7 +80,7 @@ public class LDtkRenderer
 
     private Texture2D[] RenderLayers(LDtkLevel level)
     {
-        List<Texture2D> layers = new();
+        List<Texture2D> layers = new List<Texture2D>();
 
         if (level.BgRelPath != null)
         {

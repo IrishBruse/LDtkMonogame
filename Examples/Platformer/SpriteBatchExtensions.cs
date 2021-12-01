@@ -1,6 +1,6 @@
+using AABB;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Platformer.AABB;
 
 namespace Platformer;
 
@@ -8,7 +8,7 @@ public static class SpriteBatchExtensions
 {
     private static Texture2D pixelTexture;
 
-    public static void DrawRect(this SpriteBatch spriteBatch, Rect rect, Color color)
+    public static void DrawRect(this SpriteBatch spriteBatch, Box rect, Color color)
     {
         CreatePixelTexture(spriteBatch);
         spriteBatch.Draw(pixelTexture, rect.Position, null, color, 0, rect.Pivot, rect.Size, SpriteEffects.None, 0);

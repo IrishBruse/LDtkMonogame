@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\LDtk\LDtk.csproj" />
+        <ProjectReference Include="..\AABB\AABB.csproj" />
     </ItemGroup>
 
 </Project>

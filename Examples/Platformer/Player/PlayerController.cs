@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
+using AABB;
 using LDtk;
+using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Platformer.AABB;
-using Platformer.LDtkTypes;
 
 namespace Platformer.Player;
 
@@ -13,10 +13,10 @@ public class PlayerController : ILDtkEntity
     private const float Gavity = 175f;
     public Animator animator;
     public bool fliped = true;
-    public Rect collider;
-    public Rect attack;
+    public Box collider;
+    public Box attack;
     public Vector2 velocity;
-    public List<(Rect rect, long type)> tiles;
+    public List<(Box rect, long type)> tiles;
     public Door door;
 
     private float gravityMultiplier;
@@ -41,8 +41,8 @@ public class PlayerController : ILDtkEntity
         Tile = new Rectangle(0, 0, 78, 58);
         Size = new Vector2(78, 58);
 
-        collider = new Rect(Vector2.Zero, new Vector2(20, 30), Pivot);
-        attack = new Rect(Vector2.Zero, new Vector2(20, 40), Vector2.One * .5f);
+        collider = new Box(Vector2.Zero, new Vector2(20, 30), Pivot);
+        attack = new Box(Vector2.Zero, new Vector2(20, 40), Vector2.One * .5f);
         animator = new Animator(this);
     }
 
@@ -138,7 +138,7 @@ public class PlayerController : ILDtkEntity
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
         Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
 
-        tiles = new List<(Rect rect, long type)>();
+        tiles = new List<(Box rect, long type)>();
 
         for (int x = topLeftGrid.X; x < bottomRightGrid.X; x++)
         {
@@ -147,7 +147,7 @@ public class PlayerController : ILDtkEntity
                 long intGridValue = collisions.GetValueAt(x, y);
                 if (intGridValue > 0)
                 {
-                    tiles.Add((new Rect(level.Position.ToVector2() + new Vector2(x * collisions.TileSize, y * collisions.TileSize), new Vector2(collisions.TileSize), Vector2.Zero), intGridValue));
+                    tiles.Add((new Box(level.Position.ToVector2() + new Vector2(x * collisions.TileSize, y * collisions.TileSize), new Vector2(collisions.TileSize), Vector2.Zero), intGridValue));
                 }
             }
         }
@@ -172,7 +172,7 @@ public class PlayerController : ILDtkEntity
         // Perform collision resolution
         for (int i = 0; i < z.Count; i++)
         {
-            (Rect rect, long type) = tiles[z[i].Key];
+            (Box rect, long type) = tiles[z[i].Key];
 
             if (collider.Cast(velocity, rect, out Vector2 cp, out Vector2 cn, out float ct, deltaTime))
             {

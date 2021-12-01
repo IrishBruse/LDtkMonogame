@@ -26,18 +26,18 @@ public class CompilationUnitSource
             return;
         }
 
-        _ = imports.Add(package);
+        imports.Add(package);
     }
 
     public void AddLine(string line)
     {
         for (int i = 0; i < currIndent; i++)
         {
-            _ = verbatimSrc.Append(cs.IndentString);
+            verbatimSrc.Append(cs.IndentString);
         }
 
-        _ = verbatimSrc.Append(line);
-        _ = verbatimSrc.Append(cs.NewLine);
+        verbatimSrc.Append(line);
+        verbatimSrc.Append(cs.NewLine);
     }
 
     public void StartBlock()
@@ -58,20 +58,20 @@ public class CompilationUnitSource
 
         if (cs.GeneratedFileHeader != null)
         {
-            _ = code.AppendLine(cs.GeneratedFileHeader);
+            code.AppendLine(cs.GeneratedFileHeader);
         }
 
-        _ = code.AppendLine("#pragma warning disable IDE1006");
+        code.AppendLine("#pragma warning disable");
 
         foreach (string use in imports)
         {
-            _ = code.AppendLine($"using {use};");
+            code.AppendLine($"using {use};");
         }
 
-        _ = code.AppendLine();
-        _ = code.Append(verbatimSrc);
+        code.AppendLine();
+        code.Append(verbatimSrc);
 
-        _ = code.AppendLine("#pragma warning restore IDE1006");
+        code.AppendLine("#pragma warning restore");
 
         return code.ToString();
     }

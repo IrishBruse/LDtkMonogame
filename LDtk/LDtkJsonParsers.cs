@@ -50,7 +50,7 @@ internal class RectConverter : JsonConverter<Rect>
             throw new JsonException();
         }
 
-        List<int> value = new();
+        List<int> value = new List<int>();
 
         while (reader.Read())
         {
@@ -91,7 +91,7 @@ internal class Vector2Converter : JsonConverter<Vector2>
             throw new JsonException();
         }
 
-        List<float> value = new();
+        List<float> value = new List<float>();
 
         while (reader.Read())
         {
@@ -130,7 +130,7 @@ internal class PointConverter : JsonConverter<Point>
             throw new JsonException();
         }
 
-        List<int> value = new();
+        List<int> value = new List<int>();
 
         while (reader.Read())
         {
@@ -169,27 +169,27 @@ internal class CxCyConverter : JsonConverter<Point>
             throw new JsonException();
         }
 
-        _ = reader.Read();
+        reader.Read();
 
         if (reader.TokenType != JsonTokenType.PropertyName)
         {
             throw new JsonException();
         }
 
-        _ = reader.Read();
+        reader.Read();
         int cx = reader.GetInt32();
 
-        _ = reader.Read();
+        reader.Read();
 
         if (reader.TokenType != JsonTokenType.PropertyName)
         {
             throw new JsonException();
         }
 
-        _ = reader.Read();
+        reader.Read();
         int cy = reader.GetInt32();
 
-        _ = reader.Read();
+        reader.Read();
         return reader.TokenType != JsonTokenType.EndObject ? throw new JsonException() : new Point(cx, cy);
     }
 

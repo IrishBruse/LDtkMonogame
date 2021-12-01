@@ -12,9 +12,9 @@ public class SingleFileOutput : ICodeOutput
 
     public void OutputCode(List<CompilationUnitFragment> fragments, LdtkGeneratorContext ctx)
     {
-        _ = Directory.CreateDirectory(OutputDir);
+        Directory.CreateDirectory(OutputDir);
 
-        CompilationUnit cu = new()
+        CompilationUnit cu = new CompilationUnit()
         {
             name = Filename,
             classNamespace = ctx.CodeSettings.Namespace,

@@ -13,7 +13,7 @@ public class LevelManager
     public LDtkLevel CurrentLevel { get; private set; }
 
     public Action<LDtkLevel> onEnterNewLevel;
-    private readonly List<string> levelsVisited = new();
+    private readonly List<string> levelsVisited = new List<string>();
     private readonly LDtkWorld world;
 
     public ContentManager content;

@@ -1,16 +1,16 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using AABB;
 using Comora;
 using LDtk;
+using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Platformer.AABB;
-using Platformer.LDtkTypes;
 using Platformer.Player;
 
 namespace Platformer;
-
 public class PlatformerGame : BaseExample
 {
     private LDtkWorld world;
@@ -23,9 +23,9 @@ public class PlatformerGame : BaseExample
     private bool showTileColliders;
     private bool showEntityColliders;
 
-    private readonly List<Door> doors = new();
-    private readonly List<Crate> crates = new();
-    private readonly List<Diamond> diamonds = new();
+    private readonly List<Door> doors = new List<Door>();
+    private readonly List<Crate> crates = new List<Crate>();
+    private readonly List<Diamond> diamonds = new List<Diamond>();
     private int diamondsCollected;
     private Camera camera;
     private Texture2D doorTexture;
@@ -126,7 +126,7 @@ public class PlatformerGame : BaseExample
     {
         for (int i = diamonds.Count - 1; i >= 0; i--)
         {
-            if (player.collider.Contains(new Rect(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
+            if (player.collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
             {
                 diamondsCollected++;
 
@@ -137,7 +137,7 @@ public class PlatformerGame : BaseExample
                 }
                 else
                 {
-                    _ = diamonds.Remove(diamonds[i]);
+                    diamonds.Remove(diamonds[i]);
                     return;
                 }
             }
@@ -165,7 +165,7 @@ public class PlatformerGame : BaseExample
                 }
             }
 
-            if (player.attack.Contains(new Rect(crates[i].Position, crates[i].Size, crates[i].Pivot)) && player.attacking)
+            if (player.attack.Contains(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot)) && player.attacking)
             {
                 crates[i].Damaged = true;
                 crates[i].Tile = new Rectangle(1 * (int)crates[i].Size.X, 0, (int)crates[i].Size.X, (int)crates[i].Size.Y);
@@ -203,7 +203,7 @@ public class PlatformerGame : BaseExample
                 doors[i].Tile = tile;
             }
 
-            if (new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).Contains(player.collider))
+            if (new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).Contains(player.collider))
             {
                 player.door = doors[i];
 
@@ -299,8 +299,8 @@ public class PlatformerGame : BaseExample
         for (int i = 0; i < doors.Count; i++)
         {
             spriteBatch.Draw(doorTexture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawPoint(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).TopLeft, Color.Black);
-            spriteBatch.DrawPoint(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot).BottomRight, Color.Black);
+            spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).TopLeft, Color.Black);
+            spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).BottomRight, Color.Black);
         }
 
         for (int i = 0; i < crates.Count; i++)
@@ -329,19 +329,19 @@ public class PlatformerGame : BaseExample
         {
             for (int i = 0; i < doors.Count; i++)
             {
-                spriteBatch.DrawRect(new Rect(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].EditorVisualColor);
                 spriteBatch.DrawPoint(doors[i].Position, Color.Black);
             }
 
             for (int i = 0; i < crates.Count; i++)
             {
-                spriteBatch.DrawRect(new Rect(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].EditorVisualColor);
                 spriteBatch.DrawPoint(crates[i].Position, Color.Black);
             }
 
             for (int i = 0; i < diamonds.Count; i++)
             {
-                spriteBatch.DrawRect(new Rect(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].EditorVisualColor);
                 spriteBatch.DrawPoint(diamonds[i].Position, Color.Black);
             }
 

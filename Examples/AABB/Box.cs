@@ -1,9 +1,9 @@
 using System;
 using Microsoft.Xna.Framework;
 
-namespace Platformer.AABB;
+namespace AABB;
 
-public class Rect
+public class Box
 {
     public Vector2 Position { get; set; }
     public Vector2 Size { get; set; }
@@ -12,7 +12,7 @@ public class Rect
     public Vector2 TopLeft => Position - (Size * Pivot);
     public Vector2 BottomRight => Position + (Size * (Vector2.One - Pivot));
 
-    public Rect(Vector2 position, Vector2 size, Vector2 pivot)
+    public Box(Vector2 position, Vector2 size, Vector2 pivot)
     {
         Position = position;
         Size = size;
@@ -27,12 +27,12 @@ public class Rect
             && point.Y <= BottomRight.Y;
     }
 
-    public bool Contains(Rect rect)
+    public bool Contains(Box rect)
     {
         bool inside = Contains(rect.TopLeft)
-                  || Contains(rect.BottomRight)
-                  || Contains(new Vector2(rect.TopLeft.X, rect.BottomRight.Y))
-                  || Contains(new Vector2(rect.BottomRight.X, rect.TopLeft.Y));
+                    || Contains(rect.BottomRight)
+                    || Contains(new Vector2(rect.TopLeft.X, rect.BottomRight.Y))
+                    || Contains(new Vector2(rect.BottomRight.X, rect.TopLeft.Y));
 
         return inside;
     }
@@ -90,7 +90,7 @@ public class Rect
         return true;
     }
 
-    public bool Cast(Vector2 direction, Rect target, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear, float deltaTime)
+    public bool Cast(Vector2 direction, Box target, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear, float deltaTime)
     {
         contactPoint = default;
         contactNormal = default;
@@ -101,7 +101,7 @@ public class Rect
             return false;
         }
 
-        Rect expandedTarget = new Rect(target.Position - (Size / 2f), target.Size + Size, target.Pivot);
+        Box expandedTarget = new Box(target.Position - (Size / 2f), target.Size + Size, target.Pivot);
 
         return expandedTarget.RayCast(Position, direction * deltaTime, out contactPoint, out contactNormal, out hitNear) && hitNear >= 0f && hitNear < 1f;
     }

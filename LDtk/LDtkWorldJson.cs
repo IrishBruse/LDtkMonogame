@@ -73,7 +73,7 @@ public partial class LDtkWorld
     public WorldLayout WorldLayout { get; set; }
 
 
-    public static readonly JsonSerializerOptions SerializeOptions = new()
+    public static readonly JsonSerializerOptions SerializeOptions = new JsonSerializerOptions()
     {
         Converters ={
                 new JsonStringEnumConverter(),
