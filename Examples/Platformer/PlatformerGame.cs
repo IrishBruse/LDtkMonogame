@@ -6,7 +6,6 @@ using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Platformer;
 using Platformer.AABB;
 using Platformer.Player;
 

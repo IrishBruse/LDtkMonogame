@@ -3,7 +3,7 @@ namespace Shooter;
 using System;
 using Microsoft.Xna.Framework;
 
-static class Extensions
+internal static class Extensions
 {
 
     /// <summary>

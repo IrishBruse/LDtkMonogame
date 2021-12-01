@@ -30,18 +30,19 @@ public class ShooterGame : Game
     public static bool DebugF3 = false;
 
     // Monogame Stuff
-    SpriteBatch spriteBatch;
-    readonly GraphicsDeviceManager graphics;
-    float pixelScale = 1f;
+    private SpriteBatch spriteBatch;
+    private readonly GraphicsDeviceManager graphics;
+    private float pixelScale = 1f;
     public static Texture2D Pixel { get; set; }
-    KeyboardState oldKeyboard;
+
+    private KeyboardState oldKeyboard;
 
     public ShooterGame()
     {
         graphics = new GraphicsDeviceManager(this);
     }
 
-    void MonogameInitialize()
+    private void MonogameInitialize()
     {
         Window.Title = "LDtkMonogame - Shooter";
 
@@ -81,7 +82,7 @@ public class ShooterGame : Game
         {
             levels[i] = world.LoadLevel(world.Levels[i].Identifier);
 
-            foreach (var enemy in levels[i].GetEntities<Enemy>())
+            foreach (Enemy enemy in levels[i].GetEntities<Enemy>())
             {
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
@@ -91,7 +92,7 @@ public class ShooterGame : Game
             renderer.PrerenderLevel(levels[i]);
         }
 
-        var playerData = world.Levels[1].GetEntity<Player>();
+        Player playerData = world.Levels[1].GetEntity<Player>();
         player = new PlayerEntity(playerData, spriteSheet, renderer);
     }
 
@@ -156,7 +157,7 @@ public class ShooterGame : Game
         base.Draw(gameTime);
     }
 
-    void DebugInput(KeyboardState old)
+    private void DebugInput(KeyboardState old)
     {
         if (old.IsKeyUp(Keys.F1) && Keyboard.GetState().IsKeyDown(Keys.F1))
         {

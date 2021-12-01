@@ -10,9 +10,8 @@ public class EnemyEntity
     private readonly Enemy data;
     private readonly Texture2D texture;
     private readonly LDtkRenderer renderer;
-
-    bool flip;
-    int nextWander;
+    private bool flip;
+    private int nextWander;
 
     public EnemyEntity(Enemy data, Texture2D texture, LDtkRenderer renderer)
     {
