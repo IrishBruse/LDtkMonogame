@@ -91,8 +91,8 @@ public class ShooterGame : Game
             renderer.PrerenderLevel(levels[i]);
         }
 
-        Player playerData = world.Levels[1].GetEntity<Player>();
-        player = new PlayerEntity(playerData, spriteSheet, renderer);
+        Player playerData = world.Levels[1].GetEntity<Player>();// TODO: get entity in levels
+        player = new PlayerEntity(playerData, spriteSheet, renderer, world.Levels[1]);// TODO: levels
     }
 
     protected override void Update(GameTime gameTime)

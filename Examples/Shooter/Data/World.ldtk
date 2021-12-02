@@ -749,7 +749,7 @@
 			"limitScope": "PerWorld",
 			"limitBehavior": "PreventAdding",
 			"pivotX": 0.5,
-			"pivotY": 1,
+			"pivotY": 0.5,
 			"fieldDefs": []
 		}
 	], "tilesets": [
@@ -797,7 +797,7 @@
 	], "iconTilesetUid": 2, "externalRelPath": null, "externalFileChecksum": null }], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
-			"identifier": "Level_0",
+			"identifier": "Level_1",
 			"uid": 0,
 			"worldX": 608,
 			"worldY": -320,
@@ -805,7 +805,7 @@
 			"pxHei": 320,
 			"__bgColor": "#FCDFCD",
 			"bgColor": null,
-			"useAutoIdentifier": true,
+			"useAutoIdentifier": false,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
@@ -1111,7 +1111,7 @@
 			"__neighbours": [{ "levelUid": 108, "dir": "w" }]
 		},
 		{
-			"identifier": "Level_1",
+			"identifier": "Level_0",
 			"uid": 108,
 			"worldX": -32,
 			"worldY": -320,
@@ -1119,7 +1119,7 @@
 			"pxHei": 320,
 			"__bgColor": "#FCDFCD",
 			"bgColor": null,
-			"useAutoIdentifier": true,
+			"useAutoIdentifier": false,
 			"bgRelPath": null,
 			"bgPos": null,
 			"bgPivotX": 0.5,
@@ -1301,13 +1301,13 @@
 						},
 						{
 							"__identifier": "Player",
-							"__grid": [3,8],
-							"__pivot": [0.5,1],
+							"__grid": [3,7],
+							"__pivot": [0.5,0.5],
 							"__tile": { "tilesetUid": 2, "srcRect": [80,0,16,16] },
 							"width": 16,
 							"height": 16,
 							"defUid": 120,
-							"px": [59,144],
+							"px": [59,112],
 							"fieldInstances": []
 						}
 					]

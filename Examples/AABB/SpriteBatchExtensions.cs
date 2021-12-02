@@ -1,8 +1,7 @@
-using AABB;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Platformer;
+namespace AABB;
 
 public static class SpriteBatchExtensions
 {
