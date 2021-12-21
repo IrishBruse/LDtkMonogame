@@ -12,6 +12,9 @@ namespace Shooter.Entities;
 public class PlayerEntity
 {
     public Vector2 Position { get => data.Position; set => data.Position = value; }
+    public bool flip;
+
+    public Action onShoot;
 
     private readonly Box collider;
     private readonly Player data;
@@ -19,16 +22,20 @@ public class PlayerEntity
     private readonly LDtkRenderer renderer;
     private readonly LDtkLevel level;
     private Vector2 velocity;
-    private float direction;
     private List<Box> tiles;
     private bool grounded;
+    private readonly GunEntity gun;
 
-    public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, LDtkLevel level)
+    private bool hasGun = false;
+    private KeyboardState oldKeyboard;
+
+    public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, LDtkLevel level, GunEntity gun)
     {
         data = player;
         this.texture = texture;
         this.renderer = renderer;
         this.level = level;
+        this.gun = gun;
 
         collider = new Box(Vector2.Zero, new Vector2(10, 16), data.Pivot);
     }
@@ -40,14 +47,25 @@ public class PlayerEntity
 
         int h = (keyboard.IsKeyDown(Keys.A) || keyboard.IsKeyDown(Keys.Left) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) || keyboard.IsKeyDown(Keys.Right) ? +1 : 0);
 
-        if (keyboard.IsKeyDown(Keys.Space) && grounded)
+        if (keyboard.IsKeyDown(Keys.W) && grounded)
         {
             velocity -= new Vector2(0, 90);
         }
 
+        if (keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyUp(Keys.Space) && hasGun)
+        {
+            onShoot?.Invoke();
+        }
+
+        if (gun.collider.Contains(collider))
+        {
+            gun.taken = true;
+            hasGun = true;
+        }
+
         if (h != 0)
         {
-            direction = h;
+            flip = h < 0;
         }
 
         float gravityMultiplier = 1;
@@ -57,11 +75,13 @@ public class PlayerEntity
             gravityMultiplier = 1.8f;
         }
 
-        velocity = new Vector2(h * 40, velocity.Y);
+        velocity = new Vector2(h * 60, velocity.Y);
         velocity += new Vector2(0, 200) * gravityMultiplier * deltaTime;
 
         CollisionDetection(level, deltaTime);
         Position += velocity * deltaTime;
+
+        oldKeyboard = keyboard;
     }
 
     public void Draw(float totalTime)
@@ -72,14 +92,17 @@ public class PlayerEntity
             frame = (int)(totalTime * 10) % 2;
         }
 
-        renderer.RenderEntity(data, texture, (SpriteEffects)(direction < 0 ? 1 : 0), frame);
+        renderer.RenderEntity(data, texture, (SpriteEffects)(flip ? 1 : 0), frame - (hasGun ? 5 : 0));
 
-        for (int i = 0; i < tiles.Count; i++)
+        if (ShooterGame.DebugF2)
         {
-            renderer.SpriteBatch.DrawRect(tiles[i], new Color(128, 255, 0, 128));
-        }
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                renderer.SpriteBatch.DrawRect(tiles[i], new Color(128, 255, 0, 128));
+            }
 
-        renderer.SpriteBatch.DrawRect(collider, new Color(128, 255, 0, 128));
+            renderer.SpriteBatch.DrawRect(collider, new Color(128, 255, 0, 128));
+        }
     }
 
     private void CollisionDetection(LDtkLevel level, float deltaTime)

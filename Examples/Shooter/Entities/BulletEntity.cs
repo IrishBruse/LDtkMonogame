@@ -1,52 +1,49 @@
-using System;
 using AABB;
 using LDtk.Renderer;
-using LDtkTypes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Shooter.Entities;
 
-public class GunEntity
+public class BulletEntity
 {
-    public Vector2 Position { get => data.Position; set => data.Position = value; }
+    public Vector2 Position { get; set; }
+    public bool flip;
 
-    public bool taken = false;
+    public bool hit = false;
 
     public readonly Box collider;
-    private readonly Gun_Pickup data;
     private readonly Texture2D texture;
     private readonly LDtkRenderer renderer;
 
-    public GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer)
+    public BulletEntity(Texture2D texture, LDtkRenderer renderer)
     {
-        this.data = data;
         this.texture = texture;
         this.renderer = renderer;
 
-        collider = new Box(Vector2.Zero, new Vector2(10, 16), data.Pivot);
+        collider = new Box(Vector2.Zero, new Vector2(10, 16), Vector2.Zero);
     }
 
-    public void Update(float totalTime)
+    public void Update(float deltaTime)
     {
-        if (taken)
+        if (hit)
         {
             return;
         }
 
-        Position += new Vector2(0, -MathF.Sin(totalTime * 1.5f) * .1f);
+        Position += new Vector2(192 * (flip ? -1 : 1), 0) * deltaTime;
 
         collider.Position = Position;
     }
 
     public void Draw()
     {
-        if (taken)
+        if (hit)
         {
             return;
         }
 
-        renderer.RenderEntity(data, texture);
+        renderer.SpriteBatch.Draw(texture, Position, new Rectangle(16 * 4, 0, 16, 16), Color.White, 0, Vector2.Zero, Vector2.One, (SpriteEffects)(flip ? 1 : 0), 0);
 
         if (ShooterGame.DebugF3)
         {

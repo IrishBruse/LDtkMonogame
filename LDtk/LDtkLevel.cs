@@ -91,9 +91,14 @@ public partial class LDtkLevel
     {
         T[] entities = ParseEntities<T>(typeof(T).Name);
 
-        return entities.Length != 0
-            ? entities[0]
-            : throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
+        if (entities.Length != 0)
+        {
+            return entities[0];
+        }
+        else
+        {
+            throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
+        }
     }
 
     /// <summary>

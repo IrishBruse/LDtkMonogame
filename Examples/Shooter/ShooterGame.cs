@@ -18,8 +18,9 @@ public class ShooterGame : Game
     private LDtkLevel[] levels;
     private LDtkRenderer renderer;
     private readonly List<EnemyEntity> enemies = new List<EnemyEntity>();
-    private readonly List<Gun_Pickup> guns = new List<Gun_Pickup>();
+    private readonly List<BulletEntity> bullets = new List<BulletEntity>();
     private PlayerEntity player;
+    private GunEntity gun;
 
     private Camera camera;
     private Texture2D spriteSheet;
@@ -86,13 +87,24 @@ public class ShooterGame : Game
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
-            guns.AddRange(levels[i].GetEntities<Gun_Pickup>());
-
             renderer.PrerenderLevel(levels[i]);
         }
 
+        Gun_Pickup gunData = levels[1].GetEntity<Gun_Pickup>();
+        gun = new GunEntity(gunData, spriteSheet, renderer);
+
         Player playerData = world.Levels[1].GetEntity<Player>();// TODO: get entity in levels
-        player = new PlayerEntity(playerData, spriteSheet, renderer, world.Levels[1]);// TODO: levels
+        player = new PlayerEntity(playerData, spriteSheet, renderer, world.Levels[1], gun);// TODO: levels
+
+        player.onShoot += () =>
+        {
+            BulletEntity b = new BulletEntity(spriteSheet, renderer)
+            {
+                Position = player.Position + new Vector2(player.flip ? -21 : 5, -6),
+                flip = player.flip,
+            };
+            bullets.Add(b);
+        };
     }
 
     protected override void Update(GameTime gameTime)
@@ -103,17 +115,19 @@ public class ShooterGame : Game
         float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
         camera.Update(gameTime);
-        camera.Position = player.Position;
+        camera.Position = new Vector2(player.Position.X, -170);
         camera.Zoom = pixelScale;
 
-        for (int i = 0; i < guns.Count; i++)
-        {
-            guns[i].Position += new Vector2(0, -MathF.Sin(totalTime * 1.5f) * .1f);
-        }
+        gun.Update(totalTime);
 
         for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].Update(deltaTime);
+        }
+
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            bullets[i].Update(deltaTime);
         }
 
         player.Update(deltaTime);
@@ -145,11 +159,14 @@ public class ShooterGame : Game
                 enemies[i].Draw(totalTime);
             }
 
-            for (int i = 0; i < guns.Count; i++)
+            // Draw bullets
+            for (int i = 0; i < bullets.Count; i++)
             {
-                renderer.RenderEntity(guns[i], spriteSheet);
+                bullets[i].Draw();
             }
         }
+
+        gun.Draw();
 
         spriteBatch.End();
 
