@@ -15,7 +15,6 @@ public class ShooterGame : Game
 {
     // LDtk stuff
     private LDtkWorld world;
-    private LDtkLevel[] levels;
     private LDtkRenderer renderer;
     private readonly List<EnemyEntity> enemies = new List<EnemyEntity>();
     private readonly List<BulletEntity> bullets = new List<BulletEntity>();
@@ -34,7 +33,6 @@ public class ShooterGame : Game
     private readonly GraphicsDeviceManager graphics;
     private float pixelScale = 1f;
     public static Texture2D Pixel { get; set; }
-
     private KeyboardState oldKeyboard;
 
     public ShooterGame()
@@ -74,27 +72,26 @@ public class ShooterGame : Game
         renderer = new LDtkRenderer(spriteBatch);
 
         world = LDtkWorld.LoadWorld("Data\\World.ldtk");
-        levels = new LDtkLevel[world.Levels.Length];
 
         spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(world.RootFolder, "Characters.png"));
 
         for (int i = 0; i < world.Levels.Length; i++)
         {
-            levels[i] = world.LoadLevel(world.Levels[i].Identifier);
+            world.Levels[i] = world.LoadLevel(world.Levels[i].Identifier);
 
-            foreach (Enemy enemy in levels[i].GetEntities<Enemy>())
+            foreach (Enemy enemy in world.Levels[i].GetEntities<Enemy>())
             {
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
-            renderer.PrerenderLevel(levels[i]);
+            renderer.PrerenderLevel(world.Levels[i]);
         }
 
-        Gun_Pickup gunData = levels[1].GetEntity<Gun_Pickup>();
+        Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();
         gun = new GunEntity(gunData, spriteSheet, renderer);
 
-        Player playerData = world.Levels[1].GetEntity<Player>();// TODO: get entity in levels
-        player = new PlayerEntity(playerData, spriteSheet, renderer, gun);// TODO: levels
+        Player playerData = world.GetEntity<Player>();
+        player = new PlayerEntity(playerData, spriteSheet, renderer, gun);
 
         player.onShoot += () =>
         {
@@ -165,9 +162,9 @@ public class ShooterGame : Game
         spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
         {
             // Draw Levels layers
-            for (int i = 0; i < levels.Length; i++)
+            for (int i = 0; i < world.Levels.Length; i++)
             {
-                renderer.RenderPrerenderedLevel(levels[i]);
+                renderer.RenderPrerenderedLevel(world.Levels[i]);
             }
 
             player.Draw(totalTime);

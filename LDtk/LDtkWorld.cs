@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -91,6 +92,29 @@ public partial class LDtkWorld
         }
 
         throw new LevelNotFoundException($"Could not find {identifier} Level in {this}.");
+    }
+
+    /// <summary>
+    /// Gets a collection of entities of type <typeparamref name="T"/> in the current level
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="EntityNotFoundException"></exception>
+    public T GetEntity<T>() where T : new()
+    {
+        List<T> entities = new List<T>();
+        for (int i = 0; i < Levels.Length; i++)
+        {
+            entities.AddRange(Levels[i].GetEntities<T>());
+        }
+
+        if (entities.Count == 1)
+        {
+            return entities[0];
+        }
+        else
+        {
+            throw new EntityNotFoundException($"Could not find entity with identifier {typeof(T).Name}");
+        }
     }
 
     /// <summary>
