@@ -37,14 +37,14 @@ public class LevelManager
     public void Update()
     {
         // Handle leaving a level
-        if (LevelContainsPoint(CurrentLevel, center) == false)
+        if (CurrentLevel.Contains(center) == false)
         {
             for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
             {
                 LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid, content);
                 renderer.PrerenderLevel(neighbour);
 
-                if (LevelContainsPoint(neighbour, center))
+                if (neighbour.Contains(center))
                 {
                     ChangeLevelTo(neighbour.Identifier);
                 }
@@ -90,14 +90,5 @@ public class LevelManager
             levelsVisited.Add(CurrentLevel.Identifier);
             onEnterNewLevel?.Invoke(CurrentLevel);
         }
-    }
-
-    private bool LevelContainsPoint(LDtkLevel level, Vector2 point)
-    {
-        return
-            point.X >= level.Position.X &&
-            point.Y >= level.Position.Y &&
-            point.X <= level.Position.X + level.Size.X &&
-            point.Y <= level.Position.Y + level.Size.Y;
     }
 }

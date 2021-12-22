@@ -94,7 +94,7 @@ public class ShooterGame : Game
         gun = new GunEntity(gunData, spriteSheet, renderer);
 
         Player playerData = world.Levels[1].GetEntity<Player>();// TODO: get entity in levels
-        player = new PlayerEntity(playerData, spriteSheet, renderer, world.Levels[1], gun);// TODO: levels
+        player = new PlayerEntity(playerData, spriteSheet, renderer, gun);// TODO: levels
 
         player.onShoot += () =>
         {
@@ -120,14 +120,33 @@ public class ShooterGame : Game
 
         gun.Update(totalTime);
 
+        for (int i = 0; i < world.Levels.Length; i++)
+        {
+            if (world.Levels[i].Contains(player.Position))
+            {
+                player.level = world.Levels[i];
+                break;
+            }
+        }
+
         for (int i = 0; i < enemies.Count; i++)
         {
             enemies[i].Update(deltaTime);
         }
 
-        for (int i = 0; i < bullets.Count; i++)
+        for (int i = bullets.Count - 1; i >= 0; i--)
         {
             bullets[i].Update(deltaTime);
+
+            for (int j = enemies.Count - 1; j >= 0; j--)
+            {
+                if (bullets[i].collider.Contains(enemies[j].collider))
+                {
+                    bullets.RemoveAt(i);
+                    enemies[j].Kill(deltaTime);
+                    break;
+                }
+            }
         }
 
         player.Update(deltaTime);

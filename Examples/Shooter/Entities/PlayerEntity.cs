@@ -9,9 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Shooter.Entities;
+
 public class PlayerEntity
 {
     public Vector2 Position { get => data.Position; set => data.Position = value; }
+    public LDtkLevel level;
     public bool flip;
 
     public Action onShoot;
@@ -20,7 +22,6 @@ public class PlayerEntity
     private readonly Player data;
     private readonly Texture2D texture;
     private readonly LDtkRenderer renderer;
-    private readonly LDtkLevel level;
     private Vector2 velocity;
     private List<Box> tiles;
     private bool grounded;
@@ -28,14 +29,16 @@ public class PlayerEntity
 
     private bool hasGun = false;
     private KeyboardState oldKeyboard;
+    private Vector2 startPosition;
 
-    public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, LDtkLevel level, GunEntity gun)
+    public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, GunEntity gun)
     {
         data = player;
         this.texture = texture;
         this.renderer = renderer;
-        this.level = level;
         this.gun = gun;
+
+        startPosition = data.Position;
 
         collider = new Box(Vector2.Zero, new Vector2(10, 16), data.Pivot);
     }
@@ -47,7 +50,7 @@ public class PlayerEntity
 
         int h = (keyboard.IsKeyDown(Keys.A) || keyboard.IsKeyDown(Keys.Left) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) || keyboard.IsKeyDown(Keys.Right) ? +1 : 0);
 
-        if (keyboard.IsKeyDown(Keys.W) && grounded)
+        if ((keyboard.IsKeyDown(Keys.W) || keyboard.IsKeyDown(Keys.Up)) && grounded)
         {
             velocity -= new Vector2(0, 90);
         }
@@ -61,6 +64,11 @@ public class PlayerEntity
         {
             gun.taken = true;
             hasGun = true;
+        }
+
+        if (Position.Y > 20)
+        {
+            Position = startPosition;
         }
 
         if (h != 0)

@@ -136,6 +136,32 @@ public partial class LDtkLevel
         return levelFields;
     }
 
+    /// <summary>
+    /// Check if point is inside of a level
+    /// </summary>
+    /// <returns>True if point is inside level</returns>
+    public bool Contains(Point point)
+    {
+        return
+            point.X >= Position.X &&
+            point.Y >= Position.Y &&
+            point.X <= Position.X + Size.X &&
+            point.Y <= Position.Y + Size.Y;
+    }
+
+    /// <summary>
+    /// Check if point is inside of a level
+    /// </summary>
+    /// <returns>True if point is inside level</returns>
+    public bool Contains(Vector2 point)
+    {
+        return
+            point.X >= Position.X &&
+            point.Y >= Position.Y &&
+            point.X <= Position.X + Size.X &&
+            point.Y <= Position.Y + Size.Y;
+    }
+
     private T[] ParseEntities<T>(string identifier) where T : new()
     {
         List<T> parsedEntities = new List<T>();
