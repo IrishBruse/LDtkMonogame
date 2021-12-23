@@ -38,7 +38,7 @@ public class ApiGame : BaseExample
         levels = new LDtkLevel[world.Levels.Length];
         for (int i = 0; i < world.Levels.Length; i++)
         {
-            levels[i] = world.LoadLevel("Level_" + i, Content);
+            levels[i] = world.LoadLevel("Level_" + i);
 
             rects.AddRange(levels[i].GetEntities<RectRegion>());
 

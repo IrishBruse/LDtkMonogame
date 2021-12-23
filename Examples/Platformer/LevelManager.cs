@@ -41,7 +41,7 @@ public class LevelManager
         {
             for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
             {
-                LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid, content);
+                LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid);
                 renderer.PrerenderLevel(neighbour);
 
                 if (neighbour.Contains(center))
@@ -58,20 +58,20 @@ public class LevelManager
 
         for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
         {
-            LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid, content);
+            LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid);
             renderer.RenderPrerenderedLevel(neighbour);
         }
     }
 
     public void ChangeLevelTo(string identifier)
     {
-        CurrentLevel = content != null ? world.LoadLevel(identifier, content) : world.LoadLevel(identifier);
+        CurrentLevel = world.LoadLevel(identifier);
 
         renderer.PrerenderLevel(CurrentLevel);
 
         for (int ii = 0; ii < CurrentLevel._Neighbours.Length; ii++)
         {
-            LDtkLevel neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid, content);
+            LDtkLevel neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid);
             renderer.PrerenderLevel(neighbourLevel);
         }
 
