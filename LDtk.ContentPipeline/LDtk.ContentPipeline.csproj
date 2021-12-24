@@ -19,7 +19,7 @@
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.ContentPipeline</PackageId>
-        <Description>LDtk importer for Monogame</Description>
+        <Description>LDtk contentpipeline extension for importing .ldtk and .ldtkl files</Description>
         <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
@@ -30,12 +30,14 @@
 
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-
-        <PackageOutputDir>../Nuget</PackageOutputDir>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="../Icon.png" Pack="true" PackagePath="" />
+        <Content Include="bin/Release/netcoreapp3.1/LDtk.dll">
+            <PackagePath>lib/netcoreapp3.1</PackagePath>
+            <Pack>true</Pack>
+        </Content>
     </ItemGroup>
 
 </Project>

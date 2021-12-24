@@ -16,7 +16,7 @@
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.Codegen</PackageId>
-        <Description>LDtk importer for Monogame</Description>
+        <Description>LDtk tool that generates staticaly typed entities</Description>
         <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
