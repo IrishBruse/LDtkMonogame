@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="..\..\LDtk.Codegen\bin\Debug\netcoreapp3.1\LDtk.Codegen.exe -i Data/World.ldtk" />
+        <Exec Command="..\..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.exe -i Data/World.ldtk" />
     </Target>
 
     <ItemGroup>

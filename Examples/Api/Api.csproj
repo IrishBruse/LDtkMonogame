@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="ldtkgen -i Content/Test_file_for_API_showing_all_features.ldtk" />
+        <Exec Command="..\..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.exe -i Content/Test_file_for_API_showing_all_features.ldtk" />
     </Target>
 
     <ItemGroup>
