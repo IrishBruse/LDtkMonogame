@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Version>0.4.0</Version>
+        <Version>0.4.1</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.ContentPipeline</PackageId>
@@ -27,15 +27,12 @@
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
         <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
-
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="../Icon.png" Pack="true" PackagePath="" />
         <Content Include="bin/Release/netcoreapp3.1/LDtk.dll">
-            <PackagePath>lib/netcoreapp3.1</PackagePath>
+            <PackagePath>lib/netcoreapp3.1/</PackagePath>
             <Pack>true</Pack>
         </Content>
     </ItemGroup>
