@@ -7,56 +7,14 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
+                "${workspaceFolder}\\LDtkMonogame.sln",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "publish",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "publish",
-                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+            "problemMatcher": [
+                "$msCompile"
             ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "watch",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "watch",
-                "run",
-                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },        
-        {
-            "label": "dotnet restore",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "restore",
-                "${workspaceFolder}/LDtkMonogame.Examples/LDtkMonogame.Examples.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "docfx build",
-            "command": "docfx",
-            "type": "process",
-            "args": [
-                "${workspaceFolder}/docfx_project/docfx.json"],
-            "problemMatcher": "$msCompile"
+            "group": "build"
         }
     ]
 }

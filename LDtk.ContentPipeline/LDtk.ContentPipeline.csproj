@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.0.1641" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\LDtk\LDtk.csproj" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Version>0.4.0</Version>
+        <Authors>Ethan Conneely</Authors>
+        <Product>LDtk Monogame</Product>
+        <PackageId>LDtkMonogame.ContentPipeline</PackageId>
+        <Description>LDtk importer for Monogame</Description>
+        <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
+        <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
+        <PackageIcon>Icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
+
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+        <PackageOutputDir>../Nuget</PackageOutputDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../Icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+</Project>

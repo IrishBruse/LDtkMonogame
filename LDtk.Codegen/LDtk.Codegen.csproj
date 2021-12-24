@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\LDtk\LDtk.csproj" />
+        <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <Version>0.4.0</Version>
+        <Authors>Ethan Conneely</Authors>
+        <Product>LDtk Monogame</Product>
+        <PackageId>LDtkMonogame.Codegen</PackageId>
+        <Description>LDtk importer for Monogame</Description>
+        <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
+        <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
+        <PackageIcon>Icon.png</PackageIcon>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
+
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>ldtkgen</ToolCommandName>
+
+        <PackageOutputDir>../Nuget</PackageOutputDir>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../Icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+</Project>

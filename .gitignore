@@ -15,6 +15,7 @@
 
 # Mono auto generated files
 mono_crash.*
+**/LDtkTypes/
 
 # Build results
 [Dd]ebug/
@@ -360,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+*/LDtkTypes/*.cs

@@ -1,4 +1,0 @@
-apiRules:
-  - exclude:
-      uidRegex: ^LDtk\.Json
-      type: Namespace
