@@ -4,6 +4,8 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <LangVersion>latest</LangVersion>
+
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,7 +21,7 @@
     </ItemGroup>
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="..\..\LDtk.Codegen\bin\Debug\netcoreapp3.1\LDtk.Codegen.exe -i Content/Test_file_for_API_showing_all_features.ldtk" />
+        <Exec Command="ldtkgen -i Content/Test_file_for_API_showing_all_features.ldtk" />
     </Target>
 
     <ItemGroup>
