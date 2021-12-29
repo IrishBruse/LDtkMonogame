@@ -16,9 +16,9 @@ public class SingleFileOutput : ICodeOutput
 
         CompilationUnit cu = new CompilationUnit()
         {
-            name = Filename,
-            classNamespace = ctx.CodeSettings.Namespace,
-            fragments = fragments
+            Name = Filename,
+            ClassNamespace = ctx.CodeSettings.Namespace,
+            Fragments = fragments
         };
 
         CompilationUnitSource source = new(ctx.CodeSettings);

@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace LDtk.Codegen.CompilationUnits;
 
 public class CompilationUnitField : CompilationUnitFragment
@@ -9,9 +11,9 @@ public class CompilationUnitField : CompilationUnitFragment
         Public,
     }
 
-    public string type;
-    public string requiredImport;
-    public FieldVisibility? visibility;
+    public string RequiredImport { get; set; }
+    public FieldVisibility? Visibility { get; set; }
+    public string Type { get; set; }
 
     public CompilationUnitField()
     {
@@ -19,33 +21,33 @@ public class CompilationUnitField : CompilationUnitFragment
 
     public CompilationUnitField(string name, string type, string requiredImport, FieldVisibility visibility)
     {
-        base.name = name;
-        this.type = type;
-        this.visibility = visibility;
-        this.requiredImport = requiredImport;
+        base.Name = name;
+        Type = type;
+        Visibility = visibility;
+        RequiredImport = requiredImport;
     }
 
     public CompilationUnitField(string name, string type)
     {
-        base.name = name;
-        this.type = type;
-        visibility = FieldVisibility.Public;
-        requiredImport = null;
+        base.Name = name;
+        Type = type;
+        Visibility = FieldVisibility.Public;
+        RequiredImport = null;
     }
 
     public override void Render(CompilationUnitSource source)
     {
-        if (requiredImport != null)
+        if (RequiredImport != null)
         {
-            source.Using(requiredImport);
+            source.Using(RequiredImport);
         }
 
         string vStr = "";
-        if (visibility.HasValue)
+        if (Visibility.HasValue)
         {
-            vStr = visibility.GetValueOrDefault().ToString().ToLower();
+            vStr = Visibility.GetValueOrDefault().ToString().ToLower(CultureInfo.InvariantCulture);
         }
 
-        source.AddLine($"{vStr} {type} {name} {{ get; set; }}");
+        source.AddLine($"{vStr} {Type} {Name} {{ get; set; }}");
     }
 }

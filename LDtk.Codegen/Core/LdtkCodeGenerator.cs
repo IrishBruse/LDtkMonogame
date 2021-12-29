@@ -17,7 +17,7 @@ public class LdtkCodeGenerator
 
         foreach (EntityDefinition ed in ldtkJson.Defs.Entities)
         {
-            CompilationUnitClass entity = GenerateEntity(ed, ctx);
+            ClassCompilationUnit entity = GenerateEntity(ed, ctx);
             fragments.Add(entity);
 
             if (ctx.CodeCustomizer != null)
@@ -26,7 +26,7 @@ public class LdtkCodeGenerator
             }
         }
 
-        CompilationUnitClass level = GenerateLevel(ldtkJson, ctx);
+        ClassCompilationUnit level = GenerateLevel(ldtkJson, ctx);
         fragments.Add(level);
 
         if (ctx.CodeCustomizer != null)
@@ -37,46 +37,46 @@ public class LdtkCodeGenerator
         output.OutputCode(fragments, ctx);
     }
 
-    public virtual CompilationUnitEnum GenerateEnum(EnumDefinition enumDefinition, LdtkGeneratorContext ctx)
+    public virtual EnumCompilationUnit GenerateEnum(EnumDefinition enumDefinition, LdtkGeneratorContext ctx)
     {
-        CompilationUnitEnum enumFragment = new CompilationUnitEnum()
+        EnumCompilationUnit enumFragment = new EnumCompilationUnit()
         {
-            name = enumDefinition.Identifier
+            Name = enumDefinition.Identifier
         };
 
         foreach (EnumValueDefinition evd in enumDefinition.Values)
         {
-            enumFragment.literals.Add(evd.Id);
+            enumFragment.Literals.Add(evd.Id);
         }
 
         return enumFragment;
     }
 
-    public virtual CompilationUnitClass GenerateEntity(EntityDefinition ed, LdtkGeneratorContext ctx)
+    public virtual ClassCompilationUnit GenerateEntity(EntityDefinition ed, LdtkGeneratorContext ctx)
     {
-        CompilationUnitClass classFragment = new CompilationUnitClass()
+        ClassCompilationUnit classFragment = new ClassCompilationUnit()
         {
-            name = ed.Identifier
+            Name = ed.Identifier
         };
 
         foreach (FieldDefinition fd in ed.FieldDefs)
         {
-            classFragment.fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
+            classFragment.Fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
         }
 
         return classFragment;
     }
 
-    public virtual CompilationUnitClass GenerateLevel(LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
+    public virtual ClassCompilationUnit GenerateLevel(LDtkWorld ldtkJson, LdtkGeneratorContext ctx)
     {
-        CompilationUnitClass levelClass = new CompilationUnitClass()
+        ClassCompilationUnit levelClass = new ClassCompilationUnit()
         {
-            name = ctx.LevelClassName
+            Name = ctx.LevelClassName
         };
 
         foreach (FieldDefinition fd in ldtkJson.Defs.LevelFields)
         {
-            levelClass.fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
+            levelClass.Fields.Add(ctx.TypeConverter.ToCompilationUnitField(fd, ctx));
         }
 
         return levelClass;

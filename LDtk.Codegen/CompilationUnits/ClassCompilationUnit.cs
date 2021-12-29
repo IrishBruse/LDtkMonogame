@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace LDtk.Codegen.CompilationUnits;
 
-public class CompilationUnitClass : CompilationUnitFragment
+public class ClassCompilationUnit : CompilationUnitFragment
 {
-    public string BaseClass { get; set; } = null;
-    public List<CompilationUnitField> fields = new List<CompilationUnitField>();
+    public string BaseClass { get; set; }
+    public List<CompilationUnitField> Fields { get; set; } = new List<CompilationUnitField>();
 
     public override void Render(CompilationUnitSource source)
     {
@@ -19,10 +19,10 @@ public class CompilationUnitClass : CompilationUnitFragment
         source.AddLine($"using LDtk;");
         source.AddLine($"using Microsoft.Xna.Framework;");
         source.AddLine("");
-        source.AddLine($"public class {name}{extends}");
+        source.AddLine($"public class {Name}{extends}");
         source.StartBlock();
 
-        foreach (CompilationUnitField field in fields)
+        foreach (CompilationUnitField field in Fields)
         {
             field.Render(source);
         }

@@ -1,5 +1,6 @@
 #pragma warning disable IDE0057
 
+using System;
 using LDtk.Codegen.CompilationUnits;
 
 namespace LDtk.Codegen.Core;
@@ -13,7 +14,7 @@ public class LdtkTypeConverter
 
     protected static string GetCSharpTypeFor(string ldtkType)
     {
-        return ldtkType.StartsWith("LocalEnum")
+        return ldtkType.StartsWith("LocalEnum", StringComparison.Ordinal)
             ? ldtkType.Substring(10)
             : ldtkType switch
             {
@@ -54,14 +55,14 @@ public class LdtkTypeConverter
     {
         CompilationUnitField field = new CompilationUnitField()
         {
-            name = fieldDefinition.Identifier,
-            type = GetDeclaringTypeFor(fieldDefinition, ctx),
-            visibility = CompilationUnitField.FieldVisibility.Public
+            Name = fieldDefinition.Identifier,
+            Type = GetDeclaringTypeFor(fieldDefinition, ctx),
+            Visibility = CompilationUnitField.FieldVisibility.Public
         };
 
         if (fieldDefinition.IsArray)
         {
-            field.requiredImport = GetArrayImport();
+            field.RequiredImport = GetArrayImport();
         }
 
         return field;

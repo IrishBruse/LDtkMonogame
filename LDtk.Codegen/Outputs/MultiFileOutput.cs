@@ -19,21 +19,21 @@ public class MultiFileOutput : ICodeOutput
         {
             CompilationUnit cuFile = new CompilationUnit()
             {
-                classNamespace = ctx.CodeSettings.Namespace,
-                name = fragment.name
+                ClassNamespace = ctx.CodeSettings.Namespace,
+                Name = fragment.Name
             };
 
-            cuFile.fragments.Add(fragment);
+            cuFile.Fragments.Add(fragment);
 
             CompilationUnitSource source = new(ctx.CodeSettings);
             cuFile.Render(source);
 
             if (PrintFragments)
             {
-                Console.WriteLine("Generating -> " + fragment.name + ".cs");
+                Console.WriteLine("Generating -> " + fragment.Name + ".cs");
             }
 
-            string filePath = OutputDir + "/" + fragment.name + ".cs";
+            string filePath = OutputDir + "/" + fragment.Name + ".cs";
             File.WriteAllText(filePath, source.GetSourceCode());
         }
     }

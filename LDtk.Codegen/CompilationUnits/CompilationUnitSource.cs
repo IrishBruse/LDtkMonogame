@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using LDtk.Codegen.Core;
 
@@ -65,7 +66,7 @@ public class CompilationUnitSource
 
         foreach (string use in imports)
         {
-            code.AppendLine($"using {use};");
+            code.AppendLine(CultureInfo.InvariantCulture, $"using {use};");
         }
 
         code.AppendLine();

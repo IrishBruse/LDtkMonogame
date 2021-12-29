@@ -5,23 +5,23 @@ namespace LDtk.Codegen.CompilationUnits;
 
 public class CompilationUnit : CompilationUnitFragment
 {
-    public string classNamespace;
-    public List<CompilationUnitFragment> fragments = new List<CompilationUnitFragment>();
+    public string ClassNamespace { get; set; }
+    public List<CompilationUnitFragment> Fragments { get; set; } = new List<CompilationUnitFragment>();
 
     public override void Render(CompilationUnitSource source)
     {
-        if (classNamespace != null)
+        if (ClassNamespace != null)
         {
-            source.AddLine($"namespace {classNamespace}");
+            source.AddLine($"namespace {ClassNamespace}");
             source.StartBlock();
         }
 
-        foreach (CompilationUnitFragment fragment in fragments)
+        foreach (CompilationUnitFragment fragment in Fragments)
         {
             fragment.Render(source);
         }
 
-        if (classNamespace != null)
+        if (ClassNamespace != null)
         {
             source.EndBlock();
         }
