@@ -1,18 +1,12 @@
-<p align="center">
-  <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?&label=LDtk&color=yellow"></a>
-  <a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?" /></a>
-  <a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
-</p>
-<p align="center">
-  <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame"> <img alt="GitHub Package Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Package?label=LDtkMonogame"></a>
-  <a href="https://github.com/IrishBruse/LDtkMonogame/tree/main/LDtkMonogame.Examples"> <img alt="GitHub Examples Build Status" src="https://img.shields.io/github/workflow/status/IrishBruse/LDtkMonogame/Build%20Examples?label=LDtkMonogame.Examples"></a>
-</p>
-
----
-
 <h1 align="center">
     <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a>
 </h1>
+
+| Name                         | Package                                                                                                                                                      | Description                                                               |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| LDtkMonogame                 | [![NuGet Badge](https://buildstats.info/nuget/LDtkMonogame)](https://www.nuget.org/packages/LDtkMonogame/)                                                   | Core LDtk Package                                                         |
+| LDtkMonogame.Codegen         | [![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.Codegen) ](https://www.nuget.org/packages/LDtkMonogame.Codegen/)                         | A tool that automates generation staticaly typed entity script generation |
+| LDtkMonogame.ContentPipeline | [![LDtkMonogame.ContentPipeline](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/) | Includes the dll needed for the MGCP tool                                 |
 
 ## Build instructions
 
