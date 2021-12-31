@@ -8,6 +8,9 @@
 | LDtkMonogame.Codegen         | [![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.Codegen) ](https://www.nuget.org/packages/LDtkMonogame.Codegen/)                         | A tool that automates generation staticaly typed entity script generation |
 | LDtkMonogame.ContentPipeline | [![LDtkMonogame.ContentPipeline](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/) | Includes the dll needed for the MGCP tool                                 |
 
+## Examples
+# [LDtkMonogameExample](https://github.com/IrishBruse/LDtkMonogameExample)
+
 ## Build instructions
 
 Run `build.bat` and ignore errors as its just because of the weird dependencies of the contentpipeline dll.

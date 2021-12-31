@@ -21,7 +21,7 @@ public class CompilationUnitField : CompilationUnitFragment
 
     public CompilationUnitField(string name, string type, string requiredImport, FieldVisibility visibility)
     {
-        base.Name = name;
+        Name = name;
         Type = type;
         Visibility = visibility;
         RequiredImport = requiredImport;
@@ -29,7 +29,7 @@ public class CompilationUnitField : CompilationUnitFragment
 
     public CompilationUnitField(string name, string type)
     {
-        base.Name = name;
+        Name = name;
         Type = type;
         Visibility = FieldVisibility.Public;
         RequiredImport = null;
