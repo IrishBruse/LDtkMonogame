@@ -5,11 +5,6 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using Color = Microsoft.Xna.Framework.Color;
-using Point = Microsoft.Xna.Framework.Point;
-using Rect = Microsoft.Xna.Framework.Rectangle;
-using Vector2 = Microsoft.Xna.Framework.Vector2;
-
 class ColorConverter : JsonConverter<Color>
 {
     public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
@@ -36,9 +31,9 @@ class ColorConverter : JsonConverter<Color>
     }
 }
 
-class RectConverter : JsonConverter<Rect>
+class RectConverter : JsonConverter<Rectangle>
 {
-    public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override Rectangle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType == JsonTokenType.Null)
         {
@@ -56,7 +51,7 @@ class RectConverter : JsonConverter<Rect>
         {
             if (reader.TokenType == JsonTokenType.EndArray)
             {
-                return new Rect(value[0], value[1], value[2], value[3]);
+                return new Rectangle(value[0], value[1], value[2], value[3]);
             }
 
             if (reader.TokenType != JsonTokenType.Number)
@@ -71,7 +66,7 @@ class RectConverter : JsonConverter<Rect>
         throw new JsonException();
     }
 
-    public override void Write(Utf8JsonWriter writer, Rect val, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, Rectangle val, JsonSerializerOptions options)
     {
         writer.WriteStartArray();
         writer.WriteNumberValue(val.X);

@@ -2,7 +2,6 @@ namespace LDtk;
 
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
-using Color = Microsoft.Xna.Framework.Color;
 
 #pragma warning disable 1591, 1570, IDE1006
 /// <summary>
