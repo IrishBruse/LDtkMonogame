@@ -1,8 +1,8 @@
-﻿using System;
+﻿namespace LDtk.ContentPipeline.Level;
+
+using System;
 using System.IO;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
-namespace LDtk.ContentPipeline.Level;
 
 [ContentImporter(".ldtkl", DisplayName = "LDtk Level Importer", DefaultProcessor = "LDtkLevelProcessor")]
 public class LDtkLevelImporter : ContentImporter<string>

@@ -1,7 +1,7 @@
+namespace LDtk.Codegen.CompilationUnits;
 
 using System.Collections.Generic;
 
-namespace LDtk.Codegen.CompilationUnits;
 public class EnumCompilationUnit : CompilationUnitFragment
 {
     public List<string> Literals { get; set; } = new List<string>();

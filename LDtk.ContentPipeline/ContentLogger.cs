@@ -1,6 +1,6 @@
-using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace LDtk.ContentPipeline;
+
+using Microsoft.Xna.Framework.Content.Pipeline;
 
 public static class ContentLogger
 {

@@ -1,9 +1,8 @@
+namespace LDtk;
+
 using System;
 using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
-
-namespace LDtk;
 
 /// <summary>
 /// LDtk IntGrid
@@ -28,7 +27,7 @@ public class LDtkIntGrid
     /// <value>Pixels</value>
     public Point WorldPosition { get; set; }
 
-    internal Dictionary<int, Color> colors = new Dictionary<int, Color>();
+    internal Dictionary<int, Color> colors = new();
 
     /// <summary>
     /// Gets the int value at location and return 0 if out of bounds

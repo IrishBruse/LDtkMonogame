@@ -1,10 +1,10 @@
+namespace LDtk;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
-
-namespace LDtk;
 
 public partial class LDtkLevel
 {
@@ -48,7 +48,7 @@ public partial class LDtkLevel
             }
 
             IntGridValueDefinition[] intgridValues = Parent.GetIntgridValueDefinitions(layer._Identifier);
-            Dictionary<int, Color> colors = new Dictionary<int, Color>();
+            Dictionary<int, Color> colors = new();
             for (int j = 0; j < intgridValues.Length; j++)
             {
                 colors.Add(intgridValues[j].Value, intgridValues[j].Color);
@@ -129,7 +129,7 @@ public partial class LDtkLevel
     /// <returns>Custom Fields for this level</returns>
     public T GetCustomFields<T>() where T : new()
     {
-        T levelFields = new T();
+        T levelFields = new();
 
         LDtkFieldParser.ParseCustomLevelFields(levelFields, FieldInstances);
 
@@ -162,9 +162,9 @@ public partial class LDtkLevel
             point.Y <= Position.Y + Size.Y;
     }
 
-    private T[] ParseEntities<T>(string identifier) where T : new()
+    T[] ParseEntities<T>(string identifier) where T : new()
     {
-        List<T> parsedEntities = new List<T>();
+        List<T> parsedEntities = new();
 
         for (int i = 0; i < LayerInstances.Length; i++)
         {
@@ -174,7 +174,7 @@ public partial class LDtkLevel
                 {
                     if (LayerInstances[i].EntityInstances[entityIndex]._Identifier == identifier)
                     {
-                        T entity = new T();
+                        T entity = new();
                         EntityInstance entityInstance = LayerInstances[i].EntityInstances[entityIndex];
 
                         LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);

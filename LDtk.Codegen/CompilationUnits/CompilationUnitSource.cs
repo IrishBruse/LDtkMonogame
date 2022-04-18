@@ -1,16 +1,16 @@
+namespace LDtk.Codegen.CompilationUnits;
+
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using LDtk.Codegen.Core;
 
-namespace LDtk.Codegen.CompilationUnits;
-
 public class CompilationUnitSource
 {
-    private readonly StringBuilder verbatimSrc;
-    private int currIndent;
-    private readonly CodeSettings cs;
-    private readonly SortedSet<string> imports;
+    readonly StringBuilder verbatimSrc;
+    int currIndent;
+    readonly CodeSettings cs;
+    readonly SortedSet<string> imports;
 
     public CompilationUnitSource(CodeSettings cs)
     {
@@ -55,7 +55,7 @@ public class CompilationUnitSource
 
     public string GetSourceCode()
     {
-        StringBuilder code = new StringBuilder();
+        StringBuilder code = new();
 
         if (cs.GeneratedFileHeader != null)
         {

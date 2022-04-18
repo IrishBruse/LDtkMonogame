@@ -1,3 +1,5 @@
+namespace LDtk;
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -8,9 +10,7 @@ using Point = Microsoft.Xna.Framework.Point;
 using Rect = Microsoft.Xna.Framework.Rectangle;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace LDtk;
-
-internal class ColorConverter : JsonConverter<Color>
+class ColorConverter : JsonConverter<Color>
 {
     public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -36,7 +36,7 @@ internal class ColorConverter : JsonConverter<Color>
     }
 }
 
-internal class RectConverter : JsonConverter<Rect>
+class RectConverter : JsonConverter<Rect>
 {
     public override Rect Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -50,7 +50,7 @@ internal class RectConverter : JsonConverter<Rect>
             throw new JsonException();
         }
 
-        List<int> value = new List<int>();
+        List<int> value = new();
 
         while (reader.Read())
         {
@@ -82,7 +82,7 @@ internal class RectConverter : JsonConverter<Rect>
     }
 }
 
-internal class Vector2Converter : JsonConverter<Vector2>
+class Vector2Converter : JsonConverter<Vector2>
 {
     public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -91,7 +91,7 @@ internal class Vector2Converter : JsonConverter<Vector2>
             throw new JsonException();
         }
 
-        List<float> value = new List<float>();
+        List<float> value = new();
 
         while (reader.Read())
         {
@@ -121,7 +121,7 @@ internal class Vector2Converter : JsonConverter<Vector2>
     }
 }
 
-internal class PointConverter : JsonConverter<Point>
+class PointConverter : JsonConverter<Point>
 {
     public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -130,7 +130,7 @@ internal class PointConverter : JsonConverter<Point>
             throw new JsonException();
         }
 
-        List<int> value = new List<int>();
+        List<int> value = new();
 
         while (reader.Read())
         {
@@ -160,7 +160,7 @@ internal class PointConverter : JsonConverter<Point>
     }
 }
 
-internal class CxCyConverter : JsonConverter<Point>
+class CxCyConverter : JsonConverter<Point>
 {
     public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

@@ -1,9 +1,9 @@
-﻿using System;
+﻿namespace LDtk.ContentPipeline.World;
+
+using System;
 using System.Text.Json;
 using Microsoft.Xna.Framework.Content.Pipeline;
 using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Compiler;
-
-namespace LDtk.ContentPipeline.World;
 
 [ContentTypeWriter]
 public class LDtkWorldWritter : ContentTypeWriter<LDtkWorld>

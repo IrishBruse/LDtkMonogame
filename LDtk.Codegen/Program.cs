@@ -1,12 +1,12 @@
-﻿using System;
+﻿namespace LDtk.Codegen;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using CommandLine;
 using LDtk.Codegen.Core;
 using LDtk.Codegen.Outputs;
-
-namespace LDtk.Codegen;
 
 public class Program
 {
@@ -16,16 +16,16 @@ public class Program
         Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
-    private static void HandleParseError(IEnumerable<Error> errs)
+    static void HandleParseError(IEnumerable<Error> errs)
     {
         if (errs.IsVersion())
         {
-            Console.WriteLine("Supports LDtk version " + Constants.supportedLDtkVersion);
+            Console.WriteLine("Supports LDtk version " + Constants.SupportedLDtkVersion);
             return;
         }
     }
 
-    private static void Run(Options options)
+    static void Run(Options options)
     {
         string outputDirectory = Path.GetDirectoryName(Path.GetFullPath(options.Output));
 
@@ -38,12 +38,12 @@ public class Program
             File.Delete(files[i]);
         }
 
-        LdtkTypeConverter typeConverter = new LdtkTypeConverter()
+        LdtkTypeConverter typeConverter = new()
         {
             PointAsVector2 = options.PointAsVector2
         };
 
-        LdtkGeneratorContext ctx = new LdtkGeneratorContext()
+        LdtkGeneratorContext ctx = new()
         {
             LevelClassName = options.LevelClassName,
             TypeConverter = typeConverter
@@ -54,7 +54,7 @@ public class Program
 
         if (options.SingleFile)
         {
-            SingleFileOutput singleFileOutput = new SingleFileOutput()
+            SingleFileOutput singleFileOutput = new()
             {
                 OutputDir = outputDirectory,
                 Filename = Path.GetFileNameWithoutExtension(options.Input)
@@ -63,7 +63,7 @@ public class Program
         }
         else
         {
-            MultiFileOutput multiFileOutput = new MultiFileOutput()
+            MultiFileOutput multiFileOutput = new()
             {
                 PrintFragments = true,
                 OutputDir = outputDirectory,
@@ -73,12 +73,12 @@ public class Program
 
         LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(options.Input), LDtkWorld.SerializeOptions);
 
-        LdtkCodeGenerator cg = new LdtkCodeGenerator();
+        LdtkCodeGenerator cg = new();
         cg.GenerateCode(ldtkWorld, ctx, output);
     }
 }
 
-internal class Options
+class Options
 {
     [Option('i', "input", Required = true, HelpText = "Input LDtk world file.")]
     public string Input { get; set; }

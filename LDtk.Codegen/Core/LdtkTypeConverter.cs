@@ -1,9 +1,10 @@
-#pragma warning disable IDE0057
+namespace LDtk.Codegen.Core;
+
 
 using System;
 using LDtk.Codegen.CompilationUnits;
 
-namespace LDtk.Codegen.Core;
+#pragma warning disable IDE0057
 public class LdtkTypeConverter
 {
     public bool PointAsVector2 { get; set; }
@@ -53,7 +54,7 @@ public class LdtkTypeConverter
 
     public CompilationUnitField ToCompilationUnitField(FieldDefinition fieldDefinition, LdtkGeneratorContext ctx)
     {
-        CompilationUnitField field = new CompilationUnitField()
+        CompilationUnitField field = new()
         {
             Name = fieldDefinition.Identifier,
             Type = GetDeclaringTypeFor(fieldDefinition, ctx),

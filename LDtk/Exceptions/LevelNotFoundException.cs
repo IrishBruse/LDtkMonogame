@@ -1,6 +1,6 @@
-using System;
-
 namespace LDtk.Exceptions;
+
+using System;
 
 /// <summary>
 /// Level Not Found Exception

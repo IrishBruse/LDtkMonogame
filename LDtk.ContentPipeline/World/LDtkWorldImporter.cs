@@ -1,8 +1,8 @@
-﻿using System;
+﻿namespace LDtk.ContentPipeline.World;
+
+using System;
 using System.IO;
 using Microsoft.Xna.Framework.Content.Pipeline;
-
-namespace LDtk.ContentPipeline.World;
 
 [ContentImporter(".ldtk", DisplayName = "LDtk World Importer", DefaultProcessor = "LDtkWorldProcessor")]
 public class LDtkWorldImporter : ContentImporter<string>

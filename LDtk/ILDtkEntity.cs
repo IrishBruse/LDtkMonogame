@@ -1,6 +1,6 @@
-using Microsoft.Xna.Framework;
-
 namespace LDtk;
+
+using Microsoft.Xna.Framework;
 
 /// <summary>
 /// Interface that implements the Entity

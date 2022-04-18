@@ -1,9 +1,9 @@
+namespace LDtk.Codegen.Outputs;
+
 using System.Collections.Generic;
 using System.IO;
 using LDtk.Codegen.CompilationUnits;
 using LDtk.Codegen.Core;
-
-namespace LDtk.Codegen.Outputs;
 
 public class SingleFileOutput : ICodeOutput
 {
@@ -14,7 +14,7 @@ public class SingleFileOutput : ICodeOutput
     {
         Directory.CreateDirectory(OutputDir);
 
-        CompilationUnit cu = new CompilationUnit()
+        CompilationUnit cu = new()
         {
             Name = Filename,
             ClassNamespace = ctx.CodeSettings.Namespace,

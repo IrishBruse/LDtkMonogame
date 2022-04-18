@@ -1,6 +1,6 @@
-using System;
-
 namespace LDtk.Exceptions;
+
+using System;
 
 /// <summary>
 /// Tileset Not Found Exception

@@ -1,6 +1,6 @@
-using System.Globalization;
-
 namespace LDtk.Codegen.CompilationUnits;
+
+using System.Globalization;
 
 public class CompilationUnitField : CompilationUnitFragment
 {

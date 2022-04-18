@@ -1,7 +1,6 @@
+namespace LDtk.Codegen.CompilationUnits;
 
 using System.Collections.Generic;
-
-namespace LDtk.Codegen.CompilationUnits;
 
 public class ClassCompilationUnit : CompilationUnitFragment
 {

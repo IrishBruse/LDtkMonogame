@@ -1,3 +1,5 @@
+namespace LDtk;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +8,6 @@ using System.Text.Json.Serialization;
 using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-
-namespace LDtk;
 
 public partial class LDtkWorld
 {
@@ -183,7 +183,7 @@ public partial class LDtkWorld
     /// <exception cref="EntityNotFoundException"></exception>
     public T GetEntity<T>() where T : new()
     {
-        List<T> entities = new List<T>();
+        List<T> entities = new();
         for (int i = 0; i < Levels.Length; i++)
         {
             entities.AddRange(Levels[i].GetEntities<T>());

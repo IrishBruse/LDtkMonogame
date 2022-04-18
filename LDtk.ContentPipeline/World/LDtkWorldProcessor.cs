@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework.Content.Pipeline;
+﻿namespace LDtk.ContentPipeline.World;
 
-namespace LDtk.ContentPipeline.World;
+using System;
+using Microsoft.Xna.Framework.Content.Pipeline;
 
 [ContentProcessor(DisplayName = "LDtk World Processor")]
 public class LDtkWorldProcessor : ContentProcessor<string, LDtkWorld>

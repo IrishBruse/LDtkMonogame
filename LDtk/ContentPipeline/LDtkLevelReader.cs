@@ -1,7 +1,7 @@
+namespace LDtk.ContentPipeline;
 
 using Microsoft.Xna.Framework.Content;
 
-namespace LDtk.ContentPipeline;
 /// <summary>
 /// LDtkLevelReader
 /// </summary>

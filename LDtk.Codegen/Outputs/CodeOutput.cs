@@ -1,8 +1,8 @@
+namespace LDtk.Codegen.Outputs;
+
 using System.Collections.Generic;
 using LDtk.Codegen.CompilationUnits;
 using LDtk.Codegen.Core;
-
-namespace LDtk.Codegen.Outputs;
 
 public interface ICodeOutput
 {

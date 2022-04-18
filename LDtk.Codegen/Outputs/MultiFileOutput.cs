@@ -1,10 +1,10 @@
+namespace LDtk.Codegen.Outputs;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using LDtk.Codegen.CompilationUnits;
 using LDtk.Codegen.Core;
-
-namespace LDtk.Codegen.Outputs;
 
 public class MultiFileOutput : ICodeOutput
 {
@@ -17,7 +17,7 @@ public class MultiFileOutput : ICodeOutput
 
         foreach (CompilationUnitFragment fragment in fragments)
         {
-            CompilationUnit cuFile = new CompilationUnit()
+            CompilationUnit cuFile = new()
             {
                 ClassNamespace = ctx.CodeSettings.Namespace,
                 Name = fragment.Name
