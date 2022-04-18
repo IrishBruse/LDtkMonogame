@@ -15,6 +15,21 @@
                 "$msCompile"
             ],
             "group": "build"
-        }
+        },
+        {
+            "label": "buildCodegen",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}\\LDtk.Codegen\\LDtk.Codegen.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": "build"
+        },
     ]
 }

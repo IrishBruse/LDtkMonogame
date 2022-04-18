@@ -1,54 +1,18 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "Debug Api",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Examples/Api/bin/Debug/netcoreapp3.1/Api.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Examples/Api/",
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "Debug Platformer",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Examples/Platformer/bin/Debug/netcoreapp3.1/Platformer.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Examples/Platformer/",
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
-        {
-            "name": "Debug Shooter",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Examples/Shooter/bin/Debug/netcoreapp3.1/Shooter.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/Examples/Shooter/",
-            "console": "externalTerminal",
-            "stopAtEntry": false
-        },
         {
             "name": "Debug Codegen",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/LDtk.Codegen/bin/Debug/netcoreapp3.1/LDtk.Codegen.dll",
+            "preLaunchTask": "buildCodegen",
+            "program": "${workspaceFolder}/LDtk.Codegen/bin/Debug/net6.0/LDtk.Codegen.dll",
             "args": [
                 "-i",
-                "../Examples/Api/Content/Test_file_for_API_showing_all_features.ldtk"
+                "../LDtk.Example/Test_file_for_API_showing_all_features.ldtk",
             ],
             "cwd": "${workspaceFolder}/LDtk.Codegen/",
-            "console": "externalTerminal",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         }
     ]
