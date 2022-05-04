@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Codegen", "LDtk.Codege
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.ContentPipeline", "LDtk.ContentPipeline\LDtk.ContentPipeline.csproj", "{1479A43C-F4FA-45B4-9E7C-41FD8A56771B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Quicktype", "LDtk.Quicktype\LDtk.Quicktype.csproj", "{C744A027-369B-42C0-B27C-EFE5EA15F402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Example", "LDtk.Example\LDtk.Example.csproj", "{664B7C84-1F3A-4A71-B46B-6741B4D28368}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,17 @@ Global
 		{1479A43C-F4FA-45B4-9E7C-41FD8A56771B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1479A43C-F4FA-45B4-9E7C-41FD8A56771B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1479A43C-F4FA-45B4-9E7C-41FD8A56771B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BFB61E2-CE4F-43D5-81A1-2A732C42DD2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BFB61E2-CE4F-43D5-81A1-2A732C42DD2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BFB61E2-CE4F-43D5-81A1-2A732C42DD2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BFB61E2-CE4F-43D5-81A1-2A732C42DD2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C744A027-369B-42C0-B27C-EFE5EA15F402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C744A027-369B-42C0-B27C-EFE5EA15F402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C744A027-369B-42C0-B27C-EFE5EA15F402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C744A027-369B-42C0-B27C-EFE5EA15F402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664B7C84-1F3A-4A71-B46B-6741B4D28368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664B7C84-1F3A-4A71-B46B-6741B4D28368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664B7C84-1F3A-4A71-B46B-6741B4D28368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664B7C84-1F3A-4A71-B46B-6741B4D28368}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

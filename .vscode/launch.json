@@ -2,18 +2,31 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Codegen",
+            "name": "LDtk.Codegen",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "buildCodegen",
+            "preLaunchTask": "Build LDtk.Codegen",
             "program": "${workspaceFolder}/LDtk.Codegen/bin/Debug/net6.0/LDtk.Codegen.dll",
-            "args": [
-                "-i",
-                "../LDtk.Example/Test_file_for_API_showing_all_features.ldtk",
-            ],
-            "cwd": "${workspaceFolder}/LDtk.Codegen/",
-            "console": "integratedTerminal",
-            "stopAtEntry": false
+            "cwd": "${workspaceFolder}/LDtk.Codegen",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LDtk.Quicktype",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build LDtk.Quicktype",
+            "program": "${workspaceFolder}/LDtk.Quicktype/bin/Debug/net6.0/LDtk.Quicktype.dll",
+            "cwd": "${workspaceFolder}/LDtk.Quicktype",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "LDtk.Example",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build LDtk.Example",
+            "program": "${workspaceFolder}/LDtk.Example/bin/Debug/net6.0/LDtk.Example.dll",
+            "cwd": "${workspaceFolder}/LDtk.Example",
+            "console": "integratedTerminal"
         }
     ]
 }
