@@ -155,6 +155,7 @@ public class Program
         file[index] = file[index].Replace("float[] Scale", "Vector2 Scale");
 
         file[index] = file[index].Replace("float[] CropRect", "Rectangle CropRect");
+        file[index] = file[index].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
 
         // string -> Guid/Iid
         file[index] = Regex.Replace(file[index], "(public string )(.*)(Iid )", "public Guid $2Iid ");
