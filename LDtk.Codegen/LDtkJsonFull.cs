@@ -199,13 +199,29 @@ namespace LDtk.Codegen
         public LDtkWorld[] Worlds { get; set; }
     }
 
+
+    public partial class AutoLayerRuleGroup
+    {
+        public bool Active { get; set; }
+
+        /// <summary>
+        /// This field was removed in 1.0.0 and should no inter be used.
+        /// </summary>
+        public bool? Collapsed { get; set; }
+
+        public bool IsOptional { get; set; }
+        public string Name { get; set; }
+        public int Uid { get; set; }
+    }
+
+
     /// <summary>
     /// If you're writing your own LDtk importer, you should probably just ignore most stuff in
     /// the defs section, as it contains data that are mostly important to the editor. To keep
     /// you away from the defs section and avoid some unnecessary JSON parsing, important data
     /// from definitions is often duplicated in fields prefixed with a float underscore (eg.
-    /// __identifier or __type).  The 2 only definition types you might need here are
-    /// Tilesets and Enums.
+    /// __identifier or __type).  The 2 only definition types you might
+    /// need here are Tilesets and Enums.
     /// A structure containing all the definitions of this project
     /// </summary>
     public partial class Definitions
@@ -383,7 +399,7 @@ namespace LDtk.Codegen
         /// you enable the advanced option Use Multilines type, you will have "Multilines"
         /// instead of "String" when relevant.
         /// </summary>
-        public string Type { get; set; }
+        public string _Type { get; set; }
 
         /// <summary>
         /// Optional list of accepted file extensions for FilePath value type. Includes the dot:
@@ -391,13 +407,13 @@ namespace LDtk.Codegen
         /// </summary>
         public string[] AcceptFileTypes { get; set; }
 
+        public bool AllowOutOfLevelRef { get; set; }
+        public string[] AllowedRefTags { get; set; }
+
         /// <summary>
         /// Possible values: Any, OnlySame, OnlyTags
         /// </summary>
         public AllowedRefs AllowedRefs { get; set; }
-
-        public string[] AllowedRefTags { get; set; }
-        public bool AllowOutOfLevelRef { get; set; }
 
         /// <summary>
         /// Array max length
@@ -484,7 +500,7 @@ namespace LDtk.Codegen
         /// Internal enum representing the possible field types. Possible values: F_Int, F_Float,
         /// F_String, F_Text, F_Bool, F_Color, F_Enum(...), F_Point, F_Path, F_EntityRef, F_Tile
         /// </summary>
-        public string FieldDefinitionType { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Unique Int identifier
@@ -571,7 +587,7 @@ namespace LDtk.Codegen
         /// An array of 4 Int values that refers to the tile in the tileset image: [ x, y, width,
         /// height ]
         /// </summary>
-        public int[] TileSrcRect { get; set; }
+        public int[] _TileSrcRect { get; set; }
 
         /// <summary>
         /// Optional color
@@ -594,7 +610,7 @@ namespace LDtk.Codegen
         /// <summary>
         /// Type of the layer (IntGrid, Entities, Tiles or AutoLayer)
         /// </summary>
-        public LayerType Type { get; set; }
+        public LayerType _Type { get; set; }
 
         /// <summary>
         /// Contains all the auto-layer rule definitions.
@@ -707,8 +723,9 @@ namespace LDtk.Codegen
         /// <summary>
         /// Reference to the default Tileset UID being used by this layer definition.
         /// WARNING: some layer instances might use a different tileset. So most of the time,
-        /// you should probably use the __tilesetDefUid value found in layer instances. Note:
-        /// since version 1.0.0, the old autoTilesetDefUid was removed and merged into this value.
+        /// you should probably use the __tilesetDefUid value found in layer
+        /// instances. Note: since version 1.0.0, the old autoTilesetDefUid was removed and
+        /// merged into this value.
         /// </summary>
         public int? TilesetDefUid { get; set; }
 
@@ -716,28 +733,13 @@ namespace LDtk.Codegen
         /// Type of the layer as Haxe Enum Possible values: IntGrid, Entities, Tiles,
         /// AutoLayer
         /// </summary>
-        public TypeEnum LayerDefinitionType { get; set; }
+        public TypeEnum Type { get; set; }
 
         /// <summary>
         /// Unique Int identifier
         /// </summary>
         public int Uid { get; set; }
     }
-
-    public partial class AutoLayerRuleGroup
-    {
-        public bool Active { get; set; }
-
-        /// <summary>
-        /// This field was removed in 1.0.0 and should no inter be used.
-        /// </summary>
-        public bool? Collapsed { get; set; }
-
-        public bool IsOptional { get; set; }
-        public string Name { get; set; }
-        public int Uid { get; set; }
-    }
-
 
     /// <summary>
     /// IntGrid value definition
@@ -767,12 +769,12 @@ namespace LDtk.Codegen
         /// <summary>
         /// Grid-based height
         /// </summary>
-        public int CHei { get; set; }
+        public int _CHei { get; set; }
 
         /// <summary>
         /// Grid-based width
         /// </summary>
-        public int CWid { get; set; }
+        public int _CWid { get; set; }
 
         /// <summary>
         /// The following data is used internally for various optimizations. It's always synced with
@@ -869,40 +871,39 @@ namespace LDtk.Codegen
         public int[] TileIds { get; set; }
     }
 
-
     public partial class EntityInstance
     {
         /// <summary>
         /// Grid-based coordinates ([x,y] format)
         /// </summary>
-        public Point Grid { get; set; }
+        public Point _Grid { get; set; }
 
         /// <summary>
         /// Entity definition identifier
         /// </summary>
-        public string Identifier { get; set; }
+        public string _Identifier { get; set; }
 
         /// <summary>
         /// Pivot coordinates  ([x,y] format, values are from 0 to 1) of the Entity
         /// </summary>
-        public Vector2 Pivot { get; set; }
+        public Vector2 _Pivot { get; set; }
 
         /// <summary>
         /// The entity "smart" color, guessed from either Entity definition, or one its field
         /// instances.
         /// </summary>
-        public string SmartColor { get; set; }
+        public string _SmartColor { get; set; }
 
         /// <summary>
         /// Array of tags defined in this Entity definition
         /// </summary>
-        public string[] Tags { get; set; }
+        public string[] _Tags { get; set; }
 
         /// <summary>
         /// Optional TilesetRect used to display this entity (it could either be the default Entity
         /// tile, or some tile provided by a field value, like an Enum).
         /// </summary>
-        public TilesetRectangle Tile { get; set; }
+        public TilesetRectangle _Tile { get; set; }
 
         /// <summary>
         /// Reference of the Entity definition UID
@@ -943,33 +944,33 @@ namespace LDtk.Codegen
         /// <summary>
         /// Field definition identifier
         /// </summary>
-        public string Identifier { get; set; }
+        public string _Identifier { get; set; }
 
         /// <summary>
         /// Optional TilesetRect used to display this field (this can be the field own Tile, or some
         /// other Tile guessed from the value, like an Enum).
         /// </summary>
-        public TilesetRectangle Tile { get; set; }
+        public TilesetRectangle _Tile { get; set; }
 
         /// <summary>
         /// Type of the field, such as Int, Float, String, Enum(my_enum_name), Bool,
         /// etc. NOTE: if you enable the advanced option Use Multilines type, you will have
         /// "Multilines" instead of "String" when relevant.
         /// </summary>
-        public string Type { get; set; }
+        public string _Type { get; set; }
 
         /// <summary>
-        /// Actual value of the field instance. The value type varies, depending on __type:
-        /// - For classic types (ie. Integer, Float, Boolean, String, Text and FilePath), you
-        /// just get the actual value with the expected type.  - For Color, the value is an
-        /// hexadecimal string using "#rrggbb" format.  - For Enum, the value is a String
-        /// representing the selected enum value.  - For Point, the value is a
-        /// GridPoint object.  - For Tile, the value is a
-        /// TilesetRect object.  - For EntityRef, the value is an
-        /// EntityReferenceInfos object. If the field is an
-        /// array, then this __value will also be a JSON array.
+        /// Actual value of the field instance. The value type varies, depending on
+        /// __type:  - For classic types (ie. Integer, Float, Boolean, String,
+        /// Text and FilePath), you just get the actual value with the expected type.  - For
+        /// Color, the value is an hexadecimal string using "#rrggbb" format.  - For
+        /// Enum, the value is a String representing the selected enum value.  - For
+        /// Point, the value is a GridPoint object.  - For Tile, the
+        /// value is a TilesetRect object.  - For EntityRef, the value
+        /// is an EntityReferenceInfos object. If the field
+        /// is an array, then this __value will also be a JSON array.
         /// </summary>
-        public object Value { get; set; }
+        public object _Value { get; set; }
 
         /// <summary>
         /// Reference of the Field definition UID
@@ -1040,167 +1041,6 @@ namespace LDtk.Codegen
         public int V { get; set; }
     }
 
-    public partial class LayerInstance
-    {
-        /// <summary>
-        /// Grid-based height
-        /// </summary>
-        public int CHei { get; set; }
-
-        /// <summary>
-        /// Grid-based width
-        /// </summary>
-        public int CWid { get; set; }
-
-        /// <summary>
-        /// Grid size
-        /// </summary>
-        public int GridSize { get; set; }
-
-        /// <summary>
-        /// Layer definition identifier
-        /// </summary>
-        public string Identifier { get; set; }
-
-        /// <summary>
-        /// Layer opacity as Float [0-1]
-        /// </summary>
-        public float Opacity { get; set; }
-
-        /// <summary>
-        /// Total layer X pixel offset, including both instance and definition offsets.
-        /// </summary>
-        public int PxTotalOffsetX { get; set; }
-
-        /// <summary>
-        /// Total layer Y pixel offset, including both instance and definition offsets.
-        /// </summary>
-        public int PxTotalOffsetY { get; set; }
-
-        /// <summary>
-        /// The definition UID of corresponding Tileset, if any.
-        /// </summary>
-        public int? TilesetDefUid { get; set; }
-
-        /// <summary>
-        /// The relative path to corresponding Tileset, if any.
-        /// </summary>
-        public string TilesetRelPath { get; set; }
-
-        /// <summary>
-        /// Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
-        /// </summary>
-        public LayerType Type { get; set; }
-
-        /// <summary>
-        /// An array containing all tiles generated by Auto-layer rules. The array is already sorted
-        /// in display order (ie. 1st tile is beneath 2nd, which is beneath 3rd etc.).
-        /// Note: if multiple tiles are stacked in the same cell as the result of different rules,
-        /// all tiles behind opaque ones will be discarded.
-        /// </summary>
-        public TileInstance[] AutoLayerTiles { get; set; }
-
-        public EntityInstance[] EntityInstances { get; set; }
-        public TileInstance[] GridTiles { get; set; }
-
-        /// <summary>
-        /// Unique layer instance identifier
-        /// </summary>
-        public Guid Iid { get; set; }
-
-        /// <summary>
-        /// WARNING: this deprecated value is no inter exported since version 1.0.0  Replaced
-        /// by: intGridCsv
-        /// </summary>
-        public IntGridValueInstance[] IntGrid { get; set; }
-
-        /// <summary>
-        /// A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
-        /// Values). Order is from left to right, and top to bottom (ie. first row from left to
-        /// right, followed by second row, etc). 0 means "empty cell" and IntGrid values
-        /// start at 1. The array size is __cWid x __cHei cells.
-        /// </summary>
-        public int[] IntGridCsv { get; set; }
-
-        /// <summary>
-        /// Reference the Layer definition UID
-        /// </summary>
-        public int LayerDefUid { get; set; }
-
-        /// <summary>
-        /// Reference to the UID of the level containing this layer instance
-        /// </summary>
-        public int LevelId { get; set; }
-
-        /// <summary>
-        /// An Array containing the UIDs of optional rules that were enabled in this specific layer
-        /// instance.
-        /// </summary>
-        public int[] OptionalRules { get; set; }
-
-        /// <summary>
-        /// This layer can use another tileset by overriding the tileset UID here.
-        /// </summary>
-        public int? OverrideTilesetUid { get; set; }
-
-        /// <summary>
-        /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-        /// the LayerDef optional offset, see __pxTotalOffsetX)
-        /// </summary>
-        public int PxOffsetX { get; set; }
-
-        /// <summary>
-        /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-        /// the LayerDef optional offset, see __pxTotalOffsetY)
-        /// </summary>
-        public int PxOffsetY { get; set; }
-
-        /// <summary>
-        /// Random seed used for Auto-Layers rendering
-        /// </summary>
-        public int Seed { get; set; }
-
-        /// <summary>
-        /// Layer instance visibility
-        /// </summary>
-        public bool Visible { get; set; }
-    }
-
-    /// <summary>
-    /// This structure represents a single tile from a given Tileset.
-    /// </summary>
-    public partial class TileInstance
-    {
-        /// <summary>
-        /// Internal data used by the editor. For auto-layer tiles: [ruleId, coordId].
-        /// For tile-layer tiles: [coordId].
-        /// </summary>
-        public int[] D { get; set; }
-
-        /// <summary>
-        /// "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.
-        /// - Bit 0 = X flip  - Bit 1 = Y flip  Examples: f=0 (no flip), f=1 (X flip
-        /// only), f=2 (Y flip only), f=3 (both flips)
-        /// </summary>
-        public int F { get; set; }
-
-        /// <summary>
-        /// Pixel coordinates of the tile in the layer ([x,y] format). Don't forget optional
-        /// layer offsets, if they exist!
-        /// </summary>
-        public Point Px { get; set; }
-
-        /// <summary>
-        /// Pixel coordinates of the tile in the tileset ([x,y] format)
-        /// </summary>
-        public Point Src { get; set; }
-
-        /// <summary>
-        /// The Tile ID in the corresponding tileset.
-        /// </summary>
-        public int T { get; set; }
-    }
-
     /// <summary>
     /// This section contains all the level data. It can be found in 2 distinct forms, depending
     /// on Project current settings:  - If "Separate level files" is disabled (default):
@@ -1217,31 +1057,31 @@ namespace LDtk.Codegen
         /// Background color of the level (same as bgColor, except the default value is
         /// automatically used here if its value is null)
         /// </summary>
-        public Color BgColor { get; set; }
+        public string _BgColor { get; set; }
 
         /// <summary>
         /// Position informations of the background image, if there is one.
         /// </summary>
-        public LevelBackgroundPosition BgPos { get; set; }
+        public LevelBackgroundPosition _BgPos { get; set; }
 
         /// <summary>
         /// An array listing all other levels touching this one on the world map. Only relevant
         /// for world layouts where level spatial positioning is manual (ie. GridVania, Free). For
         /// Horizontal and Vertical layouts, this array is always empty.
         /// </summary>
-        public NeighbourLevel[] Neighbours { get; set; }
+        public NeighbourLevel[] _Neighbours { get; set; }
 
         /// <summary>
         /// The "guessed" color for this level in the editor, decided using either the background
         /// color or an existing custom field.
         /// </summary>
-        public string SmartColor { get; set; }
+        public string _SmartColor { get; set; }
 
         /// <summary>
         /// Background color of the level. If null, the project defaultLevelBgColor should be
         /// used.
         /// </summary>
-        public string LevelBgColor { get; set; }
+        public Color BgColor { get; set; }
 
         /// <summary>
         /// Background image X pivot (0-1)
@@ -1255,10 +1095,10 @@ namespace LDtk.Codegen
 
         /// <summary>
         /// An enum defining the way the background image (if any) is positioned on the level. See
-        /// __bgPos for resulting position info. Possible values: &lt;null&gt;, Unscaled,
-        /// Contain, Cover, CoverDirty
+        /// __bgPos for resulting position info. Possible values: &lt;null&gt;,
+        /// Unscaled, Contain, Cover, CoverDirty
         /// </summary>
-        public BgPos? LevelBgPos { get; set; }
+        public BgPos? BgPos { get; set; }
 
         /// <summary>
         /// The optional relative path to the level background image.
@@ -1385,6 +1225,167 @@ namespace LDtk.Codegen
         public int? LevelUid { get; set; }
     }
 
+    public partial class LayerInstance
+    {
+        /// <summary>
+        /// Grid-based height
+        /// </summary>
+        public int _CHei { get; set; }
+
+        /// <summary>
+        /// Grid-based width
+        /// </summary>
+        public int _CWid { get; set; }
+
+        /// <summary>
+        /// Grid size
+        /// </summary>
+        public int _GridSize { get; set; }
+
+        /// <summary>
+        /// Layer definition identifier
+        /// </summary>
+        public string _Identifier { get; set; }
+
+        /// <summary>
+        /// Layer opacity as Float [0-1]
+        /// </summary>
+        public float _Opacity { get; set; }
+
+        /// <summary>
+        /// Total layer X pixel offset, including both instance and definition offsets.
+        /// </summary>
+        public int _PxTotalOffsetX { get; set; }
+
+        /// <summary>
+        /// Total layer Y pixel offset, including both instance and definition offsets.
+        /// </summary>
+        public int _PxTotalOffsetY { get; set; }
+
+        /// <summary>
+        /// The definition UID of corresponding Tileset, if any.
+        /// </summary>
+        public int? _TilesetDefUid { get; set; }
+
+        /// <summary>
+        /// The relative path to corresponding Tileset, if any.
+        /// </summary>
+        public string _TilesetRelPath { get; set; }
+
+        /// <summary>
+        /// Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
+        /// </summary>
+        public LayerType _Type { get; set; }
+
+        /// <summary>
+        /// An array containing all tiles generated by Auto-layer rules. The array is already sorted
+        /// in display order (ie. 1st tile is beneath 2nd, which is beneath 3rd etc.).
+        /// Note: if multiple tiles are stacked in the same cell as the result of different rules,
+        /// all tiles behind opaque ones will be discarded.
+        /// </summary>
+        public TileInstance[] AutoLayerTiles { get; set; }
+
+        public EntityInstance[] EntityInstances { get; set; }
+        public TileInstance[] GridTiles { get; set; }
+
+        /// <summary>
+        /// Unique layer instance identifier
+        /// </summary>
+        public Guid Iid { get; set; }
+
+        /// <summary>
+        /// WARNING: this deprecated value is no inter exported since version 1.0.0  Replaced
+        /// by: intGridCsv
+        /// </summary>
+        public IntGridValueInstance[] IntGrid { get; set; }
+
+        /// <summary>
+        /// A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
+        /// Values). Order is from left to right, and top to bottom (ie. first row from left to
+        /// right, followed by second row, etc). 0 means "empty cell" and IntGrid values
+        /// start at 1. The array size is __cWid x __cHei cells.
+        /// </summary>
+        public int[] IntGridCsv { get; set; }
+
+        /// <summary>
+        /// Reference the Layer definition UID
+        /// </summary>
+        public int LayerDefUid { get; set; }
+
+        /// <summary>
+        /// Reference to the UID of the level containing this layer instance
+        /// </summary>
+        public int LevelId { get; set; }
+
+        /// <summary>
+        /// An Array containing the UIDs of optional rules that were enabled in this specific layer
+        /// instance.
+        /// </summary>
+        public int[] OptionalRules { get; set; }
+
+        /// <summary>
+        /// This layer can use another tileset by overriding the tileset UID here.
+        /// </summary>
+        public int? OverrideTilesetUid { get; set; }
+
+        /// <summary>
+        /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
+        /// the LayerDef optional offset, see __pxTotalOffsetX)
+        /// </summary>
+        public int PxOffsetX { get; set; }
+
+        /// <summary>
+        /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
+        /// the LayerDef optional offset, see __pxTotalOffsetY)
+        /// </summary>
+        public int PxOffsetY { get; set; }
+
+        /// <summary>
+        /// Random seed used for Auto-Layers rendering
+        /// </summary>
+        public int Seed { get; set; }
+
+        /// <summary>
+        /// Layer instance visibility
+        /// </summary>
+        public bool Visible { get; set; }
+    }
+
+    /// <summary>
+    /// This structure represents a single tile from a given Tileset.
+    /// </summary>
+    public partial class TileInstance
+    {
+        /// <summary>
+        /// Internal data used by the editor. For auto-layer tiles: [ruleId, coordId].
+        /// For tile-layer tiles: [coordId].
+        /// </summary>
+        public int[] D { get; set; }
+
+        /// <summary>
+        /// "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.
+        /// - Bit 0 = X flip  - Bit 1 = Y flip  Examples: f=0 (no flip), f=1 (X flip
+        /// only), f=2 (Y flip only), f=3 (both flips)
+        /// </summary>
+        public int F { get; set; }
+
+        /// <summary>
+        /// Pixel coordinates of the tile in the layer ([x,y] format). Don't forget optional
+        /// layer offsets, if they exist!
+        /// </summary>
+        public Point Px { get; set; }
+
+        /// <summary>
+        /// Pixel coordinates of the tile in the tileset ([x,y] format)
+        /// </summary>
+        public Point Src { get; set; }
+
+        /// <summary>
+        /// The Tile ID in the corresponding tileset.
+        /// </summary>
+        public int T { get; set; }
+    }
+
     /// <summary>
     /// IMPORTANT: this type is not used yet in current LDtk version. It's only presented
     /// here as a preview of a planned feature.  A World contains multiple levels, and it has its
@@ -1437,6 +1438,16 @@ namespace LDtk.Codegen
     }
 
     /// <summary>
+    /// Checker mode Possible values: None, Horizontal, Vertical
+    /// </summary>
+    public enum Checker { Horizontal, None, Vertical };
+
+    /// <summary>
+    /// Defines how tileIds array is used Possible values: Single, Stamp
+    /// </summary>
+    public enum TileMode { Single, Stamp };
+
+    /// <summary>
     /// Possible values: Any, OnlySame, OnlyTags
     /// </summary>
     public enum AllowedRefs { Any, OnlySame, OnlyTags };
@@ -1480,16 +1491,6 @@ namespace LDtk.Codegen
     public enum TileRenderMode { Cover, FitInside, FullSizeCropped, FullSizeUncropped, NineSlice, Repeat, Stretch };
 
     /// <summary>
-    /// Checker mode Possible values: None, Horizontal, Vertical
-    /// </summary>
-    public enum Checker { Horizontal, None, Vertical };
-
-    /// <summary>
-    /// Defines how tileIds array is used Possible values: Single, Stamp
-    /// </summary>
-    public enum TileMode { Single, Stamp };
-
-    /// <summary>
     /// Type of the layer as Haxe Enum Possible values: IntGrid, Entities, Tiles,
     /// AutoLayer
     /// </summary>
@@ -1497,11 +1498,11 @@ namespace LDtk.Codegen
 
     public enum EmbedAtlas { LdtkIcons };
 
-    public enum Flag { DiscardPreCsvIntGrid, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, MultiWorlds, PrependIndexToLevelFileNames, UseMultilinesType };
-
     public enum BgPos { Contain, Cover, CoverDirty, Unscaled };
 
     public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
+
+    public enum Flag { DiscardPreCsvIntGrid, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, MultiWorlds, PrependIndexToLevelFileNames, UseMultilinesType };
 
     /// <summary>
     /// Naming convention for Identifiers (first-letter uppercase, full uppercase etc.) Possible

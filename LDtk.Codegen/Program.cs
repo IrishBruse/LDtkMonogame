@@ -2,11 +2,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using CommandLine;
-using LDtk.Codegen.Core;
-using LDtk.Codegen.Outputs;
+using LDtk.Codegen.Generators;
 
 public class Program
 {
@@ -23,62 +20,23 @@ public class Program
             Console.WriteLine("Supports LDtk version " + Constants.SupportedLDtkVersion);
             return;
         }
+
+        errs.Output();
     }
 
     static void Run(Options options)
     {
-        string outputDirectory = Path.GetDirectoryName(Path.GetFullPath(options.Output));
+        LDtkFile file = LDtkFile.FromFile(options.Input);
 
-        Directory.CreateDirectory(outputDirectory);
+        EnumGenerator enumGenerator = new(file, options);
+        enumGenerator.Generate();
 
-        string[] files = Directory.GetFiles(outputDirectory);
-
-        for (int i = 0; i < files.Length; i++)
-        {
-            File.Delete(files[i]);
-        }
-
-        LdtkTypeConverter typeConverter = new()
-        {
-            PointAsVector2 = options.PointAsVector2
-        };
-
-        LdtkGeneratorContext ctx = new()
-        {
-            LevelClassName = options.LevelClassName,
-            TypeConverter = typeConverter
-        };
-        ctx.CodeSettings.Namespace = options.Namespace;
-
-        ICodeOutput output;
-
-        if (options.SingleFile)
-        {
-            SingleFileOutput singleFileOutput = new()
-            {
-                OutputDir = outputDirectory,
-                Filename = Path.GetFileNameWithoutExtension(options.Input)
-            };
-            output = singleFileOutput;
-        }
-        else
-        {
-            MultiFileOutput multiFileOutput = new()
-            {
-                PrintFragments = true,
-                OutputDir = outputDirectory,
-            };
-            output = multiFileOutput;
-        }
-
-        LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(options.Input), LDtkWorld.SerializeOptions);
-
-        LdtkCodeGenerator cg = new();
-        cg.GenerateCode(ldtkWorld, ctx, output);
+        ClassGenerator classGenerator = new(file, options);
+        classGenerator.Generate();
     }
 }
 
-class Options
+public class Options
 {
     [Option('i', "input", Required = true, HelpText = "Input LDtk world file.")]
     public string Input { get; set; }
@@ -91,9 +49,6 @@ class Options
 
     [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file.")]
     public string LevelClassName { get; set; }
-
-    [Option("SingleFile", Required = false, Default = false, HelpText = "Output all the LDtk files into a single file.")]
-    public bool SingleFile { get; set; }
 
     [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
     public bool PointAsVector2 { get; set; }
