@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <!-- This is how to automate the ldtkgen tool -->
+    <!-- <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
+        <Exec Command="ldtkgen -i Content/World.ldtk" />
+    </Target> -->
+
+    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
+        <Exec Command="dotnet build ..\LDtk.Codegen\LDtk.Codegen.csproj" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk" />
+    </Target>
+
+    <ItemGroup>
+        <ProjectReference Include="..\LDtk\LDtk.csproj" />
+        <PackageReference Include="Comora" Version="0.5.0" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <MonoGameContentReference Include="Content\Content.mgcb" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+        <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+    </ItemGroup>
+
+</Project>
