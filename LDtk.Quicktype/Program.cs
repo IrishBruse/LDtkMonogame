@@ -34,13 +34,15 @@ public class Program
 
         for (int i = file.Count - 1; i >= 0; i--)
         {
+            file[i] = Regex.Replace(file[i], @"Aaaaaaaaaaaa", "_");
+
             TypeConversion(file, i);
-            RenameTypes(file, i);
             CleanupDocComments(file, i);
 
-            RemoveVariable(file, i, "ForcedRefs ForcedRefs");
+            RemoveVariable(file, i, "_ForcedRefs _ForcedRefs");
+            RemoveVariable(file, i, "AutoLayerRuleDefinition AutoRuleDef");
             RemoveVariable(file, i, "AutoLayerRuleDefinition[] Rules");
-            RemoveClass(file, i, "ForcedRefs");
+            RemoveClass(file, i, "_ForcedRefs");
             RemoveClass(file, i, "AutoLayerRuleDefinition");
 
             ForceLayerTypeToEnum(file, i);
@@ -146,35 +148,16 @@ public class Program
 
         file[index] = file[index].Replace("int[] Px", "Point Px");
         file[index] = file[index].Replace("int[] Src", "Point Src");
-        file[index] = file[index].Replace("int[] Grid", "Point Grid");
+        file[index] = file[index].Replace("int[] _Grid", "Point _Grid");
         file[index] = file[index].Replace("int[] TopLeftPx", "Point TopLeftPx");
 
-        file[index] = file[index].Replace("float[] Pivot", "Vector2 Pivot");
+        file[index] = file[index].Replace("float[] _Pivot", "Vector2 _Pivot");
         file[index] = file[index].Replace("float[] Scale", "Vector2 Scale");
 
         file[index] = file[index].Replace("float[] CropRect", "Rectangle CropRect");
 
         // string -> Guid/Iid
         file[index] = Regex.Replace(file[index], "(public string )(.*)(Iid )", "public Guid $2Iid ");
-
-        return file[index];
-    }
-
-    static string RenameTypes(SourceFile file, int index)
-    {
-        // World Type Rename
-        file[index] = file[index].Replace("public World ", "public LDtkWorld ");
-        file[index] = file[index].Replace("public World[]", "public LDtkWorld[]");
-        file[index] = file[index].Replace("public partial class World", "public partial class LDtkWorld");
-
-        // Level Type Rename
-        file[index] = file[index].Replace("public Level ", "public LDtkLevel ");
-        file[index] = file[index].Replace("public Level[]", "public LDtkLevel[]");
-
-        if (file[index].EndsWith("public partial class Level"))// Stop changing LevelBackground
-        {
-            file[index] = file[index].Replace("public partial class Level", "public partial class LDtkLevel");
-        }
 
         return file[index];
     }

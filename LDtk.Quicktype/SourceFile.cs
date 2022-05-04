@@ -19,7 +19,7 @@ public class SourceFile
         }
         else
         {
-            throw new ArgumentException("Line already removed");
+            Console.WriteLine("Line already removed: " + index);
         }
     }
 
