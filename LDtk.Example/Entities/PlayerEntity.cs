@@ -106,7 +106,7 @@ public class PlayerEntity
         velocity = new Vector2(h * 60, velocity.Y);
         velocity += new Vector2(0, 200) * gravityMultiplier * deltaTime;
 
-        // CollisionDetection(level, deltaTime);
+        CollisionDetection(level, deltaTime);
         Position += velocity * deltaTime;
 
         oldKeyboard = keyboard;

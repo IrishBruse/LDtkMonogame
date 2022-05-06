@@ -1,8 +1,9 @@
-﻿namespace LDtkMonogameExample;
+﻿#define UseContentPipeline
+
+namespace LDtkMonogameExample;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Comora;
 using LDtk;
 using LDtk.Renderer;
@@ -36,18 +37,15 @@ public class LDtkMonogameGame : Game
     public static bool DebugF2 { get; set; }
     public static bool DebugF3 { get; set; }
 
-    public bool useContentPipeline;  // requres you to edit the Content.mgcb to enable
-
     KeyboardState oldKeyboard;
 
     public LDtkMonogameGame()
     {
         graphics = new GraphicsDeviceManager(this);
 
-        if (useContentPipeline)
-        {
-            Content.RootDirectory = "Content";
-        }
+#if UseContentPipeline
+        Content.RootDirectory = "Content";
+#endif
     }
 
     void MonogameInitialize()
@@ -77,18 +75,16 @@ public class LDtkMonogameGame : Game
         MonogameInitialize();
 
         camera = new Camera(GraphicsDevice);
-        if (useContentPipeline)
-        {
-            renderer = new LDtkRenderer(spriteBatch, Content);
-            file = LDtkFile.FromFile("World", Content);
-            spriteSheet = Content.Load<Texture2D>("Characters");
-        }
-        else
-        {
-            renderer = new LDtkRenderer(spriteBatch);
-            file = LDtkFile.FromFile("Content/World.ldtk");
-            spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.Path), "Characters.png"));
-        }
+
+#if UseContentPipeline
+        renderer = new LDtkRenderer(spriteBatch, Content);
+        file = LDtkFile.FromFile("World", Content);
+        spriteSheet = Content.Load<Texture2D>("Characters");
+#else
+        renderer = new LDtkRenderer(spriteBatch);
+        file = LDtkFile.FromFile("Content/World.ldtk");
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.Path), "Characters.png"));
+#endif
 
         world = file.LoadWorld(Guid.Parse("2c81d720-b4d0-11ec-9871-056972512958"));
 
@@ -99,7 +95,7 @@ public class LDtkMonogameGame : Game
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
-            // renderer.PrerenderLevel(level);
+            renderer.PrerenderLevel(level);
         }
 
         Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();
@@ -194,11 +190,11 @@ public class LDtkMonogameGame : Game
 
         spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
         {
-            // // Draw Levels layers
-            // foreach (LDtkLevel level in world)
-            // {
-            //     renderer.RenderPrerenderedLevel(level);
-            // }
+            // Draw Levels layers
+            foreach (LDtkLevel level in world.Levels)
+            {
+                renderer.RenderPrerenderedLevel(level);
+            }
 
             player.Draw(totalTime);
 

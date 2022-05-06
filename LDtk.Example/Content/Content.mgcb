@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:D:\LDtkMonogame\LDtk.ContentPipeline\bin\Debug\netcoreapp3.1\LDtk.ContentPipeline.dll
+/reference:../../LDtk.ContentPipeline/bin/Debug/netcoreapp3.1/LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -39,6 +39,6 @@
 /build:Tilemap.png
 
 #begin World.ldtk
-/importer:LDtkWorldImporter
-/processor:LDtkWorldProcessor
+/importer:LDtkFileImporter
+/processor:LDtkFileProcessor
 /build:World.ldtk

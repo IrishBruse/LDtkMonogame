@@ -6,7 +6,7 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
-    <!-- This is how to automate the ldtkgen tool -->
+    <!-- This is how to automate the ldtkgen tool using nuget tool -->
     <!-- <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
         <Exec Command="ldtkgen -i Content/World.ldtk" />
     </Target> -->
