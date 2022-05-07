@@ -1,4 +1,4 @@
-﻿namespace LDtk.Codegen;
+namespace LDtk.Codegen;
 
 using System;
 using System.Collections.Generic;
