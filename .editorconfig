@@ -20,50 +20,6 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 ##########################################
-# File Extension Settings
-##########################################
-
-# Visual Studio Solution Files
-[*.sln]
-indent_style = tab
-
-# Visual Studio XML Project Files
-[*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
-indent_size = 4
-
-# XML Configuration Files
-[*.{xml,config,props,targets,nuspec,resx,ruleset,vsixmanifest,vsct}]
-indent_size = 4
-
-# JSON Files
-[*.{json,json5,webmanifest}]
-indent_size = 4
-
-# YAML Files
-[*.{yml,yaml}]
-indent_size = 4
-
-# Markdown Files
-[*.{md,mdx}]
-trim_trailing_whitespace = false
-
-# Web Files
-[*.{htm,html,js,jsm,ts,tsx,cjs,cts,ctsx,mjs,mts,mtsx,css,sass,scss,less,pcss,svg,vue}]
-indent_size = 4
-
-# Batch Files
-[*.{cmd,bat}]
-end_of_line = crlf
-
-# Bash Files
-[*.sh]
-end_of_line = lf
-
-# Makefiles
-[Makefile]
-indent_style = tab
-
-##########################################
 # Default .NET Code Style Severities
 # https://docs.microsoft.com/dotnet/fundamentals/code-analysis/configuration-options#scope
 ##########################################
@@ -263,9 +219,9 @@ csharp_preserve_single_line_statements = true
 csharp_preserve_single_line_blocks = true
 csharp_indent_switch_labels = true
 csharp_indent_case_contents = false
-# Allow instance fields as it would add alot of noise and require alot of pragmas
+
+# Disable Doc Comments
 dotnet_diagnostic.CA1051.severity = none
-dotnet_diagnostic.CS1591.severity = none
 
 # Disable the warning about user locale settings with string in the examples
 dotnet_diagnostic.CA1310.severity = none
