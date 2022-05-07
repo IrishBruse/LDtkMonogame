@@ -1,4 +1,4 @@
-﻿namespace LDtkMonogameExample;
+namespace LDtkMonogameExample;
 
 using System;
 

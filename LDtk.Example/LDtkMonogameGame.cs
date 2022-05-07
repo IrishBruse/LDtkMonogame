@@ -1,10 +1,9 @@
-﻿#define UseContentPipeline
+#define UseContentPipeline
 
 namespace LDtkMonogameExample;
 
 using System;
 using System.Collections.Generic;
-using Comora;
 using LDtk;
 using LDtk.Renderer;
 using LDtkMonogameExample.Entities;
@@ -118,6 +117,7 @@ public class LDtkMonogameGame : Game
                 Console.WriteLine("Gun_Pickup Type");
                 break;
                 default:
+                Console.WriteLine("Unhandled Entity of type " + item.GetType());
                 break;
             }
         }
@@ -140,7 +140,7 @@ public class LDtkMonogameGame : Game
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
         float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
-        camera.Update(gameTime);
+        camera.Update();
         camera.Position = new Vector2(player.Position.X, 120);
         camera.Zoom = pixelScale;
 
@@ -188,7 +188,7 @@ public class LDtkMonogameGame : Game
 
         GraphicsDevice.Clear(file.BgColor);
 
-        spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: camera.Transform);
         {
             // Draw Levels layers
             foreach (LDtkLevel level in world.Levels)
