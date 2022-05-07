@@ -1,4 +1,4 @@
-﻿namespace LDtk;
+namespace LDtk;
 
 using System;
 using System.Collections.Generic;
@@ -6,39 +6,37 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using LDtk.Exceptions;
 using Microsoft.Xna.Framework;
 
-/// <summary>
-/// Utility for parsing ldtk json data into more typed versions
-/// </summary>
+/// <summary> Utility for parsing ldtk json data into more typed versions </summary>
 static class LDtkFieldParser
 {
-    /// <summary>
-    /// Using Reflections parse the fields in the json/<paramref name="fields"/> into <paramref name="level"/>
-    /// </summary>
-    /// <typeparam name="T">Level Type</typeparam>
-    /// <param name="level">Level</param>
-    /// <param name="fields">LDtk fields to apply to the class</param>
-    /// <exception cref="FieldNotFoundException"></exception>
     public static void ParseCustomLevelFields<T>(T level, FieldInstance[] fields) where T : new()
     {
         ParseCustomFields(level, fields, null);
     }
 
-    /// <summary>
-    /// Using Reflections parse the fields in the json/<paramref name="fields"/> into <paramref name="entity"/>
-    /// </summary>
-    /// <typeparam name="T">Entity Type</typeparam>
-    /// <param name="entity">Entity</param>
-    /// <param name="fields">LDtk fields to apply to the class</param>
-    /// <param name="level"></param>
-    /// <exception cref="FieldNotFoundException"></exception>
     public static void ParseCustomEntityFields<T>(T entity, FieldInstance[] fields, LDtkLevel level) where T : new()
     {
         ParseCustomFields(entity, fields, level);
     }
 
+    public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
+    {
+        ParseBaseField(entity, "Identifier", entityInstance._Identifier);
+        ParseBaseField(entity, "Position", (entityInstance.Px + level.Position).ToVector2());
+        ParseBaseField(entity, "Pivot", entityInstance._Pivot);
+        ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
+
+        if (entityInstance._Tile != null)
+        {
+            TilesetRectangle tileDefinition = entityInstance._Tile;
+            Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
+            ParseBaseField(entity, "Tile", rect);
+        }
+    }
+
+    // Helpers
     static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
     {
         for (int i = 0; i < fields.Length; i++)
@@ -50,7 +48,7 @@ static class LDtkFieldParser
 
             if (variableDef == null)
             {
-                throw new FieldNotFoundException($"Error: Field \"{variableName}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
+                throw new LDtkException($"Error: Field \"{variableName}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
             }
 
             // Split any enums
@@ -61,9 +59,7 @@ static class LDtkFieldParser
 
             if (enumTypeIndex != -1)
             {
-                variableType = arrayEndIndex != -1
-                    ? variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex)
-                    : variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
+                variableType = arrayEndIndex != -1 ? variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex) : variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
             }
 
             switch (variableType)
@@ -78,7 +74,6 @@ static class LDtkFieldParser
                 {
                     variableDef.SetValue(classFields, Convert.ChangeType(fieldInstance._Value.ToString(), variableDef.PropertyType));
                 }
-
                 break;
 
                 case Field.IntArrayType:
@@ -126,7 +121,6 @@ static class LDtkFieldParser
                         variableDef.SetValue(classFields, Point.Zero);
                     }
                 }
-
                 break;
 
                 case Field.PointArrayType:
@@ -152,29 +146,23 @@ static class LDtkFieldParser
                 break;
 
                 default:
-                throw new FieldNotFoundException("Unknown Variable of type " + fieldInstance._Type);
+                throw new LDtkException("Unknown Variable of type " + fieldInstance._Tile);
             }
         }
     }
 
-    public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
+    static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
-        EntityDefinition entityDefinition = level.Parent.GetEntityDefinitionFromUid(entityInstance.DefUid);
+        PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
-        ParseBaseField(entity, "Position", (entityInstance.Px + level.Position).ToVector2());
-        ParseBaseField(entity, "Pivot", entityInstance._Pivot);
-        ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
-        ParseBaseField(entity, "EditorVisualColor", entityDefinition.Color);
-
-        if (entityInstance._Tile != null)
+        if (variableDef == null)
         {
-            EntityInstanceTile tileDefinition = entityInstance._Tile;
-            Rectangle rect = tileDefinition.SrcRect;
-            ParseBaseField(entity, "Tile", rect);
+            throw new LDtkException($"Error: Field \"{variableDef.Name}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
         }
+
+        variableDef.SetValue(entity, value);
     }
 
-    // Helpers
     static Color ParseStringToColor(string hex)
     {
         return ParseStringToColor(hex, 255);
@@ -194,42 +182,5 @@ static class LDtkFieldParser
         {
             return new Color(0xFF00FFFF);
         }
-    }
-
-    static void ParseBaseField<T>(T entity, string fieldName, object value)
-    {
-        PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-
-        if (variableDef == null)
-        {
-            throw new FieldNotFoundException($"Error: Field \"{variableDef.Name}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
-        }
-
-        variableDef.SetValue(entity, value);
-    }
-
-    /// <summary>
-    /// Entity and Level Field Types
-    /// </summary>
-    static class Field
-    {
-        public const string IntType = "Int";
-        public const string IntArrayType = "Array<Int>";
-        public const string FloatType = "Float";
-        public const string FloatArrayType = "Array<Float>";
-        public const string BoolType = "Bool";
-        public const string BoolArrayType = "Array<Bool>";
-        public const string EnumType = "Enum";
-        public const string EnumArrayType = "Array<Enum>";
-        public const string LocalEnumType = "LocalEnum";
-        public const string LocalEnumArrayType = "Array<LocalEnum>";
-        public const string StringType = "String";
-        public const string StringArrayType = "Array<String>";
-        public const string FilePathType = "FilePath";
-        public const string FilePathArrayType = "Array<FilePath>";
-        public const string ColorType = "Color";
-        public const string ColorArrayType = "Array<Color>";
-        public const string PointType = "Point";
-        public const string PointArrayType = "Array<Point>";
     }
 }
