@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using LDtk.Exceptions;
+using LDtk;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -50,8 +50,6 @@ public class LDtkRenderer
     {
         this.content = content;
     }
-
-    #region Levels
 
     /// <summary>
     /// Prerender out the level to textures to optimize the rendering process
@@ -138,8 +136,8 @@ public class LDtkRenderer
                 }
 
                 break;
+
                 case LayerType.Entities:
-                break;
                 default:
                 break;
             }
@@ -168,9 +166,10 @@ public class LDtkRenderer
 
     Texture2D GetTexture(LDtkLevel level, string path)
     {
+        _ = level;
         if (content == null)
         {
-            return Texture2D.FromFile(graphicsDevice, Path.Combine(level.Parent.RootFolder, path));
+            return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
         }
         else
         {
@@ -194,7 +193,7 @@ public class LDtkRenderer
         }
         else
         {
-            throw new LevelNotFoundException($"No prerendered level with Identifier {level.Identifier} found.");
+            throw new LDtkException($"No prerendered level with Identifier {level.Identifier} found.");
         }
     }
 
@@ -218,27 +217,23 @@ public class LDtkRenderer
     /// <param name="intGrid"></param>
     public void RenderIntGrid(LDtkIntGrid intGrid)
     {
-        for (int x = 0; x < intGrid.Values.GetLength(0); x++)
+        for (int x = 0; x < intGrid.GridSize.X; x++)
         {
-            for (int y = 0; y < intGrid.Values.GetLength(1); y++)
+            for (int y = 0; y < intGrid.GridSize.Y; y++)
             {
-                int cellValue = intGrid.Values[x, y];
+                int cellValue = intGrid.Values[(y * intGrid.GridSize.X) + x];
 
                 if (cellValue != 0)
                 {
-                    Color col = intGrid.GetColorFromValue(cellValue);
+                    // Color col = intGrid.GetColorFromValue(cellValue);
 
                     int spriteX = intGrid.WorldPosition.X + (x * intGrid.TileSize);
                     int spriteY = intGrid.WorldPosition.Y + (y * intGrid.TileSize);
-                    SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, col, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
+                    SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, Color.Pink /*col*/, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
                 }
             }
         }
     }
-
-    #endregion
-
-    #region Entities
 
     /// <summary>
     /// Renders the entity with the tile it includes
@@ -287,8 +282,6 @@ public class LDtkRenderer
         animatedTile.Offset(animatedTile.Width * animationFrame, 0);
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
     }
-
-    #endregion
 
     struct RenderedLevel
     {
