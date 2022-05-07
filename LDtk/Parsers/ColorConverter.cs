@@ -20,7 +20,7 @@ class ColorConverter : JsonConverter<Color>
             byte r = Convert.ToByte(str[1..3], 16);
             byte g = Convert.ToByte(str[3..5], 16);
             byte b = Convert.ToByte(str[5..7], 16);
-            Color color = new(r, g, b, 255);
+            Color color = new(r, g, b, (byte)255);
             return color;
         }
 

@@ -28,9 +28,7 @@
         <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 
         <PackageOutputDir>../Nuget</PackageOutputDir>
     </PropertyGroup>
