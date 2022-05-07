@@ -1,18 +1,16 @@
-# Quick Start Guide
+# Introduction
 
 The easiest way to start using LDtkMonogame is to import it into the project using
 
-| Name                         | Package                                                                                                                                                      | Description                                                                                  |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| LDtkMonogame                 | [![NuGet Badge](https://buildstats.info/nuget/LDtkMonogame)](https://www.nuget.org/packages/LDtkMonogame/)                                                   | Core LDtk Package                                                                            |
-| LDtkMonogame.Codegen         | [![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.Codegen) ](https://www.nuget.org/packages/LDtkMonogame.Codegen/)                         | Codegen tool for ldtk thanks to [ldtk_codegen](https://github.com/codefrommars/ldtk_codegen) |
-| LDtkMonogame.ContentPipeline | [![LDtkMonogame.ContentPipeline](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/) | Includes the dll needed for the MGCP tool                                                    |
+[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame?label=LDtkMonogame&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame/)
+
+[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame.ContentPipeline?label=ContentPipeline&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+
+[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame.Codegen?label=Codegen&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 Make sure to import the namespace at the top
-
-```csharp
+```cs
 using LDtk;
-
 // Optional
 using LDtk.Renderer;
 ```
@@ -23,15 +21,15 @@ is an example of how to make one.
 
 To get started loading ldtk files load a world in `Initialize`.
 
-```csharp
-World world = LDtkWorld.LoadWorld("World", Content);
+```cs
+LDtkWorld world = LDtkFile.FromFile("World", Content);
 // or
-World world = LDtkWorld.LoadWorld("Data/World.ldtk");
+LDtkWorld world = LDtkFile.FromFile("Data/World.ldtk");
 ```
 
 Create the renderer in `Initialize`.
 
-```csharp
+```cs
 LDtkRenderer renderer = new LDtkRenderer(spriteBatch, Content);
 // or
 LDtkRenderer renderer = new LDtkRenderer(spriteBatch);
@@ -39,7 +37,7 @@ LDtkRenderer renderer = new LDtkRenderer(spriteBatch);
 
 Prerender Levels
 
-```csharp
+```cs
 for (int i = 0; i < world.Levels.Length; i++)
 {
     renderer.PrerenderLevel(world.Levels[i]);
@@ -48,7 +46,7 @@ for (int i = 0; i < world.Levels.Length; i++)
 
 Now to render the level and entities we loaded in `Draw`
 
-```csharp
+```cs
 GraphicsDevice.Clear(world.BgColor);
 
 spriteBatch.Begin(samplerState: SamplerState.PointClamp);

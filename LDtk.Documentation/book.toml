@@ -7,12 +7,13 @@ title = "LDtkMonogame"
 description = "The LDtkMonogame nuget documentation"
 
 [build]
-build-dir = "docs"
+build-dir = "docs/docs"
 
 [output.html]
 theme = "theme"
 default-theme = "ldtk"
 preferred-dark-theme = "ldtk"
+additional-js = ["csharpHighlight.js","toc.js"]
 curly-quotes = false
 mathjax-support = false
 copy-fonts = true
