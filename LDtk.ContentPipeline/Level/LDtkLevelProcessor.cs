@@ -1,24 +1,12 @@
-﻿namespace LDtk.ContentPipeline.Level;
+namespace LDtk.ContentPipeline.Level;
 
-using System;
 using Microsoft.Xna.Framework.Content.Pipeline;
 
-[ContentProcessor(DisplayName = "LDtk Level Processor")]
+[ContentProcessor(DisplayName = "LDtkLevel Processor")]
 public class LDtkLevelProcessor : ContentProcessor<string, LDtkLevel>
 {
     public override LDtkLevel Process(string input, ContentProcessorContext context)
     {
-        try
-        {
-            ContentLogger.Logger = context.Logger;
-            ContentLogger.LogMessage($"Processing");
-
-            return System.Text.Json.JsonSerializer.Deserialize<LDtkLevel>(input, LDtkWorld.SerializeOptions);
-        }
-        catch (Exception ex)
-        {
-            context.Logger.LogImportantMessage(ex.Message);
-            throw;
-        }
+        return LDtkLevel.FromFile(input);
     }
 }

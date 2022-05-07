@@ -8,8 +8,8 @@ public static class ContentLogger
 
     public static void LogMessage(string message)
     {
-#if false
-            Logger?.LogMessage(message);
+#if true
+        Logger?.LogMessage(message);
 #endif
     }
 }
