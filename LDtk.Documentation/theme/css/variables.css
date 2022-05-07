@@ -15,7 +15,7 @@
     --sidebar-active: #ffffff;
     --sidebar-spacer: #545d73;
 
-    --scrollbar: var(--sidebar-fg);
+    --scrollbar: var(--fg);
 
     --icons: #ffcc00;
     --icons-hover: #ffffff;

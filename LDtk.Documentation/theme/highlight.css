@@ -6,78 +6,68 @@
  * (https://github.com/chriskempson/base16)
  */
 
-/* Comment */
+.hljs-tag,
 .hljs-comment,
 .hljs-quote {
-  color: #575757;
+    color: #606060 !important;
 }
 
-/* Red */
 .hljs-variable,
 .hljs-template-variable,
-.hljs-attribute,
-.hljs-tag,
 .hljs-name,
 .hljs-regexp,
 .hljs-link,
 .hljs-name,
+.hljs-keyword,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #d70025;
+    color: #569cd6 !important;
 }
 
-/* Orange */
+.hljs-attribute,
+.hljs-attr {
+    color: #c94e67 !important;
+}
+
 .hljs-number,
-.hljs-meta,
 .hljs-built_in,
 .hljs-builtin-name,
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #b21e00;
+    color: #ffbaac !important;
 }
 
-/* Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #008200;
+    color: #ce9178 !important;
 }
 
-/* Blue */
 .hljs-title,
 .hljs-section {
-  color: #0030f2;
+    color: #0030f2 !important;
 }
 
-/* Purple */
-.hljs-keyword,
+.hljs-meta,
+.bash,
 .hljs-selector-tag {
-  color: #9d00ec;
+    color: #606060 !important;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #f6f7f6;
-  color: #000;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #f6f7f6;
+    color: #000;
+    padding: 0.5em;
 }
 
-.hljs-emphasis {
-  font-style: italic;
+/* Custom */
+.hljs-method {
+    color: #dcdcaa !important;
 }
 
-.hljs-strong {
-  font-weight: bold;
-}
-
-.hljs-addition {
-  color: #22863a;
-  background-color: #f0fff4;
-}
-
-.hljs-deletion {
-  color: #b31d28;
-  background-color: #ffeef0;
+.hljs-class {
+    color: #4EC9B0 !important;
 }

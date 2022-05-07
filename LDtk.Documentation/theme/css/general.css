@@ -2,11 +2,6 @@
 
 @import 'variables.css';
 
-:root {
-    /* Browser default font-size is 16px, this way 1 rem = 10px */
-    font-size: .75rem;
-}
-
 html {
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     color: var(--fg);
@@ -17,32 +12,58 @@ html {
 
 body {
     margin: 0;
-    font-size: 1.6rem;
     overflow-x: hidden;
 }
 
 code {
     font-family: "Roboto", Helvetica, Arial, sans-serif !important;
-    font-size: 0.875em; /* please adjust the ace font size accordingly in editor.js */
+    font-size: 0.875em;
+    /* please adjust the ace font size accordingly in editor.js */
 }
 
 /* Don't change font size in headers. */
-h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
     font-size: unset;
 }
 
-.left { float: left; }
-.right { float: right; }
-.boring { opacity: 0.6; }
-.hide-boring .boring { display: none; }
-.hidden { display: none !important; }
+.left {
+    float: left;
+}
 
-h2, h3 { margin-top: 2.5em; }
-h4, h5 { margin-top: 2em; }
+.right {
+    float: right;
+}
 
-.header + .header h3,
-.header + .header h4,
-.header + .header h5 {
+.boring {
+    opacity: 0.6;
+}
+
+.hide-boring .boring {
+    display: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+h2,
+h3 {
+    margin-top: 2.5em;
+}
+
+h4,
+h5 {
+    margin-top: 2em;
+}
+
+.header+.header h3,
+.header+.header h4,
+.header+.header h5 {
     margin-top: 1em;
 }
 
@@ -69,13 +90,17 @@ h6:target::before {
 .page {
     outline: 0;
     padding: 0 var(--page-padding);
-    margin-top: calc(0px - var(--menu-bar-height)); /* Compensate for the #menu-bar-hover-placeholder */
+    margin-top: calc(0px - var(--menu-bar-height));
+    /* Compensate for the #menu-bar-hover-placeholder */
 }
+
 .page-wrapper {
     box-sizing: border-box;
 }
+
 .js:not(.sidebar-resizing) .page-wrapper {
-    transition: margin-left 0.3s ease, transform 0.3s ease; /* Animation: slide away */
+    transition: margin-left 0.3s ease, transform 0.3s ease;
+    /* Animation: slide away */
 }
 
 .content {
@@ -83,21 +108,43 @@ h6:target::before {
     padding: 0 15px;
     padding-bottom: 50px;
 }
+
 .content main {
     margin-left: auto;
     margin-right: auto;
     max-width: var(--content-max-width);
 }
-.content p { line-height: 1.45em; }
-.content ol { line-height: 1.45em; }
-.content ul { line-height: 1.45em; }
-.content a { text-decoration: none; }
-.content a:hover { text-decoration: underline; }
-.content img, .content video { max-width: 100%; }
+
+.content p {
+    line-height: 1.45em;
+}
+
+.content ol {
+    line-height: 1.45em;
+}
+
+.content ul {
+    line-height: 1.45em;
+}
+
+.content a {
+    text-decoration: none;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
+
+.content img,
+.content video {
+    max-width: 100%;
+}
+
 .content .header:link,
 .content .header:visited {
     color: var(--fg);
 }
+
 .content .header:link,
 .content .header:visited:hover {
     text-decoration: none;
@@ -107,23 +154,29 @@ table {
     margin: 0 auto;
     border-collapse: collapse;
 }
+
 table td {
     padding: 3px 20px;
     border: 1px var(--table-border-color) solid;
 }
+
 table thead {
     background: var(--table-header-bg);
 }
+
 table thead td {
     font-weight: 700;
     border: none;
 }
+
 table thead th {
     padding: 3px 20px;
 }
+
 table thead tr {
     border: 1px var(--table-header-bg) solid;
 }
+
 /* Alternate background colors for rows */
 table tbody tr:nth-child(2n) {
     background: var(--table-alternate-bg);
@@ -140,19 +193,21 @@ blockquote {
 }
 
 
-:not(.footnote-definition) + .footnote-definition,
-.footnote-definition + :not(.footnote-definition) {
+:not(.footnote-definition)+.footnote-definition,
+.footnote-definition+ :not(.footnote-definition) {
     margin-top: 2em;
 }
+
 .footnote-definition {
     font-size: 0.9em;
     margin: 0.5em 0;
 }
+
 .footnote-definition p {
     display: inline;
 }
 
-.fa-copy{
+.fa-copy {
     color: var(--code-block-copy) !important;
 }
 
@@ -161,8 +216,10 @@ blockquote {
     visibility: hidden;
     color: #fff;
     background-color: #333;
-    transform: translateX(-50%); /* Center by moving tooltip 50% of its width left */
-    left: -8px; /* Half of the width of the icon */
+    transform: translateX(-50%);
+    /* Center by moving tooltip 50% of its width left */
+    left: -8px;
+    /* Half of the width of the icon */
     top: -35px;
     font-size: 0.8em;
     text-align: center;
@@ -171,6 +228,7 @@ blockquote {
     margin: 5px;
     z-index: 1000;
 }
+
 .tooltipped .tooltiptext {
     visibility: visible;
 }
@@ -183,4 +241,8 @@ blockquote {
 
 .result-no-output {
     font-style: italic;
+}
+
+.hljs {
+    background-color: var(--code-block-bg) !important;
 }
