@@ -2,12 +2,19 @@ namespace QuickTypeGenerator;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 public class SourceFile
 {
     public List<string> lines = new();
     public List<int> linesToRemove = new();
+    public bool isFull;
+
+    public SourceFile(bool isFull)
+    {
+        this.isFull = isFull;
+    }
 
     public int Count => lines.Count;
 
@@ -33,6 +40,15 @@ public class SourceFile
         }
 
         File.WriteAllLines(path, lines);
+
+        // Run dotnet format on generated files
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "dotnet",
+            Arguments = @"format --include ./" + Path.GetFileName(path),
+            WorkingDirectory = Path.GetDirectoryName(path),
+        });
     }
 
     public string this[int key]

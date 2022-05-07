@@ -1,4 +1,4 @@
-﻿namespace QuickTypeGenerator;
+namespace QuickTypeGenerator;
 
 using System.IO;
 using System.Linq;
@@ -19,14 +19,27 @@ public class Program
     {
         Quicktype.Generate();
 
-        SourceFile sourceFile = new();
+        SourceFile sourceFile = new(false);
         ProcessFile(sourceFile, Quicktype.MinimalFilePath);
         sourceFile.Output(MinimalFilePath);
 
-        sourceFile = new();
+        sourceFile = new(true);
         ProcessFile(sourceFile, Quicktype.FullFilePath);
         sourceFile.Output(FullFilePath);
     }
+
+    static void InitializeFile(SourceFile file, string path)
+    {
+        file.Add("// This file was auto generated, any changes will be lost.");
+        file.Add("#pragma warning disable");
+        foreach (string use in Usings)
+        {
+            file.Add(use);
+        }
+        file.AddRange(File.ReadAllLines(path));
+        file.Add("#pragma warning restore");
+    }
+
 
     static void ProcessFile(SourceFile file, string path)
     {
@@ -39,13 +52,17 @@ public class Program
             TypeConversion(file, i);
             CleanupDocComments(file, i);
 
-            RemoveVariable(file, i, "_ForcedRefs _ForcedRefs");
-            RemoveVariable(file, i, "AutoLayerRuleDefinition AutoRuleDef");
-            RemoveVariable(file, i, "AutoLayerRuleDefinition[] Rules");
-            RemoveClass(file, i, "_ForcedRefs");
-            RemoveClass(file, i, "AutoLayerRuleDefinition");
-
             ForceLayerTypeToEnum(file, i);
+
+            if (!file.isFull)
+            {
+                RemoveStuff(file, i);
+            }
+
+            RemoveLineWithComment(file, i, "public enum TypeEnum");
+
+            RemoveLineWithComment(file, i, "_ForcedRefs _ForcedRefs");
+            RemoveClass(file, i, "_ForcedRefs");
 
             if (file[i].EndsWith("///"))
             {
@@ -84,7 +101,7 @@ public class Program
         }
     }
 
-    static void RemoveVariable(SourceFile file, int i, string match)
+    static void RemoveLineWithComment(SourceFile file, int i, string match)
     {
         if (file[i].Contains(match))
         {
@@ -107,59 +124,61 @@ public class Program
         }
     }
 
-    static void InitializeFile(SourceFile file, string path)
-    {
-        file.Add("// This file was auto generated, any changes will be lost.");
-        file.Add("#pragma warning disable");
-        foreach (string use in Usings)
-        {
-            file.Add(use);
-        }
-        file.AddRange(File.ReadAllLines(path));
-        file.Add("#pragma warning restore");
-    }
-
-    static string CleanupDocComments(SourceFile file, int index)
+    static string CleanupDocComments(SourceFile file, int i)
     {
         // Doc comment cleanup
-        if (file[index].Contains("///"))
+        if (file[i].Contains("///"))
         {
-            file[index] = file[index].Replace("<br/> ", "");
-            file[index] = file[index].Replace("<br/>", "");
+            file[i] = file[i].Replace("<br/> ", "");
+            file[i] = file[i].Replace("<br/>", "");
 
-            file[index] = file[index].Replace("`", "");
-            file[index] = file[index].Replace("*", "");
-            file[index] = file[index].Replace("IID", "Guid");
-            file[index] = Regex.Replace(file[index], "\\[(.*)\\]\\(.*\\)", "$1");
+            file[i] = file[i].Replace("`", "");
+            file[i] = file[i].Replace("*", "");
+            file[i] = file[i].Replace("IID", "Guid");
+            file[i] = Regex.Replace(file[i], "\\[(.*)\\]\\(.*\\)", "$1");
 
-            file[index] = file[index].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
+            file[i] = file[i].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
         }
 
-        return file[index];
+        return file[i];
     }
 
-    static string TypeConversion(SourceFile file, int index)
+    static string TypeConversion(SourceFile file, int i)
     {
-        file[index] = file[index].Replace("double", "float");
-        file[index] = file[index].Replace("long", "int");
+        file[i] = file[i].Replace("double", "float");
+        file[i] = file[i].Replace("long", "int");
 
-        file[index] = file[index].Replace("string Color", "Color Color");
-        file[index] = file[index].Replace("string BgColor", "Color BgColor");
+        file[i] = file[i].Replace("string Color", "Color Color");
+        file[i] = file[i].Replace("string BgColor", "Color BgColor");
 
-        file[index] = file[index].Replace("int[] Px", "Point Px");
-        file[index] = file[index].Replace("int[] Src", "Point Src");
-        file[index] = file[index].Replace("int[] _Grid", "Point _Grid");
-        file[index] = file[index].Replace("int[] TopLeftPx", "Point TopLeftPx");
+        file[i] = file[i].Replace("int[] Px", "Point Px");
+        file[i] = file[i].Replace("int[] Src", "Point Src");
+        file[i] = file[i].Replace("int[] _Grid", "Point _Grid");
+        file[i] = file[i].Replace("int[] TopLeftPx", "Point TopLeftPx");
 
-        file[index] = file[index].Replace("float[] _Pivot", "Vector2 _Pivot");
-        file[index] = file[index].Replace("float[] Scale", "Vector2 Scale");
+        file[i] = file[i].Replace("float[] _Pivot", "Vector2 _Pivot");
+        file[i] = file[i].Replace("float[] Scale", "Vector2 Scale");
 
-        file[index] = file[index].Replace("float[] CropRect", "Rectangle CropRect");
-        file[index] = file[index].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
+        file[i] = file[i].Replace("float[] CropRect", "Rectangle CropRect");
+        file[i] = file[i].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
+
+        file[i] = file[i].Replace("TypeEnum Type", "LayerType Type");
 
         // string -> Guid/Iid
-        file[index] = Regex.Replace(file[index], "(public string )(.*)(Iid )", "public Guid $2Iid ");
+        file[i] = Regex.Replace(file[i], "(public string )(.*)(Iid )", "public Guid $2Iid ");
 
-        return file[index];
+        return file[i];
+    }
+
+    static string RemoveStuff(SourceFile file, int i)
+    {
+        RemoveLineWithComment(file, i, "LDtkLevel[] Levels");
+        RemoveLineWithComment(file, i, "AutoLayerRuleDefinition AutoRuleDef");
+        RemoveLineWithComment(file, i, "AutoLayerRuleDefinition[] Rules");
+
+        RemoveClass(file, i, "AutoLayerRuleDefinition");
+        RemoveClass(file, i, "AutoLayerRuleGroup");
+
+        return file[i];
     }
 }
