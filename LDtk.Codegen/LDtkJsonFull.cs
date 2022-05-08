@@ -1,6 +1,6 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk.Codegen;
-#pragma warning disable IDE1006,CA1711,CA1720
+#pragma warning disable IDE1006,CA1711,CA1720,CS1591
 using System;
 using Microsoft.Xna.Framework;
 
