@@ -493,7 +493,7 @@ public partial class EntityInstance
     /// The entity "smart" color, guessed from either Entity definition, or one its field
     /// instances.
     /// </summary>
-    public string _SmartColor { get; set; }
+    public Color _SmartColor { get; set; }
 
     /// <summary>
     /// Array of tags defined in this Entity definition

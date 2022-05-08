@@ -150,6 +150,7 @@ public class Program
 
         file[i] = file[i].Replace("string Color", "Color Color");
         file[i] = file[i].Replace("string BgColor", "Color BgColor");
+        file[i] = file[i].Replace("string _SmartColor", "Color _SmartColor");
 
         file[i] = file[i].Replace("int[] Px", "Point Px");
         file[i] = file[i].Replace("int[] Src", "Point Src");

@@ -1,6 +1,6 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk.Codegen;
-#pragma warning disable IDE1006,CA1711,CA1720,CS1591
+#pragma warning disable IDE1006, CA1711, CA1720, CS1591
 using System;
 using Microsoft.Xna.Framework;
 
@@ -998,7 +998,7 @@ public partial class EntityInstance
     /// The entity "smart" color, guessed from either Entity definition, or one its field
     /// instances.
     /// </summary>
-    public string _SmartColor { get; set; }
+    public Color _SmartColor { get; set; }
 
     /// <summary>
     /// Array of tags defined in this Entity definition
@@ -1181,7 +1181,7 @@ public partial class LDtkLevel
     /// The "guessed" color for this level in the editor, decided using either the background
     /// color or an existing custom field.
     /// </summary>
-    public string _SmartColor { get; set; }
+    public Color _SmartColor { get; set; }
 
     /// <summary>
     /// Background color of the level. If null, the project defaultLevelBgColor should be
