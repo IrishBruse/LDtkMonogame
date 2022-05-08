@@ -86,7 +86,7 @@ public class LDtkMonogameGame : Game
         spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.FilePath), "Characters.png"));
 #endif
 
-        world = file.LoadWorld(Guid.Parse("2c81d720-b4d0-11ec-9871-056972512958"));
+        world = file.LoadWorld(Worlds.World.Iid);
 
         for (int i = 0; i < world.Length; i++)
         {
