@@ -28,11 +28,9 @@ public class Program
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 
-        EnumGenerator enumGenerator = new(file, options);
-        enumGenerator.Generate();
-
-        ClassGenerator classGenerator = new(file, options);
-        classGenerator.Generate();
+        new EnumGenerator(file, options).Generate();
+        new ClassGenerator(file, options).Generate();
+        new IidGenerator(file, options).Generate();
     }
 }
 
