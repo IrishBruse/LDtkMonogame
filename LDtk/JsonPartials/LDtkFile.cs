@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 public partial class LDtkFile
 {
     /// <summary> The absolute path to the ldtkFile </summary>
-    public string Path { get; set; }
+    public string FilePath { get; set; }
 
     /// <summary> The content manager used if you are using the contentpipeline </summary>
     public ContentManager Content { get; set; }
@@ -22,7 +22,7 @@ public partial class LDtkFile
     public static LDtkFile FromFile(string filePath)
     {
         LDtkFile file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
-        file.Path = System.IO.Path.GetFullPath(filePath);
+        file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
 
@@ -34,7 +34,7 @@ public partial class LDtkFile
         LDtkFile file;
         file = content.Load<LDtkFile>(filePath);
         file.Content = content;
-        file.Path = filePath;
+        file.FilePath = filePath;
         return file;
     }
 
@@ -45,7 +45,7 @@ public partial class LDtkFile
         {
             if (world.Iid == iid)
             {
-                world.Path = Path;
+                world.FilePath = FilePath;
                 return world;
             }
         }

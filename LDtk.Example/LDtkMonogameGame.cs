@@ -1,9 +1,10 @@
-#define UseContentPipeline
+// #define UseContentPipeline
 
 namespace LDtkMonogameExample;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using LDtk;
 using LDtk.Renderer;
 using LDtkMonogameExample.Entities;
@@ -82,13 +83,15 @@ public class LDtkMonogameGame : Game
 #else
         renderer = new LDtkRenderer(spriteBatch);
         file = LDtkFile.FromFile("Content/World.ldtk");
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.Path), "Characters.png"));
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.FilePath), "Characters.png"));
 #endif
 
         world = file.LoadWorld(Guid.Parse("2c81d720-b4d0-11ec-9871-056972512958"));
 
-        foreach (LDtkLevel level in world.Levels)
+        for (int i = 0; i < world.Length; i++)
         {
+            LDtkLevel level = world[i];
+
             foreach (Enemy enemy in level.GetEntities<Enemy>())
             {
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
@@ -103,24 +106,24 @@ public class LDtkMonogameGame : Game
         Player playerData = world.GetEntity<Player>();
         player = new PlayerEntity(playerData, spriteSheet, renderer, gun);
 
-        foreach (ILDtkEntity item in world.Levels[1].GetAllEntities())
-        {
-            switch (item)
-            {
-                case Enemy:
-                Console.WriteLine("Enemy Type");
-                break;
-                case Player:
-                Console.WriteLine("Player Type");
-                break;
-                case Gun_Pickup:
-                Console.WriteLine("Gun_Pickup Type");
-                break;
-                default:
-                Console.WriteLine("Unhandled Entity of type " + item.GetType());
-                break;
-            }
-        }
+        // foreach (ILDtkEntity item in world.Levels[1].GetAllEntities())
+        // {
+        //     switch (item)
+        //     {
+        //         case Enemy:
+        //         Console.WriteLine("Enemy Type");
+        //         break;
+        //         case Player:
+        //         Console.WriteLine("Player Type");
+        //         break;
+        //         case Gun_Pickup:
+        //         Console.WriteLine("Gun_Pickup Type");
+        //         break;
+        //         default:
+        //         Console.WriteLine("Unhandled Entity of type " + item.GetType());
+        //         break;
+        //     }
+        // }
 
         player.onShoot += () =>
         {

@@ -11,10 +11,7 @@ using Microsoft.Xna.Framework.Content;
 public partial class LDtkLevel
 {
     /// <summary> The absolute filepath to the level </summary>
-    [JsonIgnore] public string Path { get; set; }
-
-    /// <summary> The parent world of this level </summary>
-    [JsonIgnore] public LDtkFile Parent { get; set; }
+    [JsonIgnore] public string FilePath { get; set; }
 
     /// <summary> World Position of the level in pixels </summary>
     [JsonIgnore] public Point Position => new(WorldX, WorldY);
@@ -34,7 +31,7 @@ public partial class LDtkLevel
     public static LDtkLevel FromFile(string filePath)
     {
         LDtkLevel file = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(filePath), Constants.SerializeOptions);
-        file.Path = System.IO.Path.GetFullPath(filePath);
+        file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
 
@@ -45,7 +42,7 @@ public partial class LDtkLevel
     {
         LDtkLevel file;
         file = content.Load<LDtkLevel>(filePath);
-        file.Path = filePath;
+        file.FilePath = filePath;
         return file;
     }
 
@@ -141,8 +138,8 @@ public partial class LDtkLevel
         return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
     }
 
-    public ILDtkEntity[] GetAllEntities()
-    {
-        return Array.Empty<ILDtkEntity>();
-    }
+    // public ILDtkEntity[] GetAllEntities()
+    // {
+    //     return Array.Empty<ILDtkEntity>();
+    // }
 }
