@@ -16,12 +16,11 @@ using Microsoft.Xna.Framework.Graphics;
 /// </summary>
 public class LDtkRenderer
 {
-    /// <summary>
-    /// The spritebatch used for rendering with this Renderer
-    /// </summary>
+    /// <summary> The spritebatch used for rendering with this Renderer </summary>
     public SpriteBatch SpriteBatch { get; set; }
+    /// <summary> The levels identifier to layers Dictionary </summary>
+    protected Dictionary<string, RenderedLevel> PrerenderedLevels { get; set; } = new();
     static Texture2D pixel;
-    Dictionary<string, RenderedLevel> prerenderedLevels = new();
     GraphicsDevice graphicsDevice;
     ContentManager content;
 
@@ -58,7 +57,7 @@ public class LDtkRenderer
     /// <exception cref="Exception">The level already has been prerendered</exception>
     public void PrerenderLevel(LDtkLevel level)
     {
-        if (prerenderedLevels.ContainsKey(level.Identifier))
+        if (PrerenderedLevels.ContainsKey(level.Identifier))
         {
             return;
         }
@@ -67,12 +66,12 @@ public class LDtkRenderer
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         {
-            renderLevel.layers = RenderLayers(level);
+            renderLevel.Layers = RenderLayers(level);
         }
 
         SpriteBatch.End();
 
-        prerenderedLevels.Add(level.Identifier, renderLevel);
+        PrerenderedLevels.Add(level.Identifier, renderLevel);
         graphicsDevice.SetRenderTarget(null);
     }
 
@@ -156,7 +155,7 @@ public class LDtkRenderer
         {
             LevelBackgroundPosition bg = level._BgPos;
             Vector2 pos = bg.TopLeftPx.ToVector2();
-            SpriteBatch.Draw(texture, pos, bg.CropRect, Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+            SpriteBatch.Draw(texture, pos, new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]), Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
         }
 
         graphicsDevice.SetRenderTarget(null);
@@ -184,11 +183,11 @@ public class LDtkRenderer
     /// <param name="level"></param>
     public void RenderPrerenderedLevel(LDtkLevel level)
     {
-        if (prerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
+        if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
         {
-            for (int i = 0; i < prerenderedLevel.layers.Length; i++)
+            for (int i = 0; i < prerenderedLevel.Layers.Length; i++)
             {
-                SpriteBatch.Draw(prerenderedLevel.layers[i], level.Position.ToVector2(), Color.White);
+                SpriteBatch.Draw(prerenderedLevel.Layers[i], level.Position.ToVector2(), Color.White);
             }
         }
         else
@@ -281,10 +280,5 @@ public class LDtkRenderer
         Rectangle animatedTile = entity.Tile;
         animatedTile.Offset(animatedTile.Width * animationFrame, 0);
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
-    }
-
-    struct RenderedLevel
-    {
-        public Texture2D[] layers;
     }
 }
