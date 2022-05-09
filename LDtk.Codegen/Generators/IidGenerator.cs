@@ -35,6 +35,6 @@ public class IidGenerator : BaseGenerator
         EndBlock();
         Line($"#pragma warning restore");
 
-        Output(options, "Iids", "Worlds.cs");
+        Output(options, "Iids", "Worlds");
     }
 }

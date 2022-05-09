@@ -14,6 +14,6 @@ public class LDtkLevelWriter : ContentTypeWriter<LDtkLevel>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "LDtk.ContentPipeline.LDtkLevelReader, LDtk";
+        return "LDtk.ContentPipeline.LDtkLevelReader, LDtkMonogame";
     }
 }

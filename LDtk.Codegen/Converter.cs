@@ -1,5 +1,4 @@
 namespace LDtk.Codegen;
-
 public static class Converter
 {
     public static string ConvertFieldDefinitionTypes(string input, bool pointAsVector)
@@ -39,7 +38,6 @@ public static class Converter
             "Multilines" => "string",
             "Float" => "float",
             "Bool" => "bool",
-            "EntityRef" => "FieldInstanceEntityReference",
             _ => input,
         };
     }
