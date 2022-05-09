@@ -1,12 +1,11 @@
-﻿using System;
+namespace LDtk.Codegen;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
+using System.Linq;
 using CommandLine;
-using LDtk.Codegen.Core;
-using LDtk.Codegen.Outputs;
-
-namespace LDtk.Codegen;
+using LDtk.Codegen.Generators;
 
 public class Program
 {
@@ -16,85 +15,59 @@ public class Program
         Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
-    private static void HandleParseError(IEnumerable<Error> errs)
+    static void HandleParseError(IEnumerable<Error> errs)
     {
         if (errs.IsVersion())
         {
-            Console.WriteLine("Supports LDtk version " + Constants.supportedLDtkVersion);
+            Console.WriteLine("Supports LDtk version " + Constants.SupportedLDtkVersion);
             return;
         }
+
+        errs.Output();
     }
 
-    private static void Run(Options options)
+    static void Run(Options options)
     {
-        string outputDirectory = Path.GetDirectoryName(Path.GetFullPath(options.Output));
+        LDtkFile file = LDtkFile.FromFile(options.Input);
 
-        Directory.CreateDirectory(outputDirectory);
-
-        string[] files = Directory.GetFiles(outputDirectory);
-
-        for (int i = 0; i < files.Length; i++)
+        if (!file.Flags.Contains(Flag.MultiWorlds))
         {
-            File.Delete(files[i]);
+            throw new LDtkException("LDtk Files must have the `MultiWorlds` flag enabled");
         }
 
-        LdtkTypeConverter typeConverter = new LdtkTypeConverter()
+        if (file.Flags.Contains(Flag.ExportPreCsvIntGridFormat))
         {
-            PointAsVector2 = options.PointAsVector2
-        };
-
-        LdtkGeneratorContext ctx = new LdtkGeneratorContext()
-        {
-            LevelClassName = options.LevelClassName,
-            TypeConverter = typeConverter
-        };
-        ctx.CodeSettings.Namespace = options.Namespace;
-
-        ICodeOutput output;
-
-        if (options.SingleFile)
-        {
-            SingleFileOutput singleFileOutput = new SingleFileOutput()
-            {
-                OutputDir = outputDirectory,
-                Filename = Path.GetFileNameWithoutExtension(options.Input)
-            };
-            output = singleFileOutput;
-        }
-        else
-        {
-            MultiFileOutput multiFileOutput = new MultiFileOutput()
-            {
-                PrintFragments = true,
-                OutputDir = outputDirectory,
-            };
-            output = multiFileOutput;
+            throw new LDtkException("LDtk Files must have the `ExportPreCsvIntGridFormat` flag disabled");
         }
 
-        LDtkWorld ldtkWorld = JsonSerializer.Deserialize<LDtkWorld>(File.ReadAllText(options.Input), LDtkWorld.SerializeOptions);
+        if (options.FileNameInNamespace)
+        {
+            options.Namespace += "." + Path.GetFileNameWithoutExtension(options.Input);
+        }
 
-        LdtkCodeGenerator cg = new LdtkCodeGenerator();
-        cg.GenerateCode(ldtkWorld, ctx, output);
+        new ClassGenerator(file, options).Generate();
+        new EnumGenerator(file, options).Generate();
+        new IidGenerator(file, options).Generate();
     }
 }
 
-internal class Options
+public class Options
 {
-    [Option('i', "input", Required = true, HelpText = "Input LDtk world file.")]
+    [Option('i', "input", Required = true, HelpText = "Input LDtk file (.ldtk)")]
     public string Input { get; set; }
 
-    [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder/file depending on if single file is set.")]
+    [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder")]
     public string Output { get; set; }
 
-    [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into.")]
+    [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into")]
     public string Namespace { get; set; }
 
-    [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file.")]
+    [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file")]
     public string LevelClassName { get; set; }
-
-    [Option("SingleFile", Required = false, Default = false, HelpText = "Output all the LDtk files into a single file.")]
-    public bool SingleFile { get; set; }
 
     [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
     public bool PointAsVector2 { get; set; }
+
+    [Option("FileNameInNamespace", Required = false, Default = false, HelpText = "Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'")]
+    public bool FileNameInNamespace { get; set; }
 }

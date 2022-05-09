@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <NoWarn>CA1051</NoWarn>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <!-- This is how to automate the ldtkgen tool using nuget tool -->
+    <!-- <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
+        <Exec Command="ldtkgen -i Content/World.ldtk" />
+        <Exec Command="ldtkgen -i Content/TestWorld.ldtk" />
+    </Target> -->
+
+    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
+        <Exec Command="dotnet build ..\LDtk.Codegen\LDtk.Codegen.csproj" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/TestWorld.ldtk --FileNameInNamespace" />
+    </Target>
+
+    <ItemGroup>
+        <ProjectReference Include="..\LDtk\LDtk.csproj" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <MonoGameContentReference Include="Content\Content.mgcb" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+    </ItemGroup>
+
+</Project>

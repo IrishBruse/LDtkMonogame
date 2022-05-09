@@ -1,6 +1,6 @@
-using Microsoft.Xna.Framework.Content.Pipeline;
-
 namespace LDtk.ContentPipeline;
+
+using Microsoft.Xna.Framework.Content.Pipeline;
 
 public static class ContentLogger
 {
@@ -8,8 +8,8 @@ public static class ContentLogger
 
     public static void LogMessage(string message)
     {
-#if false
-            Logger?.LogMessage(message);
+#if true
+        Logger?.LogMessage(message);
 #endif
     }
 }

@@ -1,13 +1,13 @@
+namespace LDtk.Renderer;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using LDtk.Exceptions;
+using LDtk;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-
-namespace LDtk.Renderer;
 
 /// <summary>
 /// Renderer for the ldtkWorld, ldtkLevel, intgrids and entities.
@@ -16,14 +16,13 @@ namespace LDtk.Renderer;
 /// </summary>
 public class LDtkRenderer
 {
-    /// <summary>
-    /// The spritebatch used for rendering with this Renderer
-    /// </summary>
+    /// <summary> The spritebatch used for rendering with this Renderer </summary>
     public SpriteBatch SpriteBatch { get; set; }
-    private static Texture2D pixel;
-    private readonly Dictionary<string, RenderedLevel> prerenderedLevels = new Dictionary<string, RenderedLevel>();
-    private readonly GraphicsDevice graphicsDevice;
-    private readonly ContentManager content;
+    /// <summary> The levels identifier to layers Dictionary </summary>
+    protected Dictionary<string, RenderedLevel> PrerenderedLevels { get; set; } = new();
+    static Texture2D pixel;
+    GraphicsDevice graphicsDevice;
+    ContentManager content;
 
     /// <summary>
     /// This is used to intizialize the renderer for use with direct file loading
@@ -51,8 +50,6 @@ public class LDtkRenderer
         this.content = content;
     }
 
-    #region Levels
-
     /// <summary>
     /// Prerender out the level to textures to optimize the rendering process
     /// </summary>
@@ -60,27 +57,27 @@ public class LDtkRenderer
     /// <exception cref="Exception">The level already has been prerendered</exception>
     public void PrerenderLevel(LDtkLevel level)
     {
-        if (prerenderedLevels.ContainsKey(level.Identifier))
+        if (PrerenderedLevels.ContainsKey(level.Identifier))
         {
             return;
         }
 
-        RenderedLevel renderLevel = new RenderedLevel();
+        RenderedLevel renderLevel = new();
 
         SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
         {
-            renderLevel.layers = RenderLayers(level);
+            renderLevel.Layers = RenderLayers(level);
         }
 
         SpriteBatch.End();
 
-        prerenderedLevels.Add(level.Identifier, renderLevel);
+        PrerenderedLevels.Add(level.Identifier, renderLevel);
         graphicsDevice.SetRenderTarget(null);
     }
 
-    private Texture2D[] RenderLayers(LDtkLevel level)
+    Texture2D[] RenderLayers(LDtkLevel level)
     {
-        List<Texture2D> layers = new List<Texture2D>();
+        List<Texture2D> layers = new();
 
         if (level.BgRelPath != null)
         {
@@ -114,41 +111,41 @@ public class LDtkRenderer
             switch (layer._Type)
             {
                 case LayerType.Tiles:
-                    foreach (TileInstance tile in layer.GridTiles.Where(tile => layer._TilesetDefUid.HasValue))
+                foreach (TileInstance tile in layer.GridTiles.Where(tile => layer._TilesetDefUid.HasValue))
+                {
+                    Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
+                    Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
+                    SpriteEffects mirror = (SpriteEffects)tile.F;
+                    SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                }
+
+                break;
+
+                case LayerType.AutoLayer:
+                case LayerType.IntGrid:
+                if (layer.AutoLayerTiles.Length > 0)
+                {
+                    foreach (TileInstance tile in layer.AutoLayerTiles.Where(tile => layer._TilesetDefUid.HasValue))
                     {
                         Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                         Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                         SpriteEffects mirror = (SpriteEffects)tile.F;
                         SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                     }
+                }
 
-                    break;
+                break;
 
-                case LayerType.AutoLayer:
-                case LayerType.IntGrid:
-                    if (layer.AutoLayerTiles.Length > 0)
-                    {
-                        foreach (TileInstance tile in layer.AutoLayerTiles.Where(tile => layer._TilesetDefUid.HasValue))
-                        {
-                            Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
-                            Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
-                            SpriteEffects mirror = (SpriteEffects)tile.F;
-                            SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                        }
-                    }
-
-                    break;
                 case LayerType.Entities:
-                    break;
                 default:
-                    break;
+                break;
             }
         }
 
         return layers.ToArray();
     }
 
-    private Texture2D RenderBackgroundToLayer(LDtkLevel level)
+    Texture2D RenderBackgroundToLayer(LDtkLevel level)
     {
         Texture2D texture = GetTexture(level, level.BgRelPath);
 
@@ -158,7 +155,7 @@ public class LDtkRenderer
         {
             LevelBackgroundPosition bg = level._BgPos;
             Vector2 pos = bg.TopLeftPx.ToVector2();
-            SpriteBatch.Draw(texture, pos, bg.CropRect, Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+            SpriteBatch.Draw(texture, pos, new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]), Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
         }
 
         graphicsDevice.SetRenderTarget(null);
@@ -166,11 +163,12 @@ public class LDtkRenderer
         return layer;
     }
 
-    private Texture2D GetTexture(LDtkLevel level, string path)
+    Texture2D GetTexture(LDtkLevel level, string path)
     {
+        _ = level;
         if (content == null)
         {
-            return Texture2D.FromFile(graphicsDevice, Path.Combine(level.Parent.RootFolder, path));
+            return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
         }
         else
         {
@@ -185,16 +183,16 @@ public class LDtkRenderer
     /// <param name="level"></param>
     public void RenderPrerenderedLevel(LDtkLevel level)
     {
-        if (prerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
+        if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
         {
-            for (int i = 0; i < prerenderedLevel.layers.Length; i++)
+            for (int i = 0; i < prerenderedLevel.Layers.Length; i++)
             {
-                SpriteBatch.Draw(prerenderedLevel.layers[i], level.Position.ToVector2(), Color.White);
+                SpriteBatch.Draw(prerenderedLevel.Layers[i], level.Position.ToVector2(), Color.White);
             }
         }
         else
         {
-            throw new LevelNotFoundException($"No prerendered level with Identifier {level.Identifier} found.");
+            throw new LDtkException($"No prerendered level with Identifier {level.Identifier} found.");
         }
     }
 
@@ -218,27 +216,23 @@ public class LDtkRenderer
     /// <param name="intGrid"></param>
     public void RenderIntGrid(LDtkIntGrid intGrid)
     {
-        for (int x = 0; x < intGrid.Values.GetLength(0); x++)
+        for (int x = 0; x < intGrid.GridSize.X; x++)
         {
-            for (int y = 0; y < intGrid.Values.GetLength(1); y++)
+            for (int y = 0; y < intGrid.GridSize.Y; y++)
             {
-                int cellValue = intGrid.Values[x, y];
+                int cellValue = intGrid.Values[(y * intGrid.GridSize.X) + x];
 
                 if (cellValue != 0)
                 {
-                    Color col = intGrid.GetColorFromValue(cellValue);
+                    // Color col = intGrid.GetColorFromValue(cellValue);
 
                     int spriteX = intGrid.WorldPosition.X + (x * intGrid.TileSize);
                     int spriteY = intGrid.WorldPosition.Y + (y * intGrid.TileSize);
-                    SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, col, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
+                    SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, Color.Pink /*col*/, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
                 }
             }
         }
     }
-
-    #endregion
-
-    #region Entities
 
     /// <summary>
     /// Renders the entity with the tile it includes
@@ -286,12 +280,5 @@ public class LDtkRenderer
         Rectangle animatedTile = entity.Tile;
         animatedTile.Offset(animatedTile.Width * animationFrame, 0);
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
-    }
-
-    #endregion
-
-    private struct RenderedLevel
-    {
-        public Texture2D[] layers;
     }
 }

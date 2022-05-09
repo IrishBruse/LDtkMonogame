@@ -1,3 +1,3 @@
-# Modified LDtk codegen
+# Codegen
 
-Thanks to codefrommars for the original [LDtk Codegen](https://github.com/codefrommars/ldtk_codegen)
+Generates type safe entities for loading easier

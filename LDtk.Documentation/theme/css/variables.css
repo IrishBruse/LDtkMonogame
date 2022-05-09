@@ -1,0 +1,51 @@
+:root {
+    --sidebar-width: 300px;
+    --page-padding: 15px;
+    --content-max-width: 750px;
+    --menu-bar-height: 50px;
+}
+
+.ldtk {
+    --bg: #1e2229;
+    --fg: #abb8c3;
+
+    --sidebar-bg: #1e2229;
+    --sidebar-fg: #ffcc00;
+    --sidebar-non-existant: #5c6773;
+    --sidebar-active: #ffffff;
+    --sidebar-spacer: #545d73;
+
+    --scrollbar: var(--fg);
+
+    --icons: #ffcc00;
+    --icons-hover: #ffffff;
+
+    --links: #ffcc00;
+
+    --inline-code-color: #c5c5c5;
+
+    --theme-popup-bg: #14191f;
+    --theme-popup-border: #5c6773;
+    --theme-hover: #ffffff;
+
+    --quote-bg: #252832;
+    --quote-border: #303441;
+
+    --table-border-color: #16181d;
+    --table-header-bg: #16181d;
+    --table-alternate-bg: #0000002c;
+
+    --menu-bar-bg: #16181d;
+
+    --code-block-bg: #16181d;
+    --code-block-copy: #abb8c3;
+
+    --searchbar-bg: #1e2229;
+    --searchbar-fg: #abb8c3;
+    --searchbar-border-color: #545d73;
+    --searchbar-shadow-color: #00000000;
+    --searchresults-header-fg: #ffcc00;
+    --searchresults-border-color: #545d73;
+    --searchresults-li-bg: #ffcc00;
+    --search-mark-bg: #ffcc00;
+}

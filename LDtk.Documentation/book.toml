@@ -1,0 +1,25 @@
+[book]
+authors = ["IrishBruse"]
+language = "en"
+multilingual = false
+src = "src"
+title = "LDtkMonogame"
+description = "The LDtkMonogame nuget documentation"
+
+[build]
+build-dir = "docs/docs/next"
+
+[output.html]
+theme = "theme"
+default-theme = "ldtk"
+preferred-dark-theme = "ldtk"
+additional-js = ["csharpHighlight.js","misc.js"]
+curly-quotes = false
+mathjax-support = false
+copy-fonts = true
+no-section-label = false
+git-repository-url = "https://github.com/IrishBruse/LDtkMonogame"
+git-repository-icon = "fa-github"
+
+[output.html.print]
+enable = false

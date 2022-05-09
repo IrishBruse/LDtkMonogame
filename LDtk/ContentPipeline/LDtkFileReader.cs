@@ -1,17 +1,14 @@
+namespace LDtk.ContentPipeline;
 
+using System.Text.Json;
 using Microsoft.Xna.Framework.Content;
 
-namespace LDtk.ContentPipeline;
-/// <summary>
-/// LDtkFileReader
-/// </summary>
-public class LDtkFileReader : ContentTypeReader<LDtkWorld>
+/// <summary> LDtkFileReader </summary>
+public class LDtkFileReader : ContentTypeReader<LDtkFile>
 {
-    /// <summary>
-    /// Read
-    /// </summary>
-    protected override LDtkWorld Read(ContentReader input, LDtkWorld existingInstance)
+    /// <summary> Read </summary>
+    protected override LDtkFile Read(ContentReader input, LDtkFile existingInstance)
     {
-        return existingInstance ?? System.Text.Json.JsonSerializer.Deserialize<LDtkWorld>(input.ReadString(), LDtkWorld.SerializeOptions);
+        return existingInstance ?? JsonSerializer.Deserialize<LDtkFile>(input.ReadString(), Constants.SerializeOptions);
     }
 }

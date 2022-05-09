@@ -1,0 +1,73 @@
+/*
+ * An increased contrast highlighting scheme loosely based on the
+ * "Base16 Atelier Dune Light" theme by Bram de Haan
+ * (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/dune)
+ * Original Base16 color scheme by Chris Kempson
+ * (https://github.com/chriskempson/base16)
+ */
+
+.hljs-tag,
+.hljs-comment,
+.hljs-quote {
+    color: #606060 !important;
+}
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-name,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-keyword,
+.hljs-selector-id,
+.hljs-selector-class {
+    color: #569cd6 !important;
+}
+
+.hljs-attribute,
+.hljs-attr {
+    color: #c94e67 !important;
+}
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+    color: #ffbaac !important;
+}
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+    color: #ce9178 !important;
+}
+
+.hljs-title,
+.hljs-section {
+    color: #0030f2 !important;
+}
+
+.hljs-meta,
+.bash,
+.hljs-selector-tag {
+    color: #606060 !important;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    background: #f6f7f6;
+    color: #000;
+    padding: 0.5em;
+}
+
+/* Custom */
+.hljs-method {
+    color: #dcdcaa !important;
+}
+
+.hljs-class {
+    color: #4EC9B0 !important;
+}
