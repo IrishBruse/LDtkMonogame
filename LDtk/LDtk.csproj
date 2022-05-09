@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Version>0.5.0</Version>
+        <Version>0.5.1</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame</PackageId>
@@ -25,7 +25,7 @@
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>[Visit Wiki for more information](https://www.ethanconneely.com/LDtkMonogame/)</PackageReleaseNotes>
+        <PackageReleaseNotes>https://www.ethanconneely.com/LDtkMonogame/</PackageReleaseNotes>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
