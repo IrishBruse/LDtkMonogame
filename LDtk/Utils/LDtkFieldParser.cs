@@ -23,16 +23,19 @@ static class LDtkFieldParser
 
     public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
     {
-        ParseBaseField(entity, "Identifier", entityInstance._Identifier);
-        ParseBaseField(entity, "Position", (entityInstance.Px + level.Position).ToVector2());
-        ParseBaseField(entity, "Pivot", entityInstance._Pivot);
-        ParseBaseField(entity, "Size", new Vector2(entityInstance.Width, entityInstance.Height));
+        ParseBaseField(entity, nameof(ILDtkEntity.Uid), entityInstance.DefUid);
+        ParseBaseField(entity, nameof(ILDtkEntity.Iid), entityInstance.Iid);
+        ParseBaseField(entity, nameof(ILDtkEntity.Identifier), entityInstance._Identifier);
+        ParseBaseField(entity, nameof(ILDtkEntity.Position), (entityInstance.Px + level.Position).ToVector2());
+        ParseBaseField(entity, nameof(ILDtkEntity.Pivot), entityInstance._Pivot);
+        ParseBaseField(entity, nameof(ILDtkEntity.Size), new Vector2(entityInstance.Width, entityInstance.Height));
+        ParseBaseField(entity, nameof(ILDtkEntity.SmartColor), entityInstance._SmartColor);
 
         if (entityInstance._Tile != null)
         {
             TilesetRectangle tileDefinition = entityInstance._Tile;
             Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
-            ParseBaseField(entity, "Tile", rect);
+            ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
         }
     }
 
@@ -142,7 +145,21 @@ static class LDtkFieldParser
                     points[j] += new Point(gridSize / 2);
                 }
 
-                variableDef.SetValue(classFields, points.ToArray());
+                if (variableDef.PropertyType.GetElementType() == typeof(Vector2))
+                {
+                    Vector2[] pointsAsVec = new Vector2[points.Count];
+
+                    for (int j = 0; j < pointsAsVec.Length; j++)
+                    {
+                        pointsAsVec[j] = new Vector2(points[j].X, points[j].Y);
+                    }
+
+                    variableDef.SetValue(classFields, pointsAsVec);
+                }
+                else
+                {
+                    variableDef.SetValue(classFields, points.ToArray());
+                }
                 break;
 
                 default:
