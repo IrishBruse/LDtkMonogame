@@ -160,7 +160,6 @@ public class Program
         file[i] = file[i].Replace("float[] _Pivot", "Vector2 _Pivot");
         file[i] = file[i].Replace("float[] Scale", "Vector2 Scale");
 
-        file[i] = file[i].Replace("float[] CropRect", "Rectangle CropRect");
         file[i] = file[i].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
 
         file[i] = file[i].Replace("TypeEnum Type", "LayerType Type");
