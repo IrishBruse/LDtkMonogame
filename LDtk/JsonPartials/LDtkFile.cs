@@ -31,10 +31,9 @@ public partial class LDtkFile
     /// <param name="content">The optional content manager if you are using the content pipeline</param>
     public static LDtkFile FromFile(string filePath, ContentManager content)
     {
-        LDtkFile file;
-        file = content.Load<LDtkFile>(filePath);
-        file.Content = content;
+        LDtkFile file = content.Load<LDtkFile>(filePath);
         file.FilePath = filePath;
+        file.Content = content;
         return file;
     }
 
@@ -46,6 +45,7 @@ public partial class LDtkFile
             if (world.Iid == iid)
             {
                 world.FilePath = FilePath;
+                world.Content = Content;
                 return world;
             }
         }

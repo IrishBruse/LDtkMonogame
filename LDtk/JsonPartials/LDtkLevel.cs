@@ -41,7 +41,7 @@ public partial class LDtkLevel
     public static LDtkLevel FromFile(string filePath, ContentManager content)
     {
         LDtkLevel file;
-        file = content.Load<LDtkLevel>(filePath);
+        file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", ""));
         file.FilePath = filePath;
         return file;
     }
