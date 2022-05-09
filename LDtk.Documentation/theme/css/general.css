@@ -15,12 +15,6 @@ body {
     overflow-x: hidden;
 }
 
-code {
-    font-family: "Roboto", Helvetica, Arial, sans-serif !important;
-    font-size: 0.875em;
-    /* please adjust the ace font size accordingly in editor.js */
-}
-
 /* Don't change font size in headers. */
 h1 code,
 h2 code,
@@ -74,7 +68,7 @@ h4:target::before,
 h5:target::before,
 h6:target::before {
     display: inline-block;
-    content: "»";
+    content: "#";
     margin-left: -30px;
     width: 30px;
 }
@@ -151,13 +145,16 @@ h6:target::before {
 }
 
 table {
+    width: 140%;
+    left: -20%;
+    position: relative;
     margin: 0 auto;
     border-collapse: collapse;
 }
 
 table td {
     padding: 3px 20px;
-    border: 1px var(--table-border-color) solid;
+    border: none;
 }
 
 table thead {
@@ -174,7 +171,7 @@ table thead th {
 }
 
 table thead tr {
-    border: 1px var(--table-header-bg) solid;
+    border: none;
 }
 
 /* Alternate background colors for rows */

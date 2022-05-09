@@ -22,7 +22,7 @@
 
     --links: #ffcc00;
 
-    --inline-code-color: #ff7a8b;
+    --inline-code-color: #c5c5c5;
 
     --theme-popup-bg: #14191f;
     --theme-popup-border: #5c6773;
@@ -31,9 +31,9 @@
     --quote-bg: #252832;
     --quote-border: #303441;
 
-    --table-border-color: #1e2229;
+    --table-border-color: #16181d;
     --table-header-bg: #16181d;
-    --table-alternate-bg: #1e2229;
+    --table-alternate-bg: #0000002c;
 
     --menu-bar-bg: #16181d;
 
