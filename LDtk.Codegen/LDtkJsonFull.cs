@@ -1,6 +1,6 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk.Codegen;
-#pragma warning disable IDE1006,CA1711,CA1720,CS1591
+#pragma warning disable IDE1006, CA1711, CA1720, CS1591
 using System;
 using Microsoft.Xna.Framework;
 
@@ -1092,7 +1092,7 @@ public partial class FieldInstance
 /// <summary>
 /// This object is used in Field Instances to describe an EntityRef value.
 /// </summary>
-public partial class FieldInstanceEntityReference
+public partial class EntityRef
 {
     /// <summary>
     /// Guid of the refered EntityInstance
