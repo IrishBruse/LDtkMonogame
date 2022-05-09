@@ -1,6 +1,7 @@
 namespace LDtk;
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
@@ -9,30 +10,21 @@ using Microsoft.Xna.Framework.Content;
 public partial class LDtkWorld
 {
     /// <summary> The Real LDtk Levels Json data Use indexer directly on the world eg world[0] instead as that will load external files if that setting is enabled. </summary>
-    public LDtkLevel[] Levels { get; set; }
+    [Obsolete("The raw Levels json property. Use LoadLevel Instead or Levels."), JsonPropertyName("levels")]
+    public LDtkLevel[] RawLevels { get; set; }
 
-    /// <summary>
-    /// This field will call LoadLevel if the file uses external levels.<br/>
-    /// All levels from this world. The order of this array is only relevant in LinearHorizontal and linearVertical
-    /// world layouts (see worldLayout value). Otherwise, you should refer to the worldX,worldY coordinates of each Level.
-    /// </summary>
-    public LDtkLevel this[int i]
+    /// <summary> The Levels iterator used in foreach will load external levels each time caching recommended </summary>
+    [JsonIgnore]
+    public IEnumerable<LDtkLevel> Levels
     {
         get
         {
-            if (Levels[i].ExternalRelPath != null)
+            for (int i = 0; i < RawLevels.Length; i++)
             {
-                LDtkLevel level = LDtkLevel.FromFile(Path.Join(Path.GetDirectoryName(FilePath), Levels[i].ExternalRelPath));
-                level.ExternalRelPath = Levels[i].ExternalRelPath;
-                level.Loaded = true;
-                Levels[i] = level;
+                yield return LoadLevel(RawLevels[i]);
             }
-            return Levels[i];
         }
     }
-
-    /// <summary> The number of levels in the world </summary>
-    public int Length => Levels.Length;
 
     /// <summary> The absolute filepath to the world </summary>
     [JsonIgnore] public string FilePath { get; set; }
@@ -76,9 +68,57 @@ public partial class LDtkWorld
         throw new LDtkException($"No entity of type {nameof(T)} found in this level");
     }
 
-    /// <summary> Goes through all the loaded levels looking for the entities </summary>
-    public static T[] GetEntities<T>() where T : new()
+    /// <summary> Get the level with an identifier </summary>
+    public LDtkLevel LoadLevel(string identifier)
     {
-        return default;
+        foreach (LDtkLevel level in RawLevels)
+        {
+            if (level.Identifier != identifier)
+            {
+                continue;
+            }
+
+            return LoadLevel(level);
+        }
+
+        throw new LDtkException($"No level with identifier {identifier} found in this world");
+    }
+
+    /// <summary> Get the level with an iid </summary>
+    public LDtkLevel LoadLevel(Guid iid)
+    {
+        foreach (LDtkLevel level in RawLevels)
+        {
+            if (level.Iid != iid)
+            {
+                continue;
+            }
+
+            return LoadLevel(level);
+        }
+
+        throw new LDtkException($"No level with iid {iid} found in this world");
+    }
+
+    LDtkLevel LoadLevel(LDtkLevel rawLevel)
+    {
+        LDtkLevel level = null;
+
+        if (rawLevel.ExternalRelPath != null)
+        {
+            if (Content != null)
+            {
+                level = LDtkLevel.FromFile(Path.Join(Path.GetDirectoryName(FilePath), rawLevel.ExternalRelPath), Content);
+            }
+            else
+            {
+                level = LDtkLevel.FromFile(Path.Join(Path.GetDirectoryName(FilePath), rawLevel.ExternalRelPath));
+            }
+
+            level.ExternalRelPath = rawLevel.ExternalRelPath;
+            level.Loaded = true;
+        }
+
+        return level;
     }
 }
