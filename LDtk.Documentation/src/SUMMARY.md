@@ -1,4 +1,4 @@
-[Introduction](intro.md)
+- [Introduction](intro.md)
 
 - [Tutorials](tutorials.md)
   - [World](Tutorials/world.md)
@@ -7,6 +7,11 @@
   - [Entity](Tutorials/entity.md)
   - [Codegen](Tutorials/codegen.md)
   - [ContentPipeline](Tutorials/content.md)
+
+
+- [LDtk Reference](LDtkReference.md)
+
+----
 
 - [Changelog](changelog.md)
   - [0.4.0](Changelog/0.4.0.md)
