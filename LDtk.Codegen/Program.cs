@@ -2,6 +2,8 @@ namespace LDtk.Codegen;
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using CommandLine;
 using LDtk.Codegen.Generators;
 
@@ -28,26 +30,44 @@ public class Program
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 
-        new EnumGenerator(file, options).Generate();
+        if (!file.Flags.Contains(Flag.MultiWorlds))
+        {
+            throw new LDtkException("LDtk Files must have the `MultiWorlds` flag enabled");
+        }
+
+        if (file.Flags.Contains(Flag.ExportPreCsvIntGridFormat))
+        {
+            throw new LDtkException("LDtk Files must have the `ExportPreCsvIntGridFormat` flag disabled");
+        }
+
+        if (options.FileNameInNamespace)
+        {
+            options.Namespace += "." + Path.GetFileNameWithoutExtension(options.Input);
+        }
+
         new ClassGenerator(file, options).Generate();
+        new EnumGenerator(file, options).Generate();
         new IidGenerator(file, options).Generate();
     }
 }
 
 public class Options
 {
-    [Option('i', "input", Required = true, HelpText = "Input LDtk world file.")]
+    [Option('i', "input", Required = true, HelpText = "Input LDtk file (.ldtk)")]
     public string Input { get; set; }
 
-    [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder/file depending on if single file is set.")]
+    [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder")]
     public string Output { get; set; }
 
-    [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into.")]
+    [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into")]
     public string Namespace { get; set; }
 
-    [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file.")]
+    [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file")]
     public string LevelClassName { get; set; }
 
     [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
     public bool PointAsVector2 { get; set; }
+
+    [Option("FileNameInNamespace", Required = false, Default = false, HelpText = "Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'")]
+    public bool FileNameInNamespace { get; set; }
 }
