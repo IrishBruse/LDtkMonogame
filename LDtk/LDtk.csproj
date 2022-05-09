@@ -25,12 +25,12 @@
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
+        <PackageReleaseNotes>[Visit Wiki for more information](https://www.ethanconneely.com/LDtkMonogame/)</PackageReleaseNotes>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 
-        <PackageOutputDir>../Nuget</PackageOutputDir>
+        <PackageOutputDir>../Nuget/</PackageOutputDir>
     </PropertyGroup>
 
     <ItemGroup>

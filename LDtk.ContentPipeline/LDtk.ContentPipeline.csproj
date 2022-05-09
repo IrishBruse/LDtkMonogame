@@ -26,12 +26,13 @@
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>Visit Wiki for more information</PackageReleaseNotes>
+        <PackageReleaseNotes>[Visit Wiki for more information](https://www.ethanconneely.com/LDtkMonogame/)</PackageReleaseNotes>
+
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="../Icon.png" Pack="true" PackagePath="" />
-        <Content Include="bin/Release/netcoreapp3.1/LDtk.dll">
+        <Content Include="./bin/Release/netcoreapp3.1/LDtkMonogame.dll">
             <PackagePath>lib/netcoreapp3.1/</PackagePath>
             <Pack>true</Pack>
         </Content>

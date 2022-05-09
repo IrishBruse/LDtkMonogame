@@ -1,6 +1,6 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk;
-#pragma warning disable IDE1006, CA1711, CA1720, CS1591
+#pragma warning disable IDE1006,CA1711,CA1720,CS1591
 using System;
 using Microsoft.Xna.Framework;
 
@@ -747,7 +747,7 @@ public partial class LevelBackgroundPosition
     /// background image. This cropping happens when original is larger than the level bounds.
     /// Array format: [ cropX, cropY, cropWidth, cropHeight ]
     /// </summary>
-    public Rectangle CropRect { get; set; }
+    public float[] CropRect { get; set; }
 
     /// <summary>
     /// An array containing the [scaleX,scaleY] values of the cropped background image,
