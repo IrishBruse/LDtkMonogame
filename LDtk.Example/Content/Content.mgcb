@@ -14,6 +14,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin atlas/Beach by deepnight.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:atlas/Beach by deepnight.png
+
 #begin Characters.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,6 +37,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Characters.png
+
+#begin TestWorld.ldtk
+/importer:LDtkFileImporter
+/processor:LDtkFileProcessor
+/build:TestWorld.ldtk
 
 #begin Tilemap.png
 /importer:TextureImporter
@@ -42,3 +59,4 @@
 /importer:LDtkFileImporter
 /processor:LDtkFileProcessor
 /build:World.ldtk
+

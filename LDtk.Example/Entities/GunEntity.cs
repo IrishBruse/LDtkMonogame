@@ -3,7 +3,7 @@ namespace LDtkMonogameExample.Entities;
 using System;
 using LDtk.Renderer;
 using LDtkMonogameExample.AABB;
-using LDtkTypes;
+using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

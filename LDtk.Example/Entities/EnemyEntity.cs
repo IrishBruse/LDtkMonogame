@@ -4,6 +4,7 @@ using System;
 using LDtk.Renderer;
 using LDtkMonogameExample.AABB;
 using LDtkTypes;
+using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -45,7 +46,7 @@ public class EnemyEntity
             return;
         }
 
-        Vector2 target = data.Wander[nextWander].ToVector2();
+        Vector2 target = data.Wander[nextWander];
 
         int speed = 20;
 
@@ -78,7 +79,7 @@ public class EnemyEntity
             for (int i = 0; i < data.Wander.Length; i++)
             {
                 renderer.SpriteBatch.Draw(LDtkMonogameGame.Pixel, data.Position, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                renderer.SpriteBatch.Draw(LDtkMonogameGame.Pixel, data.Wander[i].ToVector2(), null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                renderer.SpriteBatch.Draw(LDtkMonogameGame.Pixel, data.Wander[i], null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
         }
 

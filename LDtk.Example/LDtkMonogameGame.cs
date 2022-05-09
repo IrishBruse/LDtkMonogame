@@ -8,7 +8,7 @@ using System.IO;
 using LDtk;
 using LDtk.Renderer;
 using LDtkMonogameExample.Entities;
-using LDtkTypes;
+using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
