@@ -32,12 +32,14 @@ public class Program
 
         if (!file.Flags.Contains(Flag.MultiWorlds))
         {
-            throw new LDtkException("LDtk Files must have the `MultiWorlds` flag enabled");
+            Console.Error.WriteLine("LDtk Files must have the `MultiWorlds` flag enabled");
+            return;
         }
 
         if (file.Flags.Contains(Flag.ExportPreCsvIntGridFormat))
         {
-            throw new LDtkException("LDtk Files must have the `ExportPreCsvIntGridFormat` flag disabled");
+            Console.Error.WriteLine("LDtk Files must have the `ExportPreCsvIntGridFormat` flag disabled");
+            return;
         }
 
         if (options.FileNameInNamespace)

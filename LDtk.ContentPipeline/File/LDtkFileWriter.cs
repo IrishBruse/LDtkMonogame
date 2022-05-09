@@ -14,6 +14,6 @@ public class LDtkFileWriter : ContentTypeWriter<LDtkFile>
 
     public override string GetRuntimeReader(TargetPlatform targetPlatform)
     {
-        return "LDtk.ContentPipeline.LDtkFileReader, LDtk";
+        return "LDtk.ContentPipeline.LDtkFileReader, LDtkMonogame";
     }
 }
