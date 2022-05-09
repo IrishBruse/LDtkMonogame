@@ -2,7 +2,7 @@ namespace LDtk.Codegen;
 
 public static class Converter
 {
-    public static string ConvertFieldDefinitionTypes(string input)
+    public static string ConvertFieldDefinitionTypes(string input, bool pointAsVector)
     {
         input = input.Replace("LocalEnum.", "");
         input = input.Replace("ExternEnum.", "");
@@ -10,14 +10,23 @@ public static class Converter
         int lessThan = input.IndexOf('<');
         int greaterThan = input.IndexOf('>');
 
+        string type;
+
         if (lessThan != -1)
         {
-            return TypeConversion(input[(lessThan + 1)..greaterThan]) + "[]";
+            type = TypeConversion(input[(lessThan + 1)..greaterThan]) + "[]";
         }
         else
         {
-            return TypeConversion(input);
+            type = TypeConversion(input);
         }
+
+        if (type.Contains("Point") && pointAsVector)
+        {
+            type = type.Replace("Point", "Vector2");
+        }
+
+        return type;
     }
 
     static string TypeConversion(string input)
@@ -27,9 +36,9 @@ public static class Converter
             "Int" => "int",
             "String" => "string",
             "FilePath" => "string",
+            "Multilines" => "string",
             "Float" => "float",
             "Bool" => "bool",
-            "F_Point" => "Vector2",
             "EntityRef" => "FieldInstanceEntityReference",
             _ => input,
         };
