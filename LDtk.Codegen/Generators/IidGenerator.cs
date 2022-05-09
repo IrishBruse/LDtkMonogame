@@ -1,7 +1,5 @@
 namespace LDtk.Codegen.Generators;
 
-using System;
-using System.IO;
 using Raylib_CsLo.Codegen;
 
 public class IidGenerator : BaseGenerator
@@ -37,10 +35,6 @@ public class IidGenerator : BaseGenerator
         EndBlock();
         Line($"#pragma warning restore");
 
-        string file = Path.Join(options.Output, "Iids", "Worlds.cs");
-        Directory.CreateDirectory(Path.GetDirectoryName(file));
-        File.WriteAllText(file, fileContents.ToString());
-        Console.WriteLine("Generating -> Iids/Worlds.cs");
-        fileContents.Clear();
+        Output(options, "Iids", "Worlds.cs");
     }
 }

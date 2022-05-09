@@ -1,6 +1,9 @@
 namespace Raylib_CsLo.Codegen;
 
+using System;
+using System.IO;
 using System.Text;
+using LDtk.Codegen;
 
 public class BaseGenerator
 {
@@ -63,5 +66,14 @@ public class BaseGenerator
     public void DocumentationBlock(string description)
     {
         Line($"/// <summary> {description} </summary>");
+    }
+
+    public void Output(Options options, string folder, string identifier)
+    {
+        string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
+        Directory.CreateDirectory(Path.GetDirectoryName(file));
+        File.WriteAllText(file, fileContents.ToString());
+        Console.WriteLine("Generating -> " + folder + "/" + identifier);
+        fileContents.Clear();
     }
 }

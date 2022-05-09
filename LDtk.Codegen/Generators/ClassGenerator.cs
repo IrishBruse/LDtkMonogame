@@ -1,7 +1,5 @@
 namespace LDtk.Codegen.Generators;
 
-using System;
-using System.IO;
 using Raylib_CsLo.Codegen;
 
 public class ClassGenerator : BaseGenerator
@@ -17,14 +15,14 @@ public class ClassGenerator : BaseGenerator
 
     public void Generate()
     {
+        // Level Classes
+        GenClass(options.LevelClassName, ldtkFile.Defs.LevelFields, "");
+
         // Entity Classes
         foreach (EntityDefinition e in ldtkFile.Defs.Entities)
         {
             GenClass(e.Identifier, e.FieldDefs, "Entities");
         }
-
-        // Level Classes
-        GenClass(options.LevelClassName, ldtkFile.Defs.LevelFields, "");
     }
 
     void GenClass(string identifier, FieldDefinition[] fields, string folder)
@@ -41,17 +39,18 @@ public class ClassGenerator : BaseGenerator
         StartBlock();
         {
             Line($"public string Identifier {{ get; set; }}");
-            Line($"public long Uid {{ get; set; }}");
+            Line($"public System.Guid Iid {{ get; set; }}");
+            Line($"public int Uid {{ get; set; }}");
             Line($"public Vector2 Position {{ get; set; }}");
             Line($"public Vector2 Size {{ get; set; }}");
             Line($"public Vector2 Pivot {{ get; set; }}");
             Line($"public Rectangle Tile {{ get; set; }}");
             Blank();
-            Line($"public Color EditorVisualColor {{ get; set; }}");
+            Line($"public Color SmartColor {{ get; set; }}");
             Blank();
             foreach (FieldDefinition value in fields)
             {
-                string type = Converter.ConvertFieldDefinitionTypes(value._Type);
+                string type = Converter.ConvertFieldDefinitionTypes(value._Type, options.PointAsVector2);
                 Line($"public {type} {value.Identifier} {{ get; set; }}");
             }
         }
@@ -59,10 +58,6 @@ public class ClassGenerator : BaseGenerator
 
         Line($"#pragma warning restore");
 
-        string file = Path.Join(options.Output, folder, identifier + ".cs");
-        Directory.CreateDirectory(Path.GetDirectoryName(file));
-        File.WriteAllText(file, fileContents.ToString());
-        Console.WriteLine("Generating -> " + folder + "/" + identifier);
-        fileContents.Clear();
+        Output(options, folder, identifier);
     }
 }
