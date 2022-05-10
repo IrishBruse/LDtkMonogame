@@ -1,10 +1,9 @@
-// #define UseContentPipeline
+#define UseContentPipeline
 
 namespace LDtkMonogameExample;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using LDtk;
 using LDtk.Renderer;
 using LDtkMonogameExample.Entities;
@@ -88,10 +87,11 @@ public class LDtkMonogameGame : Game
 
         world = file.LoadWorld(Worlds.World.Iid);
 
-        for (int i = 0; i < world.Length; i++)
-        {
-            LDtkLevel level = world[i];
+        LDtkLevel temp1 = world.LoadLevel("Level_0");
+        LDtkLevel temp2 = world.LoadLevel(Worlds.World.Level_1);
 
+        foreach (LDtkLevel level in world.Levels)
+        {
             foreach (Enemy enemy in level.GetEntities<Enemy>())
             {
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
