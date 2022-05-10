@@ -98,7 +98,6 @@ public class LDtkMonogameGame : Game
         {
             foreach (Enemy enemy in level.GetEntities<Enemy>())
             {
-                Console.WriteLine(enemy.Wander[0]);
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 

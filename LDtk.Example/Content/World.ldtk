@@ -10,7 +10,7 @@
 	},
 	"jsonVersion": "1.1.3",
 	"appBuildId": 458364,
-	"nextUid": 143,
+	"nextUid": 144,
 	"identifierStyle": "Capitalize",
 	"worldLayout": null,
 	"worldGridWidth": null,
@@ -862,6 +862,35 @@
 					"allowedRefs": "OnlySame",
 					"allowedRefTags": [],
 					"tilesetUid": null
+				},
+				{
+					"identifier": "Color",
+					"__type": "Color",
+					"uid": 143,
+					"type": "F_Color",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayPos": "Above",
+					"editorAlwaysShow": false,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": true,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [10899536] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefTags": [],
+					"tilesetUid": null
 				}
 			]
 		},
@@ -1169,7 +1198,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "203900c1-8dc0-11ec-a0e2-5d1dc3c7917f",
 							"width": 16,
 							"height": 16,
@@ -1186,7 +1215,8 @@
 								{ "__identifier": "Type", "__value": "Slug", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Slug"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1195,7 +1225,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "203900c2-8dc0-11ec-a0e2-038e052b6b4c",
 							"width": 16,
 							"height": 16,
@@ -1212,7 +1242,8 @@
 								{ "__identifier": "Type", "__value": "Slug", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Slug"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1221,7 +1252,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 48, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "203927d0-8dc0-11ec-a0e2-17db39629243",
 							"width": 16,
 							"height": 16,
@@ -1244,7 +1275,8 @@
 								{ "__identifier": "Type", "__value": "BlueBee", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 48, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["BlueBee"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						}
 					]
@@ -1425,7 +1457,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "2039eb23-8dc0-11ec-a0e2-5bd3ece113c6",
 							"width": 16,
 							"height": 16,
@@ -1442,7 +1474,8 @@
 								{ "__identifier": "Type", "__value": "Slug", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Slug"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1451,7 +1484,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "2039eb24-8dc0-11ec-a0e2-f32448e21f7b",
 							"width": 16,
 							"height": 16,
@@ -1468,7 +1501,8 @@
 								{ "__identifier": "Type", "__value": "Slug", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Slug"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1477,7 +1511,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 16, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "2039eb25-8dc0-11ec-a0e2-b3e5c192dfa7",
 							"width": 16,
 							"height": 16,
@@ -1515,7 +1549,8 @@
 								{ "__identifier": "Type", "__value": "YellowBee", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 16, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["YellowBee"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
@@ -1538,7 +1573,7 @@
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 },
-							"__smartColor": "#FF6B19",
+							"__smartColor": "#A65050",
 							"iid": "203a1230-8dc0-11ec-a0e2-9bd99f75636d",
 							"width": 16,
 							"height": 16,
@@ -1555,7 +1590,8 @@
 								{ "__identifier": "Type", "__value": "Slug", "__type": "LocalEnum.EnemyType", "__tile": { "tilesetUid": 2, "x": 80, "y": 16, "w": 16, "h": 16 }, "defUid": 119, "realEditorValues": [{
 									"id": "V_String",
 									"params": ["Slug"]
-								}] }
+								}] },
+								{ "__identifier": "Color", "__value": "#A65050", "__type": "Color", "__tile": null, "defUid": 143, "realEditorValues": [] }
 							]
 						},
 						{
