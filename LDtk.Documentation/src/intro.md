@@ -33,7 +33,7 @@ Then load the world right after for now ldtk only supports one file but make sur
 LDtkWorld world = file.LoadWorld(Worlds.World.Iid);
 ```
 
-The `Worlds.World.Iid` is generated from the ldtkgen tool and is recommended that you use it for static typing of entities. It is a class within in a class that represents the world name and the levels name and holds the iid you can use to load that specific level.
+The `Worlds.World.Iid` is generated from the ldtkgen tool and is recommended that you use it for static typing of entities and levels. It is a class within in a class that represents the world name and the levels name and holds the iid you can use to load that specific level.
 
 Create the renderer in `Initialize`.
 

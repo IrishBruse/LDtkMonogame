@@ -22,5 +22,16 @@ public class LDtkLevelData
 }
 ```
 
-For more information on the level refer to the ldtk documentation [ldtk-LevelJson](https://ldtk.io/json/#ldtk-LevelJson)
-cd
+```cs
+public class LDtkLevelData:
+{
+    public string biome;
+    public int difficulty;
+}
+```
+
+```cs
+Gun_Pickup level1 = level0.GetEntityRef<Gun_Pickup>();// Guid/Iid
+```
+
+For more information on the level refer to the ldtk documentation [ldtk-LevelJson](../LDtkReference.md#level)

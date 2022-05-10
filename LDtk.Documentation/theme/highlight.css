@@ -34,8 +34,9 @@
 .hljs-builtin-name,
 .hljs-literal,
 .hljs-type,
+.hljs-function,
 .hljs-params {
-    color: #ffbaac !important;
+    color: #ffffff !important;
 }
 
 .hljs-string,
@@ -46,7 +47,7 @@
 
 .hljs-title,
 .hljs-section {
-    color: #0030f2 !important;
+    color: #dcdcaa !important;
 }
 
 .hljs-meta,

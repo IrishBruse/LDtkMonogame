@@ -48,7 +48,7 @@ put this in your `.csproj` file and set the path to point to your ldtk file(be c
 
 - --PointAsVector2          **(Default: false)** Convert any Point fields or Point[] to Vector2 or Vector2[]
 
-- --FileNameInNamespace     Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'
+- --FileNameInNamespace     **(Default: false)** Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'
 
 - --help                    Display the help screen.
 
