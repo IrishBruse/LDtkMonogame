@@ -14,6 +14,7 @@
 ----
 
 - [Changelog](changelog.md)
+  - [0.5.0](Changelog/0.5.0.md)
   - [0.4.0](Changelog/0.4.0.md)
   - [0.3.1](Changelog/0.3.1.md)
   - [0.3.0](Changelog/0.3.0.md)

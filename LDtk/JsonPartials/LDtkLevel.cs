@@ -3,6 +3,8 @@ namespace LDtk;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
@@ -10,6 +12,8 @@ using Microsoft.Xna.Framework.Content;
 
 public partial class LDtkLevel
 {
+    private const string Name = nameof(GetEntityFromInstance);
+
     /// <summary> The absolute filepath to the level </summary>
     [JsonIgnore] public string FilePath { get; set; }
 
@@ -95,6 +99,32 @@ public partial class LDtkLevel
         throw new LDtkException($"No entity of type {typeof(T).Name} found in this level");
     }
 
+    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/> </summary>
+    public T GetEntityRef<T>(EntityRef entityRef) where T : new()
+    {
+        foreach (LayerInstance layer in LayerInstances)
+        {
+            if (layer.Iid != entityRef.LayerIid)
+            {
+                continue;
+            }
+
+            foreach (EntityInstance entity in layer.EntityInstances)
+            {
+                if (entity.Iid != entityRef.EntityIid)
+                {
+                    continue;
+                }
+
+                return GetEntityFromInstance<T>(entity);
+            }
+
+            throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in layer {layer._Identifier}");
+        }
+
+        throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in level {Identifier}");
+    }
+
     /// <summary> Gets an array of entities of type <typeparamref name="T"/> in the current level </summary>
     public T[] GetEntities<T>() where T : new()
     {
@@ -111,17 +141,21 @@ public partial class LDtkLevel
                         continue;
                     }
 
-                    T entity = new();
-
-                    LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);
-                    LDtkFieldParser.ParseCustomEntityFields(entity, entityInstance.FieldInstances, this);
-
+                    T entity = GetEntityFromInstance<T>(entityInstance);
                     entities.Add(entity);
                 }
             }
         }
 
         return entities.ToArray();
+    }
+
+    T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
+    {
+        T entity = new();
+        LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);
+        LDtkFieldParser.ParseCustomEntityFields(entity, entityInstance.FieldInstances, this);
+        return entity;
     }
 
     /// <summary> Check if point is inside of a level </summary>
@@ -137,9 +171,4 @@ public partial class LDtkLevel
     {
         return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
     }
-
-    // public ILDtkEntity[] GetAllEntities()
-    // {
-    //     return Array.Empty<ILDtkEntity>();
-    // }
 }

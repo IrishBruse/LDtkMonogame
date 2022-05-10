@@ -100,6 +100,17 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with iid {iid} found in this world");
     }
 
+    /// <summary> Get the level with an index </summary>
+    public LDtkLevel LoadLevel(int index)
+    {
+        if (index >= 0 && index <= RawLevels.Length)
+        {
+            return LoadLevel(RawLevels[index]);
+        }
+
+        throw new LDtkException($"No level with index {index} found in this world");
+    }
+
     LDtkLevel LoadLevel(LDtkLevel rawLevel)
     {
         LDtkLevel level = null;
@@ -120,5 +131,21 @@ public partial class LDtkWorld
         }
 
         return level;
+    }
+
+    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/> </summary>
+    public T GetEntityRef<T>(EntityRef entityRef) where T : new()
+    {
+        foreach (LDtkLevel level in RawLevels)
+        {
+            if (level.Iid != entityRef.LevelIid)
+            {
+                continue;
+            }
+
+            return level.GetEntityRef<T>(entityRef);
+        }
+
+        throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in world {Identifier}");
     }
 }

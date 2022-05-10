@@ -17,15 +17,23 @@ using LDtk.Renderer;
 
 LDtk.Renderer is a premade renderer for the levels, you can create your own if you have more specific needs
 [LDtkRenderer.cs](https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtk/Renderer/LDtkRenderer.cs)
-is an example of how to make one.
+is an example of how to make one. Or you can inherit it and extend it.
 
-To get started loading ldtk files load a world in `Initialize`.
+To get started loading ldtk files load the file in `Initialize`.
 
 ```cs
-LDtkWorld world = LDtkFile.FromFile("World", Content);
+LDtkFile file = LDtkFile.FromFile("World", Content);
 // or
-LDtkWorld world = LDtkFile.FromFile("Data/World.ldtk");
+LDtkFile file = LDtkFile.FromFile("Data/World.ldtk");
 ```
+
+Then load the world right after for now ldtk only supports one file but make sure to enable the multiworlds flag in the project settings under advanced.
+
+```cs
+LDtkWorld world = file.LoadWorld(Worlds.World.Iid);
+```
+
+The `Worlds.World.Iid` is generated from the ldtkgen tool and is recommended that you use it for static typing of entities. It is a class within in a class that represents the world name and the levels name and holds the iid you can use to load that specific level.
 
 Create the renderer in `Initialize`.
 
@@ -38,9 +46,9 @@ LDtkRenderer renderer = new LDtkRenderer(spriteBatch);
 Prerender Levels
 
 ```cs
-for (int i = 0; i < world.Levels.Length; i++)
+foreach (LDtkLevel level in world.Levels)
 {
-    renderer.PrerenderLevel(world.Levels[i]);
+    renderer.PrerenderLevel(level);
 }
 ```
 
@@ -51,7 +59,10 @@ GraphicsDevice.Clear(world.BgColor);
 
 spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 {
-    renderer.RenderPrerenderedLevel(world.Levels[i]);
+    foreach (LDtkLevel level in world.Levels)
+    {
+        renderer.RenderPrerenderedLevel(level);
+    }
 }
 spriteBatch.End();
 ```

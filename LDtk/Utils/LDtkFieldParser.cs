@@ -1,11 +1,8 @@
 namespace LDtk;
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
 
 /// <summary> Utility for parsing ldtk json data into more typed versions </summary>
@@ -19,6 +16,134 @@ static class LDtkFieldParser
     public static void ParseCustomEntityFields<T>(T entity, FieldInstance[] fields, LDtkLevel level) where T : new()
     {
         ParseCustomFields(entity, fields, level);
+    }
+
+    static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
+    {
+        foreach (FieldInstance field in fields)
+        {
+            string variableName = field._Identifier;
+            PropertyInfo variableDef = typeof(T).GetProperty(variableName);
+
+            if (field._Value == null)
+            {
+                continue;
+            }
+
+            JsonElement element = (JsonElement)field._Value;
+
+            if (field._Type.Contains(Field.PointType))
+            {
+                HandlePoints(classFields, level, field, variableDef, element);
+            }
+            else
+            {
+                switch (element.ValueKind)
+                {
+                    case JsonValueKind.Object:
+                    case JsonValueKind.Array:
+                    case JsonValueKind.Number:
+                    variableDef.SetValue(classFields, JsonSerializer.Deserialize(element.ToString(), variableDef.PropertyType, Constants.SerializeOptions));
+                    break;
+
+                    case JsonValueKind.String:
+                    bool isEnum = field._Type.Split('.')[0].Contains("Enum");
+
+                    if (isEnum)
+                    {
+                        Type t = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
+                        variableDef.SetValue(classFields, Enum.Parse(t, element.ToString()));
+                    }
+                    else
+                    {
+                        variableDef.SetValue(classFields, element.ToString());
+                    }
+                    break;
+
+                    case JsonValueKind.True:
+                    variableDef.SetValue(classFields, true);
+                    break;
+
+                    case JsonValueKind.False:
+                    variableDef.SetValue(classFields, false);
+                    break;
+
+                    case JsonValueKind.Null:
+                    variableDef.SetValue(classFields, null);
+                    break;
+
+                    default:
+                    case JsonValueKind.Undefined:
+                    throw new LDtkException("Oops");
+                }
+            }
+        }
+    }
+
+    static void HandlePoints<T>(T classFields, LDtkLevel level, FieldInstance field, PropertyInfo variableDef, JsonElement element)
+    {
+        int gridSize = GetGridSize(level);
+
+        if (field._Type == Field.PointType)
+        {
+            if (variableDef.PropertyType == typeof(Point))
+            {
+                Point point = JsonSerializer.Deserialize<Point>(element.ToString(), Constants.SerializeOptions);
+                point *= new Point(gridSize, gridSize);
+                point += level.Position;
+                point += new Point(gridSize / 2);
+                variableDef.SetValue(classFields, point);
+            }
+            else
+            {
+                Vector2 point = JsonSerializer.Deserialize<Vector2>(element.ToString(), Constants.SerializeOptions);
+                point *= new Vector2(gridSize, gridSize);
+                point += level.Position.ToVector2();
+                point += new Vector2(gridSize / 2);
+                variableDef.SetValue(classFields, point);
+            }
+        }
+        else if (field._Type == Field.PointArrayType)
+        {
+            if (variableDef.PropertyType.GetElementType() == typeof(Point))
+            {
+                Point[] points = JsonSerializer.Deserialize<Point[]>(element.ToString(), Constants.SerializeOptions);
+                for (int i = 0; i < points.Length; i++)
+                {
+                    points[i] *= new Point(gridSize, gridSize);
+                    points[i] += level.Position;
+                    points[i] += new Point(gridSize / 2);
+                }
+
+                variableDef.SetValue(classFields, points);
+            }
+            else
+            {
+                Vector2[] points = JsonSerializer.Deserialize<Vector2[]>(element.ToString(), Constants.SerializeOptions);
+                for (int i = 0; i < points.Length; i++)
+                {
+                    points[i] *= new Vector2(gridSize, gridSize);
+                    points[i] += level.Position.ToVector2();
+                    points[i] += new Vector2(gridSize / 2);
+                }
+
+                variableDef.SetValue(classFields, points);
+            }
+        }
+    }
+
+    static int GetGridSize(LDtkLevel level)
+    {
+        int gridSize = 0;
+        for (int j = 0; j < level.LayerInstances.Length; j++)
+        {
+            if (level.LayerInstances[j]._Type == LayerType.Entities)
+            {
+                gridSize = level.LayerInstances[j]._GridSize;
+            }
+        }
+
+        return gridSize;
     }
 
     public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
@@ -40,134 +165,6 @@ static class LDtkFieldParser
     }
 
     // Helpers
-    static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
-    {
-        for (int i = 0; i < fields.Length; i++)
-        {
-            FieldInstance fieldInstance = fields[i];
-            string variableName = fieldInstance._Identifier;
-
-            PropertyInfo variableDef = typeof(T).GetProperty(variableName);
-
-            if (variableDef == null)
-            {
-                throw new LDtkException($"Error: Field \"{variableName}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
-            }
-
-            // Split any enums
-            int enumTypeIndex = fieldInstance._Type.LastIndexOf('.');
-            int arrayEndIndex = fieldInstance._Type.LastIndexOf('>');
-
-            string variableType = fieldInstance._Type;
-
-            if (enumTypeIndex != -1)
-            {
-                variableType = arrayEndIndex != -1 ? variableType.Remove(enumTypeIndex, arrayEndIndex - enumTypeIndex) : variableType.Remove(enumTypeIndex, variableType.Length - enumTypeIndex);
-            }
-
-            switch (variableType)
-            {
-                case Field.IntType:
-                case Field.BoolType:
-                case Field.EnumType:
-                case Field.FloatType:
-                case Field.StringType:
-                case Field.FilePathType:
-                if (fieldInstance._Value != null)
-                {
-                    variableDef.SetValue(classFields, Convert.ChangeType(fieldInstance._Value.ToString(), variableDef.PropertyType));
-                }
-                break;
-
-                case Field.IntArrayType:
-                case Field.BoolArrayType:
-                case Field.EnumArrayType:
-                case Field.FloatArrayType:
-                case Field.StringArrayType:
-                case Field.FilePathArrayType:
-                case Field.LocalEnumArrayType:
-                object primativeArrayValues = JsonSerializer.Deserialize(fieldInstance._Value.ToString(), variableDef.PropertyType, new JsonSerializerOptions() { Converters = { new JsonStringEnumConverter() } });
-                variableDef.SetValue(classFields, Convert.ChangeType(primativeArrayValues, variableDef.PropertyType));
-                break;
-
-                case Field.LocalEnumType:
-                variableDef.SetValue(classFields, Enum.Parse(variableDef.PropertyType, fieldInstance._Value.ToString()));
-                break;
-
-                case Field.ColorType:
-                variableDef.SetValue(classFields, ParseStringToColor(fieldInstance._Value.ToString()));
-                break;
-
-                // Only Entities can have point fields
-                case Field.PointType:
-                if (fieldInstance._Value != null)
-                {
-                    if (variableDef.PropertyType == typeof(Vector2))
-                    {
-                        Vector2 vector = (Vector2)fieldInstance._Value;
-                        variableDef.SetValue(classFields, vector);
-                    }
-                    else if (variableDef.PropertyType == typeof(Point))
-                    {
-                        Point point = JsonSerializer.Deserialize<Point>(fieldInstance._Value.ToString(), new JsonSerializerOptions() { Converters = { new CxCyConverter() } });
-                        variableDef.SetValue(classFields, point);
-                    }
-                }
-                else
-                {
-                    if (variableDef.PropertyType == typeof(Vector2))
-                    {
-                        variableDef.SetValue(classFields, Vector2.Zero);
-                    }
-                    else if (variableDef.PropertyType == typeof(Point))
-                    {
-                        variableDef.SetValue(classFields, Point.Zero);
-                    }
-                }
-                break;
-
-                case Field.PointArrayType:
-                List<Point> points = JsonSerializer.Deserialize<List<Point>>(fieldInstance._Value.ToString(), new JsonSerializerOptions() { Converters = { new CxCyConverter() } });
-
-                int gridSize = 0;
-                for (int j = 0; j < level.LayerInstances.Length; j++)
-                {
-                    if (level.LayerInstances[j]._Type == LayerType.Entities)
-                    {
-                        gridSize = level.LayerInstances[j]._GridSize;
-                    }
-                }
-
-                for (int j = 0; j < points.Count; j++)
-                {
-                    points[j] = new Point(points[j].X * gridSize, points[j].Y * gridSize);
-                    points[j] += level.Position;
-                    points[j] += new Point(gridSize / 2);
-                }
-
-                if (variableDef.PropertyType.GetElementType() == typeof(Vector2))
-                {
-                    Vector2[] pointsAsVec = new Vector2[points.Count];
-
-                    for (int j = 0; j < pointsAsVec.Length; j++)
-                    {
-                        pointsAsVec[j] = new Vector2(points[j].X, points[j].Y);
-                    }
-
-                    variableDef.SetValue(classFields, pointsAsVec);
-                }
-                else
-                {
-                    variableDef.SetValue(classFields, points.ToArray());
-                }
-                break;
-
-                default:
-                throw new LDtkException("Unknown Variable of type " + fieldInstance._Tile);
-            }
-        }
-    }
-
     static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
         PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -180,24 +177,9 @@ static class LDtkFieldParser
         variableDef.SetValue(entity, value);
     }
 
-    static Color ParseStringToColor(string hex)
+    class CxCyPoint
     {
-        return ParseStringToColor(hex, 255);
-    }
-
-    static Color ParseStringToColor(string hex, int alpha)
-    {
-        if (uint.TryParse(hex.Replace("#", ""), NumberStyles.HexNumber, null, out uint color))
-        {
-            byte red = (byte)((color & 0xFF0000) >> 16);
-            byte green = (byte)((color & 0x00FF00) >> 8);
-            byte blue = (byte)(color & 0x0000FF);
-
-            return new Color(red, green, blue, alpha);
-        }
-        else
-        {
-            return new Color(0xFF00FFFF);
-        }
+        public int Cx { get; set; }
+        public int Cy { get; set; }
     }
 }

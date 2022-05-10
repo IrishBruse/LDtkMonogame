@@ -2,18 +2,16 @@
 
 To open a ldtk project file you should start by creating a new `World` object as this is what holds all the data to a ldtk project.
 
-
-
-This will load `.ldtk` world directly from disk.
+This will load `.ldtk` worlds directly from disk.
 
 ```cs
-World world = LDtkWorld.LoadWorld("Assets/World.ldtk");
+LDtkWorld world = LDtkWorld.LoadWorld("Assets/World.ldtk");
 ```
 
 This will load `.ldtk` world from the content pipeline.
 
 ```cs
-World world = LDtkWorld.LoadWorld("World", Content);
+LDtkWorld world = LDtkWorld.LoadWorld("World", Content);
 ```
 
 You will need to make sure your files are in the same relative folders as the origonal files in the project.

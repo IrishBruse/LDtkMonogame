@@ -20,4 +20,10 @@ static class Field
     public const string ColorArrayType = "Array<Color>";
     public const string PointType = "Point";
     public const string PointArrayType = "Array<Point>";
+
+    public const string EntityRefType = "EntityRef";
+    public const string EntityRefArrayType = "Array<EntityRef>";
+
+    public const string TileType = "Tile";
+    public const string TileArrayType = "Array<Tile>";
 }

@@ -1,7 +1,6 @@
 namespace LDtk;
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,30 +8,32 @@ class Vector2Converter : JsonConverter<Vector2>
 {
     public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.StartArray)
+        Vector2 val = Vector2.Zero;
+        if (reader.TokenType == JsonTokenType.StartArray)
         {
-            throw new JsonException();
+            reader.Read();
+
+            float x = reader.GetSingle();
+            reader.Read();
+
+            float y = reader.GetSingle();
+            reader.Read();
+
+            val = new(x, y);
         }
-
-        List<float> value = new();
-
-        while (reader.Read())
+        else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            if (reader.TokenType == JsonTokenType.EndArray)
-            {
-                return new Vector2(value[0], value[1]);
-            }
+            reader.Read();
+            reader.Read();
+            float x = reader.GetSingle();
+            reader.Read();
+            reader.Read();
+            float y = reader.GetSingle();
+            reader.Read();
 
-            if (reader.TokenType != JsonTokenType.Number)
-            {
-                throw new JsonException();
-            }
-
-            float element = reader.GetSingle();
-            value.Add(element);
+            val = new(x, y);
         }
-
-        throw new JsonException();
+        return val;
     }
 
     public override void Write(Utf8JsonWriter writer, Vector2 val, JsonSerializerOptions options)

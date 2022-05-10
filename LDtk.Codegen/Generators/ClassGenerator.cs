@@ -51,6 +51,12 @@ public class ClassGenerator : BaseGenerator
             foreach (FieldDefinition value in fields)
             {
                 string type = Converter.ConvertFieldDefinitionTypes(value._Type, options.PointAsVector2);
+
+                if (value.CanBeNull)
+                {
+                    type += "?";
+                }
+
                 Line($"public {type} {value.Identifier} {{ get; set; }}");
             }
         }
