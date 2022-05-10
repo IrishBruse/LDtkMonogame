@@ -1,6 +1,7 @@
 namespace LDtk;
 
 using System;
+using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using Microsoft.Xna.Framework;
@@ -43,16 +44,22 @@ static class LDtkFieldParser
                     case JsonValueKind.Object:
                     case JsonValueKind.Array:
                     case JsonValueKind.Number:
-                    variableDef.SetValue(classFields, JsonSerializer.Deserialize(element.ToString(), variableDef.PropertyType, Constants.SerializeOptions));
+                    Type returnType = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
+                    variableDef.SetValue(classFields, JsonSerializer.Deserialize(element.ToString(), returnType, Constants.SerializeOptions));
                     break;
 
                     case JsonValueKind.String:
+                    Type t = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
                     bool isEnum = field._Type.Split('.')[0].Contains("Enum");
+                    bool isColor = field._Type.Split('.')[0].Contains("Color");
 
                     if (isEnum)
                     {
-                        Type t = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
                         variableDef.SetValue(classFields, Enum.Parse(t, element.ToString()));
+                    }
+                    else if (isColor)
+                    {
+                        variableDef.SetValue(classFields, ParseStringToColor(field._Value.ToString(), 255));
                     }
                     else
                     {
@@ -77,6 +84,22 @@ static class LDtkFieldParser
                     throw new LDtkException("Oops");
                 }
             }
+        }
+    }
+
+    static Color ParseStringToColor(string hex, int alpha)
+    {
+        if (uint.TryParse(hex.Replace("#", ""), NumberStyles.HexNumber, null, out uint color))
+        {
+            byte red = (byte)((color & 0xFF0000) >> 16);
+            byte green = (byte)((color & 0x00FF00) >> 8);
+            byte blue = (byte)(color & 0x0000FF);
+
+            return new Color(red, green, blue, alpha);
+        }
+        else
+        {
+            return new Color(0xFF00FFFF);
         }
     }
 
