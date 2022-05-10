@@ -1,7 +1,6 @@
 namespace LDtk;
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,30 +8,32 @@ class PointConverter : JsonConverter<Point>
 {
     public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType != JsonTokenType.StartArray)
+        Point val = Point.Zero;
+        if (reader.TokenType == JsonTokenType.StartArray)
         {
-            throw new JsonException();
+            reader.Read();
+
+            int x = reader.GetInt32();
+            reader.Read();
+
+            int y = reader.GetInt32();
+            reader.Read();
+
+            val = new(x, y);
         }
-
-        List<int> value = new();
-
-        while (reader.Read())
+        else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            if (reader.TokenType == JsonTokenType.EndArray)
-            {
-                return value.Count > 0 ? new Point(value[0], value[1]) : new Point();
-            }
+            reader.Read();
+            reader.Read();
+            int x = reader.GetInt32();
+            reader.Read();
+            reader.Read();
+            int y = reader.GetInt32();
+            reader.Read();
 
-            if (reader.TokenType != JsonTokenType.Number)
-            {
-                throw new JsonException();
-            }
-
-            int element = reader.GetInt32();
-            value.Add(element);
+            val = new(x, y);
         }
-
-        throw new JsonException();
+        return val;
     }
 
     public override void Write(Utf8JsonWriter writer, Point val, JsonSerializerOptions options)

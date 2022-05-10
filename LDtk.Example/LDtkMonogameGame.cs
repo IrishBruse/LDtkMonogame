@@ -90,10 +90,15 @@ public class LDtkMonogameGame : Game
         LDtkLevel temp1 = world.LoadLevel("Level_0");
         LDtkLevel temp2 = world.LoadLevel(Worlds.World.Level_1);
 
+        RefTest[] entities = temp1.GetEntities<RefTest>();
+
+        RefTest test = temp1.GetEntityRef<RefTest>(entities[0].Test);
+
         foreach (LDtkLevel level in world.Levels)
         {
             foreach (Enemy enemy in level.GetEntities<Enemy>())
             {
+                Console.WriteLine(enemy.Wander[0]);
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
@@ -106,24 +111,24 @@ public class LDtkMonogameGame : Game
         Player playerData = world.GetEntity<Player>();
         player = new PlayerEntity(playerData, spriteSheet, renderer, gun);
 
-        // foreach (ILDtkEntity item in world.Levels[1].GetAllEntities())
-        // {
-        //     switch (item)
-        //     {
-        //         case Enemy:
-        //         Console.WriteLine("Enemy Type");
-        //         break;
-        //         case Player:
-        //         Console.WriteLine("Player Type");
-        //         break;
-        //         case Gun_Pickup:
-        //         Console.WriteLine("Gun_Pickup Type");
-        //         break;
-        //         default:
-        //         Console.WriteLine("Unhandled Entity of type " + item.GetType());
-        //         break;
-        //     }
-        // }
+        foreach (ILDtkEntity item in world.LoadLevel(1).GetAllEntities<Gun_Pickup>())
+        {
+            switch (item)
+            {
+                case Enemy:
+                Console.WriteLine("Enemy Type");
+                break;
+                case Player:
+                Console.WriteLine("Player Type");
+                break;
+                case Gun_Pickup:
+                Console.WriteLine("Gun_Pickup Type");
+                break;
+                default:
+                Console.WriteLine("Unhandled Entity of type " + item.GetType());
+                break;
+            }
+        }
 
         player.onShoot += () =>
         {

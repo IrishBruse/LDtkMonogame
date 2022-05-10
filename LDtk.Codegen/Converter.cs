@@ -38,6 +38,7 @@ public static class Converter
             "Multilines" => "string",
             "Float" => "float",
             "Bool" => "bool",
+            "Tile" => "TilesetRectangle",
             _ => input,
         };
     }

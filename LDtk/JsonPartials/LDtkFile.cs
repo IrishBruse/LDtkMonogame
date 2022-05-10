@@ -51,4 +51,20 @@ public partial class LDtkFile
         }
         return null;
     }
+
+    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/> </summary>
+    public T GetEntityRef<T>(EntityRef entityRef) where T : new()
+    {
+        foreach (LDtkWorld world in Worlds)
+        {
+            if (world.Iid != entityRef.WorldIid)
+            {
+                continue;
+            }
+
+            return world.GetEntityRef<T>(entityRef);
+        }
+
+        throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in this level");
+    }
 }

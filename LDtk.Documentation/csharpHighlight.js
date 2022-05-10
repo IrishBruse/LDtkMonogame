@@ -12,9 +12,12 @@ const keywords = [
     "class ",
     "get;",
     "set;",
+    "foreach"
 ]
 
 const classes = [
+    "LDtkLevelData",
+
     "LDtkRenderer",
     "LDtkFile",
     "LDtkWorld",
@@ -23,7 +26,6 @@ const classes = [
     "ILDtkEntity",
     "Gun_Pickup",
 
-    "LDtkLevelData",
 
     "Vector2",
     " Color",
