@@ -2,11 +2,14 @@
 
 The easiest way to start using LDtkMonogame is to import it into the project using
 
-[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame?label=LDtkMonogame&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame/)
+a
+![LDtkMonogame](https://img.shields.io/nuget/dt/LDtkMonogame?label=LDtkMonogame&logo=nuget&color=brightgreen)
 
-[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame.ContentPipeline?label=ContentPipeline&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+b
+![ContentPipeline](https://img.shields.io/nuget/dt/LDtkMonogame.ContentPipeline?label=ContentPipeline&logo=nuget&color=brightgreen)
 
-[![Nuget](https://img.shields.io/nuget/dt/LDtkMonogame.Codegen?label=Codegen&logo=nuget&color=brightgreen)](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
+c
+![Codegen](https://img.shields.io/nuget/dt/LDtkMonogame.Codegen?label=Codegen&logo=nuget&color=brightgreen)
 
 Make sure to import the namespace at the top
 ```cs

@@ -8,6 +8,13 @@
   - [Codegen](Tutorials/codegen.md)
   - [ContentPipeline](Tutorials/content.md)
 
+- [Api](tutorials.md)
+  - [LDtkFile](Api/LDtkFile.md)
+  - [LDtkWorld](Api/LDtkWorld.md)
+  - [LDtkLevel](Api/LDtkLevel.md)
+  - [LDtkIntGrid](Api/LDtkIntgrid.md)
+  - [ILDtkEntity](Api/ILDtkEntity.md)
+
 - [LDtk Reference](LDtkReference.md)
 
 ----
