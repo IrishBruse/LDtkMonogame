@@ -1,4 +1,4 @@
-#define UseContentPipeline
+// #define UseContentPipeline
 
 namespace LDtkMonogameExample;
 
@@ -82,7 +82,7 @@ public class LDtkMonogameGame : Game
 #else
         renderer = new LDtkRenderer(spriteBatch);
         file = LDtkFile.FromFile("Content/World.ldtk");
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, Path.Combine(Path.GetDirectoryName(file.FilePath), "Characters.png"));
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 #endif
 
         world = file.LoadWorld(Worlds.World.Iid);
@@ -110,25 +110,6 @@ public class LDtkMonogameGame : Game
 
         Player playerData = world.GetEntity<Player>();
         player = new PlayerEntity(playerData, spriteSheet, renderer, gun);
-
-        foreach (ILDtkEntity item in world.LoadLevel(1).GetAllEntities<Gun_Pickup>())
-        {
-            switch (item)
-            {
-                case Enemy:
-                Console.WriteLine("Enemy Type");
-                break;
-                case Player:
-                Console.WriteLine("Player Type");
-                break;
-                case Gun_Pickup:
-                Console.WriteLine("Gun_Pickup Type");
-                break;
-                default:
-                Console.WriteLine("Unhandled Entity of type " + item.GetType());
-                break;
-            }
-        }
 
         player.onShoot += () =>
         {

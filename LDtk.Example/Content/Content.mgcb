@@ -59,14 +59,3 @@
 /importer:LDtkFileImporter
 /processor:LDtkFileProcessor
 /build:World.ldtk
-
-#begin World/Level_0.ldtkl
-/importer:LDtkLevelImporter
-/processor:LDtkLevelProcessor
-/build:World/Level_0.ldtkl
-
-#begin World/Level_1.ldtkl
-/importer:LDtkLevelImporter
-/processor:LDtkLevelProcessor
-/build:World/Level_1.ldtkl
-
