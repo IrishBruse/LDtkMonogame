@@ -113,8 +113,7 @@ public partial class LDtkWorld
 
     LDtkLevel LoadLevel(LDtkLevel rawLevel)
     {
-        LDtkLevel level = null;
-
+        LDtkLevel level;
         if (rawLevel.ExternalRelPath != null)
         {
             if (Content != null)
@@ -128,6 +127,10 @@ public partial class LDtkWorld
 
             level.ExternalRelPath = rawLevel.ExternalRelPath;
             level.Loaded = true;
+        }
+        else
+        {
+            return rawLevel;
         }
 
         return level;

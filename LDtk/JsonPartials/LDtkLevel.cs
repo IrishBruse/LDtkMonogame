@@ -3,8 +3,6 @@ namespace LDtk;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
@@ -12,8 +10,6 @@ using Microsoft.Xna.Framework.Content;
 
 public partial class LDtkLevel
 {
-    private const string Name = nameof(GetEntityFromInstance);
-
     /// <summary> The absolute filepath to the level </summary>
     [JsonIgnore] public string FilePath { get; set; }
 
