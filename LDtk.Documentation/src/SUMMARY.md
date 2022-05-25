@@ -8,7 +8,7 @@
   - [Codegen](Tutorials/codegen.md)
   - [ContentPipeline](Tutorials/content.md)
 
-- [Api](tutorials.md)
+- [Api](api.md)
   - [LDtkFile](Api/LDtkFile.md)
   - [LDtkWorld](Api/LDtkWorld.md)
   - [LDtkLevel](Api/LDtkLevel.md)
