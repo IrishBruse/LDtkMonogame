@@ -34,4 +34,12 @@ public class LDtkLevelData:
 Gun_Pickup level1 = level0.GetEntityRef<Gun_Pickup>();// Guid/Iid
 ```
 
+If you have custom fields specified ldtkCodegen should have generated a file named `LDtkfileData`
+
+To get the fields from the level
+```cs
+LDtkfileData levelData = levelName.GetCustomFields<LDtkfileData>();
+```
+
+
 For more information on the level refer to the ldtk documentation [ldtk-LevelJson](../LDtkReference.md#level)

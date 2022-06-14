@@ -72,4 +72,7 @@ public class Options
 
     [Option("FileNameInNamespace", Required = false, Default = false, HelpText = "Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'")]
     public bool FileNameInNamespace { get; set; }
+
+    [Option("BlockScopeNamespace", Required = false, Default = false, HelpText = "Changes namespace to use block scoped namespace instead of newer c# file scoped namespace.`")]
+    public bool BlockScopeNamespace { get; set; }
 }

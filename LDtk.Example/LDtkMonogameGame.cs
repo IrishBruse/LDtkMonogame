@@ -87,12 +87,22 @@ public class LDtkMonogameGame : Game
 
         world = file.LoadWorld(Worlds.World.Iid);
 
-        LDtkLevel temp1 = world.LoadLevel("Level_0");
-        LDtkLevel temp2 = world.LoadLevel(Worlds.World.Level_1);
+        LDtkLevel level0 = world.LoadLevel("Level_0");
+        LDtkLevel level1 = world.LoadLevel(Worlds.World.Level_1);
 
-        RefTest[] entities = temp1.GetEntities<RefTest>();
+        CustomLevelDataName levelData = level1.GetCustomFields<CustomLevelDataName>();
 
-        RefTest test = temp1.GetEntityRef<RefTest>(entities[0].Test);
+        Console.WriteLine(levelData.Float);
+        Console.WriteLine(levelData.Multilines);
+
+        foreach (TilesetRectangle item in levelData.Tile)
+        {
+            Console.WriteLine(item.X);
+        }
+
+        RefTest[] entities = level0.GetEntities<RefTest>();
+
+        RefTest test = level0.GetEntityRef<RefTest>(entities[0].Test);
 
         foreach (LDtkLevel level in world.Levels)
         {
