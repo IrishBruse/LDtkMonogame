@@ -28,7 +28,16 @@ public class EnumGenerator : BaseGenerator
 
     void GenEnum(EnumDefinition e)
     {
-        Line($"namespace {options.Namespace};");
+        if (options.BlockScopeNamespace)
+        {
+            Line($"namespace {options.Namespace}");
+            StartBlock();
+        }
+        else
+        {
+            Line($"namespace {options.Namespace};");
+        }
+
         Blank();
         Line($"#pragma warning disable");
         Line($"public enum {e.Identifier}");
@@ -38,6 +47,12 @@ public class EnumGenerator : BaseGenerator
             Line($"{value.Id},");
         }
         EndBlock();
+
+        if (options.BlockScopeNamespace)
+        {
+            EndBlock();
+        }
+
         Line($"#pragma warning restore");
 
         Output(options, "Enums", e.Identifier);

@@ -15,7 +15,16 @@ public class IidGenerator : BaseGenerator
 
     public void Generate()
     {
-        Line($"namespace {options.Namespace};");
+        if (options.BlockScopeNamespace)
+        {
+            Line($"namespace {options.Namespace}");
+            StartBlock();
+        }
+        else
+        {
+            Line($"namespace {options.Namespace};");
+        }
+
         Blank();
         Line($"#pragma warning disable");
         Line($"public static class Worlds");
@@ -33,6 +42,12 @@ public class IidGenerator : BaseGenerator
             EndBlock();
         }
         EndBlock();
+
+        if (options.BlockScopeNamespace)
+        {
+            EndBlock();
+        }
+
         Line($"#pragma warning restore");
 
         Output(options, "Iids", "Worlds");
