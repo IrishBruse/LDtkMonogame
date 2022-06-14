@@ -29,7 +29,17 @@ public class ClassGenerator : BaseGenerator
     {
         Line($"// This file was automatically generated, any modifications will be lost!");
         Blank();
-        Line($"namespace {options.Namespace};");
+
+        if (options.BlockScopeNamespace)
+        {
+            Line($"namespace {options.Namespace}");
+            StartBlock();
+        }
+        else
+        {
+            Line($"namespace {options.Namespace};");
+        }
+
         Blank();
         Line($"#pragma warning disable");
         Line("using Microsoft.Xna.Framework;");
@@ -61,6 +71,11 @@ public class ClassGenerator : BaseGenerator
             }
         }
         EndBlock();
+
+        if (options.BlockScopeNamespace)
+        {
+            EndBlock();
+        }
 
         Line($"#pragma warning restore");
 

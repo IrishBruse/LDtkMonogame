@@ -17,7 +17,7 @@
 
     <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
         <Exec Command="dotnet build ..\LDtk.Codegen\LDtk.Codegen.csproj" />
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --BlockScopeNamespace --FileNameInNamespace --PointAsVector2" />
         <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/TestWorld.ldtk" />
     </Target>
 
