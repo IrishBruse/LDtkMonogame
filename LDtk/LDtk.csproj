@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <Version>0.6.2</Version>
+        <Version>0.6.3</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame</PackageId>
