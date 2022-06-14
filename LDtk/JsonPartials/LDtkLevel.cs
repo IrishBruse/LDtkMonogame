@@ -78,6 +78,16 @@ public partial class LDtkLevel
         throw new LDtkException($"{identifier} is not a valid intgrid identifier");
     }
 
+    /// <summary> Gets the custom fields of the level </summary>
+    public T GetCustomFields<T>() where T : new()
+    {
+        T levelFields = new();
+
+        LDtkFieldParser.ParseCustomLevelFields(levelFields, FieldInstances);
+
+        return levelFields;
+    }
+
     /// <summary> Gets one entity of type T in the current level best used with 1 per level constraint </summary>
     public T GetEntity<T>() where T : new()
     {

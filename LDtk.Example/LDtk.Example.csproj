@@ -9,16 +9,15 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
-    <!-- This is how to automate the ldtkgen tool using nuget tool -->
-    <!-- <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
+    <!-- This is how to automate the ldtkgen tool using nuget tool
+    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
         <Exec Command="ldtkgen -i Content/World.ldtk" />
-        <Exec Command="ldtkgen -i Content/TestWorld.ldtk" />
-    </Target> -->
+    </Target>
+    -->
 
     <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
         <Exec Command="dotnet build ..\LDtk.Codegen\LDtk.Codegen.csproj" />
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --BlockScopeNamespace --FileNameInNamespace --PointAsVector2" />
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/TestWorld.ldtk" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --LevelClassName CustomLevelDataName --FileNameInNamespace --PointAsVector2" />
     </Target>
 
     <ItemGroup>

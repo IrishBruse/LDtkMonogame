@@ -41,6 +41,11 @@ Gets an intgrid with the "identifier" in a "LDtkLevel"
 public LDtkIntGrid GetIntGrid(string identifier)
 ```
 
+Gets the custom fields of the level
+```cs
+public T GetCustomFields<T>() where T : new()
+```
+
 Gets one entity of type T in the current level best used with 1 per level constraint
 ```cs
 public T GetEntity<T>() where T : new()
@@ -55,8 +60,6 @@ Gets an array of entities of type "T" in the current level
 ```cs
 public T[] GetEntities<T>() where T : new()
 ```
-
-T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
 
 Check if point is inside of a level
 ```cs
