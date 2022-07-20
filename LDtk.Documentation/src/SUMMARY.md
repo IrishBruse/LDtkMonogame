@@ -17,15 +17,4 @@
 
 - [LDtk Reference](LDtkReference.md)
 
-----
-
 - [Changelog](changelog.md)
-  - [0.6.0](Changelog/0.6.0.md)
-  - [0.5.0](Changelog/0.5.0.md)
-  - [0.4.0](Changelog/0.4.0.md)
-  - [0.3.1](Changelog/0.3.1.md)
-  - [0.3.0](Changelog/0.3.0.md)
-  - [0.2.0](Changelog/0.2.0.md)
-  - [0.1.1](Changelog/0.1.1.md)
-  - [0.1.0](Changelog/0.1.0.md)
-  - [0.0.1](Changelog/0.0.1.md)
