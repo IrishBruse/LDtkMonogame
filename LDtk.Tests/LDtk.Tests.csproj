@@ -12,20 +12,20 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
         <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="coverlet.collector" Version="1.3.0">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+        <PackageReference Include="coverlet.collector" Version="1.3.0" />
     </ItemGroup>
 
     <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet build ..\LDtk.Codegen\LDtk.Codegen.csproj" />
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i ./Files/TestApi/TestWorld.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i ./Files/ExternalLevels/ExternalLevelsWorld.ldtk --FileNameInNamespace --PointAsVector2" />
     </Target>
+
+    <ItemGroup>
+        <Content Include="Files\**\*">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\LDtk\LDtk.csproj" />
