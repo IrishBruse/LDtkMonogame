@@ -49,7 +49,14 @@ public partial class LDtkFile
                 {
                     foreach (LDtkLevel level in world.Levels)
                     {
-                        level.FilePath = FilePath;
+                        if (level.ExternalRelPath != null)
+                        {
+                            level.FilePath = Path.Join(Path.GetDirectoryName(FilePath), level.ExternalRelPath);
+                        }
+                        else
+                        {
+                            level.FilePath = FilePath;
+                        }
                     }
                 }
 
