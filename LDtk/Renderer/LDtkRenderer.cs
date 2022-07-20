@@ -165,9 +165,13 @@ public class LDtkRenderer
 
     Texture2D GetTexture(LDtkLevel level, string path)
     {
-        _ = level;
         if (content == null)
         {
+            if (!string.IsNullOrWhiteSpace(level.FilePath))
+            {
+                string filePath = Path.GetDirectoryName(level.FilePath);
+                return Texture2D.FromFile(graphicsDevice, Path.Combine(filePath, path));
+            }
             return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
         }
         else
