@@ -32,9 +32,6 @@ public partial class LDtkWorld
     /// <summary> Size of the world grid in pixels. </summary>
     [JsonIgnore] public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
 
-    /// <summary> The absolute folder that the world is located in.Used to absolute relative addresses of textures </summary>
-    [JsonIgnore] public string RootFolder { get; set; }
-
     /// <summary> Used by json deserializer not for use by user! </summary>
     [Obsolete("Used by json deserializer not for use by user!", true)]
     public LDtkWorld() { }
