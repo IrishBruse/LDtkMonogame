@@ -24,10 +24,7 @@ public class LDtkRenderer
     GraphicsDevice graphicsDevice;
     ContentManager content;
 
-    /// <summary>
-    /// This is used to intizialize the renderer for use with direct file loading
-    /// </summary>
-    /// <param name="spriteBatch"></param>
+    /// <summary> This is used to intizialize the renderer for use with direct file loading </summary>
     public LDtkRenderer(SpriteBatch spriteBatch)
     {
         SpriteBatch = spriteBatch;
@@ -40,19 +37,13 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary>
-    /// This is used to intizialize the renderer for use with content Pipeline
-    /// </summary>
-    /// <param name="spriteBatch"></param>
-    /// <param name="content"></param>
+    /// <summary> This is used to intizialize the renderer for use with content Pipeline </summary>
     public LDtkRenderer(SpriteBatch spriteBatch, ContentManager content) : this(spriteBatch)
     {
         this.content = content;
     }
 
-    /// <summary>
-    /// Prerender out the level to textures to optimize the rendering process
-    /// </summary>
+    /// <summary> Prerender out the level to textures to optimize the rendering process </summary>
     /// <param name="level">The level to prerender</param>
     /// <exception cref="Exception">The level already has been prerendered</exception>
     public void PrerenderLevel(LDtkLevel level)
@@ -181,10 +172,7 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary>
-    /// Render the prerendered level you created from PrerenderLevel()
-    /// </summary>
-    /// <param name="level"></param>
+    /// <summary> Render the prerendered level you created from PrerenderLevel() </summary>
     public void RenderPrerenderedLevel(LDtkLevel level)
     {
         if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
@@ -200,10 +188,7 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary>
-    /// Render the level directly without prerendering the layers alot slower than prerendering
-    /// </summary>
-    /// <param name="level"></param>
+    /// <summary> Render the level directly without prerendering the layers alot slower than prerendering </summary>
     public void RenderLevel(LDtkLevel level)
     {
         Texture2D[] layers = RenderLayers(level);
@@ -214,10 +199,7 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary>
-    /// Render intgrids by displaying the intgrid as solidcolor squares
-    /// </summary>
-    /// <param name="intGrid"></param>
+    /// <summary> Render intgrids by displaying the intgrid as solidcolor squares </summary>
     public void RenderIntGrid(LDtkIntGrid intGrid)
     {
         for (int x = 0; x < intGrid.GridSize.X; x++)
@@ -238,9 +220,7 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary>
-    /// Renders the entity with the tile it includes
-    /// </summary>
+    /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
     public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity
@@ -248,9 +228,7 @@ public class LDtkRenderer
         SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
     }
 
-    /// <summary>
-    /// Renders the entity with the tile it includes
-    /// </summary>
+    /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
     /// <param name="flipDirection">The direction to flip the entity when rendering</param>
@@ -259,9 +237,7 @@ public class LDtkRenderer
         SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
     }
 
-    /// <summary>
-    /// Renders the entity with the tile it includes
-    /// </summary>
+    /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
     /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
@@ -272,9 +248,7 @@ public class LDtkRenderer
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
     }
 
-    /// <summary>
-    /// Renders the entity with the tile it includes
-    /// </summary>
+    /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
     /// <param name="flipDirection">The direction to flip the entity when rendering</param>
