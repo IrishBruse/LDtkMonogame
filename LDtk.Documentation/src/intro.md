@@ -2,15 +2,17 @@
     <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a>
 </h1>
 
-# Introduction
+> Monogame renderer and importer for LDtk Level editor
 
-The easiest way to start using LDtkMonogame is to import it into the project using nuget.
+## Getting Started
 
-[LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
+The easiest way to start using LDtkMonogame is to import it into the project using [NuGet package](https://www.nuget.org/packages/LDtkMonogame/).
 
-[LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+- [LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
 
-[LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
+- [LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+
+- [LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 Make sure to import the namespace at the top
 ```cs
