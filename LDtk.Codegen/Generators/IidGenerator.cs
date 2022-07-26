@@ -1,11 +1,9 @@
 namespace LDtk.Codegen.Generators;
 
-using Raylib_CsLo.Codegen;
-
 public class IidGenerator : BaseGenerator
 {
-    LDtkFile ldtkFile;
-    readonly Options options;
+    private LDtkFile ldtkFile;
+    private readonly Options options;
 
     public IidGenerator(LDtkFile ldtkFile, Options options)
     {
@@ -15,6 +13,9 @@ public class IidGenerator : BaseGenerator
 
     public void Generate()
     {
+        Line($"// This file was automatically generated, any modifications will be lost!");
+        Line($"#pragma warning disable");
+
         if (options.BlockScopeNamespace)
         {
             Line($"namespace {options.Namespace}");
@@ -26,7 +27,6 @@ public class IidGenerator : BaseGenerator
         }
 
         Blank();
-        Line($"#pragma warning disable");
         Line($"public static class Worlds");
         StartBlock();
         foreach (LDtkWorld w in ldtkFile.Worlds)

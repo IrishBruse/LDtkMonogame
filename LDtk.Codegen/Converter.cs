@@ -1,4 +1,5 @@
 namespace LDtk.Codegen;
+
 public static class Converter
 {
     public static string ConvertFieldDefinitionTypes(string input, bool pointAsVector)
@@ -28,18 +29,15 @@ public static class Converter
         return type;
     }
 
-    static string TypeConversion(string input)
+    private static string TypeConversion(string input) => input switch
     {
-        return input switch
-        {
-            "Int" => "int",
-            "String" => "string",
-            "FilePath" => "string",
-            "Multilines" => "string",
-            "Float" => "float",
-            "Bool" => "bool",
-            "Tile" => "TilesetRectangle",
-            _ => input,
-        };
-    }
+        "Int" => "int",
+        "String" => "string",
+        "FilePath" => "string",
+        "Multilines" => "string",
+        "Float" => "float",
+        "Bool" => "bool",
+        "Tile" => "TilesetRectangle",
+        _ => input,
+    };
 }

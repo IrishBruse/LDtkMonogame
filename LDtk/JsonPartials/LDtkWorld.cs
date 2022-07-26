@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json.Serialization;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -108,7 +109,7 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with index {index} found in this world");
     }
 
-    LDtkLevel LoadLevel(LDtkLevel rawLevel)
+    private LDtkLevel LoadLevel(LDtkLevel rawLevel)
     {
         LDtkLevel level;
         if (rawLevel.ExternalRelPath != null)

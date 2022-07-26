@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using LDtk.JsonPartials;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -156,7 +159,7 @@ public partial class LDtkLevel
         return entities.ToArray();
     }
 
-    T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
+    private T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
     {
         T entity = new();
         LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);
@@ -166,15 +169,9 @@ public partial class LDtkLevel
 
     /// <summary> Check if point is inside of a level </summary>
     /// <returns> True if point is inside level </returns>
-    public bool Contains(Vector2 point)
-    {
-        return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
-    }
+    public bool Contains(Vector2 point) => point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
 
     /// <summary> Check if point is inside of a level </summary>
     /// <returns> True if point is inside level </returns>
-    public bool Contains(Point point)
-    {
-        return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
-    }
+    public bool Contains(Point point) => point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
 }

@@ -1,6 +1,7 @@
 # Changelog
 
 Changelog for versions
+- <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.5...v0.7.0">0.7.0</a> Monogame 3.8.1
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.4...v0.6.5">0.6.5</a>
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.3...v0.6.4">0.6.4</a>
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.0...v0.6.3">0.6.3</a>

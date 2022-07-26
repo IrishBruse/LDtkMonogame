@@ -1,35 +1,37 @@
-namespace LDtk;
+namespace LDtk.Parsers;
 
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-class PointConverter : JsonConverter<Point>
+using Microsoft.Xna.Framework;
+
+internal class PointConverter : JsonConverter<Point>
 {
     public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         Point val = Point.Zero;
         if (reader.TokenType == JsonTokenType.StartArray)
         {
-            reader.Read();
+            _ = reader.Read();
 
             int x = reader.GetInt32();
-            reader.Read();
+            _ = reader.Read();
 
             int y = reader.GetInt32();
-            reader.Read();
+            _ = reader.Read();
 
             val = new(x, y);
         }
         else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            reader.Read();
-            reader.Read();
+            _ = reader.Read();
+            _ = reader.Read();
             int x = reader.GetInt32();
-            reader.Read();
-            reader.Read();
+            _ = reader.Read();
+            _ = reader.Read();
             int y = reader.GetInt32();
-            reader.Read();
+            _ = reader.Read();
 
             val = new(x, y);
         }

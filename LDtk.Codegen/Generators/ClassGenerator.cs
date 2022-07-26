@@ -1,11 +1,9 @@
 namespace LDtk.Codegen.Generators;
 
-using Raylib_CsLo.Codegen;
-
 public class ClassGenerator : BaseGenerator
 {
-    LDtkFile ldtkFile;
-    readonly Options options;
+    private LDtkFile ldtkFile;
+    private readonly Options options;
 
     public ClassGenerator(LDtkFile ldtkFile, Options options)
     {
@@ -25,10 +23,10 @@ public class ClassGenerator : BaseGenerator
         }
     }
 
-    void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
+    private void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
     {
         Line($"// This file was automatically generated, any modifications will be lost!");
-        Blank();
+        Line($"#pragma warning disable");
 
         if (options.BlockScopeNamespace)
         {
@@ -41,7 +39,6 @@ public class ClassGenerator : BaseGenerator
         }
 
         Blank();
-        Line($"#pragma warning disable");
         Line("using Microsoft.Xna.Framework;");
         Line("using LDtk;");
         Blank();

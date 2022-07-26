@@ -1,4 +1,5 @@
 namespace LDtk.Renderer;
+
 using Microsoft.Xna.Framework.Graphics;
 
 /// <summary> The level struct containting the rendered out textures </summary>

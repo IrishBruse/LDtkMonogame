@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public static class SpriteBatchExtensions
 {
-    static Texture2D pixelTexture;
+    private static Texture2D pixelTexture;
 
     public static void DrawRect(this SpriteBatch spriteBatch, Box rect, Color color)
     {
@@ -19,7 +19,7 @@ public static class SpriteBatchExtensions
         spriteBatch.Draw(pixelTexture, point, null, color, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, 0);
     }
 
-    static void CreatePixelTexture(SpriteBatch spriteBatch)
+    private static void CreatePixelTexture(SpriteBatch spriteBatch)
     {
         if (pixelTexture == null)
         {

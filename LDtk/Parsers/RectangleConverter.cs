@@ -1,11 +1,13 @@
-namespace LDtk;
+namespace LDtk.Parsers;
 
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-class RectangleConverter : JsonConverter<Rectangle>
+using Microsoft.Xna.Framework;
+
+internal class RectangleConverter : JsonConverter<Rectangle>
 {
     public override Rectangle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

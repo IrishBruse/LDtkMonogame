@@ -1,6 +1,7 @@
-﻿namespace Tests;
+﻿namespace LDtk.Tests;
 
 using LDtk;
+
 using Xunit;
 
 public class UnitTest1
@@ -18,7 +19,7 @@ public class UnitTest1
         ValidateWorldsLevels(world);
     }
 
-    static void ValidateWorlds(LDtkFile file)
+    private static void ValidateWorlds(LDtkFile file)
     {
         foreach (LDtkWorld item in file.Worlds)
         {
@@ -42,7 +43,7 @@ public class UnitTest1
         ValidateWorldsLevels(world);
     }
 
-    static void ValidateWorldsLevels(LDtkWorld world)
+    private static void ValidateWorldsLevels(LDtkWorld world)
     {
         foreach (LDtkLevel item in world.Levels)
         {

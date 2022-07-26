@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class Camera
 {
-    readonly GraphicsDevice graphicsDevice;
+    private readonly GraphicsDevice graphicsDevice;
 
     public Vector2 Position { get; set; }
     public float Zoom { get; set; }
@@ -17,8 +17,5 @@ public class Camera
         this.graphicsDevice = graphicsDevice;
     }
 
-    public void Update()
-    {
-        Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f, 0);
-    }
+    public void Update() => Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) * Matrix.CreateScale(Zoom) * Matrix.CreateTranslation(graphicsDevice.Viewport.Width / 2f, graphicsDevice.Viewport.Height / 2f, 0);
 }

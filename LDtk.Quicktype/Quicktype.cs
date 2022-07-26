@@ -12,8 +12,7 @@ public static class Quicktype
 
     public static readonly string MinimalJson = "bin/LDtkJson.json";
     public static readonly string FullJson = "bin/LDtkJsonFull.json";
-
-    static string[] minimalArgs = {
+    private static string[] minimalArgs = {
         "--lang cs",
         "--src", MinimalJson,
         "-s schema",
@@ -23,8 +22,7 @@ public static class Quicktype
         "--namespace LDtk",
         "--alphabetize-properties"
     };
-
-    static string[] fullArgs = {
+    private static string[] fullArgs = {
         "--lang cs",
         "--src", FullJson,
         "-s schema",
@@ -46,7 +44,7 @@ public static class Quicktype
         GenerateQuickType(full, fullArgs, FullJson);
     }
 
-    static void GenerateQuickType(string json, string[] args, string jsonFile)
+    private static void GenerateQuickType(string json, string[] args, string jsonFile)
     {
         json = Regex.Replace(json, "__", "Aaaaaaaaaaaa_");
         json = Regex.Replace(json, "([^a-zA-Z])Level\"", "$1LDtkLevel\"");
@@ -64,7 +62,7 @@ public static class Quicktype
             RedirectStandardInput = false,
             CreateNoWindow = true
         });
-        minimal.Start();
+        _ = minimal.Start();
         minimal.WaitForExit();
     }
 }

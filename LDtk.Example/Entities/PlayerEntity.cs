@@ -2,10 +2,16 @@ namespace LDtkMonogameExample.Entities;
 
 using System;
 using System.Collections.Generic;
+
 using LDtk;
+using LDtk.JsonPartials;
 using LDtk.Renderer;
+
+using LDtkMonogameExample;
 using LDtkMonogameExample.AABB;
+
 using LDtkTypes.World;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,35 +20,27 @@ public class PlayerEntity
 {
     public Vector2 Position
     {
-        get
-        {
-            return data.Position;
-        }
-
-        set
-        {
-            data.Position = value;
-        }
+        get => data.Position;
+        set => data.Position = value;
     }
-    public LDtkLevel level;
-    public bool flip;
 
-    public Action onShoot;
+    public LDtkLevel Level { get; set; }
+    public bool Flip { get; set; }
 
-    readonly Box collider;
-    readonly Player data;
-    readonly Texture2D texture;
-    readonly LDtkRenderer renderer;
-    Vector2 velocity;
-    List<Box> tiles;
-    bool grounded;
-    readonly GunEntity gun;
-
-    bool hasGun;
-    KeyboardState oldKeyboard;
-    Vector2 startPosition;
-    float startTime;
-    bool shoot;
+    public Action OnShoot { get; set; }
+    private readonly Box collider;
+    private readonly Player data;
+    private readonly Texture2D texture;
+    private readonly LDtkRenderer renderer;
+    private Vector2 velocity;
+    private List<Box> tiles;
+    private bool grounded;
+    private readonly GunEntity gun;
+    private bool hasGun;
+    private KeyboardState oldKeyboard;
+    private Vector2 startPosition;
+    private float startTime;
+    private bool shoot;
 
     public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, GunEntity gun)
     {
@@ -70,7 +68,7 @@ public class PlayerEntity
 
         if (keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyUp(Keys.Space) && hasGun)
         {
-            onShoot?.Invoke();
+            OnShoot?.Invoke();
             startTime = totalTime;
             shoot = true;
         }
@@ -80,9 +78,9 @@ public class PlayerEntity
             shoot = false;
         }
 
-        if (gun.collider.Contains(collider))
+        if (gun.Collider.Contains(collider))
         {
-            gun.taken = true;
+            gun.Taken = true;
             hasGun = true;
         }
 
@@ -93,7 +91,7 @@ public class PlayerEntity
 
         if (h != 0)
         {
-            flip = h < 0;
+            Flip = h < 0;
         }
 
         float gravityMultiplier = 1;
@@ -106,7 +104,7 @@ public class PlayerEntity
         velocity = new Vector2(h * 60, velocity.Y);
         velocity += new Vector2(0, 200) * gravityMultiplier * deltaTime;
 
-        CollisionDetection(level, deltaTime);
+        CollisionDetection(Level, deltaTime);
         Position += velocity * deltaTime;
 
         oldKeyboard = keyboard;
@@ -120,11 +118,11 @@ public class PlayerEntity
             frame = (int)(totalTime * 10) % 2;
         }
 
-        renderer.RenderEntity(data, texture, (SpriteEffects)(flip ? 1 : 0), frame - (hasGun ? 5 : 0));
+        renderer.RenderEntity(data, texture, (SpriteEffects)(Flip ? 1 : 0), frame - (hasGun ? 5 : 0));
 
         if (shoot)
         {
-            renderer.SpriteBatch.Draw(texture, Position + new Vector2(flip ? -23 : 7, -5.5f), new Rectangle(48, 0, 16, 16), Color.White, 0, Vector2.Zero, Vector2.One, (SpriteEffects)(flip ? 1 : 0), 0);
+            renderer.SpriteBatch.Draw(texture, Position + new Vector2(Flip ? -23 : 7, -5.5f), new Rectangle(48, 0, 16, 16), Color.White, 0, Vector2.Zero, Vector2.One, (SpriteEffects)(Flip ? 1 : 0), 0);
         }
 
         if (LDtkMonogameGame.DebugF2)
@@ -138,7 +136,7 @@ public class PlayerEntity
         }
     }
 
-    void CollisionDetection(LDtkLevel level, float deltaTime)
+    private void CollisionDetection(LDtkLevel level, float deltaTime)
     {
         grounded = false;
         LDtkIntGrid collisions = level.GetIntGrid("Tiles");
@@ -155,7 +153,7 @@ public class PlayerEntity
             for (int y = topLeftGrid.Y; y < bottomRightGrid.Y; y++)
             {
                 long intGridValue = collisions.GetValueAt(x, y);
-                if (intGridValue == 6 || intGridValue == 7)
+                if (intGridValue is 6 or 7)
                 {
                     tiles.Add(new Box(level.Position.ToVector2() + new Vector2(x * collisions.TileSize, y * collisions.TileSize), new Vector2(collisions.TileSize), Vector2.Zero));
                 }

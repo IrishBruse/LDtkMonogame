@@ -1,13 +1,15 @@
-// #define UseContentPipeline
-
 namespace LDtkMonogameExample;
 
 using System;
 using System.Collections.Generic;
+
 using LDtk;
 using LDtk.Renderer;
+
 using LDtkMonogameExample.Entities;
+
 using LDtkTypes.World;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,28 +17,27 @@ using Microsoft.Xna.Framework.Input;
 public class LDtkMonogameGame : Game
 {
     // LDtk stuff
-    LDtkFile file;
-    LDtkWorld world;
-    LDtkRenderer renderer;
-    readonly List<EnemyEntity> enemies = new();
-    readonly List<BulletEntity> bullets = new();
-    PlayerEntity player;
-    GunEntity gun;
-
-    Camera camera;
-    Texture2D spriteSheet;
+    private LDtkFile file;
+    private LDtkWorld world;
+    private LDtkRenderer renderer;
+    private readonly List<EnemyEntity> enemies = new();
+    private readonly List<BulletEntity> bullets = new();
+    private PlayerEntity player;
+    private GunEntity gun;
+    private Camera camera;
+    private Texture2D spriteSheet;
 
     // Monogame Stuff
-    SpriteBatch spriteBatch;
-    readonly GraphicsDeviceManager graphics;
-    float pixelScale = 1f;
+    private SpriteBatch spriteBatch;
+    private readonly GraphicsDeviceManager graphics;
+    private float pixelScale = 1f;
     public static Texture2D Pixel { get; set; }
 
     public static bool DebugF1 { get; set; }
     public static bool DebugF2 { get; set; }
     public static bool DebugF3 { get; set; }
 
-    KeyboardState oldKeyboard;
+    private KeyboardState oldKeyboard;
 
     public LDtkMonogameGame()
     {
@@ -47,7 +48,7 @@ public class LDtkMonogameGame : Game
 #endif
     }
 
-    void MonogameInitialize()
+    private void MonogameInitialize()
     {
         Window.Title = "LDtkMonogame - Shooter";
 
@@ -120,12 +121,12 @@ public class LDtkMonogameGame : Game
         Player playerData = world.GetEntity<Player>();
         player = new PlayerEntity(playerData, spriteSheet, renderer, gun);
 
-        player.onShoot += () =>
+        player.OnShoot += () =>
         {
             BulletEntity b = new(spriteSheet, renderer)
             {
-                Position = player.Position + new Vector2(player.flip ? -23 : 7, -5.5f),
-                flip = player.flip,
+                Position = player.Position + new Vector2(player.Flip ? -23 : 7, -5.5f),
+                Flip = player.Flip,
             };
             bullets.Add(b);
         };
@@ -148,7 +149,7 @@ public class LDtkMonogameGame : Game
         {
             if (level.Contains(player.Position))
             {
-                player.level = level;
+                player.Level = level;
                 break;
             }
         }
@@ -164,7 +165,7 @@ public class LDtkMonogameGame : Game
 
             for (int j = enemies.Count - 1; j >= 0; j--)
             {
-                if (bullets[i].collider.Contains(enemies[j].collider))
+                if (bullets[i].Collider.Contains(enemies[j].Collider))
                 {
                     bullets.RemoveAt(i);
                     enemies[j].Kill(deltaTime);
@@ -216,7 +217,7 @@ public class LDtkMonogameGame : Game
         base.Draw(gameTime);
     }
 
-    static void DebugInput(KeyboardState old)
+    private static void DebugInput(KeyboardState old)
     {
         if (old.IsKeyUp(Keys.F1) && Keyboard.GetState().IsKeyDown(Keys.F1))
         {

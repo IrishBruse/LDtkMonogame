@@ -1,6 +1,7 @@
 namespace LDtkMonogameExample.AABB;
 
 using System;
+
 using Microsoft.Xna.Framework;
 
 public class Box
@@ -19,13 +20,7 @@ public class Box
         Pivot = pivot;
     }
 
-    public bool Contains(Vector2 point)
-    {
-        return point.X >= TopLeft.X
-            && point.X <= BottomRight.X
-            && point.Y >= TopLeft.Y
-            && point.Y <= BottomRight.Y;
-    }
+    public bool Contains(Vector2 point) => point.X >= TopLeft.X && point.X <= BottomRight.X && point.Y >= TopLeft.Y && point.Y <= BottomRight.Y;
 
     public bool Contains(Box rect)
     {

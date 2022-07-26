@@ -7,22 +7,22 @@ using System.IO;
 
 public class SourceFile
 {
-    public List<string> lines = new();
-    public List<int> linesToRemove = new();
-    public bool isFull;
+    public List<string> Lines { get; set; } = new();
+    public List<int> LinesToRemove { get; set; } = new();
+    public bool IsFull { get; set; }
 
     public SourceFile(bool isFull)
     {
-        this.isFull = isFull;
+        IsFull = isFull;
     }
 
-    public int Count => lines.Count;
+    public int Count => Lines.Count;
 
     public void RemoveLine(int index)
     {
-        if (!linesToRemove.Contains(index))
+        if (!LinesToRemove.Contains(index))
         {
-            linesToRemove.Add(index);
+            LinesToRemove.Add(index);
         }
         else
         {
@@ -32,14 +32,14 @@ public class SourceFile
 
     public void Output(string path)
     {
-        linesToRemove.Sort();
+        LinesToRemove.Sort();
 
-        for (int i = linesToRemove.Count - 1; i >= 0; i--)
+        for (int i = LinesToRemove.Count - 1; i >= 0; i--)
         {
-            lines.RemoveAt(linesToRemove[i]);
+            Lines.RemoveAt(LinesToRemove[i]);
         }
 
-        File.WriteAllLines(path, lines);
+        File.WriteAllLines(path, Lines);
 
         // Run dotnet format on generated files
 
@@ -48,29 +48,16 @@ public class SourceFile
             FileName = "dotnet",
             Arguments = @"format --include ./" + Path.GetFileName(path),
             WorkingDirectory = Path.GetDirectoryName(path),
-        });
+        }).WaitForExit();
     }
 
     public string this[int key]
     {
-        get
-        {
-            return lines[key];
-        }
-
-        set
-        {
-            lines[key] = value;
-        }
+        get => Lines[key];
+        set => Lines[key] = value;
     }
 
-    public void Add(string line)
-    {
-        lines.Add(line);
-    }
+    public void Add(string line) => Lines.Add(line);
 
-    public void AddRange(string[] lines)
-    {
-        this.lines.AddRange(lines);
-    }
+    public void AddRange(string[] lines) => Lines.AddRange(lines);
 }

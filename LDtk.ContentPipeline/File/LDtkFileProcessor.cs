@@ -1,12 +1,9 @@
-namespace LDtk.ContentPipeline.World;
+namespace LDtk.ContentPipeline.File;
 
 using Microsoft.Xna.Framework.Content.Pipeline;
 
 [ContentProcessor(DisplayName = "LDtkFile Processor")]
 public class LDtkFileProcessor : ContentProcessor<string, LDtkFile>
 {
-    public override LDtkFile Process(string input, ContentProcessorContext context)
-    {
-        return LDtkFile.FromFile(input);
-    }
+    public override LDtkFile Process(string input, ContentProcessorContext context) => LDtkFile.FromFile(input);
 }

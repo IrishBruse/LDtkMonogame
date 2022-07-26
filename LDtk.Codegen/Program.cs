@@ -4,7 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using CommandLine;
+
+using LDtk;
 using LDtk.Codegen.Generators;
 
 public class Program
@@ -12,10 +15,10 @@ public class Program
     public static void Main(string[] args)
     {
         Console.WriteLine("-- LDtk Codegen --");
-        Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
+        _ = Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
-    static void HandleParseError(IEnumerable<Error> errs)
+    private static void HandleParseError(IEnumerable<Error> errs)
     {
         if (errs.IsVersion())
         {
@@ -23,10 +26,10 @@ public class Program
             return;
         }
 
-        errs.Output();
+        _ = errs.Output();
     }
 
-    static void Run(Options options)
+    private static void Run(Options options)
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 

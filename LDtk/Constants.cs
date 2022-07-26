@@ -3,6 +3,8 @@ namespace LDtk;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using LDtk.Parsers;
+
 /// <summary> General Constants used in LDtkMonogame </summary>
 public class Constants
 {
@@ -22,6 +24,6 @@ public class Constants
             new GuidConverter(),
         },
         PropertyNamingPolicy = new LDtkNamingPolicy(),
-        IgnoreNullValues = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
     };
 }

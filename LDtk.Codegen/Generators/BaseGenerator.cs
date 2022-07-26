@@ -1,14 +1,15 @@
-namespace Raylib_CsLo.Codegen;
+namespace LDtk.Codegen.Generators;
 
 using System;
 using System.IO;
 using System.Text;
+
 using LDtk.Codegen;
 
 public class BaseGenerator
 {
-    int indent;
-    public StringBuilder fileContents = new();
+    private int indent;
+    private StringBuilder FileContents { get; set; } = new();
 
     public bool Debug { get; protected set; }
     public bool Commented { get; protected set; }
@@ -25,15 +26,9 @@ public class BaseGenerator
         Line("}");
     }
 
-    public static string Call(string functionName, string contents)
-    {
-        return $"{functionName}({contents})";
-    }
+    public static string Call(string functionName, string contents) => $"{functionName}({contents})";
 
-    public void Blank()
-    {
-        fileContents.AppendLine();
-    }
+    public void Blank() => _ = FileContents.AppendLine();
 
     public void Line(string line)
     {
@@ -43,16 +38,16 @@ public class BaseGenerator
             {
                 if (Commented && i == 0)
                 {
-                    fileContents.Append("    //  ");
+                    _ = FileContents.Append("    //  ");
                 }
                 else
                 {
-                    fileContents.Append("    ");
+                    _ = FileContents.Append("    ");
                 }
             }
         }
 
-        fileContents.AppendLine(line);
+        _ = FileContents.AppendLine(line);
     }
 
     public void DebugLine(string line)
@@ -63,17 +58,14 @@ public class BaseGenerator
         }
     }
 
-    public void DocumentationBlock(string description)
-    {
-        Line($"/// <summary> {description} </summary>");
-    }
+    public void DocumentationBlock(string description) => Line($"/// <summary> {description} </summary>");
 
     public void Output(Options options, string folder, string identifier)
     {
         string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
-        Directory.CreateDirectory(Path.GetDirectoryName(file));
-        File.WriteAllText(file, fileContents.ToString());
+        _ = Directory.CreateDirectory(Path.GetDirectoryName(file));
+        File.WriteAllText(file, FileContents.ToString());
         Console.WriteLine("Generating -> " + folder + "/" + identifier);
-        fileContents.Clear();
+        _ = FileContents.Clear();
     }
 }

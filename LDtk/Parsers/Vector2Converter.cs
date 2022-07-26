@@ -1,35 +1,37 @@
-namespace LDtk;
+namespace LDtk.Parsers;
 
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-class Vector2Converter : JsonConverter<Vector2>
+using Microsoft.Xna.Framework;
+
+internal class Vector2Converter : JsonConverter<Vector2>
 {
     public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         Vector2 val = Vector2.Zero;
         if (reader.TokenType == JsonTokenType.StartArray)
         {
-            reader.Read();
+            _ = reader.Read();
 
             float x = reader.GetSingle();
-            reader.Read();
+            _ = reader.Read();
 
             float y = reader.GetSingle();
-            reader.Read();
+            _ = reader.Read();
 
             val = new(x, y);
         }
         else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            reader.Read();
-            reader.Read();
+            _ = reader.Read();
+            _ = reader.Read();
             float x = reader.GetSingle();
-            reader.Read();
-            reader.Read();
+            _ = reader.Read();
+            _ = reader.Read();
             float y = reader.GetSingle();
-            reader.Read();
+            _ = reader.Read();
 
             val = new(x, y);
         }

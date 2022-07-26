@@ -3,6 +3,7 @@ namespace LDtk;
 using System;
 using System.IO;
 using System.Text.Json;
+
 using Microsoft.Xna.Framework.Content;
 
 public partial class LDtkFile

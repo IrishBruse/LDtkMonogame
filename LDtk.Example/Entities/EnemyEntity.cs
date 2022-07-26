@@ -1,23 +1,28 @@
 namespace LDtkMonogameExample.Entities;
 
 using System;
+
 using LDtk.Renderer;
+
+using LDtkMonogameExample;
 using LDtkMonogameExample.AABB;
+
 using LDtkTypes.World;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 public class EnemyEntity
 {
-    public Box collider;
+    private Enemy data;
+    private Texture2D texture;
+    private LDtkRenderer renderer;
+    private bool flip;
+    private int nextWander;
+    private bool dead;
+    private Vector2 velocity;
 
-    Enemy data;
-    Texture2D texture;
-    LDtkRenderer renderer;
-    bool flip;
-    int nextWander;
-    bool dead;
-    Vector2 velocity;
+    public Box Collider { get; set; }
 
     public EnemyEntity(Enemy data, Texture2D texture, LDtkRenderer renderer)
     {
@@ -25,13 +30,13 @@ public class EnemyEntity
         this.texture = texture;
         this.renderer = renderer;
 
-        collider = new Box(new Vector2(0, 0), new Vector2(16, 10), data.Pivot);
+        Collider = new Box(new Vector2(0, 0), new Vector2(16, 10), data.Pivot);
     }
 
     public void Update(float deltaTime)
     {
 
-        collider.Position = data.Position;
+        Collider.Position = data.Position;
 
         if (dead)
         {
@@ -84,7 +89,7 @@ public class EnemyEntity
 
         if (LDtkMonogameGame.DebugF3)
         {
-            renderer.SpriteBatch.DrawRect(collider, new Color(128, 255, 0, 128));
+            renderer.SpriteBatch.DrawRect(Collider, new Color(128, 255, 0, 128));
         }
     }
 

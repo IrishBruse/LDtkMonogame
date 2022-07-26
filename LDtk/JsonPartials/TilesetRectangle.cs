@@ -1,5 +1,7 @@
 namespace LDtk;
 
+using Microsoft.Xna.Framework;
+
 public partial class TilesetRectangle
 {
     /// <summary> Monogame Implicit Rectangle Cast </summary>

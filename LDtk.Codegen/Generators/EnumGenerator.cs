@@ -1,11 +1,9 @@
 namespace LDtk.Codegen.Generators;
 
-using Raylib_CsLo.Codegen;
-
 public class EnumGenerator : BaseGenerator
 {
-    LDtkFile ldtkFile;
-    Options options;
+    private LDtkFile ldtkFile;
+    private Options options;
 
     public EnumGenerator(LDtkFile ldtkFile, Options options)
     {
@@ -26,8 +24,11 @@ public class EnumGenerator : BaseGenerator
         }
     }
 
-    void GenEnum(EnumDefinition e)
+    private void GenEnum(EnumDefinition e)
     {
+        Line($"// This file was automatically generated, any modifications will be lost!");
+        Line($"#pragma warning disable");
+
         if (options.BlockScopeNamespace)
         {
             Line($"namespace {options.Namespace}");
@@ -39,7 +40,6 @@ public class EnumGenerator : BaseGenerator
         }
 
         Blank();
-        Line($"#pragma warning disable");
         Line($"public enum {e.Identifier}");
         StartBlock();
         foreach (EnumValueDefinition value in e.Values)

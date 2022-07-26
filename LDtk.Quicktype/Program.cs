@@ -6,10 +6,9 @@ using System.Text.RegularExpressions;
 
 public class Program
 {
-    static readonly string MinimalFilePath = "../LDtk/LDtkJson.cs";
-    static readonly string FullFilePath = "../LDtk.Codegen/LDtkJsonFull.cs";
-
-    static readonly string[] Usings = {
+    private static readonly string MinimalFilePath = "../LDtk/LDtkJson.cs";
+    private static readonly string FullFilePath = "../LDtk.Codegen/LDtkJsonFull.cs";
+    private static readonly string[] Usings = {
         "using System;",
         "using System.Text.Json.Serialization;",
         "using Microsoft.Xna.Framework;",
@@ -28,10 +27,10 @@ public class Program
         sourceFile.Output(FullFilePath);
     }
 
-    static void InitializeFile(SourceFile file, string path)
+    private static void InitializeFile(SourceFile file, string path)
     {
         file.Add("// This file was auto generated, any changes will be lost.");
-        file.Add("#pragma warning disable IDE1006,CA1711,CA1720,CS1591");
+        file.Add("#pragma warning disable IDE1006, CA1711, CA1720");
         foreach (string use in Usings)
         {
             file.Add(use);
@@ -40,8 +39,7 @@ public class Program
         file.Add("#pragma warning restore");
     }
 
-
-    static void ProcessFile(SourceFile file, string path)
+    private static void ProcessFile(SourceFile file, string path)
     {
         InitializeFile(file, path);
 
@@ -49,14 +47,14 @@ public class Program
         {
             file[i] = Regex.Replace(file[i], @"Aaaaaaaaaaaa", "_");
 
-            TypeConversion(file, i);
-            CleanupDocComments(file, i);
+            _ = TypeConversion(file, i);
+            _ = CleanupDocComments(file, i);
 
             ForceLayerTypeToEnum(file, i);
 
-            if (!file.isFull)
+            if (!file.IsFull)
             {
-                RemoveStuff(file, i);
+                _ = RemoveStuff(file, i);
             }
 
             RemoveLineWithComment(file, i, "public enum TypeEnum");
@@ -64,14 +62,14 @@ public class Program
             RemoveLineWithComment(file, i, "_ForcedRefs _ForcedRefs");
             RemoveClass(file, i, "_ForcedRefs");
 
-            if (file[i].EndsWith("///"))
+            if (file[i].EndsWith("///", System.StringComparison.InvariantCultureIgnoreCase))
             {
                 file.RemoveLine(i);
             }
         }
     }
 
-    static void ForceLayerTypeToEnum(SourceFile file, int i)
+    private static void ForceLayerTypeToEnum(SourceFile file, int i)
     {
         // TODO ldtk/quicktype bug
         // Make LayerType Type string variable into enum
@@ -81,7 +79,7 @@ public class Program
         }
     }
 
-    static void RemoveClass(SourceFile file, int i, string match)
+    private static void RemoveClass(SourceFile file, int i, string match)
     {
         if (file[i].Contains("public partial class " + match))
         {
@@ -101,7 +99,7 @@ public class Program
         }
     }
 
-    static void RemoveLineWithComment(SourceFile file, int i, string match)
+    private static void RemoveLineWithComment(SourceFile file, int i, string match)
     {
         if (file[i].Contains(match))
         {
@@ -109,7 +107,7 @@ public class Program
         }
     }
 
-    static void RemoveLineWithComments(SourceFile file, int i)
+    private static void RemoveLineWithComments(SourceFile file, int i)
     {
         int currentLine = i;
         file.RemoveLine(currentLine--);
@@ -124,7 +122,7 @@ public class Program
         }
     }
 
-    static string CleanupDocComments(SourceFile file, int i)
+    private static string CleanupDocComments(SourceFile file, int i)
     {
         // Doc comment cleanup
         if (file[i].Contains("///"))
@@ -143,7 +141,7 @@ public class Program
         return file[i];
     }
 
-    static string TypeConversion(SourceFile file, int i)
+    private static string TypeConversion(SourceFile file, int i)
     {
         file[i] = file[i].Replace("double", "float");
         file[i] = file[i].Replace("long", "int");
@@ -172,7 +170,7 @@ public class Program
         return file[i];
     }
 
-    static string RemoveStuff(SourceFile file, int i)
+    private static string RemoveStuff(SourceFile file, int i)
     {
         RemoveLineWithComment(file, i, "LDtkLevel[] Levels");
         RemoveLineWithComment(file, i, "AutoLayerRuleDefinition AutoRuleDef");
