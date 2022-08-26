@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 
 using LDtk;
-using LDtk.JsonPartials;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
