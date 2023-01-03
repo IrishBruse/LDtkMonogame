@@ -14,7 +14,6 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("-- LDtk Codegen --");
         _ = Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
