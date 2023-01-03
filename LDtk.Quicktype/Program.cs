@@ -30,7 +30,7 @@ public class Program
     private static void InitializeFile(SourceFile file, string path)
     {
         file.Add("// This file was auto generated, any changes will be lost.");
-        file.Add("#pragma warning disable IDE1006, CA1711, CA1720");
+        file.Add("#pragma warning disable IDE1006, CA1711, CA1720, CA1707, CS1591, CA1716");
         foreach (string use in Usings)
         {
             file.Add(use);

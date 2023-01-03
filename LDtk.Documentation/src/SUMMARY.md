@@ -15,6 +15,4 @@
   - [LDtkIntGrid](Api/LDtkIntgrid.md)
   - [ILDtkEntity](Api/ILDtkEntity.md)
 
-- [LDtk Reference](LDtkReference.md)
-
 - [Changelog](changelog.md)

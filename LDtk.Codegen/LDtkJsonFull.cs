@@ -1,7 +1,7 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk.Codegen;
 
-#pragma warning disable IDE1006, CA1711, CA1720
+#pragma warning disable IDE1006, CA1711, CA1720, CA1707, CS1591, CA1716
 using System;
 
 using Microsoft.Xna.Framework;
@@ -38,6 +38,11 @@ public partial class LDtkFile
     /// Project background color
     /// </summary>
     public Color BgColor { get; set; }
+
+    /// <summary>
+    /// An array of command lines that can be ran manually by the user
+    /// </summary>
+    public LdtkCustomCommand[] CustomCommands { get; set; }
 
     /// <summary>
     /// Default grid size for new layers
@@ -79,6 +84,11 @@ public partial class LDtkFile
     public Definitions Defs { get; set; }
 
     /// <summary>
+    /// If TRUE, the exported PNGs will include the level background (color or image).
+    /// </summary>
+    public bool ExportLevelBg { get; set; }
+
+    /// <summary>
     /// WARNING: this deprecated value is no inter exported since version 0.9.3  Replaced
     /// by: imageExportMode
     /// </summary>
@@ -108,6 +118,11 @@ public partial class LDtkFile
     /// values: Capitalize, Uppercase, Lowercase, Free
     /// </summary>
     public IdentifierStyle IdentifierStyle { get; set; }
+
+    /// <summary>
+    /// Unique project identifier
+    /// </summary>
+    public Guid Iid { get; set; }
 
     /// <summary>
     /// "Image export" option when saving project. Possible values: None, OneImagePerLayer,
@@ -213,6 +228,7 @@ public partial class AutoLayerRuleGroup
     public string Name { get; set; }
     public AutoLayerRuleDefinition[] Rules { get; set; }
     public int Uid { get; set; }
+    public bool UsesWizard { get; set; }
 }
 
 /// <summary>
@@ -321,6 +337,16 @@ public partial class AutoLayerRuleDefinition
     /// Y cell start offset
     /// </summary>
     public int YOffset { get; set; }
+}
+
+public partial class LdtkCustomCommand
+{
+    public string Command { get; set; }
+
+    /// <summary>
+    /// Possible values: Manual, AfterLoad, BeforeSave, AfterSave
+    /// </summary>
+    public When When { get; set; }
 }
 
 /// <summary>
@@ -459,8 +485,8 @@ public partial class EntityDefinition
     public string[] Tags { get; set; }
 
     /// <summary>
-    /// WARNING: this deprecated value will be removed completely on version 1.2.0+
-    /// Replaced by: tileRect
+    /// WARNING: this deprecated value is no inter exported since version 1.2.0  Replaced
+    /// by: tileRect
     /// </summary>
     public int? TileId { get; set; }
 
@@ -546,6 +572,12 @@ public partial class FieldDefinition
     /// </summary>
     public object DefaultOverride { get; set; }
 
+    /// <summary>
+    /// User defined documentation for this field to provide help/tips to level designers about
+    /// accepted values.
+    /// </summary>
+    public string Doc { get; set; }
+
     public bool EditorAlwaysShow { get; set; }
     public bool EditorCutLongValues { get; set; }
 
@@ -562,6 +594,12 @@ public partial class FieldDefinition
     /// </summary>
     public EditorDisplayPos EditorDisplayPos { get; set; }
 
+    /// <summary>
+    /// Possible values: ZigZag, StraightArrow, CurvedArrow, ArrowsLine, DashedLine
+    /// </summary>
+    public EditorLinkStyle EditorLinkStyle { get; set; }
+
+    public bool EditorShowInWorld { get; set; }
     public string EditorTextPrefix { get; set; }
     public string EditorTextSuffix { get; set; }
 
@@ -728,10 +766,15 @@ public partial class LayerDefinition
     public int? AutoSourceLayerDefUid { get; set; }
 
     /// <summary>
-    /// WARNING: this deprecated value will be removed completely on version 1.2.0+
-    /// Replaced by: tilesetDefUid
+    /// WARNING: this deprecated value is no inter exported since version 1.2.0  Replaced
+    /// by: tilesetDefUid
     /// </summary>
     public int? AutoTilesetDefUid { get; set; }
+
+    /// <summary>
+    /// Allow editor selections when the layer is not currently active.
+    /// </summary>
+    public bool CanSelectWhenInactive { get; set; }
 
     /// <summary>
     /// Opacity of the layer (0 to 1.0)
@@ -1327,8 +1370,8 @@ public partial class NeighbourLevel
     public Guid LevelIid { get; set; }
 
     /// <summary>
-    /// WARNING: this deprecated value will be removed completely on version 1.2.0+
-    /// Replaced by: levelIid
+    /// WARNING: this deprecated value is no inter exported since version 1.2.0  Replaced
+    /// by: levelIid
     /// </summary>
     public int? LevelUid { get; set; }
 }
@@ -1556,6 +1599,11 @@ public enum Checker { Horizontal, None, Vertical };
 public enum TileMode { Single, Stamp };
 
 /// <summary>
+/// Possible values: Manual, AfterLoad, BeforeSave, AfterSave
+/// </summary>
+public enum When { AfterLoad, AfterSave, BeforeSave, Manual };
+
+/// <summary>
 /// Possible values: Any, OnlySame, OnlyTags
 /// </summary>
 public enum AllowedRefs { Any, OnlySame, OnlyTags };
@@ -1572,6 +1620,11 @@ public enum EditorDisplayMode { ArrayCountNoLabel, ArrayCountWithLabel, EntityTi
 /// Possible values: Above, Center, Beneath
 /// </summary>
 public enum EditorDisplayPos { Above, Beneath, Center };
+
+/// <summary>
+/// Possible values: ZigZag, StraightArrow, CurvedArrow, ArrowsLine, DashedLine
+/// </summary>
+public enum EditorLinkStyle { ArrowsLine, CurvedArrow, DashedLine, StraightArrow, ZigZag };
 
 public enum TextLanguageMode { LangC, LangHaxe, LangJs, LangJson, LangLog, LangLua, LangMarkdown, LangPython, LangRuby, LangXml };
 

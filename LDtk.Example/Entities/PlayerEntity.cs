@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 
 using LDtk;
-using LDtk.JsonPartials;
 using LDtk.Renderer;
 
 using LDtkMonogameExample;

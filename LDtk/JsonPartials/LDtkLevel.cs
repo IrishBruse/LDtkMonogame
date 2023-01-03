@@ -6,8 +6,6 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-using LDtk.JsonPartials;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 

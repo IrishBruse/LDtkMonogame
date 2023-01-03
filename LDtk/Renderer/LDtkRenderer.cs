@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 
 using LDtk;
-using LDtk.JsonPartials;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -165,7 +164,7 @@ public class LDtkRenderer
             if (!string.IsNullOrWhiteSpace(level.FilePath))
             {
                 string filePath = Path.GetDirectoryName(level.FilePath);
-                return Texture2D.FromFile(graphicsDevice, Path.Combine(filePath, path));
+                return Texture2D.FromFile(graphicsDevice, Path.GetFullPath(Path.Combine(filePath, "../", path)));
             }
             return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
         }

@@ -1,11 +1,21 @@
-:root {
+/* Globals */
+
+:root
+{
     --sidebar-width: 300px;
     --page-padding: 15px;
     --content-max-width: 750px;
     --menu-bar-height: 50px;
+    --mono-font: "Source Code Pro", Consolas, "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
+    --code-font-size: 0.875em
+        /* please adjust the ace font size accordingly in editor.js */
 }
 
-.ldtk {
+/* Themes */
+
+
+.ldtk
+{
     --bg: #1e2229;
     --fg: #abb8c3;
 
@@ -22,11 +32,11 @@
 
     --links: #ffcc00;
 
-    --inline-code-color: #c5c5c5;
+    --inline-code-color: #ff7a8b;
 
     --theme-popup-bg: #14191f;
     --theme-popup-border: #5c6773;
-    --theme-hover: #ffffff;
+    --theme-hover: #252832;
 
     --quote-bg: #252832;
     --quote-border: #303441;

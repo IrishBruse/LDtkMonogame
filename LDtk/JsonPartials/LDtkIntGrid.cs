@@ -1,4 +1,4 @@
-namespace LDtk.JsonPartials;
+namespace LDtk;
 
 using System;
 
