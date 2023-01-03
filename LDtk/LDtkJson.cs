@@ -1,7 +1,7 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk;
 
-#pragma warning disable IDE1006, CA1711, CA1720, CS1591, CA1707
+#pragma warning disable IDE1006, CA1711, CA1720, CA1707, CS1591, CA1716
 using System;
 
 using Microsoft.Xna.Framework;
@@ -21,6 +21,11 @@ public partial class LDtkFile
     public Color BgColor { get; set; }
 
     /// <summary>
+    /// An array of command lines that can be ran manually by the user
+    /// </summary>
+    public LdtkCustomCommand[] CustomCommands { get; set; }
+
+    /// <summary>
     /// A structure containing all the definitions of this project
     /// </summary>
     public Definitions Defs { get; set; }
@@ -30,6 +35,11 @@ public partial class LDtkFile
     /// in a sub-folder for each level.
     /// </summary>
     public bool ExternalLevels { get; set; }
+
+    /// <summary>
+    /// Unique project identifier
+    /// </summary>
+    public Guid Iid { get; set; }
 
     /// <summary>
     /// File format version
@@ -78,6 +88,16 @@ public partial class LDtkFile
 
 
 
+
+public partial class LdtkCustomCommand
+{
+    public string Command { get; set; }
+
+    /// <summary>
+    /// Possible values: Manual, AfterLoad, BeforeSave, AfterSave
+    /// </summary>
+    public When When { get; set; }
+}
 
 /// <summary>
 /// If you're writing your own LDtk importer, you should probably just ignore most stuff in
@@ -954,6 +974,11 @@ public partial class LDtkWorld
     /// </summary>
     public WorldLayout? WorldLayout { get; set; }
 }
+
+/// <summary>
+/// Possible values: Manual, AfterLoad, BeforeSave, AfterSave
+/// </summary>
+public enum When { AfterLoad, AfterSave, BeforeSave, Manual };
 
 /// <summary>
 /// An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible
