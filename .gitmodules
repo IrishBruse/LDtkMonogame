@@ -1,4 +1,0 @@
-[submodule "LDtk.Documentation/docs"]
-	path = LDtk.Documentation/docs
-	url = https://github.com/IrishBruse/LDtkMonogame.git
-	branch = docs
