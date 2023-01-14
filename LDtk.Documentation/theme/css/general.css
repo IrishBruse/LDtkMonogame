@@ -39,8 +39,14 @@ main
 /* make wide tables scroll if they overflow */
 .table-wrapper
 {
-    overflow-x: auto;
+    position: relative;
+    left: -20%;
+    right: 20%;
+    width: 140%;
+    /* overflow-x: auto; */
 }
+
+
 
 /* Don't change font size in headers. */
 h1 code,
@@ -110,9 +116,18 @@ h6:target::before
     width: 30px;
 }
 
-.link-buttons
+
+
+.right-buttons a
 {
-    margin: 1rem;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+
+.right-buttons a>*
+{
+    height: 24px;
 }
 
 .link-buttons:hover
@@ -132,7 +147,7 @@ h6:target::before
 .page
 {
     outline: 0;
-    padding: 0 var(--page-padding);
+    margin: 0;
     margin-top: calc(0px - var(--menu-bar-height));
     /* Compensate for the #menu-bar-hover-placeholder */
 }
@@ -151,7 +166,6 @@ h6:target::before
 .content
 {
     overflow-y: auto;
-    padding: 0 5px 50px 5px;
 }
 
 .content main
@@ -206,7 +220,7 @@ h6:target::before
 
 table
 {
-    margin: 0 auto;
+    width: 100%;
     border-collapse: collapse;
 }
 

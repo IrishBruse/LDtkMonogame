@@ -1,33 +1,33 @@
 # ILDtkEntity
 
 ```cs
-string Identifier { get; set; }
+public string Identifier { get; set; }
 ```
 
 ```cs
-Guid Iid { get; set; }
+public Guid Iid { get; set; }
 ```
 
 ```cs
-int Uid { get; set; }
+public int Uid { get; set; }
 ```
 
 ```cs
-Vector2 Position { get; set; }
+public Vector2 Position { get; set; }
 ```
 
 ```cs
-Vector2 Size { get; set; }
+public Vector2 Size { get; set; }
 ```
 
 ```cs
-Vector2 Pivot { get; set; }
+public Vector2 Pivot { get; set; }
 ```
 
 ```cs
-Rectangle Tile { get; set; }
+public Rectangle Tile { get; set; }
 ```
 
 ```cs
-Color SmartColor { get; set; }
+public Color SmartColor { get; set; }
 ```

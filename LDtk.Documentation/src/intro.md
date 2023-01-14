@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a><br/>
-    <a href="https://discord.com/invite/BfFNqtCyfU">
+    <a href="https://ldtk.io/go/discord">
         <img alt="Discord" src="https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord">
     </a>
 </h1>
@@ -32,7 +32,6 @@ To get started loading ldtk files load the file in `Initialize`.
 
 ```cs
 LDtkFile file = LDtkFile.FromFile("World", Content);
-// or
 LDtkFile file = LDtkFile.FromFile("Data/World.ldtk");
 ```
 
@@ -49,7 +48,6 @@ Create the renderer in `Initialize`.
 
 ```cs
 LDtkRenderer renderer = new LDtkRenderer(spriteBatch, Content);
-// or
 LDtkRenderer renderer = new LDtkRenderer(spriteBatch);
 ```
 

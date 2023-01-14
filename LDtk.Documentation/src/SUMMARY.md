@@ -1,18 +1,16 @@
 - [Introduction](intro.md)
 
-- [Tutorials](tutorials.md)
-  - [World](Tutorials/world.md)
-  - [Level](Tutorials/level.md)
-  - [IntGrid](Tutorials/intgrid.md)
-  - [Entity](Tutorials/entity.md)
-  - [Codegen](Tutorials/codegen.md)
-  - [ContentPipeline](Tutorials/content.md)
+- [Documentation](Documentation/index.md)
+  - [Codegen](Documentation/codegen.md)
+  - [ContentPipeline](Documentation/content.md)
 
-- [Api](api.md)
+- [Api](Api/index.md)
   - [LDtkFile](Api/LDtkFile.md)
   - [LDtkWorld](Api/LDtkWorld.md)
   - [LDtkLevel](Api/LDtkLevel.md)
   - [LDtkIntGrid](Api/LDtkIntgrid.md)
   - [ILDtkEntity](Api/ILDtkEntity.md)
+
+- [Reference](reference.md)
 
 - [Changelog](changelog.md)

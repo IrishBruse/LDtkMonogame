@@ -7,10 +7,16 @@ title = "LDtkMonogame"
 description = "The LDtkMonogame nuget documentation"
 
 [build]
-build-dir = "./docs/docs/"
+build-dir = "../docs/docs"
+use-default-preprocessors = true
+create-missing = false
 
 [output.html.print]
 enable = false
+
+[output.html.fold]
+enable = false    # whether or not to enable section folding
+level = 0         # the depth to start folding
 
 [output.html]
 theme = "theme"
@@ -19,6 +25,8 @@ preferred-dark-theme = "ldtk"
 curly-quotes = false
 mathjax-support = false
 copy-fonts = true
-no-section-label = false
+no-section-label = true
+additional-js = []
 git-repository-url = "https://github.com/IrishBruse/LDtkMonogame"
-git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/IrishBruse/LDtkMonogame/edit/main/LDtk.Documentation/{path}"
+discord-url = "https://ldtk.io/go/discord"

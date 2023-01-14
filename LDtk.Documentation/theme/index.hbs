@@ -107,7 +107,6 @@
     </script>
 
     <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-        <div class="header-toc"></div>
         <div class="sidebar-scrollbox">
             {{#toc}}{{/toc}}
         </div>
@@ -124,6 +123,16 @@
                     <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                         <i class="fa fa-bars"></i>
                     </button>
+                    <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                        <i class="fa fa-paint-brush"></i>
+                    </button>
+                    <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                        <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                        <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                    </ul>
                     {{#if search_enabled}}
                     <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                         <i class="fa fa-search"></i>
@@ -134,12 +143,23 @@
                 <h1 class="menu-title">{{ book_title }}</h1>
 
                 <div class="right-buttons">
+                    {{#if git_repository_url}}
                     <a href="{{git_repository_url}}" title="Git repository" aria-label="Git repository">
                         <img src="https://ldtk.io/wp-content/themes/ldtk/icons/github.svg" class="link-buttons">
                     </a>
-                    <a href="https://discord.com/invite/BfFNqtCyfU" title="Discord link" aria-label="Discord link">
+                    {{/if}}
+
+                    <a href="{{discord_url}}" title="Discord server" aria-label="Discord server">
                         <img src="https://ldtk.io/wp-content/themes/ldtk/icons/discord.svg" class="link-buttons">
                     </a>
+
+                    {{#if git_repository_edit_url}}
+                    <a href="{{git_repository_edit_url}}" title="Suggest an edit" aria-label="Suggest an edit">
+                        <svg class="link-buttons" viewBox="0 0 24 24">
+                            <path fill="#ffcc00" d="M19,19V5H5V19H19M19,3A2,2 0 0,1 21,5V19C21,20.11 20.1,21 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19M16.7,9.35L15.7,10.35L13.65,8.3L14.65,7.3C14.86,7.08 15.21,7.08 15.42,7.3L16.7,8.58C16.92,8.79 16.92,9.14 16.7,9.35M7,14.94L13.06,8.88L15.12,10.94L9.06,17H7V14.94Z" />
+                        </svg>
+                    </a>
+                    {{/if}}
                 </div>
             </div>
 
