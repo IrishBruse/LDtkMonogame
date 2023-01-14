@@ -1,7 +1,5 @@
 **/bin/
 **/obj/
-**/LDtkTypes/
 
 .vs/
-.vscode/launch.json
-.vscode/tasks.json
+Nuget/

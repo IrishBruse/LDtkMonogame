@@ -6,7 +6,6 @@
         <LangVersion>latest</LangVersion>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <NoWarn>CA1051</NoWarn>
-        <IsPackable>false</IsPackable>
         <RootNamespace>LDtkMonogameExample</RootNamespace>
     </PropertyGroup>
 

@@ -1,11 +1,11 @@
-write-host "Enter nuget api key: " -nonewline
-$key = read-host
+dotnet pack ./LDtk/LDtk.csproj -c Release -o ./Nuget/
+dotnet pack ./LDtk.Codegen/LDtk.Codegen.csproj -c Release -o ./Nuget/
+dotnet pack ./LDtk.ContentPipeline/LDtk.ContentPipeline.csproj -c Release -o ./Nuget/
 
-dotnet pack -c Release -o ./Nuget/
-
-$packages = Get-ChildItem -Path .\Nuget\*.nupkg
+$packages = Get-ChildItem -Path ./Nuget/*.nupkg
 
 foreach ($package in $packages) {
-    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key $key $package
+    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key $env:NugetApiKey $package
 }
-rmdir .\Nuget\ -Force -Recurse -Confirm:$false
+
+rmdir ./Nuget/ -Force -Recurse -Confirm:$false
