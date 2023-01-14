@@ -8,30 +8,32 @@
         <ImplicitUsings>false</ImplicitUsings>
     </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\LDtk\LDtk.csproj" />
-        <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    </ItemGroup>
-
     <PropertyGroup>
         <Version>1.0.0</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.Codegen</PackageId>
         <Description>LDtk tool that generates staticaly typed entities</Description>
-        <PackageProjectUrl>https://ethanconneely.com/LDtkMonogame/</PackageProjectUrl>
+        <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>https://ethanconneely.com/LDtkMonogame/</PackageReleaseNotes>
+        <PackageReleaseNotes>https://irishbruse.github.io/LDtkMonogame/</PackageReleaseNotes>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
 
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>ldtkgen</ToolCommandName>
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\LDtk\LDtk.csproj" />
+        <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="../LDtk.Documentation/src/intro.md" Pack="true" PackagePath="/readme.md" />
         <None Include="../Icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
