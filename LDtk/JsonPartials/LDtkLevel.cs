@@ -2,6 +2,7 @@ namespace LDtk;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ using System.Text.Json.Serialization;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
+[DebuggerDisplay("Identifier: {Identifier} Pos: {Position} Size: {Size} Path: {FilePath}")]
 public partial class LDtkLevel
 {
     /// <summary> The absolute filepath to the level </summary>
@@ -43,7 +45,7 @@ public partial class LDtkLevel
     {
         LDtkLevel file;
         file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", ""));
-        file.FilePath = filePath;
+        file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
 

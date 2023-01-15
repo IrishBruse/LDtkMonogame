@@ -2,12 +2,14 @@ namespace LDtk;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
+[DebuggerDisplay("WorldLayout: {WorldLayout} Size: {WorldGridSize} Path: {FilePath}")]
 public partial class LDtkWorld
 {
     /// <summary> The Real LDtk Levels Json data Use indexer directly on the world eg world[0] instead as that will load external files if that setting is enabled. </summary>

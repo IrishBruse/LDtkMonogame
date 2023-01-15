@@ -1,11 +1,13 @@
 namespace LDtk;
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
 using Microsoft.Xna.Framework.Content;
 
+[DebuggerDisplay("ExternalFiles: {ExternalLevels} Path: {FilePath}")]
 public partial class LDtkFile
 {
     /// <summary> The absolute path to the ldtkFile </summary>
@@ -24,6 +26,9 @@ public partial class LDtkFile
     {
         LDtkFile file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
         file.FilePath = Path.GetFullPath(filePath);
+#if Debug
+        ValidateFile(file);
+#endif
         return file;
     }
 
@@ -35,7 +40,23 @@ public partial class LDtkFile
         LDtkFile file = content.Load<LDtkFile>(filePath);
         file.FilePath = filePath;
         file.Content = content;
+#if Debug
+        ValidateFile(file);
+#endif
         return file;
+    }
+
+    private static void ValidateFile(LDtkFile file)
+    {
+        if (Version.Parse(file.JsonVersion).Minor > Version.Parse(Constants.SupportedLDtkVersion).Minor)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(
+                $"LDtkMonogame supports {Constants.SupportedLDtkVersion} your file is on {file.JsonVersion} it\n" +
+                "is probably supported but new features may be missing please make an issue on github to remind me to update it :)"
+            );
+            Console.ResetColor();
+        }
     }
 
     /// <summary> Loads the ldtkl world file from disk directly or from the embeded one depending on if the file uses externalworlds </summary>
