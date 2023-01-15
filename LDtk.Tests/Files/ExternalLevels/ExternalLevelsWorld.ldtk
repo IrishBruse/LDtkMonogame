@@ -5,13 +5,15 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.1.3",
+		"appVersion": "1.2.5",
 		"url": "https://ldtk.io"
 	},
-	"jsonVersion": "1.1.3",
-	"appBuildId": 458364,
+	"iid": "c2626530-7820-11ed-a6f0-bf50d254b653",
+	"jsonVersion": "1.2.5",
+	"appBuildId": 464870,
 	"nextUid": 4,
 	"identifierStyle": "Capitalize",
+	"toc": [],
 	"worldLayout": null,
 	"worldGridWidth": null,
 	"worldGridHeight": null,
@@ -27,11 +29,13 @@
 	"exportTiled": false,
 	"simplifiedExport": false,
 	"imageExportMode": "None",
+	"exportLevelBg": true,
 	"pngFilePattern": null,
 	"backupOnSave": false,
 	"backupLimit": 10,
 	"levelNamePattern": "Level_%idx",
 	"tutorialDesc": null,
+	"customCommands": [{ "command": "ldtkgen -i ./World.ldtk", "when": "AfterSave" }],
 	"flags": ["MultiWorlds"],
 	"defs": { "layers": [
 		{
@@ -39,6 +43,7 @@
 			"identifier": "Tiles",
 			"type": "Tiles",
 			"uid": 2,
+			"doc": null,
 			"gridSize": 16,
 			"guideGridWid": 0,
 			"guideGridHei": 0,
@@ -46,6 +51,7 @@
 			"inactiveOpacity": 1,
 			"hideInList": false,
 			"hideFieldsWhenInactive": false,
+			"canSelectWhenInactive": true,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
 			"parallaxFactorX": 0,
@@ -54,7 +60,6 @@
 			"requiredTags": [],
 			"excludedTags": [],
 			"intGridValues": [],
-			"autoTilesetDefUid": 1,
 			"autoRuleGroups": [],
 			"autoSourceLayerDefUid": null,
 			"tilesetDefUid": 1,
@@ -108,7 +113,7 @@
 			"externalRelPath": "ExternalLevelsWorld/Level_0.ldtkl",
 			"fieldInstances": [],
 			"layerInstances": null,
-			"__neighbours": [{ "levelIid": "9b713120-02f0-11ed-9a3d-f784794b7978", "levelUid": 3, "dir": "w" }]
+			"__neighbours": [{ "levelIid": "9b713120-02f0-11ed-9a3d-f784794b7978", "dir": "w" }]
 		},
 		{
 			"identifier": "Level_1",
@@ -131,7 +136,7 @@
 			"externalRelPath": "ExternalLevelsWorld/Level_1.ldtkl",
 			"fieldInstances": [],
 			"layerInstances": null,
-			"__neighbours": [{ "levelIid": "77d342e0-02f0-11ed-b6c7-7b47c003777d", "levelUid": 0, "dir": "e" }]
+			"__neighbours": [{ "levelIid": "77d342e0-02f0-11ed-b6c7-7b47c003777d", "dir": "e" }]
 		}
 	] }]
 }

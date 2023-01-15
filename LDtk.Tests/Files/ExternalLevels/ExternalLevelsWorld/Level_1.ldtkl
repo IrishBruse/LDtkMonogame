@@ -5,7 +5,7 @@
 		"doc": "https://ldtk.io/json",
 		"schema": "https://ldtk.io/files/JSON_SCHEMA.json",
 		"appAuthor": "Sebastien 'deepnight' Benard",
-		"appVersion": "1.1.3",
+		"appVersion": "1.2.5",
 		"url": "https://ldtk.io"
 	},
 	"identifier": "Level_1",
@@ -97,5 +97,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [{ "levelIid": "77d342e0-02f0-11ed-b6c7-7b47c003777d", "levelUid": 0, "dir": "e" }]
+	"__neighbours": [{ "levelIid": "77d342e0-02f0-11ed-b6c7-7b47c003777d", "dir": "e" }]
 }
