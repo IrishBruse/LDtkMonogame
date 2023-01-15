@@ -11,8 +11,8 @@ using System.Xml;
 public class Program
 {
 
-    private const string XMLDocPath = "./bin/Debug/net6.0/LDtkMonogame.xml";
-    private const string SummaryTemplatePath = "../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
+    private const string XMLDocPath = "../../LDtk/bin/Debug/net6.0/LDtkMonogame.xml";
+    private const string SummaryTemplatePath = "../../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
 
     private static HashSet<string> excludedFiles = new(){
         "LDtkFileReader",
@@ -47,13 +47,13 @@ public class Program
 
         try
         {
-            Directory.Delete("../LDtk.Documentation/src/Api/", true);
+            Directory.Delete("../../LDtk.Documentation/src/Api/", true);
         }
         catch (Exception)
         {
         }
 
-        _ = Directory.CreateDirectory("../LDtk.Documentation/src/Api/");
+        _ = Directory.CreateDirectory("../../LDtk.Documentation/src/Api/");
 
         XmlDocument doc = new();
 
@@ -269,7 +269,7 @@ public class Program
                 + $"\n";
             }
 
-            string path = "../LDtk.Documentation/src/Api/" + item.Name + ".md";
+            string path = "../../LDtk.Documentation/src/Api/" + item.Name + ".md";
 
             Console.WriteLine(item.Name);
             Console.WriteLine(path);
@@ -277,7 +277,7 @@ public class Program
             File.AppendAllText(path, txt);
         }
 
-        using StreamWriter indexFileWriter = File.CreateText("../LDtk.Documentation/src/Api/index.md");
+        using StreamWriter indexFileWriter = File.CreateText("../../LDtk.Documentation/src/Api/index.md");
 
         indexFileWriter.WriteLine("# APi");
         indexFileWriter.WriteLine();

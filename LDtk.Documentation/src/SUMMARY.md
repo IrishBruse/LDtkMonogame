@@ -21,7 +21,7 @@
   - [TileCustomMetadata](./Api/TileCustomMetadata.md)
   - [EnumTagValue](./Api/EnumTagValue.md)
   - [EntityRef](./Api/EntityRef.md)
-  - [FieldInstanceGridPoint](./Api/FieldInstanceGridPoint.md)
+  - [GridPoint](./Api/GridPoint.md)
   - [IntGridValueInstance](./Api/IntGridValueInstance.md)
   - [LevelBackgroundPosition](./Api/LevelBackgroundPosition.md)
   - [NeighbourLevel](./Api/NeighbourLevel.md)

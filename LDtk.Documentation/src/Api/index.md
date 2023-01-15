@@ -19,7 +19,7 @@ This is the list of classes in LDtkMonogame
   - [TileCustomMetadata](./TileCustomMetadata.md)
   - [EnumTagValue](./EnumTagValue.md)
   - [EntityRef](./EntityRef.md)
-  - [FieldInstanceGridPoint](./FieldInstanceGridPoint.md)
+  - [GridPoint](./GridPoint.md)
   - [IntGridValueInstance](./IntGridValueInstance.md)
   - [LevelBackgroundPosition](./LevelBackgroundPosition.md)
   - [NeighbourLevel](./NeighbourLevel.md)
