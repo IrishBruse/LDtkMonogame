@@ -1,49 +1,33 @@
 # ILDtkEntity
 
-  
-Interface that implements the Entity  
-
-
-## Properties
-
-Identifier
-```csharp
+```cs
 public string Identifier { get; set; }
 ```
 
-Iid
-```csharp
+```cs
 public Guid Iid { get; set; }
 ```
 
-Uid
-```csharp
+```cs
 public int Uid { get; set; }
 ```
 
-Position
-```csharp
+```cs
 public Vector2 Position { get; set; }
 ```
 
-Size
-```csharp
+```cs
 public Vector2 Size { get; set; }
 ```
 
-Pivot
-```csharp
+```cs
 public Vector2 Pivot { get; set; }
 ```
 
-Tile
-```csharp
+```cs
 public Rectangle Tile { get; set; }
 ```
 
-EditorVisualColor
-```csharp
+```cs
 public Color SmartColor { get; set; }
 ```
-
-

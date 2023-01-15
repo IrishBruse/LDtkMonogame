@@ -34,6 +34,10 @@ put this in your `.csproj` file and set the path to point to your ldtk file(be c
 </Target>
 ```
 
+Or using the new ldtk command runner feature you can setup the command to be run everytime the file is saved
+
+![CommandRunner](./CommandRunner.png)
+
 ## ldtkgen flags
 
 - -i, --input               **Required**. Input LDtk world file.

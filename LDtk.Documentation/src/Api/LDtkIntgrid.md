@@ -1,57 +1,65 @@
 # LDtkIntGrid
 
+LDtk IntGrid
+
+## Methods
+
+Used by json deserializer not for use by user!
+```csharp
+public LDtkIntGrid()
+```
+
+Gets the int value at location and return 0 if out of bounds
+```csharp
+public int GetValueAt(int x, int y);
+```
+
+Gets the int value at location and return 0 if out of bounds
+```csharp
+public int GetValueAt(int x, int y);
+```
+
+Gets the int value at location and return 0 if out of bounds
+```csharp
+public int GetValueAt(int x, int y);
+```
+
+Check if point is inside of a grid
+```csharp
+public bool Contains(Point point);
+```
+
+Check if point is inside of a grid
+```csharp
+public bool Contains(Point point);
+```
+
+Convert from world pixel space to int grid space Floors the value based on  to an Integer
+```csharp
+public Point FromWorldToGridSpace(Vector2 position);
+```
+
+
+## Properties
 
 Size of a tile in pixels
-```cs
+```csharp
 public int TileSize { get; set; }
 ```
 
 The underlying values of the int grid
-```cs
+```csharp
 public int[] Values { get; set; }
 ```
 
 Worldspace start Position of the intgrid
-```cs
+```csharp
 public Point WorldPosition { get; set; }
 ```
 
 Worldspace start Position of the intgrid
-```cs
+```csharp
 public Point GridSize { get; set; }
 ```
 
-Gets the int value at location and return 0 if out of bounds
-```cs
-public int GetValueAt(int x, int y)
-```
 
-
-Gets the int value at location and return 0 if out of bounds
-```cs
-public int GetValueAt(Point position)
-```
-
-
-Gets the int value at location and return 0 if out of bounds
-```cs
-public int GetValueAt(Vector2 position)
-```
-
-
-Check if point is inside of a grid
-```cs
-public bool Contains(Point point)
-```
-
-
-Check if point is inside of a grid
-```cs
-public bool Contains(Vector2 point)
-```
-
-
-Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer
-```cs
-public Point FromWorldToGridSpace(Vector2 position)
-```
