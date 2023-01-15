@@ -6,15 +6,20 @@ using System.Text.RegularExpressions;
 
 public class Program
 {
-    private static readonly string MinimalFilePath = "../LDtk/LDtkJson.cs";
-    private static readonly string FullFilePath = "../LDtk.Codegen/LDtkJsonFull.cs";
+    public static void Main()
+    {
+        Run();
+    }
+
+    private static readonly string MinimalFilePath = "../../LDtk/LDtkJson.cs";
+    private static readonly string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
     private static readonly string[] Usings = {
         "using System;",
         "using System.Text.Json.Serialization;",
         "using Microsoft.Xna.Framework;",
     };
 
-    public static void Main()
+    public static void Run()
     {
         Quicktype.Generate();
 
@@ -158,7 +163,7 @@ public class Program
         file[i] = file[i].Replace("float[] _Pivot", "Vector2 _Pivot");
         file[i] = file[i].Replace("float[] Scale", "Vector2 Scale");
 
-        file[i] = file[i].Replace("FieldInstanceEntityReference", "EntityRef");
+        file[i] = file[i].Replace("ReferenceToAnEntityInstance", "EntityRef");
 
         file[i] = file[i].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
 

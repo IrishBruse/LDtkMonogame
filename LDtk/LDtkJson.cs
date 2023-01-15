@@ -1,10 +1,10 @@
 // This file was auto generated, any changes will be lost.
 namespace LDtk;
-
 #pragma warning disable IDE1006, CA1711, CA1720, CA1707, CS1591, CA1716
 using System;
 
 using Microsoft.Xna.Framework;
+
 
 /// <summary>
 /// This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
@@ -19,11 +19,6 @@ public partial class LDtkFile
     /// Project background color
     /// </summary>
     public Color BgColor { get; set; }
-
-    /// <summary>
-    /// An array of command lines that can be ran manually by the user
-    /// </summary>
-    public LdtkCustomCommand[] CustomCommands { get; set; }
 
     /// <summary>
     /// A structure containing all the definitions of this project
@@ -46,6 +41,12 @@ public partial class LDtkFile
     /// </summary>
     public string JsonVersion { get; set; }
 
+
+    /// <summary>
+    /// All instances of entities that have their exportToToc flag enabled are listed in this
+    /// array.
+    /// </summary>
+    public LdtkTableOfContentEntry[] Toc { get; set; }
 
     /// <summary>
     /// WARNING: this field will move to the worlds array after the "multi-worlds" update.
@@ -602,7 +603,7 @@ public partial class FieldInstance
 }
 
 /// <summary>
-/// This object is used in Field Instances to describe an EntityRef value.
+/// This object describes the "location" of an Entity instance in the project worlds.
 /// </summary>
 public partial class EntityRef
 {
@@ -630,7 +631,7 @@ public partial class EntityRef
 /// <summary>
 /// This object is just a grid-based coordinate used in Field values.
 /// </summary>
-public partial class FieldInstanceGridPoint
+public partial class GridPoint
 {
     /// <summary>
     /// X grid-based coordinate
@@ -894,13 +895,15 @@ public partial class LayerInstance
 
     /// <summary>
     /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    /// the LayerDef optional offset, see __pxTotalOffsetX)
+    /// the LayerDef optional offset, so you should probably prefer using
+    /// __pxTotalOffsetX which contains the total offset value)
     /// </summary>
     public int PxOffsetX { get; set; }
 
     /// <summary>
     /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    /// the LayerDef optional offset, see __pxTotalOffsetY)
+    /// the LayerDef optional offset, so you should probably prefer using
+    /// __pxTotalOffsetX which contains the total offset value)
     /// </summary>
     public int PxOffsetY { get; set; }
 
@@ -973,6 +976,12 @@ public partial class LDtkWorld
     /// null, null
     /// </summary>
     public WorldLayout? WorldLayout { get; set; }
+}
+
+public partial class LdtkTableOfContentEntry
+{
+    public string Identifier { get; set; }
+    public EntityRef[] Instances { get; set; }
 }
 
 /// <summary>

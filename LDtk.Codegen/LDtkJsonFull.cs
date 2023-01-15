@@ -170,6 +170,12 @@ public partial class LDtkFile
     public bool SimplifiedExport { get; set; }
 
     /// <summary>
+    /// All instances of entities that have their exportToToc flag enabled are listed in this
+    /// array.
+    /// </summary>
+    public LdtkTableOfContentEntry[] Toc { get; set; }
+
+    /// <summary>
     /// This optional description is used by LDtk Samples to show up some informations and
     /// instructions.
     /// </summary>
@@ -398,6 +404,17 @@ public partial class EntityDefinition
     /// Base entity color
     /// </summary>
     public Color Color { get; set; }
+
+    /// <summary>
+    /// User defined documentation for this element to provide help/tips to level designers.
+    /// </summary>
+    public string Doc { get; set; }
+
+    /// <summary>
+    /// If enabled, all instances of this entity will be listed in the project "Table of content"
+    /// object.
+    /// </summary>
+    public bool ExportToToc { get; set; }
 
     /// <summary>
     /// Array of field definitions
@@ -782,6 +799,11 @@ public partial class LayerDefinition
     public float DisplayOpacity { get; set; }
 
     /// <summary>
+    /// User defined documentation for this element to provide help/tips to level designers.
+    /// </summary>
+    public string Doc { get; set; }
+
+    /// <summary>
     /// An array of tags to forbid some Entities in this layer
     /// </summary>
     public string[] ExcludedTags { get; set; }
@@ -1135,7 +1157,7 @@ public partial class FieldInstance
 }
 
 /// <summary>
-/// This object is used in Field Instances to describe an EntityRef value.
+/// This object describes the "location" of an Entity instance in the project worlds.
 /// </summary>
 public partial class EntityRef
 {
@@ -1163,7 +1185,7 @@ public partial class EntityRef
 /// <summary>
 /// This object is just a grid-based coordinate used in Field values.
 /// </summary>
-public partial class FieldInstanceGridPoint
+public partial class GridPoint
 {
     /// <summary>
     /// X grid-based coordinate
@@ -1481,13 +1503,15 @@ public partial class LayerInstance
 
     /// <summary>
     /// X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    /// the LayerDef optional offset, see __pxTotalOffsetX)
+    /// the LayerDef optional offset, so you should probably prefer using
+    /// __pxTotalOffsetX which contains the total offset value)
     /// </summary>
     public int PxOffsetX { get; set; }
 
     /// <summary>
     /// Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
-    /// the LayerDef optional offset, see __pxTotalOffsetY)
+    /// the LayerDef optional offset, so you should probably prefer using
+    /// __pxTotalOffsetX which contains the total offset value)
     /// </summary>
     public int PxOffsetY { get; set; }
 
@@ -1586,6 +1610,12 @@ public partial class LDtkWorld
     /// space). Possible values: Free, GridVania, LinearHorizontal, LinearVertical, null
     /// </summary>
     public WorldLayout? WorldLayout { get; set; }
+}
+
+public partial class LdtkTableOfContentEntry
+{
+    public string Identifier { get; set; }
+    public EntityRef[] Instances { get; set; }
 }
 
 /// <summary>
