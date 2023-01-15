@@ -64,27 +64,22 @@ public partial class LDtkFile
     {
         foreach (LDtkWorld world in Worlds)
         {
-            if (world.Iid == iid)
+            if (world.Iid != iid)
             {
-                world.FilePath = FilePath;
-                if (world.Levels != null)
-                {
-                    foreach (LDtkLevel level in world.Levels)
-                    {
-                        if (level.ExternalRelPath != null)
-                        {
-                            level.FilePath = Path.Join(Path.GetDirectoryName(FilePath), level.ExternalRelPath);
-                        }
-                        else
-                        {
-                            level.FilePath = FilePath;
-                        }
-                    }
-                }
-
-                world.Content = Content;
-                return world;
+                continue;
             }
+            world.FilePath = FilePath;
+            foreach (LDtkLevel level in world.Levels)
+            {
+                if (level.ExternalRelPath != null)
+                {
+                    level.FilePath = Path.Join(Path.GetDirectoryName(FilePath), level.ExternalRelPath);
+                }
+                level.WorldFilePath = world.FilePath;
+            }
+
+            world.Content = Content;
+            return world;
         }
         return null;
     }

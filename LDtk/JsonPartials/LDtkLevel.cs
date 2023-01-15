@@ -16,6 +16,9 @@ public partial class LDtkLevel
     /// <summary> The absolute filepath to the level </summary>
     [JsonIgnore] public string FilePath { get; set; }
 
+    /// <summary> The absolute filepath to the world </summary>
+    [JsonIgnore] public string WorldFilePath { get; set; }
+
     /// <summary> World Position of the level in pixels </summary>
     [JsonIgnore] public Point Position => new(WorldX, WorldY);
 

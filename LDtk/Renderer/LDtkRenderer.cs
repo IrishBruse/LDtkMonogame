@@ -112,7 +112,6 @@ public class LDtkRenderer
                     SpriteEffects mirror = (SpriteEffects)tile.F;
                     SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                 }
-
                 break;
 
                 case LayerType.AutoLayer:
@@ -127,7 +126,6 @@ public class LDtkRenderer
                         SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                     }
                 }
-
                 break;
 
                 case LayerType.Entities:
@@ -163,8 +161,9 @@ public class LDtkRenderer
         {
             if (!string.IsNullOrWhiteSpace(level.FilePath))
             {
-                string filePath = Path.GetDirectoryName(level.FilePath);
-                return Texture2D.FromFile(graphicsDevice, Path.GetFullPath(Path.Combine(filePath, "../", path)));
+                string filePath = Path.GetDirectoryName(level.WorldFilePath);
+                string absolutePath = Path.GetFullPath(Path.Combine(filePath, path));
+                return Texture2D.FromFile(graphicsDevice, absolutePath);
             }
             return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
         }
