@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../LDtk/LDtk.csproj" />
-        <ProjectReference Include="../LDtk.ContentPipeline/LDtk.ContentPipeline.csproj" />
+        <ProjectReference Include="../../LDtk/LDtk.csproj" />
+        <ProjectReference Include="../../LDtk.ContentPipeline/LDtk.ContentPipeline.csproj" />
     </ItemGroup>
 
 </Project>

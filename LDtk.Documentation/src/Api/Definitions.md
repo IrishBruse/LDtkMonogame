@@ -12,10 +12,53 @@ A structure containing all the definitions of this project
 
 ## Properties
 
-- types **LDtk.Definitions.Entities**
-- types **LDtk.Definitions.Enums**
-- types **LDtk.Definitions.ExternalEnums**
-- types **LDtk.Definitions.Layers**
-- types **LDtk.Definitions.LevelFields**
-- types **LDtk.Definitions.Tilesets**
+  
+All entities definitions, including their custom fields  
+
+
+```csharp
+public EntityDefinition[] Entities { get; set; }
+```
+
+  
+All internal enums  
+
+
+```csharp
+public EnumDefinition[] Enums { get; set; }
+```
+
+  
+Note: external enums are exactly the same as enums, except they have a relPath to  
+point to an external source file.  
+
+
+```csharp
+public EnumDefinition[] ExternalEnums { get; set; }
+```
+
+  
+All layer definitions  
+
+
+```csharp
+public LayerDefinition[] Layers { get; set; }
+```
+
+  
+All custom fields available to all levels.  
+
+
+```csharp
+public FieldDefinition[] LevelFields { get; set; }
+```
+
+  
+All tilesets  
+
+
+```csharp
+public TilesetDefinition[] Tilesets { get; set; }
+```
+
 

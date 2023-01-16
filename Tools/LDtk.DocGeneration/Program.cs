@@ -2,18 +2,26 @@ namespace DocGenerator;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml;
 
+using LDtk;
+using LDtk.ContentPipeline;
+using LDtk.Renderer;
+
 public class Program
 {
+    private LDtkFile f;
+    private LDtkRenderer r;
+    private LDtkFileReader l;
 
-    private const string XMLDocPath = "../../LDtk/bin/Debug/net6.0/LDtkMonogame.xml";
+    private const string XMLDocPath = "./bin/Debug/net6.0/LDtkMonogame.xml";
     private const string SummaryTemplatePath = "../../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
-
+    private const string ApiFolder = "../../LDtk.Documentation/src/Api/";
     private static HashSet<string> excludedFiles = new(){
         "LDtkFileReader",
         "LDtkLevelReader",
@@ -22,59 +30,50 @@ public class Program
         "LDtkFieldParser",
     };
 
+    private static Dictionary<string, TypeDocs> docs = new();
+    private static Dictionary<string, Type> types = new();
     public static void Main()
     {
-        ParseDocumentation();
-    }
+        DeleteApiFolder();
 
-    private static void ParseDocumentation()
-    {
-        Dictionary<string, Type> types = new();
+        GenerateTypes();
 
-        foreach (AssemblyName assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
-        {
-            if (assemblyName.Name != "LDtkMonogame")
-            {
-                continue;
-            }
-
-            Assembly assembly = Assembly.Load(assemblyName);
-            foreach (Type type in assembly.GetTypes())
-            {
-                types.Add(type.FullName, type);
-            }
-        }
-
-        try
-        {
-            Directory.Delete("../../LDtk.Documentation/src/Api/", true);
-        }
-        catch (Exception)
-        {
-        }
-
-        _ = Directory.CreateDirectory("../../LDtk.Documentation/src/Api/");
-
-        XmlDocument doc = new();
+        XmlDocument xmlCommentsDocument = new();
 
         string text = File.ReadAllText(XMLDocPath);
 
-        doc.LoadXml(text);
+        xmlCommentsDocument.LoadXml(text);
 
-        XmlNodeList list = doc.DocumentElement.SelectSingleNode("/doc/members").ChildNodes;
+        XmlNodeList list = xmlCommentsDocument.DocumentElement.SelectSingleNode("/doc/members").ChildNodes;
 
-        Dictionary<string, TypeDocs> docs = new();
+        string[] commentlessTypes = {
+            "EnumDefinition",
+            "EnumValueDefinition",
+            "LayerDefinition",
+            "LayerInstance",
+            "LdtkCustomCommand",
+            "EntityDefinition",
+            "EntityInstance",
+            "FieldInstance",
+        };
+
+        foreach (string item in commentlessTypes)
+        {
+            docs.Add(item, new TypeDocs(item, item));
+        }
 
         foreach (XmlNode node in list)
         {
             string[] parts = node.Attributes[0].InnerText.Split(":");
             string data = parts[1];
 
+            data = RemoveNamespace(data);
+
             switch (parts[0])
             {
                 case "T":
                 {
-                    string type = data.Split(".")[^1];
+                    string type = data.Split(".")[0];
                     if (excludedFiles.Contains(type))
                     {
                         continue;
@@ -84,158 +83,37 @@ public class Program
                 break;
 
                 case "P":
-                {
-                    string type = data.Split(".")[^2];
-                    if (excludedFiles.Contains(type))
-                    {
-                        continue;
-                    }
-                    string property = data.Split(".")[^1];
-
-                    string key = data[0..data.LastIndexOf(".", StringComparison.CurrentCulture)];
-
-                    if (!docs.TryGetValue(type, out TypeDocs val))
-                    {
-                        Console.WriteLine(data);
-                        break;
-                    }
-
-                    if (!types.TryGetValue(key, out Type t))
-                    {
-                        val.Properties.Add($"- types **{data}**");
-                        break;
-                    }
-
-                    PropertyInfo ty = t.GetProperty(property, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
-                    if (ty != null)
-                    {
-                        string returnType = ProcessReturnType(ty.PropertyType, false);
-                        val.Properties.Add($"{ToMarkdownText(node.FirstChild.InnerText)}\n```csharp\npublic {returnType} {property} {{ get; set; }}\n```\n");
-                    }
-                    else
-                    {
-                        val.Properties.Add($"- else **{data}**");
-                    }
-                }
+                Process(node.FirstChild.InnerText, data, false, false);
                 break;
 
                 case "F":
-                {
-                    string type = data.Split(".")[^2];
-                    if (excludedFiles.Contains(type))
-                    {
-                        continue;
-                    }
-
-                    string field = data.Split(".")[^1];
-
-                    string key = data[0..data.LastIndexOf(".", StringComparison.CurrentCulture)];
-
-                    if (!docs.TryGetValue(type, out TypeDocs val))
-                    {
-                        Console.WriteLine(data);
-                        break;
-                    }
-
-                    if (!types.TryGetValue(key, out Type t))
-                    {
-                        val.Fields.Add($"- types **{data}**");
-                        break;
-                    }
-
-                    FieldInfo ty = t.GetField(field, BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
-                    if (ty != null)
-                    {
-                        string returnType = ProcessReturnType(ty.FieldType, ty.IsStatic);
-                        val.Fields.Add($"{ToMarkdownText(node.FirstChild.InnerText)}\n```csharp\npublic {returnType} {field} {{ get; set; }}\n```\n");
-                    }
-                    else
-                    {
-                        val.Fields.Add($"- else **{data}**");
-                    }
-                }
+                Process(node.FirstChild.InnerText, data, true, false);
                 break;
 
                 case "M":
-                {
-                    string[] memberParts = data.Split("(");
-                    string memeberData = memberParts[0];
-
-                    string[] parameters;
-
-                    if (memberParts.Length > 1)
-                    {
-                        parameters = memberParts[1][..^1].Split(",");
-                        for (int i = 0; i < parameters.Length; i++)
-                        {
-                            parameters[i] = parameters[i].Split(".")[^1];
-                        }
-                    }
-                    else
-                    {
-                        parameters = Array.Empty<string>();
-                    }
-
-                    string type = memeberData.Split(".")[^2];
-                    if (excludedFiles.Contains(type))
-                    {
-                        continue;
-                    }
-                    string field = memeberData.Split(".")[^1];
-
-                    string key = memeberData[0..memeberData.LastIndexOf(".", StringComparison.CurrentCulture)];
-
-                    if (!docs.TryGetValue(type, out TypeDocs val))
-                    {
-                        Console.WriteLine(data);
-                        break;
-                    }
-
-                    if (!types.TryGetValue(key, out Type t))
-                    {
-                        val.Methods.Add($"- types **{memeberData}**");
-                        break;
-                    }
-
-                    if (field.EndsWith("#ctor", StringComparison.CurrentCulture))
-                    {
-                        val.Methods.Add($"{ToMarkdownText(node.FirstChild.InnerText)}\n```csharp\npublic {type}({string.Join(",", parameters)})\n```\n");
-                        break;
-                    }
-
-                    MethodInfo ty = t.GetMethod(data, BindingFlags.Instance | BindingFlags.OptionalParamBinding | BindingFlags.CreateInstance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-                    MethodInfo[] tys = t.GetMethods(BindingFlags.Instance | BindingFlags.OptionalParamBinding | BindingFlags.CreateInstance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-
-                    // TODO fix this
-                    MethodInfo method = tys.Where(m => m.Name == field).FirstOrDefault();
-
-                    if (ty != null)
-                    {
-                        string returnType = ProcessReturnType(ty.ReturnType, ty.IsStatic);
-                        val.Methods.Add($"{ToMarkdownText(node.FirstChild.InnerText)}\n```csharp\npublic {returnType} {field}({string.Join(",", parameters)});\n```\n");
-                    }
-                    else if (method != null)
-                    {
-                        string returnType = ProcessReturnType(method.ReturnType, method.IsStatic);
-                        ParameterInfo[] ps = method.GetParameters();
-                        IEnumerable<string> methodParams = ps.Select((p) => ProcessTypeName(p.ParameterType.Name.ToString()) + " " + p.Name);
-                        val.Methods.Add($"{ToMarkdownText(node.FirstChild.InnerText)}\n```csharp\npublic {returnType} {field}({string.Join(", ", methodParams)});\n```\n");
-                    }
-                    else
-                    {
-                        val.Methods.Add($"- else **{memeberData}**");
-                    }
-                }
-                break;
-
-                default:
-                Console.WriteLine(data);
+                Process(node.FirstChild.InnerText, data, false, true);
                 break;
             }
         }
 
-        foreach (TypeDocs item in docs.Values)
+        List<TypeDocs> items = docs.Values.ToList();
+        items.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.Ordinal));
+
+        using StreamWriter indexFileWriter = File.CreateText(ApiFolder + "index.md");
+
+        indexFileWriter.WriteLine("# APi");
+        indexFileWriter.WriteLine();
+        indexFileWriter.WriteLine("The docs inside api are auto generated  ");
+        indexFileWriter.WriteLine("This is the list of classes in LDtkMonogame  ");
+        indexFileWriter.WriteLine();
+
+        StringBuilder output = new();
+
+        foreach (TypeDocs item in items)
         {
+            indexFileWriter.WriteLine($"  - [{item.Name}](./{item.Name}.md)");
+            _ = output.AppendLine($"  - [{item.Name}](./Api/{item.Name}.md)");
+
             string txt
             = $"# {item.Name}\n"
             + $"\n"
@@ -269,72 +147,184 @@ public class Program
                 + $"\n";
             }
 
-            string path = "../../LDtk.Documentation/src/Api/" + item.Name + ".md";
-
-            Console.WriteLine(item.Name);
-            Console.WriteLine(path);
+            string path = ApiFolder + item.Name + ".md";
 
             File.AppendAllText(path, txt);
         }
 
-        using StreamWriter indexFileWriter = File.CreateText("../../LDtk.Documentation/src/Api/index.md");
-
-        indexFileWriter.WriteLine("# APi");
-        indexFileWriter.WriteLine();
-        indexFileWriter.WriteLine("The docs inside api are auto generated  ");
-        indexFileWriter.WriteLine("This is the list of classes in LDtkMonogame  ");
-        indexFileWriter.WriteLine();
-
         string summaryTemplate = File.ReadAllText(SummaryTemplatePath);
-
-        StringBuilder output = new();
-        foreach (string item in docs.Keys)
-        {
-            indexFileWriter.WriteLine($"  - [{item}](./{item}.md)");
-            _ = output.AppendLine($"  - [{item}](./Api/{item}.md)");
-        }
-
         summaryTemplate = summaryTemplate.Replace("API_REPLACE", output.ToString());
-
         File.WriteAllText(SummaryTemplatePath.Replace("_TEMPLATE", ""), summaryTemplate);
-
     }
 
-    private static string ProcessReturnType(Type declType, bool isStatic)
+    private static void GenerateTypes()
     {
-        string returnType;
-        if (isStatic)
+        foreach (AssemblyName assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
         {
-            returnType = "static " + ProcessTypeName(declType.Name);
+            if (assemblyName.Name != "LDtkMonogame")
+            {
+                continue;
+            }
+
+            Assembly assembly = Assembly.Load(assemblyName);
+            foreach (Type type in assembly.GetTypes())
+            {
+                types.Add(type.Name, type);
+            }
         }
-        else if (declType.Name.StartsWith("Nullable", StringComparison.CurrentCulture))
+    }
+
+    private static void Process(string description, string data, bool isField, bool isMethod)
+    {
+        string[] variableParts = data.Split(".");
+
+        if (!docs.TryGetValue(variableParts[0], out TypeDocs doc))
         {
-            returnType = ProcessTypeName(declType.GenericTypeArguments[0].Name) + "?";
+            Console.WriteLine("notFound: " + variableParts[0]);
+            return;
         }
-        else if (declType.Name.StartsWith("IEnumerable", StringComparison.CurrentCulture))
+
+        StringBuilder markdown = new();
+        _ = markdown.AppendLine(ToMarkdownText(description));
+        _ = markdown.AppendLine();
+        _ = markdown.AppendLine("```csharp");
+        if (isField)
         {
-            returnType = "IEnumerable<" + ProcessTypeName(declType.GenericTypeArguments[0].Name) + ">";
+            _ = markdown.AppendLine(ProcessField(data));
+        }
+        else if (isMethod)
+        {
+            _ = markdown.AppendLine(ProcessMethod(data));
         }
         else
         {
-            returnType = ProcessTypeName(declType.Name);
+            _ = markdown.AppendLine(ProcessProperty(data));
+        }
+        _ = markdown.AppendLine("```");
+
+        if (isField)
+        {
+            doc.Fields.Add(markdown.ToString());
+        }
+        else if (isMethod)
+        {
+            doc.Methods.Add(markdown.ToString());
+        }
+        else
+        {
+            doc.Properties.Add(markdown.ToString());
+        }
+    }
+
+    private static string ProcessField(string data)
+    {
+        string[] variableParts = data.Split(".");
+
+        if (!types.TryGetValue(variableParts[0], out Type t))
+        {
+            return "Could not find type " + variableParts[0];
         }
 
-        return returnType;
+        FieldInfo ty = t.GetField(variableParts[1], BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public);
+        return $"public {RemoveNamespaceFromType(ty.FieldType.ToString())} {ty.Name};";
     }
 
-    private static string ProcessMethod(string input, string type)
+    private static string ProcessProperty(string data)
     {
-        return input.Replace("``1", "<T>");
+        string[] variableParts = data.Split(".");
+
+        if (!types.TryGetValue(variableParts[0], out Type t))
+        {
+            return "Could not find type " + variableParts[0];
+        }
+
+        PropertyInfo ty = t.GetProperty(variableParts[1], BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+
+        if (ty == null)
+        {
+            return data;
+        }
+        else
+        {
+            return $"public {RemoveNamespaceFromType(ty.PropertyType.ToString())} {ty.Name} {{ get; set; }}";
+        }
     }
 
+    private static string ProcessMethod(string data)
+    {
+        string[] methodParts = data.Split("(");
+        string[] variableParts = methodParts[0][..^1].Split(".");
+
+        if (!types.TryGetValue(variableParts[0], out Type t))
+        {
+            return "Could not find type " + variableParts[0];
+        }
+
+        MethodInfo ty = t
+            .GetMethods(BindingFlags.Instance | BindingFlags.OptionalParamBinding | BindingFlags.CreateInstance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+            .Where(m => methodParts[0].Replace("``1", "")
+            .EndsWith(m.Name, StringComparison.CurrentCulture))
+            .FirstOrDefault();
+
+        if (ty == null)
+        {
+            return data;
+        }
+        else
+        {
+            string parametersTemplate = methodParts.Length > 1 ? methodParts[1][..^1] : "";
+
+            string[] parameters = parametersTemplate.Split(",");
+
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                parameters[i] = RemoveNamespaceFromType(parameters[i]);
+            }
+
+            string genericT = methodParts[0].Contains("``1") ? "<T>" : string.Empty;
+            return $"public {RemoveNamespaceFromType(ty.ReturnType.ToString())} {ty.Name}{genericT}({string.Join(",", parameters).Replace("``0,", "")})";
+        }
+    }
+
+    private static string RemoveNamespace(string data)
+    {
+        return data.Replace("LDtk.Renderer.", "").Replace("LDtk.ContentPipeline.", "").Replace("LDtk.", "");
+    }
+
+    private static string RemoveNamespaceFromType(string data)
+    {
+        if (data.StartsWith("System.Nullable", StringComparison.CurrentCulture))
+        {
+            string[] nullableType = data.Split("[");
+            return ProcessTypeName(nullableType[1][..^1].Split(".")[^1]) + "?";
+        }
+        else
+        {
+            return ProcessTypeName(data.Split(".")[^1]);
+        }
+    }
     private static string ProcessTypeName(string input)
     {
         return input
         .Replace("Boolean", "bool")
         .Replace("Int32", "int")
         .Replace("Single", "float")
+        .Replace("Object", "object")
+        .Replace("Void", "void")
         .Replace("String", "string");
+    }
+
+    private static void DeleteApiFolder()
+    {
+        try
+        {
+            Directory.Delete(ApiFolder, true);
+        }
+        catch (Exception)
+        {
+        }
+
+        _ = Directory.CreateDirectory(ApiFolder);
     }
 
     private static string ToMarkdownText(string input)
@@ -349,6 +339,7 @@ public class Program
     }
 }
 
+[DebuggerDisplay("{Name}: {Description}")]
 public class TypeDocs
 {
     public string Name { get; set; }

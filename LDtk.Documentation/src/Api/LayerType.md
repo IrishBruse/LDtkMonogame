@@ -4,8 +4,28 @@ The Type of layer
 
 ## Fields
 
-- types **LDtk.LayerType.Entities**
-- types **LDtk.LayerType.IntGrid**
-- types **LDtk.LayerType.Tiles**
-- types **LDtk.LayerType.AutoLayer**
+Entities Layer
+
+```csharp
+public LayerType Entities;
+```
+
+IntGrid Layer
+
+```csharp
+public LayerType IntGrid;
+```
+
+Tiles Layer
+
+```csharp
+public LayerType Tiles;
+```
+
+AutoLayer Layer
+
+```csharp
+public LayerType AutoLayer;
+```
+
 

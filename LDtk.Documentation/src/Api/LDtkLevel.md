@@ -13,37 +13,229 @@ containing exactly what is described below.
 
 ## Methods
 
-- types **LDtk.LDtkLevel.#ctor**
-- types **LDtk.LDtkLevel.FromFile**
-- types **LDtk.LDtkLevel.FromFile**
-- types **LDtk.LDtkLevel.GetIntGrid**
-- types **LDtk.LDtkLevel.GetCustomFields``1**
-- types **LDtk.LDtkLevel.GetEntity``1**
-- types **LDtk.LDtkLevel.GetEntityRef``1**
-- types **LDtk.LDtkLevel.GetEntities``1**
-- types **LDtk.LDtkLevel.Contains**
-- types **LDtk.LDtkLevel.Contains**
+Used by json deserializer not for use by user!
+
+```csharp
+LDtkLevel.#ctor
+```
+
+Loads the ldtk world file from disk directly
+
+```csharp
+public LDtkLevel FromFile(string)
+```
+
+Loads the ldtk world file from disk directly
+
+```csharp
+public LDtkLevel FromFile(string,ContentManager)
+```
+
+Gets an intgrid with the  in a
+
+```csharp
+public LDtkIntGrid GetIntGrid(string)
+```
+
+Gets the custom fields of the level
+
+```csharp
+public T GetCustomFields<T>()
+```
+
+Gets one entity of type T in the current level best used with 1 per level constraint
+
+```csharp
+public T GetEntity<T>()
+```
+
+Gets an entity from an  converted to
+
+```csharp
+public T GetEntityRef<T>(EntityRef)
+```
+
+Gets an array of entities of type  in the current level
+
+```csharp
+public T[] GetEntities<T>()
+```
+
+Check if point is inside of a level
+
+```csharp
+public bool Contains(Vector2)
+```
+
+Check if point is inside of a level
+
+```csharp
+public bool Contains(Point)
+```
+
 
 ## Properties
 
-- types **LDtk.LDtkLevel.FilePath**
-- types **LDtk.LDtkLevel.WorldFilePath**
-- types **LDtk.LDtkLevel.Position**
-- types **LDtk.LDtkLevel.Size**
-- types **LDtk.LDtkLevel.Loaded**
-- types **LDtk.LDtkLevel._BgColor**
-- types **LDtk.LDtkLevel._BgPos**
-- types **LDtk.LDtkLevel._Neighbours**
-- types **LDtk.LDtkLevel.BgRelPath**
-- types **LDtk.LDtkLevel.ExternalRelPath**
-- types **LDtk.LDtkLevel.FieldInstances**
-- types **LDtk.LDtkLevel.Identifier**
-- types **LDtk.LDtkLevel.Iid**
-- types **LDtk.LDtkLevel.LayerInstances**
-- types **LDtk.LDtkLevel.PxHei**
-- types **LDtk.LDtkLevel.PxWid**
-- types **LDtk.LDtkLevel.Uid**
-- types **LDtk.LDtkLevel.WorldDepth**
-- types **LDtk.LDtkLevel.WorldX**
-- types **LDtk.LDtkLevel.WorldY**
+The absolute filepath to the level
+
+```csharp
+public string FilePath { get; set; }
+```
+
+The absolute filepath to the world
+
+```csharp
+public string WorldFilePath { get; set; }
+```
+
+World Position of the level in pixels
+
+```csharp
+public Point Position { get; set; }
+```
+
+World size of the level in pixels
+
+```csharp
+public Point Size { get; set; }
+```
+
+Has the file been loaded if the level is external
+
+```csharp
+public bool Loaded { get; set; }
+```
+
+  
+Background color of the level (same as bgColor, except the default value is  
+automatically used here if its value is null)  
+
+
+```csharp
+public string _BgColor { get; set; }
+```
+
+  
+Position informations of the background image, if there is one.  
+
+
+```csharp
+public LevelBackgroundPosition _BgPos { get; set; }
+```
+
+  
+An array listing all other levels touching this one on the world map. Only relevant  
+for world layouts where level spatial positioning is manual (ie. GridVania, Free). For  
+Horizontal and Vertical layouts, this array is always empty.  
+
+
+```csharp
+public NeighbourLevel[] _Neighbours { get; set; }
+```
+
+  
+The optional relative path to the level background image.  
+
+
+```csharp
+public string BgRelPath { get; set; }
+```
+
+  
+This value is not null if the project option "Save levels separately" is enabled. In  
+this case, this relative path points to the level Json file.  
+
+
+```csharp
+public string ExternalRelPath { get; set; }
+```
+
+  
+An array containing this level custom field values.  
+
+
+```csharp
+public FieldInstance[] FieldInstances { get; set; }
+```
+
+  
+User defined unique identifier  
+
+
+```csharp
+public string Identifier { get; set; }
+```
+
+  
+Unique instance identifier  
+
+
+```csharp
+public Guid Iid { get; set; }
+```
+
+  
+An array containing all Layer instances. IMPORTANT: if the project option "Save  
+levels separately" is enabled, this field will be null. This array is sorted  
+in display order: the 1st layer is the top-most and the last is behind.  
+
+
+```csharp
+public LayerInstance[] LayerInstances { get; set; }
+```
+
+  
+Height of the level in pixels  
+
+
+```csharp
+public int PxHei { get; set; }
+```
+
+  
+Width of the level in pixels  
+
+
+```csharp
+public int PxWid { get; set; }
+```
+
+  
+Unique Int identifier  
+
+
+```csharp
+public int Uid { get; set; }
+```
+
+  
+Index that represents the "depth" of the level in the world. Default is 0, greater means  
+"above", lower means "below". This value is mostly used for display only and is  
+intended to make stacking of levels easier to manage.  
+
+
+```csharp
+public int WorldDepth { get; set; }
+```
+
+  
+World X coordinate in pixels. Only relevant for world layouts where level spatial  
+positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the  
+value is always -1 here.  
+
+
+```csharp
+public int WorldX { get; set; }
+```
+
+  
+World Y coordinate in pixels. Only relevant for world layouts where level spatial  
+positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the  
+value is always -1 here.  
+
+
+```csharp
+public int WorldY { get; set; }
+```
+
 

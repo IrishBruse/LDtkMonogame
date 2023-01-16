@@ -6,6 +6,20 @@ Generic LDtk Exception
 
 ## Methods
 
-- types **LDtk.LDtkException.#ctor**
-- types **LDtk.LDtkException.#ctor**
+  
+Generic LDtk Exception  
+
+
+```csharp
+LDtkException.#ctor
+```
+
+  
+Generic LDtk Exception  
+
+
+```csharp
+LDtkException.#ctor(System.String)
+```
+
 

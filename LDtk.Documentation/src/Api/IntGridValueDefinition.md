@@ -6,6 +6,20 @@ IntGrid value definition
 
 ## Properties
 
-- types **LDtk.IntGridValueDefinition.Identifier**
-- types **LDtk.IntGridValueDefinition.Value**
+  
+User defined unique identifier  
+
+
+```csharp
+public string Identifier { get; set; }
+```
+
+  
+The IntGrid value itself  
+
+
+```csharp
+public int Value { get; set; }
+```
+
 

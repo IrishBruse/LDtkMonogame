@@ -6,6 +6,20 @@ IntGrid value instance
 
 ## Properties
 
-- types **LDtk.IntGridValueInstance.CoordId**
-- types **LDtk.IntGridValueInstance.V**
+  
+Coordinate ID in the layer grid  
+
+
+```csharp
+public int CoordId { get; set; }
+```
+
+  
+IntGrid value  
+
+
+```csharp
+public int V { get; set; }
+```
+
 

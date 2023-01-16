@@ -4,5 +4,10 @@ The level struct containting the rendered out textures
 
 ## Properties
 
-- types **LDtk.Renderer.RenderedLevel.Layers**
+The layers of the level in order
+
+```csharp
+public Texture2D[] Layers { get; set; }
+```
+
 

@@ -8,19 +8,79 @@ this one is mostly here to get you up and running quickly.
 
 ## Methods
 
-- types **LDtk.Renderer.LDtkRenderer.#ctor**
-- types **LDtk.Renderer.LDtkRenderer.#ctor**
-- types **LDtk.Renderer.LDtkRenderer.PrerenderLevel**
-- types **LDtk.Renderer.LDtkRenderer.RenderPrerenderedLevel**
-- types **LDtk.Renderer.LDtkRenderer.RenderLevel**
-- types **LDtk.Renderer.LDtkRenderer.RenderIntGrid**
-- types **LDtk.Renderer.LDtkRenderer.RenderEntity``1**
-- types **LDtk.Renderer.LDtkRenderer.RenderEntity``1**
-- types **LDtk.Renderer.LDtkRenderer.RenderEntity``1**
-- types **LDtk.Renderer.LDtkRenderer.RenderEntity``1**
+This is used to intizialize the renderer for use with direct file loading
+
+```csharp
+LDtkRenderer.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+```
+
+This is used to intizialize the renderer for use with content Pipeline
+
+```csharp
+LDtkRenderer.#ctor(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Content.ContentManager)
+```
+
+Prerender out the level to textures to optimize the rendering process
+
+```csharp
+public void PrerenderLevel(LDtkLevel)
+```
+
+Render the prerendered level you created from PrerenderLevel()
+
+```csharp
+public void RenderPrerenderedLevel(LDtkLevel)
+```
+
+Render the level directly without prerendering the layers alot slower than prerendering
+
+```csharp
+public void RenderLevel(LDtkLevel)
+```
+
+Render intgrids by displaying the intgrid as solidcolor squares
+
+```csharp
+public void RenderIntGrid(LDtkIntGrid)
+```
+
+Renders the entity with the tile it includes
+
+```csharp
+public void RenderEntity<T>(Texture2D)
+```
+
+Renders the entity with the tile it includes
+
+```csharp
+public void RenderEntity<T>(Texture2D,SpriteEffects)
+```
+
+Renders the entity with the tile it includes
+
+```csharp
+public void RenderEntity<T>(Texture2D,int)
+```
+
+Renders the entity with the tile it includes
+
+```csharp
+public void RenderEntity<T>(Texture2D,SpriteEffects,int)
+```
+
 
 ## Properties
 
-- types **LDtk.Renderer.LDtkRenderer.SpriteBatch**
-- types **LDtk.Renderer.LDtkRenderer.PrerenderedLevels**
+The spritebatch used for rendering with this Renderer
+
+```csharp
+public SpriteBatch SpriteBatch { get; set; }
+```
+
+The levels identifier to layers Dictionary
+
+```csharp
+public RenderedLevel] PrerenderedLevels { get; set; }
+```
+
 
