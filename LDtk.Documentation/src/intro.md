@@ -1,9 +1,6 @@
-<h1 align="center">
-    <a href="https://irishbruse.github.io/LDtkMonogame/">LDtkMonogame Wiki</a><br/>
-    <a href="https://ldtk.io/go/discord">
-        <img alt="Discord" src="https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord">
-    </a>
-</h1>
+# [LDtkMonogame Wiki](https://irishbruse.github.io/LDtkMonogame/)
+
+ [![Discord Link](https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord)](https://ldtk.io/go/discord)
 
 > Monogame renderer and importer for LDtk Level editor
 
