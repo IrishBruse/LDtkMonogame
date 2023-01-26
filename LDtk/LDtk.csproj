@@ -16,13 +16,13 @@
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame</PackageId>
         <Description>LDtk importer for Monogame</Description>
-        <PackageProjectUrl>https://irishbruse.github.io/LDtkMonogame/</PackageProjectUrl>
+        <PackageProjectUrl>https://irishbruse.github.io/ldtk/</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>https://irishbruse.github.io/LDtkMonogame/</PackageReleaseNotes>
+        <PackageReleaseNotes>https://irishbruse.github.io/ldtk/</PackageReleaseNotes>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
