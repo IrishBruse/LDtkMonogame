@@ -2,8 +2,9 @@
 #pragma warning disable
 namespace LDtkTypes;
 
-using Microsoft.Xna.Framework;
 using LDtk;
+
+using Microsoft.Xna.Framework;
 
 public class LDtkLevelData
 {
