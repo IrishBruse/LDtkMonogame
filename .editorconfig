@@ -1,4 +1,4 @@
-root = true
+﻿root = true
 
 [*] # All files
 indent_style = space
@@ -10,6 +10,24 @@ insert_final_newline = true
 [*.cs] # C# files
 dotnet_analyzer_diagnostic.severity = warning # Default Severity for all .NET Code Style rules below
 file_header_template = unset
+
+dotnet_diagnostic.CA1305.severity = refactoring
+dotnet_diagnostic.IDE0010.severity = none
+dotnet_diagnostic.IDE0072.severity = none
+dotnet_diagnostic.IDE0045.severity = warning
+dotnet_diagnostic.IDE0053.severity = none
+dotnet_diagnostic.IDE0022.severity = refactoring
+dotnet_diagnostic.IDE0046.severity = warning
+dotnet_diagnostic.IDE0051.severity = none # Remove unused private member
+dotnet_diagnostic.IDE0058.severity = refactoring
+dotnet_diagnostic.IDE0059.severity = suggestion
+dotnet_diagnostic.IDE0078.severity = none
+dotnet_diagnostic.IDE0058.severity = none # Discard variable _ =
+dotnet_diagnostic.IDE0063.severity = warning
+dotnet_diagnostic.IDE0130.severity = warning
+dotnet_diagnostic.CA1310.severity = none # string local/culture ignored
+dotnet_diagnostic.CA1304.severity = none # string local/culture ignored
+dotnet_diagnostic.CA1822.severity = none # Disable convert function to static
 
 csharp_indent_block_contents = true # Indentation preferences
 csharp_indent_braces = false
@@ -60,7 +78,7 @@ csharp_style_expression_bodied_constructors = false:warning
 csharp_style_expression_bodied_indexers = true:warning
 csharp_style_expression_bodied_lambdas = true:warning
 csharp_style_expression_bodied_local_functions = false:warning
-csharp_style_expression_bodied_methods = false
+csharp_style_expression_bodied_methods = false:refactoring
 csharp_style_expression_bodied_operators = false:warning
 csharp_style_expression_bodied_properties = true:warning
 csharp_style_implicit_object_creation_when_type_is_apparent = true:warning
@@ -83,22 +101,6 @@ csharp_style_var_for_built_in_types = false:warning
 csharp_style_var_when_type_is_apparent = false:warning
 csharp_using_directive_placement = inside_namespace:warning # 'using' directive preferences
 dotnet_code_quality_unused_parameters = all:warning # Parameter preferences
-dotnet_diagnostic.CA1822.severity = none # Disable convert function to static
-dotnet_diagnostic.CA1305.severity = none
-dotnet_diagnostic.CA1310.severity = warning
-dotnet_diagnostic.CS0649.severity = none
-dotnet_diagnostic.IDE0010.severity = none
-dotnet_diagnostic.IDE0072.severity = none
-dotnet_diagnostic.IDE0045.severity = warning
-dotnet_diagnostic.IDE0022.severity = refactoring
-dotnet_diagnostic.IDE0046.severity = warning
-dotnet_diagnostic.IDE0051.severity = none # Remove unused private member
-dotnet_diagnostic.IDE0058.severity = warning
-dotnet_diagnostic.IDE0059.severity = suggestion
-dotnet_diagnostic.IDE0078.severity = none
-dotnet_diagnostic.IDE0060.severity = none
-dotnet_diagnostic.IDE0063.severity = warning
-dotnet_diagnostic.IDE0130.severity = warning
 dotnet_remove_unnecessary_suppression_exclusions = none # Suppression preferences
 dotnet_separate_import_directive_groups = true # Organize usings
 dotnet_sort_system_directives_first = true
