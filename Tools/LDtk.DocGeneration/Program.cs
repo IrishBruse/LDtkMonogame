@@ -15,9 +15,11 @@ using LDtk.Renderer;
 
 public class Program
 {
+#pragma warning disable
     private LDtkFile f;
     private LDtkRenderer r;
     private LDtkFileReader l;
+#pragma warning restore
 
     private const string XMLDocPath = "./bin/Debug/net6.0/LDtkMonogame.xml";
     private const string SummaryTemplatePath = "../../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
@@ -112,39 +114,23 @@ public class Program
         foreach (TypeDocs item in items)
         {
             indexFileWriter.WriteLine($"  - [{item.Name}](./{item.Name}.md)");
-            _ = output.AppendLine($"  - [{item.Name}](./Api/{item.Name}.md)");
+            output.AppendLine($"  - [{item.Name}](./Api/{item.Name}.md)");
 
-            string txt
-            = $"# {item.Name}\n"
-            + $"\n"
-            + $"{ToMarkdownText(item.Description)}\n"
-            + $"\n";
+            string txt = $"# {item.Name}\n" + $"\n" + $"{ToMarkdownText(item.Description)}\n" + $"\n";
 
             if (item.Methods.Count > 0)
             {
-                txt
-                += $"## Methods\n"
-                + $"\n"
-                + $"{string.Join("\n", item.Methods)}\n"
-                + $"\n";
+                txt += $"## Methods\n" + $"\n" + $"{string.Join("\n", item.Methods)}\n" + $"\n";
             }
 
             if (item.Properties.Count > 0)
             {
-                txt
-                += $"## Properties\n"
-                + $"\n"
-                + $"{string.Join("\n", item.Properties)}\n"
-                + $"\n";
+                txt += $"## Properties\n" + $"\n" + $"{string.Join("\n", item.Properties)}\n" + $"\n";
             }
 
             if (item.Fields.Count > 0)
             {
-                txt
-                += $"## Fields\n"
-                + $"\n"
-                + $"{string.Join("\n", item.Fields)}\n"
-                + $"\n";
+                txt += $"## Fields\n" + $"\n" + $"{string.Join("\n", item.Fields)}\n" + $"\n";
             }
 
             string path = ApiFolder + item.Name + ".md";
@@ -185,22 +171,22 @@ public class Program
         }
 
         StringBuilder markdown = new();
-        _ = markdown.AppendLine(ToMarkdownText(description));
-        _ = markdown.AppendLine();
-        _ = markdown.AppendLine("```csharp");
+        markdown.AppendLine(ToMarkdownText(description));
+        markdown.AppendLine();
+        markdown.AppendLine("```csharp");
         if (isField)
         {
-            _ = markdown.AppendLine(ProcessField(data));
+            markdown.AppendLine(ProcessField(data));
         }
         else if (isMethod)
         {
-            _ = markdown.AppendLine(ProcessMethod(data));
+            markdown.AppendLine(ProcessMethod(data));
         }
         else
         {
-            _ = markdown.AppendLine(ProcessProperty(data));
+            markdown.AppendLine(ProcessProperty(data));
         }
-        _ = markdown.AppendLine("```");
+        markdown.AppendLine("```");
 
         if (isField)
         {
@@ -324,7 +310,7 @@ public class Program
         {
         }
 
-        _ = Directory.CreateDirectory(ApiFolder);
+        Directory.CreateDirectory(ApiFolder);
     }
 
     private static string ToMarkdownText(string input)
