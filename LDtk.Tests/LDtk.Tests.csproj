@@ -15,8 +15,8 @@
     </ItemGroup>
 
     <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i ./Files/TestApi/TestWorld.ldtk --FileNameInNamespace --PointAsVector2" />
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i ./Files/ExternalLevels/ExternalLevelsWorld.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="ldtkgen -i ./Files/TestApi/TestWorld.ldtk --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="ldtkgen -i ./Files/ExternalLevels/ExternalLevelsWorld.ldtk --FileNameInNamespace --PointAsVector2" />
     </Target>
 
     <ItemGroup>

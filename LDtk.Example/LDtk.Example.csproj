@@ -9,14 +9,8 @@
         <RootNamespace>LDtkMonogameExample</RootNamespace>
     </PropertyGroup>
 
-    <!-- This is how to automate the ldtkgen tool using nuget tool
     <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="ldtkgen -i Content/World.ldtk" />
-    </Target>
-    -->
-
-    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet ..\LDtk.Codegen\bin\Debug\net6.0\LDtk.Codegen.dll -- -i Content/World.ldtk --LevelClassName CustomLevelDataName --FileNameInNamespace --PointAsVector2" />
+        <Exec Command="ldtkgen -i Content/World.ldtk --LevelClassName CustomLevelDataName --FileNameInNamespace --PointAsVector2" />
     </Target>
 
     <ItemGroup>
