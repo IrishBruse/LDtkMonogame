@@ -1,189 +1,260 @@
 namespace QuickTypeGenerator;
 
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 
-public class Program
+public partial class Program
 {
-    public static void Main()
-    {
-        Run();
-    }
-
     private static readonly string MinimalFilePath = "../../LDtk/LDtkJson.cs";
     private static readonly string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
-    private static readonly string[] Usings = {
-        "using System;",
-        "using System.Text.Json.Serialization;",
-        "using Microsoft.Xna.Framework;",
-    };
+    private static readonly string Version = "1.3.3";
 
-    public static void Run()
+    public static void Main()
     {
-        Quicktype.Generate();
+        GenerateFile();
 
-        SourceFile sourceFile = new(false);
-        ProcessFile(sourceFile, Quicktype.MinimalFilePath);
-        sourceFile.Output(MinimalFilePath);
+        List<string> lines = File.ReadAllLines(MinimalFilePath).ToList();
+        ProcessFile(lines);
+        lines[0] = "// This file was auto generated, any changes will be lost. For LDtk " + Version + " \n" + lines[0];
+        lines[0] += "#pragma warning disable CS1591, IDE1006, CA1707, CA1716";
+        lines[1] += "using Microsoft.Xna.Framework;";
+        File.WriteAllLines(MinimalFilePath, lines);
 
-        sourceFile = new(true);
-        ProcessFile(sourceFile, Quicktype.FullFilePath);
-        sourceFile.Output(FullFilePath);
-    }
+        Format();
 
-    private static void InitializeFile(SourceFile file, string path)
-    {
-        file.Add("// This file was auto generated, any changes will be lost.");
-        file.Add("#pragma warning disable IDE1006, CA1711, CA1720, CA1707, CS1591, CA1716");
-        foreach (string use in Usings)
+        // Delete multiple blank lines in a row
+        lines = File.ReadAllLines(MinimalFilePath).ToList();
+
+        int blanks = 0;
+        for (int i = lines.Count - 1; i >= 0; i--)
         {
-            file.Add(use);
-        }
-        file.AddRange(File.ReadAllLines(path));
-        file.Add("#pragma warning restore");
-    }
-
-    private static void ProcessFile(SourceFile file, string path)
-    {
-        InitializeFile(file, path);
-
-        for (int i = file.Count - 1; i >= 0; i--)
-        {
-            file[i] = Regex.Replace(file[i], @"Aaaaaaaaaaaa", "_");
-
-            _ = TypeConversion(file, i);
-            _ = CleanupDocComments(file, i);
-
-            ForceLayerTypeToEnum(file, i);
-
-            if (!file.IsFull)
+            if (string.IsNullOrEmpty(lines[i]))
             {
-                _ = RemoveStuff(file, i);
+                blanks++;
+                if (blanks > 1)
+                {
+                    lines.RemoveAt(i);
+                }
             }
-
-            RemoveLineWithComment(file, i, "public enum TypeEnum");
-
-            RemoveLineWithComment(file, i, "_ForcedRefs _ForcedRefs");
-            RemoveClass(file, i, "_ForcedRefs");
-
-            if (file[i].EndsWith("///", System.StringComparison.InvariantCultureIgnoreCase))
+            else
             {
-                file.RemoveLine(i);
+                blanks = 0;
             }
         }
+
+        File.WriteAllLines(MinimalFilePath, lines);
+
+        File.AppendAllText(MinimalFilePath, "#pragma warning restore CS1591, IDE1006, CA1707, CA1716");
     }
 
-    private static void ForceLayerTypeToEnum(SourceFile file, int i)
+    private static void Format()
     {
-        // TODO ldtk/quicktype bug
-        // Make LayerType Type string variable into enum
-        if (file[i].Contains("IntGrid, Entities, Tiles or AutoLayer"))
+        Thread.Sleep(300);
+        Process.Start(new ProcessStartInfo
         {
-            file[i + 2] = file[i + 2].Replace("string", "LayerType");
-        }
+            FileName = "dotnet",
+            Arguments = "format ../../LDtk/",
+            UseShellExecute = false,
+            RedirectStandardOutput = false,
+            RedirectStandardError = false,
+            RedirectStandardInput = false,
+            CreateNoWindow = true
+        }).WaitForExit();
     }
 
-    private static void RemoveClass(SourceFile file, int i, string match)
+    private static void ProcessFile(List<string> lines)
     {
-        if (file[i].Contains("public partial class " + match))
+        bool end = false;
+
+        for (int i = 0; i < lines.Count; i++)
         {
-            RemoveLineWithComments(file, i);
-
-            int currentLine = i + 1;
-            file.RemoveLine(currentLine++);
-            int indent = 1;
-
-            // Remove class body
-            while (indent > 0)
+            if (end)
             {
-                indent += file[currentLine].Count(c => c == '{');
-                indent -= file[currentLine].Count(c => c == '}');
-                file.RemoveLine(currentLine++);
+                lines[i] = "";
+                continue;
+            }
+
+            if (
+                lines[i].TrimStart().EndsWith("public partial class ForcedRefs") ||
+                lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleDefinition") ||
+                lines[i].TrimStart().EndsWith("public partial class FieldDefinition")
+            )
+            {
+                DeleteDocComment(lines, i);
+                RemoveClassBody(lines, i);
+                continue;
+            }
+
+            if (lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleGroup"))
+            {
+                RemoveClassBody(lines, i);
+                continue;
+            }
+
+            if (lines[i].TrimStart().StartsWith("///"))
+            {
+                if (lines[i].EndsWith("///"))
+                {
+                    lines[i] += " <br/>";
+                    continue;
+                }
+                // Doc comment cleanup
+                lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
+                lines[i] = lines[i].Replace("&lt;", " &lt; ").Replace("&gt;", " &gt; ");
+
+                lines[i] = lines[i].Replace("`", "");
+                lines[i] = lines[i].Replace("*", "");
+                lines[i] = lines[i].Replace("IID", "Guid");
+                lines[i] = MyRegex().Replace(lines[i], "$1");
+
+                lines[i] = lines[i].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
+                continue;
+            }
+
+            if (lines[i].TrimStart().EndsWith("public partial class World"))
+            {
+                lines[i] = "public partial class LDtkWorld";
+                continue;
+            }
+
+            if (lines[i].TrimStart().EndsWith("public partial class Level"))
+            {
+                lines[i] = "public partial class LDtkLevel";
+                continue;
+            }
+
+            if (lines[i].TrimStart().StartsWith("public string _Type "))
+            {
+                if (lines[i - 3].Contains("IntGrid, Entities, Tiles or AutoLayer"))
+                {
+                    lines[i] = "public LayerType _Type { get; set; }";
+                    continue;
+                }
+            }
+
+            if (lines[i].Contains("JsonPropertyName"))
+            {
+                ProcessVariables(lines, i);
+            }
+
+#pragma warning disable SYSLIB1045
+            lines[i] = Regex.Replace(lines[i], "double", "float");
+            lines[i] = Regex.Replace(lines[i], "long", "int");
+
+            lines[i] = Regex.Replace(lines[i], "string Color", "Color Color");
+            lines[i] = Regex.Replace(lines[i], "string BgColor", "Color BgColor");
+            lines[i] = Regex.Replace(lines[i], "string _SmartColor", "Color _SmartColor");
+
+            lines[i] = Regex.Replace(lines[i], @"int\[\] Px", "Point Px");
+            lines[i] = Regex.Replace(lines[i], @"int\[\] Src", "Point Src");
+            lines[i] = Regex.Replace(lines[i], @"int\[\] _Grid", "Point _Grid");
+            lines[i] = Regex.Replace(lines[i], @"int\[\] TopLeftPx", "Point TopLeftPx");
+
+            lines[i] = Regex.Replace(lines[i], @"float\[\] _Pivot", "Vector2 _Pivot");
+            lines[i] = Regex.Replace(lines[i], @"float\[\] Scale", "Vector2 Scale");
+
+            lines[i] = Regex.Replace(lines[i], @"ReferenceToAnEntityInstance", "EntityRef");
+
+            lines[i] = Regex.Replace(lines[i], "TypeEnum Type", "LayerType Type");
+
+            lines[i] = Regex.Replace(lines[i], "(public string )(.*)(Iid )", "public Guid $2Iid ");
+#pragma warning restore SYSLIB1045
+
+            if (lines[i].StartsWith("    internal static class Converter"))
+            {
+                lines[i] = "";
+                end = true;
             }
         }
     }
 
-    private static void RemoveLineWithComment(SourceFile file, int i, string match)
+    private static void RemoveClassBody(List<string> lines, int i)
     {
-        if (file[i].Contains(match))
+        int indent = 1;
+
+        lines[i] = "";
+        lines[i + 1] = "";
+
+        int currentLine = i + 2;
+
+        // Remove class body
+        while (indent > 0)
         {
-            RemoveLineWithComments(file, i);
+            indent += lines[currentLine].Count(c => c == '{');
+            indent -= lines[currentLine].Count(c => c == '}');
+            lines[currentLine] = "";
+            currentLine++;
         }
     }
 
-    private static void RemoveLineWithComments(SourceFile file, int i)
+    private static void ProcessVariables(List<string> lines, int i)
     {
-        int currentLine = i;
-        file.RemoveLine(currentLine--);
+        string name = lines[i].Split('"')[1];
 
-        if (file[currentLine].Contains("</summary>"))
+        if (name == "__FORCED_REFS" || name == "levels" || name == "levelFields")
         {
-            while (!file[currentLine].Contains("<summary>"))
+            lines[i] = "";
+            lines[i + 1] = "";
+            DeleteDocComment(lines, i);
+        }
+        else if (name == "worlds")
+        {
+            string[] lineParts = lines[i + 1].TrimStart().Split(' ');
+            lineParts[1] = "LDtk" + lineParts[1];
+            lines[i + 1] = string.Join(" ", lineParts);
+        }
+        else if (name.StartsWith("__"))
+        {
+            string[] lineParts = lines[i + 1].TrimStart().Split(' ');
+            lineParts[2] = "_" + lineParts[2];
+            lines[i + 1] = string.Join(" ", lineParts);
+        }
+    }
+
+    private static void DeleteDocComment(List<string> lines, int i)
+    {
+        for (int j = i - 1; j >= 0; j--)
+        {
+            if (lines[j].Contains("/// <summary>"))
             {
-                file.RemoveLine(currentLine--);
+                lines[j] = "";
+                break;
             }
-            file.RemoveLine(currentLine--);
+            lines[j] = "";
         }
     }
 
-    private static string CleanupDocComments(SourceFile file, int i)
+    private static void GenerateFile()
     {
-        // Doc comment cleanup
-        if (file[i].Contains("///"))
+        string[] args = new string[]
         {
-            file[i] = file[i].Replace("<br/> ", "");
-            file[i] = file[i].Replace("<br/>", "");
+            "--lang cs",
+            "--src https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json",
+            "-s schema",
+            "-o " + MinimalFilePath,
+            "-t LDtkFile",
+            "--features attributes-only",
+            "--namespace LDtk",
+            "--framework SystemTextJson",
+            "--alphabetize-properties"
+        };
 
-            file[i] = file[i].Replace("`", "");
-            file[i] = file[i].Replace("*", "");
-            file[i] = file[i].Replace("IID", "Guid");
-            file[i] = Regex.Replace(file[i], "\\[(.*)\\]\\(.*\\)", "$1");
-
-            file[i] = file[i].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
-        }
-
-        return file[i];
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "quicktype.cmd",
+            Arguments = string.Join(" ", args),
+            UseShellExecute = false,
+            RedirectStandardOutput = false,
+            RedirectStandardError = false,
+            RedirectStandardInput = false,
+            CreateNoWindow = true
+        }).WaitForExit();
     }
 
-    private static string TypeConversion(SourceFile file, int i)
-    {
-        file[i] = file[i].Replace("double", "float");
-        file[i] = file[i].Replace("long", "int");
-
-        file[i] = file[i].Replace("string Color", "Color Color");
-        file[i] = file[i].Replace("string BgColor", "Color BgColor");
-        file[i] = file[i].Replace("string _SmartColor", "Color _SmartColor");
-
-        file[i] = file[i].Replace("int[] Px", "Point Px");
-        file[i] = file[i].Replace("int[] Src", "Point Src");
-        file[i] = file[i].Replace("int[] _Grid", "Point _Grid");
-        file[i] = file[i].Replace("int[] TopLeftPx", "Point TopLeftPx");
-
-        file[i] = file[i].Replace("float[] _Pivot", "Vector2 _Pivot");
-        file[i] = file[i].Replace("float[] Scale", "Vector2 Scale");
-
-        file[i] = file[i].Replace("ReferenceToAnEntityInstance", "EntityRef");
-
-        file[i] = file[i].Replace("float[] _TileSrcRect", "Rectangle _TileSrcRect");
-
-        file[i] = file[i].Replace("TypeEnum Type", "LayerType Type");
-
-        // string -> Guid/Iid
-        file[i] = Regex.Replace(file[i], "(public string )(.*)(Iid )", "public Guid $2Iid ");
-
-        return file[i];
-    }
-
-    private static string RemoveStuff(SourceFile file, int i)
-    {
-        RemoveLineWithComment(file, i, "LDtkLevel[] Levels");
-        RemoveLineWithComment(file, i, "AutoLayerRuleDefinition AutoRuleDef");
-        RemoveLineWithComment(file, i, "AutoLayerRuleDefinition[] Rules");
-
-        RemoveClass(file, i, "AutoLayerRuleDefinition");
-        RemoveClass(file, i, "AutoLayerRuleGroup");
-
-        return file[i];
-    }
+    [GeneratedRegex("\\[(.*)\\]\\(.*\\)")]
+    private static partial Regex MyRegex();
 }
