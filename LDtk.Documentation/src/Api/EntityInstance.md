@@ -5,11 +5,36 @@ EntityInstance
 ## Properties
 
   
+Reference of the Entity definition UID  
+
+
+```csharp
+public int DefUid { get; set; }
+```
+
+  
+An array of all custom fields and their values.  
+
+
+```csharp
+public FieldInstance[] FieldInstances { get; set; }
+```
+
+  
 Grid-based coordinates ([x,y] format)  
 
 
 ```csharp
 public Point _Grid { get; set; }
+```
+
+  
+Entity height in pixels. For non-resizable entities, it will be the same as Entity  
+definition.  
+
+
+```csharp
+public int Height { get; set; }
 ```
 
   
@@ -21,11 +46,28 @@ public string _Identifier { get; set; }
 ```
 
   
+Unique instance identifier  
+
+
+```csharp
+public Guid Iid { get; set; }
+```
+
+  
 Pivot coordinates  ([x,y] format, values are from 0 to 1) of the Entity  
 
 
 ```csharp
 public Vector2 _Pivot { get; set; }
+```
+
+  
+Pixel coordinates ([x,y] format) in current level coordinate space. Don't forget  
+optional layer offsets, if they exist!  
+
+
+```csharp
+public Point Px { get; set; }
 ```
 
   
@@ -52,48 +94,6 @@ tile, or some tile provided by a field value, like an Enum).
 
 ```csharp
 public TilesetRectangle _Tile { get; set; }
-```
-
-  
-Reference of the Entity definition UID  
-
-
-```csharp
-public int DefUid { get; set; }
-```
-
-  
-An array of all custom fields and their values.  
-
-
-```csharp
-public FieldInstance[] FieldInstances { get; set; }
-```
-
-  
-Entity height in pixels. For non-resizable entities, it will be the same as Entity  
-definition.  
-
-
-```csharp
-public int Height { get; set; }
-```
-
-  
-Unique instance identifier  
-
-
-```csharp
-public Guid Iid { get; set; }
-```
-
-  
-Pixel coordinates ([x,y] format) in current level coordinate space. Don't forget  
-optional layer offsets, if they exist!  
-
-
-```csharp
-public Point Px { get; set; }
 ```
 
   

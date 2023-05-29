@@ -1,28 +1,28 @@
 # LayerType
 
-The Type of layer
+The Type of layer.
 
 ## Fields
 
-Entities Layer
+Entities Layer.
 
 ```csharp
 public LayerType Entities;
 ```
 
-IntGrid Layer
+IntGrid Layer.
 
 ```csharp
 public LayerType IntGrid;
 ```
 
-Tiles Layer
+Tiles Layer.
 
 ```csharp
 public LayerType Tiles;
 ```
 
-AutoLayer Layer
+AutoLayer Layer.
 
 ```csharp
 public LayerType AutoLayer;

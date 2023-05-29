@@ -5,15 +5,6 @@ EnumValueDefinition
 ## Properties
 
   
-An array of 4 Int values that refers to the tile in the tileset image: [ x, y, width,  
-height ]  
-
-
-```csharp
-public int[] _TileSrcRect { get; set; }
-```
-
-  
 Optional color  
 
 
@@ -30,11 +21,11 @@ public string Id { get; set; }
 ```
 
   
-The optional ID of the tile  
+Optional tileset rectangle to represents this value  
 
 
 ```csharp
-public int? TileId { get; set; }
+public TilesetRectangle TileRect { get; set; }
 ```
 
 

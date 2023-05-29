@@ -1,9 +1,8 @@
 - [Introduction](intro.md)
 
-- [Documentation](Documentation/index.md)
-  - [Codegen](Documentation/codegen.md)
-  - [ContentPipeline](Documentation/content.md)
-
+- [LDtk](Documentation/index.md)
+- [LDtk.Codegen](Documentation/codegen.md)
+- [LDtk.ContentPipeline](Documentation/content.md)
 - [Api](Api/index.md)
   - [Constants](./Api/Constants.md)
   - [Definitions](./Api/Definitions.md)
@@ -13,7 +12,6 @@
   - [EnumDefinition](./Api/EnumDefinition.md)
   - [EnumTagValue](./Api/EnumTagValue.md)
   - [EnumValueDefinition](./Api/EnumValueDefinition.md)
-  - [FieldDefinition](./Api/FieldDefinition.md)
   - [FieldInstance](./Api/FieldInstance.md)
   - [GridPoint](./Api/GridPoint.md)
   - [ILDtkEntity](./Api/ILDtkEntity.md)
@@ -38,7 +36,5 @@
   - [TilesetDefinition](./Api/TilesetDefinition.md)
   - [TilesetRectangle](./Api/TilesetRectangle.md)
 
-
 - [Reference](reference.md)
-
 - [Changelog](changelog.md)

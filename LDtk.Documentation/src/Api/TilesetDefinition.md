@@ -34,7 +34,7 @@ public TileCustomMetadata[] CustomData { get; set; }
 
   
 If this value is set, then it means that this atlas uses an internal LDtk atlas image  
-instead of a loaded one. Possible values: <null>, LdtkIcons, null  
+instead of a loaded one. Possible values:  < null > , LdtkIcons, null  
 
 
 ```csharp
@@ -83,7 +83,7 @@ public int PxWid { get; set; }
 ```
 
   
-Path to the source file, relative to the current project JSON file It can be null  
+Path to the source file, relative to the current project JSON file  It can be null  
 if no image was provided, or when using an embed atlas.  
 
 

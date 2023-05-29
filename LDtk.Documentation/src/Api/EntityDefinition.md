@@ -30,8 +30,8 @@ public string Identifier { get; set; }
 
   
 An array of 4 dimensions for the up/right/down/left borders (in this order) when using  
-9-slice mode for tileRenderMode. If the tileRenderMode is not NineSlice, then  
-this array is empty. See: https://en.wikipedia.org/wiki/9-slice_scaling  
+9-slice mode for tileRenderMode.  If the tileRenderMode is not NineSlice, then  
+this array is empty.  See: https://en.wikipedia.org/wiki/9-slice_scaling  
 
 
 ```csharp

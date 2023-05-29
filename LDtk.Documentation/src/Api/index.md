@@ -11,7 +11,6 @@ This is the list of classes in LDtkMonogame
   - [EnumDefinition](./EnumDefinition.md)
   - [EnumTagValue](./EnumTagValue.md)
   - [EnumValueDefinition](./EnumValueDefinition.md)
-  - [FieldDefinition](./FieldDefinition.md)
   - [FieldInstance](./FieldInstance.md)
   - [GridPoint](./GridPoint.md)
   - [ILDtkEntity](./ILDtkEntity.md)

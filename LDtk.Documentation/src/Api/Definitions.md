@@ -4,9 +4,10 @@
 If you're writing your own LDtk importer, you should probably just ignore most stuff in  
 the defs section, as it contains data that are mostly important to the editor. To keep  
 you away from the defs section and avoid some unnecessary JSON parsing, important data  
-from definitions is often duplicated in fields prefixed with a float underscore (eg.  
-__identifier or __type).  The 2 only definition types you might  
-need here are Tilesets and Enums.  
+from definitions is often duplicated in fields prefixed with a double underscore (eg.  
+__identifier or __type).  The 2 only definition types you might need here are  
+Tilesets and Enums.  
+  
 A structure containing all the definitions of this project  
 
 
@@ -43,14 +44,6 @@ All layer definitions
 
 ```csharp
 public LayerDefinition[] Layers { get; set; }
-```
-
-  
-All custom fields available to all levels.  
-
-
-```csharp
-public FieldDefinition[] LevelFields { get; set; }
 ```
 
   

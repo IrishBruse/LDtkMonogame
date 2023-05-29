@@ -7,8 +7,16 @@ This structure represents a single tile from a given Tileset.
 ## Properties
 
   
+Alpha/opacity of the tile (0-1, defaults to 1)  
+
+
+```csharp
+public float A { get; set; }
+```
+
+  
 "Flip bits", a 2-bits integer to represent the mirror transformations of the tile.  
-- Bit 0 = X flip  - Bit 1 = Y flip  Examples: f=0 (no flip), f=1 (X flip  
+- Bit 0 = X flip   - Bit 1 = Y flip   Examples: f=0 (no flip), f=1 (X flip  
 only), f=2 (Y flip only), f=3 (both flips)  
 
 

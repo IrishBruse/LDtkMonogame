@@ -1,25 +1,25 @@
 # LDtkException
 
   
-Generic LDtk Exception  
+Generic LDtk Exception.  
 
 
 ## Methods
 
   
-Generic LDtk Exception  
-
-
-```csharp
-LDtkException.#ctor
-```
-
-  
-Generic LDtk Exception  
+Initializes a new instance of the  class.  
 
 
 ```csharp
 LDtkException.#ctor(System.String)
+```
+
+  
+Initializes a new instance of the  class.  
+
+
+```csharp
+LDtkException.#ctor
 ```
 
 

@@ -124,16 +124,6 @@ public LevelBackgroundPosition _BgPos { get; set; }
 ```
 
   
-An array listing all other levels touching this one on the world map. Only relevant  
-for world layouts where level spatial positioning is manual (ie. GridVania, Free). For  
-Horizontal and Vertical layouts, this array is always empty.  
-
-
-```csharp
-public NeighbourLevel[] _Neighbours { get; set; }
-```
-
-  
 The optional relative path to the level background image.  
 
 
@@ -176,12 +166,22 @@ public Guid Iid { get; set; }
 
   
 An array containing all Layer instances. IMPORTANT: if the project option "Save  
-levels separately" is enabled, this field will be null. This array is sorted  
+levels separately" is enabled, this field will be null.  This array is sorted  
 in display order: the 1st layer is the top-most and the last is behind.  
 
 
 ```csharp
 public LayerInstance[] LayerInstances { get; set; }
+```
+
+  
+An array listing all other levels touching this one on the world map.  Only relevant  
+for world layouts where level spatial positioning is manual (ie. GridVania, Free). For  
+Horizontal and Vertical layouts, this array is always empty.  
+
+
+```csharp
+public NeighbourLevel[] _Neighbours { get; set; }
 ```
 
   
@@ -210,7 +210,7 @@ public int Uid { get; set; }
 
   
 Index that represents the "depth" of the level in the world. Default is 0, greater means  
-"above", lower means "below". This value is mostly used for display only and is  
+"above", lower means "below".  This value is mostly used for display only and is  
 intended to make stacking of levels easier to manage.  
 
 
@@ -219,7 +219,7 @@ public int WorldDepth { get; set; }
 ```
 
   
-World X coordinate in pixels. Only relevant for world layouts where level spatial  
+World X coordinate in pixels.  Only relevant for world layouts where level spatial  
 positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the  
 value is always -1 here.  
 
@@ -229,7 +229,7 @@ public int WorldX { get; set; }
 ```
 
   
-World Y coordinate in pixels. Only relevant for world layouts where level spatial  
+World Y coordinate in pixels.  Only relevant for world layouts where level spatial  
 positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the  
 value is always -1 here.  
 

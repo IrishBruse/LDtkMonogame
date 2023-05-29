@@ -1,54 +1,54 @@
 # ILDtkEntity
 
   
-Interface that implements the Entity  
+Interface that implements the Entity.  
 
 
 ## Properties
 
-Identifier
+Gets or sets identifier.
 
 ```csharp
 public string Identifier { get; set; }
 ```
 
-Iid
+Gets or sets iid.
 
 ```csharp
 public Guid Iid { get; set; }
 ```
 
-Uid
+Gets or sets uid.
 
 ```csharp
 public int Uid { get; set; }
 ```
 
-Position
+Gets or sets position.
 
 ```csharp
 public Vector2 Position { get; set; }
 ```
 
-Size
+Gets or sets size.
 
 ```csharp
 public Vector2 Size { get; set; }
 ```
 
-Pivot
+Gets or sets pivot.
 
 ```csharp
 public Vector2 Pivot { get; set; }
 ```
 
-Tile
+Gets or sets tile.
 
 ```csharp
 public Rectangle Tile { get; set; }
 ```
 
-EditorVisualColor
+Gets or sets editorVisualColor.
 
 ```csharp
 public Color SmartColor { get; set; }

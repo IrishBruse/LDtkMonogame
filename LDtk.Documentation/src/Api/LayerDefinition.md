@@ -5,14 +5,6 @@ LayerDefinition
 ## Properties
 
   
-Type of the layer (IntGrid, Entities, Tiles or AutoLayer)  
-
-
-```csharp
-public LayerType _Type { get; set; }
-```
-
-  
 Opacity of the layer (0 to 1.0)  
 
 
@@ -37,7 +29,7 @@ public string Identifier { get; set; }
 ```
 
   
-An array that defines extra optional info for each IntGrid value. WARNING: the  
+An array that defines extra optional info for each IntGrid value.  WARNING: the  
 array order is not related to actual IntGrid values! As user can re-order IntGrid values  
 freely, you may value "2" before value "1" in this array.  
 
@@ -93,13 +85,20 @@ public int PxOffsetY { get; set; }
   
 Reference to the default Tileset UID being used by this layer definition.  
 WARNING: some layer instances might use a different tileset. So most of the time,  
-you should probably use the __tilesetDefUid value found in layer  
-instances. Note: since version 1.0.0, the old autoTilesetDefUid was removed and  
-merged into this value.  
+you should probably use the __tilesetDefUid value found in layer instances.  Note:  
+since version 1.0.0, the old autoTilesetDefUid was removed and merged into this value.  
 
 
 ```csharp
 public int? TilesetDefUid { get; set; }
+```
+
+  
+Type of the layer (IntGrid, Entities, Tiles or AutoLayer)  
+
+
+```csharp
+public LayerType _Type { get; set; }
 ```
 
   
