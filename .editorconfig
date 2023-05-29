@@ -11,20 +11,22 @@ insert_final_newline = true
 dotnet_analyzer_diagnostic.severity = warning # Default Severity for all .NET Code Style rules below
 file_header_template = unset
 
-dotnet_diagnostic.CA1305.severity = refactoring
+dotnet_diagnostic.IDE0130.severity = none
 dotnet_diagnostic.IDE0010.severity = none
 dotnet_diagnostic.IDE0072.severity = none
 dotnet_diagnostic.IDE0045.severity = warning
 dotnet_diagnostic.IDE0053.severity = none
-dotnet_diagnostic.IDE0022.severity = refactoring
+dotnet_diagnostic.IDE0022.severity = none
 dotnet_diagnostic.IDE0046.severity = warning
 dotnet_diagnostic.IDE0051.severity = none # Remove unused private member
-dotnet_diagnostic.IDE0058.severity = refactoring
+dotnet_diagnostic.IDE0058.severity = none
 dotnet_diagnostic.IDE0059.severity = suggestion
 dotnet_diagnostic.IDE0078.severity = none
 dotnet_diagnostic.IDE0058.severity = none # Discard variable _ =
 dotnet_diagnostic.IDE0063.severity = warning
 dotnet_diagnostic.IDE0130.severity = warning
+
+dotnet_diagnostic.CA1305.severity = none # CA1305: Specify IFormatProvider
 dotnet_diagnostic.CA1310.severity = none # string local/culture ignored
 dotnet_diagnostic.CA1304.severity = none # string local/culture ignored
 dotnet_diagnostic.CA1822.severity = none # Disable convert function to static
