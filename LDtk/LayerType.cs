@@ -1,14 +1,17 @@
 namespace LDtk;
 
-/// <summary> The Type of layer </summary>
+/// <summary> The Type of layer. </summary>
 public enum LayerType
 {
-    /// <summary> Entities Layer </summary>
+    /// <summary> Entities Layer. </summary>
     Entities,
-    /// <summary> IntGrid Layer </summary>
+
+    /// <summary> IntGrid Layer. </summary>
     IntGrid,
-    /// <summary> Tiles Layer </summary>
+
+    /// <summary> Tiles Layer. </summary>
     Tiles,
-    /// <summary> AutoLayer Layer </summary>
+
+    /// <summary> AutoLayer Layer. </summary>
     AutoLayer,
 }

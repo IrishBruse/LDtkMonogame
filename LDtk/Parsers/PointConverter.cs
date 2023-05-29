@@ -13,25 +13,25 @@ internal class PointConverter : JsonConverter<Point>
         Point val = Point.Zero;
         if (reader.TokenType == JsonTokenType.StartArray)
         {
-            _ = reader.Read();
+            reader.Read();
 
             int x = reader.GetInt32();
-            _ = reader.Read();
+            reader.Read();
 
             int y = reader.GetInt32();
-            _ = reader.Read();
+            reader.Read();
 
             val = new(x, y);
         }
         else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            _ = reader.Read();
-            _ = reader.Read();
+            reader.Read();
+            reader.Read();
             int x = reader.GetInt32();
-            _ = reader.Read();
-            _ = reader.Read();
+            reader.Read();
+            reader.Read();
             int y = reader.GetInt32();
-            _ = reader.Read();
+            reader.Read();
 
             val = new(x, y);
         }

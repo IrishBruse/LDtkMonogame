@@ -3,16 +3,18 @@ namespace LDtk;
 using System;
 
 /// <summary>
-/// Generic LDtk Exception
+/// Generic LDtk Exception.
 /// </summary>
 public class LDtkException : Exception
 {
     /// <summary>
-    /// Generic LDtk Exception
+    /// Initializes a new instance of the <see cref="LDtkException"/> class.
+    /// </summary>
+    /// <param name="message"> The message. </param>
+    public LDtkException(string message) : base(message) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LDtkException"/> class.
     /// </summary>
     private LDtkException() { }
-    /// <summary>
-    /// Generic LDtk Exception
-    /// </summary>
-    public LDtkException(string message) : base(message) { }
 }

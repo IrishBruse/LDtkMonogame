@@ -28,7 +28,7 @@ public class BaseGenerator
 
     public static string Call(string functionName, string contents) => $"{functionName}({contents})";
 
-    public void Blank() => _ = FileContents.AppendLine();
+    public void Blank() => FileContents.AppendLine();
 
     public void Line(string line)
     {
@@ -38,16 +38,16 @@ public class BaseGenerator
             {
                 if (Commented && i == 0)
                 {
-                    _ = FileContents.Append("    //  ");
+                    FileContents.Append("    //  ");
                 }
                 else
                 {
-                    _ = FileContents.Append("    ");
+                    FileContents.Append("    ");
                 }
             }
         }
 
-        _ = FileContents.AppendLine(line);
+        FileContents.AppendLine(line);
     }
 
     public void DebugLine(string line)
@@ -63,9 +63,9 @@ public class BaseGenerator
     public void Output(Options options, string folder, string identifier)
     {
         string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
-        _ = Directory.CreateDirectory(Path.GetDirectoryName(file));
+        Directory.CreateDirectory(Path.GetDirectoryName(file));
         File.WriteAllText(file, FileContents.ToString());
         Console.WriteLine("Generating -> " + folder + "/" + identifier + ".cs");
-        _ = FileContents.Clear();
+        FileContents.Clear();
     }
 }

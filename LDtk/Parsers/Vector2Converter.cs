@@ -13,25 +13,25 @@ internal class Vector2Converter : JsonConverter<Vector2>
         Vector2 val = Vector2.Zero;
         if (reader.TokenType == JsonTokenType.StartArray)
         {
-            _ = reader.Read();
+            reader.Read();
 
             float x = reader.GetSingle();
-            _ = reader.Read();
+            reader.Read();
 
             float y = reader.GetSingle();
-            _ = reader.Read();
+            reader.Read();
 
             val = new(x, y);
         }
         else if (reader.TokenType == JsonTokenType.StartObject)
         {
-            _ = reader.Read();
-            _ = reader.Read();
+            reader.Read();
+            reader.Read();
             float x = reader.GetSingle();
-            _ = reader.Read();
-            _ = reader.Read();
+            reader.Read();
+            reader.Read();
             float y = reader.GetSingle();
-            _ = reader.Read();
+            reader.Read();
 
             val = new(x, y);
         }

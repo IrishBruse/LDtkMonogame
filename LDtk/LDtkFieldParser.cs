@@ -7,12 +7,53 @@ using System.Text.Json;
 
 using Microsoft.Xna.Framework;
 
-/// <summary> Utility for parsing ldtk json data into more typed versions </summary>
+/// <summary> Utility for parsing ldtk json data into more typed versions. </summary>
 internal static class LDtkFieldParser
 {
-    public static void ParseCustomLevelFields<T>(T level, FieldInstance[] fields) where T : new() => ParseCustomFields(level, fields, null);
+    /// <summary> Parses the custom level fields. </summary>
+    /// <typeparam name="T"> Generic type parameter. </typeparam>
+    /// <param name="level"> The level. </param>
+    /// <param name="fields"> The fields. </param>
+    public static void ParseCustomLevelFields<T>(T level, FieldInstance[] fields)
+        where T : new()
+    {
+        ParseCustomFields(level, fields, null);
+    }
 
-    public static void ParseCustomEntityFields<T>(T entity, FieldInstance[] fields, LDtkLevel level) where T : new() => ParseCustomFields(entity, fields, level);
+    /// <summary> Parses the custom fields. </summary>
+    /// <typeparam name="T"> Generic type parameter. </typeparam>
+    /// <param name="entity"> The entity. </param>
+    /// <param name="fields"> The fields. </param>
+    /// <param name="level"> The level. </param>
+    public static void ParseCustomEntityFields<T>(T entity, FieldInstance[] fields, LDtkLevel level)
+        where T : new()
+    {
+        ParseCustomFields(entity, fields, level);
+    }
+
+    /// <summary> Parses the base entity fields. </summary>
+    /// <typeparam name="T"> Generic type parameter. </typeparam>
+    /// <param name="entity"> The entity. </param>
+    /// <param name="entityInstance"> The entity instance. </param>
+    /// <param name="level"> The level. </param>
+    public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level)
+        where T : new()
+    {
+        ParseBaseField(entity, nameof(ILDtkEntity.Uid), entityInstance.DefUid);
+        ParseBaseField(entity, nameof(ILDtkEntity.Iid), entityInstance.Iid);
+        ParseBaseField(entity, nameof(ILDtkEntity.Identifier), entityInstance._Identifier);
+        ParseBaseField(entity, nameof(ILDtkEntity.Position), (entityInstance.Px + level.Position).ToVector2());
+        ParseBaseField(entity, nameof(ILDtkEntity.Pivot), entityInstance._Pivot);
+        ParseBaseField(entity, nameof(ILDtkEntity.Size), new Vector2(entityInstance.Width, entityInstance.Height));
+        ParseBaseField(entity, nameof(ILDtkEntity.SmartColor), entityInstance._SmartColor);
+
+        if (entityInstance._Tile != null)
+        {
+            TilesetRectangle tileDefinition = entityInstance._Tile;
+            Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
+            ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
+        }
+    }
 
     private static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
     {
@@ -60,6 +101,7 @@ internal static class LDtkFieldParser
                     {
                         variableDef.SetValue(classFields, element.ToString());
                     }
+
                     break;
 
                     case JsonValueKind.True:
@@ -84,7 +126,7 @@ internal static class LDtkFieldParser
 
     private static Color ParseStringToColor(string hex, int alpha)
     {
-        if (uint.TryParse(hex.Replace("#", ""), NumberStyles.HexNumber, null, out uint color))
+        if (uint.TryParse(hex.Replace("#", string.Empty), NumberStyles.HexNumber, null, out uint color))
         {
             byte red = (byte)((color & 0xFF0000) >> 16);
             byte green = (byte)((color & 0x00FF00) >> 8);
@@ -164,24 +206,6 @@ internal static class LDtkFieldParser
         return gridSize;
     }
 
-    public static void ParseBaseEntityFields<T>(T entity, EntityInstance entityInstance, LDtkLevel level) where T : new()
-    {
-        ParseBaseField(entity, nameof(ILDtkEntity.Uid), entityInstance.DefUid);
-        ParseBaseField(entity, nameof(ILDtkEntity.Iid), entityInstance.Iid);
-        ParseBaseField(entity, nameof(ILDtkEntity.Identifier), entityInstance._Identifier);
-        ParseBaseField(entity, nameof(ILDtkEntity.Position), (entityInstance.Px + level.Position).ToVector2());
-        ParseBaseField(entity, nameof(ILDtkEntity.Pivot), entityInstance._Pivot);
-        ParseBaseField(entity, nameof(ILDtkEntity.Size), new Vector2(entityInstance.Width, entityInstance.Height));
-        ParseBaseField(entity, nameof(ILDtkEntity.SmartColor), entityInstance._SmartColor);
-
-        if (entityInstance._Tile != null)
-        {
-            TilesetRectangle tileDefinition = entityInstance._Tile;
-            Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
-            ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
-        }
-    }
-
     // Helpers
     private static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
@@ -198,6 +222,7 @@ internal static class LDtkFieldParser
     private class CxCyPoint
     {
         public int Cx { get; set; }
+
         public int Cy { get; set; }
     }
 }
