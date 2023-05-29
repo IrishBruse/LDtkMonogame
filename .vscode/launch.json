@@ -39,7 +39,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build LDtk.Quicktype",
-            "program": "${workspaceFolder}/Tools\\LDtk.Quicktype/bin/Debug/net6.0/LDtk.Quicktype.dll",
+            "program": "${workspaceFolder}/Tools\\LDtk.Quicktype/bin/Debug/net7.0/LDtk.Quicktype.dll",
             "cwd": "${workspaceFolder}/Tools\\LDtk.Quicktype",
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
