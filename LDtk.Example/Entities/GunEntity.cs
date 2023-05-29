@@ -56,7 +56,7 @@ public class GunEntity
 
         renderer.RenderEntity(data, texture);
 
-        if (LDtkMonogameGame.DebugF3)
+        if (Entry.DebugF3)
         {
             renderer.SpriteBatch.DrawRect(Collider, new Color(128, 255, 0, 128));
         }

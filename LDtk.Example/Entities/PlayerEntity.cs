@@ -124,7 +124,7 @@ public class PlayerEntity
             renderer.SpriteBatch.Draw(texture, Position + new Vector2(Flip ? -23 : 7, -5.5f), new Rectangle(48, 0, 16, 16), Color.White, 0, Vector2.Zero, Vector2.One, (SpriteEffects)(Flip ? 1 : 0), 0);
         }
 
-        if (LDtkMonogameGame.DebugF2)
+        if (Entry.DebugF2)
         {
             for (int i = 0; i < tiles.Count; i++)
             {

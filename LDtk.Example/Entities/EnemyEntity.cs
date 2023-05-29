@@ -78,16 +78,16 @@ public class EnemyEntity
 
         renderer.RenderEntity(data, texture, (SpriteEffects)(flip ? 1 : 0) + (dead ? 2 : 0), currentAnimationFrame % 2);
 
-        if (LDtkMonogameGame.DebugF1)
+        if (Entry.DebugF1)
         {
             for (int i = 0; i < data.Wander.Length; i++)
             {
-                renderer.SpriteBatch.Draw(LDtkMonogameGame.Pixel, data.Position, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                renderer.SpriteBatch.Draw(LDtkMonogameGame.Pixel, data.Wander[i], null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                renderer.SpriteBatch.Draw(Entry.Pixel, data.Position, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                renderer.SpriteBatch.Draw(Entry.Pixel, data.Wander[i], null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
         }
 
-        if (LDtkMonogameGame.DebugF3)
+        if (Entry.DebugF3)
         {
             renderer.SpriteBatch.DrawRect(Collider, new Color(128, 255, 0, 128));
         }

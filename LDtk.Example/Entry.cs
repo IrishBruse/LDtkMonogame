@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
-public class LDtkMonogameGame : Game
+public class Entry : Game
 {
     // LDtk stuff
     private LDtkFile file;
@@ -40,7 +40,7 @@ public class LDtkMonogameGame : Game
 
     private KeyboardState oldKeyboard;
 
-    public LDtkMonogameGame()
+    public Entry()
     {
         graphics = new GraphicsDeviceManager(this);
 

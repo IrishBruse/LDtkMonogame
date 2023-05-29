@@ -7,7 +7,7 @@ public static class Program
     [STAThread]
     private static void Main()
     {
-        using LDtkMonogameGame game = new();
+        using Entry game = new();
         game.Run();
     }
 }

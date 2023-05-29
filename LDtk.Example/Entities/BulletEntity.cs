@@ -38,7 +38,7 @@ public class BulletEntity
     {
         renderer.SpriteBatch.Draw(texture, Position, new Rectangle(16 * 4, 0, 16, 16), Color.White, 0, new Vector2(0, .5f), Vector2.One, (SpriteEffects)(Flip ? 1 : 0), 0);
 
-        if (LDtkMonogameGame.DebugF3)
+        if (Entry.DebugF3)
         {
             renderer.SpriteBatch.DrawRect(Collider, new Color(128, 255, 0, 128));
         }
