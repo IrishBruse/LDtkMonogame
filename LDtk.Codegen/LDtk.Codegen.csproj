@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>1.0.1</Version>
+        <Version>1.1.0</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.Codegen</PackageId>
@@ -20,11 +20,13 @@
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>https://irishbruse.github.io/ldtk/</PackageReleaseNotes>
+        <PackageReleaseNotes>https://irishbruse.github.io/ldtk/changelog/</PackageReleaseNotes>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
 
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>ldtkgen</ToolCommandName>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
