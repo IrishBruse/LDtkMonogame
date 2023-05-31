@@ -32,6 +32,18 @@ public class Program
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 
+        if (file == null)
+        {
+            Console.Error.WriteLine("Failed to load LDtk file");
+            return;
+        }
+
+        if (file.Flags == null)
+        {
+            Console.Error.WriteLine("LDtk File has no flags");
+            return;
+        }
+
         if (!file.Flags.Contains(Flag.MultiWorlds))
         {
             Console.Error.WriteLine("LDtk Files must have the `MultiWorlds` flag enabled");
