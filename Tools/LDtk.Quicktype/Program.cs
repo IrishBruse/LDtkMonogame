@@ -9,25 +9,60 @@ using System.Threading;
 
 public partial class Program
 {
+    private const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
+    private const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
     private static readonly string MinimalFilePath = "../../LDtk/LDtkJson.cs";
     private static readonly string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
     private static readonly string Version = "1.3.3";
 
+    private static bool minimal;
+
     public static void Main()
     {
-        GenerateFile();
+        minimal = true;
+        GenerateFile(MinimalFilePath, MinSchema, "LDtk");
+        minimal = false;
+        GenerateFile(FullFilePath, FullSchema, "LDtk.Codegen");
+    }
 
-        List<string> lines = File.ReadAllLines(MinimalFilePath).ToList();
+    private static void GenerateFile(string file, string schema, string namespace_)
+    {
+        string[] args = new string[]
+        {
+            "--lang cs",
+            "--src " + schema,
+            "-s schema",
+            "-o " + file,
+            "-t LDtkFile",
+            "--features attributes-only",
+            "--namespace " + namespace_,
+            "--framework SystemTextJson",
+            "--alphabetize-properties"
+        };
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = "quicktype.cmd",
+            Arguments = string.Join(" ", args),
+            UseShellExecute = false,
+            RedirectStandardOutput = false,
+            RedirectStandardError = false,
+            RedirectStandardInput = false,
+            CreateNoWindow = true
+        }).WaitForExit();
+
+        List<string> lines = File.ReadAllLines(file).ToList();
+
         ProcessFile(lines);
-        lines[0] = "// This file was auto generated, any changes will be lost. For LDtk " + Version + " \n" + lines[0];
-        lines[0] += "#pragma warning disable CS1591, IDE1006, CA1707, CA1716";
-        lines[1] += "using Microsoft.Xna.Framework;";
-        File.WriteAllLines(MinimalFilePath, lines);
 
-        Format();
+        lines[0] = "#pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
+        lines[1] += "using Microsoft.Xna.Framework;";
+        File.WriteAllLines(file, lines);
+
+        Format(file);
 
         // Delete multiple blank lines in a row
-        lines = File.ReadAllLines(MinimalFilePath).ToList();
+        lines = File.ReadAllLines(file).ToList();
 
         int blanks = 0;
         for (int i = lines.Count - 1; i >= 0; i--)
@@ -46,18 +81,18 @@ public partial class Program
             }
         }
 
-        File.WriteAllLines(MinimalFilePath, lines);
+        File.WriteAllLines(file, lines);
 
-        File.AppendAllText(MinimalFilePath, "#pragma warning restore CS1591, IDE1006, CA1707, CA1716");
+        File.AppendAllText(file, "#pragma warning restore CS1591, IDE1006, CA1707, CA1716, IDE0130");
     }
 
-    private static void Format()
+    private static void Format(string file)
     {
         Thread.Sleep(300);
         Process.Start(new ProcessStartInfo
         {
             FileName = "dotnet",
-            Arguments = "format ../../LDtk/",
+            Arguments = "format " + Path.GetDirectoryName(file),
             UseShellExecute = false,
             RedirectStandardOutput = false,
             RedirectStandardError = false,
@@ -78,20 +113,15 @@ public partial class Program
                 continue;
             }
 
-            if (
-                lines[i].TrimStart().EndsWith("public partial class ForcedRefs") ||
-                lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleDefinition") ||
-                lines[i].TrimStart().EndsWith("public partial class FieldDefinition")
-            )
+            if (lines[i].TrimStart().EndsWith("public partial class World"))
             {
-                DeleteDocComment(lines, i);
-                RemoveClassBody(lines, i);
+                lines[i] = "public partial class LDtkWorld";
                 continue;
             }
 
-            if (lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleGroup"))
+            if (lines[i].TrimStart().EndsWith("public partial class Level"))
             {
-                RemoveClassBody(lines, i);
+                lines[i] = "public partial class LDtkLevel";
                 continue;
             }
 
@@ -115,17 +145,9 @@ public partial class Program
                 continue;
             }
 
-            if (lines[i].TrimStart().EndsWith("public partial class World"))
-            {
-                lines[i] = "public partial class LDtkWorld";
-                continue;
-            }
-
-            if (lines[i].TrimStart().EndsWith("public partial class Level"))
-            {
-                lines[i] = "public partial class LDtkLevel";
-                continue;
-            }
+            lines[i] = lines[i].Replace("public Level ", "public LDtkLevel ");
+            lines[i] = lines[i].Replace("public Level[] ", "public LDtkLevel[] ");
+            lines[i] = lines[i].Replace("public World ", "public LDtkWorld ");
 
             if (lines[i].TrimStart().StartsWith("public string _Type "))
             {
@@ -134,6 +156,27 @@ public partial class Program
                     lines[i] = "public LayerType _Type { get; set; }";
                     continue;
                 }
+            }
+
+            if (minimal)
+            {
+                if (
+                    lines[i].TrimStart().EndsWith("public partial class ForcedRefs") ||
+                    lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleDefinition") ||
+                    lines[i].TrimStart().EndsWith("public partial class FieldDefinition")
+                )
+                {
+                    DeleteDocComment(lines, i);
+                    RemoveClassBody(lines, i);
+                    continue;
+                }
+
+                if (lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleGroup"))
+                {
+                    RemoveClassBody(lines, i);
+                    continue;
+                }
+
             }
 
             if (lines[i].Contains("JsonPropertyName"))
@@ -195,7 +238,7 @@ public partial class Program
     {
         string name = lines[i].Split('"')[1];
 
-        if (name == "__FORCED_REFS" || name == "levels" || name == "levelFields")
+        if ((name == "__FORCED_REFS" || name == "levels" || name == "levelFields") && minimal)
         {
             lines[i] = "";
             lines[i + 1] = "";
@@ -226,33 +269,6 @@ public partial class Program
             }
             lines[j] = "";
         }
-    }
-
-    private static void GenerateFile()
-    {
-        string[] args = new string[]
-        {
-            "--lang cs",
-            "--src https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json",
-            "-s schema",
-            "-o " + MinimalFilePath,
-            "-t LDtkFile",
-            "--features attributes-only",
-            "--namespace LDtk",
-            "--framework SystemTextJson",
-            "--alphabetize-properties"
-        };
-
-        Process.Start(new ProcessStartInfo
-        {
-            FileName = "quicktype.cmd",
-            Arguments = string.Join(" ", args),
-            UseShellExecute = false,
-            RedirectStandardOutput = false,
-            RedirectStandardError = false,
-            RedirectStandardInput = false,
-            CreateNoWindow = true
-        }).WaitForExit();
     }
 
     [GeneratedRegex("\\[(.*)\\]\\(.*\\)")]

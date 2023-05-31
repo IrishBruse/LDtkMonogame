@@ -1,5 +1,7 @@
 namespace LDtk.Codegen.Generators;
 
+using LDtk.Codegen;
+
 public class ClassGenerator : BaseGenerator
 {
     private LDtkFile ldtkFile;
@@ -39,8 +41,9 @@ public class ClassGenerator : BaseGenerator
         }
 
         Blank();
-        Line("using Microsoft.Xna.Framework;");
         Line("using LDtk;");
+        Blank();
+        Line("using Microsoft.Xna.Framework;");
         Blank();
 
         string classDef = $"public class {identifier}";
