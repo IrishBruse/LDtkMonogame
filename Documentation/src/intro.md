@@ -1,6 +1,6 @@
 # [LDtkMonogame Wiki](https://irishbruse.github.io/LDtkMonogame/)
 
- [![Discord Link](https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord)](https://ldtk.io/go/discord)
+[![Discord Link](https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord)](https://ldtk.io/go/discord)
 
 > Monogame renderer and importer for LDtk Level editor
 

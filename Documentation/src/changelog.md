@@ -2,9 +2,12 @@
 
 Changelog for versions
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v1.0.1...v1.1.0">1.1.0</a>
+    - Updated `LDtkFile.FromFile(filePath)` For old slower behaviour use `FromFileReflection` <br/> Source generator deserializing should be faster but may have bugs please test.
+    - Updated json to 1.3.3
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v1.0.0...v1.0.1">1.0.1</a>
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.7.0...v1.0.0">1.0.0</a>
-- <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.5...v0.7.0">0.7.0</a> Monogame 3.8.1
+- <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.5...v0.7.0">0.7.0</a>
+    - Update to support Monogame 3.8.1.303
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.4...v0.6.5">0.6.5</a>
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.3...v0.6.4">0.6.4</a>
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v0.6.0...v0.6.3">0.6.3</a>
