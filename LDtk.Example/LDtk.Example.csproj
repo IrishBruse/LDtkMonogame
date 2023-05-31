@@ -9,10 +9,6 @@
         <RootNamespace>LDtkMonogameExample</RootNamespace>
     </PropertyGroup>
 
-    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="ldtkgen -i Content/World.ldtk --LevelClassName CustomLevelDataName --FileNameInNamespace --PointAsVector2" />
-    </Target>
-
     <ItemGroup>
         <ProjectReference Include="..\LDtk\LDtk.csproj" />
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />

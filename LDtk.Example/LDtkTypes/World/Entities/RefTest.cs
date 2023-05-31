@@ -2,9 +2,8 @@
 #pragma warning disable
 namespace LDtkTypes.World;
 
-using LDtk;
-
 using Microsoft.Xna.Framework;
+using LDtk;
 
 public class RefTest : ILDtkEntity
 {
