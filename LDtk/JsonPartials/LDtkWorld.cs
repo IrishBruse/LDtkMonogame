@@ -12,8 +12,8 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("WorldLayout: {WorldLayout} Size: {WorldGridSize} Path: {FilePath}")]
 public partial class LDtkWorld
 {
-    /// <summary> The Real LDtk Levels Json data Use indexer directly on the world eg world[0] instead as that will load external files if that setting is enabled. </summary>
-    [Obsolete("The raw Levels json property. Use LoadLevel Instead or Levels."), JsonPropertyName("levels")]
+    /// <summary> The raw ldtk level data </summary>
+    [JsonPropertyName("levels")]
     public LDtkLevel[] RawLevels { get; set; }
 
     /// <summary> The Levels iterator used in foreach will load external levels each time caching recommended </summary>
@@ -36,7 +36,6 @@ public partial class LDtkWorld
     [JsonIgnore] public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
 
     /// <summary> Used by json deserializer not for use by user! </summary>
-    [Obsolete("Used by json deserializer not for use by user!", true)]
     public LDtkWorld() { }
 
     /// <summary> The content manager used if you are using the contentpipeline </summary>

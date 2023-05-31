@@ -17,19 +17,27 @@ public partial class LDtkFile
     public ContentManager Content { get; set; }
 
     /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
-    [Obsolete("Used by json deserializer not for use by user!", true)]
     public LDtkFile() { }
 
-    /// <summary> Loads the ldtk world file from disk directly. </summary>
+    /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
     /// <returns> Returns the file loaded from the path. </returns>
     public static LDtkFile FromFile(string filePath)
     {
+        LDtkFile file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkFile);
+        file.FilePath = Path.GetFullPath(filePath);
+        ValidateFile(file);
+        return file;
+    }
+
+    /// <summary> Loads the ldtk world file from disk directly. </summary>
+    /// <param name="filePath"> Path to the .ldtk file. </param>
+    /// <returns> Returns the file loaded from the path. </returns>
+    public static LDtkFile FromFileReflection(string filePath)
+    {
         LDtkFile file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
         file.FilePath = Path.GetFullPath(filePath);
-#if Debug
         ValidateFile(file);
-#endif
         return file;
     }
 
@@ -42,9 +50,7 @@ public partial class LDtkFile
         LDtkFile file = content.Load<LDtkFile>(filePath);
         file.FilePath = filePath;
         file.Content = content;
-#if Debug
         ValidateFile(file);
-#endif
         return file;
     }
 

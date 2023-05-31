@@ -20,7 +20,6 @@ public class LDtkIntGrid
     public Point GridSize { get; set; }
 
     /// <summary> Used by json deserializer not for use by user! </summary>
-    [Obsolete("Used by json deserializer not for use by user!")]
     public LDtkIntGrid() { }
 
     /// <summary> Gets the int value at location and return 0 if out of bounds </summary>

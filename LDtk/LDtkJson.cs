@@ -1,6 +1,6 @@
+#pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130
 // This file was auto generated, any changes will be lost. For LDtk 1.3.3
 namespace LDtk;
-#pragma warning disable CS1591, IDE1006, CA1707, CA1716
 
 using System;
 using System.Text.Json.Serialization;
@@ -1142,4 +1142,4 @@ public enum When { AfterLoad, AfterSave, BeforeSave, Manual };
 
 public enum WorldLayout { Free, GridVania, LinearHorizontal, LinearVertical };
 
-#pragma warning restore CS1591, IDE1006, CA1707, CA1716
+#pragma warning restore CS1591, IDE1006, CA1707, CA1716, IDE0130

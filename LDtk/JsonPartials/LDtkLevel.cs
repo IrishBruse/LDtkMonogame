@@ -1,6 +1,5 @@
 namespace LDtk;
 
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -29,12 +28,20 @@ public partial class LDtkLevel
     [JsonIgnore] public bool Loaded { get; internal set; }
 
     /// <summary> Used by json deserializer not for use by user! </summary>
-    [Obsolete("Used by json deserializer not for use by user!", true)]
     public LDtkLevel() { }
+
+    /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
+    /// <param name="filePath"> Path to the .ldtk file </param>
+    public static LDtkLevel FromFile(string filePath)
+    {
+        LDtkLevel file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkLevel);
+        file.FilePath = Path.GetFullPath(filePath);
+        return file;
+    }
 
     /// <summary> Loads the ldtk world file from disk directly </summary>
     /// <param name="filePath"> Path to the .ldtk file </param>
-    public static LDtkLevel FromFile(string filePath)
+    public static LDtkLevel FromFileReflection(string filePath)
     {
         LDtkLevel file = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(filePath), Constants.SerializeOptions);
         file.FilePath = Path.GetFullPath(filePath);
