@@ -1,4 +1,4 @@
-#pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130
+#pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711
 // This file was auto generated, any changes will be lost. For LDtk 1.3.3
 namespace LDtk.Codegen;
 
@@ -2238,4 +2238,4 @@ public enum IdentifierStyle { Capitalize, Free, Lowercase, Uppercase };
 /// </summary>
 public enum ImageExportMode { LayersAndLevels, None, OneImagePerLayer, OneImagePerLevel };
 
-#pragma warning restore CS1591, IDE1006, CA1707, CA1716, IDE0130
+#pragma warning restore CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711

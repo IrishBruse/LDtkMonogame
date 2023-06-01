@@ -15,6 +15,8 @@ public partial class Program
     private static readonly string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
     private static readonly string Version = "1.3.3";
 
+    private static readonly string PragmaWarnings = "CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711";
+
     private static bool minimal;
 
     public static void Main()
@@ -55,7 +57,7 @@ public partial class Program
 
         ProcessFile(lines);
 
-        lines[0] = "#pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
+        lines[0] = "#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
         lines[1] += "using Microsoft.Xna.Framework;";
         File.WriteAllLines(file, lines);
 
@@ -83,7 +85,7 @@ public partial class Program
 
         File.WriteAllLines(file, lines);
 
-        File.AppendAllText(file, "#pragma warning restore CS1591, IDE1006, CA1707, CA1716, IDE0130");
+        File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings);
     }
 
     private static void Format(string file)
