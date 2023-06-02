@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework.Content;
 
@@ -11,10 +12,10 @@ using Microsoft.Xna.Framework.Content;
 public partial class LDtkFile
 {
     /// <summary> Gets or sets the absolute path to the ldtkFile. </summary>
-    public string FilePath { get; set; }
+    [JsonIgnore] public string FilePath { get; set; }
 
     /// <summary> Gets or sets the content manager used if you are using the contentpipeline. </summary>
-    public ContentManager Content { get; set; }
+    [JsonIgnore] public ContentManager Content { get; set; }
 
     /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
     public LDtkFile() { }
@@ -26,7 +27,6 @@ public partial class LDtkFile
     {
         LDtkFile file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkFile);
         file.FilePath = Path.GetFullPath(filePath);
-        ValidateFile(file);
         return file;
     }
 
@@ -37,7 +37,6 @@ public partial class LDtkFile
     {
         LDtkFile file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
         file.FilePath = Path.GetFullPath(filePath);
-        ValidateFile(file);
         return file;
     }
 
@@ -50,7 +49,6 @@ public partial class LDtkFile
         LDtkFile file = content.Load<LDtkFile>(filePath);
         file.FilePath = filePath;
         file.Content = content;
-        ValidateFile(file);
         return file;
     }
 
@@ -101,18 +99,5 @@ public partial class LDtkFile
         }
 
         throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in this level");
-    }
-
-    private static void ValidateFile(LDtkFile file)
-    {
-        if (Version.Parse(file.JsonVersion).Minor > Version.Parse(Constants.SupportedLDtkVersion).Minor)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            string value = $"LDtkMonogame supports {Constants.SupportedLDtkVersion} your file is on {file.JsonVersion} it\n";
-            value += "is probably supported but new features may be missing please make an issue on github to remind me to update it :)";
-
-            Console.WriteLine(value);
-            Console.ResetColor();
-        }
     }
 }

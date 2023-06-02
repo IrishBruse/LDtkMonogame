@@ -32,6 +32,16 @@ public class Program
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 
+        if (Version.Parse(file.JsonVersion) > Version.Parse(Constants.SupportedLDtkVersion))
+        {
+            string value = $"LDtkMonogame supports {Constants.SupportedLDtkVersion} your file is on {file.JsonVersion} it\n";
+            value += "is probably supported but new features may be missing please make an issue on github to remind me to update it :)";
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(value);
+            Console.ResetColor();
+        }
+
         if (file == null)
         {
             Console.Error.WriteLine("Failed to load LDtk file");
