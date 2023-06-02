@@ -263,3 +263,6 @@ dotnet_naming_style.camelcase.required_prefix =
 dotnet_naming_style.camelcase.required_suffix =
 dotnet_naming_style.camelcase.word_separator =
 dotnet_naming_style.camelcase.capitalization = camel_case
+
+[*.{g.cs,generated.cs}] # Generated files
+dotnet_diagnostic.CS1591.severity = none

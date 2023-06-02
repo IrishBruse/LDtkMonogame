@@ -2,9 +2,8 @@
 #pragma warning disable
 namespace LDtkTypes.TestWorld;
 
-using LDtk;
-
 using Microsoft.Xna.Framework;
+using LDtk;
 
 public class RectRegion : ILDtkEntity
 {

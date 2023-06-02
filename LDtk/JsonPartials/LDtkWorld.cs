@@ -126,10 +126,12 @@ public partial class LDtkWorld
 
             level.ExternalRelPath = rawLevel.ExternalRelPath;
             level.WorldFilePath = FilePath;
+            level.FilePath = level.ExternalRelPath;
             level.Loaded = true;
         }
         else
         {
+            rawLevel.FilePath = FilePath;
             return rawLevel;
         }
 

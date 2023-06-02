@@ -12,12 +12,8 @@
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
         <PackageReference Include="coverlet.collector" Version="1.3.0" />
+        <PackageReference Include="coverlet.msbuild" Version="6.0.0"/>
     </ItemGroup>
-
-    <Target Name="LDtkCodegen" BeforeTargets="BeforeBuild">
-        <Exec Command="ldtkgen -i ./Files/TestApi/TestWorld.ldtk --FileNameInNamespace --PointAsVector2" />
-        <Exec Command="ldtkgen -i ./Files/ExternalLevels/ExternalLevelsWorld.ldtk --FileNameInNamespace --PointAsVector2" />
-    </Target>
 
     <ItemGroup>
         <Content Include="Files\**\*">
