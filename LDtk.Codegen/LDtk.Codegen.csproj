@@ -35,7 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="../LDtk.Documentation/src/intro.md" Pack="true" PackagePath="/readme.md" />
+        <Content Include="../Documentation/src/intro.md" Pack="true" PackagePath="/readme.md" />
         <None Include="../Icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
 

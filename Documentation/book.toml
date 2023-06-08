@@ -28,5 +28,5 @@ copy-fonts = true
 no-section-label = true
 additional-js = []
 git-repository-url = "https://github.com/IrishBruse/LDtkMonogame"
-edit-url-template = "https://github.com/IrishBruse/LDtkMonogame/edit/main/LDtk.Documentation/{path}"
+edit-url-template = "https://github.com/IrishBruse/LDtkMonogame/edit/main/Documentation/{path}"
 discord-url = "https://ldtk.io/go/discord"
