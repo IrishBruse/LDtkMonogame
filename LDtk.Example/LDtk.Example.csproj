@@ -14,6 +14,12 @@
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     </ItemGroup>
 
+      <ItemGroup>
+        <Content Include="Content\*.*">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
     <ItemGroup>
         <MonoGameContentReference Include="Content\Content.mgcb" />
         <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
