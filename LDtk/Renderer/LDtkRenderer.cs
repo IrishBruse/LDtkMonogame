@@ -170,7 +170,9 @@ public class LDtkRenderer
         else
         {
             string file = Path.ChangeExtension(path, null);
-            return content.Load<Texture2D>(file);
+            string directory = Path.GetDirectoryName(level.WorldFilePath);
+            string assetName = string.IsNullOrEmpty(directory) ? file : $"{directory}/{file}";
+            return content.Load<Texture2D>(assetName);
         }
     }
 
