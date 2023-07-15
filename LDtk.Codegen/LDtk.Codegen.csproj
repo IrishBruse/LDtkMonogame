@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>1.1.0</Version>
+        <Version>1.1.1</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.Codegen</PackageId>

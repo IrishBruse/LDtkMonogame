@@ -1,6 +1,8 @@
 # Changelog
 
 Changelog for versions
+- <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v1.1.0...v1.1.1">1.1.1</a>
+    - Fix assetName for textures when the parent ldtk is in a nested folder [PR-25](https://github.com/IrishBruse/LDtkMonogame/pull/25)
 - <a href="https://github.com/IrishBruse/LDtkMonogame/compare/v1.0.1...v1.1.0">1.1.0</a>
     - Updated `LDtkFile.FromFile(filePath)` For old slower behaviour use `FromFileReflection` <br/> Source generator deserializing should be faster but may have bugs please test.
     - Updated json to 1.3.3

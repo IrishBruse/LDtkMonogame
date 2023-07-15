@@ -159,19 +159,15 @@ public class LDtkRenderer
     {
         if (content == null)
         {
-            if (!string.IsNullOrWhiteSpace(level.FilePath))
-            {
-                string filePath = Path.GetDirectoryName(level.WorldFilePath);
-                string absolutePath = Path.GetFullPath(Path.Combine(filePath, path));
-                return Texture2D.FromFile(graphicsDevice, absolutePath);
-            }
-            return Texture2D.FromFile(graphicsDevice, Path.Combine("Content", path));
+            string directory = Path.GetDirectoryName(level.WorldFilePath);
+            string assetName = Path.Join(directory, path);
+            return Texture2D.FromFile(graphicsDevice, assetName);
         }
         else
         {
             string file = Path.ChangeExtension(path, null);
             string directory = Path.GetDirectoryName(level.WorldFilePath);
-            string assetName = string.IsNullOrEmpty(directory) ? file : $"{directory}/{file}";
+            string assetName = Path.Join(directory, file);
             return content.Load<Texture2D>(assetName);
         }
     }

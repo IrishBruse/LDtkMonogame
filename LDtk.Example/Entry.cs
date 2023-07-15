@@ -44,9 +44,7 @@ public class Entry : Game
     {
         graphics = new GraphicsDeviceManager(this);
 
-#if UseContentPipeline
         Content.RootDirectory = "Content";
-#endif
     }
 
     private void MonogameInitialize()
@@ -77,15 +75,14 @@ public class Entry : Game
 
         camera = new Camera(GraphicsDevice);
 
-#if UseContentPipeline
         renderer = new LDtkRenderer(spriteBatch, Content);
-        file = LDtkFile.FromFile("World", Content);
+        file = LDtkFile.FromFile("Test/World", Content);
         spriteSheet = Content.Load<Texture2D>("Characters");
-#else
-        renderer = new LDtkRenderer(spriteBatch);
-        file = LDtkFile.FromFile("Content/World.ldtk");
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
-#endif
+
+        // None ContentManager version
+        // renderer = new LDtkRenderer(spriteBatch);
+        // file = LDtkFile.FromFile("Content/World.ldtk");
+        // spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 
         world = file.LoadWorld(Worlds.World.Iid);
 
