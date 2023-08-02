@@ -48,11 +48,11 @@ Or using the new ldtk command runner feature you can setup the command to be run
 
 - --LevelClassName          **(Default: LDtkLevelData)** The name to give the custom level file.
 
-- --SingleFile              **(Default: false)** Output all the LDtk files into a single file.
-
 - --PointAsVector2          **(Default: false)** Convert any Point fields or Point[] to Vector2 or Vector2[]
 
 - --FileNameInNamespace     **(Default: false)** Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'
+
+- --BlockScopeNamespace     **(Default: false)** Changes namespace to use block scoped namespace instead of newer c# file scoped namespace.`
 
 - --help                    Display the help screen.
 
