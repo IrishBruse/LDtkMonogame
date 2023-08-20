@@ -47,10 +47,10 @@ public class LDtkIntGrid
     public int GetValueAt(Vector2 position) => GetValueAt((int)position.X, (int)position.Y);
 
     /// <summary> Check if point is inside of a grid </summary>
-    public bool Contains(Point point) => point.X >= 0 && point.Y >= 0 && point.X <= GridSize.X && point.Y <= GridSize.Y;
+    public bool Contains(Point point) => point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
 
     /// <summary> Check if point is inside of a grid </summary>
-    public bool Contains(Vector2 point) => point.X >= 0 && point.Y >= 0 && point.X <= GridSize.X && point.Y <= GridSize.Y;
+    public bool Contains(Vector2 point) => point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
 
     /// <summary> Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer </summary>
     public Point FromWorldToGridSpace(Vector2 position)
