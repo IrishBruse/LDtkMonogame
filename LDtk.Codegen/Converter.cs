@@ -29,7 +29,7 @@ public static class Converter
         return type;
     }
 
-    private static string TypeConversion(string input) => input switch
+    static string TypeConversion(string input) => input switch
     {
         "Int" => "int",
         "String" => "string",

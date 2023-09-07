@@ -6,11 +6,11 @@ using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
-internal class ColorConverter : JsonConverter<Color>
+class ColorConverter : JsonConverter<Color>
 {
     public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        string str = reader.GetString();
+        string str = reader.GetString()!;
 
         if (str == null)
         {

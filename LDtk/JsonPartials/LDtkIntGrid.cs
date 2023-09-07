@@ -20,7 +20,9 @@ public class LDtkIntGrid
     public Point GridSize { get; set; }
 
     /// <summary> Used by json deserializer not for use by user! </summary>
+#pragma warning disable CS8618
     public LDtkIntGrid() { }
+#pragma warning restore
 
     /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
     public int GetValueAt(int x, int y)
@@ -41,16 +43,28 @@ public class LDtkIntGrid
     }
 
     /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
-    public int GetValueAt(Point position) => GetValueAt(position.X, position.Y);
+    public int GetValueAt(Point position)
+    {
+        return GetValueAt(position.X, position.Y);
+    }
 
     /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
-    public int GetValueAt(Vector2 position) => GetValueAt((int)position.X, (int)position.Y);
+    public int GetValueAt(Vector2 position)
+    {
+        return GetValueAt((int)position.X, (int)position.Y);
+    }
 
     /// <summary> Check if point is inside of a grid </summary>
-    public bool Contains(Point point) => point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
+    public bool Contains(Point point)
+    {
+        return point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
+    }
 
     /// <summary> Check if point is inside of a grid </summary>
-    public bool Contains(Vector2 point) => point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
+    public bool Contains(Vector2 point)
+    {
+        return point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
+    }
 
     /// <summary> Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer </summary>
     public Point FromWorldToGridSpace(Vector2 position)

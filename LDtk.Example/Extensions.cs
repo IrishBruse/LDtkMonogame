@@ -4,7 +4,7 @@ using System;
 
 using Microsoft.Xna.Framework;
 
-internal static class Extensions
+static class Extensions
 {
 
     /// <summary>

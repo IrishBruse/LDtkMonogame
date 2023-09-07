@@ -28,34 +28,44 @@ public partial class LDtkLevel
     [JsonIgnore] public bool Loaded { get; internal set; }
 
     /// <summary> Used by json deserializer not for use by user! </summary>
+#pragma warning disable CS8618
     public LDtkLevel() { }
+#pragma warning restore
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file </param>
-    public static LDtkLevel FromFile(string filePath)
+    public static LDtkLevel? FromFile(string filePath)
     {
-        LDtkLevel file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkLevel);
-        file.FilePath = Path.GetFullPath(filePath);
+        LDtkLevel? file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkLevel);
+        if (file != null)
+        {
+            file.FilePath = Path.GetFullPath(filePath);
+        }
         return file;
     }
 
     /// <summary> Loads the ldtk world file from disk directly </summary>
     /// <param name="filePath"> Path to the .ldtk file </param>
-    public static LDtkLevel FromFileReflection(string filePath)
+    public static LDtkLevel? FromFileReflection(string filePath)
     {
-        LDtkLevel file = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(filePath), Constants.SerializeOptions);
-        file.FilePath = Path.GetFullPath(filePath);
+        LDtkLevel? file = JsonSerializer.Deserialize<LDtkLevel>(File.ReadAllText(filePath), Constants.SerializeOptions);
+        if (file != null)
+        {
+            file.FilePath = Path.GetFullPath(filePath);
+        }
         return file;
     }
 
     /// <summary> Loads the ldtk world file from disk directly </summary>
     /// <param name="filePath">Path to the .ldtk file excluding file extension</param>
     /// <param name="content">The optional content manager if you are using the content pipeline</param>
-    public static LDtkLevel FromFile(string filePath, ContentManager content)
+    public static LDtkLevel? FromFile(string filePath, ContentManager content)
     {
-        LDtkLevel file;
-        file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", ""));
-        file.FilePath = Path.GetFullPath(filePath);
+        LDtkLevel? file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", ""));
+        if (file != null)
+        {
+            file.FilePath = Path.GetFullPath(filePath);
+        }
         return file;
     }
 
@@ -169,7 +179,7 @@ public partial class LDtkLevel
         return entities.ToArray();
     }
 
-    private T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
+    T GetEntityFromInstance<T>(EntityInstance entityInstance) where T : new()
     {
         T entity = new();
         LDtkFieldParser.ParseBaseEntityFields(entity, entityInstance, this);
@@ -179,9 +189,15 @@ public partial class LDtkLevel
 
     /// <summary> Check if point is inside of a level </summary>
     /// <returns> True if point is inside level </returns>
-    public bool Contains(Vector2 point) => point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
+    public bool Contains(Vector2 point)
+    {
+        return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
+    }
 
     /// <summary> Check if point is inside of a level </summary>
     /// <returns> True if point is inside level </returns>
-    public bool Contains(Point point) => point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
+    public bool Contains(Point point)
+    {
+        return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
+    }
 }

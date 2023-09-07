@@ -36,7 +36,9 @@ public partial class LDtkWorld
     [JsonIgnore] public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
 
     /// <summary> Used by json deserializer not for use by user! </summary>
+#pragma warning disable CS8618
     public LDtkWorld() { }
+#pragma warning restore
 
     /// <summary> The content manager used if you are using the contentpipeline </summary>
     public ContentManager Content { get; set; }
@@ -44,7 +46,7 @@ public partial class LDtkWorld
     /// <summary> Goes through all the loaded levels looking for the entity </summary>
     public T GetEntity<T>() where T : new()
     {
-        T entity = default;
+        T entity = new();
 
         foreach (LDtkLevel level in Levels)
         {
@@ -110,11 +112,17 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with index {index} found in this world");
     }
 
-    private LDtkLevel LoadLevel(LDtkLevel rawLevel)
+    LDtkLevel LoadLevel(LDtkLevel rawLevel)
     {
-        LDtkLevel level;
-        if (rawLevel.ExternalRelPath != null)
+        if (rawLevel.ExternalRelPath == null)
         {
+            rawLevel.FilePath = FilePath;
+            return rawLevel;
+        }
+        else
+        {
+            LDtkLevel? level;
+
             if (Content != null)
             {
                 level = LDtkLevel.FromFile(Path.Join(Path.GetDirectoryName(FilePath), rawLevel.ExternalRelPath), Content);
@@ -124,18 +132,18 @@ public partial class LDtkWorld
                 level = LDtkLevel.FromFile(Path.Join(Path.GetDirectoryName(FilePath), rawLevel.ExternalRelPath));
             }
 
+            if (level == null)
+            {
+                throw new LDtkException($"No level with identifier {rawLevel.Identifier} found in this world");
+            }
+
             level.ExternalRelPath = rawLevel.ExternalRelPath;
             level.WorldFilePath = FilePath;
             level.FilePath = level.ExternalRelPath;
             level.Loaded = true;
-        }
-        else
-        {
-            rawLevel.FilePath = FilePath;
-            return rawLevel;
-        }
 
-        return level;
+            return level;
+        }
     }
 
     /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/> </summary>

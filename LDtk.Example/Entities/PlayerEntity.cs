@@ -27,19 +27,19 @@ public class PlayerEntity
     public bool Flip { get; set; }
 
     public Action OnShoot { get; set; }
-    private readonly Box collider;
-    private readonly Player data;
-    private readonly Texture2D texture;
-    private readonly LDtkRenderer renderer;
-    private Vector2 velocity;
-    private List<Box> tiles;
-    private bool grounded;
-    private readonly GunEntity gun;
-    private bool hasGun;
-    private KeyboardState oldKeyboard;
-    private Vector2 startPosition;
-    private float startTime;
-    private bool shoot;
+    readonly Box collider;
+    readonly Player data;
+    readonly Texture2D texture;
+    readonly LDtkRenderer renderer;
+    Vector2 velocity;
+    List<Box> tiles;
+    bool grounded;
+    readonly GunEntity gun;
+    bool hasGun;
+    KeyboardState oldKeyboard;
+    Vector2 startPosition;
+    float startTime;
+    bool shoot;
 
     public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, GunEntity gun)
     {
@@ -135,7 +135,7 @@ public class PlayerEntity
         }
     }
 
-    private void CollisionDetection(LDtkLevel level, float deltaTime)
+    void CollisionDetection(LDtkLevel level, float deltaTime)
     {
         grounded = false;
         LDtkIntGrid collisions = level.GetIntGrid("Tiles");
@@ -145,7 +145,7 @@ public class PlayerEntity
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
         Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
 
-        tiles = new List<Box>();
+        tiles = new();
 
         for (int x = topLeftGrid.X; x < bottomRightGrid.X; x++)
         {

@@ -2,8 +2,8 @@ namespace LDtk.Codegen.Generators;
 
 public class EnumGenerator : BaseGenerator
 {
-    private LDtkFile ldtkFile;
-    private Options options;
+    LDtkFile ldtkFile;
+    Options options;
 
     public EnumGenerator(LDtkFile ldtkFile, Options options)
     {
@@ -24,7 +24,7 @@ public class EnumGenerator : BaseGenerator
         }
     }
 
-    private void GenEnum(EnumDefinition e)
+    void GenEnum(EnumDefinition e)
     {
         Line($"// This file was automatically generated, any modifications will be lost!");
         Line($"#pragma warning disable");

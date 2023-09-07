@@ -18,14 +18,20 @@ public partial class LDtkFile
     [JsonIgnore] public ContentManager Content { get; set; }
 
     /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
+#pragma warning disable CS8618
     public LDtkFile() { }
+#pragma warning restore
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
     /// <returns> Returns the file loaded from the path. </returns>
     public static LDtkFile FromFile(string filePath)
     {
-        LDtkFile file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkFile);
+        LDtkFile? file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkFile);
+        if (file == null)
+        {
+            throw new LDtkException($"Failed to Deserialize ldtk file from {filePath}");
+        }
         file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
@@ -35,7 +41,11 @@ public partial class LDtkFile
     /// <returns> Returns the file loaded from the path. </returns>
     public static LDtkFile FromFileReflection(string filePath)
     {
-        LDtkFile file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
+        LDtkFile? file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
+        if (file == null)
+        {
+            throw new LDtkException($"Failed to Deserialize ldtk file from {filePath}");
+        }
         file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
@@ -55,7 +65,7 @@ public partial class LDtkFile
     /// <summary> Loads the ldtkl world file from disk directly or from the embeded one depending on if the file uses externalworlds. </summary>
     /// <param name="iid" > The iid of the world to load. </param>
     /// <returns> Returns the world from the iid. </returns>
-    public LDtkWorld LoadWorld(Guid iid)
+    public LDtkWorld? LoadWorld(Guid iid)
     {
         foreach (LDtkWorld world in Worlds)
         {

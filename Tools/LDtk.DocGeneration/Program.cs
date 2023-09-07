@@ -21,10 +21,10 @@ public class Program
     private LDtkFileReader l;
 #pragma warning restore
 
-    private const string XMLDocPath = "./bin/Debug/net6.0/LDtkMonogame.xml";
-    private const string SummaryTemplatePath = "../../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
-    private const string ApiFolder = "../../LDtk.Documentation/src/Api/";
-    private static HashSet<string> excludedFiles = new(){
+    const string XMLDocPath = "./bin/Debug/net6.0/LDtkMonogame.xml";
+    const string SummaryTemplatePath = "../../LDtk.Documentation/src/SUMMARY_TEMPLATE.md";
+    const string ApiFolder = "../../LDtk.Documentation/src/Api/";
+    static HashSet<string> excludedFiles = new(){
         "LDtkFileReader",
         "LDtkLevelReader",
         "When",
@@ -32,8 +32,8 @@ public class Program
         "LDtkFieldParser",
     };
 
-    private static Dictionary<string, TypeDocs> docs = new();
-    private static Dictionary<string, Type> types = new();
+    static Dictionary<string, TypeDocs> docs = new();
+    static Dictionary<string, Type> types = new();
     public static void Main()
     {
         DeleteApiFolder();
@@ -95,6 +95,8 @@ public class Program
                 case "M":
                 Process(node.FirstChild.InnerText, data, false, true);
                 break;
+
+                default: throw new Exception("Unknown type: " + parts[0]);
             }
         }
 
@@ -143,7 +145,7 @@ public class Program
         File.WriteAllText(SummaryTemplatePath.Replace("_TEMPLATE", ""), summaryTemplate);
     }
 
-    private static void GenerateTypes()
+    static void GenerateTypes()
     {
         foreach (AssemblyName assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
         {
@@ -160,7 +162,7 @@ public class Program
         }
     }
 
-    private static void Process(string description, string data, bool isField, bool isMethod)
+    static void Process(string description, string data, bool isField, bool isMethod)
     {
         string[] variableParts = data.Split(".");
 
@@ -202,7 +204,7 @@ public class Program
         }
     }
 
-    private static string ProcessField(string data)
+    static string ProcessField(string data)
     {
         string[] variableParts = data.Split(".");
 
@@ -215,7 +217,7 @@ public class Program
         return $"public {RemoveNamespaceFromType(ty.FieldType.ToString())} {ty.Name};";
     }
 
-    private static string ProcessProperty(string data)
+    static string ProcessProperty(string data)
     {
         string[] variableParts = data.Split(".");
 
@@ -236,7 +238,7 @@ public class Program
         }
     }
 
-    private static string ProcessMethod(string data)
+    static string ProcessMethod(string data)
     {
         string[] methodParts = data.Split("(");
         string[] variableParts = methodParts[0][..^1].Split(".");
@@ -272,12 +274,12 @@ public class Program
         }
     }
 
-    private static string RemoveNamespace(string data)
+    static string RemoveNamespace(string data)
     {
         return data.Replace("LDtk.Renderer.", "").Replace("LDtk.ContentPipeline.", "").Replace("LDtk.", "");
     }
 
-    private static string RemoveNamespaceFromType(string data)
+    static string RemoveNamespaceFromType(string data)
     {
         if (data.StartsWith("System.Nullable", StringComparison.CurrentCulture))
         {
@@ -289,7 +291,7 @@ public class Program
             return ProcessTypeName(data.Split(".")[^1]);
         }
     }
-    private static string ProcessTypeName(string input)
+    static string ProcessTypeName(string input)
     {
         return input
         .Replace("Boolean", "bool")
@@ -300,7 +302,7 @@ public class Program
         .Replace("String", "string");
     }
 
-    private static void DeleteApiFolder()
+    static void DeleteApiFolder()
     {
         try
         {
@@ -313,7 +315,7 @@ public class Program
         Directory.CreateDirectory(ApiFolder);
     }
 
-    private static string ToMarkdownText(string input)
+    static string ToMarkdownText(string input)
     {
         string[] lines = input.Split("\n");
         for (int i = 0; i < lines.Length; i++)
@@ -330,9 +332,9 @@ public class TypeDocs
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public List<string> Properties { get; set; } = new();
-    public List<string> Fields { get; set; } = new();
-    public List<string> Methods { get; set; } = new();
+    public List<string> Properties { get; init; } = new();
+    public List<string> Fields { get; init; } = new();
+    public List<string> Methods { get; init; } = new();
 
     public TypeDocs(string name, string description)
     {

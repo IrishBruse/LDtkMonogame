@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
-internal class PointConverter : JsonConverter<Point>
+class PointConverter : JsonConverter<Point>
 {
     public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

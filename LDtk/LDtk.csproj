@@ -8,6 +8,7 @@
         <AssemblyName>LDtkMonogame</AssemblyName>
         <NoWarn>CS0618,IDE0130</NoWarn>
         <ImplicitUsings>false</ImplicitUsings>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup>

@@ -1,6 +1,7 @@
 namespace LDtkMonogameExample.AABB;
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Xna.Framework;
 
@@ -20,7 +21,10 @@ public class Box
         Pivot = pivot;
     }
 
-    public bool Contains(Vector2 point) => point.X >= TopLeft.X && point.X <= BottomRight.X && point.Y >= TopLeft.Y && point.Y <= BottomRight.Y;
+    public bool Contains(Vector2 point)
+    {
+        return point.X >= TopLeft.X && point.X <= BottomRight.X && point.Y >= TopLeft.Y && point.Y <= BottomRight.Y;
+    }
 
     public bool Contains(Box rect)
     {
@@ -32,6 +36,7 @@ public class Box
         return inside;
     }
 
+    [SuppressMessage("Usage", "CA1021:Avoid out parameters", Justification = "This is a try like method")]
     public bool RayCast(Vector2 rayOrigin, Vector2 rayDirection, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear)
     {
         hitNear = 0;
@@ -81,6 +86,7 @@ public class Box
         return true;
     }
 
+    [SuppressMessage("Usage", "CA1021:Avoid out parameters", Justification = "This is a try like method")]
     public bool Cast(Vector2 direction, Box target, out Vector2 contactPoint, out Vector2 contactNormal, out float hitNear, float deltaTime)
     {
         contactPoint = default;

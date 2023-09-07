@@ -16,8 +16,8 @@ public class BulletEntity
     public bool Hit { get; set; }
 
     public Box Collider { get; set; }
-    private readonly Texture2D texture;
-    private readonly LDtkRenderer renderer;
+    readonly Texture2D texture;
+    readonly LDtkRenderer renderer;
 
     public BulletEntity(Texture2D texture, LDtkRenderer renderer)
     {

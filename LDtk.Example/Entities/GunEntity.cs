@@ -22,9 +22,9 @@ public class GunEntity
     public bool Taken { get; set; }
     public Box Collider { get; set; }
 
-    private Gun_Pickup data;
-    private Texture2D texture;
-    private LDtkRenderer renderer;
+    Gun_Pickup data;
+    Texture2D texture;
+    LDtkRenderer renderer;
 
     public GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer)
     {

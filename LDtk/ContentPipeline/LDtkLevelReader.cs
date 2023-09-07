@@ -15,7 +15,6 @@ public class LDtkLevelReader : ContentTypeReader<LDtkLevel>
     /// <returns> The LDtkLevel read from the content pipeline. </returns>
     protected override LDtkLevel Read(ContentReader input, LDtkLevel existingInstance)
     {
-        LDtkLevel lDtkLevel = JsonSerializer.Deserialize<LDtkLevel>(input.ReadString(), Constants.SerializeOptions);
-        return existingInstance ?? lDtkLevel;
+        return existingInstance ?? JsonSerializer.Deserialize<LDtkLevel>(input.ReadString(), Constants.SerializeOptions)!;
     }
 }

@@ -18,27 +18,27 @@ using Microsoft.Xna.Framework.Input;
 public class Entry : Game
 {
     // LDtk stuff
-    private LDtkFile file;
-    private LDtkWorld world;
-    private LDtkRenderer renderer;
-    private readonly List<EnemyEntity> enemies = new();
-    private readonly List<BulletEntity> bullets = new();
-    private PlayerEntity player;
-    private GunEntity gun;
-    private Camera camera;
-    private Texture2D spriteSheet;
+    LDtkFile file;
+    LDtkWorld world;
+    LDtkRenderer renderer;
+    readonly List<EnemyEntity> enemies = new();
+    readonly List<BulletEntity> bullets = new();
+    PlayerEntity player;
+    GunEntity gun;
+    Camera camera;
+    Texture2D spriteSheet;
 
     // Monogame Stuff
-    private SpriteBatch spriteBatch;
-    private readonly GraphicsDeviceManager graphics;
-    private float pixelScale = 1f;
+    SpriteBatch spriteBatch;
+    readonly GraphicsDeviceManager graphics;
+    float pixelScale = 1f;
     public static Texture2D Pixel { get; set; }
 
     public static bool DebugF1 { get; set; }
     public static bool DebugF2 { get; set; }
     public static bool DebugF3 { get; set; }
 
-    private KeyboardState oldKeyboard;
+    KeyboardState oldKeyboard;
 
     public Entry()
     {
@@ -47,7 +47,7 @@ public class Entry : Game
         Content.RootDirectory = "Content";
     }
 
-    private void MonogameInitialize()
+    void MonogameInitialize()
     {
         Window.Title = "LDtkMonogame - Shooter";
 
@@ -215,7 +215,7 @@ public class Entry : Game
         base.Draw(gameTime);
     }
 
-    private static void DebugInput(KeyboardState old)
+    static void DebugInput(KeyboardState old)
     {
         if (old.IsKeyUp(Keys.F1) && Keyboard.GetState().IsKeyDown(Keys.F1))
         {

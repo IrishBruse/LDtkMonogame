@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
-internal class RectangleConverter : JsonConverter<Rectangle>
+class RectangleConverter : JsonConverter<Rectangle>
 {
     public override Rectangle Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

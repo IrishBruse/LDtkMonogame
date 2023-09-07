@@ -14,13 +14,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 public class EnemyEntity
 {
-    private Enemy data;
-    private Texture2D texture;
-    private LDtkRenderer renderer;
-    private bool flip;
-    private int nextWander;
-    private bool dead;
-    private Vector2 velocity;
+    Enemy data;
+    Texture2D texture;
+    LDtkRenderer renderer;
+    bool flip;
+    int nextWander;
+    bool dead;
+    Vector2 velocity;
 
     public Box Collider { get; set; }
 

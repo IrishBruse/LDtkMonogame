@@ -2,8 +2,8 @@ namespace LDtk.Codegen.Generators;
 
 public class IidGenerator : BaseGenerator
 {
-    private LDtkFile ldtkFile;
-    private readonly Options options;
+    LDtkFile ldtkFile;
+    readonly Options options;
 
     public IidGenerator(LDtkFile ldtkFile, Options options)
     {

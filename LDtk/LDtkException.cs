@@ -16,5 +16,5 @@ public class LDtkException : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="LDtkException"/> class.
     /// </summary>
-    private LDtkException() { }
+    LDtkException() { }
 }

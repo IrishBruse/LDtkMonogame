@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-public partial class Program
+public static partial class Program
 {
-    private const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
-    private const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
-    private static readonly string MinimalFilePath = "../../LDtk/LDtkJson.cs";
-    private static readonly string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
-    private static readonly string Version = "1.3.3";
+    const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
+    const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
+    const string MinimalFilePath = "../../LDtk/LDtkJson.cs";
+    const string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
+    const string Version = "1.3.3";
 
-    private static readonly string PragmaWarnings = "CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711";
+    const string PragmaWarnings = "CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711";
 
-    private static bool minimal;
+    static bool minimal;
 
     public static void Main()
     {
@@ -27,7 +27,7 @@ public partial class Program
         GenerateFile(FullFilePath, FullSchema, "LDtk.Codegen");
     }
 
-    private static void GenerateFile(string file, string schema, string namespace_)
+    static void GenerateFile(string file, string schema, string namespace_)
     {
         string[] args = new string[]
         {
@@ -88,7 +88,7 @@ public partial class Program
         File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings);
     }
 
-    private static void Format(string file)
+    static void Format(string file)
     {
         Thread.Sleep(300);
         Process.Start(new ProcessStartInfo
@@ -103,7 +103,7 @@ public partial class Program
         }).WaitForExit();
     }
 
-    private static void ProcessFile(List<string> lines)
+    static void ProcessFile(List<string> lines)
     {
         bool end = false;
 
@@ -217,7 +217,7 @@ public partial class Program
         }
     }
 
-    private static void RemoveClassBody(List<string> lines, int i)
+    static void RemoveClassBody(List<string> lines, int i)
     {
         int indent = 1;
 
@@ -236,7 +236,7 @@ public partial class Program
         }
     }
 
-    private static void ProcessVariables(List<string> lines, int i)
+    static void ProcessVariables(List<string> lines, int i)
     {
         string name = lines[i].Split('"')[1];
 
@@ -260,7 +260,7 @@ public partial class Program
         }
     }
 
-    private static void DeleteDocComment(List<string> lines, int i)
+    static void DeleteDocComment(List<string> lines, int i)
     {
         for (int j = i - 1; j >= 0; j--)
         {

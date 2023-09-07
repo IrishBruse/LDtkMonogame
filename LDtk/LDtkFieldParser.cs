@@ -8,7 +8,7 @@ using System.Text.Json;
 using Microsoft.Xna.Framework;
 
 /// <summary> Utility for parsing ldtk json data into more typed versions. </summary>
-internal static class LDtkFieldParser
+static class LDtkFieldParser
 {
     /// <summary> Parses the custom level fields. </summary>
     /// <typeparam name="T"> Generic type parameter. </typeparam>
@@ -55,12 +55,17 @@ internal static class LDtkFieldParser
         }
     }
 
-    private static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel level)
+    static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel? level)
     {
         foreach (FieldInstance field in fields)
         {
             string variableName = field._Identifier;
-            PropertyInfo variableDef = typeof(T).GetProperty(variableName);
+            PropertyInfo? variableDef = typeof(T).GetProperty(variableName);
+
+            if (variableDef == null)
+            {
+                throw new LDtkException($"Field {variableName} does not exist on {typeof(T).Name}");
+            }
 
             if (field._Value == null)
             {
@@ -69,7 +74,7 @@ internal static class LDtkFieldParser
 
             JsonElement element = (JsonElement)field._Value;
 
-            if (field._Type.Contains(Field.PointType))
+            if (level != null && field._Type.Contains(Field.PointType))
             {
                 HandlePoints(classFields, level, field, variableDef, element);
             }
@@ -95,7 +100,7 @@ internal static class LDtkFieldParser
                     }
                     else if (isColor)
                     {
-                        variableDef.SetValue(classFields, ParseStringToColor(field._Value.ToString(), 255));
+                        variableDef.SetValue(classFields, ParseStringToColor(field._Value.ToString()!, 255));
                     }
                     else
                     {
@@ -124,7 +129,7 @@ internal static class LDtkFieldParser
         }
     }
 
-    private static Color ParseStringToColor(string hex, int alpha)
+    static Color ParseStringToColor(string hex, int alpha)
     {
         if (uint.TryParse(hex.Replace("#", string.Empty), NumberStyles.HexNumber, null, out uint color))
         {
@@ -140,7 +145,7 @@ internal static class LDtkFieldParser
         }
     }
 
-    private static void HandlePoints<T>(T classFields, LDtkLevel level, FieldInstance field, PropertyInfo variableDef, JsonElement element)
+    static void HandlePoints<T>(T classFields, LDtkLevel level, FieldInstance field, PropertyInfo variableDef, JsonElement element)
     {
         int gridSize = GetGridSize(level);
 
@@ -167,7 +172,7 @@ internal static class LDtkFieldParser
         {
             if (variableDef.PropertyType.GetElementType() == typeof(Point))
             {
-                Point[] points = JsonSerializer.Deserialize<Point[]>(element.ToString(), Constants.SerializeOptions);
+                Point[] points = JsonSerializer.Deserialize<Point[]>(element.ToString(), Constants.SerializeOptions)!;
                 for (int i = 0; i < points.Length; i++)
                 {
                     points[i] *= new Point(gridSize, gridSize);
@@ -179,7 +184,7 @@ internal static class LDtkFieldParser
             }
             else
             {
-                Vector2[] points = JsonSerializer.Deserialize<Vector2[]>(element.ToString(), Constants.SerializeOptions);
+                Vector2[] points = JsonSerializer.Deserialize<Vector2[]>(element.ToString(), Constants.SerializeOptions) ?? Array.Empty<Vector2>();
                 for (int i = 0; i < points.Length; i++)
                 {
                     points[i] *= new Vector2(gridSize, gridSize);
@@ -192,7 +197,7 @@ internal static class LDtkFieldParser
         }
     }
 
-    private static int GetGridSize(LDtkLevel level)
+    static int GetGridSize(LDtkLevel level)
     {
         int gridSize = 0;
         for (int j = 0; j < level.LayerInstances.Length; j++)
@@ -207,22 +212,15 @@ internal static class LDtkFieldParser
     }
 
     // Helpers
-    private static void ParseBaseField<T>(T entity, string fieldName, object value)
+    static void ParseBaseField<T>(T entity, string fieldName, object value)
     {
-        PropertyInfo variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        PropertyInfo? variableDef = typeof(T).GetProperty(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         if (variableDef == null)
         {
-            throw new LDtkException($"Error: Field \"{variableDef.Name}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
+            throw new LDtkException($"Error: Field \"{fieldName}\" not found in {typeof(T).FullName}. Maybe you should run ldtkgen again to update the files?");
         }
 
         variableDef.SetValue(entity, value);
-    }
-
-    private class CxCyPoint
-    {
-        public int Cx { get; set; }
-
-        public int Cy { get; set; }
     }
 }

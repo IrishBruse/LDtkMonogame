@@ -1252,7 +1252,7 @@ public partial class TilesetDefinition
     /// source image changes.
     /// </summary>
     [JsonPropertyName("cachedPixelData")]
-    public Dictionary<string, object> CachedPixelData { get; set; }
+    public Dictionary<string, object> CachedPixelData { get; init; }
 
     /// <summary>
     /// An array of custom tile metadata

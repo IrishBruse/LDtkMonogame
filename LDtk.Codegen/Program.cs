@@ -10,14 +10,14 @@ using CommandLine;
 using LDtk;
 using LDtk.Codegen.Generators;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
         Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
-    private static void HandleParseError(IEnumerable<Error> errs)
+    static void HandleParseError(IEnumerable<Error> errs)
     {
         if (errs.IsVersion())
         {
@@ -28,7 +28,7 @@ public class Program
         errs.Output();
     }
 
-    private static void Run(Options options)
+    static void Run(Options options)
     {
         LDtkFile file = LDtkFile.FromFile(options.Input);
 

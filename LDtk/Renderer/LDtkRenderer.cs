@@ -21,11 +21,13 @@ public class LDtkRenderer
     /// <summary> The spritebatch used for rendering with this Renderer </summary>
     public SpriteBatch SpriteBatch { get; set; }
     /// <summary> The levels identifier to layers Dictionary </summary>
-    protected Dictionary<string, RenderedLevel> PrerenderedLevels { get; set; } = new();
+    Dictionary<string, RenderedLevel> PrerenderedLevels { get; set; } = new();
+    /// <summary> The levels identifier to layers Dictionary </summary>
+    Dictionary<string, Texture2D> TilemapCache { get; set; } = new();
 
-    private static Texture2D pixel;
-    private GraphicsDevice graphicsDevice;
-    private ContentManager content;
+    Texture2D pixel;
+    GraphicsDevice graphicsDevice;
+    ContentManager? content;
 
     /// <summary> This is used to intizialize the renderer for use with direct file loading </summary>
     public LDtkRenderer(SpriteBatch spriteBatch)
@@ -38,6 +40,12 @@ public class LDtkRenderer
             pixel = new Texture2D(graphicsDevice, 1, 1);
             pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
         }
+    }
+
+    /// <summary> Dispose </summary>
+    ~LDtkRenderer()
+    {
+        pixel.Dispose();
     }
 
     /// <summary> This is used to intizialize the renderer for use with content Pipeline </summary>
@@ -69,7 +77,7 @@ public class LDtkRenderer
         graphicsDevice.SetRenderTarget(null);
     }
 
-    private Texture2D[] RenderLayers(LDtkLevel level)
+    Texture2D[] RenderLayers(LDtkLevel level)
     {
         List<Texture2D> layers = new();
 
@@ -137,7 +145,7 @@ public class LDtkRenderer
         return layers.ToArray();
     }
 
-    private Texture2D RenderBackgroundToLayer(LDtkLevel level)
+    Texture2D RenderBackgroundToLayer(LDtkLevel level)
     {
         Texture2D texture = GetTexture(level, level.BgRelPath);
 
@@ -155,21 +163,32 @@ public class LDtkRenderer
         return layer;
     }
 
-    private Texture2D GetTexture(LDtkLevel level, string path)
+    Texture2D GetTexture(LDtkLevel level, string path)
     {
+        if (TilemapCache.TryGetValue(path, out Texture2D? texture))
+        {
+            return texture;
+        }
+
+        Texture2D tilemap;
+
         if (content == null)
         {
-            string directory = Path.GetDirectoryName(level.WorldFilePath);
+            string directory = Path.GetDirectoryName(level.WorldFilePath)!;
             string assetName = Path.Join(directory, path);
-            return Texture2D.FromFile(graphicsDevice, assetName);
+            tilemap = Texture2D.FromFile(graphicsDevice, assetName);
         }
         else
         {
             string file = Path.ChangeExtension(path, null);
-            string directory = Path.GetDirectoryName(level.WorldFilePath);
+            string directory = Path.GetDirectoryName(level.WorldFilePath)!;
             string assetName = Path.Join(directory, file);
-            return content.Load<Texture2D>(assetName);
+            tilemap = content.Load<Texture2D>(assetName);
         }
+
+        TilemapCache.Add(path, tilemap);
+
+        return tilemap;
     }
 
     /// <summary> Render the prerendered level you created from PrerenderLevel() </summary>
@@ -191,6 +210,7 @@ public class LDtkRenderer
     /// <summary> Render the level directly without prerendering the layers alot slower than prerendering </summary>
     public void RenderLevel(LDtkLevel level)
     {
+        ArgumentNullException.ThrowIfNull(level);
         Texture2D[] layers = RenderLayers(level);
 
         for (int i = 0; i < layers.Length; i++)
@@ -223,13 +243,19 @@ public class LDtkRenderer
     /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
-    public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity => SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+    public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity
+    {
+        SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
+    }
 
     /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>
     /// <param name="texture">The spritesheet/texture for rendering the entity</param>
     /// <param name="flipDirection">The direction to flip the entity when rendering</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection) where T : ILDtkEntity => SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection) where T : ILDtkEntity
+    {
+        SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+    }
 
     /// <summary> Renders the entity with the tile it includes </summary>
     /// <param name="entity">The entity you want to render</param>

@@ -4,8 +4,8 @@ using LDtk.Codegen;
 
 public class ClassGenerator : BaseGenerator
 {
-    private LDtkFile ldtkFile;
-    private readonly Options options;
+    LDtkFile ldtkFile;
+    Options options;
 
     public ClassGenerator(LDtkFile ldtkFile, Options options)
     {
@@ -25,7 +25,7 @@ public class ClassGenerator : BaseGenerator
         }
     }
 
-    private void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
+    void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
     {
         Line($"// This file was automatically generated, any modifications will be lost!");
         Line($"#pragma warning disable");
