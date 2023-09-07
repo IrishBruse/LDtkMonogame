@@ -4,6 +4,8 @@ namespace LDtk.Codegen;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
@@ -56,6 +58,18 @@ public partial class LDtkFile
     /// </summary>
     [JsonPropertyName("customCommands")]
     public LdtkCustomCommand[] CustomCommands { get; set; }
+
+    /// <summary>
+    /// Default height for new entities
+    /// </summary>
+    [JsonPropertyName("defaultEntityHeight")]
+    public int DefaultEntityHeight { get; set; }
+
+    /// <summary>
+    /// Default width for new entities
+    /// </summary>
+    [JsonPropertyName("defaultEntityWidth")]
+    public int DefaultEntityWidth { get; set; }
 
     /// <summary>
     /// Default grid size for new layers
@@ -595,6 +609,9 @@ public partial class FieldDefinition
 
     [JsonPropertyName("editorCutLongValues")]
     public bool EditorCutLongValues { get; set; }
+
+    [JsonPropertyName("editorDisplayColor")]
+    public string EditorDisplayColor { get; set; }
 
     /// <summary>
     /// Possible values: Hidden, ValueOnly, NameAndValue, EntityTile, LevelTile,
@@ -1252,7 +1269,7 @@ public partial class TilesetDefinition
     /// source image changes.
     /// </summary>
     [JsonPropertyName("cachedPixelData")]
-    public Dictionary<string, object> CachedPixelData { get; init; }
+    public Dictionary<string, object> CachedPixelData { get; set; }
 
     /// <summary>
     /// An array of custom tile metadata
@@ -1553,6 +1570,18 @@ public partial class EntityInstance
     /// </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
+
+    /// <summary>
+    /// X world coordinate in pixels
+    /// </summary>
+    [JsonPropertyName("__worldX")]
+    public int _WorldX { get; set; }
+
+    /// <summary>
+    /// Y world coordinate in pixels
+    /// </summary>
+    [JsonPropertyName("__worldY")]
+    public int _WorldY { get; set; }
 }
 
 public partial class FieldInstance

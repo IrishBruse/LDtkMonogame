@@ -85,7 +85,7 @@ public static partial class Program
 
         File.WriteAllLines(file, lines);
 
-        File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings);
+        File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings + "\n");
     }
 
     static void Format(string file)

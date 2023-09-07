@@ -1,9 +1,11 @@
-#nullable disable
 #pragma warning disable CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711
 // This file was auto generated, any changes will be lost. For LDtk 1.3.3
 namespace LDtk;
 
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
@@ -632,6 +634,18 @@ public partial class EntityInstance
     /// </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
+
+    /// <summary>
+    /// X world coordinate in pixels
+    /// </summary>
+    [JsonPropertyName("__worldX")]
+    public int _WorldX { get; set; }
+
+    /// <summary>
+    /// Y world coordinate in pixels
+    /// </summary>
+    [JsonPropertyName("__worldY")]
+    public int _WorldY { get; set; }
 }
 
 public partial class FieldInstance
