@@ -57,7 +57,7 @@ public static partial class Program
 
         ProcessFile(lines);
 
-        lines[0] = "#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
+        lines[0] = "#nullable disable\n#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
         lines[1] += "using Microsoft.Xna.Framework;";
         File.WriteAllLines(file, lines);
 
