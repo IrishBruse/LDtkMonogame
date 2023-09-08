@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>1.1.1</Version>
+        <Version>1.1.2</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.ContentPipeline</PackageId>
