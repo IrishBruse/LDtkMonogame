@@ -1,1 +1,1 @@
-./Documentation/src/intro.md
+./docs/src/intro.md
