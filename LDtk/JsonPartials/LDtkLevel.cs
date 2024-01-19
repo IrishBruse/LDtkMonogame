@@ -87,7 +87,7 @@ public partial class LDtkLevel
                 continue;
             }
 
-            if (layer.Type != LayerType.IntGrid)
+            if (layer._Type != LayerType.IntGrid)
             {
                 continue;
             }
@@ -101,8 +101,8 @@ public partial class LDtkLevel
             {
                 Values = layer.IntGridCsv,
                 WorldPosition = Position,
-                GridSize = new(layer.CWid, layer.CHei),
-                TileSize = layer.GridSize,
+                GridSize = new(layer._CWid, layer._CHei),
+                TileSize = layer._GridSize,
             };
         }
 
@@ -175,11 +175,11 @@ public partial class LDtkLevel
 
         foreach (LayerInstance layer in LayerInstances)
         {
-            if (layer.Type == LayerType.Entities)
+            if (layer._Type == LayerType.Entities)
             {
                 foreach (EntityInstance entityInstance in layer.EntityInstances)
                 {
-                    if (entityInstance.Identifier != typeof(T).Name)
+                    if (entityInstance._Identifier != typeof(T).Name)
                     {
                         continue;
                     }
