@@ -1,8 +1,8 @@
 # [LDtkMonogame Wiki](https://ldtk.ethanconneely.com/)
 
 <p align="center">
-    <p><a href="https://ldtk.io/go/discord"><img src="https://img.shields.io/discord/761549092677353513?color=%236370f4&amp;label=Discord" alt="Discord Link"></a> &nbsp;
-    <a href="https://github.com/deepnight/ldtk"><img src="https://img.shields.io/badge/LDtk-1.5.3-yellow" alt=""></a></p>
+    <a href="https://ldtk.io/go/discord"><img src="https://img.shields.io/discord/761549092677353513?color=%236370f4&amp;label=Discord" alt="Discord Link"></a> &nbsp;
+    <a href="https://github.com/deepnight/ldtk"><img src="https://img.shields.io/badge/LDtk-1.5.3-yellow" alt=""></a>
 </p>
 
 LDtkMonogame is an level importer for the LDtk level editor
