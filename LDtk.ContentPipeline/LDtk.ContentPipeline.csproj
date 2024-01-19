@@ -12,13 +12,13 @@
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame.ContentPipeline</PackageId>
         <Description>LDtk contentpipeline extension for importing .ldtk and .ldtkl files</Description>
-        <PackageProjectUrl>https://irishbruse.github.io/ldtk/</PackageProjectUrl>
+        <PackageProjectUrl>https://ldtk.ethanconneely.com/</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/IrishBruse/LDtkMonogame</RepositoryUrl>
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>https://irishbruse.github.io/ldtk/changelog/</PackageReleaseNotes>
+        <PackageReleaseNotes>https://ldtk.ethanconneely.com/changelog/</PackageReleaseNotes>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 

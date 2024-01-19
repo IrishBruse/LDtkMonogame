@@ -16,20 +16,23 @@ using Microsoft.Xna.Framework.Graphics;
 /// This can all be done in your own class if you want to reimplement it and customize it differently
 /// this one is mostly here to get you up and running quickly.
 /// </summary>
-public class LDtkRenderer
+public class LDtkRenderer : IDisposable
 {
-    /// <summary> The spritebatch used for rendering with this Renderer </summary>
+    /// <summary> Gets or sets the spritebatch used for rendering with this Renderer. </summary>
     public SpriteBatch SpriteBatch { get; set; }
-    /// <summary> The levels identifier to layers Dictionary </summary>
-    Dictionary<string, RenderedLevel> PrerenderedLevels { get; set; } = new();
-    /// <summary> The levels identifier to layers Dictionary </summary>
-    Dictionary<string, Texture2D> TilemapCache { get; set; } = new();
 
-    Texture2D pixel;
-    GraphicsDevice graphicsDevice;
-    ContentManager? content;
+    /// <summary> Gets or sets the levels identifier to layers Dictionary. </summary>
+    Dictionary<string, RenderedLevel> PrerenderedLevels { get; } = [];
 
-    /// <summary> This is used to intizialize the renderer for use with direct file loading </summary>
+    /// <summary> Gets or sets the levels identifier to layers Dictionary. </summary>
+    Dictionary<string, Texture2D> TilemapCache { get; } = [];
+
+    readonly Texture2D pixel;
+    readonly GraphicsDevice graphicsDevice;
+    readonly ContentManager? content;
+
+    /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with direct file loading. </summary>
+    /// <param name="spriteBatch">Spritebatch</param>
     public LDtkRenderer(SpriteBatch spriteBatch)
     {
         SpriteBatch = spriteBatch;
@@ -42,21 +45,18 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary> Dispose </summary>
-    ~LDtkRenderer()
-    {
-        pixel.Dispose();
-    }
-
-    /// <summary> This is used to intizialize the renderer for use with content Pipeline </summary>
-    public LDtkRenderer(SpriteBatch spriteBatch, ContentManager content) : this(spriteBatch)
+    /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with content Pipeline. </summary>
+    /// <param name="spriteBatch">SpriteBatch</param>
+    /// <param name="content">Optional ContentManager</param>
+    public LDtkRenderer(SpriteBatch spriteBatch, ContentManager content)
+        : this(spriteBatch)
     {
         this.content = content;
     }
 
-    /// <summary> Prerender out the level to textures to optimize the rendering process </summary>
-    /// <param name="level">The level to prerender</param>
-    /// <exception cref="Exception">The level already has been prerendered</exception>
+    /// <summary> Prerender out the level to textures to optimize the rendering process. </summary>
+    /// <param name="level">The level to prerender.</param>
+    /// <exception cref="Exception">The level already has been prerendered.</exception>
     public void PrerenderLevel(LDtkLevel level)
     {
         if (PrerenderedLevels.ContainsKey(level.Identifier))
@@ -79,7 +79,7 @@ public class LDtkRenderer
 
     Texture2D[] RenderLayers(LDtkLevel level)
     {
-        List<Texture2D> layers = new();
+        List<Texture2D> layers = [];
 
         if (level.BgRelPath != null)
         {
@@ -113,7 +113,7 @@ public class LDtkRenderer
             switch (layer._Type)
             {
                 case LayerType.Tiles:
-                foreach (TileInstance tile in layer.GridTiles.Where(tile => layer._TilesetDefUid.HasValue))
+                foreach (TileInstance tile in layer.GridTiles.Where(_ => layer._TilesetDefUid.HasValue))
                 {
                     Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                     Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
@@ -126,7 +126,7 @@ public class LDtkRenderer
                 case LayerType.IntGrid:
                 if (layer.AutoLayerTiles.Length > 0)
                 {
-                    foreach (TileInstance tile in layer.AutoLayerTiles.Where(tile => layer._TilesetDefUid.HasValue))
+                    foreach (TileInstance tile in layer.AutoLayerTiles.Where(_ => layer._TilesetDefUid.HasValue))
                     {
                         Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                         Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
@@ -134,10 +134,6 @@ public class LDtkRenderer
                         SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
                     }
                 }
-                break;
-
-                case LayerType.Entities:
-                default:
                 break;
             }
         }
@@ -191,7 +187,9 @@ public class LDtkRenderer
         return tilemap;
     }
 
-    /// <summary> Render the prerendered level you created from PrerenderLevel() </summary>
+    /// <summary> Render the prerendered level you created from PrerenderLevel(). </summary>
+    /// <param name="level">Level to prerender</param>
+    /// <exception cref="LDtkException"></exception>
     public void RenderPrerenderedLevel(LDtkLevel level)
     {
         if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
@@ -207,7 +205,8 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary> Render the level directly without prerendering the layers alot slower than prerendering </summary>
+    /// <summary> Render the level directly without prerendering the layers alot slower than prerendering. </summary>
+    /// <param name="level">Level to render</param>
     public void RenderLevel(LDtkLevel level)
     {
         ArgumentNullException.ThrowIfNull(level);
@@ -219,7 +218,8 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary> Render intgrids by displaying the intgrid as solidcolor squares </summary>
+    /// <summary> Render intgrids by displaying the intgrid as solidcolor squares. </summary>
+    /// <param name="intGrid">Render intgrid</param>
     public void RenderIntGrid(LDtkIntGrid intGrid)
     {
         for (int x = 0; x < intGrid.GridSize.X; x++)
@@ -231,7 +231,6 @@ public class LDtkRenderer
                 if (cellValue != 0)
                 {
                     // Color col = intGrid.GetColorFromValue(cellValue);
-
                     int spriteX = intGrid.WorldPosition.X + (x * intGrid.TileSize);
                     int spriteY = intGrid.WorldPosition.Y + (y * intGrid.TileSize);
                     SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, Color.Pink /*col*/, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
@@ -240,43 +239,54 @@ public class LDtkRenderer
         }
     }
 
-    /// <summary> Renders the entity with the tile it includes </summary>
-    /// <param name="entity">The entity you want to render</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity</param>
-    public void RenderEntity<T>(T entity, Texture2D texture) where T : ILDtkEntity
+    /// <summary> Renders the entity with the tile it includes. </summary>
+    /// <param name="entity">The entity you want to render.</param>
+    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
+    public void RenderEntity<T>(T entity, Texture2D texture)
+        where T : ILDtkEntity
     {
         SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
     }
 
-    /// <summary> Renders the entity with the tile it includes </summary>
-    /// <param name="entity">The entity you want to render</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity</param>
-    /// <param name="flipDirection">The direction to flip the entity when rendering</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection) where T : ILDtkEntity
+    /// <summary> Renders the entity with the tile it includes. </summary>
+    /// <param name="entity">The entity you want to render.</param>
+    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
+    /// <param name="flipDirection">The direction to flip the entity when rendering.</param>
+    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection)
+        where T : ILDtkEntity
     {
         SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
     }
 
-    /// <summary> Renders the entity with the tile it includes </summary>
-    /// <param name="entity">The entity you want to render</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity</param>
-    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, int animationFrame) where T : ILDtkEntity
+    /// <summary> Renders the entity with the tile it includes. </summary>
+    /// <param name="entity">The entity you want to render.</param>
+    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
+    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size.</param>
+    public void RenderEntity<T>(T entity, Texture2D texture, int animationFrame)
+        where T : ILDtkEntity
     {
         Rectangle animatedTile = entity.Tile;
         animatedTile.Offset(animatedTile.Width * animationFrame, 0);
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
     }
 
-    /// <summary> Renders the entity with the tile it includes </summary>
-    /// <param name="entity">The entity you want to render</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity</param>
-    /// <param name="flipDirection">The direction to flip the entity when rendering</param>
-    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection, int animationFrame) where T : ILDtkEntity
+    /// <summary> Renders the entity with the tile it includes. </summary>
+    /// <param name="entity">The entity you want to render.</param>
+    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
+    /// <param name="flipDirection">The direction to flip the entity when rendering.</param>
+    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size.</param>
+    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection, int animationFrame)
+        where T : ILDtkEntity
     {
         Rectangle animatedTile = entity.Tile;
         animatedTile.Offset(animatedTile.Width * animationFrame, 0);
         SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
+    }
+
+    /// <summary> Dispose Renderer </summary>
+    public void Dispose()
+    {
+        pixel.Dispose();
+        GC.SuppressFinalize(this);
     }
 }

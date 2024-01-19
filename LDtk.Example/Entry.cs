@@ -14,24 +14,26 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-
 public class Entry : Game
 {
     // LDtk stuff
+
     LDtkFile file;
     LDtkWorld world;
     LDtkRenderer renderer;
-    readonly List<EnemyEntity> enemies = new();
-    readonly List<BulletEntity> bullets = new();
+    readonly List<EnemyEntity> enemies = [];
+    readonly List<BulletEntity> bullets = [];
     PlayerEntity player;
     GunEntity gun;
     Camera camera;
     Texture2D spriteSheet;
 
     // Monogame Stuff
+
     SpriteBatch spriteBatch;
     readonly GraphicsDeviceManager graphics;
     float pixelScale = 1f;
+
     public static Texture2D Pixel { get; set; }
 
     public static bool DebugF1 { get; set; }
@@ -83,7 +85,6 @@ public class Entry : Game
         // renderer = new LDtkRenderer(spriteBatch);
         // file = LDtkFile.FromFile("Content/World.ldtk");
         // spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
-
         world = file.LoadWorld(Worlds.World.Iid);
 
         LDtkLevel level0 = world.LoadLevel("Level_0");

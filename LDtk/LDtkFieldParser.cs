@@ -121,9 +121,12 @@ static class LDtkFieldParser
                     variableDef.SetValue(classFields, null);
                     break;
 
-                    default:
                     case JsonValueKind.Undefined:
-                    throw new LDtkException("Oops");
+                    throw new LDtkException("Field Undefined");
+
+                    default:
+                    throw new LDtkException("Unknown FieldKind");
+
                 }
             }
         }
@@ -184,7 +187,7 @@ static class LDtkFieldParser
             }
             else
             {
-                Vector2[] points = JsonSerializer.Deserialize<Vector2[]>(element.ToString(), Constants.SerializeOptions) ?? Array.Empty<Vector2>();
+                Vector2[] points = JsonSerializer.Deserialize<Vector2[]>(element.ToString(), Constants.SerializeOptions) ?? [];
                 for (int i = 0; i < points.Length; i++)
                 {
                     points[i] *= new Vector2(gridSize, gridSize);

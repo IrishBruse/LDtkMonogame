@@ -24,9 +24,11 @@ public class PlayerEntity
     }
 
     public LDtkLevel Level { get; set; }
+
     public bool Flip { get; set; }
 
     public Action OnShoot { get; set; }
+
     readonly Box collider;
     readonly Player data;
     readonly Texture2D texture;
@@ -145,7 +147,7 @@ public class PlayerEntity
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
         Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
 
-        tiles = new();
+        tiles = [];
 
         for (int x = topLeftGrid.X; x < bottomRightGrid.X; x++)
         {
@@ -159,7 +161,8 @@ public class PlayerEntity
             }
         }
 
-        List<KeyValuePair<int, float>> tilesDistance = new();
+        List<KeyValuePair<int, float>> tilesDistance = [];
+
         // get values to be sorted
         for (int i = 0; i < tiles.Count; i++)
         {

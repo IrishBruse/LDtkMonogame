@@ -4,8 +4,8 @@ public static class Converter
 {
     public static string ConvertFieldDefinitionTypes(string input, bool pointAsVector)
     {
-        input = input.Replace("LocalEnum.", "");
-        input = input.Replace("ExternEnum.", "");
+        input = input.Replace("LocalEnum.", string.Empty);
+        input = input.Replace("ExternEnum.", string.Empty);
 
         int lessThan = input.IndexOf('<');
         int greaterThan = input.IndexOf('>');

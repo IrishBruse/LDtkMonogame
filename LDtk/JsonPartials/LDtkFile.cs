@@ -11,16 +11,16 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("ExternalFiles: {ExternalLevels} Path: {FilePath}")]
 public partial class LDtkFile
 {
+    /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
+    public LDtkFile() { }
+
     /// <summary> Gets or sets the absolute path to the ldtkFile. </summary>
-    [JsonIgnore] public string FilePath { get; set; }
+    [JsonIgnore]
+    public string FilePath { get; set; } = string.Empty;
 
     /// <summary> Gets or sets the content manager used if you are using the contentpipeline. </summary>
-    [JsonIgnore] public ContentManager Content { get; set; }
-
-    /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
-#pragma warning disable CS8618
-    public LDtkFile() { }
-#pragma warning restore
+    [JsonIgnore]
+    public ContentManager? Content { get; set; }
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
@@ -96,7 +96,8 @@ public partial class LDtkFile
     /// <typeparam name="T"> The type to convert the entity to. </typeparam>
     /// <param name="entityRef"> The entityRef to convert. </param>
     /// <returns> The converted entity. </returns>
-    public T GetEntityRef<T>(EntityRef entityRef) where T : new()
+    public T GetEntityRef<T>(EntityRef entityRef)
+        where T : new()
     {
         foreach (LDtkWorld world in Worlds)
         {

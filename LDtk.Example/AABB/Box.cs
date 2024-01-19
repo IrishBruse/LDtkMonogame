@@ -5,21 +5,17 @@ using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.Xna.Framework;
 
-public class Box
+public class Box(Vector2 position, Vector2 size, Vector2 pivot)
 {
-    public Vector2 Position { get; set; }
-    public Vector2 Size { get; set; }
-    public Vector2 Pivot { get; set; }
+    public Vector2 Position { get; set; } = position;
+
+    public Vector2 Size { get; set; } = size;
+
+    public Vector2 Pivot { get; set; } = pivot;
 
     public Vector2 TopLeft => Position - (Size * Pivot);
-    public Vector2 BottomRight => Position + (Size * (Vector2.One - Pivot));
 
-    public Box(Vector2 position, Vector2 size, Vector2 pivot)
-    {
-        Position = position;
-        Size = size;
-        Pivot = pivot;
-    }
+    public Vector2 BottomRight => Position + (Size * (Vector2.One - Pivot));
 
     public bool Contains(Vector2 point)
     {
@@ -28,12 +24,10 @@ public class Box
 
     public bool Contains(Box rect)
     {
-        bool inside = Contains(rect.TopLeft)
+        return Contains(rect.TopLeft)
                     || Contains(rect.BottomRight)
                     || Contains(new Vector2(rect.TopLeft.X, rect.BottomRight.Y))
                     || Contains(new Vector2(rect.BottomRight.X, rect.TopLeft.Y));
-
-        return inside;
     }
 
     [SuppressMessage("Usage", "CA1021:Avoid out parameters", Justification = "This is a try like method")]
@@ -79,9 +73,25 @@ public class Box
 
         contactPoint = rayOrigin + (hitNear * rayDirection);
 
-        contactNormal = near.X > near.Y
-            ? invdir.X < 0 ? new Vector2(1, 0) : new Vector2(-1, 0)
-            : invdir.Y < 0 ? new Vector2(0, 1) : new Vector2(0, -1);
+        if (near.X > near.Y)
+        {
+            if (invdir.X < 0)
+            {
+                contactNormal = new Vector2(1, 0);
+            }
+            else
+            {
+                contactNormal = new Vector2(-1, 0);
+            }
+        }
+        else if (invdir.Y < 0)
+        {
+            contactNormal = new Vector2(0, 1);
+        }
+        else
+        {
+            contactNormal = new Vector2(0, -1);
+        }
 
         return true;
     }

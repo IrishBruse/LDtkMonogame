@@ -3,19 +3,15 @@ namespace LDtkMonogameExample;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class Camera
+public class Camera(GraphicsDevice graphicsDevice)
 {
-    readonly GraphicsDevice graphicsDevice;
+    readonly GraphicsDevice graphicsDevice = graphicsDevice;
 
     public Vector2 Position { get; set; }
-    public float Zoom { get; set; }
-    public Matrix Transform { get; private set; }
 
-    public Camera(GraphicsDevice graphicsDevice)
-    {
-        Transform = new();
-        this.graphicsDevice = graphicsDevice;
-    }
+    public float Zoom { get; set; }
+
+    public Matrix Transform { get; private set; } = new();
 
     public void Update()
     {

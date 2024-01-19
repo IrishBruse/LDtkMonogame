@@ -69,7 +69,7 @@ csharp_new_line_before_members_in_anonymous_types = true
 dotnet_diagnostic.IDE0003.severity = suggestion         # Simplify name
 dotnet_diagnostic.IDE0001.severity = suggestion         # Simplify name
 
-dotnet_diagnostic.IDE0010.severity = error              # Populate switch
+dotnet_diagnostic.IDE0010.severity = refactoring        # Populate switch
 dotnet_diagnostic.IDE0022.severity = refactoring        # Use block scope
 dotnet_diagnostic.IDE0044.severity = refactoring        # Make field readonly
 dotnet_diagnostic.IDE0046.severity = refactoring        # If statement can be simplified
@@ -80,10 +80,20 @@ dotnet_diagnostic.CA1062.severity = none                # Validate arguments not
 dotnet_diagnostic.CA1819.severity = none                # Properties should not return arrays
 dotnet_diagnostic.CA2213.severity = none                # Disposable fields should be disposed
 dotnet_diagnostic.IDE0005.severity = suggestion         # Remove unnecessary using directives
+dotnet_diagnostic.IDE0305.severity = none               # replace .ToArray()
+dotnet_diagnostic.IDE0051.severity = refactoring               # remove unused code
 
 dotnet_diagnostic.IDE0047.severity = suggestion         # Parentheses preferences
 dotnet_diagnostic.IDE0048.severity = suggestion         # Parentheses preferences
 dotnet_diagnostic.IDE0058.severity = refactoring        # Remove unnecessary expression value
+
+# Unused element in a documentation comment
+dotnet_diagnostic.rcs1228.severity = none
+
+# Remove unused member declaration
+dotnet_diagnostic.rcs1213.severity = none
+
+dotnet_style_coalesce_expression=false
 
 csharp_indent_block_contents = true # Indentation preferences
 csharp_indent_braces = false

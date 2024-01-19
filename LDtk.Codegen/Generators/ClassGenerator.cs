@@ -2,21 +2,15 @@ namespace LDtk.Codegen.Generators;
 
 using LDtk.Codegen;
 
-public class ClassGenerator : BaseGenerator
+public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
 {
-    LDtkFile ldtkFile;
-    Options options;
-
-    public ClassGenerator(LDtkFile ldtkFile, Options options)
-    {
-        this.ldtkFile = ldtkFile;
-        this.options = options;
-    }
+    readonly LDtkFile ldtkFile = ldtkFile;
+    readonly Options options = options;
 
     public void Generate()
     {
         // Level Classes
-        GenClass(options.LevelClassName, ldtkFile.Defs.LevelFields, "", false);
+        GenClass(options.LevelClassName, ldtkFile.Defs.LevelFields, string.Empty, false);
 
         // Entity Classes
         foreach (EntityDefinition e in ldtkFile.Defs.Entities)
@@ -27,8 +21,8 @@ public class ClassGenerator : BaseGenerator
 
     void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
     {
-        Line($"// This file was automatically generated, any modifications will be lost!");
-        Line($"#pragma warning disable");
+        Line("// This file was automatically generated, any modifications will be lost!");
+        Line("#pragma warning disable");
 
         if (options.BlockScopeNamespace)
         {
@@ -58,15 +52,15 @@ public class ClassGenerator : BaseGenerator
         {
             if (isEntity)
             {
-                Line($"public string Identifier {{ get; set; }}");
-                Line($"public System.Guid Iid {{ get; set; }}");
-                Line($"public int Uid {{ get; set; }}");
-                Line($"public Vector2 Position {{ get; set; }}");
-                Line($"public Vector2 Size {{ get; set; }}");
-                Line($"public Vector2 Pivot {{ get; set; }}");
-                Line($"public Rectangle Tile {{ get; set; }}");
+                Line("public string Identifier { get; set; }");
+                Line("public System.Guid Iid { get; set; }");
+                Line("public int Uid { get; set; }");
+                Line("public Vector2 Position { get; set; }");
+                Line("public Vector2 Size { get; set; }");
+                Line("public Vector2 Pivot { get; set; }");
+                Line("public Rectangle Tile { get; set; }");
                 Blank();
-                Line($"public Color SmartColor {{ get; set; }}");
+                Line("public Color SmartColor { get; set; }");
                 Blank();
             }
 
@@ -89,7 +83,7 @@ public class ClassGenerator : BaseGenerator
             EndBlock();
         }
 
-        Line($"#pragma warning restore");
+        Line("#pragma warning restore");
 
         Output(options, folder, identifier);
     }

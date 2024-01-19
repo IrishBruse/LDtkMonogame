@@ -14,7 +14,7 @@ public static class Program
 {
     public static void Main(string[] args)
     {
-        Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
+        _ = Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
     }
 
     static void HandleParseError(IEnumerable<Error> errs)
@@ -25,7 +25,7 @@ public static class Program
             return;
         }
 
-        errs.Output();
+        _ = errs.Output();
     }
 
     static void Run(Options options)

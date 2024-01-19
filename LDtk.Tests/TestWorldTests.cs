@@ -30,7 +30,7 @@ public class TestWorldTests
     [InlineData(typeof(ArgumentNullException), null)]
     public void LoadFileThrowsNotFoundPath(Type expectedException, string path)
     {
-        Assert.Throws(expectedException, () => LDtkFile.FromFile(path));
+        _ = Assert.Throws(expectedException, () => LDtkFile.FromFile(path));
     }
 
     [Fact]

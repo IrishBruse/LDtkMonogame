@@ -12,28 +12,21 @@ using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class GunEntity
+public class GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer)
 {
     public Vector2 Position
     {
         get => data.Position;
         set => data.Position = value;
     }
+
     public bool Taken { get; set; }
-    public Box Collider { get; set; }
 
-    Gun_Pickup data;
-    Texture2D texture;
-    LDtkRenderer renderer;
+    public Box Collider { get; set; } = new Box(Vector2.Zero, new Vector2(10, 16), data.Pivot);
 
-    public GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer)
-    {
-        this.data = data;
-        this.texture = texture;
-        this.renderer = renderer;
-
-        Collider = new Box(Vector2.Zero, new Vector2(10, 16), data.Pivot);
-    }
+    readonly Gun_Pickup data = data;
+    readonly Texture2D texture = texture;
+    readonly LDtkRenderer renderer = renderer;
 
     public void Update(float totalTime)
     {

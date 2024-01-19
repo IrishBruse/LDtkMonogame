@@ -7,17 +7,18 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-public static partial class Program
+public static class Program
 {
     const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
     const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
-    const string MinimalFilePath = "../../LDtk/LDtkJson.cs";
-    const string FullFilePath = "../../LDtk.Codegen/LDtkJsonFull.cs";
-    const string Version = "1.3.3";
+    const string MinimalFilePath = "../LDtk/LDtkJson.cs";
+    const string FullFilePath = "../LDtk.Codegen/LDtkJsonFull.cs";
+    const string Version = "1.5.3";
 
     const string PragmaWarnings = "CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711";
 
     static bool minimal;
+    static readonly Regex MyRegex = new("\\[(.*)\\]\\(.*\\)", RegexOptions.Compiled);
 
     public static void Main()
     {
@@ -53,39 +54,19 @@ public static partial class Program
             CreateNoWindow = true
         }).WaitForExit();
 
-        List<string> lines = File.ReadAllLines(file).ToList();
+        // List<string> lines = File.ReadAllLines(file).ToList();
 
-        ProcessFile(lines);
+        // ProcessFile(lines);
 
-        lines[0] = "#nullable disable\n#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
-        lines[1] += "using Microsoft.Xna.Framework;";
-        File.WriteAllLines(file, lines);
+        // lines[0] = "#nullable disable\n#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
+        // lines[1] += "using Microsoft.Xna.Framework;";
+        // File.WriteAllLines(file, lines);
 
-        Format(file);
+        // Format(file);
 
-        // Delete multiple blank lines in a row
-        lines = File.ReadAllLines(file).ToList();
+        // File.WriteAllLines(file, lines);
 
-        int blanks = 0;
-        for (int i = lines.Count - 1; i >= 0; i--)
-        {
-            if (string.IsNullOrEmpty(lines[i]))
-            {
-                blanks++;
-                if (blanks > 1)
-                {
-                    lines.RemoveAt(i);
-                }
-            }
-            else
-            {
-                blanks = 0;
-            }
-        }
-
-        File.WriteAllLines(file, lines);
-
-        File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings + "\n");
+        // File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings + "\n");
     }
 
     static void Format(string file)
@@ -135,13 +116,14 @@ public static partial class Program
                     continue;
                 }
                 // Doc comment cleanup
-                lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
-                lines[i] = lines[i].Replace("&lt;", " &lt; ").Replace("&gt;", " &gt; ");
+                // lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
+                // lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
+                // lines[i] = lines[i].Replace("&lt;", " &lt; ").Replace("&gt;", " &gt; ");
 
                 lines[i] = lines[i].Replace("`", "");
                 lines[i] = lines[i].Replace("*", "");
                 lines[i] = lines[i].Replace("IID", "Guid");
-                lines[i] = MyRegex().Replace(lines[i], "$1");
+                lines[i] = MyRegex.Replace(lines[i], "$1");
 
                 lines[i] = lines[i].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
                 continue;
@@ -151,13 +133,10 @@ public static partial class Program
             lines[i] = lines[i].Replace("public Level[] ", "public LDtkLevel[] ");
             lines[i] = lines[i].Replace("public World ", "public LDtkWorld ");
 
-            if (lines[i].TrimStart().StartsWith("public string _Type "))
+            if (lines[i].TrimStart().StartsWith("public string _Type ") && lines[i - 3].Contains("IntGrid, Entities, Tiles or AutoLayer"))
             {
-                if (lines[i - 3].Contains("IntGrid, Entities, Tiles or AutoLayer"))
-                {
-                    lines[i] = "public LayerType _Type { get; set; }";
-                    continue;
-                }
+                lines[i] = "public LayerType _Type { get; set; }";
+                continue;
             }
 
             if (minimal)
@@ -178,7 +157,6 @@ public static partial class Program
                     RemoveClassBody(lines, i);
                     continue;
                 }
-
             }
 
             if (lines[i].Contains("JsonPropertyName"))
@@ -202,7 +180,7 @@ public static partial class Program
             lines[i] = Regex.Replace(lines[i], @"float\[\] _Pivot", "Vector2 _Pivot");
             lines[i] = Regex.Replace(lines[i], @"float\[\] Scale", "Vector2 Scale");
 
-            lines[i] = Regex.Replace(lines[i], @"ReferenceToAnEntityInstance", "EntityRef");
+            lines[i] = Regex.Replace(lines[i], "ReferenceToAnEntityInstance", "EntityRef");
 
             lines[i] = Regex.Replace(lines[i], "TypeEnum Type", "LayerType Type");
 
@@ -224,15 +202,12 @@ public static partial class Program
         lines[i] = "";
         lines[i + 1] = "";
 
-        int currentLine = i + 2;
-
         // Remove class body
-        while (indent > 0)
+        for (int currentLine = i + 2; indent > 0; currentLine++)
         {
             indent += lines[currentLine].Count(c => c == '{');
             indent -= lines[currentLine].Count(c => c == '}');
             lines[currentLine] = "";
-            currentLine++;
         }
     }
 
@@ -272,7 +247,4 @@ public static partial class Program
             lines[j] = "";
         }
     }
-
-    [GeneratedRegex("\\[(.*)\\]\\(.*\\)")]
-    private static partial Regex MyRegex();
 }

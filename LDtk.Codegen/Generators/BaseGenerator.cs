@@ -9,7 +9,7 @@ using LDtk.Codegen;
 public class BaseGenerator
 {
     int indent;
-    StringBuilder FileContents { get; set; } = new();
+    StringBuilder FileContents { get; } = new();
 
     public bool Debug { get; protected set; }
     public bool Commented { get; protected set; }
@@ -33,7 +33,7 @@ public class BaseGenerator
 
     public void Blank()
     {
-        FileContents.AppendLine();
+        _ = FileContents.AppendLine();
     }
 
     public void Line(string line)
@@ -44,16 +44,16 @@ public class BaseGenerator
             {
                 if (Commented && i == 0)
                 {
-                    FileContents.Append("    //  ");
+                    _ = FileContents.Append("    //  ");
                 }
                 else
                 {
-                    FileContents.Append("    ");
+                    _ = FileContents.Append("    ");
                 }
             }
         }
 
-        FileContents.AppendLine(line);
+        _ = FileContents.AppendLine(line);
     }
 
     public void DebugLine(string line)
@@ -72,9 +72,9 @@ public class BaseGenerator
     public void Output(Options options, string folder, string identifier)
     {
         string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
-        Directory.CreateDirectory(Path.GetDirectoryName(file));
+        _ = Directory.CreateDirectory(Path.GetDirectoryName(file));
         File.WriteAllText(file, FileContents.ToString());
         Console.WriteLine("Generating -> " + folder + "/" + identifier + ".cs");
-        FileContents.Clear();
+        _ = FileContents.Clear();
     }
 }

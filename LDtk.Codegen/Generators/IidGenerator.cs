@@ -1,20 +1,14 @@
 namespace LDtk.Codegen.Generators;
 
-public class IidGenerator : BaseGenerator
+public class IidGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
 {
-    LDtkFile ldtkFile;
-    readonly Options options;
-
-    public IidGenerator(LDtkFile ldtkFile, Options options)
-    {
-        this.ldtkFile = ldtkFile;
-        this.options = options;
-    }
+    readonly LDtkFile ldtkFile = ldtkFile;
+    readonly Options options = options;
 
     public void Generate()
     {
-        Line($"// This file was automatically generated, any modifications will be lost!");
-        Line($"#pragma warning disable");
+        Line("// This file was automatically generated, any modifications will be lost!");
+        Line("#pragma warning disable");
 
         if (options.BlockScopeNamespace)
         {
@@ -27,7 +21,7 @@ public class IidGenerator : BaseGenerator
         }
 
         Blank();
-        Line($"public static class Worlds");
+        Line("public static class Worlds");
         StartBlock();
         foreach (LDtkWorld w in ldtkFile.Worlds)
         {
@@ -48,7 +42,7 @@ public class IidGenerator : BaseGenerator
             EndBlock();
         }
 
-        Line($"#pragma warning restore");
+        Line("#pragma warning restore");
 
         Output(options, "Iids", "Worlds");
     }

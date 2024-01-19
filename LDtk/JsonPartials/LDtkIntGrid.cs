@@ -4,27 +4,26 @@ using System;
 
 using Microsoft.Xna.Framework;
 
-/// <summary> LDtk IntGrid </summary>
+/// <summary> LDtk IntGrid. </summary>
 public class LDtkIntGrid
 {
-    /// <summary> Size of a tile in pixels </summary>
+    /// <summary> Gets or sets size of a tile in pixels. </summary>
     public int TileSize { get; set; }
 
-    /// <summary> The underlying values of the int grid </summary>
-    public int[] Values { get; set; }
+    /// <summary> Gets or sets the underlying values of the int grid. </summary>
+    public int[] Values { get; set; } = [];
 
-    /// <summary> Worldspace start Position of the intgrid </summary>
+    /// <summary> Gets or sets worldspace start Position of the intgrid. </summary>
     public Point WorldPosition { get; set; }
 
-    /// <summary> Worldspace start Position of the intgrid </summary>
+    /// <summary> Gets or sets worldspace start Position of the intgrid. </summary>
     public Point GridSize { get; set; }
 
-    /// <summary> Used by json deserializer not for use by user! </summary>
-#pragma warning disable CS8618
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LDtkIntGrid"/> class. Used by json deserializer not for use by user!. </summary>
     public LDtkIntGrid() { }
-#pragma warning restore
 
-    /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
+    /// <summary> Gets the int value at location and return 0 if out of bounds. </summary>
     public int GetValueAt(int x, int y)
     {
         if (Values.Length == 0)
@@ -42,31 +41,31 @@ public class LDtkIntGrid
         }
     }
 
-    /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
+    /// <summary> Gets the int value at location and return 0 if out of bounds. </summary>
     public int GetValueAt(Point position)
     {
         return GetValueAt(position.X, position.Y);
     }
 
-    /// <summary> Gets the int value at location and return 0 if out of bounds </summary>
+    /// <summary> Gets the int value at location and return 0 if out of bounds. </summary>
     public int GetValueAt(Vector2 position)
     {
         return GetValueAt((int)position.X, (int)position.Y);
     }
 
-    /// <summary> Check if point is inside of a grid </summary>
+    /// <summary> Check if point is inside of a grid. </summary>
     public bool Contains(Point point)
     {
         return point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
     }
 
-    /// <summary> Check if point is inside of a grid </summary>
+    /// <summary> Check if point is inside of a grid. </summary>
     public bool Contains(Vector2 point)
     {
         return point.X >= 0 && point.Y >= 0 && point.X < GridSize.X && point.Y < GridSize.Y;
     }
 
-    /// <summary> Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer </summary>
+    /// <summary> Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer. </summary>
     public Point FromWorldToGridSpace(Vector2 position)
     {
         int x = (int)Math.Floor(position.X / TileSize);

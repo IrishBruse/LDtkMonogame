@@ -12,11 +12,11 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("WorldLayout: {WorldLayout} Size: {WorldGridSize} Path: {FilePath}")]
 public partial class LDtkWorld
 {
-    /// <summary> The raw ldtk level data </summary>
+    /// <summary> Gets or sets the raw ldtk level data. </summary>
     [JsonPropertyName("levels")]
-    public LDtkLevel[] RawLevels { get; set; }
+    public LDtkLevel[] RawLevels { get; set; } = [];
 
-    /// <summary> The Levels iterator used in foreach will load external levels each time caching recommended </summary>
+    /// <summary> Gets the Levels iterator used in foreach will load external levels each time caching recommended. </summary>
     [JsonIgnore]
     public IEnumerable<LDtkLevel> Levels
     {
@@ -29,22 +29,23 @@ public partial class LDtkWorld
         }
     }
 
-    /// <summary> The absolute filepath to the world </summary>
-    [JsonIgnore] public string FilePath { get; set; }
+    /// <summary> Gets or sets the absolute filepath to the world. </summary>
+    [JsonIgnore]
+    public string FilePath { get; set; } = "";
 
-    /// <summary> Size of the world grid in pixels. </summary>
-    [JsonIgnore] public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
+    /// <summary> Gets size of the world grid in pixels. </summary>
+    [JsonIgnore]
+    public Point WorldGridSize => new(WorldGridWidth, WorldGridHeight);
 
-    /// <summary> Used by json deserializer not for use by user! </summary>
-#pragma warning disable CS8618
+    /// <summary> Initializes a new instance of the <see cref="LDtkWorld"/> class. Used by json deserializer not for use by user!. </summary>
     public LDtkWorld() { }
-#pragma warning restore
 
-    /// <summary> The content manager used if you are using the contentpipeline </summary>
-    public ContentManager Content { get; set; }
+    /// <summary> Gets or sets the content manager used if you are using the contentpipeline. </summary>
+    public ContentManager? Content { get; set; }
 
-    /// <summary> Goes through all the loaded levels looking for the entity </summary>
-    public T GetEntity<T>() where T : new()
+    /// <summary> Goes through all the loaded levels looking for the entity. </summary>
+    public T GetEntity<T>()
+        where T : new()
     {
         T entity = new();
 
@@ -69,7 +70,7 @@ public partial class LDtkWorld
         throw new LDtkException($"No entity of type {nameof(T)} found in this level");
     }
 
-    /// <summary> Get the level with an identifier </summary>
+    /// <summary> Get the level with an identifier. </summary>
     public LDtkLevel LoadLevel(string identifier)
     {
         foreach (LDtkLevel level in RawLevels)
@@ -85,7 +86,7 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with identifier {identifier} found in this world");
     }
 
-    /// <summary> Get the level with an iid </summary>
+    /// <summary> Get the level with an iid. </summary>
     public LDtkLevel LoadLevel(Guid iid)
     {
         foreach (LDtkLevel level in RawLevels)
@@ -101,7 +102,7 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with iid {iid} found in this world");
     }
 
-    /// <summary> Get the level with an index </summary>
+    /// <summary> Get the level with an index. </summary>
     public LDtkLevel LoadLevel(int index)
     {
         if (index >= 0 && index <= RawLevels.Length)
@@ -146,8 +147,9 @@ public partial class LDtkWorld
         }
     }
 
-    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/> </summary>
-    public T GetEntityRef<T>(EntityRef entityRef) where T : new()
+    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/>. </summary>
+    public T GetEntityRef<T>(EntityRef entityRef)
+        where T : new()
     {
         foreach (LDtkLevel level in RawLevels)
         {

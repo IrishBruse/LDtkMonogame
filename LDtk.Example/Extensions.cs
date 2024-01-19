@@ -6,9 +6,8 @@ using Microsoft.Xna.Framework;
 
 static class Extensions
 {
-
     /// <summary>
-    /// Magic lerp that doesnt use start position but instead uses current position and <paramref name="maxDistanceDelta"/>
+    /// Magic lerp that doesnt use start position but instead uses current position and <paramref name="maxDistanceDelta"/>.
     /// </summary>
     public static Vector2 MoveTowards(this Vector2 current, Vector2 end, float maxDistanceDelta, out bool done)
     {

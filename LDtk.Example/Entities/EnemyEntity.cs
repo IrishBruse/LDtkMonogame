@@ -12,30 +12,20 @@ using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class EnemyEntity
+public class EnemyEntity(Enemy data, Texture2D texture, LDtkRenderer renderer)
 {
-    Enemy data;
-    Texture2D texture;
-    LDtkRenderer renderer;
+    readonly Enemy data = data;
+    readonly Texture2D texture = texture;
+    readonly LDtkRenderer renderer = renderer;
     bool flip;
     int nextWander;
     bool dead;
     Vector2 velocity;
 
-    public Box Collider { get; set; }
-
-    public EnemyEntity(Enemy data, Texture2D texture, LDtkRenderer renderer)
-    {
-        this.data = data;
-        this.texture = texture;
-        this.renderer = renderer;
-
-        Collider = new Box(new Vector2(0, 0), new Vector2(16, 10), data.Pivot);
-    }
+    public Box Collider { get; set; } = new Box(new Vector2(0, 0), new Vector2(16, 10), data.Pivot);
 
     public void Update(float deltaTime)
     {
-
         Collider.Position = data.Position;
 
         if (dead)

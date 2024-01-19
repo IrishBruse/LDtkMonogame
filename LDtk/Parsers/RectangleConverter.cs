@@ -21,7 +21,7 @@ class RectangleConverter : JsonConverter<Rectangle>
             throw new JsonException();
         }
 
-        List<int> value = new();
+        List<int> value = [];
 
         while (reader.Read())
         {

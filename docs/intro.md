@@ -1,20 +1,24 @@
-# [LDtkMonogame Wiki](https://irishbruse.github.io/LDtkMonogame/)
+# [LDtkMonogame Wiki](https://ldtk.ethanconneely.com/)
 
-[![Discord Link](https://img.shields.io/discord/761549092677353513?color=%236370f4&label=Discord)](https://ldtk.io/go/discord)
+<p align="center">
+    <p><a href="https://ldtk.io/go/discord"><img src="https://img.shields.io/discord/761549092677353513?color=%236370f4&amp;label=Discord" alt="Discord Link"></a> &nbsp;
+    <a href="https://github.com/deepnight/ldtk"><img src="https://img.shields.io/badge/LDtk-1.5.3-yellow" alt=""></a></p>
+</p>
 
-> Monogame renderer and importer for LDtk Level editor
+LDtkMonogame is an level importer for the LDtk level editor
 
 ## Getting Started
 
 The easiest way to start using LDtkMonogame is to import it into the project using [NuGet package](https://www.nuget.org/packages/LDtkMonogame/).
 
-- [LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
+-   [LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
 
-- [LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+-   [LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
 
-- [LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
+-   [LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 Make sure to import the namespace at the top
+
 ```cs
 using LDtk;
 // Optional
@@ -39,7 +43,7 @@ LDtkWorld world = file.LoadWorld(Worlds.World.Iid);
 ```
 
 The `Worlds.World.Iid` is generated from the ldtkgen tool and is recommended that you use it for static typing of entities and levels.  
-It is a class within in a class that represents the world name and the levels name and holds the iid you can use to load that specific level.  
+It is a class within in a class that represents the world name and the levels name and holds the iid you can use to load that specific level.
 
 Create the renderer in `Initialize`.
 
