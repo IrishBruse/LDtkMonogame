@@ -1,4 +1,6 @@
-# [LDtkMonogame Wiki](https://ldtk.ethanconneely.com/)
+<p align="center">
+<img src="Icon.png" height="128px"/>
+</p>
 
 <p align="center">
     <a href="https://ldtk.io/go/discord"><img src="https://img.shields.io/discord/761549092677353513?color=%236370f4&amp;label=Discord" alt="Discord Link"></a> &nbsp;
@@ -7,14 +9,12 @@
 
 LDtkMonogame is an level importer for the LDtk level editor
 
-## Getting Started
+# Getting Started
 
 The easiest way to start using LDtkMonogame is to import it into the project using [NuGet package](https://www.nuget.org/packages/LDtkMonogame/).
 
 -   [LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
-
 -   [LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
-
 -   [LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 Make sure to import the namespace at the top
@@ -75,3 +75,21 @@ spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 }
 spriteBatch.End();
 ```
+
+# Showcase
+
+## Unnamed
+
+![screenshot](https://img.itch.zone/aW1nLzEzNjQ1MTM5LnBuZw==/original/yOAqCD.png)
+
+> by Fypur
+
+[Play the game on Itch](https://fypur.itch.io/unnamed)
+
+## Example Game
+
+![screenshot](LDtk.Example/Screenshot.png)
+
+> by IrishBruse
+
+[Source code here](./LDtk.Example/)
