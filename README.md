@@ -88,7 +88,7 @@ spriteBatch.End();
 
 ## Example Game
 
-![screenshot](LDtk.Example/Screenshot.png)
+![screenshot](https://raw.githubusercontent.com/IrishBruse/LDtkMonogame/main/LDtk.Example/Screenshot.png)
 
 > by IrishBruse
 
