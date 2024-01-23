@@ -1,0 +1,146 @@
+.sidebar {
+    padding: 0;
+    position: absolute;
+    transition: transform 250ms linear, transform 250ms linear;
+    width: 300px;
+
+    border-right-width: 2px;
+}
+
+.sidebar::after {
+    border-left: 2px solid var(--theme-hightlight-color);
+
+    content: "";
+
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    top: -1em;
+    right: -18px;
+    border-radius: 4px;
+}
+
+.sidebar > h1 {
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+.sidebar > h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.sidebar > h1 .app-nav {
+    display: block;
+    position: static;
+}
+
+.sidebar .sidebar-nav {
+    line-height: 2em;
+    padding-bottom: 40px;
+}
+
+.sidebar ul {
+    margin: 0 0 0 15px;
+    padding: 0;
+}
+
+.sidebar li > p {
+    font-weight: 700;
+    margin: 0;
+}
+
+.sidebar ul,
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar ul li a {
+    border-bottom: none;
+    display: block;
+    margin-right: 4px;
+}
+
+.sidebar ul li ul {
+    padding-left: 20px;
+}
+
+.search {
+    margin-right: 4px;
+}
+
+.sidebar-toggle {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    transition: opacity 0.3s;
+    width: 284px;
+    z-index: 30;
+    cursor: pointer;
+}
+
+.sidebar-toggle:hover .sidebar-toggle-button span {
+    background-color: white;
+}
+
+.sidebar-toggle span {
+    background-color: var(--theme-hightlight-color, #000);
+    display: block;
+    margin-bottom: 4px;
+    width: 16px;
+    height: 2px;
+}
+
+body.sticky .sidebar,
+body.sticky .sidebar-toggle {
+    position: fixed;
+}
+
+@media screen and (max-width: 768px) {
+    .github-corner,
+    .sidebar-toggle,
+    .sidebar {
+        position: fixed;
+    }
+}
+
+.sidebar-nav > ul > li a {
+    color: #ffed82;
+    font-weight: bold;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.sidebar-nav > ul > li > ul a {
+    color: var(--theme-hightlight-color);
+    font-weight: bold;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.sidebar-nav a {
+    padding: 4px 8px;
+    margin-left: 2.5em;
+
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    line-height: 20px;
+}
+
+.sidebar-nav li.active > a {
+    background-color: var(--theme-hightlight-color);
+    color: #1e2229;
+}
+
+.sidebar-nav a:hover {
+    background-color: #2e333f;
+}

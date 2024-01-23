@@ -2,7 +2,7 @@
 
 [![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
 
-**Please make sure you have the `mgcb-editor` at minimum version `3.8.1.303`**
+!> **Please make sure you have the `mgcb-editor` at minimum version `3.8.1.303`**
 
 This is going to be a bit weird but hang on with me as the content pipeline is really particular.
 
@@ -16,24 +16,22 @@ dotnet add package LDtkMonogame.ContentPipeline
 Once that has finished it will have cached the project to the packages directory on your system.
 Now you can remove it from your project as your game does not actually need the dll its only used for processing the files.
 
-
-```shell
+```sh
 dotnet remove package LDtkMonogame.ContentPipeline
 ```
 
 We have the dll cached to the harddrive you can now go and locate the dll we will be adding to the content pipeline file.
 It should be located here.
 
-```shell
+```sh
 C:/Users/<USERNAME>/.nuget/packages/ldtkmonogame.contentpipeline/<VERSION>/lib/net6.0
 ```
 
-Where `<USERNAME>` is your username on your machine and `<VERSION>` is the latest version of the contentpipeline nuget package [![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/) as of right now.
+Where `<USERNAME>` is your username on your machine and `<VERSION>` is the latest version of the contentpipeline nuget package as of right now.
 
 Now with that path you can paste it into your content.mgcb here is what i did in mine.
 
-
-```shell
+```sh
 #-------------------------------- References --------------------------------#
 
 /reference:C:/Users/IrishBruse/.nuget/packages/ldtkmonogame.contentpipeline/1.0.0/lib/net6.0/LDtk.ContentPipeline.dll
