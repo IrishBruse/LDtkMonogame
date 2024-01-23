@@ -12,7 +12,7 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>1.1.2</Version>
+        <Version>$(version)</Version>
         <Authors>Ethan Conneely</Authors>
         <Product>LDtk Monogame</Product>
         <PackageId>LDtkMonogame</PackageId>
@@ -23,7 +23,7 @@
         <PackageTags>LDtk, Monogame, Level-Editor</PackageTags>
         <PackageIcon>Icon.png</PackageIcon>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>https://ldtk.ethanconneely.com/changelog/</PackageReleaseNotes>
+        <PackageReleaseNotes>https://ldtk.ethanconneely.com/Changelog/</PackageReleaseNotes>
 
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
@@ -50,7 +50,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="../Documentation/src/intro.md" Pack="true" PackagePath="/readme.md" />
+        <Content Include="../README.md" Pack="true" PackagePath="/readme.md" />
         <None Include="../Icon.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
