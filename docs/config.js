@@ -12,7 +12,7 @@ window.$docsify = {
     topMargin: 70,
     loadSidebar: true,
     loadNavbar: true,
-    notFoundPage: "404.md",
+    notFoundPage: "_notfound.md",
     search: "auto",
     auto2top: true,
     relativePath: true,
