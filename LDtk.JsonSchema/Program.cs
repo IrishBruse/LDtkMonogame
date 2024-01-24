@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 public static class Program
 {
     const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
+    const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
     static readonly string[] Namespaces = {
         "using System;",
         "using System.Collections.Generic;",
@@ -28,7 +29,46 @@ public static class Program
 
     static readonly string[] IgnoreFields = {
         "__FORCED_REFS",
-        "levelFields",
+    };
+
+    static readonly Dictionary<string, Dictionary<string, string>> ClassPropertyTypeOverrides = new()
+    {
+        {"LDtkFile", new() {
+            {"WorldLayout", "WorldLayout"},
+            {"BgColor",     "Color"},
+        }},
+        {"LDtkLevel", new() {
+            {"_BgColor", "Color"},
+        }},
+        {"LayerDefinition", new() {
+            {"_Type",       "LayerType"},
+        }},
+        {"LayerInstance", new() {
+            {"_Type",       "LayerType"},
+        }},
+        {"EntityInstance", new() {
+            {"_Grid",       "Point"},
+            {"_Pivot",      "Vector2"},
+            {"_SmartColor", "Color"},
+            {"Px",          "Point"},
+        }},
+        {"TileInstance", new() {
+            {"Px",          "Point"},
+            {"Src",         "Point"},
+        }},
+        {"EntityDefinition", new() {
+            {"Color",       "Color"},
+        }},
+        {"LevelBackgroundPosition", new() {
+            {"Scale",       "Vector2"},
+            {"TopLeftPx",   "Point"},
+        }},
+        {"AutoLayerRuleGroup", new() {
+            {"Color",       "Color?"},
+        }},
+        {"IntGridValueDefinition", new() {
+            {"Color",       "Color?"},
+        }},
     };
 
     static readonly Dictionary<string, EnumItems> Enums = new();
@@ -36,16 +76,37 @@ public static class Program
     public static async Task<int> Main()
     {
         using HttpClient wc = new();
-        string json = await wc.GetStringAsync(MinSchema);
 
-        ParseJson(json);
+        string json = "";
+
+        if (!File.Exists("MinSchema.json"))
+        {
+            json = await wc.GetStringAsync(MinSchema);
+            File.WriteAllText("MinSchema.json", json);
+        }
+        else
+        {
+            json = File.ReadAllText("MinSchema.json");
+        }
+        ParseJson(json, "../LDtk/LDtkJson.cs");
+
+        if (!File.Exists("FullSchema.json"))
+        {
+            json = await wc.GetStringAsync(FullSchema);
+            File.WriteAllText("FullSchema.json", json);
+        }
+        else
+        {
+            json = File.ReadAllText("FullSchema.json");
+        }
+        ParseJson(json, "../LDtk.Codegen/LDtkJsonFull.cs");
 
         return 0;
     }
 
-    static void ParseJson(string json)
+    static void ParseJson(string json, string output)
     {
-        using StreamWriter file = new("../LDtk/LDtkJson.cs");
+        using StreamWriter file = new(output);
 
         JsonNode root = JsonNode.Parse(json);
 
@@ -132,7 +193,8 @@ public static class Program
                 continue;
             }
 
-            string name = ToCSharpName(key);
+            prop.Name = ToCSharpName(key);
+
             string description = prop.Description;
 
             string type = "";
@@ -142,15 +204,15 @@ public static class Program
             }
             else if (prop.Ref != null)
             {
-                type = ParseRef(prop.Ref);
+                type = ParseRefToType(prop.Ref);
             }
             else if (prop.Enum != null)
             {
-                type = name;
+                type = prop.Name;
 
-                if (!Enums.ContainsKey(name))
+                if (!Enums.ContainsKey(prop.Name))
                 {
-                    Enums.Add(name, new()
+                    Enums.Add(prop.Name, new()
                     {
                         Description = description,
                         Values = prop.Enum.Where(v => v != null).ToArray()
@@ -166,9 +228,14 @@ public static class Program
                 type = "object";
             }
 
+            if (ClassPropertyTypeOverrides.TryGetValue(className, out Dictionary<string, string> overrides) && overrides.TryGetValue(prop.Name, out string overrideType))
+            {
+                type = overrideType;
+            }
+
             if (description?.Length == 0)
             {
-                description = name;
+                description = prop.Name;
             }
 
             if (start)
@@ -179,7 +246,7 @@ public static class Program
 
             // file.WriteLine($"    /// <summary> {description} </summary>");
             file.WriteLine($"    [JsonPropertyName(\"{key}\")]");
-            file.WriteLine($"    public {type} {name} {{ get; set; }}");
+            file.WriteLine($"    public {type} {prop.Name} {{ get; set; }}");
         }
         file.WriteLine("}");
         file.WriteLine();
@@ -187,7 +254,30 @@ public static class Program
 
     static string OneOf(Items[] oneOf)
     {
-        return "int";
+        string type = "";
+        bool nullable = false;
+
+        foreach (Items item in oneOf)
+        {
+            if (item.Ref != null)
+            {
+                type += ParseRefToType(item.Ref);
+            }
+            else
+            {
+                if (item.Type[0] == "null")
+                {
+                    nullable = true;
+                }
+                else
+                {
+                    string itemType = ConvertJsonTypeToCSharpType(item.Type[0]);
+                    type += itemType;
+                }
+            }
+        }
+
+        return type + (nullable ? "?" : "");
     }
 
     static string ToCSharpName(string key)
@@ -204,8 +294,6 @@ public static class Program
     {
         string[] types = value.Type;
 
-        Console.WriteLine(string.Join(", ", types));
-
         string baseType = types[0];
         string nullableType = "";
         if (types.Length > 1 && types[1] != null)
@@ -220,17 +308,31 @@ public static class Program
         string arrayType = "";
         if (value.Items?.Ref != null)
         {
-            arrayType = ParseRef(value.Items?.Ref);
+            arrayType = ParseRefToType(value.Items?.Ref);
         }
-        if (value.Items?.Type != null)
+        else if (value.Items?.Type != null)
         {
-            arrayType = GetTypeName(value.Items.Type[0]);
+            arrayType = ConvertJsonTypeToCSharpType(value.Items.Type[0]);
+        }
+        else if (value.Items?.Enum != null)
+        {
+            Enums.Add(value.Name.TrimEnd('s'), new()
+            {
+                Description = value.Description,
+                Values = value.Items?.Enum
+            });
+            arrayType = ToCSharpName(value.Name.TrimEnd('s'));
         }
 
-        return arrayType + GetTypeName(baseType) + nullableType;
+        if (value.Name.Contains("Iid"))
+        {
+            baseType = "Guid";
+        }
+
+        return arrayType + ConvertJsonTypeToCSharpType(baseType) + nullableType;
     }
 
-    static string ParseRef(string typeRef)
+    static string ParseRefToType(string typeRef)
     {
         string[] parts = typeRef.Split("/");
         if (parts.Length != 0)
@@ -241,7 +343,7 @@ public static class Program
         return typeRef;
     }
 
-    static string GetTypeName(string type) => type switch
+    static string ConvertJsonTypeToCSharpType(string type) => type switch
     {
         "boolean" => "bool",
         "integer" => "int",
@@ -254,7 +356,7 @@ public static class Program
         "file" => "string",
         "any" => "object",
         "null" => "?",
-        _ => throw new NotImplementedException(type),
+        _ => type,
     };
 
     static string ConvertClassName(string type) => type switch
@@ -287,14 +389,15 @@ public static class Program
 
 class Property
 {
+    public string Name { get; set; }
     public string Description { get; set; }
     public string[] Type { get; set; }
     public Items Items { get; set; }
     public Items[] OneOf { get; set; }
-    public string[] Enum { get; set; }
 
     [JsonPropertyName("$ref")]
     public string Ref { get; set; }
+    public string[] Enum { get; set; }
 }
 
 class Items
@@ -303,6 +406,7 @@ class Items
     public string Ref { get; set; }
 
     public string[] Type { get; set; }
+    public string[] Enum { get; set; }
 }
 
 class EnumItems

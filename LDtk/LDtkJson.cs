@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 public partial class LDtkFile
 {
     [JsonPropertyName("bgColor")]
-    public string BgColor { get; set; }
+    public Color BgColor { get; set; }
 
     [JsonPropertyName("defs")]
     public Definitions Defs { get; set; }
@@ -23,7 +23,7 @@ public partial class LDtkFile
     public bool ExternalLevels { get; set; }
 
     [JsonPropertyName("iid")]
-    public string Iid { get; set; }
+    public Guid Iid { get; set; }
 
     [JsonPropertyName("jsonVersion")]
     public string JsonVersion { get; set; }
@@ -56,10 +56,10 @@ public partial class AutoLayerRuleGroup
     public int BiomeRequirementMode { get; set; }
 
     [JsonPropertyName("color")]
-    public string? Color { get; set; }
+    public Color? Color { get; set; }
 
     [JsonPropertyName("icon")]
-    public int Icon { get; set; }
+    public TilesetRectangle? Icon { get; set; }
 
     [JsonPropertyName("isOptional")]
     public bool IsOptional { get; set; }
@@ -103,6 +103,9 @@ public partial class Definitions
     [JsonPropertyName("layers")]
     public LayerDefinition[] Layers { get; set; }
 
+    [JsonPropertyName("levelFields")]
+    public FieldDefinition[] LevelFields { get; set; }
+
     [JsonPropertyName("tilesets")]
     public TilesetDefinition[] Tilesets { get; set; }
 }
@@ -110,7 +113,7 @@ public partial class Definitions
 public partial class EntityDefinition
 {
     [JsonPropertyName("color")]
-    public string Color { get; set; }
+    public Color Color { get; set; }
 
     [JsonPropertyName("height")]
     public int Height { get; set; }
@@ -128,7 +131,7 @@ public partial class EntityDefinition
     public float PivotY { get; set; }
 
     [JsonPropertyName("tileRect")]
-    public int TileRect { get; set; }
+    public TilesetRectangle? TileRect { get; set; }
 
     [JsonPropertyName("tileRenderMode")]
     public TileRenderMode TileRenderMode { get; set; }
@@ -140,7 +143,7 @@ public partial class EntityDefinition
     public int Uid { get; set; }
 
     [JsonPropertyName("uiTileRect")]
-    public int UiTileRect { get; set; }
+    public TilesetRectangle? UiTileRect { get; set; }
 
     [JsonPropertyName("width")]
     public int Width { get; set; }
@@ -155,7 +158,7 @@ public partial class EntityInstance
     public FieldInstance[] FieldInstances { get; set; }
 
     [JsonPropertyName("__grid")]
-    public int[] _Grid { get; set; }
+    public Point _Grid { get; set; }
 
     [JsonPropertyName("height")]
     public int Height { get; set; }
@@ -164,22 +167,22 @@ public partial class EntityInstance
     public string _Identifier { get; set; }
 
     [JsonPropertyName("iid")]
-    public string Iid { get; set; }
+    public Guid Iid { get; set; }
 
     [JsonPropertyName("__pivot")]
-    public float[] _Pivot { get; set; }
+    public Vector2 _Pivot { get; set; }
 
     [JsonPropertyName("px")]
-    public int[] Px { get; set; }
+    public Point Px { get; set; }
 
     [JsonPropertyName("__smartColor")]
-    public string _SmartColor { get; set; }
+    public Color _SmartColor { get; set; }
 
     [JsonPropertyName("__tags")]
     public string[] _Tags { get; set; }
 
     [JsonPropertyName("__tile")]
-    public int _Tile { get; set; }
+    public TilesetRectangle? _Tile { get; set; }
 
     [JsonPropertyName("width")]
     public int Width { get; set; }
@@ -194,16 +197,16 @@ public partial class EntityInstance
 public partial class EntityReference
 {
     [JsonPropertyName("entityIid")]
-    public string EntityIid { get; set; }
+    public Guid EntityIid { get; set; }
 
     [JsonPropertyName("layerIid")]
-    public string LayerIid { get; set; }
+    public Guid LayerIid { get; set; }
 
     [JsonPropertyName("levelIid")]
-    public string LevelIid { get; set; }
+    public Guid LevelIid { get; set; }
 
     [JsonPropertyName("worldIid")]
-    public string WorldIid { get; set; }
+    public Guid WorldIid { get; set; }
 }
 
 public partial class EnumDefinition
@@ -236,7 +239,7 @@ public partial class EnumValueDefinition
     public string Id { get; set; }
 
     [JsonPropertyName("tileRect")]
-    public int TileRect { get; set; }
+    public TilesetRectangle? TileRect { get; set; }
 }
 
 public partial class EnumTagValue
@@ -257,7 +260,7 @@ public partial class FieldInstance
     public string _Identifier { get; set; }
 
     [JsonPropertyName("__tile")]
-    public int _Tile { get; set; }
+    public TilesetRectangle? _Tile { get; set; }
 
     [JsonPropertyName("__type")]
     public string _Type { get; set; }
@@ -278,7 +281,7 @@ public partial class GridPoint
 public partial class IntGridValueDefinition
 {
     [JsonPropertyName("color")]
-    public string Color { get; set; }
+    public Color? Color { get; set; }
 
     [JsonPropertyName("groupUid")]
     public int GroupUid { get; set; }
@@ -287,7 +290,7 @@ public partial class IntGridValueDefinition
     public string? Identifier { get; set; }
 
     [JsonPropertyName("tile")]
-    public int Tile { get; set; }
+    public TilesetRectangle? Tile { get; set; }
 
     [JsonPropertyName("value")]
     public int Value { get; set; }
@@ -353,7 +356,7 @@ public partial class LayerDefinition
     public int? TilesetDefUid { get; set; }
 
     [JsonPropertyName("__type")]
-    public string _Type { get; set; }
+    public LayerType _Type { get; set; }
 
     [JsonPropertyName("uid")]
     public int Uid { get; set; }
@@ -383,7 +386,7 @@ public partial class LayerInstance
     public string _Identifier { get; set; }
 
     [JsonPropertyName("iid")]
-    public string Iid { get; set; }
+    public Guid Iid { get; set; }
 
     [JsonPropertyName("intGridCsv")]
     public int[] IntGridCsv { get; set; }
@@ -419,7 +422,7 @@ public partial class LayerInstance
     public string? _TilesetRelPath { get; set; }
 
     [JsonPropertyName("__type")]
-    public string _Type { get; set; }
+    public LayerType _Type { get; set; }
 
     [JsonPropertyName("visible")]
     public bool Visible { get; set; }
@@ -428,10 +431,10 @@ public partial class LayerInstance
 public partial class LDtkLevel
 {
     [JsonPropertyName("__bgColor")]
-    public string _BgColor { get; set; }
+    public Color _BgColor { get; set; }
 
     [JsonPropertyName("__bgPos")]
-    public int _BgPos { get; set; }
+    public LevelBackgroundPosition? _BgPos { get; set; }
 
     [JsonPropertyName("bgRelPath")]
     public string? BgRelPath { get; set; }
@@ -446,7 +449,7 @@ public partial class LDtkLevel
     public string Identifier { get; set; }
 
     [JsonPropertyName("iid")]
-    public string Iid { get; set; }
+    public Guid Iid { get; set; }
 
     [JsonPropertyName("layerInstances")]
     public LayerInstance[]? LayerInstances { get; set; }
@@ -479,10 +482,10 @@ public partial class LevelBackgroundPosition
     public float[] CropRect { get; set; }
 
     [JsonPropertyName("scale")]
-    public float[] Scale { get; set; }
+    public Vector2 Scale { get; set; }
 
     [JsonPropertyName("topLeftPx")]
-    public int[] TopLeftPx { get; set; }
+    public Point TopLeftPx { get; set; }
 }
 
 public partial class NeighbourLevel
@@ -491,7 +494,7 @@ public partial class NeighbourLevel
     public string Dir { get; set; }
 
     [JsonPropertyName("levelIid")]
-    public string LevelIid { get; set; }
+    public Guid LevelIid { get; set; }
 }
 
 public partial class LDtkTableOfContentEntry
@@ -512,10 +515,10 @@ public partial class TileInstance
     public int F { get; set; }
 
     [JsonPropertyName("px")]
-    public int[] Px { get; set; }
+    public Point Px { get; set; }
 
     [JsonPropertyName("src")]
-    public int[] Src { get; set; }
+    public Point Src { get; set; }
 
     [JsonPropertyName("t")]
     public int T { get; set; }
@@ -623,7 +626,7 @@ public partial class LDtkWorld
     public string Identifier { get; set; }
 
     [JsonPropertyName("iid")]
-    public string Iid { get; set; }
+    public Guid Iid { get; set; }
 
     [JsonPropertyName("levels")]
     public LDtkLevel[] Levels { get; set; }
@@ -637,7 +640,6 @@ public partial class LDtkWorld
     [JsonPropertyName("worldLayout")]
     public WorldLayout WorldLayout { get; set; }
 }
-
 
 public enum EmbedAtlas { LdtkIcons, }
 
