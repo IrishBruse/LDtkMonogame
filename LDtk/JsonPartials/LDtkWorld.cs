@@ -12,22 +12,22 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("WorldLayout: {WorldLayout} Size: {WorldGridSize} Path: {FilePath}")]
 public partial class LDtkWorld
 {
-    /// <summary> Gets or sets the raw ldtk level data. </summary>
-    [JsonPropertyName("levels")]
-    public LDtkLevel[] RawLevels { get; set; } = [];
+    // /// <summary> Gets or sets the raw ldtk level data. </summary>
+    // [JsonPropertyName("levels")]
+    // public LDtkLevel[] RawLevels { get; set; } = [];
 
-    /// <summary> Gets the Levels iterator used in foreach will load external levels each time caching recommended. </summary>
-    [JsonIgnore]
-    public IEnumerable<LDtkLevel> Levels
-    {
-        get
-        {
-            for (int i = 0; i < RawLevels.Length; i++)
-            {
-                yield return LoadLevel(RawLevels[i]);
-            }
-        }
-    }
+    // /// <summary> Gets the Levels iterator used in foreach will load external levels each time caching recommended. </summary>
+    // [JsonIgnore]
+    // public IEnumerable<LDtkLevel> Levels
+    // {
+    //     get
+    //     {
+    //         for (int i = 0; i < RawLevels.Length; i++)
+    //         {
+    //             yield return LoadLevel(RawLevels[i]);
+    //         }
+    //     }
+    // }
 
     /// <summary> Gets or sets the absolute filepath to the world. </summary>
     [JsonIgnore]

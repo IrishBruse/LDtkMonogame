@@ -1,250 +1,310 @@
 namespace QuickTypeGenerator;
 
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
+using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 public static class Program
 {
     const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
-    const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
-    const string MinimalFilePath = "../LDtk/LDtkJson.cs";
-    const string FullFilePath = "../LDtk.Codegen/LDtkJsonFull.cs";
-    const string Version = "1.5.3";
+    static readonly string[] Namespaces = {
+        "using System;",
+        "using System.Collections.Generic;",
+        "using System.Text.Json.Serialization;",
+        "",
+        "using Microsoft.Xna.Framework;",
+    };
 
-    const string PragmaWarnings = "CS1591, IDE1006, CA1707, CA1716, IDE0130, CA1720, CA1711";
+    static readonly string[] IgnoreClasses = {
+        "AutoRuleDef",
+        "FieldDef"
+    };
 
-    static bool minimal;
-    static readonly Regex MyRegex = new("\\[(.*)\\]\\(.*\\)", RegexOptions.Compiled);
+    static readonly string[] IgnoreFields = {
+        "__FORCED_REFS",
+        "levelFields",
+    };
 
-    public static void Main()
+    static readonly Dictionary<string, EnumItems> Enums = new();
+
+    public static async Task<int> Main()
     {
-        minimal = true;
-        GenerateFile(MinimalFilePath, MinSchema, "LDtk");
-        minimal = false;
-        GenerateFile(FullFilePath, FullSchema, "LDtk.Codegen");
+        using HttpClient wc = new();
+        string json = await wc.GetStringAsync(MinSchema);
+
+        ParseJson(json);
+
+        return 0;
     }
 
-    static void GenerateFile(string file, string schema, string namespace_)
+    static void ParseJson(string json)
     {
-        string[] args = new string[]
+        using StreamWriter file = new("../LDtk/LDtkJson.cs");
+
+        JsonNode root = JsonNode.Parse(json);
+
+        string rootClassPath = root["$ref"].GetValue<string>();
+        var rootClass = GetNode(root, rootClassPath);
+
+        file.WriteLine("namespace LDtk;");
+        file.WriteLine();
+        file.WriteLine("#nullable disable");
+        file.WriteLine("#pragma warning disable CS8618, CS1591, CS8632, IDE1006");
+        file.WriteLine();
+        file.WriteLine("// LDtk " + root["version"].GetValue<string>());
+        file.WriteLine();
+        file.WriteLine(string.Join(Environment.NewLine, Namespaces));
+        file.WriteLine();
+
+        CreateClass("LDtkFile", rootClass, file);
+
+        foreach ((string key, JsonNode type) in root["otherTypes"].AsObject().OrderBy(x => ToCSharpName(x.Key).TrimStart('_')))
         {
-            "--lang cs",
-            "--src " + schema,
-            "-s schema",
-            "-o " + file,
-            "-t LDtkFile",
-            "--features attributes-only",
-            "--namespace " + namespace_,
-            "--framework SystemTextJson",
-            "--alphabetize-properties"
-        };
+            if (IgnoreClasses.Contains(key))
+            {
+                continue;
+            }
 
-        Process.Start(new ProcessStartInfo
+            CreateClass(ConvertClassName(key), type, file);
+        }
+        file.WriteLine();
+        foreach ((string key, var val) in Enums.OrderBy(x => x.Key))
         {
-            FileName = "quicktype.cmd",
-            Arguments = string.Join(" ", args),
-            UseShellExecute = false,
-            RedirectStandardOutput = false,
-            RedirectStandardError = false,
-            RedirectStandardInput = false,
-            CreateNoWindow = true
-        }).WaitForExit();
-
-        // List<string> lines = File.ReadAllLines(file).ToList();
-
-        // ProcessFile(lines);
-
-        // lines[0] = "#nullable disable\n#pragma warning disable " + PragmaWarnings + "\n// This file was auto generated, any changes will be lost. For LDtk " + Version + "\n" + lines[0];
-        // lines[1] += "using Microsoft.Xna.Framework;";
-        // File.WriteAllLines(file, lines);
-
-        // Format(file);
-
-        // File.WriteAllLines(file, lines);
-
-        // File.AppendAllText(file, "#pragma warning restore " + PragmaWarnings + "\n");
+            // file.WriteLine($"/// <summary> {val.Description} </summary>");
+            file.Write($"public enum {key} ");
+            file.Write("{");
+            foreach (string item in val.Values)
+            {
+                file.Write($" {item},");
+            }
+            file.WriteLine("}");
+            file.WriteLine();
+        }
+        file.WriteLine("#pragma warning restore");
+        file.WriteLine("#nullable restore");
     }
 
-    static void Format(string file)
+    static JsonNode GetNode(JsonNode node, string path)
     {
-        Thread.Sleep(300);
-        Process.Start(new ProcessStartInfo
+        foreach (string part in path.Split('/'))
         {
-            FileName = "dotnet",
-            Arguments = "format " + Path.GetDirectoryName(file),
-            UseShellExecute = false,
-            RedirectStandardOutput = false,
-            RedirectStandardError = false,
-            RedirectStandardInput = false,
-            CreateNoWindow = true
-        }).WaitForExit();
+            if (part == "#")
+            {
+                node = node.Root;
+                continue;
+            }
+
+            try
+            {
+                node = node[part];
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(node.GetPath());
+                throw;
+            }
+        }
+
+        return node;
     }
 
-    static void ProcessFile(List<string> lines)
+    static void CreateClass(string className, JsonNode node, StreamWriter file)
     {
-        bool end = false;
+        // file.WriteLine($"/// <summary> {node.Root["description"]} <br/> {node["description"] ?? className} </summary>");
+        file.WriteLine($"public partial class {className}");
+        file.WriteLine("{");
 
-        for (int i = 0; i < lines.Count; i++)
+        JsonSerializerOptions options = new() { PropertyNameCaseInsensitive = true };
+        var properties = node["properties"].Deserialize<Dictionary<string, Property>>(options).OrderBy(v => ToCSharpName(v.Key).TrimStart('_'));
+
+        bool start = false;
+
+        foreach ((string key, Property prop) in properties)
         {
-            if (end)
+            if (IgnoreFields.Contains(key))
             {
-                lines[i] = "";
                 continue;
             }
 
-            if (lines[i].TrimStart().EndsWith("public partial class World"))
-            {
-                lines[i] = "public partial class LDtkWorld";
-                continue;
-            }
+            string name = ToCSharpName(key);
+            string description = prop.Description;
 
-            if (lines[i].TrimStart().EndsWith("public partial class Level"))
+            string type = "";
+            if (prop.Type != null)
             {
-                lines[i] = "public partial class LDtkLevel";
-                continue;
+                type = GetType(prop);
             }
-
-            if (lines[i].TrimStart().StartsWith("///"))
+            else if (prop.Ref != null)
             {
-                if (lines[i].EndsWith("///"))
+                type = ParseRef(prop.Ref);
+            }
+            else if (prop.Enum != null)
+            {
+                type = name;
+
+                if (!Enums.ContainsKey(name))
                 {
-                    lines[i] += " <br/>";
-                    continue;
-                }
-                // Doc comment cleanup
-                // lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
-                // lines[i] = lines[i].Replace("<br/><br/>", "<br/>");
-                // lines[i] = lines[i].Replace("&lt;", " &lt; ").Replace("&gt;", " &gt; ");
-
-                lines[i] = lines[i].Replace("`", "");
-                lines[i] = lines[i].Replace("*", "");
-                lines[i] = lines[i].Replace("IID", "Guid");
-                lines[i] = MyRegex.Replace(lines[i], "$1");
-
-                lines[i] = lines[i].Replace("Array<...> (eg. Array<Int>, Array<Point>", "<![CDATA[ Array<...> (eg. Array<Int>, Array<Point> ]]>");
-                continue;
-            }
-
-            lines[i] = lines[i].Replace("public Level ", "public LDtkLevel ");
-            lines[i] = lines[i].Replace("public Level[] ", "public LDtkLevel[] ");
-            lines[i] = lines[i].Replace("public World ", "public LDtkWorld ");
-
-            if (lines[i].TrimStart().StartsWith("public string _Type ") && lines[i - 3].Contains("IntGrid, Entities, Tiles or AutoLayer"))
-            {
-                lines[i] = "public LayerType _Type { get; set; }";
-                continue;
-            }
-
-            if (minimal)
-            {
-                if (
-                    lines[i].TrimStart().EndsWith("public partial class ForcedRefs") ||
-                    lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleDefinition") ||
-                    lines[i].TrimStart().EndsWith("public partial class FieldDefinition")
-                )
-                {
-                    DeleteDocComment(lines, i);
-                    RemoveClassBody(lines, i);
-                    continue;
-                }
-
-                if (lines[i].TrimStart().EndsWith("public partial class AutoLayerRuleGroup"))
-                {
-                    RemoveClassBody(lines, i);
-                    continue;
+                    Enums.Add(name, new()
+                    {
+                        Description = description,
+                        Values = prop.Enum.Where(v => v != null).ToArray()
+                    });
                 }
             }
-
-            if (lines[i].Contains("JsonPropertyName"))
+            else if (prop.OneOf != null)
             {
-                ProcessVariables(lines, i);
+                type = OneOf(prop.OneOf);
+            }
+            else
+            {
+                type = "object";
             }
 
-#pragma warning disable SYSLIB1045
-            lines[i] = Regex.Replace(lines[i], "double", "float");
-            lines[i] = Regex.Replace(lines[i], "long", "int");
-
-            lines[i] = Regex.Replace(lines[i], "string Color", "Color Color");
-            lines[i] = Regex.Replace(lines[i], "string BgColor", "Color BgColor");
-            lines[i] = Regex.Replace(lines[i], "string _SmartColor", "Color _SmartColor");
-
-            lines[i] = Regex.Replace(lines[i], @"int\[\] Px", "Point Px");
-            lines[i] = Regex.Replace(lines[i], @"int\[\] Src", "Point Src");
-            lines[i] = Regex.Replace(lines[i], @"int\[\] _Grid", "Point _Grid");
-            lines[i] = Regex.Replace(lines[i], @"int\[\] TopLeftPx", "Point TopLeftPx");
-
-            lines[i] = Regex.Replace(lines[i], @"float\[\] _Pivot", "Vector2 _Pivot");
-            lines[i] = Regex.Replace(lines[i], @"float\[\] Scale", "Vector2 Scale");
-
-            lines[i] = Regex.Replace(lines[i], "ReferenceToAnEntityInstance", "EntityRef");
-
-            lines[i] = Regex.Replace(lines[i], "TypeEnum Type", "LayerType Type");
-
-            lines[i] = Regex.Replace(lines[i], "(public string )(.*)(Iid )", "public Guid $2Iid ");
-#pragma warning restore SYSLIB1045
-
-            if (lines[i].StartsWith("    internal static class Converter"))
+            if (description?.Length == 0)
             {
-                lines[i] = "";
-                end = true;
+                description = name;
             }
-        }
-    }
 
-    static void RemoveClassBody(List<string> lines, int i)
-    {
-        int indent = 1;
-
-        lines[i] = "";
-        lines[i + 1] = "";
-
-        // Remove class body
-        for (int currentLine = i + 2; indent > 0; currentLine++)
-        {
-            indent += lines[currentLine].Count(c => c == '{');
-            indent -= lines[currentLine].Count(c => c == '}');
-            lines[currentLine] = "";
-        }
-    }
-
-    static void ProcessVariables(List<string> lines, int i)
-    {
-        string name = lines[i].Split('"')[1];
-
-        if ((name == "__FORCED_REFS" || name == "levels" || name == "levelFields") && minimal)
-        {
-            lines[i] = "";
-            lines[i + 1] = "";
-            DeleteDocComment(lines, i);
-        }
-        else if (name == "worlds")
-        {
-            string[] lineParts = lines[i + 1].TrimStart().Split(' ');
-            lineParts[1] = "LDtk" + lineParts[1];
-            lines[i + 1] = string.Join(" ", lineParts);
-        }
-        else if (name.StartsWith("__"))
-        {
-            string[] lineParts = lines[i + 1].TrimStart().Split(' ');
-            lineParts[2] = "_" + lineParts[2];
-            lines[i + 1] = string.Join(" ", lineParts);
-        }
-    }
-
-    static void DeleteDocComment(List<string> lines, int i)
-    {
-        for (int j = i - 1; j >= 0; j--)
-        {
-            if (lines[j].Contains("/// <summary>"))
+            if (start)
             {
-                lines[j] = "";
-                break;
+                file.WriteLine();
             }
-            lines[j] = "";
+            start = true;
+
+            // file.WriteLine($"    /// <summary> {description} </summary>");
+            file.WriteLine($"    [JsonPropertyName(\"{key}\")]");
+            file.WriteLine($"    public {type} {name} {{ get; set; }}");
         }
+        file.WriteLine("}");
+        file.WriteLine();
     }
+
+    static string OneOf(Items[] oneOf)
+    {
+        return "int";
+    }
+
+    static string ToCSharpName(string key)
+    {
+        if (key[0] == '_')
+        {
+            key = key[2..];
+            return "_" + char.ToUpper(key[0]) + key[1..];
+        }
+        return char.ToUpper(key[0]) + key[1..];
+    }
+
+    static string GetType(Property value)
+    {
+        string[] types = value.Type;
+
+        string baseType = types[0];
+        string nullableType = "";
+        if (types.Length > 1 && types[1] != null)
+        {
+            nullableType = types[1] switch
+            {
+                "null" => "?",
+                _ => throw new NotImplementedException(types[1]),
+            };
+        }
+
+        string arrayType = "";
+        if (value.Items?.Ref != null)
+        {
+            arrayType = ParseRef(value.Items?.Ref);
+        }
+        if (value.Items?.Type != null)
+        {
+            arrayType = GetTypeName(value.Items.Type[0]);
+        }
+
+        return arrayType + GetTypeName(baseType) + nullableType;
+    }
+
+    static string ParseRef(string typeRef)
+    {
+        string[] parts = typeRef.Split("/");
+        if (parts.Length != 0)
+        {
+            typeRef = GetCustomType(parts[^1]);
+        }
+
+        return typeRef;
+    }
+
+    static string GetTypeName(string type) => type switch
+    {
+        "boolean" => "bool",
+        "integer" => "int",
+        "number" => "float",
+        "string" => "string",
+        "array" => "[]",
+        "object" => "object",
+        "color" => "Color",
+        "enum" => "string",
+        "file" => "string",
+        "any" => "object",
+        "null" => "?",
+        _ => throw new NotImplementedException(type),
+    };
+
+    static string ConvertClassName(string type) => type switch
+    {
+        "EntityDef" => "EntityDefinition",
+        "EntityReferenceInfos" => "EntityReference",
+        "FieldDef" => "FieldDefinition",
+        "EnumDef" => "EnumDefinition",
+        "EnumDefValues" => "EnumValueDefinition",
+        "LayerDef" => "LayerDefinition",
+        "IntGridValueGroupDef" => "IntGridValueGroupDefinition",
+        "TilesetDef" => "TilesetDefinition",
+        "World" => "LDtkWorld",
+        "Level" => "LDtkLevel",
+        "IntGridValueDef" => "IntGridValueDefinition",
+        "TilesetRect" => "TilesetRectangle",
+        "LevelBgPosInfos" => "LevelBackgroundPosition",
+        "TableOfContentEntry" => "LDtkTableOfContentEntry",
+        "Tile" => "TileInstance",
+        _ => type,
+    };
+
+    static string GetCustomType(string type) => type switch
+    {
+        "AutoRuleDef" => "object",
+        "FieldDefinition" => "object",
+        _ => ConvertClassName(type),
+    };
+}
+
+class Property
+{
+    public string Description { get; set; }
+    public string[] Type { get; set; }
+    public Items Items { get; set; }
+    public Items[] OneOf { get; set; }
+    public string[] Enum { get; set; }
+
+    [JsonPropertyName("$ref")]
+    public string Ref { get; set; }
+}
+
+class Items
+{
+    [JsonPropertyName("$ref")]
+    public string Ref { get; set; }
+
+    public string[] Type { get; set; }
+}
+
+class EnumItems
+{
+    public string Description { get; set; }
+    public string[] Values { get; set; }
 }
