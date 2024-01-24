@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Example", "LDtk.Exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Tests", "LDtk.Tests\LDtk.Tests.csproj", "{D4064710-A361-4A9E-B035-E84D1E84C599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Quicktype", "LDtk.Quicktype\LDtk.Quicktype.csproj", "{DC684867-42FE-4B3B-A33D-5FE6FE929A76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.JsonShema", "LDtk.JsonShema\LDtk.JsonShema.csproj", "{DC684867-42FE-4B3B-A33D-5FE6FE929A76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

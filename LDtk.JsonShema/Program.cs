@@ -73,7 +73,7 @@ public static class Program
 
             CreateClass(ConvertClassName(key), type, file);
         }
-        file.WriteLine();
+
         foreach ((string key, var val) in Enums.OrderBy(x => x.Key))
         {
             // file.WriteLine($"/// <summary> {val.Description} </summary>");
@@ -83,7 +83,7 @@ public static class Program
             {
                 file.Write($" {item},");
             }
-            file.WriteLine("}");
+            file.WriteLine(" }");
             file.WriteLine();
         }
         file.WriteLine("#pragma warning restore");
@@ -203,6 +203,8 @@ public static class Program
     static string GetType(Property value)
     {
         string[] types = value.Type;
+
+        Console.WriteLine(string.Join(", ", types));
 
         string baseType = types[0];
         string nullableType = "";
