@@ -74,7 +74,7 @@ public class BaseGenerator
         string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
         _ = Directory.CreateDirectory(Path.GetDirectoryName(file));
         File.WriteAllText(file, FileContents.ToString());
-        Console.WriteLine("Generating -> " + folder + "/" + identifier + ".cs");
+        Console.WriteLine("Generating -> " + Path.Combine(folder, identifier) + ".cs");
         _ = FileContents.Clear();
     }
 }

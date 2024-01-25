@@ -18,6 +18,6 @@ public class EntityRefTest : ILDtkEntity
 
     public Color SmartColor { get; set; }
 
-    public EntityRef? target { get; set; }
+    public EntityReference? target { get; set; }
 }
 #pragma warning restore

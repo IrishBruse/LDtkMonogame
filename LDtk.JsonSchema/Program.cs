@@ -14,6 +14,7 @@ public static class Program
 {
     const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
     const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
+
     static readonly string[] Namespaces = {
         "using System;",
         "using System.Collections.Generic;",
@@ -22,23 +23,14 @@ public static class Program
         "using Microsoft.Xna.Framework;",
     };
 
-    static readonly string[] IgnoreClasses = {
-        "AutoRuleDef",
-        "FieldDef"
-    };
-
-    static readonly string[] IgnoreFields = {
-        "__FORCED_REFS",
-    };
-
     static readonly Dictionary<string, Dictionary<string, string>> ClassPropertyTypeOverrides = new()
     {
         {"LDtkFile", new() {
-            {"WorldLayout", "WorldLayout"},
+            {"WorldLayout", "WorldLayout?"},
             {"BgColor",     "Color"},
         }},
         {"LDtkLevel", new() {
-            {"_BgColor", "Color"},
+            {"_BgColor",    "Color"},
         }},
         {"LayerDefinition", new() {
             {"_Type",       "LayerType"},
@@ -56,6 +48,9 @@ public static class Program
             {"Px",          "Point"},
             {"Src",         "Point"},
         }},
+        {"FieldInstance", new() {
+            {"RealEditorValues","object[]"},
+        }},
         {"EntityDefinition", new() {
             {"Color",       "Color"},
         }},
@@ -69,6 +64,9 @@ public static class Program
         {"IntGridValueDefinition", new() {
             {"Color",       "Color?"},
         }},
+        {"AutoRuleDef", new() {
+            {"TileRectsIds","int[][]"},
+        }},
     };
 
     static readonly Dictionary<string, EnumItems> Enums = new();
@@ -79,6 +77,16 @@ public static class Program
 
         string json = "";
 
+        string[] ignoreClasses = {
+            "AutoRuleDef",
+            "FieldDef"
+        };
+
+        string[] ignoreFields = {
+            "__FORCED_REFS",
+            "LevelFields"
+        };
+
         if (!File.Exists("MinSchema.json"))
         {
             json = await wc.GetStringAsync(MinSchema);
@@ -88,7 +96,7 @@ public static class Program
         {
             json = File.ReadAllText("MinSchema.json");
         }
-        ParseJson(json, "../LDtk/LDtkJson.cs");
+        ParseJson(json, "LDtk", "../LDtk/LDtkJson.cs", false, ignoreClasses, ignoreFields);
 
         if (!File.Exists("FullSchema.json"))
         {
@@ -99,12 +107,12 @@ public static class Program
         {
             json = File.ReadAllText("FullSchema.json");
         }
-        ParseJson(json, "../LDtk.Codegen/LDtkJsonFull.cs");
+        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", true, new[] { "" }, new[] { "__FORCED_REFS" });
 
         return 0;
     }
 
-    static void ParseJson(string json, string output)
+    static void ParseJson(string json, string ns, string output, bool full, string[] ignoreClasses, string[] ignoreFields)
     {
         using StreamWriter file = new(output);
 
@@ -113,7 +121,7 @@ public static class Program
         string rootClassPath = root["$ref"].GetValue<string>();
         var rootClass = GetNode(root, rootClassPath);
 
-        file.WriteLine("namespace LDtk;");
+        file.WriteLine($"namespace {ns};");
         file.WriteLine();
         file.WriteLine("#nullable disable");
         file.WriteLine("#pragma warning disable CS8618, CS1591, CS8632, IDE1006");
@@ -123,16 +131,16 @@ public static class Program
         file.WriteLine(string.Join(Environment.NewLine, Namespaces));
         file.WriteLine();
 
-        CreateClass("LDtkFile", rootClass, file);
+        CreateClass("LDtkFile", rootClass, file, ignoreFields);
 
         foreach ((string key, JsonNode type) in root["otherTypes"].AsObject().OrderBy(x => ToCSharpName(x.Key).TrimStart('_')))
         {
-            if (IgnoreClasses.Contains(key))
+            if (full && ignoreClasses.Contains(key))
             {
                 continue;
             }
 
-            CreateClass(ConvertClassName(key), type, file);
+            CreateClass(ConvertClassName(key), type, file, ignoreFields);
         }
 
         foreach ((string key, var val) in Enums.OrderBy(x => x.Key))
@@ -175,7 +183,7 @@ public static class Program
         return node;
     }
 
-    static void CreateClass(string className, JsonNode node, StreamWriter file)
+    static void CreateClass(string className, JsonNode node, StreamWriter file, string[] ignoreFields)
     {
         // file.WriteLine($"/// <summary> {node.Root["description"]} <br/> {node["description"] ?? className} </summary>");
         file.WriteLine($"public partial class {className}");
@@ -188,7 +196,7 @@ public static class Program
 
         foreach ((string key, Property prop) in properties)
         {
-            if (IgnoreFields.Contains(key))
+            if (ignoreFields.Contains(key))
             {
                 continue;
             }
@@ -208,7 +216,7 @@ public static class Program
             }
             else if (prop.Enum != null)
             {
-                type = prop.Name;
+                type = prop.Name + "?";
 
                 if (!Enums.ContainsKey(prop.Name))
                 {

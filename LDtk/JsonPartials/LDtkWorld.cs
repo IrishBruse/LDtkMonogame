@@ -1,7 +1,6 @@
 namespace LDtk;
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json.Serialization;
@@ -12,23 +11,6 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("WorldLayout: {WorldLayout} Size: {WorldGridSize} Path: {FilePath}")]
 public partial class LDtkWorld
 {
-    // /// <summary> Gets or sets the raw ldtk level data. </summary>
-    // [JsonPropertyName("levels")]
-    // public LDtkLevel[] RawLevels { get; set; } = [];
-
-    // /// <summary> Gets the Levels iterator used in foreach will load external levels each time caching recommended. </summary>
-    // [JsonIgnore]
-    // public IEnumerable<LDtkLevel> Levels
-    // {
-    //     get
-    //     {
-    //         for (int i = 0; i < RawLevels.Length; i++)
-    //         {
-    //             yield return LoadLevel(RawLevels[i]);
-    //         }
-    //     }
-    // }
-
     /// <summary> Gets or sets the absolute filepath to the world. </summary>
     [JsonIgnore]
     public string FilePath { get; set; } = "";
@@ -73,7 +55,7 @@ public partial class LDtkWorld
     /// <summary> Get the level with an identifier. </summary>
     public LDtkLevel LoadLevel(string identifier)
     {
-        foreach (LDtkLevel level in RawLevels)
+        foreach (LDtkLevel level in Levels)
         {
             if (level.Identifier != identifier)
             {
@@ -89,7 +71,7 @@ public partial class LDtkWorld
     /// <summary> Get the level with an iid. </summary>
     public LDtkLevel LoadLevel(Guid iid)
     {
-        foreach (LDtkLevel level in RawLevels)
+        foreach (LDtkLevel level in Levels)
         {
             if (level.Iid != iid)
             {
@@ -105,9 +87,9 @@ public partial class LDtkWorld
     /// <summary> Get the level with an index. </summary>
     public LDtkLevel LoadLevel(int index)
     {
-        if (index >= 0 && index <= RawLevels.Length)
+        if (index >= 0 && index <= Levels.Length)
         {
-            return LoadLevel(RawLevels[index]);
+            return LoadLevel(Levels[index]);
         }
 
         throw new LDtkException($"No level with index {index} found in this world");
@@ -147,18 +129,18 @@ public partial class LDtkWorld
         }
     }
 
-    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/>. </summary>
-    public T GetEntityRef<T>(EntityRef entityRef)
+    /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
+    public T GetEntityRef<T>(EntityReference reference)
         where T : new()
     {
-        foreach (LDtkLevel level in RawLevels)
+        foreach (LDtkLevel level in Levels)
         {
-            if (level.Iid != entityRef.LevelIid)
+            if (level.Iid != reference.LevelIid)
             {
                 continue;
             }
 
-            return level.GetEntityRef<T>(entityRef);
+            return level.GetEntityRef<T>(reference);
         }
 
         throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in world {Identifier}");

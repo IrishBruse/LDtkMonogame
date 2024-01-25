@@ -1,5 +1,6 @@
 namespace LDtk;
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -80,7 +81,7 @@ public partial class LDtkLevel
     /// <exception cref="LDtkException">Throws when identifier is not valid</exception>
     public LDtkIntGrid GetIntGrid(string identifier)
     {
-        foreach (LayerInstance layer in LayerInstances)
+        foreach (LayerInstance layer in LayerInstances ?? Array.Empty<LayerInstance>())
         {
             if (layer._Identifier != identifier)
             {
@@ -138,22 +139,22 @@ public partial class LDtkLevel
         throw new LDtkException($"No entity of type {typeof(T).Name} found in this level");
     }
 
-    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/>. </summary>
-    /// <param name="entityRef"></param>
+    /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
+    /// <param name="reference"></param>
     /// <exception cref="LDtkException"></exception>
-    public T GetEntityRef<T>(EntityRef entityRef)
+    public T GetEntityRef<T>(EntityReference reference)
         where T : new()
     {
-        foreach (LayerInstance layer in LayerInstances)
+        foreach (LayerInstance layer in LayerInstances ?? Array.Empty<LayerInstance>())
         {
-            if (layer.Iid != entityRef.LayerIid)
+            if (layer.Iid != reference.LayerIid)
             {
                 continue;
             }
 
             foreach (EntityInstance entity in layer.EntityInstances)
             {
-                if (entity.Iid != entityRef.EntityIid)
+                if (entity.Iid != reference.EntityIid)
                 {
                     continue;
                 }
@@ -173,7 +174,7 @@ public partial class LDtkLevel
     {
         List<T> entities = [];
 
-        foreach (LayerInstance layer in LayerInstances)
+        foreach (LayerInstance layer in LayerInstances ?? Array.Empty<LayerInstance>())
         {
             if (layer._Type == LayerType.Entities)
             {

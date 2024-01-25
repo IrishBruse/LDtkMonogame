@@ -1,4 +1,4 @@
-namespace LDtk;
+namespace LDtk.Codegen;
 
 #nullable disable
 #pragma warning disable CS8618, CS1591, CS8632, IDE1006
@@ -77,13 +77,13 @@ public partial class LDtkFile
     public Flag[] Flags { get; set; }
 
     [JsonPropertyName("identifierStyle")]
-    public IdentifierStyle IdentifierStyle { get; set; }
+    public IdentifierStyle? IdentifierStyle { get; set; }
 
     [JsonPropertyName("iid")]
     public Guid Iid { get; set; }
 
     [JsonPropertyName("imageExportMode")]
-    public ImageExportMode ImageExportMode { get; set; }
+    public ImageExportMode? ImageExportMode { get; set; }
 
     [JsonPropertyName("jsonVersion")]
     public string JsonVersion { get; set; }
@@ -119,7 +119,7 @@ public partial class LDtkFile
     public int? WorldGridWidth { get; set; }
 
     [JsonPropertyName("worldLayout")]
-    public WorldLayout WorldLayout { get; set; }
+    public WorldLayout? WorldLayout { get; set; }
 
     [JsonPropertyName("worlds")]
     public LDtkWorld[] Worlds { get; set; }
@@ -161,13 +161,109 @@ public partial class AutoLayerRuleGroup
     public bool UsesWizard { get; set; }
 }
 
+public partial class AutoRuleDef
+{
+    [JsonPropertyName("active")]
+    public bool Active { get; set; }
+
+    [JsonPropertyName("alpha")]
+    public float Alpha { get; set; }
+
+    [JsonPropertyName("breakOnMatch")]
+    public bool BreakOnMatch { get; set; }
+
+    [JsonPropertyName("chance")]
+    public float Chance { get; set; }
+
+    [JsonPropertyName("checker")]
+    public Checker? Checker { get; set; }
+
+    [JsonPropertyName("flipX")]
+    public bool FlipX { get; set; }
+
+    [JsonPropertyName("flipY")]
+    public bool FlipY { get; set; }
+
+    [JsonPropertyName("invalidated")]
+    public bool Invalidated { get; set; }
+
+    [JsonPropertyName("outOfBoundsValue")]
+    public int? OutOfBoundsValue { get; set; }
+
+    [JsonPropertyName("pattern")]
+    public int[] Pattern { get; set; }
+
+    [JsonPropertyName("perlinActive")]
+    public bool PerlinActive { get; set; }
+
+    [JsonPropertyName("perlinOctaves")]
+    public float PerlinOctaves { get; set; }
+
+    [JsonPropertyName("perlinScale")]
+    public float PerlinScale { get; set; }
+
+    [JsonPropertyName("perlinSeed")]
+    public float PerlinSeed { get; set; }
+
+    [JsonPropertyName("pivotX")]
+    public float PivotX { get; set; }
+
+    [JsonPropertyName("pivotY")]
+    public float PivotY { get; set; }
+
+    [JsonPropertyName("size")]
+    public int Size { get; set; }
+
+    [JsonPropertyName("tileIds")]
+    public int[]? TileIds { get; set; }
+
+    [JsonPropertyName("tileMode")]
+    public TileMode? TileMode { get; set; }
+
+    [JsonPropertyName("tileRandomXMax")]
+    public int TileRandomXMax { get; set; }
+
+    [JsonPropertyName("tileRandomXMin")]
+    public int TileRandomXMin { get; set; }
+
+    [JsonPropertyName("tileRandomYMax")]
+    public int TileRandomYMax { get; set; }
+
+    [JsonPropertyName("tileRandomYMin")]
+    public int TileRandomYMin { get; set; }
+
+    [JsonPropertyName("tileRectsIds")]
+    public int[][] TileRectsIds { get; set; }
+
+    [JsonPropertyName("tileXOffset")]
+    public int TileXOffset { get; set; }
+
+    [JsonPropertyName("tileYOffset")]
+    public int TileYOffset { get; set; }
+
+    [JsonPropertyName("uid")]
+    public int Uid { get; set; }
+
+    [JsonPropertyName("xModulo")]
+    public int XModulo { get; set; }
+
+    [JsonPropertyName("xOffset")]
+    public int XOffset { get; set; }
+
+    [JsonPropertyName("yModulo")]
+    public int YModulo { get; set; }
+
+    [JsonPropertyName("yOffset")]
+    public int YOffset { get; set; }
+}
+
 public partial class CustomCommand
 {
     [JsonPropertyName("command")]
     public string Command { get; set; }
 
     [JsonPropertyName("when")]
-    public When When { get; set; }
+    public When? When { get; set; }
 }
 
 public partial class Definitions
@@ -224,10 +320,10 @@ public partial class EntityDefinition
     public bool KeepAspectRatio { get; set; }
 
     [JsonPropertyName("limitBehavior")]
-    public LimitBehavior LimitBehavior { get; set; }
+    public LimitBehavior? LimitBehavior { get; set; }
 
     [JsonPropertyName("limitScope")]
-    public LimitScope LimitScope { get; set; }
+    public LimitScope? LimitScope { get; set; }
 
     [JsonPropertyName("lineOpacity")]
     public float LineOpacity { get; set; }
@@ -257,7 +353,7 @@ public partial class EntityDefinition
     public float PivotY { get; set; }
 
     [JsonPropertyName("renderMode")]
-    public RenderMode RenderMode { get; set; }
+    public RenderMode? RenderMode { get; set; }
 
     [JsonPropertyName("resizableX")]
     public bool ResizableX { get; set; }
@@ -281,7 +377,7 @@ public partial class EntityDefinition
     public TilesetRectangle? TileRect { get; set; }
 
     [JsonPropertyName("tileRenderMode")]
-    public TileRenderMode TileRenderMode { get; set; }
+    public TileRenderMode? TileRenderMode { get; set; }
 
     [JsonPropertyName("tilesetId")]
     public int? TilesetId { get; set; }
@@ -407,6 +503,114 @@ public partial class EnumTagValue
     public int[] TileIds { get; set; }
 }
 
+public partial class FieldDefinition
+{
+    [JsonPropertyName("acceptFileTypes")]
+    public string[]? AcceptFileTypes { get; set; }
+
+    [JsonPropertyName("allowedRefs")]
+    public AllowedRefs? AllowedRefs { get; set; }
+
+    [JsonPropertyName("allowedRefsEntityUid")]
+    public int? AllowedRefsEntityUid { get; set; }
+
+    [JsonPropertyName("allowedRefTags")]
+    public string[] AllowedRefTags { get; set; }
+
+    [JsonPropertyName("allowOutOfLevelRef")]
+    public bool AllowOutOfLevelRef { get; set; }
+
+    [JsonPropertyName("arrayMaxLength")]
+    public int? ArrayMaxLength { get; set; }
+
+    [JsonPropertyName("arrayMinLength")]
+    public int? ArrayMinLength { get; set; }
+
+    [JsonPropertyName("autoChainRef")]
+    public bool AutoChainRef { get; set; }
+
+    [JsonPropertyName("canBeNull")]
+    public bool CanBeNull { get; set; }
+
+    [JsonPropertyName("defaultOverride")]
+    public object DefaultOverride { get; set; }
+
+    [JsonPropertyName("doc")]
+    public string? Doc { get; set; }
+
+    [JsonPropertyName("editorAlwaysShow")]
+    public bool EditorAlwaysShow { get; set; }
+
+    [JsonPropertyName("editorCutLongValues")]
+    public bool EditorCutLongValues { get; set; }
+
+    [JsonPropertyName("editorDisplayColor")]
+    public string? EditorDisplayColor { get; set; }
+
+    [JsonPropertyName("editorDisplayMode")]
+    public EditorDisplayMode? EditorDisplayMode { get; set; }
+
+    [JsonPropertyName("editorDisplayPos")]
+    public EditorDisplayPos? EditorDisplayPos { get; set; }
+
+    [JsonPropertyName("editorDisplayScale")]
+    public float EditorDisplayScale { get; set; }
+
+    [JsonPropertyName("editorLinkStyle")]
+    public EditorLinkStyle? EditorLinkStyle { get; set; }
+
+    [JsonPropertyName("editorShowInWorld")]
+    public bool EditorShowInWorld { get; set; }
+
+    [JsonPropertyName("editorTextPrefix")]
+    public string? EditorTextPrefix { get; set; }
+
+    [JsonPropertyName("editorTextSuffix")]
+    public string? EditorTextSuffix { get; set; }
+
+    [JsonPropertyName("exportToToc")]
+    public bool ExportToToc { get; set; }
+
+    [JsonPropertyName("identifier")]
+    public string Identifier { get; set; }
+
+    [JsonPropertyName("isArray")]
+    public bool IsArray { get; set; }
+
+    [JsonPropertyName("max")]
+    public float? Max { get; set; }
+
+    [JsonPropertyName("min")]
+    public float? Min { get; set; }
+
+    [JsonPropertyName("regex")]
+    public string? Regex { get; set; }
+
+    [JsonPropertyName("searchable")]
+    public bool Searchable { get; set; }
+
+    [JsonPropertyName("symmetricalRef")]
+    public bool SymmetricalRef { get; set; }
+
+    [JsonPropertyName("textLanguageMode")]
+    public TextLanguageMode? TextLanguageMode { get; set; }
+
+    [JsonPropertyName("tilesetUid")]
+    public int? TilesetUid { get; set; }
+
+    [JsonPropertyName("__type")]
+    public string _Type { get; set; }
+
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+
+    [JsonPropertyName("uid")]
+    public int Uid { get; set; }
+
+    [JsonPropertyName("useForSmartColor")]
+    public bool UseForSmartColor { get; set; }
+}
+
 public partial class FieldInstance
 {
     [JsonPropertyName("defUid")]
@@ -416,7 +620,7 @@ public partial class FieldInstance
     public string _Identifier { get; set; }
 
     [JsonPropertyName("realEditorValues")]
-    public [] RealEditorValues { get; set; }
+    public object[] RealEditorValues { get; set; }
 
     [JsonPropertyName("__tile")]
     public TilesetRectangle? _Tile { get; set; }
@@ -566,7 +770,7 @@ public partial class LayerDefinition
     public LayerType _Type { get; set; }
 
     [JsonPropertyName("type")]
-    public Type Type { get; set; }
+    public Type? Type { get; set; }
 
     [JsonPropertyName("uiColor")]
     public string? UiColor { get; set; }
@@ -671,7 +875,7 @@ public partial class LDtkLevel
     public float BgPivotY { get; set; }
 
     [JsonPropertyName("bgPos")]
-    public BgPos BgPos { get; set; }
+    public BgPos? BgPos { get; set; }
 
     [JsonPropertyName("__bgPos")]
     public LevelBackgroundPosition? _BgPos { get; set; }
@@ -803,7 +1007,7 @@ public partial class TilesetDefinition
     public int _CWid { get; set; }
 
     [JsonPropertyName("embedAtlas")]
-    public EmbedAtlas EmbedAtlas { get; set; }
+    public EmbedAtlas? EmbedAtlas { get; set; }
 
     [JsonPropertyName("enumTags")]
     public EnumTagValue[] EnumTags { get; set; }
@@ -905,10 +1109,20 @@ public partial class LDtkWorld
     public int WorldGridWidth { get; set; }
 
     [JsonPropertyName("worldLayout")]
-    public WorldLayout WorldLayout { get; set; }
+    public WorldLayout? WorldLayout { get; set; }
 }
 
+public enum AllowedRefs { Any, OnlySame, OnlyTags, OnlySpecificEntity, }
+
 public enum BgPos { Unscaled, Contain, Cover, CoverDirty, Repeat, }
+
+public enum Checker { None, Horizontal, Vertical, }
+
+public enum EditorDisplayMode { Hidden, ValueOnly, NameAndValue, EntityTile, LevelTile, Points, PointStar, PointPath, PointPathLoop, RadiusPx, RadiusGrid, ArrayCountWithLabel, ArrayCountNoLabel, RefLinkBetweenPivots, RefLinkBetweenCenters, }
+
+public enum EditorDisplayPos { Above, Center, Beneath, }
+
+public enum EditorLinkStyle { ZigZag, StraightArrow, CurvedArrow, ArrowsLine, DashedLine, }
 
 public enum EmbedAtlas { LdtkIcons, }
 
@@ -923,6 +1137,10 @@ public enum LimitBehavior { DiscardOldOnes, PreventAdding, MoveLastOne, }
 public enum LimitScope { PerLayer, PerLevel, PerWorld, }
 
 public enum RenderMode { Rectangle, Ellipse, Tile, Cross, }
+
+public enum TextLanguageMode { LangPython, LangRuby, LangJS, LangLua, LangC, LangHaxe, LangMarkdown, LangJson, LangXml, LangLog, }
+
+public enum TileMode { Single, Stamp, }
 
 public enum TileRenderMode { Cover, FitInside, Repeat, Stretch, FullSizeCropped, FullSizeUncropped, NineSlice, }
 

@@ -24,6 +24,8 @@ public static class Constants
             new GuidConverter(),
         },
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
     };
 
     /// <summary> The converter used internally with JsonSerializer.Deserialize(..., Constants.SerializeOptions) not needed by the user just use .FromFile instead. </summary>

@@ -28,6 +28,7 @@ public class LDtkRenderer : IDisposable
     Dictionary<string, Texture2D> TilemapCache { get; } = [];
 
     readonly Texture2D pixel;
+    readonly Texture2D error;
     readonly GraphicsDevice graphicsDevice;
     readonly ContentManager? content;
 
@@ -42,6 +43,18 @@ public class LDtkRenderer : IDisposable
         {
             pixel = new Texture2D(graphicsDevice, 1, 1);
             pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+        }
+
+        if (error == null)
+        {
+            error = new Texture2D(graphicsDevice, 2, 2);
+            error.SetData(
+                new byte[]
+                {
+                    0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0xFF,
+                    0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00,
+                }
+            );
         }
     }
 
@@ -84,6 +97,11 @@ public class LDtkRenderer : IDisposable
         if (level.BgRelPath != null)
         {
             layers.Add(RenderBackgroundToLayer(level));
+        }
+
+        if (level.LayerInstances == null)
+        {
+            return layers.ToArray();
         }
 
         // Render Tile, Auto and Int grid layers
@@ -149,25 +167,31 @@ public class LDtkRenderer : IDisposable
 
         graphicsDevice.SetRenderTarget(layer);
         {
-            LevelBackgroundPosition bg = level._BgPos;
-            Vector2 pos = bg.TopLeftPx.ToVector2();
-            SpriteBatch.Draw(texture, pos, new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]), Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+            LevelBackgroundPosition? bg = level._BgPos;
+            if (bg != null)
+            {
+                Vector2 pos = bg.TopLeftPx.ToVector2();
+                SpriteBatch.Draw(texture, pos, new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]), Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+            }
         }
-
         graphicsDevice.SetRenderTarget(null);
 
         return layer;
     }
 
-    Texture2D GetTexture(LDtkLevel level, string path)
+    Texture2D GetTexture(LDtkLevel level, string? path)
     {
+        if (path == null)
+        {
+            return error;
+        }
+
         if (TilemapCache.TryGetValue(path, out Texture2D? texture))
         {
             return texture;
         }
 
         Texture2D tilemap;
-
         if (content == null)
         {
             string directory = Path.GetDirectoryName(level.WorldFilePath)!;

@@ -37,6 +37,7 @@ public static class Converter
         "Multilines" => "string",
         "Float" => "float",
         "Bool" => "bool",
+        "EntityRef" => "EntityReference",
         "Tile" => "TilesetRectangle",
         _ => input,
     };

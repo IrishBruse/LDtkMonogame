@@ -92,21 +92,21 @@ public partial class LDtkFile
         return null;
     }
 
-    /// <summary> Gets an entity from an <paramref name="entityRef"/> converted to <typeparamref name="T"/>. </summary>
+    /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
     /// <typeparam name="T"> The type to convert the entity to. </typeparam>
-    /// <param name="entityRef"> The entityRef to convert. </param>
+    /// <param name="reference"> The entityRef to convert. </param>
     /// <returns> The converted entity. </returns>
-    public T GetEntityRef<T>(EntityRef entityRef)
+    public T GetEntityRef<T>(EntityReference reference)
         where T : new()
     {
         foreach (LDtkWorld world in Worlds)
         {
-            if (world.Iid != entityRef.WorldIid)
+            if (world.Iid != reference.WorldIid)
             {
                 continue;
             }
 
-            return world.GetEntityRef<T>(entityRef);
+            return world.GetEntityRef<T>(reference);
         }
 
         throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in this level");

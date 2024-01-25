@@ -203,7 +203,7 @@ static class LDtkFieldParser
     static int GetGridSize(LDtkLevel level)
     {
         int gridSize = 0;
-        for (int j = 0; j < level.LayerInstances.Length; j++)
+        for (int j = 0; j < level.LayerInstances?.Length; j++)
         {
             if (level.LayerInstances[j]._Type == LayerType.Entities)
             {

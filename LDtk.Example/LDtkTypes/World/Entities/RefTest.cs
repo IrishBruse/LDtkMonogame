@@ -18,7 +18,7 @@ public class RefTest : ILDtkEntity
 
     public Color SmartColor { get; set; }
 
-    public EntityRef? Test { get; set; }
+    public EntityReference? Test { get; set; }
     public TilesetRectangle? TileTest { get; set; }
     public float? Float { get; set; }
     public EnemyType? EnemyType { get; set; }

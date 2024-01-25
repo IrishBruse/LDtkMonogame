@@ -41,7 +41,7 @@ public partial class LDtkFile
     public int? WorldGridWidth { get; set; }
 
     [JsonPropertyName("worldLayout")]
-    public WorldLayout WorldLayout { get; set; }
+    public WorldLayout? WorldLayout { get; set; }
 
     [JsonPropertyName("worlds")]
     public LDtkWorld[] Worlds { get; set; }
@@ -80,13 +80,17 @@ public partial class AutoLayerRuleGroup
     public bool UsesWizard { get; set; }
 }
 
+public partial class AutoRuleDef
+{
+}
+
 public partial class CustomCommand
 {
     [JsonPropertyName("command")]
     public string Command { get; set; }
 
     [JsonPropertyName("when")]
-    public When When { get; set; }
+    public When? When { get; set; }
 }
 
 public partial class Definitions
@@ -134,7 +138,7 @@ public partial class EntityDefinition
     public TilesetRectangle? TileRect { get; set; }
 
     [JsonPropertyName("tileRenderMode")]
-    public TileRenderMode TileRenderMode { get; set; }
+    public TileRenderMode? TileRenderMode { get; set; }
 
     [JsonPropertyName("tilesetId")]
     public int? TilesetId { get; set; }
@@ -249,6 +253,10 @@ public partial class EnumTagValue
 
     [JsonPropertyName("tileIds")]
     public int[] TileIds { get; set; }
+}
+
+public partial class FieldDefinition
+{
 }
 
 public partial class FieldInstance
@@ -545,7 +553,7 @@ public partial class TilesetDefinition
     public int _CWid { get; set; }
 
     [JsonPropertyName("embedAtlas")]
-    public EmbedAtlas EmbedAtlas { get; set; }
+    public EmbedAtlas? EmbedAtlas { get; set; }
 
     [JsonPropertyName("enumTags")]
     public EnumTagValue[] EnumTags { get; set; }
@@ -638,7 +646,7 @@ public partial class LDtkWorld
     public int WorldGridWidth { get; set; }
 
     [JsonPropertyName("worldLayout")]
-    public WorldLayout WorldLayout { get; set; }
+    public WorldLayout? WorldLayout { get; set; }
 }
 
 public enum EmbedAtlas { LdtkIcons, }
