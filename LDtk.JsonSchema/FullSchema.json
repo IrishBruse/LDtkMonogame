@@ -1290,7 +1290,7 @@
             ]
         },
         "CustomCommand": {
-            "title": "ldtk.CustomCommand",
+            "title": "CustomCommand run by LDtk",
             "required": [
                 "command",
                 "when"

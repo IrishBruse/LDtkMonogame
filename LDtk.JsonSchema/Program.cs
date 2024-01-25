@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 public static class Program
@@ -78,8 +79,8 @@ public static class Program
         string json = "";
 
         string[] ignoreClasses = {
+            "FieldDefinition",
             "AutoRuleDef",
-            "FieldDef"
         };
 
         string[] ignoreFields = {
@@ -96,7 +97,7 @@ public static class Program
         {
             json = File.ReadAllText("MinSchema.json");
         }
-        ParseJson(json, "LDtk", "../LDtk/LDtkJson.cs", false, ignoreClasses, ignoreFields);
+        ParseJson(json, "LDtk", "../LDtk/LDtkJson.cs", ignoreClasses, ignoreFields);
 
         if (!File.Exists("FullSchema.json"))
         {
@@ -107,12 +108,12 @@ public static class Program
         {
             json = File.ReadAllText("FullSchema.json");
         }
-        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", true, new[] { "" }, new[] { "__FORCED_REFS" });
+        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", new[] { "" }, new[] { "__FORCED_REFS" });
 
         return 0;
     }
 
-    static void ParseJson(string json, string ns, string output, bool full, string[] ignoreClasses, string[] ignoreFields)
+    static void ParseJson(string json, string ns, string output, string[] ignoreClasses, string[] ignoreFields)
     {
         using StreamWriter file = new(output);
 
@@ -135,7 +136,7 @@ public static class Program
 
         foreach ((string key, JsonNode type) in root["otherTypes"].AsObject().OrderBy(x => ToCSharpName(x.Key).TrimStart('_')))
         {
-            if (full && ignoreClasses.Contains(key))
+            if (ignoreClasses.Contains(ConvertClassName(key)))
             {
                 continue;
             }
@@ -145,7 +146,7 @@ public static class Program
 
         foreach ((string key, var val) in Enums.OrderBy(x => x.Key))
         {
-            // file.WriteLine($"/// <summary> {val.Description} </summary>");
+            file.WriteLine($"/// <summary> {ParseDocComment(val.Description)} </summary>");
             file.Write($"public enum {key} ");
             file.Write("{");
             foreach (string item in val.Values)
@@ -185,7 +186,8 @@ public static class Program
 
     static void CreateClass(string className, JsonNode node, StreamWriter file, string[] ignoreFields)
     {
-        // file.WriteLine($"/// <summary> {node.Root["description"]} <br/> {node["description"] ?? className} </summary>");
+        string doc = ((string)node["description"]) ?? ((string)node["title"]);
+        file.WriteLine($"/// <summary> {ParseDocComment(doc)} </summary>");
         file.WriteLine($"public partial class {className}");
         file.WriteLine("{");
 
@@ -196,12 +198,12 @@ public static class Program
 
         foreach ((string key, Property prop) in properties)
         {
-            if (ignoreFields.Contains(key))
+            prop.Name = ToCSharpName(key);
+
+            if (ignoreFields.Contains(prop.Name))
             {
                 continue;
             }
-
-            prop.Name = ToCSharpName(key);
 
             string description = prop.Description;
 
@@ -252,7 +254,7 @@ public static class Program
             }
             start = true;
 
-            // file.WriteLine($"    /// <summary> {description} </summary>");
+            file.WriteLine($"    /// <summary> {ParseDocComment(description)} </summary>");
             file.WriteLine($"    [JsonPropertyName(\"{key}\")]");
             file.WriteLine($"    public {type} {prop.Name} {{ get; set; }}");
         }
@@ -393,6 +395,16 @@ public static class Program
         "FieldDefinition" => "object",
         _ => ConvertClassName(type),
     };
+
+    static string ParseDocComment(string doc)
+    {
+        string documentation = doc
+        .Replace(" the the ", " the ")// Temp Fix already fixed for next update
+        .Replace("`<`", "&lt;")
+        .Replace("`>`", "&gt;");
+
+        return Regex.Replace(Regex.Replace(documentation, "\\*\\*(.+?)\\*\\*", "<b>$1</b>"), "`(.+?)`", "<c>$1</c>");
+    }
 }
 
 class Property
