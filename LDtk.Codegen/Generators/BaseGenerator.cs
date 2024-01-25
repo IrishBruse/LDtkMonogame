@@ -69,9 +69,9 @@ public class BaseGenerator
         Line($"/// <summary> {description} </summary>");
     }
 
-    public void Output(Options options, string folder, string identifier)
+    public void Output(string folder, string identifier)
     {
-        string file = Path.Join(options.Output, Path.GetFileNameWithoutExtension(options.Input), folder, identifier + ".cs");
+        string file = Path.Join(Options.Output, Path.GetFileNameWithoutExtension(Options.Input), folder, identifier + ".cs");
         _ = Directory.CreateDirectory(Path.GetDirectoryName(file));
         File.WriteAllText(file, FileContents.ToString());
         Console.WriteLine("Generating -> " + Path.Combine(folder, identifier) + ".cs");

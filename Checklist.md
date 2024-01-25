@@ -1,7 +1,8 @@
 # Checklist
 
--   Run `LDtk.Quicktype`
+-   Delete schema in LDtk.JsonSchema
+-   Run `LDtk.JsonSchema`
 -   Update version in `Constants.cs`
--   Update version in `Tools/LDtk.Quicktype/Program.cs`
--   Update versions in `changelog.md`
--   Update versions in `publish.ps1`
+-   Update versions in `docs/Changelog.md`
+-   Update version in `publish.ps1`
+-   Add version changes update to discord and github discussions

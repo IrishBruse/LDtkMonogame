@@ -1,9 +1,8 @@
 namespace LDtk.Codegen.Generators;
 
-public class EnumGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
+public class EnumGenerator(LDtkFile ldtkFile) : BaseGenerator
 {
     readonly LDtkFile ldtkFile = ldtkFile;
-    readonly Options options = options;
 
     public void Generate()
     {
@@ -20,20 +19,11 @@ public class EnumGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
 
     void GenEnum(EnumDefinition e)
     {
-        Line("// This file was automatically generated, any modifications will be lost!");
-        Line("#pragma warning disable");
-
-        if (options.BlockScopeNamespace)
-        {
-            Line($"namespace {options.Namespace}");
-            StartBlock();
-        }
-        else
-        {
-            Line($"namespace {options.Namespace};");
-        }
-
+        Line($"namespace {Options.Namespace};");
         Blank();
+        Line("// This file was automatically generated, any modifications will be lost!");
+        Blank();
+        Line("#pragma warning disable");
         Line($"public enum {e.Identifier}");
         StartBlock();
         foreach (EnumValueDefinition value in e.Values)
@@ -41,14 +31,8 @@ public class EnumGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
             Line($"{value.Id},");
         }
         EndBlock();
-
-        if (options.BlockScopeNamespace)
-        {
-            EndBlock();
-        }
-
         Line("#pragma warning restore");
 
-        Output(options, "Enums", e.Identifier);
+        Output("Enums", e.Identifier);
     }
 }

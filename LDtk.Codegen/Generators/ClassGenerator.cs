@@ -2,15 +2,14 @@ namespace LDtk.Codegen.Generators;
 
 using LDtk.Codegen;
 
-public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
+public class ClassGenerator(LDtkFile ldtkFile) : BaseGenerator
 {
     readonly LDtkFile ldtkFile = ldtkFile;
-    readonly Options options = options;
 
     public void Generate()
     {
         // Level Classes
-        GenClass(options.LevelClassName, ldtkFile.Defs.LevelFields, string.Empty, false);
+        GenClass(Options.LevelClassName, ldtkFile.Defs.LevelFields, string.Empty, false);
 
         // Entity Classes
         foreach (EntityDefinition e in ldtkFile.Defs.Entities)
@@ -21,28 +20,18 @@ public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
 
     void GenClass(string identifier, FieldDefinition[] fields, string folder, bool isEntity)
     {
+        Line($"namespace {Options.Namespace};");
+        Blank();
         Line("// This file was automatically generated, any modifications will be lost!");
         Line("#pragma warning disable");
-
-        if (options.BlockScopeNamespace)
-        {
-            Line($"namespace {options.Namespace}");
-            StartBlock();
-        }
-        else
-        {
-            Line($"namespace {options.Namespace};");
-        }
-
         Blank();
         Line("using LDtk;");
-        Blank();
         Line("using Microsoft.Xna.Framework;");
         Blank();
 
-        string classDef = $"public class {identifier}";
+        string classDef = $"public partial class {identifier}";
 
-        if (isEntity)
+        if (isEntity && Options.EntityInterface)
         {
             classDef += " : ILDtkEntity";
         }
@@ -66,7 +55,7 @@ public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
 
             foreach (FieldDefinition value in fields)
             {
-                string type = Converter.ConvertFieldDefinitionTypes(value._Type, options.PointAsVector2);
+                string type = Converter.ConvertFieldDefinitionTypes(value._Type, Options.PointAsVector2);
 
                 if (value.CanBeNull)
                 {
@@ -77,14 +66,8 @@ public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator
             }
         }
         EndBlock();
-
-        if (options.BlockScopeNamespace)
-        {
-            EndBlock();
-        }
-
         Line("#pragma warning restore");
 
-        Output(options, folder, identifier);
+        Output(folder, identifier);
     }
 }

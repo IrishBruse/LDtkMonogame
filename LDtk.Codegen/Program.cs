@@ -12,6 +12,7 @@ using LDtk.Codegen.Generators;
 
 public static class Program
 {
+    public static Options Options { get; private set; }
     public static void Main(string[] args)
     {
         _ = Parser.Default.ParseArguments<Options>(args).WithParsed(Run).WithNotParsed(HandleParseError);
@@ -28,9 +29,12 @@ public static class Program
         _ = errs.Output();
     }
 
-    static void Run(Options options)
+    static void Run(Options opt)
     {
-        LDtkFile file = LDtkFile.FromFile(options.Input);
+        Console.WriteLine(opt);
+        Options = opt;
+
+        LDtkFile file = LDtkFile.FromFile(Options.Input);
 
         if (Version.Parse(file.JsonVersion) > Version.Parse(Constants.SupportedLDtkVersion))
         {
@@ -66,37 +70,29 @@ public static class Program
             return;
         }
 
-        if (options.FileNameInNamespace)
-        {
-            options.Namespace += "." + Path.GetFileNameWithoutExtension(options.Input);
-        }
-
-        new ClassGenerator(file, options).Generate();
-        new EnumGenerator(file, options).Generate();
-        new IidGenerator(file, options).Generate();
+        new ClassGenerator(file).Generate();
+        new EnumGenerator(file).Generate();
+        new IidGenerator(file).Generate();
     }
 }
 
 public class Options
 {
     [Option('i', "input", Required = true, HelpText = "Input LDtk file (.ldtk)")]
-    public string Input { get; set; }
+    public static string Input { get; set; }
 
     [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder")]
-    public string Output { get; set; }
+    public static string Output { get; set; }
 
     [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into")]
-    public string Namespace { get; set; }
+    public static string Namespace { get; set; }
 
     [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file")]
-    public string LevelClassName { get; set; }
+    public static string LevelClassName { get; set; }
 
     [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
-    public bool PointAsVector2 { get; set; }
+    public static bool PointAsVector2 { get; set; }
 
-    [Option("FileNameInNamespace", Required = false, Default = false, HelpText = "Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'")]
-    public bool FileNameInNamespace { get; set; }
-
-    [Option("BlockScopeNamespace", Required = false, Default = false, HelpText = "Changes namespace to use block scoped namespace instead of newer c# file scoped namespace.`")]
-    public bool BlockScopeNamespace { get; set; }
+    [Option("EntityInterface", Required = false, Default = true, HelpText = "Use the ILDtkEntity interface")]
+    public static bool EntityInterface { get; set; }
 }

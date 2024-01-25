@@ -1,4 +1,4 @@
-namespace QuickTypeGenerator;
+namespace SchemaGenerator;
 
 using System;
 using System.Collections.Generic;
@@ -185,7 +185,7 @@ public static class Program
 
     static void CreateClass(string className, JsonNode node, StreamWriter file, string[] ignoreFields)
     {
-        string doc = ((string)node["description"]) ?? ((string)node["title"]);
+        string doc = (string)node["description"] ?? (string)node["title"];
         file.WriteLine($"/// <summary> {ParseDocComment(doc)} </summary>");
         file.WriteLine($"public partial class {className}");
         file.WriteLine("{");
