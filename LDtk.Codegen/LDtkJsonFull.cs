@@ -798,7 +798,7 @@ public partial class FieldDefinition
     [JsonPropertyName("tilesetUid")]
     public int? TilesetUid { get; set; }
 
-    /// <summary> Human readable value type. Possible values: <c>Int, Float, String, Bool, Color, ExternEnum.XXX, LocalEnum.XXX, Point, FilePath</c>.<br/>  If the field is an array, this field will look like <c>Array<...></c> (eg. <c>Array<Int></c>, <c>Array<Point></c> etc.)<br/>  NOTE: if you enable the advanced option <b>Use Multilines type</b>, you will have "*Multilines*" instead of "*String*" when relevant. </summary>
+    /// <summary> Human readable value type. Possible values: <c>Int, Float, String, Bool, Color, ExternEnum.XXX, LocalEnum.XXX, Point, FilePath</c>.<br/>  If the field is an array, this field will look like <c>Array&lt;...&gt;</c> (eg. <c>Array&lt;Int&gt;</c>, <c>Array&lt;Point&gt;</c> etc.)<br/>  NOTE: if you enable the advanced option <b>Use Multilines type</b>, you will have "*Multilines*" instead of "*String*" when relevant. </summary>
     [JsonPropertyName("__type")]
     public string _Type { get; set; }
 

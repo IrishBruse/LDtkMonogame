@@ -400,6 +400,10 @@ public static class Program
     {
         string documentation = doc
         .Replace(" the the ", " the ")// Temp Fix already fixed for next update
+        .Replace("<...>", "&lt;...&gt;")
+        .Replace("<Int>", "&lt;Int&gt;")
+        .Replace("<Point>", "&lt;Point&gt;")
+        .Replace("<...>", "&lt;...&gt;")
         .Replace("`<`", "&lt;")
         .Replace("`>`", "&gt;");
 
