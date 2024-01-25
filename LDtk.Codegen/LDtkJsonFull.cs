@@ -6,7 +6,6 @@ namespace LDtk.Codegen;
 // LDtk 1.5.3
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;

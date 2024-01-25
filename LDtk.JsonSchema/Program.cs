@@ -18,7 +18,6 @@ public static class Program
 
     static readonly string[] Namespaces = {
         "using System;",
-        "using System.Collections.Generic;",
         "using System.Text.Json.Serialization;",
         "",
         "using Microsoft.Xna.Framework;",
