@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -36,7 +37,11 @@ public partial class LDtkLevel
     /// <summary>
     /// Initializes a new instance of the <see cref="LDtkLevel"/> class. Used by json deserializer not for use by user!. </summary>
 #pragma warning disable CS8618
-    public LDtkLevel() { }
+    public LDtkLevel()
+    {
+        layersLookup = new(LayerInstances?.Length ?? 0);
+        Console.WriteLine("test");
+    }
 #pragma warning restore
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
@@ -217,5 +222,29 @@ public partial class LDtkLevel
     public bool Contains(Point point)
     {
         return point.X >= Position.X && point.Y >= Position.Y && point.X <= Position.X + Size.X && point.Y <= Position.Y + Size.Y;
+    }
+
+    Dictionary<string, LayerInstance> layersLookup;
+
+    /// <summary> Gets the layer instance with the given <paramref name="layerIdentifier"/>. </summary>
+    /// <param name="layerIdentifier">Layer Identifier</param>
+    public LayerInstance this[string layerIdentifier]
+    {
+        get
+        {
+            if (layersLookup.TryGetValue(layerIdentifier, out var layerLookup))
+            {
+                return layerLookup;
+            }
+
+            LayerInstance? layer = LayerInstances!.FirstOrDefault(x => x?._Identifier == layerIdentifier, null);
+            if (layer != null)
+            {
+                layersLookup.Add(layerIdentifier, layer);
+                return layer;
+            }
+
+            throw new LDtkException($"Layer {layerIdentifier} not found in level {Identifier}");
+        }
     }
 }
