@@ -39,6 +39,7 @@ public partial class LDtkFile
     /// <summary> Loads the ldtk world file from disk directly. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
     /// <returns> Returns the file loaded from the path. </returns>
+    /// <exception cref="LDtkException"> Thrown when the file failed to deserialize. </exception>
     public static LDtkFile FromFileReflection(string filePath)
     {
         LDtkFile? file = JsonSerializer.Deserialize<LDtkFile>(File.ReadAllText(filePath), Constants.SerializeOptions);
@@ -65,7 +66,8 @@ public partial class LDtkFile
     /// <summary> Loads the ldtkl world file from disk directly or from the embeded one depending on if the file uses externalworlds. </summary>
     /// <param name="iid" > The iid of the world to load. </param>
     /// <returns> Returns the world from the iid. </returns>
-    public LDtkWorld? LoadWorld(Guid iid)
+    /// <exception cref="LDtkException"> Throws if no world with the <paramref name="iid"/> is found. </exception>
+    public LDtkWorld LoadWorld(Guid iid)
     {
         foreach (LDtkWorld world in Worlds)
         {
@@ -89,13 +91,14 @@ public partial class LDtkFile
             return world;
         }
 
-        return null;
+        throw new LDtkException($"No World({iid}) found in this project");
     }
 
     /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
     /// <typeparam name="T"> The type to convert the entity to. </typeparam>
     /// <param name="reference"> The entityRef to convert. </param>
     /// <returns> The converted entity. </returns>
+    /// <exception cref="LDtkException"> Throws if no entity with the <paramref name="reference"/> is found. </exception>
     public T GetEntityRef<T>(EntityReference reference)
         where T : new()
     {
