@@ -83,7 +83,7 @@ public static class Program
         };
 
         string[] ignoreFields = {
-            "__FORCED_REFS",
+            "_FORCED_REFS",
             "LevelFields"
         };
 

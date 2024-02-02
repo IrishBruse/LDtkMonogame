@@ -25,10 +25,6 @@ public partial class LDtkFile
     [JsonPropertyName("externalLevels")]
     public bool ExternalLevels { get; set; }
 
-    /// <summary> This object is not actually used by LDtk. It ONLY exists to force explicit references to all types, to make sure QuickType finds them and integrate all of them. Otherwise, Quicktype will drop types that are not explicitely used. </summary>
-    [JsonPropertyName("__FORCED_REFS")]
-    public object _FORCED_REFS { get; set; }
-
     /// <summary> Unique project identifier </summary>
     [JsonPropertyName("iid")]
     public Guid Iid { get; set; }
