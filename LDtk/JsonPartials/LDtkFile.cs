@@ -11,6 +11,17 @@ using Microsoft.Xna.Framework.Content;
 [DebuggerDisplay("ExternalFiles: {ExternalLevels} Path: {FilePath}")]
 public partial class LDtkFile
 {
+    /// <inheritdoc cref="Definitions.Entities"/>
+    public EntityDefinition[] Entities => Defs.Entities;
+    /// <inheritdoc cref="Definitions.Enums"/>
+    public EnumDefinition[] Enums => Defs.Enums;
+    /// <inheritdoc cref="Definitions.ExternalEnums"/>
+    public EnumDefinition[] ExternalEnums => Defs.ExternalEnums;
+    /// <inheritdoc cref="Definitions.Layers"/>
+    public LayerDefinition[] Layers => Defs.Layers;
+    /// <inheritdoc cref="Definitions.Tilesets"/>
+    public TilesetDefinition[] Tilesets => Defs.Tilesets;
+
     /// <summary> Initializes a new instance of the <see cref="LDtkFile"/> class. Used by json deserializer not for use by user. </summary>
     public LDtkFile() { }
 
@@ -25,6 +36,7 @@ public partial class LDtkFile
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
     /// <returns> Returns the file loaded from the path. </returns>
+    /// <exception cref="LDtkException">Failed to Deserialize ldtk file from</exception>
     public static LDtkFile FromFile(string filePath)
     {
         LDtkFile? file = JsonSerializer.Deserialize(File.ReadAllText(filePath), Constants.JsonSourceGenerator.LDtkFile);
@@ -113,5 +125,20 @@ public partial class LDtkFile
         }
 
         throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in this level");
+    }
+
+    /// <summary> ToString </summary>
+    public override string ToString()
+    {
+        return $"""
+        LDtkFile: {JsonVersion}
+            BgColor: {BgColor}
+            Defs: {Defs}
+            ExternalLevels: {ExternalLevels}
+            Iid: {Iid}
+            Levels: {Levels}
+            Toc: {Toc}
+            Worlds: {Worlds}
+        """;
     }
 }
