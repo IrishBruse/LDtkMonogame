@@ -34,13 +34,11 @@ public partial class LDtkLevel
     [JsonIgnore]
     public bool Loaded { get; internal set; }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="LDtkLevel"/> class. Used by json deserializer not for use by user!. </summary>
+    /// <summary> Initializes a new instance of the <see cref="LDtkLevel"/> class. Used by json deserializer not for use by user!. </summary>
 #pragma warning disable CS8618
     public LDtkLevel()
     {
         layersLookup = new(LayerInstances?.Length ?? 0);
-        Console.WriteLine("test");
     }
 #pragma warning restore
 
@@ -81,6 +79,49 @@ public partial class LDtkLevel
         return file;
     }
 
+    /// <summary> Get the level with an iid. </summary>
+    /// <param name="content"> Content pipeline </param>
+    /// <exception cref="LDtkException">No level with identifier  found in this world</exception>
+    public void Load(ContentManager? content = null)
+    {
+        if (ExternalRelPath != null)
+        {
+            LDtkLevel? level;
+
+            if (content != null)
+            {
+                level = FromFile(FilePath, content);
+            }
+            else
+            {
+                level = FromFile(FilePath);
+            }
+
+            if (level == null)
+            {
+                throw new LDtkException("External level not found");
+            }
+
+            _BgColor = level._BgColor;
+            _BgPos = level._BgPos;
+            BgRelPath = level.BgRelPath;
+            ExternalRelPath = level.ExternalRelPath;
+            FieldInstances = level.FieldInstances;
+            Identifier = level.Identifier;
+            Iid = level.Iid;
+            LayerInstances = level.LayerInstances;
+            _Neighbours = level._Neighbours;
+            PxHei = level.PxHei;
+            PxWid = level.PxWid;
+            Uid = level.Uid;
+            WorldDepth = level.WorldDepth;
+            WorldX = level.WorldX;
+            WorldY = level.WorldY;
+
+            Loaded = true;
+        }
+    }
+
     /// <summary> Gets an intgrid with the <paramref name="identifier"/> in a <see cref="LDtkLevel"/>. </summary>
     /// <param name="identifier"></param>
     /// <exception cref="LDtkException">Throws when identifier is not valid</exception>
@@ -116,6 +157,7 @@ public partial class LDtkLevel
     }
 
     /// <summary> Gets the custom fields of the level. </summary>
+    /// <typeparam name="T"></typeparam>
     public T GetCustomFields<T>() where T : new()
     {
         T levelFields = new();
@@ -126,6 +168,7 @@ public partial class LDtkLevel
     }
 
     /// <summary> Gets one entity of type T in the current level best used with 1 per level constraint. </summary>
+    /// <typeparam name="T"></typeparam>
     /// <exception cref="LDtkException"></exception>
     public T GetEntity<T>()
         where T : new()
@@ -145,6 +188,7 @@ public partial class LDtkLevel
     }
 
     /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
+    /// <typeparam name="T"></typeparam>
     /// <param name="reference"></param>
     /// <exception cref="LDtkException"></exception>
     public T GetEntityRef<T>(EntityReference reference)
@@ -174,6 +218,7 @@ public partial class LDtkLevel
     }
 
     /// <summary> Gets an array of entities of type <typeparamref name="T"/> in the current level. </summary>
+    /// <typeparam name="T"></typeparam>
     public T[] GetEntities<T>()
         where T : new()
     {
@@ -196,7 +241,7 @@ public partial class LDtkLevel
             }
         }
 
-        return [.. entities];
+        return entities.ToArray();
     }
 
     T GetEntityFromInstance<T>(EntityInstance entityInstance)
@@ -228,11 +273,12 @@ public partial class LDtkLevel
 
     /// <summary> Gets the layer instance with the given <paramref name="layerIdentifier"/>. </summary>
     /// <param name="layerIdentifier">Layer Identifier</param>
+    /// <exception cref="LDtkException"></exception>
     public LayerInstance this[string layerIdentifier]
     {
         get
         {
-            if (layersLookup.TryGetValue(layerIdentifier, out var layerLookup))
+            if (layersLookup.TryGetValue(layerIdentifier, out LayerInstance? layerLookup))
             {
                 return layerLookup;
             }
