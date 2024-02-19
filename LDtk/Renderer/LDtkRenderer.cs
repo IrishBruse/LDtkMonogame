@@ -3,7 +3,6 @@ namespace LDtk.Renderer;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 using LDtk;
 
@@ -16,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 /// This can all be done in your own class if you want to reimplement it and customize it differently
 /// this one is mostly here to get you up and running quickly.
 /// </summary>
-public class LDtkRenderer : IDisposable
+public class LevelRenderer : IDisposable
 {
     /// <summary> Gets or sets the spritebatch used for rendering with this Renderer. </summary>
     public SpriteBatch SpriteBatch { get; set; }
@@ -34,7 +33,7 @@ public class LDtkRenderer : IDisposable
 
     /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with direct file loading. </summary>
     /// <param name="spriteBatch">Spritebatch</param>
-    public LDtkRenderer(SpriteBatch spriteBatch)
+    public LevelRenderer(SpriteBatch spriteBatch)
     {
         SpriteBatch = spriteBatch;
         graphicsDevice = spriteBatch.GraphicsDevice;
@@ -42,14 +41,17 @@ public class LDtkRenderer : IDisposable
         if (pixel == null)
         {
             pixel = new Texture2D(graphicsDevice, 1, 1);
-            pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
+            pixel.SetData(new byte[]
+                {
+                    0xFF, 0xFF, 0xFF, 0xFF
+                }
+            );
         }
 
         if (error == null)
         {
             error = new Texture2D(graphicsDevice, 2, 2);
-            error.SetData(
-                new byte[]
+            error.SetData(new byte[]
                 {
                     0xFF, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x00, 0xFF,
                     0xFF, 0xFF, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0x00,
@@ -61,7 +63,7 @@ public class LDtkRenderer : IDisposable
     /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with content Pipeline. </summary>
     /// <param name="spriteBatch">SpriteBatch</param>
     /// <param name="content">Optional ContentManager</param>
-    public LDtkRenderer(SpriteBatch spriteBatch, ContentManager content)
+    public LevelRenderer(SpriteBatch spriteBatch, ContentManager content)
         : this(spriteBatch)
     {
         this.content = content;
@@ -69,7 +71,6 @@ public class LDtkRenderer : IDisposable
 
     /// <summary> Prerender out the level to textures to optimize the rendering process. </summary>
     /// <param name="level">The level to prerender.</param>
-    /// <exception cref="Exception">The level already has been prerendered.</exception>
     public void PrerenderLevel(LDtkLevel level)
     {
         if (PrerenderedLevels.ContainsKey(level.Identifier))
@@ -77,17 +78,12 @@ public class LDtkRenderer : IDisposable
             return;
         }
 
-        RenderedLevel renderLevel = new();
-
-        SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        RenderedLevel renderLevel = new()
         {
-            renderLevel.Layers = RenderLayers(level);
-        }
-
-        SpriteBatch.End();
+            Layers = RenderLayers(level)
+        };
 
         PrerenderedLevels.Add(level.Identifier, renderLevel);
-        graphicsDevice.SetRenderTarget(null);
     }
 
     Texture2D[] RenderLayers(LDtkLevel level)
@@ -109,7 +105,7 @@ public class LDtkRenderer : IDisposable
         {
             LayerInstance layer = level.LayerInstances[i];
 
-            if (layer._TilesetRelPath == null)
+            if (string.IsNullOrEmpty(layer._TilesetRelPath))
             {
                 continue;
             }
@@ -119,59 +115,86 @@ public class LDtkRenderer : IDisposable
                 continue;
             }
 
-            Texture2D texture = GetTexture(level, layer._TilesetRelPath);
-
-            int width = layer._CWid * layer._GridSize;
-            int height = layer._CHei * layer._GridSize;
-            RenderTarget2D renderTarget = new(graphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-
-            graphicsDevice.SetRenderTarget(renderTarget);
-            layers.Add(renderTarget);
-
-            switch (layer._Type)
+            SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             {
-                case LayerType.Tiles:
-                foreach (TileInstance tile in layer.GridTiles.Where(_ => layer._TilesetDefUid.HasValue))
-                {
-                    Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
-                    Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
-                    SpriteEffects mirror = (SpriteEffects)tile.F;
-                    SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                }
-                break;
+                Texture2D texture = GetTexture(level, layer._TilesetRelPath);
 
-                case LayerType.AutoLayer:
-                case LayerType.IntGrid:
-                if (layer.AutoLayerTiles.Length > 0)
+                int width = layer._CWid * layer._GridSize;
+                int height = layer._CHei * layer._GridSize;
+
+                RenderTarget2D renderTarget = new(graphicsDevice, width, height)
                 {
-                    foreach (TileInstance tile in layer.AutoLayerTiles.Where(_ => layer._TilesetDefUid.HasValue))
-                    {
-                        Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
-                        Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
-                        SpriteEffects mirror = (SpriteEffects)tile.F;
-                        SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
-                    }
+                    Name = layer._Identifier
+                };
+
+                graphicsDevice.SetRenderTarget(renderTarget);
+                graphicsDevice.Clear(Color.Transparent);
+
+                var tiles = layer._Type switch
+                {
+                    LayerType.Tiles => layer.GridTiles,
+                    LayerType.AutoLayer => layer.AutoLayerTiles,
+                    LayerType.IntGrid => layer.AutoLayerTiles,
+                    LayerType.Entities => [],
+                    _ => [],
+                };
+
+                foreach (TileInstance tile in tiles)
+                {
+                    DrawTile(layer, texture, tile);
                 }
-                break;
+
+                layers.Add(renderTarget);
             }
+            SpriteBatch.End();
         }
 
+        graphicsDevice.SetRenderTarget(null);
         return layers.ToArray();
     }
 
-    Texture2D RenderBackgroundToLayer(LDtkLevel level)
+    void DrawTile(LayerInstance layer, Texture2D texture, TileInstance tile)
+    {
+        Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
+        Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
+        SpriteEffects mirror = (SpriteEffects)tile.F;
+        SpriteBatch.Draw(
+            texture,
+            position,
+            rect,
+            Color.White,
+            0,
+            Vector2.Zero,
+            1f,
+            mirror,
+            0.5f);
+    }
+
+    RenderTarget2D RenderBackgroundToLayer(LDtkLevel level)
     {
         Texture2D texture = GetTexture(level, level.BgRelPath);
 
-        RenderTarget2D layer = new(graphicsDevice, level.PxWid, level.PxHei, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+        RenderTarget2D layer = new(graphicsDevice, level.PxWid, level.PxHei)
+        {
+            Name = "Background"
+        };
 
         graphicsDevice.SetRenderTarget(layer);
         {
             LevelBackgroundPosition? bg = level._BgPos;
             if (bg != null)
             {
-                Vector2 pos = bg.TopLeftPx.ToVector2();
-                SpriteBatch.Draw(texture, pos, new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]), Color.White, 0, Vector2.Zero, bg.Scale, SpriteEffects.None, 0);
+                Vector2 position = bg.TopLeftPx.ToVector2();
+                SpriteBatch.Draw(
+                    texture,
+                    position,
+                    new Rectangle((int)bg.CropRect[0], (int)bg.CropRect[1], (int)bg.CropRect[2], (int)bg.CropRect[3]),
+                    Color.White,
+                    0,
+                    Vector2.Zero,
+                    bg.Scale,
+                    SpriteEffects.None,
+                    0);
             }
         }
         graphicsDevice.SetRenderTarget(null);
@@ -220,7 +243,21 @@ public class LDtkRenderer : IDisposable
         {
             for (int i = 0; i < prerenderedLevel.Layers.Length; i++)
             {
-                SpriteBatch.Draw(prerenderedLevel.Layers[i], level.Position.ToVector2(), Color.White);
+                Texture2D layer = prerenderedLevel.Layers[i];
+
+                float depth = 1f - (i * 0.05f);
+                // if (layer.Name == "Buildings")
+                // {
+                SpriteBatch.Draw(
+                    layer,
+                    new(level.Position.X, level.Position.Y, layer.Bounds.Width, layer.Bounds.Height),
+                    layer.Bounds,
+                    new(0xffffffff),
+                    0,
+                    Vector2.Zero,
+                    SpriteEffects.None,
+                    depth);
+                // }
             }
         }
         else
@@ -239,6 +276,7 @@ public class LDtkRenderer : IDisposable
         for (int i = 0; i < layers.Length; i++)
         {
             SpriteBatch.Draw(layers[i], level.Position.ToVector2(), Color.White);
+            layers[i].Dispose();
         }
     }
 
@@ -254,63 +292,28 @@ public class LDtkRenderer : IDisposable
 
                 if (cellValue != 0)
                 {
-                    // Color col = intGrid.GetColorFromValue(cellValue);
                     int spriteX = intGrid.WorldPosition.X + (x * intGrid.TileSize);
                     int spriteY = intGrid.WorldPosition.Y + (y * intGrid.TileSize);
-                    SpriteBatch.Draw(pixel, new Vector2(spriteX, spriteY), null, Color.Pink /*col*/, 0, Vector2.Zero, new Vector2(intGrid.TileSize), SpriteEffects.None, 0);
+                    SpriteBatch.Draw(
+                        pixel,
+                        new Vector2(spriteX, spriteY),
+                        null,
+                        Color.Pink,
+                        0,
+                        Vector2.Zero,
+                        new Vector2(intGrid.TileSize),
+                        SpriteEffects.None,
+                        0);
                 }
             }
         }
-    }
-
-    /// <summary> Renders the entity with the tile it includes. </summary>
-    /// <param name="entity">The entity you want to render.</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
-    public void RenderEntity<T>(T entity, Texture2D texture)
-        where T : ILDtkEntity
-    {
-        SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
-    }
-
-    /// <summary> Renders the entity with the tile it includes. </summary>
-    /// <param name="entity">The entity you want to render.</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
-    /// <param name="flipDirection">The direction to flip the entity when rendering.</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection)
-        where T : ILDtkEntity
-    {
-        SpriteBatch.Draw(texture, entity.Position, entity.Tile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
-    }
-
-    /// <summary> Renders the entity with the tile it includes. </summary>
-    /// <param name="entity">The entity you want to render.</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
-    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size.</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, int animationFrame)
-        where T : ILDtkEntity
-    {
-        Rectangle animatedTile = entity.Tile;
-        animatedTile.Offset(animatedTile.Width * animationFrame, 0);
-        SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, SpriteEffects.None, 0);
-    }
-
-    /// <summary> Renders the entity with the tile it includes. </summary>
-    /// <param name="entity">The entity you want to render.</param>
-    /// <param name="texture">The spritesheet/texture for rendering the entity.</param>
-    /// <param name="flipDirection">The direction to flip the entity when rendering.</param>
-    /// <param name="animationFrame">The current frame of animation. Is a very basic entity animation frames must be to the right of them and be the same size.</param>
-    public void RenderEntity<T>(T entity, Texture2D texture, SpriteEffects flipDirection, int animationFrame)
-        where T : ILDtkEntity
-    {
-        Rectangle animatedTile = entity.Tile;
-        animatedTile.Offset(animatedTile.Width * animationFrame, 0);
-        SpriteBatch.Draw(texture, entity.Position, animatedTile, Color.White, 0, entity.Pivot * entity.Size, 1, flipDirection, 0);
     }
 
     /// <summary> Dispose Renderer </summary>
     public void Dispose()
     {
         pixel.Dispose();
+        error.Dispose();
         GC.SuppressFinalize(this);
     }
 }
