@@ -136,7 +136,7 @@ public class LDtkRenderer : IDisposable
                     Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                     Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                     SpriteEffects mirror = (SpriteEffects)tile.F;
-                    SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                    SpriteBatch.Draw(texture, position, rect, new Color(1f, 1f, 1f, layer._Opacity), 0, Vector2.Zero, 1f, mirror, 0);
                 }
                 break;
 
@@ -149,7 +149,7 @@ public class LDtkRenderer : IDisposable
                         Vector2 position = new(tile.Px.X + layer._PxTotalOffsetX, tile.Px.Y + layer._PxTotalOffsetY);
                         Rectangle rect = new(tile.Src.X, tile.Src.Y, layer._GridSize, layer._GridSize);
                         SpriteEffects mirror = (SpriteEffects)tile.F;
-                        SpriteBatch.Draw(texture, position, rect, Color.White, 0, Vector2.Zero, 1f, mirror, 0);
+                        SpriteBatch.Draw(texture, position, rect, new Color(1f, 1f, 1f, layer._Opacity), 0, Vector2.Zero, 1f, mirror, 0);
                     }
                 }
                 break;
