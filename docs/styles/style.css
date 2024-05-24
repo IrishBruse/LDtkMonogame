@@ -125,6 +125,16 @@ main.hidden {
     text-decoration: underline;
 }
 
+body.close .sidebar-toggle {
+    width: auto;
+}
+
+.sidebar {
+    left: 0px;
+    width: 300px;
+    transition: left 250ms ease, width 250ms ease;
+}
+
 .content {
     position: relative;
     left: 300px;
@@ -133,11 +143,8 @@ main.hidden {
 }
 
 body.close .sidebar {
-    transform: translateX(-300px);
-}
-
-body.close .sidebar-toggle {
-    width: auto;
+    left: -300px;
+    width: 300px;
 }
 
 body.close .content {
@@ -145,50 +152,14 @@ body.close .content {
     width: 100%;
 }
 
-@media print {
-    .github-corner,
-    .sidebar-toggle,
-    .sidebar,
-    .app-nav {
-        display: none;
-    }
+.app-nav {
+    overflow-x: auto;
 }
 
 @media screen and (max-width: 768px) {
-    .app-nav {
-        margin-top: 16px;
-    }
-
-    .icon-navbar,
-    .app-nav .logo {
-        display: none;
-    }
-
-    .app-nav li ul {
-        top: 30px;
-    }
-
-    main {
-        height: auto;
-        min-height: 100vh;
-        overflow-x: hidden;
-    }
-
-    .sidebar {
-        transform: translateX(-300px);
-        transition: transform 250ms ease;
-    }
-
-    .content {
-        left: 0;
-        width: 100%;
-        padding-top: 20px;
-        transition: left 250ms ease;
-    }
-
-    .app-nav,
-    .github-corner {
-        transition: transform 250ms ease;
+    #main {
+        margin: 0;
+        max-width: 100%;
     }
 
     .sidebar-toggle {
@@ -197,31 +168,33 @@ body.close .content {
         padding: 30px 30px 10px 10px;
     }
 
-    body.close .sidebar {
-        transform: translateX(300px);
-    }
-
     body.close .sidebar-toggle {
         transition: 1s background-color;
         width: 284px;
         padding: 10px;
     }
 
+    body.close .sidebar {
+        left: 0px;
+        width: 300px;
+        transition: left 250ms ease, width 250ms ease;
+    }
+
     body.close .content {
-        transform: translateX(300px);
+        position: relative;
+        left: 300px;
+        width: 100%;
+        transition: left 250ms ease, width 250ms ease;
     }
 
-    body.close .app-nav,
-    body.close .github-corner {
-        display: none;
+    .sidebar {
+        left: -300px;
+        width: 300px;
     }
 
-    .github-corner:hover .octo-arm {
-        animation: none;
-    }
-
-    .github-corner .octo-arm {
-        animation: octocat-wave 560ms ease-in-out;
+    .content {
+        left: 0;
+        width: 100%;
     }
 }
 
@@ -328,4 +301,16 @@ h3 {
 h4 {
     font-size: 1em;
     font-weight: normal;
+}
+.docsify-copy-code-button {
+    background-color: transparent;
+    padding: 0px;
+    padding-top: 10px;
+    padding-right: 10px;
+    display: block;
+}
+.docsify-copy-code-button .label {
+    font-family: "Material Symbols Outlined";
+    font-size: 12;
+    background-color: transparent;
 }

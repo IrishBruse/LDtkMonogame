@@ -74,12 +74,9 @@ p > code {
     display: inline-block;
 }
 
-.markdown-section p > img:not([height]) {
-    height: 28em;
-}
-
 .markdown-section p:not([align]) > img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 750px;
     border: 1px solid rgba(115, 127, 157, 0.6);
     border-radius: 3px;
     box-shadow: 2px 8px 0px rgba(0, 0, 0, 0.2);
