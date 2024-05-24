@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.Tests", "LDtk.Tests\LD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.JsonSchema", "LDtk.JsonSchema\LDtk.JsonSchema.csproj", "{DC684867-42FE-4B3B-A33D-5FE6FE929A76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LDtk.LevelViewer", "LDtk.LevelViewer\LDtk.LevelViewer.csproj", "{EE02B9F0-93BC-4030-84B6-B9B533ECA744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{DC684867-42FE-4B3B-A33D-5FE6FE929A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC684867-42FE-4B3B-A33D-5FE6FE929A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC684867-42FE-4B3B-A33D-5FE6FE929A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE02B9F0-93BC-4030-84B6-B9B533ECA744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE02B9F0-93BC-4030-84B6-B9B533ECA744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE02B9F0-93BC-4030-84B6-B9B533ECA744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE02B9F0-93BC-4030-84B6-B9B533ECA744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
