@@ -6,14 +6,17 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Color 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("color")]
-public Microsoft.Xna.Framework.Color Color { get; set; }
+public Microsoft.Xna.Framework.Color? Color { get; set; }
 ```
 
 ### Property Value
 
-[Color](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xna.framework.color)
+[Color](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xna.framework.color)?
 
 ### Attributes
 

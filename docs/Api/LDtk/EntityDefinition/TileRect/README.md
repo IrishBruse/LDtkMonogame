@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An object representing a rectangle from an existing Tileset
+ An object representing a rectangle from an existing Tileset 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tileRect")]
-public LDtk.TilesetRectangle TileRect { get; set; }
+public LDtk.TilesetRectangle? TileRect { get; set; }
 ```
 
 ### Property Value

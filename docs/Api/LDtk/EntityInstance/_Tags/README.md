@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Array of tags defined in this Entity definition
+ Array of tags defined in this Entity definition 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__tags")]

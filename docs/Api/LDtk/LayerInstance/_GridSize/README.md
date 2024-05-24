@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Grid size
+ Grid size 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__gridSize")]

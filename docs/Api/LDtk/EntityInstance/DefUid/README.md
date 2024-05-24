@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Reference of the Entity definition UID
+ Reference of the  UID 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("defUid")]

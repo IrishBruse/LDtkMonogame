@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-In a tileset definition, enum based tag infos
+ In a tileset definition, enum based tag infos 
 
 ```csharp
 public class EnumTagValue
@@ -27,8 +27,8 @@ public class EnumTagValue
 
 | Property | Summary |
 | -------- | ------- |
-| [EnumValueId](EnumValueId/README.md) | |
-| [TileIds](TileIds/README.md) | |
+| [EnumValueId](EnumValueId/README.md) |  EnumValueId  |
+| [TileIds](TileIds/README.md) |  TileIds  |
 
 ## Methods
 

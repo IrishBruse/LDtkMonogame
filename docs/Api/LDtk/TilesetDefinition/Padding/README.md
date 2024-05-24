@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Distance in pixels from image borders
+ Distance in pixels from image borders 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("padding")]

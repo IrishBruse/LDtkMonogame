@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Pivot coordinates  \(\[x,y\] format, values are from 0 to 1\) of the Entity
+ Pivot coordinates  \(`[x,y]` format, values are from 0 to 1\) of the Entity 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__pivot")]

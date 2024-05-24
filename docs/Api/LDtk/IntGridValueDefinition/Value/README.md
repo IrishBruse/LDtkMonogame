@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The IntGrid value itself
+ The IntGrid value itself 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("value")]

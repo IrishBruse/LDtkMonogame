@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Position informations of the background image, if there is one\.
+ Position informations of the background image, if there is one\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__bgPos")]
-public LDtk.LevelBackgroundPosition _BgPos { get; set; }
+public LDtk.LevelBackgroundPosition? _BgPos { get; set; }
 ```
 
 ### Property Value

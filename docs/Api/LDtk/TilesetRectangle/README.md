@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-This object represents a custom sub rectangle in a Tileset image\.
+ This object represents a custom sub rectangle in a Tileset image\. 
 
 ```csharp
 public class TilesetRectangle
@@ -27,11 +27,11 @@ public class TilesetRectangle
 
 | Property | Summary |
 | -------- | ------- |
-| [H](H/README.md) | Height in pixels |
-| [TilesetUid](TilesetUid/README.md) | UID of the tileset |
-| [W](W/README.md) | Width in pixels |
-| [X](X/README.md) | X pixels coordinate of the top\-left corner in the Tileset image |
-| [Y](Y/README.md) | Y pixels coordinate of the top\-left corner in the Tileset image |
+| [H](H/README.md) |  Height in pixels  |
+| [TilesetUid](TilesetUid/README.md) |  UID of the tileset  |
+| [W](W/README.md) |  Width in pixels  |
+| [X](X/README.md) |  X pixels coordinate of the top\-left corner in the Tileset image  |
+| [Y](Y/README.md) |  Y pixels coordinate of the top\-left corner in the Tileset image  |
 
 ## Methods
 

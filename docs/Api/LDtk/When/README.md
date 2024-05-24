@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Possible values: Manual, AfterLoad, BeforeSave, AfterSave
+ Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave` 
 
 ```csharp
 public enum When
@@ -21,8 +21,8 @@ public enum When
 
 | Name | Value | Summary |
 | ---- | ----- | ------- |
-| AfterLoad | 0 |
-| AfterSave | 1 |
+| Manual | 0 |
+| AfterLoad | 1 |
 | BeforeSave | 2 |
-| Manual | 3 |
+| AfterSave | 3 |
 

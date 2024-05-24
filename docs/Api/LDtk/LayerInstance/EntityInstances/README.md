@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ EntityInstances 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("entityInstances")]
 public LDtk.EntityInstance[] EntityInstances { get; set; }

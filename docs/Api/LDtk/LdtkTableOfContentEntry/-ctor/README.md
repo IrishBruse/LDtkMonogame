@@ -1,12 +1,12 @@
-# LdtkTableOfContentEntry\(\) Constructor
+# LDtkTableOfContentEntry\(\) Constructor
 
 [Home](../../../README.md)
 
-**Containing Type**: [LdtkTableOfContentEntry](../README.md)
+**Containing Type**: [LDtkTableOfContentEntry](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 
 ```csharp
-public LdtkTableOfContentEntry()
+public LDtkTableOfContentEntry()
 ```
 

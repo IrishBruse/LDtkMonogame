@@ -7,10 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Reference to the default Tileset UID being used by this layer definition\.
-WARNING: some layer instances might use a different tileset\. So most of the time,
-you should probably use the \_\_tilesetDefUid value found in layer instances\.  Note:
-since version 1\.0\.0, the old autoTilesetDefUid was removed and merged into this value\.
+ Reference to the default Tileset UID being used by this layer definition\.  : some layer \*instances\* might use a different tileset\. So most of the time, you should probably use the `__tilesetDefUid` value found in layer instances\.  Note: since version 1\.0\.0, the old `autoTilesetDefUid` was removed and merged into this value\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tilesetDefUid")]

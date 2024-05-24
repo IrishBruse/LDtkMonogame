@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Width of the world grid in pixels\.
+ Width of the world grid in pixels\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("worldGridWidth")]

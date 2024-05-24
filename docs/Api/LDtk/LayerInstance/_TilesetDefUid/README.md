@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The definition UID of corresponding Tileset, if any\.
+ The definition UID of corresponding Tileset, if any\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__tilesetDefUid")]

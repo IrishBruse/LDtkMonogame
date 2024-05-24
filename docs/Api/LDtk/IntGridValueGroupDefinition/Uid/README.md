@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Group unique ID
+ Group unique ID 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("uid")]

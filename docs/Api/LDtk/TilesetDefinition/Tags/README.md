@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array of user\-defined tags to organize the Tilesets
+ An array of user\-defined tags to organize the Tilesets 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tags")]

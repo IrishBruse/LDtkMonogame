@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Enum value definition 
+
 ```csharp
 public class EnumValueDefinition
 ```
@@ -24,9 +27,9 @@ public class EnumValueDefinition
 
 | Property | Summary |
 | -------- | ------- |
-| [Color](Color/README.md) | Optional color |
-| [Id](Id/README.md) | Enum value |
-| [TileRect](TileRect/README.md) | Optional tileset rectangle to represents this value |
+| [Color](Color/README.md) |  Optional color  |
+| [Id](Id/README.md) |  Enum value  |
+| [TileRect](TileRect/README.md) |  Optional tileset rectangle to represents this value  |
 
 ## Methods
 

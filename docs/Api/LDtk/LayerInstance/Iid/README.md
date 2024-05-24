@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Unique layer instance identifier
+ Unique layer instance identifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("iid")]

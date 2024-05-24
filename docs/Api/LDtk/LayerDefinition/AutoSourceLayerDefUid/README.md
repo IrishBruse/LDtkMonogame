@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ AutoSourceLayerDefUid 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("autoSourceLayerDefUid")]
 public int? AutoSourceLayerDefUid { get; set; }

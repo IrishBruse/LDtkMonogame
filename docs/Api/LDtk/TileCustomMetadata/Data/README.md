@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Data 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("data")]
 public string Data { get; set; }

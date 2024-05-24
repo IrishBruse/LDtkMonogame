@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Relative path to the external file providing this Enum
+ Relative path to the external file providing this Enum 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("externalRelPath")]
-public string ExternalRelPath { get; set; }
+public string? ExternalRelPath { get; set; }
 ```
 
 ### Property Value

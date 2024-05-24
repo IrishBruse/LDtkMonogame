@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Layer definition 
+
 ```csharp
 public class LayerDefinition
 ```
@@ -24,20 +27,20 @@ public class LayerDefinition
 
 | Property | Summary |
 | -------- | ------- |
-| [_Type](_Type/README.md) | Type of the layer \(IntGrid, Entities, Tiles or AutoLayer\) |
-| [AutoSourceLayerDefUid](AutoSourceLayerDefUid/README.md) | |
-| [DisplayOpacity](DisplayOpacity/README.md) | Opacity of the layer \(0 to 1\.0\) |
-| [GridSize](GridSize/README.md) | Width and height of the grid in pixels |
-| [Identifier](Identifier/README.md) | User defined unique identifier |
-| [IntGridValues](IntGridValues/README.md) | An array that defines extra optional info for each IntGrid value\.  WARNING: the array order is not related to actual IntGrid values\! As user can re\-order IntGrid values freely, you may value "2" before value "1" in this array\. |
-| [IntGridValuesGroups](IntGridValuesGroups/README.md) | Group informations for IntGrid values |
-| [ParallaxFactorX](ParallaxFactorX/README.md) | Parallax horizontal factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed of this layer, creating a fake 3D \(parallax\) effect\. |
-| [ParallaxFactorY](ParallaxFactorY/README.md) | Parallax vertical factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed of this layer, creating a fake 3D \(parallax\) effect\. |
-| [ParallaxScaling](ParallaxScaling/README.md) | If true \(default\), a layer with a parallax factor will also be scaled up/down accordingly\. |
-| [PxOffsetX](PxOffsetX/README.md) | X offset of the layer, in pixels \(IMPORTANT: this should be added to the LayerInstance optional offset\) |
-| [PxOffsetY](PxOffsetY/README.md) | Y offset of the layer, in pixels \(IMPORTANT: this should be added to the LayerInstance optional offset\) |
-| [TilesetDefUid](TilesetDefUid/README.md) | Reference to the default Tileset UID being used by this layer definition\. WARNING: some layer instances might use a different tileset\. So most of the time, you should probably use the \_\_tilesetDefUid value found in layer instances\.  Note: since version 1\.0\.0, the old autoTilesetDefUid was removed and merged into this value\. |
-| [Uid](Uid/README.md) | Unique Int identifier |
+| [_Type](_Type/README.md) |  Type of the layer \(\*IntGrid, Entities, Tiles or AutoLayer\*\)  |
+| [AutoSourceLayerDefUid](AutoSourceLayerDefUid/README.md) |  AutoSourceLayerDefUid  |
+| [DisplayOpacity](DisplayOpacity/README.md) |  Opacity of the layer \(0 to 1\.0\)  |
+| [GridSize](GridSize/README.md) |  Width and height of the grid in pixels  |
+| [Identifier](Identifier/README.md) |  User defined unique identifier  |
+| [IntGridValues](IntGridValues/README.md) |  An array that defines extra optional info for each IntGrid value\.  WARNING: the array order is not related to actual IntGrid values\! As user can re\-order IntGrid values freely, you may value "2" before value "1" in this array\.  |
+| [IntGridValuesGroups](IntGridValuesGroups/README.md) |  Group informations for IntGrid values  |
+| [ParallaxFactorX](ParallaxFactorX/README.md) |  Parallax horizontal factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed of this layer, creating a fake 3D \(parallax\) effect\.  |
+| [ParallaxFactorY](ParallaxFactorY/README.md) |  Parallax vertical factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed of this layer, creating a fake 3D \(parallax\) effect\.  |
+| [ParallaxScaling](ParallaxScaling/README.md) |  If true \(default\), a layer with a parallax factor will also be scaled up/down accordingly\.  |
+| [PxOffsetX](PxOffsetX/README.md) |  X offset of the layer, in pixels \(IMPORTANT: this should be added to the `LayerInstance` optional offset\)  |
+| [PxOffsetY](PxOffsetY/README.md) |  Y offset of the layer, in pixels \(IMPORTANT: this should be added to the `LayerInstance` optional offset\)  |
+| [TilesetDefUid](TilesetDefUid/README.md) |  Reference to the default Tileset UID being used by this layer definition\.  : some layer \*instances\* might use a different tileset\. So most of the time, you should probably use the `__tilesetDefUid` value found in layer instances\.  Note: since version 1\.0\.0, the old `autoTilesetDefUid` was removed and merged into this value\.  |
+| [Uid](Uid/README.md) |  Unique Int identifier  |
 
 ## Methods
 

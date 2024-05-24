@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array of user\-defined tags to organize the Enums
+ An array of user\-defined tags to organize the Enums 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tags")]

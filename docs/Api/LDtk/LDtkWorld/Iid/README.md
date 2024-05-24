@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Unique instance identifer
+ Unique instance identifer 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("iid")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-In a tileset definition, user defined meta\-data of a tile\.
+ In a tileset definition, user defined meta\-data of a tile\. 
 
 ```csharp
 public class TileCustomMetadata
@@ -27,8 +27,8 @@ public class TileCustomMetadata
 
 | Property | Summary |
 | -------- | ------- |
-| [Data](Data/README.md) | |
-| [TileId](TileId/README.md) | |
+| [Data](Data/README.md) |  Data  |
+| [TileId](TileId/README.md) |  TileId  |
 
 ## Methods
 

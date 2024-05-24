@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Coordinate ID in the layer grid
+ Coordinate ID in the layer grid 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("coordId")]

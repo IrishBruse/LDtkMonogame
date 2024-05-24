@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array containing this level custom field values\.
+ An array containing this level custom field values\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("fieldInstances")]

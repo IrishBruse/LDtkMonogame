@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array of 4 float values describing the cropped sub\-rectangle of the displayed
-background image\. This cropping happens when original is larger than the level bounds\.
-Array format: \[ cropX, cropY, cropWidth, cropHeight \]
+ An array of 4 float values describing the cropped sub\-rectangle of the displayed background image\. This cropping happens when original is larger than the level bounds\. Array format: `[ cropX, cropY, cropWidth, cropHeight ]` 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("cropRect")]

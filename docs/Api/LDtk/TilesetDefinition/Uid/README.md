@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Unique Intidentifier
+ Unique Intidentifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("uid")]

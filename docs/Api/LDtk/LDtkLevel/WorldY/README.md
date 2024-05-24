@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-World Y coordinate in pixels\.  Only relevant for world layouts where level spatial
-positioning is manual \(ie\. GridVania, Free\)\. For Horizontal and Vertical layouts, the
-value is always \-1 here\.
+ World Y coordinate in pixels\.  Only relevant for world layouts where level spatial positioning is manual \(ie\. GridVania, Free\)\. For Horizontal and Vertical layouts, the value is always \-1 here\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("worldY")]

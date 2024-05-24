@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ EnumValueId 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("enumValueId")]
 public string EnumValueId { get; set; }

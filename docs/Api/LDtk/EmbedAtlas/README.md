@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ If this value is set, then it means that this atlas uses an internal LDtk atlas image instead of a loaded one\. Possible values: \<`null`\>, `LdtkIcons`, `null` 
+
 ```csharp
 public enum EmbedAtlas
 ```

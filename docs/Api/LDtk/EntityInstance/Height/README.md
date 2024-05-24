@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Entity height in pixels\. For non\-resizable entities, it will be the same as Entity
-definition\.
+ Entity height in pixels\. For non\-resizable entities, it will be the same as Entity definition\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("height")]

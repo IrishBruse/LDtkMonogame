@@ -6,9 +6,12 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Tile 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tile")]
-public LDtk.TilesetRectangle Tile { get; set; }
+public LDtk.TilesetRectangle? Tile { get; set; }
 ```
 
 ### Property Value

@@ -1,4 +1,4 @@
-# LDtkWorld\.GetEntityRef\<T\>\(EntityRef\) Method
+# LDtkWorld\.GetEntityRef\<T\>\(EntityReference\) Method
 
 [Home](../../../README.md)
 
@@ -7,10 +7,10 @@
 **Assembly**: LDtkMonogame\.dll
 
   
- Gets an entity from an **entityRef** converted to **T**\. 
+ Gets an entity from an **reference** converted to **T**\. 
 
 ```csharp
-public T GetEntityRef<T>(LDtk.EntityRef entityRef) where T : new()
+public T GetEntityRef<T>(LDtk.EntityReference reference) where T : new()
 ```
 
 ### Type Parameters
@@ -19,7 +19,7 @@ public T GetEntityRef<T>(LDtk.EntityRef entityRef) where T : new()
 
 ### Parameters
 
-**entityRef** &ensp; [EntityRef](../../EntityRef/README.md)
+**reference** &ensp; [EntityReference](../../EntityReference/README.md)
 
 ### Returns
 

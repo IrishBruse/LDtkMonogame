@@ -1,4 +1,4 @@
-# LdtkTableOfContentEntry Class
+# LDtkTableOfContentEntry Class
 
 [Home](../../README.md) &#x2022; [Constructors](#constructors) &#x2022; [Properties](#properties) &#x2022; [Methods](#methods)
 
@@ -6,26 +6,29 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ ldtk\.TableOfContentEntry 
+
 ```csharp
-public class LdtkTableOfContentEntry
+public class LDtkTableOfContentEntry
 ```
 
 ### Inheritance
 
-[Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) &#x2192; LdtkTableOfContentEntry
+[Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) &#x2192; LDtkTableOfContentEntry
 
 ## Constructors
 
 | Constructor | Summary |
 | ----------- | ------- |
-| [LdtkTableOfContentEntry()](-ctor/README.md) | |
+| [LDtkTableOfContentEntry()](-ctor/README.md) | |
 
 ## Properties
 
 | Property | Summary |
 | -------- | ------- |
-| [Identifier](Identifier/README.md) | |
-| [InstancesData](InstancesData/README.md) | |
+| [Identifier](Identifier/README.md) |  Identifier  |
+| [InstancesData](InstancesData/README.md) |  InstancesData  |
 
 ## Methods
 

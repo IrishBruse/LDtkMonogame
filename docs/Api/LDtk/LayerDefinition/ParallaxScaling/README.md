@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-If true \(default\), a layer with a parallax factor will also be scaled up/down accordingly\.
+ If true \(default\), a layer with a parallax factor will also be scaled up/down accordingly\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("parallaxScaling")]

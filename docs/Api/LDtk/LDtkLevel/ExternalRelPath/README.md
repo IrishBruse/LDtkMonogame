@@ -7,12 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-This value is not null if the project option "Save levels separately" is enabled\. In
-this case, this relative path points to the level Json file\.
+ This value is not null if the project option "\*Save levels separately\*" is enabled\. In this case, this  path points to the level Json file\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("externalRelPath")]
-public string ExternalRelPath { get; set; }
+public string? ExternalRelPath { get; set; }
 ```
 
 ### Property Value

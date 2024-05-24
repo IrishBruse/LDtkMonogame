@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Opacity of the layer \(0 to 1\.0\)
+ Opacity of the layer \(0 to 1\.0\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("displayOpacity")]

@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array that defines extra optional info for each IntGrid value\.  WARNING: the
-array order is not related to actual IntGrid values\! As user can re\-order IntGrid values
-freely, you may value "2" before value "1" in this array\.
+ An array that defines extra optional info for each IntGrid value\.  WARNING: the array order is not related to actual IntGrid values\! As user can re\-order IntGrid values freely, you may value "2" before value "1" in this array\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("intGridValues")]

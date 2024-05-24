@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-WARNING: this field will move to the worlds array after the "multi\-worlds" update\.
-It will then be null\. You can enable the Multi\-worlds advanced project option to enable
-the change immediately\.  Height of the world grid in pixels\.
+ : this field will move to the `worlds` array after the "multi\-worlds" update\. It will then be `null`\. You can enable the Multi\-worlds advanced project option to enable the change immediately\.  Height of the world grid in pixels\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("worldGridHeight")]

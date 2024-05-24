@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Note: external enums are exactly the same as enums, except they have a relPath to
-point to an external source file\.
+ Note: external enums are exactly the same as `enums`, except they have a `relPath` to point to an external source file\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("externalEnums")]

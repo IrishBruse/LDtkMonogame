@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Reference to the UID of the level containing this layer instance
+ Reference to the UID of the level containing this layer instance 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("levelId")]

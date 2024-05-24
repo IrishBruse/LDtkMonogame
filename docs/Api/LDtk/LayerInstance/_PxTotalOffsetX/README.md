@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Total layer X pixel offset, including both instance and definition offsets\.
+ Total layer X pixel offset, including both instance and definition offsets\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__pxTotalOffsetX")]

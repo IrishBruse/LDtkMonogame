@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-This object is just a grid\-based coordinate used in Field values\.
+ This object is just a grid\-based coordinate used in Field values\. 
 
 ```csharp
 public class GridPoint
@@ -27,8 +27,8 @@ public class GridPoint
 
 | Property | Summary |
 | -------- | ------- |
-| [Cx](Cx/README.md) | X grid\-based coordinate |
-| [Cy](Cy/README.md) | Y grid\-based coordinate |
+| [Cx](Cx/README.md) |  X grid\-based coordinate  |
+| [Cy](Cy/README.md) |  Y grid\-based coordinate  |
 
 ## Methods
 

@@ -7,14 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-If you're writing your own LDtk importer, you should probably just ignore most stuff in
-the defs section, as it contains data that are mostly important to the editor\. To keep
-you away from the defs section and avoid some unnecessary JSON parsing, important data
-from definitions is often duplicated in fields prefixed with a double underscore \(eg\.
-\_\_identifier or \_\_type\)\.  The 2 only definition types you might need here are
-Tilesets and Enums\.
-
-A structure containing all the definitions of this project
+ If you're writing your own LDtk importer, you should probably just ignore \*most\* stuff in the `defs` section, as it contains data that are mostly important to the editor\. To keep you away from the `defs` section and avoid some unnecessary JSON parsing, important data from definitions is often duplicated in fields prefixed with a double underscore \(eg\. `__identifier` or `__type`\)\.  The 2 only definition types you might need here are  and \. 
 
 ```csharp
 public class Definitions
@@ -34,11 +27,11 @@ public class Definitions
 
 | Property | Summary |
 | -------- | ------- |
-| [Entities](Entities/README.md) | All entities definitions, including their custom fields |
-| [Enums](Enums/README.md) | All internal enums |
-| [ExternalEnums](ExternalEnums/README.md) | Note: external enums are exactly the same as enums, except they have a relPath to point to an external source file\. |
-| [Layers](Layers/README.md) | All layer definitions |
-| [Tilesets](Tilesets/README.md) | All tilesets |
+| [Entities](Entities/README.md) |  All entities definitions, including their custom fields  |
+| [Enums](Enums/README.md) |  All internal enums  |
+| [ExternalEnums](ExternalEnums/README.md) |  Note: external enums are exactly the same as `enums`, except they have a `relPath` to point to an external source file\.  |
+| [Layers](Layers/README.md) |  All layer definitions  |
+| [Tilesets](Tilesets/README.md) |  All tilesets  |
 
 ## Methods
 

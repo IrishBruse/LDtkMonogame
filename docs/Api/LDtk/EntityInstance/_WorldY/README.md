@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Y world coordinate in pixels Only available in GridVania or Free world layouts\.
+ Y world coordinate in pixels Only available in GridVania or Free world layouts\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__worldY")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Alpha/opacity of the tile \(0\-1, defaults to 1\)
+ Alpha/opacity of the tile \(0\-1, defaults to 1\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("a")]

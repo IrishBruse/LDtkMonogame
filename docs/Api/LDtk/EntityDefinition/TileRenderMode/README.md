@@ -7,18 +7,16 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An enum describing how the the Entity tile is rendered inside the Entity bounds\. Possible
-values: Cover, FitInside, Repeat, Stretch, FullSizeCropped,
-FullSizeUncropped, NineSlice
+ An enum describing how the Entity tile is rendered inside the Entity bounds\. Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`, `FullSizeUncropped`, `NineSlice` 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tileRenderMode")]
-public LDtk.TileRenderMode TileRenderMode { get; set; }
+public LDtk.TileRenderMode? TileRenderMode { get; set; }
 ```
 
 ### Property Value
 
-[TileRenderMode](../../TileRenderMode/README.md)
+[TileRenderMode](../../TileRenderMode/README.md)?
 
 ### Attributes
 

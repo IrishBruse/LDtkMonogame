@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Pixel coordinates \(\[x,y\] format\) in current level coordinate space\. Don't forget
-optional layer offsets, if they exist\!
+ Pixel coordinates \(`[x,y]` format\) in current level coordinate space\. Don't forget optional layer offsets, if they exist\! 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("px")]

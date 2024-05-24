@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-All layer definitions
+ All layer definitions 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("layers")]

@@ -1,4 +1,4 @@
-# LDtkJsonSourceGenerator\.LdtkTableOfContentEntryArray Property
+# LDtkJsonSourceGenerator\.LDtkTableOfContentEntryArray Property
 
 [Home](../../../README.md)
 
@@ -7,10 +7,10 @@
 **Assembly**: LDtkMonogame\.dll
 
 ```csharp
-public System.Text.Json.Serialization.Metadata.JsonTypeInfo<LDtk.LdtkTableOfContentEntry[]> LdtkTableOfContentEntryArray { get; }
+public System.Text.Json.Serialization.Metadata.JsonTypeInfo<LDtk.LDtkTableOfContentEntry[]> LDtkTableOfContentEntryArray { get; }
 ```
 
 ### Property Value
 
-[JsonTypeInfo](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1)\<[LdtkTableOfContentEntry](../../LdtkTableOfContentEntry/README.md)\[\]\>
+[JsonTypeInfo](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.metadata.jsontypeinfo-1)\<[LDtkTableOfContentEntry](../../LDtkTableOfContentEntry/README.md)\[\]\>
 

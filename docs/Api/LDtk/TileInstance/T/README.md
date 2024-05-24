@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The Tile ID in the corresponding tileset\.
+ The \*Tile ID\* in the corresponding tileset\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("t")]

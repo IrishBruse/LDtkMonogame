@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-If TRUE, one file will be saved for the project \(incl\. all its definitions\) and one file
-in a sub\-folder for each level\.
+ If TRUE, one file will be saved for the project \(incl\. all its definitions\) and one file in a sub\-folder for each level\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("externalLevels")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Width in pixels
+ Width in pixels 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("w")]

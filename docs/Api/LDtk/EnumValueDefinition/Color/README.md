@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Optional color
+ Optional color 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("color")]

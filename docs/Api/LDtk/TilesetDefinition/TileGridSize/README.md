@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ TileGridSize 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tileGridSize")]
 public int TileGridSize { get; set; }

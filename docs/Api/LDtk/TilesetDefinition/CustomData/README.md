@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array of custom tile metadata
+ An array of custom tile metadata 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("customData")]

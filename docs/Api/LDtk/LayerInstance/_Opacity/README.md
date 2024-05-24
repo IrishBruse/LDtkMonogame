@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Layer opacity as Float \[0\-1\]
+ Layer opacity as Float \[0\-1\] 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__opacity")]

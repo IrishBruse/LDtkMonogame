@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The relative path to corresponding Tileset, if any\.
+ The relative path to corresponding Tileset, if any\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__tilesetRelPath")]
-public string _TilesetRelPath { get; set; }
+public string? _TilesetRelPath { get; set; }
 ```
 
 ### Property Value

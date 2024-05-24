@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-IntGrid value group definition
+ IntGrid value group definition 
 
 ```csharp
 public class IntGridValueGroupDefinition
@@ -27,9 +27,9 @@ public class IntGridValueGroupDefinition
 
 | Property | Summary |
 | -------- | ------- |
-| [Color](Color/README.md) | User defined color |
-| [Identifier](Identifier/README.md) | User defined string identifier |
-| [Uid](Uid/README.md) | Group unique ID |
+| [Color](Color/README.md) |  User defined color  |
+| [Identifier](Identifier/README.md) |  User defined string identifier  |
+| [Uid](Uid/README.md) |  Group unique ID  |
 
 ## Methods
 

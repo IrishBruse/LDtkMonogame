@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Space in pixels between all tiles
+ Space in pixels between all tiles 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("spacing")]

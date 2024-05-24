@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-This structure represents a single tile from a given Tileset\.
+ This structure represents a single tile from a given Tileset\. 
 
 ```csharp
 public class TileInstance
@@ -27,11 +27,11 @@ public class TileInstance
 
 | Property | Summary |
 | -------- | ------- |
-| [A](A/README.md) | Alpha/opacity of the tile \(0\-1, defaults to 1\) |
-| [F](F/README.md) | "Flip bits", a 2\-bits integer to represent the mirror transformations of the tile\. \- Bit 0 = X flip   \- Bit 1 = Y flip   Examples: f=0 \(no flip\), f=1 \(X flip only\), f=2 \(Y flip only\), f=3 \(both flips\) |
-| [Px](Px/README.md) | Pixel coordinates of the tile in the layer \(\[x,y\] format\)\. Don't forget optional layer offsets, if they exist\! |
-| [Src](Src/README.md) | Pixel coordinates of the tile in the tileset \(\[x,y\] format\) |
-| [T](T/README.md) | The Tile ID in the corresponding tileset\. |
+| [A](A/README.md) |  Alpha/opacity of the tile \(0\-1, defaults to 1\)  |
+| [F](F/README.md) |  "Flip bits", a 2\-bits integer to represent the mirror transformations of the tile\.   \- Bit 0 = X flip   \- Bit 1 = Y flip   Examples: f=0 \(no flip\), f=1 \(X flip only\), f=2 \(Y flip only\), f=3 \(both flips\)  |
+| [Px](Px/README.md) |  Pixel coordinates of the tile in the  \(`[x,y]` format\)\. Don't forget optional layer offsets, if they exist\!  |
+| [Src](Src/README.md) |  Pixel coordinates of the tile in the  \(`[x,y]` format\)  |
+| [T](T/README.md) |  The \*Tile ID\* in the corresponding tileset\.  |
 
 ## Methods
 

@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The entity "smart" color, guessed from either Entity definition, or one its field
-instances\.
+ The entity "smart" color, guessed from either Entity definition, or one its field instances\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__smartColor")]

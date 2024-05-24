@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ TileId 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tileId")]
 public int TileId { get; set; }

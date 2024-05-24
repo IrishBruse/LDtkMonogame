@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Optional Enum definition UID used for this tileset meta\-data
+ Optional Enum definition UID used for this tileset meta\-data 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tagsSourceEnumUid")]

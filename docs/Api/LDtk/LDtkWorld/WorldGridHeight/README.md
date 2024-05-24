@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Height of the world grid in pixels\.
+ Height of the world grid in pixels\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("worldGridHeight")]

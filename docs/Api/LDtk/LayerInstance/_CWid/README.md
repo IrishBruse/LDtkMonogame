@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Grid\-based width
+ Grid\-based width 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__cWid")]

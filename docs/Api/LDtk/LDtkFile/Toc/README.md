@@ -7,17 +7,16 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-All instances of entities that have their exportToToc flag enabled are listed in this
-array\.
+ All instances of entities that have their `exportToToc` flag enabled are listed in this array\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("toc")]
-public LDtk.LdtkTableOfContentEntry[] Toc { get; set; }
+public LDtk.LDtkTableOfContentEntry[] Toc { get; set; }
 ```
 
 ### Property Value
 
-[LdtkTableOfContentEntry](../../LdtkTableOfContentEntry/README.md)\[\]
+[LDtkTableOfContentEntry](../../LDtkTableOfContentEntry/README.md)\[\]
 
 ### Attributes
 

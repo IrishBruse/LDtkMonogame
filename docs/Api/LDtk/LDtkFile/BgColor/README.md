@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Project background color
+ Project background color 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("bgColor")]

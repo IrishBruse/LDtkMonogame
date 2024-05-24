@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-X pixels coordinate of the top\-left corner in the Tileset image
+ X pixels coordinate of the top\-left corner in the Tileset image 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("x")]

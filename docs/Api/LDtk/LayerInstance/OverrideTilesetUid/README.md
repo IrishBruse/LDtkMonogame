@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-This layer can use another tileset by overriding the tileset UID here\.
+ This layer can use another tileset by overriding the tileset UID here\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("overrideTilesetUid")]

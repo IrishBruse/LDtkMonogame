@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Image width in pixels
+ Image width in pixels 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("pxWid")]

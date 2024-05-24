@@ -7,13 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array containing all Layer instances\. IMPORTANT: if the project option "Save
-levels separately" is enabled, this field will be null\.  This array is sorted
-in display order: the 1st layer is the top\-most and the last is behind\.
+ An array containing all Layer instances\. : if the project option "\*Save levels separately\*" is enabled, this field will be `null`\.  This array is : the 1st layer is the top\-most and the last is behind\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("layerInstances")]
-public LDtk.LayerInstance[] LayerInstances { get; set; }
+public LDtk.LayerInstance[]? LayerInstances { get; set; }
 ```
 
 ### Property Value

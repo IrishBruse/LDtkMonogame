@@ -7,17 +7,16 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Background color of the level \(same as bgColor, except the default value is
-automatically used here if its value is null\)
+ Background color of the level \(same as `bgColor`, except the default value is automatically used here if its value is `null`\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__bgColor")]
-public string _BgColor { get; set; }
+public Microsoft.Xna.Framework.Color _BgColor { get; set; }
 ```
 
 ### Property Value
 
-[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)
+[Color](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xna.framework.color)
 
 ### Attributes
 

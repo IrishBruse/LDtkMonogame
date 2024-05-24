@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Y offset in pixels to render this layer, usually 0 \(IMPORTANT: this should be added to
-the LayerDef optional offset, so you should probably prefer using \_\_pxTotalOffsetX
-which contains the total offset value\)
+ Y offset in pixels to render this layer, usually 0 \(IMPORTANT: this should be added to the `LayerDef` optional offset, so you should probably prefer using `__pxTotalOffsetX` which contains the total offset value\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("pxOffsetY")]

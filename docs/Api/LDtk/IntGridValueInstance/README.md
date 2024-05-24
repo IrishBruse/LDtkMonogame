@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-IntGrid value instance
+ IntGrid value instance 
 
 ```csharp
 public class IntGridValueInstance
@@ -27,8 +27,8 @@ public class IntGridValueInstance
 
 | Property | Summary |
 | -------- | ------- |
-| [CoordId](CoordId/README.md) | Coordinate ID in the layer grid |
-| [V](V/README.md) | IntGrid value |
+| [CoordId](CoordId/README.md) |  Coordinate ID in the layer grid  |
+| [V](V/README.md) |  IntGrid value  |
 
 ## Methods
 

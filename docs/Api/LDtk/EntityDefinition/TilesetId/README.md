@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Tileset ID used for optional tile display
+ Tileset ID used for optional tile display 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("tilesetId")]

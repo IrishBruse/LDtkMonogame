@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Grid\-based height
+ Grid\-based height 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__cHei")]

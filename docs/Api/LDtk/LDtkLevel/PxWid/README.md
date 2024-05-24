@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Width of the level in pixels
+ Width of the level in pixels 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("pxWid")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Layer instance visibility
+ Layer instance visibility 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("visible")]

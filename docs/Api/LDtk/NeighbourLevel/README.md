@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Nearby level info
+ Nearby level info 
 
 ```csharp
 public class NeighbourLevel
@@ -27,8 +27,8 @@ public class NeighbourLevel
 
 | Property | Summary |
 | -------- | ------- |
-| [Dir](Dir/README.md) | |
-| [LevelIid](LevelIid/README.md) | Neighbour Instance Identifier |
+| [Dir](Dir/README.md) |  A lowercase string tipping on the level location \(`n`orth, `s`outh, `w`est, `e`ast\)\.  Since 1\.4\.0, this value can also be \< \(neighbour depth is lower\), \> \(neighbour depth is greater\) or `o` \(levels overlap and share the same world depth\)\.  Since 1\.5\.3, this value can also be `nw`,`ne`,`sw` or `se` for levels only touching corners\.  |
+| [LevelIid](LevelIid/README.md) |  Neighbour Instance Identifier  |
 
 ## Methods
 

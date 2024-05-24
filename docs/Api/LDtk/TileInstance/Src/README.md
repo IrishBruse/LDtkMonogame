@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Pixel coordinates of the tile in the tileset \(\[x,y\] format\)
+ Pixel coordinates of the tile in the  \(`[x,y]` format\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("src")]

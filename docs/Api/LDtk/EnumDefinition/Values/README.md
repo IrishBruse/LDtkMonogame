@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-All possible enum values, with their optional Tile infos\.
+ All possible enum values, with their optional Tile infos\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("values")]

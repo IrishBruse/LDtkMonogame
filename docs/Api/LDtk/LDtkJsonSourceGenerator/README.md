@@ -10,8 +10,9 @@
  The json source generator for LDtk files\. 
 
 ```csharp
-[System.CodeDom.Compiler.GeneratedCode("System.Text.Json.SourceGeneration", "6.0.9.10508")]
+[System.CodeDom.Compiler.GeneratedCode("System.Text.Json.SourceGeneration", "6.0.10.21525")]
 [System.Text.Json.Serialization.JsonSerializable(typeof(LDtk.LDtkFile))]
+[System.Text.Json.Serialization.JsonSerializable(typeof(LDtk.EntityReference))]
 [System.Text.Json.Serialization.JsonSourceGenerationOptions(GenerationMode = System.Text.Json.Serialization.JsonSourceGenerationMode.Metadata)]
 public class LDtkJsonSourceGenerator : System.Text.Json.Serialization.JsonSerializerContext
 ```
@@ -49,7 +50,7 @@ public class LDtkJsonSourceGenerator : System.Text.Json.Serialization.JsonSerial
 | [EntityDefinitionArray](EntityDefinitionArray/README.md) | |
 | [EntityInstance](EntityInstance/README.md) | |
 | [EntityInstanceArray](EntityInstanceArray/README.md) | |
-| [EntityRef](EntityRef/README.md) | |
+| [EntityReference](EntityReference/README.md) | |
 | [EnumDefinition](EnumDefinition/README.md) | |
 | [EnumDefinitionArray](EnumDefinitionArray/README.md) | |
 | [EnumTagValue](EnumTagValue/README.md) | |
@@ -60,7 +61,6 @@ public class LDtkJsonSourceGenerator : System.Text.Json.Serialization.JsonSerial
 | [FieldInstanceArray](FieldInstanceArray/README.md) | |
 | [GeneratedSerializerOptions](GeneratedSerializerOptions/README.md) |  \(Overrides [JsonSerializerContext.GeneratedSerializerOptions](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonserializercontext.generatedserializeroptions)\) |
 | [Guid](Guid/README.md) | |
-| [IEnumerableLDtkLevel](IEnumerableLDtkLevel/README.md) | |
 | [Int32](Int32/README.md) | |
 | [Int32Array](Int32Array/README.md) | |
 | [IntGridValueDefinition](IntGridValueDefinition/README.md) | |
@@ -76,17 +76,17 @@ public class LDtkJsonSourceGenerator : System.Text.Json.Serialization.JsonSerial
 | [LDtkFile](LDtkFile/README.md) | |
 | [LDtkLevel](LDtkLevel/README.md) | |
 | [LDtkLevelArray](LDtkLevelArray/README.md) | |
-| [LdtkTableOfContentEntry](LdtkTableOfContentEntry/README.md) | |
-| [LdtkTableOfContentEntryArray](LdtkTableOfContentEntryArray/README.md) | |
-| [LdtkTocInstanceData](LdtkTocInstanceData/README.md) | |
-| [LdtkTocInstanceDataArray](LdtkTocInstanceDataArray/README.md) | |
+| [LDtkTableOfContentEntry](LDtkTableOfContentEntry/README.md) | |
+| [LDtkTableOfContentEntryArray](LDtkTableOfContentEntryArray/README.md) | |
 | [LDtkWorld](LDtkWorld/README.md) | |
 | [LDtkWorldArray](LDtkWorldArray/README.md) | |
 | [LevelBackgroundPosition](LevelBackgroundPosition/README.md) | |
 | [NeighbourLevel](NeighbourLevel/README.md) | |
 | [NeighbourLevelArray](NeighbourLevelArray/README.md) | |
+| [NullableColor](NullableColor/README.md) | |
 | [NullableEmbedAtlas](NullableEmbedAtlas/README.md) | |
 | [NullableInt32](NullableInt32/README.md) | |
+| [NullableTileRenderMode](NullableTileRenderMode/README.md) | |
 | [NullableWorldLayout](NullableWorldLayout/README.md) | |
 | [Object](Object/README.md) | |
 | [Options](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonserializercontext.options) |  \(Inherited from [JsonSerializerContext](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonserializercontext)\) |
@@ -103,6 +103,8 @@ public class LDtkJsonSourceGenerator : System.Text.Json.Serialization.JsonSerial
 | [TilesetDefinition](TilesetDefinition/README.md) | |
 | [TilesetDefinitionArray](TilesetDefinitionArray/README.md) | |
 | [TilesetRectangle](TilesetRectangle/README.md) | |
+| [TocInstanceData](TocInstanceData/README.md) | |
+| [TocInstanceDataArray](TocInstanceDataArray/README.md) | |
 | [UInt32](UInt32/README.md) | |
 | [Vector2](Vector2/README.md) | |
 | [WorldLayout](WorldLayout/README.md) | |

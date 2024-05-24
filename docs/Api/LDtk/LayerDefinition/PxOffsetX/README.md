@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-X offset of the layer, in pixels \(IMPORTANT: this should be added to the LayerInstance
-optional offset\)
+ X offset of the layer, in pixels \(IMPORTANT: this should be added to the `LayerInstance` optional offset\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("pxOffsetX")]

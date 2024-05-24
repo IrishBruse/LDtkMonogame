@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Entity definition identifier
+ Entity definition identifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__identifier")]

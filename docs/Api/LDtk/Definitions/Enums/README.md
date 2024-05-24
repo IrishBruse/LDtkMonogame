@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-All internal enums
+ All internal enums 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("enums")]

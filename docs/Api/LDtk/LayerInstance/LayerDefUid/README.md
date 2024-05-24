@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Reference the Layer definition UID
+ Reference the Layer definition UID 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("layerDefUid")]

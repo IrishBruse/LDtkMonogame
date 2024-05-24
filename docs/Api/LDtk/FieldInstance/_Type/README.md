@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Type of the field, such as Int, Float, String, Enum\(my\_enum\_name\), Bool,
-etc\.  NOTE: if you enable the advanced option Use Multilines type, you will have
-"Multilines" instead of "String" when relevant\.
+ Type of the field, such as `Int`, `Float`, `String`, `Enum(my_enum_name)`, `Bool`, etc\.  NOTE: if you enable the advanced option , you will have "\*Multilines\*" instead of "\*String\*" when relevant\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__type")]

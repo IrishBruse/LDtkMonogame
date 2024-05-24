@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-User defined string identifier
+ User defined string identifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("identifier")]
-public string Identifier { get; set; }
+public string? Identifier { get; set; }
 ```
 
 ### Property Value

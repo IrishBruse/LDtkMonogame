@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-An array containing the \[x,y\] pixel coordinates of the top\-left corner of the
-cropped background image, depending on bgPos option\.
+ An array containing the `[x,y]` pixel coordinates of the top\-left corner of the  background image, depending on `bgPos` option\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("topLeftPx")]

@@ -1,19 +1,22 @@
-# LdtkTableOfContentEntry\.InstancesData Property
+# LDtkTableOfContentEntry\.InstancesData Property
 
 [Home](../../../README.md)
 
-**Containing Type**: [LdtkTableOfContentEntry](../README.md)
+**Containing Type**: [LDtkTableOfContentEntry](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ InstancesData 
+
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("instancesData")]
-public LDtk.LdtkTocInstanceData[] InstancesData { get; set; }
+public LDtk.TocInstanceData[] InstancesData { get; set; }
 ```
 
 ### Property Value
 
-[LdtkTocInstanceData](../../LdtkTocInstanceData/README.md)\[\]
+[TocInstanceData](../../TocInstanceData/README.md)\[\]
 
 ### Attributes
 

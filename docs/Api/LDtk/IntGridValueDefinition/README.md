@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-IntGrid value definition
+ IntGrid value definition 
 
 ```csharp
 public class IntGridValueDefinition
@@ -27,11 +27,11 @@ public class IntGridValueDefinition
 
 | Property | Summary |
 | -------- | ------- |
-| [Color](Color/README.md) | |
-| [GroupUid](GroupUid/README.md) | Parent group identifier \(0 if none\) |
-| [Identifier](Identifier/README.md) | User defined unique identifier |
-| [Tile](Tile/README.md) | |
-| [Value](Value/README.md) | The IntGrid value itself |
+| [Color](Color/README.md) |  Color  |
+| [GroupUid](GroupUid/README.md) |  Parent group identifier \(0 if none\)  |
+| [Identifier](Identifier/README.md) |  User defined unique identifier  |
+| [Tile](Tile/README.md) |  Tile  |
+| [Value](Value/README.md) |  The IntGrid value itself  |
 
 ## Methods
 

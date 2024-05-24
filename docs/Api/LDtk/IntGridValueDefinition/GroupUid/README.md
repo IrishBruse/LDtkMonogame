@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Parent group identifier \(0 if none\)
+ Parent group identifier \(0 if none\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("groupUid")]

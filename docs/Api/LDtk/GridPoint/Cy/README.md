@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Y grid\-based coordinate
+ Y grid\-based coordinate 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("cy")]

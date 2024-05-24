@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-All entities definitions, including their custom fields
+ All entities definitions, including their custom fields 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("entities")]

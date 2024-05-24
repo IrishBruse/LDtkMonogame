@@ -6,13 +6,13 @@
 
 ## Classes
 
-| Class                                        | Summary                                                                                                                                                                                                                      |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Class | Summary |
+| ----- | ------- |
 | [ExampleRenderer](ExampleRenderer/README.md) | Renderer for the ldtkWorld, ldtkLevel, intgrids and entities\. This can all be done in your own class if you want to reimplement it and customize it differently this one is mostly here to get you up and running quickly\. |
 
 ## Structs
 
-| Struct                                   | Summary                                                  |
-| ---------------------------------------- | -------------------------------------------------------- |
-| [RenderedLevel](RenderedLevel/README.md) | The level struct containting the rendered out textures\. |
+| Struct | Summary |
+| ------ | ------- |
+| [RenderedLevel](RenderedLevel/README.md) |  The level struct containting the rendered out textures\.  |
 

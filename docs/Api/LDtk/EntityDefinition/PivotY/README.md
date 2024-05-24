@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Pivot Y coordinate \(from 0 to 1\.0\)
+ Pivot Y coordinate \(from 0 to 1\.0\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("pivotY")]

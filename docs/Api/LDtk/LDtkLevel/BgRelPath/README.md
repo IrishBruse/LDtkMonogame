@@ -7,11 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-The optional relative path to the level background image\.
+ The \*optional\* relative path to the level background image\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("bgRelPath")]
-public string BgRelPath { get; set; }
+public string? BgRelPath { get; set; }
 ```
 
 ### Property Value

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-X grid\-based coordinate
+ X grid\-based coordinate 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("cx")]

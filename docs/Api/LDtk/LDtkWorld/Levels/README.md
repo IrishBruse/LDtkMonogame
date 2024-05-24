@@ -7,18 +7,18 @@
 **Assembly**: LDtkMonogame\.dll
 
   
- Gets the Levels iterator used in foreach will load external levels each time caching recommended\. 
+ All levels from this world\. The order of this array is only relevant in `LinearHorizontal` and `linearVertical` world layouts \(see `worldLayout` value\)\. Otherwise, you should refer to the `worldX`,`worldY` coordinates of each Level\. 
 
 ```csharp
-[System.Text.Json.Serialization.JsonIgnore]
-public System.Collections.Generic.IEnumerable<LDtk.LDtkLevel> Levels { get; }
+[System.Text.Json.Serialization.JsonPropertyName("levels")]
+public LDtk.LDtkLevel[] Levels { get; set; }
 ```
 
 ### Property Value
 
-[IEnumerable](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1)\<[LDtkLevel](../../LDtkLevel/README.md)\>
+[LDtkLevel](../../LDtkLevel/README.md)\[\]
 
 ### Attributes
 
-* [JsonIgnoreAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonignoreattribute)
+* [JsonPropertyNameAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonpropertynameattribute)
 

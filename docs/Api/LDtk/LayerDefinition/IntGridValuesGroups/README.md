@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Group informations for IntGrid values
+ Group informations for IntGrid values 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("intGridValuesGroups")]

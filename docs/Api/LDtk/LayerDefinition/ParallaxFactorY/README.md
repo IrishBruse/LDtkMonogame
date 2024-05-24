@@ -7,8 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Parallax vertical factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed
-of this layer, creating a fake 3D \(parallax\) effect\.
+ Parallax vertical factor \(from \-1 to 1, defaults to 0\) which affects the scrolling speed of this layer, creating a fake 3D \(parallax\) effect\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("parallaxFactorY")]

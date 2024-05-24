@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Level background image position info
+ Level background image position info 
 
 ```csharp
 public class LevelBackgroundPosition
@@ -27,9 +27,9 @@ public class LevelBackgroundPosition
 
 | Property | Summary |
 | -------- | ------- |
-| [CropRect](CropRect/README.md) | An array of 4 float values describing the cropped sub\-rectangle of the displayed background image\. This cropping happens when original is larger than the level bounds\. Array format: \[ cropX, cropY, cropWidth, cropHeight \] |
-| [Scale](Scale/README.md) | An array containing the \[scaleX,scaleY\] values of the cropped background image, depending on bgPos option\. |
-| [TopLeftPx](TopLeftPx/README.md) | An array containing the \[x,y\] pixel coordinates of the top\-left corner of the cropped background image, depending on bgPos option\. |
+| [CropRect](CropRect/README.md) |  An array of 4 float values describing the cropped sub\-rectangle of the displayed background image\. This cropping happens when original is larger than the level bounds\. Array format: `[ cropX, cropY, cropWidth, cropHeight ]`  |
+| [Scale](Scale/README.md) |  An array containing the `[scaleX,scaleY]` values of the  background image, depending on `bgPos` option\.  |
+| [TopLeftPx](TopLeftPx/README.md) |  An array containing the `[x,y]` pixel coordinates of the top\-left corner of the  background image, depending on `bgPos` option\.  |
 
 ## Methods
 

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Tileset UID if provided
+ Tileset UID if provided 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("iconTilesetUid")]

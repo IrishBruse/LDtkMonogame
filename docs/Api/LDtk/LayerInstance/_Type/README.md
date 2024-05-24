@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Layer type \(possible values: IntGrid, Entities, Tiles or AutoLayer\)
+ Layer type \(possible values: IntGrid, Entities, Tiles or AutoLayer\) 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__type")]

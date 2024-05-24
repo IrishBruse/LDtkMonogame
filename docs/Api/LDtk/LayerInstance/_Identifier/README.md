@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Layer definition identifier
+ Layer definition identifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__identifier")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Neighbour Instance Identifier
+ Neighbour Instance Identifier 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("levelIid")]

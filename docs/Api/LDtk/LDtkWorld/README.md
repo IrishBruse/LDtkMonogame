@@ -7,9 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-IMPORTANT: this type is available as a preview\. You can rely on it to update your
-importers, for when it will be officially available\.  A World contains multiple levels,
-and it has its own layout settings\.
+ : this type is available as a preview\. You can rely on it to update your importers, for when it will be officially available\.  A World contains multiple levels, and it has its own layout settings\. 
 
 ```csharp
 public class LDtkWorld
@@ -31,14 +29,13 @@ public class LDtkWorld
 | -------- | ------- |
 | [Content](Content/README.md) |  Gets or sets the content manager used if you are using the contentpipeline\.  |
 | [FilePath](FilePath/README.md) |  Gets or sets the absolute filepath to the world\.  |
-| [Identifier](Identifier/README.md) | User defined unique identifier |
-| [Iid](Iid/README.md) | Unique instance identifer |
-| [Levels](Levels/README.md) |  Gets the Levels iterator used in foreach will load external levels each time caching recommended\.  |
-| [RawLevels](RawLevels/README.md) |  Gets or sets the raw ldtk level data\.  |
-| [WorldGridHeight](WorldGridHeight/README.md) | Height of the world grid in pixels\. |
+| [Identifier](Identifier/README.md) |  User defined unique identifier  |
+| [Iid](Iid/README.md) |  Unique instance identifer  |
+| [Levels](Levels/README.md) |  All levels from this world\. The order of this array is only relevant in `LinearHorizontal` and `linearVertical` world layouts \(see `worldLayout` value\)\. Otherwise, you should refer to the `worldX`,`worldY` coordinates of each Level\.  |
+| [WorldGridHeight](WorldGridHeight/README.md) |  Height of the world grid in pixels\.  |
 | [WorldGridSize](WorldGridSize/README.md) |  Gets size of the world grid in pixels\.  |
-| [WorldGridWidth](WorldGridWidth/README.md) | Width of the world grid in pixels\. |
-| [WorldLayout](WorldLayout/README.md) | An enum that describes how levels are organized in this project \(ie\. linearly or in a 2D space\)\. Possible values: Free, GridVania, LinearHorizontal, LinearVertical, null, null |
+| [WorldGridWidth](WorldGridWidth/README.md) |  Width of the world grid in pixels\.  |
+| [WorldLayout](WorldLayout/README.md) |  An enum that describes how levels are organized in this project \(ie\. linearly or in a 2D space\)\. Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`, `null`, `null`  |
 
 ## Methods
 
@@ -46,7 +43,7 @@ public class LDtkWorld
 | ------ | ------- |
 | [Equals(Object)](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) |  \(Inherited from [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)\) |
 | [GetEntity\<T\>()](GetEntity/README.md) |  Goes through all the loaded levels looking for the entity\.  |
-| [GetEntityRef\<T\>(EntityRef)](GetEntityRef/README.md) |  Gets an entity from an **entityRef** converted to **T**\.  |
+| [GetEntityRef\<T\>(EntityReference)](GetEntityRef/README.md) |  Gets an entity from an **reference** converted to **T**\.  |
 | [GetHashCode()](https://docs.microsoft.com/en-us/dotnet/api/system.object.gethashcode) |  \(Inherited from [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)\) |
 | [GetType()](https://docs.microsoft.com/en-us/dotnet/api/system.object.gettype) |  \(Inherited from [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)\) |
 | [LoadLevel(Guid)](LoadLevel/README.md#262007456) |  Get the level with an iid\.  |

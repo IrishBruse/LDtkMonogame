@@ -7,12 +7,11 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Optional TilesetRect used to display this field \(this can be the field own Tile, or some
-other Tile guessed from the value, like an Enum\)\.
+ Optional TilesetRect used to display this field \(this can be the field own Tile, or some other Tile guessed from the value, like an Enum\)\. 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("__tile")]
-public LDtk.TilesetRectangle _Tile { get; set; }
+public LDtk.TilesetRectangle? _Tile { get; set; }
 ```
 
 ### Property Value

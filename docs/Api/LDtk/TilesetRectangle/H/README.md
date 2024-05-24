@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Height in pixels
+ Height in pixels 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("h")]

@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-Base entity color
+ Base entity color 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("color")]

@@ -6,6 +6,9 @@
 
 **Assembly**: LDtkMonogame\.dll
 
+  
+ Enum definition 
+
 ```csharp
 public class EnumDefinition
 ```
@@ -24,12 +27,12 @@ public class EnumDefinition
 
 | Property | Summary |
 | -------- | ------- |
-| [ExternalRelPath](ExternalRelPath/README.md) | Relative path to the external file providing this Enum |
-| [IconTilesetUid](IconTilesetUid/README.md) | Tileset UID if provided |
-| [Identifier](Identifier/README.md) | User defined unique identifier |
-| [Tags](Tags/README.md) | An array of user\-defined tags to organize the Enums |
-| [Uid](Uid/README.md) | Unique Int identifier |
-| [Values](Values/README.md) | All possible enum values, with their optional Tile infos\. |
+| [ExternalRelPath](ExternalRelPath/README.md) |  Relative path to the external file providing this Enum  |
+| [IconTilesetUid](IconTilesetUid/README.md) |  Tileset UID if provided  |
+| [Identifier](Identifier/README.md) |  User defined unique identifier  |
+| [Tags](Tags/README.md) |  An array of user\-defined tags to organize the Enums  |
+| [Uid](Uid/README.md) |  Unique Int identifier  |
+| [Values](Values/README.md) |  All possible enum values, with their optional Tile infos\.  |
 
 ## Methods
 

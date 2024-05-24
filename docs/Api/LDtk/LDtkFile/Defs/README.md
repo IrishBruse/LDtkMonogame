@@ -7,7 +7,7 @@
 **Assembly**: LDtkMonogame\.dll
 
   
-A structure containing all the definitions of this project
+ A structure containing all the definitions of this project 
 
 ```csharp
 [System.Text.Json.Serialization.JsonPropertyName("defs")]
