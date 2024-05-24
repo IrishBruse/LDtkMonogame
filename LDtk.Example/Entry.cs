@@ -77,14 +77,15 @@ public class Entry : Game
 
         camera = new Camera(GraphicsDevice);
 
-        renderer = new LDtkRenderer(spriteBatch, Content);
-        file = LDtkFile.FromFile("Test/World", Content);
-        spriteSheet = Content.Load<Texture2D>("Characters");
+        // renderer = new LDtkRenderer(spriteBatch, Content);
+        // file = LDtkFile.FromFile("Test/World", Content);
+        // spriteSheet = Content.Load<Texture2D>("Characters");
 
         // None ContentManager version
-        // renderer = new LDtkRenderer(spriteBatch);
-        // file = LDtkFile.FromFile("Content/World.ldtk");
-        // spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
+        renderer = new LDtkRenderer(spriteBatch);
+        file = LDtkFile.FromFile("Content/Test/World.ldtk");
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "../Characters.png"));
+
         world = file.LoadWorld(Worlds.World.Iid);
 
         LDtkLevel level0 = world.LoadLevel("Level_0");
@@ -111,7 +112,7 @@ public class Entry : Game
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
-            renderer.PrerenderLevel(level);
+            _ = renderer.PrerenderLevel(level);
         }
 
         Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();
@@ -195,6 +196,7 @@ public class Entry : Game
             }
 
             player.Draw(totalTime);
+            gun.Draw();
 
             // Draw Entities
             for (int i = 0; i < enemies.Count; i++)
@@ -208,9 +210,6 @@ public class Entry : Game
                 bullets[i].Draw();
             }
         }
-
-        gun.Draw();
-
         spriteBatch.End();
 
         base.Draw(gameTime);
