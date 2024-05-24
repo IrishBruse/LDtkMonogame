@@ -3,6 +3,7 @@ namespace LDtk;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -22,6 +23,10 @@ public partial class LDtkFile
     [JsonIgnore]
     public ContentManager? Content { get; set; }
 
+    /// <summary> An array containing various advanced flags (ie. options or other states). </summary>
+    [JsonPropertyName("flags")]
+    public string[] Flags { get; set; }
+
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
     /// <returns> Returns the file loaded from the path. </returns>
@@ -32,6 +37,7 @@ public partial class LDtkFile
         {
             throw new LDtkException($"Failed to Deserialize ldtk file from {filePath}");
         }
+        ValidateFile(file);
         file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
@@ -46,6 +52,7 @@ public partial class LDtkFile
         {
             throw new LDtkException($"Failed to Deserialize ldtk file from {filePath}");
         }
+        ValidateFile(file);
         file.FilePath = Path.GetFullPath(filePath);
         return file;
     }
@@ -57,9 +64,23 @@ public partial class LDtkFile
     public static LDtkFile FromFile(string filePath, ContentManager content)
     {
         LDtkFile file = content.Load<LDtkFile>(filePath);
+        ValidateFile(file);
         file.FilePath = filePath;
         file.Content = content;
         return file;
+    }
+
+    static void ValidateFile(LDtkFile file)
+    {
+        if (Version.Parse(file.JsonVersion) < Version.Parse(Constants.SupportedLDtkVersion))
+        {
+            throw new LDtkException("LDtk file version is not supported. Please update your LDtk version.");
+        }
+
+        if (!file.Flags.Contains("MultiWorlds"))
+        {
+            throw new LDtkException("LDtk file is not a multiworld file. Please enable MultiWorlds in the ldtk file flags.");
+        }
     }
 
     /// <summary> Loads the ldtkl world file from disk directly or from the embeded one depending on if the file uses externalworlds. </summary>
@@ -90,6 +111,19 @@ public partial class LDtkFile
         }
 
         return null;
+    }
+
+    /// <summary> Loads the one and only ldtkl world file from disk directly or from the embeded one depending on if the file uses externalworlds. </summary>
+    /// <returns> Returns the world from the iid. </returns>
+    /// <exception cref="LDtkException">Throws if more than 1 world exsists</exception>
+    public LDtkWorld? LoadSingleWorld()
+    {
+        if (Worlds.Length != 1)
+        {
+            throw new LDtkException("Expected only 1 world in ldtk file");
+        }
+
+        return LoadWorld(Worlds[0].Iid);
     }
 
     /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
