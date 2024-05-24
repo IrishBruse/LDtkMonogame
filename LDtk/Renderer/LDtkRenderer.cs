@@ -69,12 +69,13 @@ public class LDtkRenderer : IDisposable
 
     /// <summary> Prerender out the level to textures to optimize the rendering process. </summary>
     /// <param name="level">The level to prerender.</param>
+    /// <returns>The prerendered level.</returns>
     /// <exception cref="Exception">The level already has been prerendered.</exception>
-    public void PrerenderLevel(LDtkLevel level)
+    public RenderedLevel PrerenderLevel(LDtkLevel level)
     {
-        if (PrerenderedLevels.ContainsKey(level.Identifier))
+        if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel cachedLevel))
         {
-            return;
+            return cachedLevel;
         }
 
         RenderedLevel renderLevel = new();
@@ -83,11 +84,12 @@ public class LDtkRenderer : IDisposable
         {
             renderLevel.Layers = RenderLayers(level);
         }
-
         SpriteBatch.End();
 
         PrerenderedLevels.Add(level.Identifier, renderLevel);
         graphicsDevice.SetRenderTarget(null);
+
+        return renderLevel;
     }
 
     Texture2D[] RenderLayers(LDtkLevel level)
@@ -101,7 +103,14 @@ public class LDtkRenderer : IDisposable
 
         if (level.LayerInstances == null)
         {
-            return layers.ToArray();
+            if (level.ExternalRelPath != null)
+            {
+                throw new Exception("Level has not been loaded.");
+            }
+            else
+            {
+                throw new Exception("Level has no layers.");
+            }
         }
 
         // Render Tile, Auto and Int grid layers
@@ -183,7 +192,7 @@ public class LDtkRenderer : IDisposable
     {
         if (path == null)
         {
-            return error;
+            throw new LDtkException("Tileset path is null.");
         }
 
         if (TilemapCache.TryGetValue(path, out Texture2D? texture))
