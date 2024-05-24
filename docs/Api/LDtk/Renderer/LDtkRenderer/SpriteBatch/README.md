@@ -1,8 +1,8 @@
-# LDtkRenderer\.SpriteBatch Property
+# ExampleRenderer\.SpriteBatch Property
 
 [Home](../../../../README.md)
 
-**Containing Type**: [LDtkRenderer](../README.md)
+**Containing Type**: [ExampleRenderer](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 

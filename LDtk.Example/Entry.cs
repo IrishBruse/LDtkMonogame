@@ -20,7 +20,7 @@ public class Entry : Game
 
     LDtkFile file;
     LDtkWorld world;
-    LDtkRenderer renderer;
+    ExampleRenderer renderer;
     readonly List<EnemyEntity> enemies = [];
     readonly List<BulletEntity> bullets = [];
     PlayerEntity player;
@@ -77,12 +77,12 @@ public class Entry : Game
 
         camera = new Camera(GraphicsDevice);
 
-        // renderer = new LDtkRenderer(spriteBatch, Content);
+        // renderer = new ExampleRenderer(spriteBatch, Content);
         // file = LDtkFile.FromFile("Test/World", Content);
         // spriteSheet = Content.Load<Texture2D>("Characters");
 
         // None ContentManager version
-        renderer = new LDtkRenderer(spriteBatch);
+        renderer = new ExampleRenderer(spriteBatch);
         file = LDtkFile.FromFile("Content/Test/World.ldtk");
         spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "../Characters.png"));
 

@@ -12,11 +12,11 @@ using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class EnemyEntity(Enemy data, Texture2D texture, LDtkRenderer renderer)
+public class EnemyEntity(Enemy data, Texture2D texture, ExampleRenderer renderer)
 {
     readonly Enemy data = data;
     readonly Texture2D texture = texture;
-    readonly LDtkRenderer renderer = renderer;
+    readonly ExampleRenderer renderer = renderer;
     bool flip;
     int nextWander;
     bool dead;

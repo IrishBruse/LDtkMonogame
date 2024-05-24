@@ -1,8 +1,8 @@
-# LDtkRenderer\.Dispose\(\) Method
+# ExampleRenderer\.Dispose\(\) Method
 
 [Home](../../../../README.md)
 
-**Containing Type**: [LDtkRenderer](../README.md)
+**Containing Type**: [ExampleRenderer](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 

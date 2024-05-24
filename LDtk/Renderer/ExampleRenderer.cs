@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 /// This can all be done in your own class if you want to reimplement it and customize it differently
 /// this one is mostly here to get you up and running quickly.
 /// </summary>
-public class LDtkRenderer : IDisposable
+public class ExampleRenderer : IDisposable
 {
     /// <summary> Gets or sets the spritebatch used for rendering with this Renderer. </summary>
     public SpriteBatch SpriteBatch { get; set; }
@@ -32,9 +32,9 @@ public class LDtkRenderer : IDisposable
     readonly GraphicsDevice graphicsDevice;
     readonly ContentManager? content;
 
-    /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with direct file loading. </summary>
+    /// <summary> Initializes a new instance of the <see cref="ExampleRenderer"/> class. This is used to intizialize the renderer for use with direct file loading. </summary>
     /// <param name="spriteBatch">Spritebatch</param>
-    public LDtkRenderer(SpriteBatch spriteBatch)
+    public ExampleRenderer(SpriteBatch spriteBatch)
     {
         SpriteBatch = spriteBatch;
         graphicsDevice = spriteBatch.GraphicsDevice;
@@ -58,10 +58,10 @@ public class LDtkRenderer : IDisposable
         }
     }
 
-    /// <summary> Initializes a new instance of the <see cref="LDtkRenderer"/> class. This is used to intizialize the renderer for use with content Pipeline. </summary>
+    /// <summary> Initializes a new instance of the <see cref="ExampleRenderer"/> class. This is used to intizialize the renderer for use with content Pipeline. </summary>
     /// <param name="spriteBatch">SpriteBatch</param>
     /// <param name="content">Optional ContentManager</param>
-    public LDtkRenderer(SpriteBatch spriteBatch, ContentManager content)
+    public ExampleRenderer(SpriteBatch spriteBatch, ContentManager content)
         : this(spriteBatch)
     {
         this.content = content;

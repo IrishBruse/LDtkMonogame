@@ -15,7 +15,7 @@ public class Entry : Game
 
     LDtkFile file;
     LDtkWorld world;
-    LDtkRenderer renderer;
+    ExampleRenderer renderer;
 
     // Monogame Stuff
 
@@ -59,7 +59,7 @@ public class Entry : Game
     {
         MonogameInitialize();
 
-        renderer = new LDtkRenderer(spriteBatch);
+        renderer = new ExampleRenderer(spriteBatch);
         file = LDtkFile.FromFile("c:/Users/Econn/AppData/Local/Programs/ldtk/extraFiles/samples/Typical_2D_platformer_example.ldtk");
 
         world = file.LoadSingleWorld();

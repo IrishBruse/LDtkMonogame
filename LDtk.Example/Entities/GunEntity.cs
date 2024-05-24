@@ -12,7 +12,7 @@ using LDtkTypes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer)
+public class GunEntity(Gun_Pickup data, Texture2D texture, ExampleRenderer renderer)
 {
     public Vector2 Position
     {
@@ -26,7 +26,7 @@ public class GunEntity(Gun_Pickup data, Texture2D texture, LDtkRenderer renderer
 
     readonly Gun_Pickup data = data;
     readonly Texture2D texture = texture;
-    readonly LDtkRenderer renderer = renderer;
+    readonly ExampleRenderer renderer = renderer;
 
     public void Update(float totalTime)
     {

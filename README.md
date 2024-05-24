@@ -26,7 +26,7 @@ using LDtk.Renderer;
 ```
 
 LDtk.Renderer is a premade renderer for the levels, you can create your own if you have more specific needs
-[LDtkRenderer.cs](https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtk/Renderer/LDtkRenderer.cs)
+[ExampleRenderer.cs](https://github.com/IrishBruse/LDtkMonogame/blob/main/LDtk/Renderer/ExampleRenderer.cs)
 is an example of how to make one. Or you can inherit it and extend it.
 
 To get started loading ldtk files load the file in `Initialize`.
@@ -48,8 +48,8 @@ It is a class within in a class that represents the world name and the levels na
 Create the renderer in `Initialize`.
 
 ```cs
-LDtkRenderer renderer = new LDtkRenderer(spriteBatch, Content);
-LDtkRenderer renderer = new LDtkRenderer(spriteBatch);
+ExampleRenderer renderer = new ExampleRenderer(spriteBatch, Content);
+ExampleRenderer renderer = new ExampleRenderer(spriteBatch);
 ```
 
 Prerender Levels

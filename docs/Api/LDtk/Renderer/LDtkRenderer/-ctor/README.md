@@ -1,27 +1,27 @@
-# LDtkRenderer Constructors
+# ExampleRenderer Constructors
 
 [Home](../../../../README.md)
 
-**Containing Type**: [LDtkRenderer](../README.md)
+**Containing Type**: [ExampleRenderer](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 
 ## Overloads
 
-| Constructor | Summary |
-| ----------- | ------- |
-| [LDtkRenderer(SpriteBatch, ContentManager)](#2642043051) |  Initializes a new instance of the [LDtkRenderer](../README.md) class\. This is used to intizialize the renderer for use with content Pipeline\.  |
-| [LDtkRenderer(SpriteBatch)](#3898746929) |  Initializes a new instance of the [LDtkRenderer](../README.md) class\. This is used to intizialize the renderer for use with direct file loading\.  |
+| Constructor                                                 | Summary                                                                                                                                               |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [ExampleRenderer(SpriteBatch, ContentManager)](#2642043051) | Initializes a new instance of the [ExampleRenderer](../README.md) class\. This is used to intizialize the renderer for use with content Pipeline\.    |
+| [ExampleRenderer(SpriteBatch)](#3898746929)                 | Initializes a new instance of the [ExampleRenderer](../README.md) class\. This is used to intizialize the renderer for use with direct file loading\. |
 
 <a id="2642043051"></a>
 
-## LDtkRenderer\(SpriteBatch, ContentManager\) 
+## ExampleRenderer\(SpriteBatch, ContentManager\) 
 
   
- Initializes a new instance of the [LDtkRenderer](../README.md) class\. This is used to intizialize the renderer for use with content Pipeline\. 
+ Initializes a new instance of the [ExampleRenderer](../README.md) class\. This is used to intizialize the renderer for use with content Pipeline\. 
 
 ```csharp
-public LDtkRenderer(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Content.ContentManager content)
+public ExampleRenderer(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch, Microsoft.Xna.Framework.Content.ContentManager content)
 ```
 
 ### Parameters
@@ -34,13 +34,13 @@ SpriteBatch
 
 Optional ContentManager<a id="3898746929"></a>
 
-## LDtkRenderer\(SpriteBatch\) 
+## ExampleRenderer\(SpriteBatch\) 
 
   
- Initializes a new instance of the [LDtkRenderer](../README.md) class\. This is used to intizialize the renderer for use with direct file loading\. 
+ Initializes a new instance of the [ExampleRenderer](../README.md) class\. This is used to intizialize the renderer for use with direct file loading\. 
 
 ```csharp
-public LDtkRenderer(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+public ExampleRenderer(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
 ```
 
 ### Parameters

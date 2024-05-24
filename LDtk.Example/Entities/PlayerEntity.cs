@@ -32,7 +32,7 @@ public class PlayerEntity
     readonly Box collider;
     readonly Player data;
     readonly Texture2D texture;
-    readonly LDtkRenderer renderer;
+    readonly ExampleRenderer renderer;
     Vector2 velocity;
     List<Box> tiles;
     bool grounded;
@@ -43,7 +43,7 @@ public class PlayerEntity
     float startTime;
     bool shoot;
 
-    public PlayerEntity(Player player, Texture2D texture, LDtkRenderer renderer, GunEntity gun)
+    public PlayerEntity(Player player, Texture2D texture, ExampleRenderer renderer, GunEntity gun)
     {
         data = player;
         this.texture = texture;

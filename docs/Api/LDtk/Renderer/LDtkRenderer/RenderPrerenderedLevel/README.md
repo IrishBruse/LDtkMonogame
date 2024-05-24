@@ -1,8 +1,8 @@
-# LDtkRenderer\.RenderPrerenderedLevel\(LDtkLevel\) Method
+# ExampleRenderer\.RenderPrerenderedLevel\(LDtkLevel\) Method
 
 [Home](../../../../README.md)
 
-**Containing Type**: [LDtkRenderer](../README.md)
+**Containing Type**: [ExampleRenderer](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 

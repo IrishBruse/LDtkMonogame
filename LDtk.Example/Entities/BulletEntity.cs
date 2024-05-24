@@ -8,7 +8,7 @@ using LDtkMonogameExample.AABB;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class BulletEntity(Texture2D texture, LDtkRenderer renderer)
+public class BulletEntity(Texture2D texture, ExampleRenderer renderer)
 {
     public Vector2 Position { get; set; }
 
@@ -19,7 +19,7 @@ public class BulletEntity(Texture2D texture, LDtkRenderer renderer)
     public Box Collider { get; set; } = new Box(Vector2.Zero, new Vector2(8, 8), new Vector2(0, -.5f));
 
     readonly Texture2D texture = texture;
-    readonly LDtkRenderer renderer = renderer;
+    readonly ExampleRenderer renderer = renderer;
 
     public void Update(float deltaTime)
     {

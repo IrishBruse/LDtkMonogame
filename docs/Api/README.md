@@ -45,7 +45,7 @@
   * [LDtkFileReader](LDtk/ContentPipeline/LDtkFileReader/README.md)
   * [LDtkLevelReader](LDtk/ContentPipeline/LDtkLevelReader/README.md)
 * [LDtk.Renderer](LDtk/Renderer/README.md)
-  * [LDtkRenderer](LDtk/Renderer/LDtkRenderer/README.md)
+  * [ExampleRenderer](LDtk/Renderer/ExampleRenderer/README.md)
   * [RenderedLevel](LDtk/Renderer/RenderedLevel/README.md)
 
 ## Class Hierarchy
@@ -77,7 +77,7 @@
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkFile](LDtk/LDtkFile/README.md)<a id="class-hierarchy-LDtk_LDtkFile"></a>
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkIntGrid](LDtk/LDtkIntGrid/README.md)<a id="class-hierarchy-LDtk_LDtkIntGrid"></a>
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkLevel](LDtk/LDtkLevel/README.md)<a id="class-hierarchy-LDtk_LDtkLevel"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkRenderer](LDtk/Renderer/LDtkRenderer/README.md)<a id="class-hierarchy-LDtk_Renderer_LDtkRenderer"></a>
+* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [ExampleRenderer](LDtk/Renderer/ExampleRenderer/README.md)<a id="class-hierarchy-LDtk_Renderer_ExampleRenderer"></a>
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LdtkTableOfContentEntry](LDtk/LdtkTableOfContentEntry/README.md)<a id="class-hierarchy-LDtk_LdtkTableOfContentEntry"></a>
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LdtkTocInstanceData](LDtk/LdtkTocInstanceData/README.md)<a id="class-hierarchy-LDtk_LdtkTocInstanceData"></a>
 * &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkWorld](LDtk/LDtkWorld/README.md)<a id="class-hierarchy-LDtk_LDtkWorld"></a>

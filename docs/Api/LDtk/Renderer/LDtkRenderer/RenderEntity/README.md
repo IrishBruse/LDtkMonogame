@@ -1,19 +1,19 @@
-# LDtkRenderer\.RenderEntity Method
+# ExampleRenderer\.RenderEntity Method
 
 [Home](../../../../README.md)
 
-**Containing Type**: [LDtkRenderer](../README.md)
+**Containing Type**: [ExampleRenderer](../README.md)
 
 **Assembly**: LDtkMonogame\.dll
 
 ## Overloads
 
-| Method | Summary |
-| ------ | ------- |
-| [RenderEntity\<T\>(T, Texture2D, Int32)](#1464074736) |  Renders the entity with the tile it includes\.  |
-| [RenderEntity\<T\>(T, Texture2D, SpriteEffects, Int32)](#122675233) |  Renders the entity with the tile it includes\.  |
-| [RenderEntity\<T\>(T, Texture2D, SpriteEffects)](#186185740) |  Renders the entity with the tile it includes\.  |
-| [RenderEntity\<T\>(T, Texture2D)](#2638496844) |  Renders the entity with the tile it includes\.  |
+| Method                                                              | Summary                                        |
+| ------------------------------------------------------------------- | ---------------------------------------------- |
+| [RenderEntity\<T\>(T, Texture2D, Int32)](#1464074736)               | Renders the entity with the tile it includes\. |
+| [RenderEntity\<T\>(T, Texture2D, SpriteEffects, Int32)](#122675233) | Renders the entity with the tile it includes\. |
+| [RenderEntity\<T\>(T, Texture2D, SpriteEffects)](#186185740)        | Renders the entity with the tile it includes\. |
+| [RenderEntity\<T\>(T, Texture2D)](#2638496844)                      | Renders the entity with the tile it includes\. |
 
 <a id="1464074736"></a>
 
