@@ -1,5 +1,7 @@
 $version="1.3.0"
 
+dotnet test
+
 dotnet pack ./LDtk/LDtk.csproj -c Release -o ./Nuget/ /p:version=$version
 dotnet pack ./LDtk.Codegen/LDtk.Codegen.csproj -c Release -o ./Nuget/ /p:version=$version
 dotnet pack ./LDtk.ContentPipeline/LDtk.ContentPipeline.csproj -c Release -o ./Nuget/ /p:version=$version
