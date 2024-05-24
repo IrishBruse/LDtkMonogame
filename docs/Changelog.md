@@ -2,6 +2,12 @@
 
 Changelog for versions
 
+## [1.3.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.2.0...v1.3.0)
+
+- Improve errors when invalid flags are set
+- Rename **LDtkRenderer** to **ExampleRenderer** to avoid confusion
+- Fix layer opacity in Example Renderer
+
 ## [1.2.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.1.2...v1.2.0)
 
 -   Upgrade Json to 1.5.4

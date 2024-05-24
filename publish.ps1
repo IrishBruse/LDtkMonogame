@@ -1,4 +1,4 @@
-$version="1.2.0"
+$version="1.3.0"
 
 dotnet pack ./LDtk/LDtk.csproj -c Release -o ./Nuget/ /p:version=$version
 dotnet pack ./LDtk.Codegen/LDtk.Codegen.csproj -c Release -o ./Nuget/ /p:version=$version
