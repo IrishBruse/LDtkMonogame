@@ -69,29 +69,29 @@ public static class Program
             return;
         }
 
-        new ClassGenerator(file).Generate();
-        new EnumGenerator(file).Generate();
-        new IidGenerator(file).Generate();
+        new ClassGenerator(file, opt).Generate();
+        new EnumGenerator(file, opt).Generate();
+        new IidGenerator(file, opt).Generate();
     }
 }
 
 public class Options
 {
     [Option('i', "input", Required = true, HelpText = "Input LDtk file (.ldtk)")]
-    public static string Input { get; set; }
+    public string Input { get; set; }
 
     [Option('o', "output", Required = false, Default = "LDtkTypes/", HelpText = "The output folder")]
-    public static string Output { get; set; }
+    public string Output { get; set; }
 
     [Option('n', "namespace", Required = false, Default = "LDtkTypes", HelpText = "Namespace to put the generated files into")]
-    public static string Namespace { get; set; }
+    public string Namespace { get; set; }
 
     [Option("LevelClassName", Required = false, Default = "LDtkLevelData", HelpText = "The name to give the custom level file")]
-    public static string LevelClassName { get; set; }
+    public string LevelClassName { get; set; }
 
     [Option("PointAsVector2", Required = false, Default = false, HelpText = "Convert any Point fields or Point[] to Vector2 or Vector2[]")]
-    public static bool PointAsVector2 { get; set; }
+    public bool PointAsVector2 { get; set; }
 
     [Option("EntityInterface", Required = false, Default = true, HelpText = "Use the ILDtkEntity interface")]
-    public static bool EntityInterface { get; set; }
+    public bool EntityInterface { get; set; }
 }

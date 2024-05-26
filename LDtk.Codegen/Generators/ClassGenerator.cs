@@ -2,17 +2,17 @@ namespace LDtk.Codegen.Generators;
 
 using LDtk.Codegen;
 
-public class ClassGenerator(LDtkFile ldtkFile) : BaseGenerator
+public class ClassGenerator : BaseGenerator
 {
-    readonly LDtkFile ldtkFile = ldtkFile;
+    public ClassGenerator(LDtkFile ldtkFile, Options options) : base(ldtkFile, options) { }
 
     public void Generate()
     {
         // Level Classes
-        GenClass(Options.LevelClassName, ldtkFile.Defs.LevelFields, string.Empty, false);
+        GenClass(Options.LevelClassName, LDtkFile.Defs.LevelFields, string.Empty, false);
 
         // Entity Classes
-        foreach (EntityDefinition e in ldtkFile.Defs.Entities)
+        foreach (EntityDefinition e in LDtkFile.Defs.Entities)
         {
             GenClass(e.Identifier, e.FieldDefs, "Entities", true);
         }

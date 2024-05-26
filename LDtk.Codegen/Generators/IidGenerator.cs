@@ -1,8 +1,8 @@
 namespace LDtk.Codegen.Generators;
 
-public class IidGenerator(LDtkFile ldtkFile) : BaseGenerator
+public class IidGenerator : BaseGenerator
 {
-    readonly LDtkFile ldtkFile = ldtkFile;
+    public IidGenerator(LDtkFile ldtkFile, Options options) : base(ldtkFile, options) { }
 
     public void Generate()
     {
@@ -13,7 +13,7 @@ public class IidGenerator(LDtkFile ldtkFile) : BaseGenerator
         Line("#pragma warning disable");
         Line("public static class Worlds");
         StartBlock();
-        foreach (LDtkWorld w in ldtkFile.Worlds)
+        foreach (LDtkWorld w in LDtkFile.Worlds)
         {
             Line($"public static class {w.Identifier}");
             StartBlock();

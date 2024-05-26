@@ -1,17 +1,17 @@
 namespace LDtk.Codegen.Generators;
 
-public class EnumGenerator(LDtkFile ldtkFile) : BaseGenerator
+public class EnumGenerator : BaseGenerator
 {
-    readonly LDtkFile ldtkFile = ldtkFile;
+    public EnumGenerator(LDtkFile ldtkFile, Options options) : base(ldtkFile, options) { }
 
     public void Generate()
     {
-        foreach (EnumDefinition e in ldtkFile.Defs.Enums)
+        foreach (EnumDefinition e in LDtkFile.Defs.Enums)
         {
             GenEnum(e);
         }
 
-        foreach (EnumDefinition e in ldtkFile.Defs.ExternalEnums)
+        foreach (EnumDefinition e in LDtkFile.Defs.ExternalEnums)
         {
             GenEnum(e);
         }

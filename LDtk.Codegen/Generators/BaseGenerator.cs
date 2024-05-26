@@ -6,9 +6,13 @@ using System.Text;
 
 using LDtk.Codegen;
 
-public class BaseGenerator
+public class BaseGenerator(LDtkFile ldtkFile, Options options)
 {
+    internal readonly LDtkFile LDtkFile = ldtkFile;
+    internal readonly Options Options = options;
+
     int indent;
+
     StringBuilder FileContents { get; } = new();
 
     public bool Debug { get; protected set; }
