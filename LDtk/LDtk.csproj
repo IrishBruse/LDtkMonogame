@@ -29,8 +29,6 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
 
         <PackageOutputDir>../Nuget/</PackageOutputDir>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>

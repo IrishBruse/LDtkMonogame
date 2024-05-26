@@ -95,7 +95,8 @@ public partial class LDtkWorld
         throw new LDtkException($"No level with index {index} found in this world");
     }
 
-    LDtkLevel LoadLevel(LDtkLevel rawLevel)
+    /// <summary> Get the level with an index. </summary>
+    public LDtkLevel LoadLevel(LDtkLevel rawLevel)
     {
         if (rawLevel.ExternalRelPath == null)
         {
