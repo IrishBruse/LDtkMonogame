@@ -1,6 +1,9 @@
-$version="1.3.0"
+$version="1.3.1"
 
 dotnet test
+
+Write-Host -NoNewLine 'Press any key to continue...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
 dotnet pack ./LDtk/LDtk.csproj -c Release -o ./Nuget/ /p:version=$version
 dotnet pack ./LDtk.Codegen/LDtk.Codegen.csproj -c Release -o ./Nuget/ /p:version=$version
