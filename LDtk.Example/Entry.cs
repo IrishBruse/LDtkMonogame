@@ -8,7 +8,7 @@ using LDtk.Renderer;
 
 using LDtkMonogameExample.Entities;
 
-using LDtkTypes.World;
+using LDtkTypes;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -78,13 +78,13 @@ public class Entry : Game
         camera = new Camera(GraphicsDevice);
 
         // renderer = new ExampleRenderer(spriteBatch, Content);
-        // file = LDtkFile.FromFile("Test/World", Content);
+        // file = LDtkFile.FromFile("World", Content);
         // spriteSheet = Content.Load<Texture2D>("Characters");
 
         // None ContentManager version
         renderer = new ExampleRenderer(spriteBatch);
-        file = LDtkFile.FromFile("Content/Test/World.ldtk");
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "../Characters.png"));
+        file = LDtkFile.FromFile("Content/World.ldtk");
+        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 
         world = file.LoadWorld(Worlds.World.Iid);
 
@@ -105,14 +105,16 @@ public class Entry : Game
 
         RefTest test = level0.GetEntityRef<RefTest>(entities[0].Test);
 
-        foreach (LDtkLevel level in world.Levels)
+        for (int i = 0; i < world.Levels.Length; i++)
         {
-            foreach (Enemy enemy in level.GetEntities<Enemy>())
+            world.Levels[i] = world.LoadLevel(world.Levels[i].Iid);
+
+            foreach (Enemy enemy in world.Levels[i].GetEntities<Enemy>())
             {
                 enemies.Add(new EnemyEntity(enemy, spriteSheet, renderer));
             }
 
-            _ = renderer.PrerenderLevel(level);
+            _ = renderer.PrerenderLevel(world.Levels[i]);
         }
 
         Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();

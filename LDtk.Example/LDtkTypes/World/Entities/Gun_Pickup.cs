@@ -1,12 +1,12 @@
+namespace LDtkTypes;
+
 // This file was automatically generated, any modifications will be lost!
 #pragma warning disable
-namespace LDtkTypes.World;
 
 using LDtk;
-
 using Microsoft.Xna.Framework;
 
-public class Gun_Pickup : ILDtkEntity
+public partial class Gun_Pickup : ILDtkEntity
 {
     public string Identifier { get; set; }
     public System.Guid Iid { get; set; }

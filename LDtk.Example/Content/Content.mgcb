@@ -36,9 +36,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Test/Atlas/Tilemap.png
+/build:Atlas/Tilemap.png
 
 #begin World.ldtk
 /importer:LDtkFileImporter
 /processor:LDtkFileProcessor
-/build:Test/World.ldtk
+/build:World.ldtk

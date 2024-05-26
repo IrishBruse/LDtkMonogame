@@ -9,7 +9,7 @@ using LDtk.Renderer;
 using LDtkMonogameExample;
 using LDtkMonogameExample.AABB;
 
-using LDtkTypes.World;
+using LDtkTypes;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

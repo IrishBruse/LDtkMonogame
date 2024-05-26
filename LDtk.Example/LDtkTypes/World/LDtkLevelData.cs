@@ -6,7 +6,7 @@ namespace LDtkTypes;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-public partial class CustomLevelDataName
+public partial class LDtkLevelData
 {
     public float Float { get; set; }
     public TilesetRectangle[] Tile { get; set; }
