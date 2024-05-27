@@ -1,22 +1,20 @@
 namespace LDtk;
 
-using System;
-
 using Microsoft.Xna.Framework;
 
 /// <summary> LDtk IntGrid. </summary>
 public class LDtkIntGrid
 {
-    /// <summary> Gets or sets size of a tile in pixels. </summary>
+    /// <summary> Gets or sets the size of a tile in pixels. </summary>
     public int TileSize { get; set; }
 
     /// <summary> Gets or sets the underlying values of the int grid. </summary>
     public int[] Values { get; set; } = [];
 
-    /// <summary> Gets or sets worldspace start Position of the intgrid. </summary>
+    /// <summary> Gets or sets the worldspace start Position of the int grid. </summary>
     public Point WorldPosition { get; set; }
 
-    /// <summary> Gets or sets worldspace start Position of the intgrid. </summary>
+    /// <summary> Gets or sets the size of the int grid in tiles. </summary>
     public Point GridSize { get; set; }
 
     /// <summary>
@@ -68,8 +66,15 @@ public class LDtkIntGrid
     /// <summary> Convert from world pixel space to int grid space Floors the value based on <see cref="TileSize"/> to an Integer. </summary>
     public Point FromWorldToGridSpace(Vector2 position)
     {
-        int x = (int)Math.Floor(position.X / TileSize);
-        int y = (int)Math.Floor(position.Y / TileSize);
-        return new Point(x, y);
+        position -= WorldPosition.ToVector2(); // Convert from world space to local space.
+        position /= TileSize; // Covert from local space to grid space.
+        position.Floor();
+        return position.ToPoint();
+    }
+
+    /// <summary> Convert from world pixel space to int grid space. Floors the value based on <see cref="TileSize"/> to an Integer. </summary>
+    public Point FromWorldToGridSpace(Point position)
+    {
+        return FromWorldToGridSpace(position.ToVector2());
     }
 }
