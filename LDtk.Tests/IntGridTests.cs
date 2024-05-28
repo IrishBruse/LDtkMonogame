@@ -14,14 +14,14 @@ public class IntGridTests
     [InlineData(15.00f, 15.00f, 1, 1)]
     public void FromWorldToGridSpaceVector2(float worldX, float worldY, int expectedGridSpaceX = 0, int expectedGridSpaceY = 0)
     {
-        var intGrid = new LDtkIntGrid()
+        LDtkIntGrid intGrid = new()
         {
             WorldPosition = new Point(-1, -1),
             TileSize = 16
         };
 
-        Vector2 positionInWorld = new Vector2(worldX, worldY);
-        Point expectedPositionInGridSpace = new Point(expectedGridSpaceX, expectedGridSpaceY);
+        Vector2 positionInWorld = new(worldX, worldY);
+        Point expectedPositionInGridSpace = new(expectedGridSpaceX, expectedGridSpaceY);
         Assert.Equal(intGrid.FromWorldToGridSpace(positionInWorld), expectedPositionInGridSpace);
     }
 
@@ -33,14 +33,14 @@ public class IntGridTests
     [InlineData(15, 15, 1, 1)]
     public void FromWorldToGridSpacePoint(int worldX, int worldY, int expectedGridSpaceX = 0, int expectedGridSpaceY = 0)
     {
-        var intGrid = new LDtkIntGrid()
+        LDtkIntGrid intGrid = new()
         {
             WorldPosition = new Point(-1, -1),
             TileSize = 16
         };
 
-        Point positionInWorld = new Point(worldX, worldY);
-        Point expectedPositionInGridSpace = new Point(expectedGridSpaceX, expectedGridSpaceY);
+        Point positionInWorld = new(worldX, worldY);
+        Point expectedPositionInGridSpace = new(expectedGridSpaceX, expectedGridSpaceY);
         Assert.Equal(intGrid.FromWorldToGridSpace(positionInWorld), expectedPositionInGridSpace);
     }
 
@@ -51,7 +51,7 @@ public class IntGridTests
     [InlineData(-1, -1, false)]
     public void ContainsPoint(int x, int y, bool isPointInGrid)
     {
-        var intGrid = new LDtkIntGrid()
+        LDtkIntGrid intGrid = new()
         {
             GridSize = new Point(2, 2)
         };
@@ -66,7 +66,7 @@ public class IntGridTests
     [InlineData(-.01f, -.01f, false)]
     public void ContainsVector2(float x, float y, bool isPointInGrid)
     {
-        var intGrid = new LDtkIntGrid()
+        LDtkIntGrid intGrid = new()
         {
             GridSize = new Point(2, 2)
         };

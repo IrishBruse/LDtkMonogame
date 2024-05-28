@@ -2,10 +2,8 @@ namespace LDtk.Codegen.Generators;
 
 using LDtk.Codegen;
 
-public class ClassGenerator : BaseGenerator
+public class ClassGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator(ldtkFile, options)
 {
-    public ClassGenerator(LDtkFile ldtkFile, Options options) : base(ldtkFile, options) { }
-
     public void Generate()
     {
         // Level Classes

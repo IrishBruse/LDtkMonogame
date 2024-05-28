@@ -25,7 +25,7 @@ public partial class LDtkFile
 
     /// <summary> An array containing various advanced flags (ie. options or other states). </summary>
     [JsonPropertyName("flags")]
-    public string[] Flags { get; set; }
+    public string[]? Flags { get; set; }
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
@@ -75,6 +75,11 @@ public partial class LDtkFile
         if (Version.Parse(file.JsonVersion) < Version.Parse(Constants.SupportedLDtkVersion))
         {
             throw new LDtkException("LDtk file version is not supported. Please update your LDtk version.");
+        }
+
+        if (file.Flags == null)
+        {
+            throw new LDtkException("LDtk file is missing required flags. Please enable them in the ldtk file flags in the UI.");
         }
 
         if (!file.Flags.Contains("MultiWorlds"))
