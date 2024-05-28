@@ -141,8 +141,8 @@ public class PlayerEntity
     {
         grounded = false;
         LDtkIntGrid collisions = level.GetIntGrid("Tiles");
-        Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + (velocity * deltaTime)) - level.Position.ToVector2();
-        Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + (velocity * deltaTime)) - level.Position.ToVector2();
+        Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + (velocity * deltaTime));
+        Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + (velocity * deltaTime));
 
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
         Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
