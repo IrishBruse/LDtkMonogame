@@ -37,7 +37,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore "${{github.workspace}}/${{matrix.project}}"
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ${{github.workspace}}/Nuget --no-restore --include-source "${{github.workspace}}/${{matrix.project}}"
+        run: dotnet pack --configuration Release --no-build --output ${{github.workspace}}/Nuget --no-restore --include-source "${{github.workspace}}/${{matrix.project}}" /p:version=${{inputs.version}}
 
       - name: Publish to Nuget
         run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} ${{github.workspace}}/Nuget/*.nupkg --skip-duplicate
