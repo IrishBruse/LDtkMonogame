@@ -6,9 +6,14 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <LangVersion>latest</LangVersion>
         <AssemblyName>LDtkMonogame</AssemblyName>
-        <NoWarn>CS0618,IDE0130</NoWarn>
+        <NoWarn>CS1591</NoWarn>
         <ImplicitUsings>false</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <DebugType>embedded</DebugType>
+
+        <!-- TODO: <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+        <AnalysisLevel>latest</AnalysisLevel> -->
     </PropertyGroup>
 
     <PropertyGroup>

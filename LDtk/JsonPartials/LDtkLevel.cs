@@ -68,7 +68,7 @@ public partial class LDtkLevel
     /// <param name="content">The optional content manager if you are using the content pipeline.</param>
     public static LDtkLevel? FromFile(string filePath, ContentManager content)
     {
-        LDtkLevel? file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", string.Empty));
+        LDtkLevel? file = content.Load<LDtkLevel>(filePath.Replace(".ldtkl", string.Empty, StringComparison.CurrentCultureIgnoreCase));
         if (file != null)
         {
             file.FilePath = Path.GetFullPath(filePath);

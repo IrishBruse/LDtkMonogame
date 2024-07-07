@@ -105,11 +105,11 @@ public class ExampleRenderer : IDisposable
         {
             if (level.ExternalRelPath != null)
             {
-                throw new Exception("Level has not been loaded.");
+                throw new LDtkException("Level has not been loaded.");
             }
             else
             {
-                throw new Exception("Level has no layers.");
+                throw new LDtkException("Level has no layers.");
             }
         }
 
@@ -168,7 +168,7 @@ public class ExampleRenderer : IDisposable
         return layers.ToArray();
     }
 
-    Texture2D RenderBackgroundToLayer(LDtkLevel level)
+    RenderTarget2D RenderBackgroundToLayer(LDtkLevel level)
     {
         Texture2D texture = GetTexture(level, level.BgRelPath);
 

@@ -90,11 +90,15 @@ dotnet_diagnostic.CA1819.severity = none                # Properties should not 
 dotnet_diagnostic.CA2213.severity = none                # Disposable fields should be disposed
 dotnet_diagnostic.IDE0005.severity = suggestion         # Remove unnecessary using directives
 dotnet_diagnostic.IDE0305.severity = none               # replace .ToArray()
-dotnet_diagnostic.IDE0051.severity = refactoring               # remove unused code
+dotnet_diagnostic.IDE0051.severity = refactoring        # remove unused code
 
 dotnet_diagnostic.IDE0047.severity = suggestion         # Parentheses preferences
 dotnet_diagnostic.IDE0048.severity = suggestion         # Parentheses preferences
 dotnet_diagnostic.IDE0058.severity = refactoring        # Remove unnecessary expression value
+
+dotnet_diagnostic.CA1707.severity = none                # remove _ from private fields
+dotnet_diagnostic.CS1591.severity = none        # Remove unnecessary expression value
+dotnet_diagnostic.CA1307.severity = none        # Remove unnecessary expression value
 
 # Unused element in a documentation comment
 dotnet_diagnostic.rcs1228.severity = none

@@ -1,0 +1,43 @@
+name: Pull Request
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version"
+        required: true
+        default: "1.X.X"
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        project:
+          - "${{github.workspace}}/LDtk/LDtk.csproj"
+          - "${{github.workspace}}/LDtk.Codegen/LDtk.Codegen.csproj"
+          - "${{github.workspace}}/LDtk.ContentPipeline/LDtk.ContentPipeline.csproj"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup dotnet 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore ${{matrix.project}}
+
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ${{github.workspace}}/Nuget --no-restore --include-source ${{matrix.project}}
+
+      - name: Publish to Nuget
+        run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} ${{matrix.project}}
