@@ -1,9 +1,3 @@
 {
-    "[html]": {
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "dotnet.defaultSolution": "LDtkMonogame.sln",
 }

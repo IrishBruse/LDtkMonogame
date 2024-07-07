@@ -80,7 +80,7 @@ spriteBatch.End();
 
 ## Unnamed
 
-![screenshot](https://img.itch.zone/aW1nLzEzNjQ1MTM5LnBuZw==/original/yOAqCD.png)
+![screenshot](https://raw.githubusercontent.com/IrishBruse/LDtkMonogame/main/docs/Unnamed.png)
 
 > by Fypur
 
