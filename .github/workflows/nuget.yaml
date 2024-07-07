@@ -17,9 +17,9 @@ jobs:
     strategy:
       matrix:
         project:
-          - "${{github.workspace}}/LDtk/LDtk.csproj"
-          - "${{github.workspace}}/LDtk.Codegen/LDtk.Codegen.csproj"
-          - "${{github.workspace}}/LDtk.ContentPipeline/LDtk.ContentPipeline.csproj"
+          - "LDtk/LDtk.csproj"
+          - "LDtk.Codegen/LDtk.Codegen.csproj"
+          - "LDtk.ContentPipeline/LDtk.ContentPipeline.csproj"
     runs-on: ubuntu-latest
 
     steps:
@@ -34,10 +34,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore ${{matrix.project}}
+        run: dotnet build --configuration Release --no-restore "${{github.workspace}}/${{matrix.project}}"
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ${{github.workspace}}/Nuget --no-restore --include-source ${{matrix.project}}
+        run: dotnet pack --configuration Release --no-build --output ${{github.workspace}}/Nuget --no-restore --include-source "${{github.workspace}}/${{matrix.project}}"
 
       - name: Publish to Nuget
         run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} ${{matrix.project}}
