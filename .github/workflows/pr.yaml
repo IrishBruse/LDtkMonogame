@@ -25,10 +25,10 @@ jobs:
         run: dotnet tool restore
 
       - name: Build ContentPipeline
-        run: dotnet build --configuration Debug --no-restore ${{github.workspace}}/LDtk.ContentPipeline/LDtk.ContentPipeline.csproj
+        run: dotnet build --no-restore ${{github.workspace}}/LDtk.ContentPipeline/LDtk.ContentPipeline.csproj
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --no-restore
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
