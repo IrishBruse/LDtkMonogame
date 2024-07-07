@@ -41,3 +41,13 @@ jobs:
 
       - name: Publish to Nuget
         run: dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_API_KEY}} ${{github.workspace}}/Nuget/*.nupkg --skip-duplicate
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
+        run: |
+          gh release create "v${{inputs.version}}" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="v${{inputs.version}}" \
+              --generate-notes
