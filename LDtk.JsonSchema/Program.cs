@@ -11,7 +11,7 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-public static class Program
+public static partial class Program
 {
     const string MinSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/MINIMAL_JSON_SCHEMA.json";
     const string FullSchema = "https://raw.githubusercontent.com/deepnight/ldtk/master/docs/JSON_SCHEMA.json";
@@ -77,16 +77,6 @@ public static class Program
 
         string json = "";
 
-        string[] ignoreClasses = {
-            "FieldDefinition",
-            "AutoRuleDef",
-        };
-
-        string[] ignoreFields = {
-            "_FORCED_REFS",
-            "LevelFields"
-        };
-
         if (!File.Exists("MinSchema.json"))
         {
             json = await wc.GetStringAsync(MinSchema);
@@ -96,6 +86,17 @@ public static class Program
         {
             json = File.ReadAllText("MinSchema.json");
         }
+
+        string[] ignoreClasses = {
+            "FieldDefinition",
+            "AutoRuleDef",
+        };
+
+        string[] ignoreFields = {
+            "_FORCED_REFS",
+            "LevelFields",
+        };
+
         ParseJson(json, "LDtk", "../LDtk/LDtkJson.cs", ignoreClasses, ignoreFields);
 
         if (!File.Exists("FullSchema.json"))
@@ -107,7 +108,7 @@ public static class Program
         {
             json = File.ReadAllText("FullSchema.json");
         }
-        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", new[] { "" }, new[] { "__FORCED_REFS" });
+        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", [], ["__FORCED_REFS"]);
 
         return 0;
     }
@@ -183,6 +184,7 @@ public static class Program
         return node;
     }
 
+    static JsonSerializerOptions jsonSerializerOptions = new() { PropertyNameCaseInsensitive = true };
     static void CreateClass(string className, JsonNode node, StreamWriter file, string[] ignoreFields)
     {
         string doc = (string)node["description"] ?? (string)node["title"];
@@ -190,8 +192,7 @@ public static class Program
         file.WriteLine($"public partial class {className}");
         file.WriteLine("{");
 
-        JsonSerializerOptions options = new() { PropertyNameCaseInsensitive = true };
-        var properties = node["properties"].Deserialize<Dictionary<string, Property>>(options).OrderBy(v => ToCSharpName(v.Key).TrimStart('_'));
+        var properties = node["properties"].Deserialize<Dictionary<string, Property>>(jsonSerializerOptions).OrderBy(v => ToCSharpName(v.Key).TrimStart('_'));
 
         bool start = false;
 
@@ -406,8 +407,13 @@ public static class Program
         .Replace("`<`", "&lt;")
         .Replace("`>`", "&gt;");
 
-        return Regex.Replace(Regex.Replace(documentation, "\\*\\*(.+?)\\*\\*", "<b>$1</b>"), "`(.+?)`", "<c>$1</c>");
+        return MyRegex().Replace(MyRegex1().Replace(documentation, "<b>$1</b>"), "<c>$1</c>");
     }
+
+    [GeneratedRegex("`(.+?)`")]
+    private static partial Regex MyRegex();
+    [GeneratedRegex("\\*\\*(.+?)\\*\\*")]
+    private static partial Regex MyRegex1();
 }
 
 class Property

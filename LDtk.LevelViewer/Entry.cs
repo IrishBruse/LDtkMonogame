@@ -60,7 +60,7 @@ public class Entry : Game
         MonogameInitialize();
 
         renderer = new ExampleRenderer(spriteBatch);
-        file = LDtkFile.FromFile("c:/Users/Econn/AppData/Local/Programs/ldtk/extraFiles/samples/Typical_2D_platformer_example.ldtk");
+        file = LDtkFile.FromFile("./Typical_2D_platformer_example.ldtk");
 
         world = file.LoadSingleWorld();
 

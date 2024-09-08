@@ -24,7 +24,7 @@ We have the dll cached to the harddrive you can now go and locate the dll we wil
 It should be located here.
 
 ```sh
-C:/Users/<USERNAME>/.nuget/packages/ldtkmonogame.contentpipeline/<VERSION>/lib/net6.0
+C:/Users/<USERNAME>/.nuget/packages/ldtkmonogame.contentpipeline/<VERSION>/lib/net8.0
 ```
 
 Where `<USERNAME>` is your username on your machine and `<VERSION>` is the latest version of the contentpipeline nuget package as of right now.
@@ -34,7 +34,7 @@ Now with that path you can paste it into your content.mgcb here is what i did in
 ```sh
 #-------------------------------- References --------------------------------#
 
-/reference:C:/Users/IrishBruse/.nuget/packages/ldtkmonogame.contentpipeline/1.0.0/lib/net6.0/LDtk.ContentPipeline.dll
+/reference:C:/Users/IrishBruse/.nuget/packages/ldtkmonogame.contentpipeline/1.0.0/lib/net8.0/LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 ```

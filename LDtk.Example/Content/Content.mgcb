@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:../../LDtk.ContentPipeline/bin/Debug/net6.0/LDtk.ContentPipeline.dll
+/reference:../../LDtk.ContentPipeline/bin/Debug/net8.0/LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
