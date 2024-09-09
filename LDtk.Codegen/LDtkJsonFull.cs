@@ -7,6 +7,7 @@ namespace LDtk.Codegen;
 
 using System;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 
 using Microsoft.Xna.Framework;
 
@@ -839,7 +840,7 @@ public partial class FieldInstance
 
     /// <summary> Actual value of the field instance. The value type varies, depending on <c>__type</c>:<br/>   - For <b>classic types</b> (ie. Integer, Float, Boolean, String, Text and FilePath), you just get the actual value with the expected type.<br/>   - For <b>Color</b>, the value is an hexadecimal string using "#rrggbb" format.<br/>   - For <b>Enum</b>, the value is a String representing the selected enum value.<br/>   - For <b>Point</b>, the value is a [GridPoint](#ldtk-GridPoint) object.<br/>   - For <b>Tile</b>, the value is a [TilesetRect](#ldtk-TilesetRect) object.<br/>   - For <b>EntityRef</b>, the value is an [EntityReferenceInfos](#ldtk-EntityReferenceInfos) object.<br/><br/>  If the field is an array, then this <c>__value</c> will also be a JSON array. </summary>
     [JsonPropertyName("__value")]
-    public object _Value { get; set; }
+    public JsonElement _Value { get; set; }
 }
 
 /// <summary> This object is just a grid-based coordinate used in Field values. </summary>

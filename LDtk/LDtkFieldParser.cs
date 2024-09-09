@@ -67,26 +67,26 @@ static class LDtkFieldParser
                 throw new LDtkException($"Field {variableName} does not exist on {typeof(T).Name}");
             }
 
-            if (field._Value == null)
+            if (field._Value.ValueKind == JsonValueKind.Null)
             {
                 continue;
             }
 
-            JsonElement element = (JsonElement)field._Value;
+            JsonElement value = field._Value;
 
             if (level != null && field._Type.Contains(Field.PointType))
             {
-                HandlePoints(classFields, level, field, variableDef, element);
+                HandlePoints(classFields, level, field, variableDef, value);
             }
             else
             {
-                switch (element.ValueKind)
+                switch (value.ValueKind)
                 {
                     case JsonValueKind.Object:
                     case JsonValueKind.Array:
                     case JsonValueKind.Number:
                     Type returnType = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
-                    variableDef.SetValue(classFields, JsonSerializer.Deserialize(element.ToString(), returnType, Constants.SerializeOptions));
+                    variableDef.SetValue(classFields, JsonSerializer.Deserialize(value.ToString(), returnType, Constants.SerializeOptions));
                     break;
 
                     case JsonValueKind.String:
@@ -96,7 +96,7 @@ static class LDtkFieldParser
 
                     if (isEnum)
                     {
-                        variableDef.SetValue(classFields, Enum.Parse(t, element.ToString()));
+                        variableDef.SetValue(classFields, Enum.Parse(t, value.ToString()));
                     }
                     else if (isColor)
                     {
@@ -104,7 +104,7 @@ static class LDtkFieldParser
                     }
                     else
                     {
-                        variableDef.SetValue(classFields, element.ToString());
+                        variableDef.SetValue(classFields, value.ToString());
                     }
 
                     break;

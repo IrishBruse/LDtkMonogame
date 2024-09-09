@@ -19,6 +19,7 @@ public static partial class Program
     static readonly string[] Namespaces = {
         "using System;",
         "using System.Text.Json.Serialization;",
+        "using System.Text.Json;",
         "",
         "using Microsoft.Xna.Framework;",
     };
@@ -50,6 +51,7 @@ public static partial class Program
         }},
         {"FieldInstance", new() {
             {"RealEditorValues","object[]"},
+            {"_Value",       "JsonElement"},
         }},
         {"EntityDefinition", new() {
             {"Color",       "Color"},

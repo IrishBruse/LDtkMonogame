@@ -1,12 +1,13 @@
 namespace LDtk;
 
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
 /// <summary> The json source generator for LDtk files. </summary>
 [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
-[JsonSerializable(typeof(object))]
+[JsonSerializable(typeof(JsonElement))]
 [JsonSerializable(typeof(bool))]
 [JsonSerializable(typeof(bool[]))]
 [JsonSerializable(typeof(float))]
