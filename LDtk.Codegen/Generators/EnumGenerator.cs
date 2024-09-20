@@ -1,6 +1,8 @@
 namespace LDtk.Codegen.Generators;
 
-public class EnumGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator(ldtkFile, options)
+using LDtk.Full;
+
+public class EnumGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenerator(ldtkFile, options)
 {
     public void Generate()
     {

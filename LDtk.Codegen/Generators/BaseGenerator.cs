@@ -5,10 +5,11 @@ using System.IO;
 using System.Text;
 
 using LDtk.Codegen;
+using LDtk.Full;
 
-public class BaseGenerator(LDtkFile ldtkFile, Options options)
+public class BaseGenerator(LDtkFileFull ldtkFile, Options options)
 {
-    internal readonly LDtkFile LDtkFile = ldtkFile;
+    internal readonly LDtkFileFull LDtkFile = ldtkFile;
     internal readonly Options Options = options;
 
     int indent;

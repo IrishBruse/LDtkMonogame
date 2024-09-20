@@ -23,9 +23,9 @@ public partial class LDtkFile
     [JsonIgnore]
     public ContentManager? Content { get; set; }
 
-    /// <summary> An array containing various advanced flags (ie. options or other states). </summary>
+    /// <summary> An array containing various advanced flags (ie. options or other states). Possible values: <c>DiscardPreCsvIntGrid</c>, <c>ExportOldTableOfContentData</c>, <c>ExportPreCsvIntGridFormat</c>, <c>IgnoreBackupSuggest</c>, <c>PrependIndexToLevelFileNames</c>, <c>MultiWorlds</c>, <c>UseMultilinesType</c> </summary>
     [JsonPropertyName("flags")]
-    public string[]? Flags { get; set; }
+    public Flag[]? Flags { get; set; }
 
     /// <summary> Loads the ldtk world file from disk directly using json source generator. </summary>
     /// <param name="filePath"> Path to the .ldtk file. </param>
@@ -82,7 +82,7 @@ public partial class LDtkFile
             throw new LDtkException("LDtk file is missing required flags. Please enable them in the ldtk file flags in the UI.");
         }
 
-        if (!file.Flags.Contains("MultiWorlds"))
+        if (!file.Flags.Contains(Flag.MultiWorlds))
         {
             throw new LDtkException("LDtk file is not a multiworld file. Please enable MultiWorlds in the ldtk file flags.");
         }
@@ -151,3 +151,6 @@ public partial class LDtkFile
         throw new LDtkException($"No EntityRef of type {typeof(T).Name} found in this level");
     }
 }
+
+/// <summary> An array containing various advanced flags (ie. options or other states). Possible values: <c>DiscardPreCsvIntGrid</c>, <c>ExportOldTableOfContentData</c>, <c>ExportPreCsvIntGridFormat</c>, <c>IgnoreBackupSuggest</c>, <c>PrependIndexToLevelFileNames</c>, <c>MultiWorlds</c>, <c>UseMultilinesType</c> </summary>
+public enum Flag { DiscardPreCsvIntGrid, ExportOldTableOfContentData, ExportPreCsvIntGridFormat, IgnoreBackupSuggest, PrependIndexToLevelFileNames, MultiWorlds, UseMultilinesType, }

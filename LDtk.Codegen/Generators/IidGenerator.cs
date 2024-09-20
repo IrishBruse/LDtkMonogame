@@ -1,6 +1,8 @@
 namespace LDtk.Codegen.Generators;
 
-public class IidGenerator(LDtkFile ldtkFile, Options options) : BaseGenerator(ldtkFile, options)
+using LDtk.Full;
+
+public class IidGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenerator(ldtkFile, options)
 {
     public void Generate()
     {

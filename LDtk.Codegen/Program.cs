@@ -6,8 +6,8 @@ using System.Linq;
 
 using CommandLine;
 
-using LDtk;
 using LDtk.Codegen.Generators;
+using LDtk.Full;
 
 public static class Program
 {
@@ -30,10 +30,9 @@ public static class Program
 
     static void Run(Options opt)
     {
-        Console.WriteLine(opt);
         Options = opt;
 
-        LDtkFile file = LDtkFile.FromFile(Options.Input);
+        LDtkFileFull file = LDtkFileFull.FromFile(Options.Input);
 
         if (Version.Parse(file.JsonVersion) > Version.Parse(Constants.SupportedLDtkVersion))
         {

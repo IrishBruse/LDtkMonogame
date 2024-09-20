@@ -2,7 +2,13 @@
 
 Changelog for versions
 
-## [1.4.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.3.1...v1.3.2)
+## [1.5.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.4.0...v1.5.0)
+
+-   Moved LDtkFileFull into LDtk package which conatins alot of editor specific fields used mainly by codegen
+-
+-   Fixed Codegen bug
+
+## [1.4.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.3.1...v1.4.0)
 
 -   Update MonoGame v3.8.2 and Dotnet 8
 

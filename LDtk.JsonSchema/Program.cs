@@ -99,7 +99,7 @@ public static partial class Program
             "LevelFields",
         };
 
-        ParseJson(json, "LDtk", "../LDtk/LDtkJson.cs", ignoreClasses, ignoreFields);
+        ParseJson(json, "LDtk", "LDtkFile", "../LDtk/LDtkJson.cs", ignoreClasses, ignoreFields);
 
         if (!File.Exists("FullSchema.json"))
         {
@@ -110,12 +110,12 @@ public static partial class Program
         {
             json = File.ReadAllText("FullSchema.json");
         }
-        ParseJson(json, "LDtk.Codegen", "../LDtk.Codegen/LDtkJsonFull.cs", [], ["__FORCED_REFS"]);
+        ParseJson(json, "LDtk.Full", "LDtkFileFull", "../LDtk/Full/LDtkJsonFull.cs", [], ["__FORCED_REFS"]);
 
         return 0;
     }
 
-    static void ParseJson(string json, string ns, string output, string[] ignoreClasses, string[] ignoreFields)
+    static void ParseJson(string json, string ns, string className, string output, string[] ignoreClasses, string[] ignoreFields)
     {
         using StreamWriter file = new(output);
 
@@ -134,7 +134,7 @@ public static partial class Program
         file.WriteLine(string.Join(Environment.NewLine, Namespaces));
         file.WriteLine();
 
-        CreateClass("LDtkFile", rootClass, file, ignoreFields);
+        CreateClass(className, rootClass, file, ignoreFields);
 
         foreach ((string key, JsonNode type) in root["otherTypes"].AsObject().OrderBy(x => ToCSharpName(x.Key).TrimStart('_')))
         {
@@ -402,6 +402,7 @@ public static partial class Program
     {
         string documentation = doc
         .Replace(" the the ", " the ")// Temp Fix already fixed for next update
+        .Replace(" & ", " &amp; ")
         .Replace("<...>", "&lt;...&gt;")
         .Replace("<Int>", "&lt;Int&gt;")
         .Replace("<Point>", "&lt;Point&gt;")

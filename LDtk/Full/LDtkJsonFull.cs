@@ -1,4 +1,4 @@
-namespace LDtk.Codegen;
+namespace LDtk.Full;
 
 #nullable disable
 #pragma warning disable CS8618, CS1591, CS8632, IDE1006
@@ -6,13 +6,13 @@ namespace LDtk.Codegen;
 // LDtk 1.5.3
 
 using System;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
 /// <summary> This is the root of any Project JSON file. It contains:  - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users). </summary>
-public partial class LDtkFile
+public partial class LDtkFileFull
 {
     /// <summary> LDtk application build identifier.<br/>  This is only used to identify the LDtk version that generated this particular project file, which can be useful for specific bug fixing. Note that the build identifier is just the date of the release, so it's not unique to each user (one single global ID per LDtk public release), and as a result, completely anonymous. </summary>
     [JsonPropertyName("appBuildId")]
@@ -32,7 +32,7 @@ public partial class LDtkFile
 
     /// <summary> Project background color </summary>
     [JsonPropertyName("bgColor")]
-    public Color BgColor { get; set; }
+    public string BgColor { get; set; }
 
     /// <summary> An array of command lines that can be ran manually by the user </summary>
     [JsonPropertyName("customCommands")]
@@ -138,7 +138,7 @@ public partial class LDtkFile
     [JsonPropertyName("pngFilePattern")]
     public string? PngFilePattern { get; set; }
 
-    /// <summary> If TRUE, a very simplified will be generated on saving, for quicker & easier engine integration. </summary>
+    /// <summary> If TRUE, a very simplified will be generated on saving, for quicker &amp; easier engine integration. </summary>
     [JsonPropertyName("simplifiedExport")]
     public bool SimplifiedExport { get; set; }
 
@@ -282,7 +282,7 @@ public partial class AutoRuleDef
     [JsonPropertyName("pivotY")]
     public float PivotY { get; set; }
 
-    /// <summary> Pattern width & height. Should only be 1,3,5 or 7. </summary>
+    /// <summary> Pattern width &amp; height. Should only be 1,3,5 or 7. </summary>
     [JsonPropertyName("size")]
     public int Size { get; set; }
 

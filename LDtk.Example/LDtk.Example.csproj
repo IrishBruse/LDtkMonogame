@@ -20,6 +20,10 @@
         <Content Include="Content/World.ldtk" CopyToOutputDirectory="Always"/>
     </ItemGroup> -->
 
+    <Target Name="Codegen" BeforeTargets="BeforeBuild">
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i Content/World.ldtk -o ./LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2" />
+    </Target>
+
     <ItemGroup>
         <MonoGameContentReference Include="Content\Content.mgcb" />
         <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.2.1105" />

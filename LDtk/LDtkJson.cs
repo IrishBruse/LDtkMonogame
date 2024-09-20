@@ -6,8 +6,8 @@ namespace LDtk;
 // LDtk 1.5.3
 
 using System;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
