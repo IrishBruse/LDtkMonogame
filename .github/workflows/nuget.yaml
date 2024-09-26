@@ -8,7 +8,7 @@ on:
       version:
         description: "Version"
         required: true
-        default: "1.0.0-beta"
+        default: ${git describe --abbrev=0}
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
@@ -56,4 +56,5 @@ jobs:
           gh release create "v${{inputs.version}}" \
               --repo="$GITHUB_REPOSITORY" \
               --title="v${{inputs.version}}" \
+              --notes="https://ldtk.ethanconneely.com/Changelog"
               --generate-notes
