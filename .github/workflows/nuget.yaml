@@ -1,13 +1,14 @@
 name: Nuget Release
 
+run-name: Release ${{inputs.version}}
+
 on:
   workflow_dispatch:
     inputs:
       version:
         description: "Version"
         required: true
-        default: "1.X.X"
-
+        default: "1.0.0-beta"
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
