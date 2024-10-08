@@ -2,10 +2,13 @@ namespace LDtk;
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json;
-
+using Full;
 using Microsoft.Xna.Framework;
+
+using Type = System.Type;
 
 /// <summary> Utility for parsing ldtk json data into more typed versions. </summary>
 static class LDtkFieldParser
@@ -30,6 +33,17 @@ static class LDtkFieldParser
     {
         ParseCustomFields(entity, fields, level);
     }
+    
+    /// <summary> Parses the custom fields. </summary>
+    /// <typeparam name="T"> Generic type parameter. </typeparam>
+    /// <param name="entity"> The entity. </param>
+    /// <param name="fields"> The fields. </param>
+    /// <param name="level"> The level. </param>
+    public static void ParseCustomEntityFieldDefinitions<T>(T entity, FieldDefinition[] fields)
+        where T : new()
+    {
+        ParseCustomFieldDefinitions(entity, fields);
+    }
 
     /// <summary> Parses the base entity fields. </summary>
     /// <typeparam name="T"> Generic type parameter. </typeparam>
@@ -50,6 +64,29 @@ static class LDtkFieldParser
         if (entityInstance._Tile != null)
         {
             TilesetRectangle tileDefinition = entityInstance._Tile;
+            Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
+            ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
+        }
+    }
+    
+    /// <summary>
+    /// Parse base entity field definitions
+    /// </summary>
+    /// <param name="entity">the entity</param>
+    /// <param name="entityDefinition">entity definition</param>
+    /// <typeparam name="T">The generic type</typeparam>
+    public static void ParseBaseEntityFieldDefinitions<T>(T entity, EntityDefinition entityDefinition)
+        where T : new()
+    {
+        ParseBaseField(entity, nameof(ILDtkEntity.Uid), entityDefinition.Uid);
+        ParseBaseField(entity, nameof(ILDtkEntity.Identifier), entityDefinition.Identifier);
+        ParseBaseField(entity, nameof(ILDtkEntity.Pivot), new Vector2(entityDefinition.PivotX, entityDefinition.PivotY));
+        ParseBaseField(entity, nameof(ILDtkEntity.Size), new Vector2(entityDefinition.Width, entityDefinition.Height));
+        ParseBaseField(entity, nameof(ILDtkEntity.SmartColor), entityDefinition.Color);
+
+        if (entityDefinition.TileRect != null)
+        {
+            TilesetRectangle tileDefinition = entityDefinition.TileRect;
             Rectangle rect = new(tileDefinition.X, tileDefinition.Y, tileDefinition.W, tileDefinition.H);
             ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
         }
@@ -131,7 +168,91 @@ static class LDtkFieldParser
             }
         }
     }
+    
+    static void ParseCustomFieldDefinitions<T>(T classFields, FieldDefinition[] fields)
+    {
+        foreach (FieldDefinition field in fields)
+        {
+            string variableName = field.Identifier;
+            PropertyInfo? variableDef = typeof(T).GetProperty(variableName);
 
+            if (variableDef == null)
+            {
+                throw new LDtkException($"Field {variableName} does not exist on {typeof(T).Name}");
+            }
+            
+            if (field.DefaultOverride == null)
+            {
+                continue;
+            }
+
+            if (field.DefaultOverride.Params.ValueKind == JsonValueKind.Null)
+            {
+                continue;
+            }
+            
+            JsonElement defaultValue = field.DefaultOverride.Params;
+
+            if (defaultValue.ValueKind == JsonValueKind.Array)
+            {
+                Type returnType = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
+                JsonElement value = defaultValue.EnumerateArray().First();
+                Type t = Nullable.GetUnderlyingType(variableDef.PropertyType) ?? variableDef.PropertyType;
+
+                if (field._Type.Contains("Enum"))
+                {
+                    string enumName = field._Type.Replace("LocalEnum.", "");
+                    object enumValue = Enum.Parse(t, value.ToString());
+                    variableDef.SetValue(classFields, enumValue);
+                    continue;
+                }
+                
+                switch (field._Type)
+                {
+                    case "Int":
+                        variableDef.SetValue(classFields, JsonSerializer.Deserialize(value.ToString(), returnType, Constants.SerializeOptions));
+                        break;
+                    case "Float":
+                        variableDef.SetValue(classFields, JsonSerializer.Deserialize(value.ToString(), returnType, Constants.SerializeOptions));
+                        break;
+                    case "Bool":
+                        variableDef.SetValue(classFields, value.GetBoolean());
+                        break;
+                    case "String":
+                        variableDef.SetValue(classFields, value.GetString());
+                        break;
+                    case "FilePath":
+                        variableDef.SetValue(classFields, value.GetString());
+                        break;
+                    case "Tile":
+                        string[] rectValues = value.GetString()!.Split(',');
+                        int x = int.Parse(rectValues[0]);
+                        int y = int.Parse(rectValues[1]);
+                        int width = int.Parse(rectValues[2]);
+                        int height = int.Parse(rectValues[3]);
+                        int tilesetUid = (int)field.TilesetUid!;
+                        TilesetRectangle? finalRect = new TilesetRectangle
+                        {
+                            X = x,
+                            Y = y,
+                            W = width,
+                            H = height,
+                            TilesetUid = tilesetUid
+                        };
+                        variableDef.SetValue(classFields, finalRect);
+                        break;
+                    case "Color":
+                        int colorValue = value.GetInt32();
+                        int red = (colorValue >> 16) & 0xFF;
+                        int green = (colorValue >> 8) & 0xFF;
+                        int blue = colorValue & 0xFF;
+                        variableDef.SetValue(classFields, new Color(red, green, blue));
+                        break;
+                }
+            }
+        }
+    }
+    
     static Color ParseStringToColor(string hex, int alpha)
     {
         if (uint.TryParse(hex.Replace("#", string.Empty), NumberStyles.HexNumber, null, out uint color))
@@ -147,7 +268,8 @@ static class LDtkFieldParser
             return new Color(0xFF00FFFF);
         }
     }
-
+    
+    
     static void HandlePoints<T>(T classFields, LDtkLevel level, FieldInstance field, PropertyInfo variableDef, JsonElement element)
     {
         int gridSize = GetGridSize(level);
