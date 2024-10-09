@@ -8,7 +8,7 @@ on:
       version:
         description: "Version"
         required: true
-        default: ${git describe --abbrev=0}
+        default: "1.0.0-beta"
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
