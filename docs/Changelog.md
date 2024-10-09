@@ -2,6 +2,10 @@
 
 Changelog for versions
 
+## [1.6.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.5.0...v1.6.0)
+
+-   Add new codegen default flag that generates a function to return the default entity as defined in LDtk
+
 ## [1.5.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.4.0...v1.5.0)
 
 -   Moved LDtkFileFull into LDtk package which conatins alot of editor specific fields used mainly by codegen
