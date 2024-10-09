@@ -131,38 +131,6 @@ public partial class LDtkFile
         return LoadWorld(Worlds[0].Iid);
     }
     
-    /// <summary>
-    /// Loads an entity definition in a pre-fab style. This loads all the default values for the Entity 
-    /// </summary>
-    /// <typeparam name="T">The generic type of the entity</typeparam>
-    /// <returns></returns>
-    public T? GetEntityDefinition<T>() where T : new()
-    {
-        foreach (var entityDef in Defs.Entities)
-        {
-            if (entityDef.Identifier != typeof(T).Name)
-            {
-                continue;
-            }
-
-            T entity = GetEntityFromDefinition<T>(entityDef);
-
-            return entity;
-        }
-
-        return default;
-    }
-
-    T GetEntityFromDefinition<T>(EntityDefinition entityDefinition)
-        where T : new()
-    {
-        T entity = new T();
-        LDtkFieldParser.ParseBaseEntityFieldDefinitions(entity, entityDefinition);
-        LDtkFieldParser.ParseCustomEntityFieldDefinitions(entity, entityDefinition.FieldDefinitions);
-
-        return entity;
-    }
-
     /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
     /// <typeparam name="T"> The type to convert the entity to. </typeparam>
     /// <param name="reference"> The entityRef to convert. </param>

@@ -815,16 +815,6 @@ public partial class FieldDefinition
     [JsonPropertyName("useForSmartColor")]
     public bool UseForSmartColor { get; set; }
 }
-
-public partial class DefaultOverride
-{
-    [JsonPropertyName("id")]
-    public string Id { get; set; }
-    
-    [JsonPropertyName("params")]
-    public JsonElement Params { get; set; }
-}
-
 /// <summary> Field instance </summary>
 public partial class FieldInstance
 {
