@@ -72,7 +72,6 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
             byte a = entityDefinition.Color.A;
 
             Line($"SmartColor = new Color({r}, {g}, {b}, {a}),");
-            Blank();
 
             //generate default data for custom fields
             GenCustomFieldDefData(entityDefinition.FieldDefs);
@@ -90,13 +89,18 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
         Line("public Rectangle Tile { get; set; }");
         Blank();
         Line("public Color SmartColor { get; set; }");
-        Blank();
+
         FieldDefinition[] fields = entityDefinition.FieldDefs;
         GenFieldDefs(fields);
     }
 
     void GenFieldDefs(FieldDefinition[] fields)
     {
+        if (fields.Length > 0)
+        {
+            Blank();
+        }
+
         foreach (FieldDefinition value in fields)
         {
             string type = Converter.ConvertFieldDefinitionTypes(value._Type, Options.PointAsVector2);
@@ -112,6 +116,11 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
 
     void GenCustomFieldDefData(FieldDefinition[] fieldDefs)
     {
+        if (fieldDefs.Length > 0)
+        {
+            Blank();
+        }
+
         foreach (FieldDefinition field in fieldDefs)
         {
             if (field.DefaultOverride == null)

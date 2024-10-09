@@ -22,7 +22,6 @@ public partial class Player : ILDtkEntity
             H = 16
         },
         SmartColor = new Color(148, 217, 179, 255),
-
     };
 
     public string Identifier { get; set; }
@@ -34,6 +33,5 @@ public partial class Player : ILDtkEntity
     public Rectangle Tile { get; set; }
 
     public Color SmartColor { get; set; }
-
 }
 #pragma warning restore
