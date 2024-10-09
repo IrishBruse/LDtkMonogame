@@ -54,15 +54,13 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
     void GenEntityFields(string identifier, EntityDefinition entityDefinition)
     {
         //generate the default data for fields.
-        Line($"public static {identifier} Default()");
+        Line($"public static readonly {identifier} Default = new()");
         StartBlock();
         {
-            Line($"var entity = new {identifier}();");
-            Line($"entity.Identifier = \"{identifier}\";");
-            Line($"entity.Uid = {entityDefinition.Uid};");
-            Line(
-                $"entity.Size = new Vector2({entityDefinition.Width.ToString()}f, {entityDefinition.Height.ToString()}f);");
-            Line($"entity.Pivot = new Vector2({entityDefinition.PivotX}f, {entityDefinition.PivotY}f);");
+            Line($"Identifier = \"{identifier}\",");
+            Line($"Uid = {entityDefinition.Uid},");
+            Line($"Size = new Vector2({entityDefinition.Width.ToString()}f, {entityDefinition.Height.ToString()}f),");
+            Line($"Pivot = new Vector2({entityDefinition.PivotX}f, {entityDefinition.PivotY}f),");
             if (entityDefinition.TileRect != null)
             {
                 GenTilesetRectangle("Tile", entityDefinition.TileRect);
@@ -73,16 +71,13 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
             byte b = entityDefinition.Color.B;
             byte a = entityDefinition.Color.A;
 
-            Line($"entity.SmartColor = new Color({r}, {g}, {b}, {a});");
+            Line($"SmartColor = new Color({r}, {g}, {b}, {a}),");
             Blank();
 
             //generate default data for custom fields
             GenCustomFieldDefData(entityDefinition.FieldDefs);
-
-            Blank();
-            Line("return entity;");
         }
-        EndBlock();
+        EndCodeBlock();
         Blank();
 
         //generate the rest of the class
@@ -143,20 +138,20 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
             switch (field._Type)
             {
                 case Field.IntType:
-                    Line($"entity.{field.Identifier} = {defaultValue.GetInt32().ToString()};");
+                    Line($"{field.Identifier} = {defaultValue.GetInt32().ToString()},");
                     break;
                 case Field.FloatType:
                     Line(
-                        $"entity.{field.Identifier} = {defaultValue.GetSingle().ToString(CultureInfo.InvariantCulture)}f;");
+                        $"{field.Identifier} = {defaultValue.GetSingle().ToString(CultureInfo.InvariantCulture)}f,");
                     break;
                 case Field.BoolType:
-                    Line($"entity.{field.Identifier} = {defaultValue.GetBoolean().ToString().ToLower()};");
+                    Line($"{field.Identifier} = {defaultValue.GetBoolean().ToString().ToLower()},");
                     break;
                 case Field.StringType:
-                    Line($"entity.{field.Identifier} = {defaultValue.GetRawText()};");
+                    Line($"{field.Identifier} = {defaultValue.GetRawText()},");
                     break;
                 case Field.FilePathType:
-                    Line($"entity.{field.Identifier} = {defaultValue.GetString()};");
+                    Line($"{field.Identifier} = {defaultValue.GetString()},");
                     break;
                 case Field.TileType:
                     string[] rectValues = defaultValue.GetString()!.Split(',');
@@ -177,9 +172,10 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
                     break;
                 case Field.ColorType:
                     int colorValue = defaultValue.GetInt32();
-                    int red = (colorValue >> 16) & 0xFF;
-                    int green = (colorValue >> 8) & 0xFF;
-                    int blue = colorValue & 0xFF;
+                    int r = (colorValue >> 16) & 0xFF;
+                    int g = (colorValue >> 8) & 0xFF;
+                    int b = colorValue & 0xFF;
+                    Line($"{field.Identifier} = new Color({r}, {g}, {b}, {1}),");
                     break;
             }
         }
@@ -199,7 +195,7 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
 
     void GenTilesetRectangle(string identifier, TilesetRectangle rect)
     {
-        Line($"entity.{identifier} = new TilesetRectangle()");
+        Line($"{identifier} = new TilesetRectangle()");
         StartBlock();
         {
             Line($"X = {rect.X.ToString()},");
@@ -207,6 +203,6 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
             Line($"W = {rect.W.ToString()},");
             Line($"H = {rect.H.ToString()}");
         }
-        EndCodeBlock();
+        EndBlockSeparator();
     }
 }

@@ -31,6 +31,12 @@ public class BaseGenerator(LDtkFileFull ldtkFile, Options options)
         Line("}");
     }
 
+    public void EndBlockSeparator()
+    {
+        indent--;
+        Line("},");
+    }
+
     public void EndCodeBlock()
     {
         indent--;

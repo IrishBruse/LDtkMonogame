@@ -4,11 +4,27 @@ namespace LDtkTypes;
 #pragma warning disable
 
 using LDtk;
-
 using Microsoft.Xna.Framework;
 
-public partial class Gun_Pickup : ILDtkEntity
+public partial class Gun_Pickup: ILDtkEntity
 {
+    public static readonly Gun_Pickup Default = new()
+    {
+        Identifier = "Gun_Pickup",
+        Uid = 107,
+        Size = new Vector2(16f, 16f),
+        Pivot = new Vector2(0.5f, 1f),
+        Tile = new TilesetRectangle()
+        {
+            X = 0,
+            Y = 16,
+            W = 16,
+            H = 16
+        },
+        SmartColor = new Color(75, 224, 96, 255),
+
+    };
+
     public string Identifier { get; set; }
     public System.Guid Iid { get; set; }
     public int Uid { get; set; }

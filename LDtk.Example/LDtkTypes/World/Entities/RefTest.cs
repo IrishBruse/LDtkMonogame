@@ -4,11 +4,34 @@ namespace LDtkTypes;
 #pragma warning disable
 
 using LDtk;
-
 using Microsoft.Xna.Framework;
 
-public partial class RefTest : ILDtkEntity
+public partial class RefTest: ILDtkEntity
 {
+    public static readonly RefTest Default = new()
+    {
+        Identifier = "RefTest",
+        Uid = 123,
+        Size = new Vector2(16f, 16f),
+        Pivot = new Vector2(0f, 0f),
+        Tile = new TilesetRectangle()
+        {
+            X = 16,
+            Y = 48,
+            W = 16,
+            H = 16
+        },
+        SmartColor = new Color(148, 217, 179, 255),
+
+        TileTest = new TilesetRectangle()
+        {
+            X = 112,
+            Y = 32,
+            W = 16,
+            H = 16
+        },
+    };
+
     public string Identifier { get; set; }
     public System.Guid Iid { get; set; }
     public int Uid { get; set; }

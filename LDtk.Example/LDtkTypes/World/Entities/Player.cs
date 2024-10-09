@@ -4,11 +4,27 @@ namespace LDtkTypes;
 #pragma warning disable
 
 using LDtk;
-
 using Microsoft.Xna.Framework;
 
-public partial class Player : ILDtkEntity
+public partial class Player: ILDtkEntity
 {
+    public static readonly Player Default = new()
+    {
+        Identifier = "Player",
+        Uid = 120,
+        Size = new Vector2(16f, 16f),
+        Pivot = new Vector2(0.5f, 0.5f),
+        Tile = new TilesetRectangle()
+        {
+            X = 80,
+            Y = 0,
+            W = 16,
+            H = 16
+        },
+        SmartColor = new Color(148, 217, 179, 255),
+
+    };
+
     public string Identifier { get; set; }
     public System.Guid Iid { get; set; }
     public int Uid { get; set; }
