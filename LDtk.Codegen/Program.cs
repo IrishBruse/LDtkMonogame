@@ -93,4 +93,7 @@ public class Options
 
     [Option("EntityInterface", Required = false, Default = true, HelpText = "Use the ILDtkEntity interface")]
     public bool EntityInterface { get; set; }
+
+    [Option("DefaultInstance", Required = false, Default = true, HelpText = "Generate an entity from its default values")]
+    public bool DefaultInstance { get; set; }
 }

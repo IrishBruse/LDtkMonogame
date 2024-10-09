@@ -54,30 +54,33 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
     void GenEntityFields(string identifier, EntityDefinition entityDefinition)
     {
         //generate the default data for fields.
-        Line($"public static {identifier} Default() => new()");
-        StartBlock();
+        if (Options.DefaultInstance)
         {
-            Line($"Identifier = \"{identifier}\",");
-            Line($"Uid = {entityDefinition.Uid},");
-            Line($"Size = new Vector2({entityDefinition.Width}f, {entityDefinition.Height}f),");
-            Line($"Pivot = new Vector2({entityDefinition.PivotX}f, {entityDefinition.PivotY}f),");
-            if (entityDefinition.TileRect != null)
+            Line($"public static {identifier} Default() => new()");
+            StartBlock();
             {
-                GenTilesetRectangle("Tile", entityDefinition.TileRect);
+                Line($"Identifier = \"{identifier}\",");
+                Line($"Uid = {entityDefinition.Uid},");
+                Line($"Size = new Vector2({entityDefinition.Width}f, {entityDefinition.Height}f),");
+                Line($"Pivot = new Vector2({entityDefinition.PivotX}f, {entityDefinition.PivotY}f),");
+                if (entityDefinition.TileRect != null)
+                {
+                    GenTilesetRectangle("Tile", entityDefinition.TileRect);
+                }
+
+                byte r = entityDefinition.Color.R;
+                byte g = entityDefinition.Color.G;
+                byte b = entityDefinition.Color.B;
+                byte a = entityDefinition.Color.A;
+
+                Line($"SmartColor = new Color({r}, {g}, {b}, {a}),");
+
+                //generate default data for custom fields
+                GenCustomFieldDefData(entityDefinition.FieldDefs);
             }
-
-            byte r = entityDefinition.Color.R;
-            byte g = entityDefinition.Color.G;
-            byte b = entityDefinition.Color.B;
-            byte a = entityDefinition.Color.A;
-
-            Line($"SmartColor = new Color({r}, {g}, {b}, {a}),");
-
-            //generate default data for custom fields
-            GenCustomFieldDefData(entityDefinition.FieldDefs);
+            EndCodeBlock();
+            Blank();
         }
-        EndCodeBlock();
-        Blank();
 
         //generate the rest of the class
         Line("public string Identifier { get; set; }");
