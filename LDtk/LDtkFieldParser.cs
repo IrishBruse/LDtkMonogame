@@ -7,7 +7,6 @@ using System.Text.Json;
 
 using Microsoft.Xna.Framework;
 
-using Type = System.Type;
 
 /// <summary> Utility for parsing ldtk json data into more typed versions. </summary>
 static class LDtkFieldParser

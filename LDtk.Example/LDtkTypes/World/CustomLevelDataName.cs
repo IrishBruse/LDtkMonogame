@@ -4,7 +4,6 @@ namespace LDtkTypes;
 #pragma warning disable
 
 using LDtk;
-
 using Microsoft.Xna.Framework;
 
 public partial class CustomLevelDataName
