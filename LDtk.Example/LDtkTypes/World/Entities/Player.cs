@@ -6,9 +6,9 @@ namespace LDtkTypes;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-public partial class Player: ILDtkEntity
+public partial class Player : ILDtkEntity
 {
-    public static readonly Player Default = new()
+    public static Player Default() => new()
     {
         Identifier = "Player",
         Uid = 120,

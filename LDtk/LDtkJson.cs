@@ -6,10 +6,8 @@ namespace LDtk;
 // LDtk 1.5.3
 
 using System;
-using System.Text.Json.Serialization;
 using System.Text.Json;
-
-using Full;
+using System.Text.Json.Serialization;
 
 using Microsoft.Xna.Framework;
 
@@ -191,10 +189,6 @@ public partial class EntityDefinition
     /// <summary> Pixel width </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
-    
-    /// <summary> the field definitions for the entity
-    [JsonPropertyName("fieldDefs")]
-    public FieldDefinition[] FieldDefinitions { get; set; }
 }
 
 /// <summary> Entity instance </summary>

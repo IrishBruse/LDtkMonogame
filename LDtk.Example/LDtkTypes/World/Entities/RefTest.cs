@@ -6,9 +6,9 @@ namespace LDtkTypes;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-public partial class RefTest: ILDtkEntity
+public partial class RefTest : ILDtkEntity
 {
-    public static readonly RefTest Default = new()
+    public static RefTest Default() => new()
     {
         Identifier = "RefTest",
         Uid = 123,

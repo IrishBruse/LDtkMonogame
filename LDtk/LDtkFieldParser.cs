@@ -2,10 +2,9 @@ namespace LDtk;
 
 using System;
 using System.Globalization;
-using System.Linq;
 using System.Reflection;
 using System.Text.Json;
-using Full;
+
 using Microsoft.Xna.Framework;
 
 using Type = System.Type;
@@ -33,7 +32,7 @@ static class LDtkFieldParser
     {
         ParseCustomFields(entity, fields, level);
     }
-    
+
     /// <summary> Parses the base entity fields. </summary>
     /// <typeparam name="T"> Generic type parameter. </typeparam>
     /// <param name="entity"> The entity. </param>
@@ -57,7 +56,7 @@ static class LDtkFieldParser
             ParseBaseField(entity, nameof(ILDtkEntity.Tile), rect);
         }
     }
-    
+
     static void ParseCustomFields<T>(T classFields, FieldInstance[] fields, LDtkLevel? level)
     {
         foreach (FieldInstance field in fields)
@@ -134,7 +133,7 @@ static class LDtkFieldParser
             }
         }
     }
-    
+
     static Color ParseStringToColor(string hex, int alpha)
     {
         if (uint.TryParse(hex.Replace("#", string.Empty), NumberStyles.HexNumber, null, out uint color))
@@ -150,7 +149,7 @@ static class LDtkFieldParser
             return new Color(0xFF00FFFF);
         }
     }
-    
+
     static void HandlePoints<T>(T classFields, LDtkLevel level, FieldInstance field, PropertyInfo variableDef, JsonElement element)
     {
         int gridSize = GetGridSize(level);

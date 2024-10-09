@@ -6,9 +6,9 @@ namespace LDtkTypes;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-public partial class Enemy: ILDtkEntity
+public partial class Enemy : ILDtkEntity
 {
-    public static readonly Enemy Default = new()
+    public static Enemy Default() => new()
     {
         Identifier = "Enemy",
         Uid = 98,

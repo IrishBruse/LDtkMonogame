@@ -6,9 +6,9 @@ namespace LDtkTypes;
 using LDtk;
 using Microsoft.Xna.Framework;
 
-public partial class Gun_Pickup: ILDtkEntity
+public partial class Gun_Pickup : ILDtkEntity
 {
-    public static readonly Gun_Pickup Default = new()
+    public static Gun_Pickup Default() => new()
     {
         Identifier = "Gun_Pickup",
         Uid = 107,

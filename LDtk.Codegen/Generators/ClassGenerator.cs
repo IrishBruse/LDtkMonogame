@@ -23,13 +23,13 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
     void GenClass(string identifier, string folder, EntityDefinition entityDefinition = null,
         FieldDefinition[] fieldDefinitions = null)
     {
-        GenHeaders(options);
+        GenHeaders();
 
         string classDef = $"public partial class {identifier}";
 
-        if (entityDefinition != null)
+        if (entityDefinition != null && Options.EntityInterface)
         {
-            classDef += ": ILDtkEntity";
+            classDef += " : ILDtkEntity";
         }
 
         Line(classDef);
@@ -54,12 +54,12 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
     void GenEntityFields(string identifier, EntityDefinition entityDefinition)
     {
         //generate the default data for fields.
-        Line($"public static readonly {identifier} Default = new()");
+        Line($"public static {identifier} Default() => new()");
         StartBlock();
         {
             Line($"Identifier = \"{identifier}\",");
             Line($"Uid = {entityDefinition.Uid},");
-            Line($"Size = new Vector2({entityDefinition.Width.ToString()}f, {entityDefinition.Height.ToString()}f),");
+            Line($"Size = new Vector2({entityDefinition.Width}f, {entityDefinition.Height}f),");
             Line($"Pivot = new Vector2({entityDefinition.PivotX}f, {entityDefinition.PivotY}f),");
             if (entityDefinition.TileRect != null)
             {
@@ -138,50 +138,55 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
             switch (field._Type)
             {
                 case Field.IntType:
-                    Line($"{field.Identifier} = {defaultValue.GetInt32().ToString()},");
-                    break;
+                Line($"{field.Identifier} = {defaultValue.GetInt32()},");
+                break;
+
                 case Field.FloatType:
-                    Line(
-                        $"{field.Identifier} = {defaultValue.GetSingle().ToString(CultureInfo.InvariantCulture)}f,");
-                    break;
+                Line($"{field.Identifier} = {defaultValue.GetSingle().ToString(CultureInfo.InvariantCulture)}f,");
+                break;
+
                 case Field.BoolType:
-                    Line($"{field.Identifier} = {defaultValue.GetBoolean().ToString().ToLower()},");
-                    break;
+                Line($"{field.Identifier} = {defaultValue.GetBoolean().ToString().ToLower()},");
+                break;
+
                 case Field.StringType:
-                    Line($"{field.Identifier} = {defaultValue.GetRawText()},");
-                    break;
+                Line($"{field.Identifier} = {defaultValue.GetRawText()},");
+                break;
+
                 case Field.FilePathType:
-                    Line($"{field.Identifier} = {defaultValue.GetString()},");
-                    break;
+                Line($"{field.Identifier} = {defaultValue.GetString()},");
+                break;
+
                 case Field.TileType:
-                    string[] rectValues = defaultValue.GetString()!.Split(',');
-                    int x = int.Parse(rectValues[0]);
-                    int y = int.Parse(rectValues[1]);
-                    int width = int.Parse(rectValues[2]);
-                    int height = int.Parse(rectValues[3]);
-                    int tilesetUid = (int)field.TilesetUid!;
-                    TilesetRectangle finalRect = new()
-                    {
-                        X = x,
-                        Y = y,
-                        W = width,
-                        H = height,
-                        TilesetUid = tilesetUid
-                    };
-                    GenTilesetRectangle(field.Identifier, finalRect);
-                    break;
+                string[] rectValues = defaultValue.GetString()!.Split(',');
+                int x = int.Parse(rectValues[0]);
+                int y = int.Parse(rectValues[1]);
+                int width = int.Parse(rectValues[2]);
+                int height = int.Parse(rectValues[3]);
+                int tilesetUid = (int)field.TilesetUid!;
+                TilesetRectangle finalRect = new()
+                {
+                    X = x,
+                    Y = y,
+                    W = width,
+                    H = height,
+                    TilesetUid = tilesetUid
+                };
+                GenTilesetRectangle(field.Identifier, finalRect);
+                break;
+
                 case Field.ColorType:
-                    int colorValue = defaultValue.GetInt32();
-                    int r = (colorValue >> 16) & 0xFF;
-                    int g = (colorValue >> 8) & 0xFF;
-                    int b = colorValue & 0xFF;
-                    Line($"{field.Identifier} = new Color({r}, {g}, {b}, {1}),");
-                    break;
+                int colorValue = defaultValue.GetInt32();
+                int r = (colorValue >> 16) & 0xFF;
+                int g = (colorValue >> 8) & 0xFF;
+                int b = colorValue & 0xFF;
+                Line($"{field.Identifier} = new Color({r}, {g}, {b}, {1}),");
+                break;
             }
         }
     }
 
-    void GenHeaders(Options options)
+    void GenHeaders()
     {
         Line($"namespace {Options.Namespace};");
         Blank();
@@ -198,10 +203,10 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
         Line($"{identifier} = new TilesetRectangle()");
         StartBlock();
         {
-            Line($"X = {rect.X.ToString()},");
-            Line($"Y = {rect.Y.ToString()},");
-            Line($"W = {rect.W.ToString()},");
-            Line($"H = {rect.H.ToString()}");
+            Line($"X = {rect.X},");
+            Line($"Y = {rect.Y},");
+            Line($"W = {rect.W},");
+            Line($"H = {rect.H}");
         }
         EndBlockSeparator();
     }
