@@ -9,6 +9,8 @@ using System;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 
+using Full;
+
 using Microsoft.Xna.Framework;
 
 /// <summary> This is the root of any Project JSON file. It contains:  - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users). </summary>
@@ -189,6 +191,10 @@ public partial class EntityDefinition
     /// <summary> Pixel width </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
+    
+    /// <summary> the field definitions for the entity
+    [JsonPropertyName("fieldDefs")]
+    public FieldDefinition[] FieldDefinitions { get; set; }
 }
 
 /// <summary> Entity instance </summary>

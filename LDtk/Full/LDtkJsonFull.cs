@@ -521,6 +521,7 @@ public partial class EntityDefinition
     /// <summary> Pixel width </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
+    
 }
 
 /// <summary> Entity instance </summary>
@@ -813,6 +814,15 @@ public partial class FieldDefinition
     /// <summary> If TRUE, the color associated with this field will override the Entity or Level default color in the editor UI. For Enum fields, this would be the color associated to their values. </summary>
     [JsonPropertyName("useForSmartColor")]
     public bool UseForSmartColor { get; set; }
+}
+
+public partial class DefaultOverride
+{
+    [JsonPropertyName("id")]
+    public string Id { get; set; }
+    
+    [JsonPropertyName("params")]
+    public JsonElement Params { get; set; }
 }
 
 /// <summary> Field instance </summary>
