@@ -7,7 +7,7 @@ public class DefaultOverride
 {
     [JsonPropertyName("id")]
     public string Id { get; set; }
-    
+
     [JsonPropertyName("params")]
     public JsonElement Params { get; set; }
 }

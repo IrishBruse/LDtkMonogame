@@ -130,7 +130,7 @@ public partial class LDtkFile
 
         return LoadWorld(Worlds[0].Iid);
     }
-    
+
     /// <summary> Gets an entity from an <paramref name="reference"/> converted to <typeparamref name="T"/>. </summary>
     /// <typeparam name="T"> The type to convert the entity to. </typeparam>
     /// <param name="reference"> The entityRef to convert. </param>
