@@ -119,11 +119,13 @@ public class Entry : Game
 
         // Default value instance example
         var prefab = Enemy.Default();
-        prefab.Wander = new Vector2[] { Vector2.One * 180, Vector2.One * 120 };
+        prefab.Wander = new Vector2[] { new(200, 160), new(200, 100) };
+        prefab.Position = prefab.Wander[0];
         enemies.Add(new EnemyEntity(prefab, spriteSheet, renderer));
 
         var prefab2 = Enemy.Default();
-        prefab2.Wander = new Vector2[] { Vector2.One * 200, Vector2.One * 100 };
+        prefab2.Wander = new Vector2[] { new(250, 100), new(230, 160) };
+        prefab2.Position = prefab2.Wander[0];
         enemies.Add(new EnemyEntity(prefab2, spriteSheet, renderer));
 
         Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();
