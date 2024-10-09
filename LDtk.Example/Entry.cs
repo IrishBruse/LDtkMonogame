@@ -117,6 +117,15 @@ public class Entry : Game
             _ = renderer.PrerenderLevel(world.Levels[i]);
         }
 
+        // Default value instance example
+        var prefab = Enemy.Default();
+        prefab.Wander = new Vector2[] { Vector2.One * 180, Vector2.One * 120 };
+        enemies.Add(new EnemyEntity(prefab, spriteSheet, renderer));
+
+        var prefab2 = Enemy.Default();
+        prefab2.Wander = new Vector2[] { Vector2.One * 200, Vector2.One * 100 };
+        enemies.Add(new EnemyEntity(prefab2, spriteSheet, renderer));
+
         Gun_Pickup gunData = world.GetEntity<Gun_Pickup>();
         gun = new GunEntity(gunData, spriteSheet, renderer);
 

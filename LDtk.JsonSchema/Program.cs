@@ -69,6 +69,9 @@ public static partial class Program
         {"AutoRuleDef", new() {
             {"TileRectsIds","int[][]"},
         }},
+        {"FieldDefinition", new () {
+            {"DefaultOverride", "DefaultOverride"}
+        }},
     };
 
     static readonly Dictionary<string, EnumItems> Enums = new();

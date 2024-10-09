@@ -521,6 +521,7 @@ public partial class EntityDefinition
     /// <summary> Pixel width </summary>
     [JsonPropertyName("width")]
     public int Width { get; set; }
+
 }
 
 /// <summary> Entity instance </summary>
@@ -712,7 +713,7 @@ public partial class FieldDefinition
 
     /// <summary> Default value if selected value is null or invalid. </summary>
     [JsonPropertyName("defaultOverride")]
-    public object DefaultOverride { get; set; }
+    public DefaultOverride DefaultOverride { get; set; }
 
     /// <summary> User defined documentation for this field to provide help/tips to level designers about accepted values. </summary>
     [JsonPropertyName("doc")]
@@ -814,7 +815,6 @@ public partial class FieldDefinition
     [JsonPropertyName("useForSmartColor")]
     public bool UseForSmartColor { get; set; }
 }
-
 /// <summary> Field instance </summary>
 public partial class FieldInstance
 {
