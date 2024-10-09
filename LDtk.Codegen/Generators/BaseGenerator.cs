@@ -31,6 +31,12 @@ public class BaseGenerator(LDtkFileFull ldtkFile, Options options)
         Line("}");
     }
 
+    public void EndCodeBlock()
+    {
+        indent--;
+        Line("};");
+    }
+
     public static string Call(string functionName, string contents)
     {
         return $"{functionName}({contents})";

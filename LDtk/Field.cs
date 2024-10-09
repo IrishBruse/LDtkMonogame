@@ -1,6 +1,6 @@
 namespace LDtk;
 
-static class Field
+public static class Field
 {
     public const string IntType = "Int";
     public const string IntArrayType = "Array<Int>";

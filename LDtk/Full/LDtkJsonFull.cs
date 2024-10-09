@@ -6,8 +6,8 @@ namespace LDtk.Full;
 // LDtk 1.5.3
 
 using System;
-using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 
 using Microsoft.Xna.Framework;
 
@@ -712,7 +712,7 @@ public partial class FieldDefinition
 
     /// <summary> Default value if selected value is null or invalid. </summary>
     [JsonPropertyName("defaultOverride")]
-    public object DefaultOverride { get; set; }
+    public DefaultOverride DefaultOverride { get; set; }
 
     /// <summary> User defined documentation for this field to provide help/tips to level designers about accepted values. </summary>
     [JsonPropertyName("doc")]
