@@ -94,6 +94,6 @@ public class Options
     [Option("EntityInterface", Required = false, Default = true, HelpText = "Use the ILDtkEntity interface")]
     public bool EntityInterface { get; set; }
 
-    [Option("DefaultInstance", Required = false, Default = true, HelpText = "Generate an entity from its default values")]
-    public bool DefaultInstance { get; set; }
+    [Option("DisableDefaultInstance", Required = false, Default = false, HelpText = "Disable generation of default entity instance static function")]
+    public bool DisableDefaultInstance { get; set; }
 }

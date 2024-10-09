@@ -54,7 +54,7 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
     void GenEntityFields(string identifier, EntityDefinition entityDefinition)
     {
         //generate the default data for fields.
-        if (Options.DefaultInstance)
+        if (!Options.DisableDefaultInstance)
         {
             Line($"public static {identifier} Default() => new()");
             StartBlock();
