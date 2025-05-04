@@ -2,6 +2,10 @@
 
 Changelog for versions
 
+## [1.7.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.6.0...v1.7.0)
+
+-   Update MonoGame to v3.8.3
+
 ## [1.6.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.5.0...v1.6.0)
 
 -   Add new codegen default flag that generates a function to return the default entity as defined in LDtk
