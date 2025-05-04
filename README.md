@@ -7,7 +7,7 @@
     <a href="https://discord.gg/ZzV7tmqvtH"><img src="https://img.shields.io/badge/Discord-LDtkMonogame-yellow" alt="Discord Link"></a>
 </p>
 <br>
-LDtkMonogame is an level importer for the LDtk level editor
+LDtkMonogame is a level importer for the LDtk level editor
 
 # Getting Started
 
