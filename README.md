@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-    <a href="https://ldtk.io/go/discord"><img src="https://img.shields.io/badge/Discord-LDtk-yellow" alt="Discord Link"></a> &nbsp;
-    <a href="https://github.com/deepnight/ldtk"><img src="https://img.shields.io/badge/LDtk-1.5.3-yellow" alt=""></a>
+    Looking for support join the discord<br><br>
+    <a href="https://discord.gg/ZzV7tmqvtH"><img src="https://img.shields.io/badge/Discord-LDtkMonogame-yellow" alt="Discord Link"></a>
 </p>
-
+<br>
 LDtkMonogame is an level importer for the LDtk level editor
 
 # Getting Started
