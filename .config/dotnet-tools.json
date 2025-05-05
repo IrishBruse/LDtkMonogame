@@ -5,6 +5,10 @@
         "dotnet-mgcb": {
             "version": "3.8.3",
             "commands": ["mgcb"]
+        },
+        "xmldocmd": {
+            "version": "2.9.0",
+            "commands": ["xmldocmd"]
         }
     }
 }

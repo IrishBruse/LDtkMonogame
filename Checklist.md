@@ -2,7 +2,7 @@
 
 -   Delete schema in LDtk.JsonSchema
 -   Run `LDtk.JsonSchema`
--   Update version in `Constants.cs`
+-   Run npm run build:api in `docs`
+-   Update min ldtk supported version in `Constants.cs`
 -   Update versions in `docs/Changelog.md`
--   Update version in `publish.ps1`
--   Add version changes update to discord and github discussions
+-   Add version changes update to discord

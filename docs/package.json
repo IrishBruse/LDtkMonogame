@@ -1,0 +1,17 @@
+{
+    "name": "ldtk-monogame-docs",
+    "version": "1.0.0",
+    "main": "config.js",
+    "scripts": {
+        "serve": "docsify serve .",
+        "build:api": "dotnet xmldocmd ../LDtk.Codegen/bin/Debug/net8.0/LDtkMonogame.dll Api/",
+        "postbuild:api": "mv Api/LDtkMonogame.md Api/README.md",
+        "docsify": "docsify"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "docsify-cli": "^4.4.4"
+    }
+}

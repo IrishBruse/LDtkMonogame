@@ -1,92 +1,116 @@
-# 'LDtkMonogame'
+# LDtkMonogame assembly
 
-[Types](#types) &#x2022; [Class Hierarchy](#class-hierarchy)
+## LDtk namespace
 
-## Types
+| public type | description |
+| --- | --- |
+| class [AutoLayerRuleGroup](./LDtk/AutoLayerRuleGroup.md) | Auto-layer rule group |
+| static class [Constants](./LDtk/Constants.md) | General Constants used in LDtkMonogame. |
+| class [CustomCommand](./LDtk/CustomCommand.md) | ldtk.CustomCommand |
+| class [DefaultOverride](./LDtk/DefaultOverride.md) |  |
+| class [Definitions](./LDtk/Definitions.md) | If you're writing your own LDtk importer, you should probably just ignore *most* stuff in the `defs` section, as it contains data that are mostly important to the editor. To keep you away from the `defs` section and avoid some unnecessary JSON parsing, important data from definitions is often duplicated in fields prefixed with a double underscore (eg. `__identifier` or `__type`). The 2 only definition types you might need here are Tilesets and Enums. |
+| enum [EmbedAtlas](./LDtk/EmbedAtlas.md) | If this value is set, then it means that this atlas uses an internal LDtk atlas image instead of a loaded one. Possible values: &lt;`null`&gt;, `LdtkIcons`, `null` |
+| class [EntityDefinition](./LDtk/EntityDefinition.md) | Entity definition |
+| class [EntityInstance](./LDtk/EntityInstance.md) | Entity instance |
+| class [EntityReference](./LDtk/EntityReference.md) | This object describes the "location" of an Entity instance in the project worlds. |
+| class [EnumDefinition](./LDtk/EnumDefinition.md) | Enum definition |
+| class [EnumTagValue](./LDtk/EnumTagValue.md) | In a tileset definition, enum based tag infos |
+| class [EnumValueDefinition](./LDtk/EnumValueDefinition.md) | Enum value definition |
+| static class [Field](./LDtk/Field.md) |  |
+| class [FieldInstance](./LDtk/FieldInstance.md) | Field instance |
+| enum [Flag](./LDtk/Flag.md) | An array containing various advanced flags (ie. options or other states). Possible values: `DiscardPreCsvIntGrid`, `ExportOldTableOfContentData`, `ExportPreCsvIntGridFormat`, `IgnoreBackupSuggest`, `PrependIndexToLevelFileNames`, `MultiWorlds`, `UseMultilinesType` |
+| class [GridPoint](./LDtk/GridPoint.md) | This object is just a grid-based coordinate used in Field values. |
+| interface [ILDtkEntity](./LDtk/ILDtkEntity.md) | Interface that implements the Entity. |
+| class [IntGridValueDefinition](./LDtk/IntGridValueDefinition.md) | IntGrid value definition |
+| class [IntGridValueGroupDefinition](./LDtk/IntGridValueGroupDefinition.md) | IntGrid value group definition |
+| class [IntGridValueInstance](./LDtk/IntGridValueInstance.md) | IntGrid value instance |
+| class [LayerDefinition](./LDtk/LayerDefinition.md) | Layer definition |
+| class [LayerInstance](./LDtk/LayerInstance.md) | Layer instance |
+| enum [LayerType](./LDtk/LayerType.md) | The Type of layer. |
+| class [LDtkException](./LDtk/LDtkException.md) | Generic LDtk Exception. |
+| class [LDtkFile](./LDtk/LDtkFile.md) | This is the root of any Project JSON file. It contains: - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users). |
+| class [LDtkIntGrid](./LDtk/LDtkIntGrid.md) | LDtk IntGrid. |
+| class [LDtkJsonSourceGenerator](./LDtk/LDtkJsonSourceGenerator.md) | The json source generator for LDtk files. |
+| class [LDtkLevel](./LDtk/LDtkLevel.md) | This section contains all the level data. It can be found in 2 distinct forms, depending on Project current settings: - If "*Separate level files*" is disabled (default): full level data is *embedded* inside the main Project JSON file, - If "*Separate level files*" is enabled: level data is stored in *separate* standalone `.ldtkl` files (one per level). In this case, the main Project JSON file will still contain most level data, except heavy sections, like the `layerInstances` array (which will be null). The `externalRelPath` string points to the `ldtkl` file. A `ldtkl` file is just a JSON file containing exactly what is described below. |
+| class [LDtkTableOfContentEntry](./LDtk/LDtkTableOfContentEntry.md) | ldtk.TableOfContentEntry |
+| class [LDtkWorld](./LDtk/LDtkWorld.md) | IMPORTANT: this type is available as a preview. You can rely on it to update your importers, for when it will be officially available. A World contains multiple levels, and it has its own layout settings. |
+| class [LevelBackgroundPosition](./LDtk/LevelBackgroundPosition.md) | Level background image position info |
+| class [NeighbourLevel](./LDtk/NeighbourLevel.md) | Nearby level info |
+| class [TileCustomMetadata](./LDtk/TileCustomMetadata.md) | In a tileset definition, user defined meta-data of a tile. |
+| class [TileInstance](./LDtk/TileInstance.md) | This structure represents a single tile from a given Tileset. |
+| enum [TileRenderMode](./LDtk/TileRenderMode.md) | An enum describing how the Entity tile is rendered inside the Entity bounds. Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`, `FullSizeUncropped`, `NineSlice` |
+| class [TilesetDefinition](./LDtk/TilesetDefinition.md) | The `Tileset` definition is the most important part among project definitions. It contains some extra informations about each integrated tileset. If you only had to parse one definition section, that would be the one. |
+| class [TilesetRectangle](./LDtk/TilesetRectangle.md) | This object represents a custom sub rectangle in a Tileset image. |
+| class [TocInstanceData](./LDtk/TocInstanceData.md) | ldtk.TocInstanceData |
+| enum [When](./LDtk/When.md) | Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave` |
+| enum [WorldLayout](./LDtk/WorldLayout.md) | WARNING: this field will move to the `worlds` array after the "multi-worlds" update. It will then be `null`. You can enable the Multi-worlds advanced project option to enable the change immediately. An enum that describes how levels are organized in this project (ie. linearly or in a 2D space). Possible values: &lt;`null`&gt;, `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`, `null` |
 
-* [LDtk](LDtk/README.md)
-  * [AutoLayerRuleGroup](LDtk/AutoLayerRuleGroup/README.md)
-  * [Constants](LDtk/Constants/README.md)
-  * [CustomCommand](LDtk/CustomCommand/README.md)
-  * [Definitions](LDtk/Definitions/README.md)
-  * [EntityDefinition](LDtk/EntityDefinition/README.md)
-  * [EntityInstance](LDtk/EntityInstance/README.md)
-  * [EntityReference](LDtk/EntityReference/README.md)
-  * [EnumDefinition](LDtk/EnumDefinition/README.md)
-  * [EnumTagValue](LDtk/EnumTagValue/README.md)
-  * [EnumValueDefinition](LDtk/EnumValueDefinition/README.md)
-  * [FieldInstance](LDtk/FieldInstance/README.md)
-  * [GridPoint](LDtk/GridPoint/README.md)
-  * [IntGridValueDefinition](LDtk/IntGridValueDefinition/README.md)
-  * [IntGridValueGroupDefinition](LDtk/IntGridValueGroupDefinition/README.md)
-  * [IntGridValueInstance](LDtk/IntGridValueInstance/README.md)
-  * [LDtkException](LDtk/LDtkException/README.md)
-  * [LDtkFile](LDtk/LDtkFile/README.md)
-  * [LDtkIntGrid](LDtk/LDtkIntGrid/README.md)
-  * [LDtkJsonSourceGenerator](LDtk/LDtkJsonSourceGenerator/README.md)
-  * [LDtkLevel](LDtk/LDtkLevel/README.md)
-  * [LDtkTableOfContentEntry](LDtk/LDtkTableOfContentEntry/README.md)
-  * [LDtkWorld](LDtk/LDtkWorld/README.md)
-  * [LayerDefinition](LDtk/LayerDefinition/README.md)
-  * [LayerInstance](LDtk/LayerInstance/README.md)
-  * [LevelBackgroundPosition](LDtk/LevelBackgroundPosition/README.md)
-  * [NeighbourLevel](LDtk/NeighbourLevel/README.md)
-  * [TileCustomMetadata](LDtk/TileCustomMetadata/README.md)
-  * [TileInstance](LDtk/TileInstance/README.md)
-  * [TilesetDefinition](LDtk/TilesetDefinition/README.md)
-  * [TilesetRectangle](LDtk/TilesetRectangle/README.md)
-  * [TocInstanceData](LDtk/TocInstanceData/README.md)
-  * [ILDtkEntity](LDtk/ILDtkEntity/README.md)
-  * [EmbedAtlas](LDtk/EmbedAtlas/README.md)
-  * [LayerType](LDtk/LayerType/README.md)
-  * [TileRenderMode](LDtk/TileRenderMode/README.md)
-  * [When](LDtk/When/README.md)
-  * [WorldLayout](LDtk/WorldLayout/README.md)
-* [LDtk.ContentPipeline](LDtk/ContentPipeline/README.md)
-  * [LDtkFileReader](LDtk/ContentPipeline/LDtkFileReader/README.md)
-  * [LDtkLevelReader](LDtk/ContentPipeline/LDtkLevelReader/README.md)
-* [LDtk.Renderer](LDtk/Renderer/README.md)
-  * [ExampleRenderer](LDtk/Renderer/ExampleRenderer/README.md)
-  * [RenderedLevel](LDtk/Renderer/RenderedLevel/README.md)
+## LDtk.ContentPipeline namespace
 
-## Class Hierarchy
+| public type | description |
+| --- | --- |
+| class [LDtkFileReader](./LDtk.ContentPipeline/LDtkFileReader.md) | LDtkFileReader. |
+| class [LDtkLevelReader](./LDtk.ContentPipeline/LDtkLevelReader.md) | LDtkLevelReader. |
 
-* &ensp; \([Object](https://docs.microsoft.com/en-us/dotnet/api/system.object)\)<a id="class-hierarchy-System_Object"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [AutoLayerRuleGroup](LDtk/AutoLayerRuleGroup/README.md)<a id="class-hierarchy-LDtk_AutoLayerRuleGroup"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; \([ContentTypeReader](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xna.framework.content.contenttypereader)\)<a id="class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [&bull;](#class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader "ContentTypeReader") &ensp; \([ContentTypeReader\<T\>](https://docs.microsoft.com/en-us/dotnet/api/microsoft.xna.framework.content.contenttypereader-1)\)<a id="class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader_1"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [&bull;](#class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader "ContentTypeReader") &ensp; [&bull;](#class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader_1 "ContentTypeReader<T>") &ensp; [LDtkFileReader](LDtk/ContentPipeline/LDtkFileReader/README.md)<a id="class-hierarchy-LDtk_ContentPipeline_LDtkFileReader"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [&bull;](#class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader "ContentTypeReader") &ensp; [&bull;](#class-hierarchy-Microsoft_Xna_Framework_Content_ContentTypeReader_1 "ContentTypeReader<T>") &ensp; [LDtkLevelReader](LDtk/ContentPipeline/LDtkLevelReader/README.md)<a id="class-hierarchy-LDtk_ContentPipeline_LDtkLevelReader"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [CustomCommand](LDtk/CustomCommand/README.md)<a id="class-hierarchy-LDtk_CustomCommand"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [Definitions](LDtk/Definitions/README.md)<a id="class-hierarchy-LDtk_Definitions"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EntityDefinition](LDtk/EntityDefinition/README.md)<a id="class-hierarchy-LDtk_EntityDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EntityInstance](LDtk/EntityInstance/README.md)<a id="class-hierarchy-LDtk_EntityInstance"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EntityReference](LDtk/EntityReference/README.md)<a id="class-hierarchy-LDtk_EntityReference"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EnumDefinition](LDtk/EnumDefinition/README.md)<a id="class-hierarchy-LDtk_EnumDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EnumTagValue](LDtk/EnumTagValue/README.md)<a id="class-hierarchy-LDtk_EnumTagValue"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [EnumValueDefinition](LDtk/EnumValueDefinition/README.md)<a id="class-hierarchy-LDtk_EnumValueDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [ExampleRenderer](LDtk/Renderer/ExampleRenderer/README.md)<a id="class-hierarchy-LDtk_Renderer_ExampleRenderer"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; \([Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)\)<a id="class-hierarchy-System_Exception"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [&bull;](#class-hierarchy-System_Exception "Exception") &ensp; [LDtkException](LDtk/LDtkException/README.md)<a id="class-hierarchy-LDtk_LDtkException"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [FieldInstance](LDtk/FieldInstance/README.md)<a id="class-hierarchy-LDtk_FieldInstance"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [GridPoint](LDtk/GridPoint/README.md)<a id="class-hierarchy-LDtk_GridPoint"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [IntGridValueDefinition](LDtk/IntGridValueDefinition/README.md)<a id="class-hierarchy-LDtk_IntGridValueDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [IntGridValueGroupDefinition](LDtk/IntGridValueGroupDefinition/README.md)<a id="class-hierarchy-LDtk_IntGridValueGroupDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [IntGridValueInstance](LDtk/IntGridValueInstance/README.md)<a id="class-hierarchy-LDtk_IntGridValueInstance"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; \([JsonSerializerContext](https://docs.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonserializercontext)\)<a id="class-hierarchy-System_Text_Json_Serialization_JsonSerializerContext"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [&bull;](#class-hierarchy-System_Text_Json_Serialization_JsonSerializerContext "JsonSerializerContext") &ensp; [LDtkJsonSourceGenerator](LDtk/LDtkJsonSourceGenerator/README.md)<a id="class-hierarchy-LDtk_LDtkJsonSourceGenerator"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LayerDefinition](LDtk/LayerDefinition/README.md)<a id="class-hierarchy-LDtk_LayerDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LayerInstance](LDtk/LayerInstance/README.md)<a id="class-hierarchy-LDtk_LayerInstance"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkFile](LDtk/LDtkFile/README.md)<a id="class-hierarchy-LDtk_LDtkFile"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkIntGrid](LDtk/LDtkIntGrid/README.md)<a id="class-hierarchy-LDtk_LDtkIntGrid"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkLevel](LDtk/LDtkLevel/README.md)<a id="class-hierarchy-LDtk_LDtkLevel"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkTableOfContentEntry](LDtk/LDtkTableOfContentEntry/README.md)<a id="class-hierarchy-LDtk_LDtkTableOfContentEntry"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LDtkWorld](LDtk/LDtkWorld/README.md)<a id="class-hierarchy-LDtk_LDtkWorld"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [LevelBackgroundPosition](LDtk/LevelBackgroundPosition/README.md)<a id="class-hierarchy-LDtk_LevelBackgroundPosition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [NeighbourLevel](LDtk/NeighbourLevel/README.md)<a id="class-hierarchy-LDtk_NeighbourLevel"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [TileCustomMetadata](LDtk/TileCustomMetadata/README.md)<a id="class-hierarchy-LDtk_TileCustomMetadata"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [TileInstance](LDtk/TileInstance/README.md)<a id="class-hierarchy-LDtk_TileInstance"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [TilesetDefinition](LDtk/TilesetDefinition/README.md)<a id="class-hierarchy-LDtk_TilesetDefinition"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [TilesetRectangle](LDtk/TilesetRectangle/README.md)<a id="class-hierarchy-LDtk_TilesetRectangle"></a>
-* &ensp; [&bull;](#class-hierarchy-System_Object "Object") &ensp; [TocInstanceData](LDtk/TocInstanceData/README.md)<a id="class-hierarchy-LDtk_TocInstanceData"></a>
+## LDtk.Full namespace
 
+| public type | description |
+| --- | --- |
+| enum [AllowedRefs](./LDtk.Full/AllowedRefs.md) | Possible values: `Any`, `OnlySame`, `OnlyTags`, `OnlySpecificEntity` |
+| class [AutoLayerRuleGroup](./LDtk.Full/AutoLayerRuleGroup.md) | Auto-layer rule group |
+| class [AutoRuleDef](./LDtk.Full/AutoRuleDef.md) | This complex section isn't meant to be used by game devs at all, as these rules are completely resolved internally by the editor before any saving. You should just ignore this part. |
+| enum [BgPos](./LDtk.Full/BgPos.md) | An enum defining the way the background image (if any) is positioned on the level. See `__bgPos` for resulting position info. Possible values: &lt;`null`&gt;, `Unscaled`, `Contain`, `Cover`, `CoverDirty`, `Repeat` |
+| enum [Checker](./LDtk.Full/Checker.md) | Checker mode Possible values: `None`, `Horizontal`, `Vertical` |
+| class [CustomCommand](./LDtk.Full/CustomCommand.md) | CustomCommand run by LDtk |
+| class [Definitions](./LDtk.Full/Definitions.md) | If you're writing your own LDtk importer, you should probably just ignore *most* stuff in the `defs` section, as it contains data that are mostly important to the editor. To keep you away from the `defs` section and avoid some unnecessary JSON parsing, important data from definitions is often duplicated in fields prefixed with a double underscore (eg. `__identifier` or `__type`). The 2 only definition types you might need here are Tilesets and Enums. |
+| enum [EditorDisplayMode](./LDtk.Full/EditorDisplayMode.md) | Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `LevelTile`, `Points`, `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`, `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`, `RefLinkBetweenCenters` |
+| enum [EditorDisplayPos](./LDtk.Full/EditorDisplayPos.md) | Possible values: `Above`, `Center`, `Beneath` |
+| enum [EditorLinkStyle](./LDtk.Full/EditorLinkStyle.md) | Possible values: `ZigZag`, `StraightArrow`, `CurvedArrow`, `ArrowsLine`, `DashedLine` |
+| enum [EmbedAtlas](./LDtk.Full/EmbedAtlas.md) | If this value is set, then it means that this atlas uses an internal LDtk atlas image instead of a loaded one. Possible values: &lt;`null`&gt;, `LdtkIcons`, `null` |
+| class [EntityDefinition](./LDtk.Full/EntityDefinition.md) | Entity definition |
+| class [EntityInstance](./LDtk.Full/EntityInstance.md) | Entity instance |
+| class [EntityReference](./LDtk.Full/EntityReference.md) | This object describes the "location" of an Entity instance in the project worlds. |
+| class [EnumDefinition](./LDtk.Full/EnumDefinition.md) | Enum definition |
+| class [EnumTagValue](./LDtk.Full/EnumTagValue.md) | In a tileset definition, enum based tag infos |
+| class [EnumValueDefinition](./LDtk.Full/EnumValueDefinition.md) | Enum value definition |
+| class [FieldDefinition](./LDtk.Full/FieldDefinition.md) | This section is mostly only intended for the LDtk editor app itself. You can safely ignore it. |
+| class [FieldInstance](./LDtk.Full/FieldInstance.md) | Field instance |
+| enum [Flag](./LDtk.Full/Flag.md) | An array containing various advanced flags (ie. options or other states). Possible values: `DiscardPreCsvIntGrid`, `ExportOldTableOfContentData`, `ExportPreCsvIntGridFormat`, `IgnoreBackupSuggest`, `PrependIndexToLevelFileNames`, `MultiWorlds`, `UseMultilinesType` |
+| class [GridPoint](./LDtk.Full/GridPoint.md) | This object is just a grid-based coordinate used in Field values. |
+| enum [IdentifierStyle](./LDtk.Full/IdentifierStyle.md) | Naming convention for Identifiers (first-letter uppercase, full uppercase etc.) Possible values: `Capitalize`, `Uppercase`, `Lowercase`, `Free` |
+| enum [ImageExportMode](./LDtk.Full/ImageExportMode.md) | "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`, `OneImagePerLevel`, `LayersAndLevels` |
+| class [IntGridValueDefinition](./LDtk.Full/IntGridValueDefinition.md) | IntGrid value definition |
+| class [IntGridValueGroupDefinition](./LDtk.Full/IntGridValueGroupDefinition.md) | IntGrid value group definition |
+| class [IntGridValueInstance](./LDtk.Full/IntGridValueInstance.md) | IntGrid value instance |
+| class [LayerDefinition](./LDtk.Full/LayerDefinition.md) | Layer definition |
+| class [LayerInstance](./LDtk.Full/LayerInstance.md) | Layer instance |
+| class [LDtkFileFull](./LDtk.Full/LDtkFileFull.md) | This is the root of any Project JSON file. It contains: - the project settings, - an array of levels, - a group of definitions (that can probably be safely ignored for most users). |
+| class [LDtkJsonFullSourceGenerator](./LDtk.Full/LDtkJsonFullSourceGenerator.md) | The json source generator for LDtk files. |
+| class [LDtkLevel](./LDtk.Full/LDtkLevel.md) | This section contains all the level data. It can be found in 2 distinct forms, depending on Project current settings: - If "*Separate level files*" is disabled (default): full level data is *embedded* inside the main Project JSON file, - If "*Separate level files*" is enabled: level data is stored in *separate* standalone `.ldtkl` files (one per level). In this case, the main Project JSON file will still contain most level data, except heavy sections, like the `layerInstances` array (which will be null). The `externalRelPath` string points to the `ldtkl` file. A `ldtkl` file is just a JSON file containing exactly what is described below. |
+| class [LDtkTableOfContentEntry](./LDtk.Full/LDtkTableOfContentEntry.md) | ldtk.TableOfContentEntry |
+| class [LDtkWorld](./LDtk.Full/LDtkWorld.md) | IMPORTANT: this type is available as a preview. You can rely on it to update your importers, for when it will be officially available. A World contains multiple levels, and it has its own layout settings. |
+| class [LevelBackgroundPosition](./LDtk.Full/LevelBackgroundPosition.md) | Level background image position info |
+| enum [LimitBehavior](./LDtk.Full/LimitBehavior.md) | Possible values: `DiscardOldOnes`, `PreventAdding`, `MoveLastOne` |
+| enum [LimitScope](./LDtk.Full/LimitScope.md) | If TRUE, the maxCount is a "per world" limit, if FALSE, it's a "per level". Possible values: `PerLayer`, `PerLevel`, `PerWorld` |
+| class [NeighbourLevel](./LDtk.Full/NeighbourLevel.md) | Nearby level info |
+| enum [RenderMode](./LDtk.Full/RenderMode.md) | Possible values: `Rectangle`, `Ellipse`, `Tile`, `Cross` |
+| enum [TextLanguageMode](./LDtk.Full/TextLanguageMode.md) | Possible values: &lt;`null`&gt;, `LangPython`, `LangRuby`, `LangJS`, `LangLua`, `LangC`, `LangHaxe`, `LangMarkdown`, `LangJson`, `LangXml`, `LangLog` |
+| class [TileCustomMetadata](./LDtk.Full/TileCustomMetadata.md) | In a tileset definition, user defined meta-data of a tile. |
+| class [TileInstance](./LDtk.Full/TileInstance.md) | This structure represents a single tile from a given Tileset. |
+| enum [TileMode](./LDtk.Full/TileMode.md) | Defines how tileIds array is used Possible values: `Single`, `Stamp` |
+| enum [TileRenderMode](./LDtk.Full/TileRenderMode.md) | An enum describing how the Entity tile is rendered inside the Entity bounds. Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`, `FullSizeUncropped`, `NineSlice` |
+| class [TilesetDefinition](./LDtk.Full/TilesetDefinition.md) | The `Tileset` definition is the most important part among project definitions. It contains some extra informations about each integrated tileset. If you only had to parse one definition section, that would be the one. |
+| class [TilesetRectangle](./LDtk.Full/TilesetRectangle.md) | This object represents a custom sub rectangle in a Tileset image. |
+| class [TocInstanceData](./LDtk.Full/TocInstanceData.md) | ldtk.TocInstanceData |
+| enum [Type](./LDtk.Full/Type.md) | Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`, `AutoLayer` |
+| enum [When](./LDtk.Full/When.md) | Possible values: `Manual`, `AfterLoad`, `BeforeSave`, `AfterSave` |
+| enum [WorldLayout](./LDtk.Full/WorldLayout.md) | WARNING: this field will move to the `worlds` array after the "multi-worlds" update. It will then be `null`. You can enable the Multi-worlds advanced project option to enable the change immediately. An enum that describes how levels are organized in this project (ie. linearly or in a 2D space). Possible values: &lt;`null`&gt;, `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`, `null` |
+
+## LDtk.Renderer namespace
+
+| public type | description |
+| --- | --- |
+| class [ExampleRenderer](./LDtk.Renderer/ExampleRenderer.md) | Renderer for the ldtkWorld, ldtkLevel, intgrids and entities. This can all be done in your own class if you want to reimplement it and customize it differently this one is mostly here to get you up and running quickly. |
+| struct [RenderedLevel](./LDtk.Renderer/RenderedLevel.md) | The level struct containting the rendered out textures. |
+
+<!-- DO NOT EDIT: generated by xmldocmd for LDtkMonogame.dll -->
