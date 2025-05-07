@@ -5,7 +5,7 @@
     "scripts": {
         "serve": "docsify serve .",
         "build:api": "dotnet xmldocmd ../LDtk.Codegen/bin/Debug/net8.0/LDtkMonogame.dll Api/",
-        "postbuild:api": "mv Api/LDtkMonogame.md Api/README.md",
+        "postbuild:api": "cp Api/LDtkMonogame.md Api/README.md",
         "docsify": "docsify"
     },
     "author": "",

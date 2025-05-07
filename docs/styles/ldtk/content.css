@@ -1,0 +1,51 @@
+.markdown-section pre {
+    -moz-osx-font-smoothing: initial;
+    -webkit-font-smoothing: initial;
+    background-color: #282828;
+    color: #c8c8c8;
+    font-family: "Roboto Mono", Monaco, courier, monospace;
+    position: relative;
+    word-wrap: normal;
+
+    padding: 1em;
+    margin-left: 1rem;
+    background-color: #16181d;
+    box-shadow: 0px 4px 0px rgba(0, 0, 0, 0.3) inset, 0px 0px 16px rgba(0, 0, 0, 0.3) inset;
+
+    color: #c0c0c0;
+}
+
+.medium-zoom-overlay {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.markdown-section tr {
+    border-width: 0px;
+}
+
+.markdown-section tr td:not(:first-child) {
+    border-width: 0px;
+    color: white;
+}
+
+.markdown-section td {
+    border-width: 0px;
+    padding: 16px 8px;
+}
+
+.markdown-section tr {
+    background-color: #2e333f;
+}
+
+.markdown-section tr:nth-child(2n) {
+    background-color: #343a48;
+}
+
+.markdown-section thead > tr {
+    background-color: #e34d00;
+    color: white;
+}
+
+.markdown-section a:hover {
+    color: white;
+}

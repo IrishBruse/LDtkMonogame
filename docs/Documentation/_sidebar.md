@@ -1,3 +1,0 @@
--   [Documentation](/Documentation/README.md)
--   [Codegen](codegen.md)
--   [Content Pipeline](content.md)

@@ -1,5 +1,7 @@
 # Documentation
 
+[![LDtkMonogame.ContentPipeline](https://img.shields.io/nuget/v/LDtkMonogame.ContentPipeline?label=LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+
 Here are the docs for each class in LDtkMonogame
 
 ## World
@@ -33,7 +35,7 @@ If you are using external levels with ldtk. You will need to load the level othe
 
 ```csharp
 LDtkLevel level0 = world.LoadLevel("Level_0"); // Identifier
-LDtkLevel level1 = world.LoadLevel(Worlds.World.Level_1);// Guid/Iid
+LDtkLevel level1 = world.LoadLevel(Worlds.World.Level_1); // Guid/Iid
 ```
 
 Now with `myLevel` you can access all the ldtk layers inside of it.

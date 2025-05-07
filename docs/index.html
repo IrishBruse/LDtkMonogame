@@ -2,91 +2,31 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-
         <title>LDtkMonogame</title>
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-            name="description"
-            content="LDtkMonogame Guides, Documentation & Changelog"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
-        />
+        <meta name="description" content="LDtkMonogame is a library for the LDtk Editor and the Monogame framework this site contains Guides, Documentation & Changelog for it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    </head>
+    <body>
+        <div id="app"></div>
 
-        <script src="/config.js"></script>
+        <script src="/search.paths.js"></script>
+        <script src="/docsify.config.js"></script>
 
-        <script src="//unpkg.com/docsify@4.13.1/lib/plugins/search.min.js"></script>
+        <!-- Docsify v4 -->
+        <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+        <!-- Plugins -->
+        <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
         <script src="//unpkg.com/docsify-copy-code"></script>
 
-        <script
-            defer
-            src="//unpkg.com/docsify@4.13.1/lib/docsify.min.js"
-        ></script>
-        <script
-            defer
-            src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"
-        ></script>
-        <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
 
-        <link rel="icon" type="image/x-icon" href="/favicon.png" />
-
-        <link rel="stylesheet" href="/styles/syntax-coloring.css" />
-        <link rel="stylesheet" href="/styles/content.css" />
-        <link rel="stylesheet" href="/styles/navbar.css" />
-        <link rel="stylesheet" href="/styles/sidebar.css" />
-
-        <link rel="stylesheet" href="/styles/style.css" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-        />
-    </head>
-
-    <body>
-        <nav>
-            <div>
-                <img src="/favicon.png" class="logo" />
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/Documentation/">Documentation</a></li>
-                    <li><a href="/Api/">Api</a></li>
-                    <li><a href="/Changelog">Changelog</a></li>
-                    <li>
-                        <a href="https://ldtk.io/json/#ldtk-ProjectJson"
-                            >Json</a
-                        >
-                    </li>
-                </ul>
-                <div class="icon-navbar">
-                    <a href="https://ldtk.io/">
-                        <img src="/ldtk.png" class="icon" />
-                    </a>
-                    <a href="https://github.com/IrishBruse/LDtkMonogame">
-                        <img
-                            src="https://ldtk.io/wp-content/themes/ldtk/icons/github.svg"
-                            alt="Github"
-                            class="icon"
-                        />
-                    </a>
-                    <a href="https://discord.gg/ZzV7tmqvtH">
-                        <img
-                            src="https://ldtk.io/wp-content/themes/ldtk/icons/discord.svg"
-                            alt="Discord"
-                            class="icon"
-                        />
-                    </a>
-                </div>
-            </div>
-        </nav>
-        <div data-app id="app"></div>
+        <!-- Styles -->
+        <link rel="stylesheet" href="/styles/base.css" />
+        <link rel="stylesheet" href="/styles/ldtk/theme.css" />
+        <link rel="stylesheet" href="/styles/vscode-syntax-coloring.css" />
     </body>
 </html>

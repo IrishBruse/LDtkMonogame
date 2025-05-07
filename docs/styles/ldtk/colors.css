@@ -1,0 +1,17 @@
+:root {
+    --theme-color: #ffcc00;
+    --theme-link-color: var(--theme-color);
+    --theme-link-hover-color: white;
+    --theme-text: #9698ac;
+    --theme-background-color: #1e2229;
+
+    --theme-navbar-background: #17191e;
+
+    --theme-code-background-color: #16181d;
+
+    --theme-sidebar-background-color: #1e2229;
+    --theme-sidebar-border-color: #89898928;
+
+    /* Image Zoom plugin */
+    --plugin-image-zoom-backdrop-background: rgba(0, 0, 0, 0.75);
+}

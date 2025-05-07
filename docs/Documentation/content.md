@@ -1,6 +1,6 @@
 # Content Pipeline Extension
 
-[![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+[![LDtkMonogame.ContentPipeline](https://img.shields.io/nuget/v/LDtkMonogame.ContentPipeline?label=LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
 
 !> **Please make sure you have the `mgcb-editor` at minimum version `3.8.1.303`**
 

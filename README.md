@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/IrishBruse/LDtkMonogame/main/Icon.png" height="128px"/>
+<img src="https://raw.githubusercontent.com/IrishBruse/LDtkMonogame/main/Icon.png" height="128px" data-no-zoom/>
 </p>
 
 <p align="center">
@@ -13,9 +13,9 @@ LDtkMonogame is a level importer for the LDtk level editor
 
 The easiest way to start using LDtkMonogame is to import it into the project using [NuGet package](https://www.nuget.org/packages/LDtkMonogame/).
 
--   [LDtkMonogame](https://www.nuget.org/packages/LDtkMonogame/)
--   [LDtkMonogame.ContentPipeline](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
--   [LDtkMonogame.Codegen](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
+-   [![LDtkMonogame](https://img.shields.io/nuget/v/LDtkMonogame?label=LDtkMonogame)](https://www.nuget.org/packages/LDtkMonogame/)
+-   [![LDtkMonogame.ContentPipeline](https://img.shields.io/nuget/v/LDtkMonogame.ContentPipeline?label=LDtkMonogame.ContentPipeline)](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
+-   [![LDtkMonogame.Codegen](https://img.shields.io/nuget/v/LDtkMonogame.Codegen?label=LDtkMonogame.Codegen)](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 Make sure to import the namespace at the top
 

@@ -1,6 +1,6 @@
 # Codegen
 
-[![LDtkMonogame.Codegen](https://buildstats.info/nuget/LDtkMonogame.Codegen) ](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
+[![LDtkMonogame.Codegen](https://img.shields.io/nuget/v/LDtkMonogame.Codegen?label=LDtkMonogame.Codegen) ](https://www.nuget.org/packages/LDtkMonogame.Codegen/)
 
 LDtk.Codegen package is a code generator that will create c# files for your entities from `.ldtk` files.
 This means you can make the variable and set them in ldtk without having to copy the names into a script just so you can use them in your code.
@@ -40,20 +40,20 @@ Or using the new ldtk command runner feature you can setup the command to be run
 
 ## ldtkgen flags
 
-- -i, --input               **Required**. Input LDtk world file.
+-   -i, --input **Required**. Input LDtk world file.
 
-- -o, --output              **(Default: LDtkTypes/)** The output folder/file depending on if single file is set.
+-   -o, --output **(Default: LDtkTypes/)** The output folder/file depending on if single file is set.
 
-- -n, --namespace           **(Default: LDtkTypes)** Namespace to put the generated files into.
+-   -n, --namespace **(Default: LDtkTypes)** Namespace to put the generated files into.
 
-- --LevelClassName          **(Default: LDtkLevelData)** The name to give the custom level file.
+-   --LevelClassName **(Default: LDtkLevelData)** The name to give the custom level file.
 
-- --PointAsVector2          **(Default: false)** Convert any Point fields or Point[] to Vector2 or Vector2[]
+-   --PointAsVector2 **(Default: false)** Convert any Point fields or Point[] to Vector2 or Vector2[]
 
-- --FileNameInNamespace     **(Default: false)** Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'
+-   --FileNameInNamespace **(Default: false)** Adds the file name of the world to the namespace eg 'Example.ldtk' will become 'namespace LDtkTypes.Example;'
 
-- --BlockScopeNamespace     **(Default: false)** Changes namespace to use block scoped namespace instead of newer c# file scoped namespace.`
+-   --BlockScopeNamespace **(Default: false)** Changes namespace to use block scoped namespace instead of newer c# file scoped namespace.`
 
-- --help                    Display the help screen.
+-   --help Display the help screen.
 
-- --version                 Display version information.
+-   --version Display version information.

@@ -1,5 +1,32 @@
 .sidebar {
+    background-color: var(--theme-background-color);
+    color: #c8c8c8;
+}
+.sidebar li {
+    margin: 6px 15px 6px 0;
+}
+.sidebar ul li a {
+    color: #c8c8c8;
+    font-size: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+.sidebar ul li ul {
     padding: 0;
+}
+.sidebar ul li.active > a {
+    color: var(--theme-color);
+    font-weight: 600;
+}
+
+.sidebar {
+    padding: 0;
+    margin-top: 4rem;
     position: absolute;
     transition: transform 250ms linear, transform 250ms linear;
     width: 300px;
@@ -50,6 +77,13 @@
 .sidebar li > p {
     font-weight: 700;
     margin: 0;
+}
+
+.sidebar > h1 {
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
 }
 
 .sidebar ul,
@@ -112,7 +146,7 @@ body.sticky .sidebar-toggle {
 }
 
 .sidebar-nav > ul > li a {
-    color: #ffed82;
+    color: var(--theme-hightlight-color);
     font-weight: bold;
 
     border-top-right-radius: 0;
