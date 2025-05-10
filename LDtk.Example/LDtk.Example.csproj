@@ -21,7 +21,8 @@
     </ItemGroup> -->
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i Content/World.ldtk -o ./LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i Shooter/Content/World.ldtk -o ./LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i PlatformerContent/World.ldtk -o ./LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2" />
     </Target>
 
     <ItemGroup>

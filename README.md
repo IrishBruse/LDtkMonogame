@@ -6,6 +6,11 @@
     Looking for support join the discord<br><br>
     <a href="https://discord.gg/ZzV7tmqvtH"><img src="https://img.shields.io/badge/Discord-LDtkMonogame-yellow" alt="Discord Link"></a>
 </p>
+<p align="center">
+  <a href="https://github.com/deepnight/ldtk"> <img alt="LDtk Version Support" src="https://img.shields.io/github/v/release/deepnight/ldtk?&label=Supports%20LDtk&color=yellow"></a>
+  <a href="https://www.nuget.org/packages/LDtkMonogame/"><img src="https://img.shields.io/nuget/v/LDtkMonogame?" /></a>
+  <a href="https://www.nuget.org/packages/LDtkMonogame/"><img alt="Nuget" src="https://img.shields.io/nuget/dt/LDtkMonogame"></a>
+</p>
 <br>
 LDtkMonogame is a level importer for the LDtk level editor
 
