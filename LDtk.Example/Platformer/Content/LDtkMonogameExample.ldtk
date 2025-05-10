@@ -14,11 +14,11 @@
 	"nextUid": 182,
 	"identifierStyle": "Capitalize",
 	"toc": [],
-	"worldLayout": "Free",
-	"worldGridWidth": 256,
-	"worldGridHeight": 256,
-	"defaultLevelWidth": 256,
-	"defaultLevelHeight": 256,
+	"worldLayout": null,
+	"worldGridWidth": null,
+	"worldGridHeight": null,
+	"defaultLevelWidth": null,
+	"defaultLevelHeight": null,
 	"defaultPivotX": 0.5,
 	"defaultPivotY": 1,
 	"defaultGridSize": 16,
@@ -33,7 +33,7 @@
 	"imageExportMode": "None",
 	"exportLevelBg": true,
 	"pngFilePattern": null,
-	"backupOnSave": true,
+	"backupOnSave": false,
 	"backupLimit": 10,
 	"backupRelPath": null,
 	"levelNamePattern": "Level_%idx",
@@ -42,7 +42,7 @@
 		"command": "ldtkgen -i LDtkMonogameExample.ldtk -o ../LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2",
 		"when": "AfterSave"
 	}],
-	"flags": [ "ExportOldTableOfContentData", "PrependIndexToLevelFileNames" ],
+	"flags": [ "ExportOldTableOfContentData", "PrependIndexToLevelFileNames", "MultiWorlds" ],
 	"defs": { "layers": [
 		{
 			"__type": "Entities",
@@ -2595,7 +2595,8 @@
 			"tilesetUid": null
 		}
 	] },
-	"levels": [
+	"levels": [],
+	"worlds": [{ "iid": "0109b6f0-1030-11f0-9e8b-5ffd4f977b5f", "identifier": "World", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
 		{
 			"identifier": "Level1",
 			"iid": "01185cf0-1030-11f0-9e8b-cdcd24ff26d3",
@@ -2807,7 +2808,6 @@
 			"layerInstances": null,
 			"__neighbours": [ { "levelIid": "011acdf0-1030-11f0-9e8b-49e4a63a1601", "dir": "sw" }, { "levelIid": "011b9140-1030-11f0-9e8b-c589166d1a81", "dir": "s" } ]
 		}
-	],
-	"worlds": [],
+	] }],
 	"dummyWorldIid": "0109b6f0-1030-11f0-9e8b-5ffd4f977b5f"
 }

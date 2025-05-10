@@ -1,11 +1,12 @@
-namespace Platformer.Player;
+namespace LDtkMonogameExample.Platformer.Player;
+
 using System;
 
 using Microsoft.Xna.Framework;
 
 public class Animator
 {
-    public Action onEnteredDoor;
+    public Action OnEnteredDoor;
 
     float animationTimer;
     int animationFrame;
@@ -87,7 +88,7 @@ public class Animator
                 }
                 else
                 {
-                    onEnteredDoor?.Invoke();
+                    OnEnteredDoor?.Invoke();
                 }
 
                 break;

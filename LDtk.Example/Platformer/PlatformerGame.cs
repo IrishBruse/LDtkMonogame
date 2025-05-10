@@ -1,7 +1,9 @@
-﻿namespace Platformer;
+﻿namespace LDtkMonogameExample.Platformer;
 
 using System;
 using System.Collections.Generic;
+
+using global::Platformer;
 
 using LDtk;
 
@@ -68,7 +70,7 @@ public class PlatformerGame : BaseExample
 
         player = new PlayerController(spawnPoint);
 
-        player.animator.onEnteredDoor += () =>
+        player.animator.OnEnteredDoor += () =>
         {
             player.animator.SetState(Animator.Animation.ExitDoor);
             levelManager.ChangeLevelTo(player.door.LevelIdentifier);
@@ -231,7 +233,7 @@ public class PlatformerGame : BaseExample
             EntityRendering();
 
             spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
-            (player.Pivot * player.Size) + new Vector2(player.fliped ? -8 : 8, 0),
+            player.Pivot * player.Size + new Vector2(player.fliped ? -8 : 8, 0),
             1,
             player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
             0.1f);

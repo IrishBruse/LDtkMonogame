@@ -202,8 +202,7 @@
 					"__worldX": 53,
 					"__worldY": -229
 				}
-			],
-			"intGrid": []
+			]
 		},
 		{
 			"__identifier": "Decorations",
@@ -231,8 +230,7 @@
 				{ "px": [96,32], "src": [0,0], "f": 0, "t": 0, "d": [10], "a": 1 },
 				{ "px": [96,64], "src": [32,64], "f": 0, "t": 15, "d": [17], "a": 1 }
 			],
-			"entityInstances": [],
-			"intGrid": []
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Level",
@@ -300,58 +298,7 @@
 			"seed": 5611462,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [],
-			"intGrid": [
-				{ "coordId": 0, "v": 0 },
-				{ "coordId": 1, "v": 0 },
-				{ "coordId": 2, "v": 0 },
-				{ "coordId": 3, "v": 0 },
-				{ "coordId": 4, "v": 0 },
-				{ "coordId": 5, "v": 0 },
-				{ "coordId": 6, "v": 0 },
-				{ "coordId": 7, "v": 0 },
-				{ "coordId": 8, "v": 0 },
-				{ "coordId": 9, "v": -1 },
-				{ "coordId": 10, "v": -1 },
-				{ "coordId": 11, "v": -1 },
-				{ "coordId": 12, "v": 0 },
-				{ "coordId": 13, "v": 0 },
-				{ "coordId": 14, "v": 0 },
-				{ "coordId": 15, "v": -1 },
-				{ "coordId": 16, "v": -1 },
-				{ "coordId": 17, "v": -1 },
-				{ "coordId": 18, "v": -1 },
-				{ "coordId": 19, "v": -1 },
-				{ "coordId": 20, "v": 0 },
-				{ "coordId": 21, "v": 0 },
-				{ "coordId": 22, "v": 1 },
-				{ "coordId": 23, "v": -1 },
-				{ "coordId": 24, "v": -1 },
-				{ "coordId": 25, "v": -1 },
-				{ "coordId": 26, "v": 1 },
-				{ "coordId": 27, "v": 0 },
-				{ "coordId": 28, "v": 0 },
-				{ "coordId": 29, "v": -1 },
-				{ "coordId": 30, "v": -1 },
-				{ "coordId": 31, "v": -1 },
-				{ "coordId": 32, "v": -1 },
-				{ "coordId": 33, "v": -1 },
-				{ "coordId": 34, "v": 0 },
-				{ "coordId": 35, "v": 0 },
-				{ "coordId": 36, "v": 0 },
-				{ "coordId": 37, "v": 0 },
-				{ "coordId": 38, "v": 0 },
-				{ "coordId": 39, "v": 0 },
-				{ "coordId": 40, "v": 0 },
-				{ "coordId": 41, "v": 0 },
-				{ "coordId": 42, "v": 0 },
-				{ "coordId": 43, "v": 0 },
-				{ "coordId": 44, "v": 0 },
-				{ "coordId": 45, "v": 0 },
-				{ "coordId": 46, "v": 0 },
-				{ "coordId": 47, "v": 0 },
-				{ "coordId": 48, "v": 0 }
-			]
+			"entityInstances": []
 		}
 	],
 	"__neighbours": []

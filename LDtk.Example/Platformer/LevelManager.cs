@@ -1,4 +1,4 @@
-namespace Platformer;
+namespace LDtkMonogameExample.Platformer;
 
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ public class LevelManager
     public ContentManager content;
 
     Vector2 center;
-    readonly LDtkRenderer renderer;
+    readonly ExampleRenderer renderer;
 
     public LevelManager(LDtkWorld world, SpriteBatch spriteBatch)
     {

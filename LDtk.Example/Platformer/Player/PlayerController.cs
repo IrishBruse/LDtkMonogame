@@ -1,8 +1,10 @@
-namespace Platformer.Player;
+namespace LDtkMonogameExample.Platformer.Player;
+
 using System;
-using System.Collections.Generic;
+
 
 using AABB;
+
 
 using LDtk;
 
@@ -135,11 +137,11 @@ public class PlayerController : ILDtkEntity
         grounded = false;
 
         LDtkIntGrid collisions = level.GetIntGrid("Level");
-        Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + (velocity * deltaTime)) - level.Position.ToVector2();
-        Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + (velocity * deltaTime)) - level.Position.ToVector2();
+        Vector2 topleft = Vector2.Min(collider.TopLeft, collider.TopLeft + velocity * deltaTime) - level.Position.ToVector2();
+        Vector2 bottomRight = Vector2.Max(collider.BottomRight, collider.BottomRight + velocity * deltaTime) - level.Position.ToVector2();
 
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
-        Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));
+        Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + Vector2.One * collisions.TileSize);
 
         tiles = new List<(Box rect, long type)>();
 
