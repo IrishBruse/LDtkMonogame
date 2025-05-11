@@ -32,8 +32,6 @@ public class GameBase : Game
 
     protected override void Initialize()
     {
-        Window.Title = "LDtkMonogame - ";
-
         Globals.Pixel = new Texture2D(GraphicsDevice, 1, 1);
         Globals.Pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
 
@@ -80,6 +78,7 @@ public class GameBase : Game
     {
         if (Keyboard.GetState().IsKeyDown(Keys.Escape))
         {
+            Window.Title = "LDtkMonogame - Menu";
             currentGame = null;
         }
 

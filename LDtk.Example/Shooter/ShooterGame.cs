@@ -30,7 +30,6 @@ public class ShooterGame : IMonogame
     Texture2D spriteSheet;
 
     // Monogame Stuff
-    ContentManager content = Globals.Content;
     SpriteBatch spriteBatch = Globals.SpriteBatch;
     GraphicsDevice graphicsDevice = Globals.GraphicsDevice;
     GameWindow window = Globals.Window;

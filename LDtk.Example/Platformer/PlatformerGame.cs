@@ -42,9 +42,12 @@ public class PlatformerGame : IMonogame
 
     ContentManager content = Globals.Content;
     SpriteBatch spriteBatch = Globals.SpriteBatch;
+    GameWindow window = Globals.Window;
 
     public void Initialize()
     {
+        window.Title = "LDtkMonogame - Platformer";
+
         camera = new Camera(Globals.GraphicsDevice);
 
         LDtkFile worldFile = LDtkFile.FromFile("LDtkMonogameExample", content);
