@@ -1,6 +1,5 @@
 ﻿namespace LDtkMonogameExample.Platformer;
 
-using System;
 using System.Collections.Generic;
 
 
@@ -11,13 +10,14 @@ using LDtkMonogameExample.AABB;
 using LDtkTypes.Platformer;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 using Platformer.Player;
 
 
-public class PlatformerGame : GameBase
+public class PlatformerGame : IMonogame
 {
     LDtkWorld world;
     LevelManager levelManager;
@@ -40,21 +40,18 @@ public class PlatformerGame : GameBase
     Texture2D fontTexture;
     Texture2D playerTexture;
 
-    public PlatformerGame() : base() { }
+    ContentManager content = Globals.Content;
+    SpriteBatch spriteBatch = Globals.SpriteBatch;
 
-    protected override void Initialize()
+    public void Initialize()
     {
-        base.Initialize();
+        camera = new Camera(Globals.GraphicsDevice);
 
-        Window.Title = "LDtkMonogame - Platformer";
-
-        camera = new Camera(GraphicsDevice);
-
-        LDtkFile worldFile = LDtkFile.FromFile("LDtkMonogameExample", Content);
+        LDtkFile worldFile = LDtkFile.FromFile("LDtkMonogameExample", content);
 
         world = worldFile.LoadWorld(Worlds.World.Iid);
 
-        levelManager = new LevelManager(world, spriteBatch, Content);
+        levelManager = new LevelManager(world, spriteBatch, content);
 
         levelManager.OnEnterNewLevel += (level) =>
         {
@@ -79,14 +76,14 @@ public class PlatformerGame : GameBase
             player.Position = destinationDoor.Position - new Vector2(0, 15);
         };
 
-        doorTexture = Content.Load<Texture2D>("Art/Door");
-        playerTexture = Content.Load<Texture2D>("Art/Characters/KingHuman");
-        boxTexture = Content.Load<Texture2D>("Art/Box/Box");
-        diamondTexture = Content.Load<Texture2D>("Art/Diamond");
-        fontTexture = Content.Load<Texture2D>("Art/Gui/Font");
+        doorTexture = content.Load<Texture2D>("Art/Door");
+        playerTexture = content.Load<Texture2D>("Art/Characters/KingHuman");
+        boxTexture = content.Load<Texture2D>("Art/Box/Box");
+        diamondTexture = content.Load<Texture2D>("Art/Diamond");
+        fontTexture = content.Load<Texture2D>("Art/Gui/Font");
     }
 
-    protected override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -109,7 +106,7 @@ public class PlatformerGame : GameBase
         }
 
         camera.Position = player.Position;
-        camera.Zoom = 2;
+        camera.Zoom = Globals.PixelScale;
         camera.Update();
 
         levelManager.MoveTo(player.Position);
@@ -224,9 +221,9 @@ public class PlatformerGame : GameBase
         }
     }
 
-    protected override void Draw(GameTime gameTime)
+    public void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(levelManager.CurrentLevel._BgColor);
+        Globals.GraphicsDevice.Clear(levelManager.CurrentLevel._BgColor);
 
 
         spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: camera.Transform);
@@ -362,4 +359,5 @@ public class PlatformerGame : GameBase
             spriteBatch.DrawPoint(player.Attack.Position, Color.Black);
         }
     }
+
 }

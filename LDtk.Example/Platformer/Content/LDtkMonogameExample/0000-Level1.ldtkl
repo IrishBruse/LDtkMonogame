@@ -321,19 +321,19 @@
 				},
 				{
 					"__identifier": "PlayerSpawn",
-					"__grid": [15,6],
+					"__grid": [2,4],
 					"__pivot": [0.5,0.5],
 					"__tags": [],
 					"__tile": null,
 					"__smartColor": "#ED3131",
-					"iid": "25a276c0-1030-11f0-8512-2370ede74ca7",
+					"iid": "1f021c90-1030-11f0-8512-3110c1d0ff8a",
 					"width": 16,
 					"height": 16,
 					"defUid": 70,
-					"px": [496,208],
+					"px": [77,141],
 					"fieldInstances": [],
-					"__worldX": 496,
-					"__worldY": 208
+					"__worldX": 77,
+					"__worldY": 141
 				}
 			]
 		},

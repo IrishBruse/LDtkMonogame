@@ -39,6 +39,7 @@ public class PlayerEntity
     readonly GunEntity gun;
     bool hasGun;
     KeyboardState oldKeyboard;
+    MouseState oldMouse;
     Vector2 startPosition;
     float startTime;
     bool shoot;
@@ -59,15 +60,15 @@ public class PlayerEntity
     {
         collider.Position = Position;
         KeyboardState keyboard = Keyboard.GetState();
-
+        MouseState mouse = Mouse.GetState();
         int h = (keyboard.IsKeyDown(Keys.A) || keyboard.IsKeyDown(Keys.Left) ? -1 : 0) + (keyboard.IsKeyDown(Keys.D) || keyboard.IsKeyDown(Keys.Right) ? +1 : 0);
 
-        if ((keyboard.IsKeyDown(Keys.W) || keyboard.IsKeyDown(Keys.Up)) && grounded)
+        if (keyboard.IsKeyDown(Keys.Space) && !oldKeyboard.IsKeyDown(Keys.Space) && grounded)
         {
             velocity -= new Vector2(0, 90);
         }
 
-        if (keyboard.IsKeyDown(Keys.Space) && oldKeyboard.IsKeyUp(Keys.Space) && hasGun)
+        if (mouse.LeftButton == ButtonState.Pressed && oldMouse.LeftButton == ButtonState.Released && hasGun)
         {
             OnShoot?.Invoke();
             startTime = totalTime;
@@ -109,6 +110,7 @@ public class PlayerEntity
         Position += velocity * deltaTime;
 
         oldKeyboard = keyboard;
+        oldMouse = mouse;
     }
 
     public void Draw(float totalTime)

@@ -73,8 +73,8 @@ public class EnemyEntity(Enemy data, Texture2D texture, ExampleRenderer renderer
         {
             for (int i = 0; i < data.Wander.Length; i++)
             {
-                renderer.SpriteBatch.Draw(ShooterGame.Pixel, data.Position, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                renderer.SpriteBatch.Draw(ShooterGame.Pixel, data.Wander[i], null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                renderer.SpriteBatch.Draw(Globals.Pixel, data.Position, null, Color.Red, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                renderer.SpriteBatch.Draw(Globals.Pixel, data.Wander[i], null, Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
         }
 

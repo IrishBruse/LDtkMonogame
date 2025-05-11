@@ -11,10 +11,11 @@ using LDtkMonogameExample.Shooter.Entities;
 using LDtkTypes.Shooter;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class ShooterGame : GameBase
+public class ShooterGame : IMonogame
 {
     // LDtk stuff
 
@@ -29,8 +30,10 @@ public class ShooterGame : GameBase
     Texture2D spriteSheet;
 
     // Monogame Stuff
-
-
+    ContentManager content = Globals.Content;
+    SpriteBatch spriteBatch = Globals.SpriteBatch;
+    GraphicsDevice graphicsDevice = Globals.GraphicsDevice;
+    GameWindow window = Globals.Window;
 
     public static bool DebugF1 { get; set; }
     public static bool DebugF2 { get; set; }
@@ -40,13 +43,11 @@ public class ShooterGame : GameBase
 
     public ShooterGame() : base() { }
 
-    protected override void Initialize()
+    public void Initialize()
     {
-        base.Initialize();
+        window.Title = "LDtkMonogame - Shooter";
 
-        Window.Title = "LDtkMonogame - Shooter";
-
-        camera = new Camera(GraphicsDevice);
+        camera = new Camera(graphicsDevice);
 
         // renderer = new ExampleRenderer(spriteBatch, Content);
         // file = LDtkFile.FromFile("World", Content);
@@ -55,7 +56,7 @@ public class ShooterGame : GameBase
         // None ContentManager version
         renderer = new ExampleRenderer(spriteBatch);
         file = LDtkFile.FromFile("Shooter/Content/World.ldtk");
-        spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
+        spriteSheet = Texture2D.FromFile(graphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 
         world = file.LoadWorld(Worlds.World.Iid);
 
@@ -116,7 +117,7 @@ public class ShooterGame : GameBase
         };
     }
 
-    protected override void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
         DebugInput(oldKeyboard);
 
@@ -125,7 +126,7 @@ public class ShooterGame : GameBase
 
         camera.Update();
         camera.Position = new Vector2(player.Position.X, 120);
-        camera.Zoom = pixelScale;
+        camera.Zoom = Globals.PixelScale;
 
         gun.Update(totalTime);
 
@@ -161,15 +162,13 @@ public class ShooterGame : GameBase
         player.Update(deltaTime, totalTime);
 
         oldKeyboard = Keyboard.GetState();
-
-        base.Update(gameTime);
     }
 
-    protected override void Draw(GameTime gameTime)
+    public void Draw(GameTime gameTime)
     {
         float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
-        GraphicsDevice.Clear(file.BgColor);
+        graphicsDevice.Clear(file.BgColor);
 
         spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: camera.Transform);
         {
@@ -195,8 +194,6 @@ public class ShooterGame : GameBase
             }
         }
         spriteBatch.End();
-
-        base.Draw(gameTime);
     }
 
     static void DebugInput(KeyboardState old)
