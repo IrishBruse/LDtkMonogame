@@ -144,7 +144,7 @@ public class PlatformerGame : GameBase
                     return;
                 }
             }
-            else if (player.Collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
+            else if (player.Collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size * 2, diamonds[i].Pivot)))
             {
                 diamondsCollected++;
                 diamonds[i].Collected = true;
@@ -153,7 +153,6 @@ public class PlatformerGame : GameBase
             {
                 int currentFrame = (int)(totalTime * 10 % 10) * (int)diamonds[i].Size.X;
                 diamonds[i].Tile = new Rectangle(currentFrame, 0, (int)diamonds[i].Size.X, (int)diamonds[i].Size.Y);
-                diamonds[i].Position += new Vector2(0, -MathF.Sin(totalTime * 2) * 0.1f);
             }
         }
     }
