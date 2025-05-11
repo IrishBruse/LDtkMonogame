@@ -4,10 +4,10 @@ using System;
 
 using LDtk.Renderer;
 
-using LDtkMonogameExample;
 using LDtkMonogameExample.AABB;
+using LDtkMonogameExample.Shooter;
 
-using LDtkTypes;
+using LDtkTypes.Shooter;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,7 +49,7 @@ public class GunEntity(Gun_Pickup data, Texture2D texture, ExampleRenderer rende
 
         renderer.RenderEntity(data, texture);
 
-        if (Entry.DebugF3)
+        if (ShooterGame.DebugF3)
         {
             renderer.SpriteBatch.DrawRect(Collider, new Color(128, 255, 0, 128));
         }

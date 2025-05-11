@@ -1,4 +1,4 @@
-namespace LDtkTypes;
+namespace LDtkTypes.Shooter;
 
 // This file was automatically generated, any modifications will be lost!
 

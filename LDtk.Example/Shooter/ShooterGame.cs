@@ -1,4 +1,4 @@
-namespace LDtkMonogameExample;
+namespace LDtkMonogameExample.Shooter;
 
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,13 @@ using LDtk.Renderer;
 
 using LDtkMonogameExample.Entities;
 
-using LDtkTypes;
+using LDtkTypes.Shooter;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class Entry : Game
+public class ShooterGame : Game
 {
     // LDtk stuff
 
@@ -42,7 +42,7 @@ public class Entry : Game
 
     KeyboardState oldKeyboard;
 
-    public Entry()
+    public ShooterGame()
     {
         graphics = new GraphicsDeviceManager(this);
 
@@ -83,7 +83,7 @@ public class Entry : Game
 
         // None ContentManager version
         renderer = new ExampleRenderer(spriteBatch);
-        file = LDtkFile.FromFile("Content/World.ldtk");
+        file = LDtkFile.FromFile("Shooter/Content/World.ldtk");
         spriteSheet = Texture2D.FromFile(GraphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 
         world = file.LoadWorld(Worlds.World.Iid);
@@ -91,7 +91,7 @@ public class Entry : Game
         LDtkLevel level0 = world.LoadLevel("Level_0");
         LDtkLevel level1 = world.LoadLevel(Worlds.World.Level_1);
 
-        CustomLevelDataName levelData = level1.GetCustomFields<CustomLevelDataName>();
+        ShooterLevelDataName levelData = level1.GetCustomFields<ShooterLevelDataName>();
 
         Console.WriteLine(levelData.Float);
         Console.WriteLine(levelData.Multilines);

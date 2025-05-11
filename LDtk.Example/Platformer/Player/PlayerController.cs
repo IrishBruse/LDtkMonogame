@@ -1,14 +1,13 @@
 namespace LDtkMonogameExample.Platformer.Player;
 
 using System;
-
+using System.Collections.Generic;
 
 using AABB;
 
-
 using LDtk;
 
-using LDtkTypes;
+using LDtkTypes.Platformer;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -37,12 +36,15 @@ public class PlayerController : ILDtkEntity
     public Vector2 Pivot { get; set; }
     public Rectangle Tile { get; set; }
     public Color EditorVisualColor { get; set; }
+    public Guid Iid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    int ILDtkEntity.Uid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Color SmartColor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public PlayerController(PlayerSpawn spawn)
     {
         Position = spawn.Position;
         Pivot = spawn.Pivot;
-        EditorVisualColor = spawn.EditorVisualColor;
+        EditorVisualColor = spawn.SmartColor;
         Tile = new Rectangle(0, 0, 78, 58);
         Size = new Vector2(78, 58);
 

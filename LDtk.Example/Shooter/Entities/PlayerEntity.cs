@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using LDtk;
 using LDtk.Renderer;
 
-using LDtkMonogameExample;
 using LDtkMonogameExample.AABB;
+using LDtkMonogameExample.Shooter;
 
-using LDtkTypes;
+using LDtkTypes.Shooter;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -126,7 +126,7 @@ public class PlayerEntity
             renderer.SpriteBatch.Draw(texture, Position + new Vector2(Flip ? -23 : 7, -5.5f), new Rectangle(48, 0, 16, 16), Color.White, 0, Vector2.Zero, Vector2.One, (SpriteEffects)(Flip ? 1 : 0), 0);
         }
 
-        if (Entry.DebugF2)
+        if (ShooterGame.DebugF2)
         {
             for (int i = 0; i < tiles.Count; i++)
             {

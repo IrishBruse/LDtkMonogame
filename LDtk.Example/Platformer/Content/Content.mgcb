@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\..\LDtk.ContentPipeline\bin\Debug\netcoreapp3.1\LDtk.ContentPipeline.dll
+/reference:../../../LDtk.ContentPipeline/bin/Debug/net8.0/LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -147,8 +147,8 @@
 /build:Art/Tilesets/Terrain.png
 
 #begin LDtkMonogameExample.ldtk
-/importer:LDtkWorldImporter
-/processor:LDtkWorldProcessor
+/importer:LDtkFileImporter
+/processor:LDtkFileProcessor
 /build:LDtkMonogameExample.ldtk
 
 #begin LDtkMonogameExample/0000-Level1.ldtkl

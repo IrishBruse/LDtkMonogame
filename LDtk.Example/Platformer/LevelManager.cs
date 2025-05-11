@@ -15,11 +15,11 @@ public class LevelManager
 {
     public LDtkLevel CurrentLevel { get; private set; }
 
-    public Action<LDtkLevel> onEnterNewLevel;
+    public Action<LDtkLevel> OnEnterNewLevel;
     readonly List<string> levelsVisited = new();
     readonly LDtkWorld world;
 
-    public ContentManager content;
+    public ContentManager Content;
 
     Vector2 center;
     readonly ExampleRenderer renderer;
@@ -27,14 +27,14 @@ public class LevelManager
     public LevelManager(LDtkWorld world, SpriteBatch spriteBatch)
     {
         this.world = world;
-        renderer = new LDtkRenderer(spriteBatch);
+        renderer = new ExampleRenderer(spriteBatch);
     }
 
     public LevelManager(LDtkWorld world, SpriteBatch spriteBatch, ContentManager content)
     {
         this.world = world;
-        this.content = content;
-        renderer = new LDtkRenderer(spriteBatch, content);
+        this.Content = content;
+        renderer = new ExampleRenderer(spriteBatch, content);
     }
 
     public void Update()
@@ -44,7 +44,7 @@ public class LevelManager
         {
             for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
             {
-                LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid);
+                LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelIid);
                 renderer.PrerenderLevel(neighbour);
 
                 if (neighbour.Contains(center))
@@ -61,7 +61,7 @@ public class LevelManager
 
         for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
         {
-            LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelUid);
+            LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelIid);
             renderer.RenderPrerenderedLevel(neighbour);
         }
     }
@@ -74,7 +74,7 @@ public class LevelManager
 
         for (int ii = 0; ii < CurrentLevel._Neighbours.Length; ii++)
         {
-            LDtkLevel neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelUid);
+            LDtkLevel neighbourLevel = world.LoadLevel(CurrentLevel._Neighbours[ii].LevelIid);
             renderer.PrerenderLevel(neighbourLevel);
         }
 
@@ -91,7 +91,7 @@ public class LevelManager
         if (levelsVisited.Contains(CurrentLevel.Identifier) == false)
         {
             levelsVisited.Add(CurrentLevel.Identifier);
-            onEnterNewLevel?.Invoke(CurrentLevel);
+            OnEnterNewLevel?.Invoke(CurrentLevel);
         }
     }
 }

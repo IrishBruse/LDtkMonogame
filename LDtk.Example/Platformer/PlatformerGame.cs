@@ -7,7 +7,9 @@ using global::Platformer;
 
 using LDtk;
 
-using LDtkTypes;
+using LDtkMonogameExample.AABB;
+
+using LDtkTypes.Platformer;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,11 +53,13 @@ public class PlatformerGame : BaseExample
 
         camera = new Camera(GraphicsDevice);
 
-        world = LDtkWorld.LoadWorld("LDtkMonogameExample", Content);
+        LDtkFile worldFile = LDtkFile.FromFile("LDtkMonogameExample", Content);
+
+        world = worldFile.LoadWorld(Worlds.World.Iid);
 
         levelManager = new LevelManager(world, spriteBatch, Content);
 
-        levelManager.onEnterNewLevel += (level) =>
+        levelManager.OnEnterNewLevel += (level) =>
         {
             doors.AddRange(level.GetEntities<Door>());
             crates.AddRange(level.GetEntities<Crate>());
@@ -109,7 +113,7 @@ public class PlatformerGame : BaseExample
 
         camera.Position = player.Position;
         camera.Zoom = 2;
-        camera.Update(gameTime);
+        camera.Update();
 
         levelManager.MoveTo(player.Position);
         levelManager.Update();
@@ -226,7 +230,8 @@ public class PlatformerGame : BaseExample
     {
         GraphicsDevice.Clear(levelManager.CurrentLevel._BgColor);
 
-        spriteBatch.Begin(camera, SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+
+        spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, transformMatrix: camera.Transform);
         {
             levelManager.Draw();
 
@@ -334,19 +339,19 @@ public class PlatformerGame : BaseExample
         {
             for (int i = 0; i < doors.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].SmartColor);
                 spriteBatch.DrawPoint(doors[i].Position, Color.Black);
             }
 
             for (int i = 0; i < crates.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].SmartColor);
                 spriteBatch.DrawPoint(crates[i].Position, Color.Black);
             }
 
             for (int i = 0; i < diamonds.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].EditorVisualColor);
+                spriteBatch.DrawRect(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].SmartColor);
                 spriteBatch.DrawPoint(diamonds[i].Position, Color.Black);
             }
 

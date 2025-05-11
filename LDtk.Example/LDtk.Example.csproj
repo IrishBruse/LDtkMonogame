@@ -12,6 +12,7 @@
     <ItemGroup>
         <ProjectReference Include="..\LDtk\LDtk.csproj" />
         <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.3" />
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.3" />
     </ItemGroup>
 
     <!-- <ItemGroup>
@@ -21,13 +22,13 @@
     </ItemGroup> -->
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i Shooter/Content/World.ldtk -o ./LDtkTypes/ --LevelClassName ShooterLevelDataName --PointAsVector2" />
-        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -i Platformer/Content/LDtkMonogameExample.ldtk -o ./LDtkTypes/ --LevelClassName PlatformerLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Shooter' -i Shooter/Content/World.ldtk -o ./LDtkTypes/ --LevelClassName ShooterLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Platformer' -i Platformer/Content/LDtkMonogameExample.ldtk -o ./LDtkTypes/ --LevelClassName PlatformerLevelDataName --PointAsVector2" />
     </Target>
 
     <ItemGroup>
-        <MonoGameContentReference Include="Content\Content.mgcb" />
-        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.3" />
+        <MonoGameContentReference Include="Shooter\Content\Content.mgcb" />
+        <MonoGameContentReference Include="Platformer\Content\Content.mgcb" />
     </ItemGroup>
 
 </Project>
