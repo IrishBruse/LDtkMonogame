@@ -223,13 +223,13 @@ public class ExampleRenderer : IDisposable
     /// <summary> Render the prerendered level you created from PrerenderLevel(). </summary>
     /// <param name="level">Level to prerender</param>
     /// <exception cref="LDtkException"></exception>
-    public void RenderPrerenderedLevel(LDtkLevel level)
+    public void RenderPrerenderedLevel(LDtkLevel level, float layerDepth = 0)
     {
         if (PrerenderedLevels.TryGetValue(level.Identifier, out RenderedLevel prerenderedLevel))
         {
             for (int i = 0; i < prerenderedLevel.Layers.Length; i++)
             {
-                SpriteBatch.Draw(prerenderedLevel.Layers[i], level.Position.ToVector2(), Color.White);
+                SpriteBatch.Draw(prerenderedLevel.Layers[i], level.Position.ToVector2(), null, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, layerDepth);
             }
         }
         else

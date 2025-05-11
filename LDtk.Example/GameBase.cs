@@ -89,7 +89,6 @@ public class GameBase : Game
             return;
         }
 
-
         MouseState currentMouseState = Mouse.GetState();
 
         if (currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed && box1Rect.Contains(currentMouseState.Position))

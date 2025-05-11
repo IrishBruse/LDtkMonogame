@@ -55,12 +55,12 @@ public class LevelManager : IDisposable
 
     public void Draw()
     {
-        renderer.RenderPrerenderedLevel(CurrentLevel);
+        renderer.RenderPrerenderedLevel(CurrentLevel, 0.2f);
 
         for (int i = 0; i < CurrentLevel._Neighbours.Length; i++)
         {
             LDtkLevel neighbour = world.LoadLevel(CurrentLevel._Neighbours[i].LevelIid);
-            renderer.RenderPrerenderedLevel(neighbour);
+            renderer.RenderPrerenderedLevel(neighbour, 0f);
         }
     }
 

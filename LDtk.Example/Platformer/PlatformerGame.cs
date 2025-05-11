@@ -233,13 +233,16 @@ public class PlatformerGame : IMonogame
         {
             levelManager.Draw();
 
-            EntityRendering();
+            for (int i = 0; i < doors.Count; i++)
+            {
+                spriteBatch.Draw(doorTexture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0.1f);
+                spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).TopLeft, Color.Black);
+                spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).BottomRight, Color.Black);
+            }
 
-            spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
-            player.Pivot * player.Size + new Vector2(player.Fliped ? -8 : 8, 0),
-            1,
-            player.Fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
-            0.1f);
+            spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0, (player.Pivot * player.Size) + new Vector2(player.Fliped ? -8 : 8, 0), 1, player.Fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0.2f);
+
+            EntityRendering();
 
             DebugRendering();
         }
@@ -304,16 +307,11 @@ public class PlatformerGame : IMonogame
 
     void EntityRendering()
     {
-        for (int i = 0; i < doors.Count; i++)
-        {
-            spriteBatch.Draw(doorTexture, doors[i].Position, doors[i].Tile, Color.White, 0, doors[i].Pivot * doors[i].Size, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).TopLeft, Color.Black);
-            spriteBatch.DrawPoint(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).BottomRight, Color.Black);
-        }
+
 
         for (int i = 0; i < crates.Count; i++)
         {
-            spriteBatch.Draw(boxTexture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(boxTexture, crates[i].Position, crates[i].Tile, Color.White, 0, crates[i].Pivot * crates[i].Size, 1, SpriteEffects.None, 0.1f);
         }
 
         for (int i = 0; i < diamonds.Count; i++)
