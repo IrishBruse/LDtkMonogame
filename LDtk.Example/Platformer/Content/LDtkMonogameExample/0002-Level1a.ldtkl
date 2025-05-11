@@ -120,7 +120,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [48,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 55,
 					"__worldY": -165
 				},
@@ -136,7 +139,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [144,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 151,
 					"__worldY": -165
 				},
@@ -152,7 +158,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [176,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 183,
 					"__worldY": -165
 				},
@@ -168,7 +177,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [80,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 87,
 					"__worldY": -165
 				},

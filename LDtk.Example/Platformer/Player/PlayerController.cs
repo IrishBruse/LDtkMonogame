@@ -12,7 +12,7 @@ using LDtkTypes.Platformer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-public class PlayerController : ILDtkEntity
+public class PlayerController
 {
     const float Gavity = 175f;
     public Animator Animator;
@@ -29,22 +29,17 @@ public class PlayerController : ILDtkEntity
     bool onPlatfrom;
     internal bool Attacking;
 
-    public long Uid { get; set; }
-    public string Identifier { get; set; }
     public Vector2 Size { get; set; }
     public Vector2 Position { get; set; }
     public Vector2 Pivot { get; set; }
     public Rectangle Tile { get; set; }
-    public Color EditorVisualColor { get; set; }
-    public Guid Iid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    int ILDtkEntity.Uid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public Color SmartColor { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Color SmartColor { get; set; }
 
     public PlayerController(PlayerSpawn spawn)
     {
         Position = spawn.Position;
         Pivot = spawn.Pivot;
-        EditorVisualColor = spawn.SmartColor;
+        SmartColor = spawn.SmartColor;
         Tile = new Rectangle(0, 0, 78, 58);
         Size = new Vector2(78, 58);
 
@@ -139,8 +134,8 @@ public class PlayerController : ILDtkEntity
         grounded = false;
 
         LDtkIntGrid collisions = level.GetIntGrid("Level");
-        Vector2 topleft = Vector2.Min(Collider.TopLeft, Collider.TopLeft + (Velocity * deltaTime)) - level.Position.ToVector2();
-        Vector2 bottomRight = Vector2.Max(Collider.BottomRight, Collider.BottomRight + (Velocity * deltaTime)) - level.Position.ToVector2();
+        Vector2 topleft = Vector2.Min(Collider.TopLeft, Collider.TopLeft + (Velocity * deltaTime));
+        Vector2 bottomRight = Vector2.Max(Collider.BottomRight, Collider.BottomRight + (Velocity * deltaTime));
 
         Point topLeftGrid = collisions.FromWorldToGridSpace(topleft);
         Point bottomRightGrid = collisions.FromWorldToGridSpace(bottomRight + (Vector2.One * collisions.TileSize));

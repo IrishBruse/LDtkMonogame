@@ -36,5 +36,6 @@ public partial class Diamond : ILDtkEntity
     public Color SmartColor { get; set; }
 
     public float Timer { get; set; }
+    public bool Collected { get; set; }
 }
 #pragma warning restore

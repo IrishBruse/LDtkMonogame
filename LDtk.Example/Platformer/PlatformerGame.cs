@@ -40,9 +40,7 @@ public class PlatformerGame : GameBase
     Texture2D fontTexture;
     Texture2D playerTexture;
 
-    public PlatformerGame() : base()
-    {
-    }
+    public PlatformerGame() : base() { }
 
     protected override void Initialize()
     {
@@ -78,7 +76,7 @@ public class PlatformerGame : GameBase
             player.Animator.SetState(Animator.Animation.ExitDoor);
             levelManager.ChangeLevelTo(player.Door.LevelIdentifier);
             destinationDoor = levelManager.CurrentLevel.GetEntity<Door>();
-            player.Position = destinationDoor.Position;
+            player.Position = destinationDoor.Position - new Vector2(0, 15);
         };
 
         doorTexture = Content.Load<Texture2D>("Art/Door");
@@ -122,7 +120,6 @@ public class PlatformerGame : GameBase
         float totalTime = (float)gameTime.TotalGameTime.TotalSeconds;
 
         UpdateDiamonds(deltaTime, totalTime);
-
         UpdateDoors(deltaTime);
         UpdateCrates(deltaTime);
 
@@ -134,10 +131,8 @@ public class PlatformerGame : GameBase
     {
         for (int i = diamonds.Count - 1; i >= 0; i--)
         {
-            if (player.Collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
+            if (diamonds[i].Collected)
             {
-                diamondsCollected++;
-
                 if (9 + (int)(diamonds[i].Timer / 0.1f) < 12)
                 {
                     diamonds[i].Timer += deltaTime;
@@ -148,6 +143,11 @@ public class PlatformerGame : GameBase
                     diamonds.Remove(diamonds[i]);
                     return;
                 }
+            }
+            else if (player.Collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
+            {
+                diamondsCollected++;
+                diamonds[i].Collected = true;
             }
             else
             {
@@ -338,27 +338,27 @@ public class PlatformerGame : GameBase
         {
             for (int i = 0; i < doors.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].SmartColor);
+                spriteBatch.DrawRect(new Box(doors[i].Position, doors[i].Size, doors[i].Pivot), doors[i].SmartColor.Alpha(128));
                 spriteBatch.DrawPoint(doors[i].Position, Color.Black);
             }
 
             for (int i = 0; i < crates.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].SmartColor);
+                spriteBatch.DrawRect(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot), crates[i].SmartColor.Alpha(128));
                 spriteBatch.DrawPoint(crates[i].Position, Color.Black);
             }
 
             for (int i = 0; i < diamonds.Count; i++)
             {
-                spriteBatch.DrawRect(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].SmartColor);
+                spriteBatch.DrawRect(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot), diamonds[i].SmartColor.Alpha(128));
                 spriteBatch.DrawPoint(diamonds[i].Position, Color.Black);
             }
 
-            spriteBatch.DrawRect(player.Collider, player.EditorVisualColor);
+            spriteBatch.DrawRect(player.Collider, player.SmartColor.Alpha(128));
             spriteBatch.DrawPoint(player.Collider.TopLeft, Color.Black);
             spriteBatch.DrawPoint(player.Collider.BottomRight, Color.Black);
 
-            spriteBatch.DrawRect(player.Attack, player.EditorVisualColor);
+            spriteBatch.DrawRect(player.Attack, player.SmartColor.Alpha(128));
             spriteBatch.DrawPoint(player.Position, Color.Black);
             spriteBatch.DrawPoint(player.Attack.Position, Color.Black);
         }

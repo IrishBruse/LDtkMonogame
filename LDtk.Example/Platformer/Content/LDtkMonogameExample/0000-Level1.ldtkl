@@ -198,7 +198,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [272,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 272,
 					"__worldY": 160
 				},
@@ -214,7 +217,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [240,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 240,
 					"__worldY": 160
 				},
@@ -230,7 +236,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [368,160],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 368,
 					"__worldY": 160
 				},
@@ -246,7 +255,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [368,224],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 368,
 					"__worldY": 224
 				},
@@ -262,7 +274,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [336,224],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 336,
 					"__worldY": 224
 				},
@@ -278,7 +293,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [304,224],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 304,
 					"__worldY": 224
 				},
@@ -294,7 +312,10 @@
 					"height": 12,
 					"defUid": 88,
 					"px": [272,64],
-					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
+					"fieldInstances": [
+						{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] },
+						{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 182, "realEditorValues": [] }
+					],
 					"__worldX": 272,
 					"__worldY": 64
 				},

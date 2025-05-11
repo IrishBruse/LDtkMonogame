@@ -38,9 +38,7 @@ public class ShooterGame : GameBase
 
     KeyboardState oldKeyboard;
 
-    public ShooterGame() : base()
-    {
-    }
+    public ShooterGame() : base() { }
 
     protected override void Initialize()
     {

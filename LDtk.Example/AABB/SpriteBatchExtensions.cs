@@ -27,4 +27,9 @@ public static class SpriteBatchExtensions
             pixelTexture.SetData(new byte[] { 0xff, 0xff, 0xff, 0xFF });
         }
     }
+
+    public static Color Alpha(this Color c, byte alpha)
+    {
+        return new Color(c.R, c.G, c.B, alpha);
+    }
 }
