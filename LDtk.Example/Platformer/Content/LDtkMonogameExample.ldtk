@@ -42,7 +42,12 @@
 		"command": "ldtkgen -i LDtkMonogameExample.ldtk -o ../LDtkTypes/ --LevelClassName CustomLevelDataName --PointAsVector2",
 		"when": "AfterSave"
 	}],
-	"flags": [ "ExportOldTableOfContentData", "PrependIndexToLevelFileNames", "MultiWorlds" ],
+	"flags": [
+		"ExportOldTableOfContentData",
+		"IgnoreBackupSuggest",
+		"PrependIndexToLevelFileNames",
+		"MultiWorlds"
+	],
 	"defs": { "layers": [
 		{
 			"__type": "Entities",

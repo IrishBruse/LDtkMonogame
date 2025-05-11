@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using LDtk;
 using LDtk.Renderer;
 
-using LDtkMonogameExample.Entities;
+using LDtkMonogameExample.Shooter.Entities;
 
 using LDtkTypes.Shooter;
 
@@ -14,7 +14,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-public class ShooterGame : Game
+public class ShooterGame : GameBase
 {
     // LDtk stuff
 
@@ -30,11 +30,7 @@ public class ShooterGame : Game
 
     // Monogame Stuff
 
-    SpriteBatch spriteBatch;
-    readonly GraphicsDeviceManager graphics;
-    float pixelScale = 1f;
 
-    public static Texture2D Pixel { get; set; }
 
     public static bool DebugF1 { get; set; }
     public static bool DebugF2 { get; set; }
@@ -42,38 +38,15 @@ public class ShooterGame : Game
 
     KeyboardState oldKeyboard;
 
-    public ShooterGame()
+    public ShooterGame() : base()
     {
-        graphics = new GraphicsDeviceManager(this);
-
-        Content.RootDirectory = "Content";
-    }
-
-    void MonogameInitialize()
-    {
-        Window.Title = "LDtkMonogame - Shooter";
-
-        spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        Window.AllowUserResizing = true;
-        IsMouseVisible = true;
-        IsFixedTimeStep = false;
-
-        graphics.PreferredBackBufferWidth = 1280;
-        graphics.PreferredBackBufferHeight = 720;
-        graphics.ApplyChanges();
-
-        Window.ClientSizeChanged += (o, e) => pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 180, 1);
-
-        pixelScale = Math.Max(GraphicsDevice.Viewport.Height / 180, 1);
-
-        Pixel = new Texture2D(GraphicsDevice, 1, 1);
-        Pixel.SetData(new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
     }
 
     protected override void Initialize()
     {
-        MonogameInitialize();
+        base.Initialize();
+
+        Window.Title = "LDtkMonogame - Shooter";
 
         camera = new Camera(GraphicsDevice);
 

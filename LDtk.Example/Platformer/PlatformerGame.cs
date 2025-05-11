@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 
-using global::Platformer;
 
 using LDtk;
 
@@ -18,7 +17,7 @@ using Microsoft.Xna.Framework.Input;
 using Platformer.Player;
 
 
-public class PlatformerGame : BaseExample
+public class PlatformerGame : GameBase
 {
     LDtkWorld world;
     LevelManager levelManager;
@@ -43,13 +42,13 @@ public class PlatformerGame : BaseExample
 
     public PlatformerGame() : base()
     {
-        Content.RootDirectory = "Content";
     }
 
     protected override void Initialize()
     {
         base.Initialize();
-        Window.Title = "LDtkMonogame - Api";
+
+        Window.Title = "LDtkMonogame - Platformer";
 
         camera = new Camera(GraphicsDevice);
 
@@ -74,10 +73,10 @@ public class PlatformerGame : BaseExample
 
         player = new PlayerController(spawnPoint);
 
-        player.animator.OnEnteredDoor += () =>
+        player.Animator.OnEnteredDoor += () =>
         {
-            player.animator.SetState(Animator.Animation.ExitDoor);
-            levelManager.ChangeLevelTo(player.door.LevelIdentifier);
+            player.Animator.SetState(Animator.Animation.ExitDoor);
+            levelManager.ChangeLevelTo(player.Door.LevelIdentifier);
             destinationDoor = levelManager.CurrentLevel.GetEntity<Door>();
             player.Position = destinationDoor.Position;
         };
@@ -135,7 +134,7 @@ public class PlatformerGame : BaseExample
     {
         for (int i = diamonds.Count - 1; i >= 0; i--)
         {
-            if (player.collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
+            if (player.Collider.Contains(new Box(diamonds[i].Position, diamonds[i].Size, diamonds[i].Pivot)))
             {
                 diamondsCollected++;
 
@@ -174,7 +173,7 @@ public class PlatformerGame : BaseExample
                 }
             }
 
-            if (player.attack.Contains(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot)) && player.attacking)
+            if (player.Attack.Contains(new Box(crates[i].Position, crates[i].Size, crates[i].Pivot)) && player.Attacking)
             {
                 crates[i].Damaged = true;
                 crates[i].Tile = new Rectangle(1 * (int)crates[i].Size.X, 0, (int)crates[i].Size.X, (int)crates[i].Size.Y);
@@ -184,7 +183,7 @@ public class PlatformerGame : BaseExample
 
     void UpdateDoors(float deltaTime)
     {
-        player.door = null;
+        player.Door = null;
 
         for (int i = 0; i < doors.Count; i++)
         {
@@ -212,11 +211,11 @@ public class PlatformerGame : BaseExample
                 doors[i].Tile = tile;
             }
 
-            if (new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).Contains(player.collider))
+            if (new Box(doors[i].Position, doors[i].Size, doors[i].Pivot).Contains(player.Collider))
             {
-                player.door = doors[i];
+                player.Door = doors[i];
 
-                if (player.animator.EnteredDoor())
+                if (player.Animator.EnteredDoor())
                 {
                     doors[i].Opening = true;
                 }
@@ -238,9 +237,9 @@ public class PlatformerGame : BaseExample
             EntityRendering();
 
             spriteBatch.Draw(playerTexture, player.Position, player.Tile, Color.White, 0,
-            player.Pivot * player.Size + new Vector2(player.fliped ? -8 : 8, 0),
+            player.Pivot * player.Size + new Vector2(player.Fliped ? -8 : 8, 0),
             1,
-            player.fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
+            player.Fliped ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
             0.1f);
 
             DebugRendering();
@@ -329,9 +328,9 @@ public class PlatformerGame : BaseExample
         // Debugging
         if (showTileColliders)
         {
-            for (int i = 0; i < player.tiles.Count; i++)
+            for (int i = 0; i < player.Tiles.Count; i++)
             {
-                spriteBatch.DrawRect(player.tiles[i].rect, new Color(128, 255, 0, 128));
+                spriteBatch.DrawRect(player.Tiles[i].rect, new Color(128, 255, 0, 128));
             }
         }
 
@@ -355,13 +354,13 @@ public class PlatformerGame : BaseExample
                 spriteBatch.DrawPoint(diamonds[i].Position, Color.Black);
             }
 
-            spriteBatch.DrawRect(player.collider, player.EditorVisualColor);
-            spriteBatch.DrawPoint(player.collider.TopLeft, Color.Black);
-            spriteBatch.DrawPoint(player.collider.BottomRight, Color.Black);
+            spriteBatch.DrawRect(player.Collider, player.EditorVisualColor);
+            spriteBatch.DrawPoint(player.Collider.TopLeft, Color.Black);
+            spriteBatch.DrawPoint(player.Collider.BottomRight, Color.Black);
 
-            spriteBatch.DrawRect(player.attack, player.EditorVisualColor);
+            spriteBatch.DrawRect(player.Attack, player.EditorVisualColor);
             spriteBatch.DrawPoint(player.Position, Color.Black);
-            spriteBatch.DrawPoint(player.attack.Position, Color.Black);
+            spriteBatch.DrawPoint(player.Attack.Position, Color.Black);
         }
     }
 }

@@ -125,22 +125,6 @@
 					"__worldY": 64
 				},
 				{
-					"__identifier": "PlayerSpawn",
-					"__grid": [2,4],
-					"__pivot": [0.5,0.5],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#ED3131",
-					"iid": "0118d221-1030-11f0-9e8b-9383e4998d88",
-					"width": 16,
-					"height": 16,
-					"defUid": 70,
-					"px": [80,128],
-					"fieldInstances": [],
-					"__worldX": 80,
-					"__worldY": 128
-				},
-				{
 					"__identifier": "Crate",
 					"__grid": [7,1],
 					"__pivot": [0.5,1],
@@ -313,6 +297,22 @@
 					"fieldInstances": [{ "__identifier": "Timer", "__type": "Float", "__value": 0, "__tile": null, "defUid": 181, "realEditorValues": [] }],
 					"__worldX": 272,
 					"__worldY": 64
+				},
+				{
+					"__identifier": "PlayerSpawn",
+					"__grid": [15,6],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#ED3131",
+					"iid": "25a276c0-1030-11f0-8512-2370ede74ca7",
+					"width": 16,
+					"height": 16,
+					"defUid": 70,
+					"px": [496,208],
+					"fieldInstances": [],
+					"__worldX": 496,
+					"__worldY": 208
 				}
 			]
 		},

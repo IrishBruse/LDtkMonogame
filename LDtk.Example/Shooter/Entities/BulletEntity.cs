@@ -1,4 +1,4 @@
-namespace LDtkMonogameExample.Entities;
+namespace LDtkMonogameExample.Shooter.Entities;
 
 using LDtk.Renderer;
 
