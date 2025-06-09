@@ -2,6 +2,14 @@
 
 Changelog for versions
 
+## [1.8.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.6.0...v1.7.0)
+
+-   Update MonoGame to v3.8.4
+
+## [1.7.1](https://github.com/IrishBruse/LDtkMonogame/compare/v1.6.0...v1.7.0)
+
+-   Fix codegen enum default bug
+
 ## [1.7.0](https://github.com/IrishBruse/LDtkMonogame/compare/v1.6.0...v1.7.0)
 
 -   Update MonoGame to v3.8.3
