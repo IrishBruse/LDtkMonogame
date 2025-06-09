@@ -11,7 +11,7 @@
 	"iid": "0108f3a0-1030-11f0-9e8b-833b93033522",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 183,
+	"nextUid": 184,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": null,
@@ -2259,7 +2259,10 @@
 					"max": null,
 					"regex": null,
 					"acceptFileTypes": null,
-					"defaultOverride": null,
+					"defaultOverride": {
+						"id": "V_String",
+						"params": ["B"]
+					},
 					"textLanguageMode": null,
 					"symmetricalRef": false,
 					"autoChainRef": true,
@@ -2557,11 +2560,14 @@
 			"savedSelections": [],
 			"cachedPixelData": { "opaqueTiles": "000000000000", "averageColors": "958a958a958a958a958a958a969a969a968a958a4eef2eee" }
 		}
-	], "enums": [{ "identifier": "Alphabet", "uid": 81, "values": [
-		{ "id": "A", "tileRect": null, "color": 0 },
-		{ "id": "B", "tileRect": null, "color": 0 },
-		{ "id": "C", "tileRect": null, "color": 0 }
-	], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [
+	], "enums": [
+		{ "identifier": "Alphabet", "uid": 81, "values": [
+			{ "id": "A", "tileRect": null, "color": 0 },
+			{ "id": "B", "tileRect": null, "color": 0 },
+			{ "id": "C", "tileRect": null, "color": 0 }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "Enum", "uid": 183, "values": [], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+	], "externalEnums": [], "levelFields": [
 		{
 			"identifier": "Biome",
 			"doc": null,

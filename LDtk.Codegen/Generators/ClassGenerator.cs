@@ -144,7 +144,7 @@ public class ClassGenerator(LDtkFileFull ldtkFile, Options options) : BaseGenera
                 string value = defaultValue.GetString();
                 string enumValue = $"{enumName}.{value}";
 
-                Line($"entity.{field.Identifier} = {enumValue};");
+                Line($"{field.Identifier} = {enumValue},");
             }
 
             switch (field._Type)

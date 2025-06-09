@@ -28,6 +28,7 @@ public partial class Crate : ILDtkEntity
         boolean = true,
         name = "test",
         multilines = "test",
+        alphabet = Alphabet.B,
     };
 
     public string Identifier { get; set; }
