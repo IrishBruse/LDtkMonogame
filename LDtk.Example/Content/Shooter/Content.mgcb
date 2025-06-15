@@ -14,18 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Characters.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Characters.png
-
 #begin Atlas/Tilemap.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -38,7 +26,40 @@
 /processorParam:TextureFormat=Color
 /build:Atlas/Tilemap.png
 
+#begin Characters.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Characters.png
+
 #begin World.ldtk
 /importer:LDtkFileImporter
 /processor:LDtkFileProcessor
 /build:World.ldtk
+
+#begin World/Level_0.ldtkl
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
+/build:World/Level_0.ldtkl;Atlas/Level_0
+
+#begin World/Level_0.ldtkl
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
+/build:World/Level_0.ldtkl
+
+#begin World/Level_1.ldtkl
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
+/build:World/Level_1.ldtkl;Atlas/Level_1
+
+#begin World/Level_1.ldtkl
+/importer:LDtkLevelImporter
+/processor:LDtkLevelProcessor
+/build:World/Level_1.ldtkl
+

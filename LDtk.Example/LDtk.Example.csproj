@@ -22,13 +22,18 @@
     </ItemGroup> -->
 
     <Target Name="Codegen" BeforeTargets="BeforeBuild">
-        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Shooter' -i Shooter/Content/World.ldtk -o ./LDtkTypes/ --LevelClassName ShooterLevelDataName --PointAsVector2" />
-        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Platformer' -i Platformer/Content/LDtkMonogameExample.ldtk -o ./LDtkTypes/ --LevelClassName PlatformerLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Shooter' -i Content/Shooter/World.ldtk -o ./LDtkTypes/ --LevelClassName ShooterLevelDataName --PointAsVector2" />
+        <Exec Command="dotnet run --project ../LDtk.Codegen/LDtk.Codegen.csproj -- -n 'LDtkTypes.Platformer' -i Content/Platformer/LDtkMonogameExample.ldtk -o ./LDtkTypes/ --LevelClassName PlatformerLevelDataName --PointAsVector2" />
     </Target>
 
     <ItemGroup>
-        <MonoGameContentReference Include="Shooter\Content\Content.mgcb" />
-        <MonoGameContentReference Include="Platformer\Content\Content.mgcb" />
+        <MonoGameContentReference Include="Content\Shooter\Content.mgcb" />
+        <MonoGameContentReference Include="Content\Platformer\Content.mgcb" />
     </ItemGroup>
+
+    <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
+        <Message Text="Restoring dotnet tools" Importance="High" />
+        <Exec Command="dotnet tool restore" />
+    </Target>
 
 </Project>

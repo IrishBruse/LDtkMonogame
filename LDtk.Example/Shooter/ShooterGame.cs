@@ -48,14 +48,17 @@ public class ShooterGame : IMonogame
 
         camera = new Camera(graphicsDevice);
 
-        // renderer = new ExampleRenderer(spriteBatch, Content);
-        // file = LDtkFile.FromFile("World", Content);
-        // spriteSheet = Content.Load<Texture2D>("Characters");
+        ContentManager Content = Globals.Content;
+        Content.RootDirectory = "Shooter";
+
+        renderer = new ExampleRenderer(spriteBatch, Content);
+        file = LDtkFile.FromFile("World", Content);
+        spriteSheet = Content.Load<Texture2D>("Characters");
 
         // None ContentManager version
-        renderer = new ExampleRenderer(spriteBatch);
-        file = LDtkFile.FromFile("Shooter/Content/World.ldtk");
-        spriteSheet = Texture2D.FromFile(graphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
+        // renderer = new ExampleRenderer(spriteBatch);
+        // file = LDtkFile.FromFile("Shooter/Content/World.ldtk");
+        // spriteSheet = Texture2D.FromFile(graphicsDevice, System.IO.Path.Combine(System.IO.Path.GetDirectoryName(file.FilePath), "Characters.png"));
 
         world = file.LoadWorld(Worlds.World.Iid);
 

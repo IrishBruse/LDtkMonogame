@@ -222,6 +222,7 @@ public class ExampleRenderer : IDisposable
 
     /// <summary> Render the prerendered level you created from PrerenderLevel(). </summary>
     /// <param name="level">Level to prerender</param>
+    /// <param name="layerDepth">A depth of the layer of this level.</param>
     /// <exception cref="LDtkException"></exception>
     public void RenderPrerenderedLevel(LDtkLevel level, float layerDepth = 0)
     {

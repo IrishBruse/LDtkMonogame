@@ -47,6 +47,7 @@ public class PlatformerGame : IMonogame
     public void Initialize()
     {
         window.Title = "LDtkMonogame - Platformer";
+        Globals.Content.RootDirectory = "Platformer";
 
         camera = new Camera(Globals.GraphicsDevice);
 
