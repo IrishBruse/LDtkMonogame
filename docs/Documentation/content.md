@@ -2,7 +2,7 @@
 
 [![LDtkMonogame.ContentPipeline](https://img.shields.io/nuget/v/LDtkMonogame.ContentPipeline?label=LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
 
-!> **Please make sure you have the `mgcb-editor` at minimum version `3.8.1.303`**
+!> **Please make sure you have the `mgcb-editor` at minimum version `3.8.4`**
 
 This is going to be a bit weird but hang on with me as the content pipeline is really particular.
 
@@ -34,7 +34,7 @@ Now with that path you can paste it into your content.mgcb here is what i did in
 ```sh
 #-------------------------------- References --------------------------------#
 
-/reference:C:/Users/IrishBruse/.nuget/packages/ldtkmonogame.contentpipeline/1.0.0/lib/net8.0/LDtk.ContentPipeline.dll
+/reference:C:/Users/IrishBruse/.nuget/packages/ldtkmonogame.contentpipeline/1.8.0/lib/net8.0/LDtk.ContentPipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 ```
