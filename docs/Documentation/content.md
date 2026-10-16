@@ -2,7 +2,7 @@
 
 [![LDtkMonogame.ContentPipeline](https://img.shields.io/nuget/v/LDtkMonogame.ContentPipeline?label=LDtkMonogame.ContentPipeline) ](https://www.nuget.org/packages/LDtkMonogame.ContentPipeline/)
 
-!> **Please make sure you have the `mgcb-editor` at minimum version `3.8.5`**
+!> **Please make sure you have the `mgcb-editor` at minimum version `3.8.6`**
 
 This is going to be a bit weird but hang on with me as the content pipeline is really particular.
 

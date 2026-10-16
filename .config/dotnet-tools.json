@@ -3,7 +3,7 @@
     "isRoot": true,
     "tools": {
         "dotnet-mgcb": {
-            "version": "3.8.5",
+            "version": "3.8.6",
             "commands": ["mgcb"]
         },
         "xmldocmd": {
@@ -11,11 +11,11 @@
             "commands": ["xmldocmd"]
         },
         "dotnet-mgcb-editor": {
-            "version": "3.8.5",
+            "version": "3.8.6",
             "commands": ["mgcb-editor"]
         },
         "dotnet-mgcb-editor-linux": {
-            "version": "3.8.5",
+            "version": "3.8.6",
             "commands": ["mgcb-editor-linux"]
         }
     }

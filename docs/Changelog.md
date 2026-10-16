@@ -2,6 +2,11 @@
 
 Changelog for versions
 
+## [1.8.3](https://github.com/IrishBruse/LDtkMonogame/compare/v1.8.2...v1.8.3)
+
+-   Update MonoGame to v3.8.6
+
+
 ## [1.8.2](https://github.com/IrishBruse/LDtkMonogame/compare/v1.8.1...v1.8.2`)
 
 -   Update MonoGame to v3.8.5

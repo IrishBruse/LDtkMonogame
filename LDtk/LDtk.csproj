@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Library</OutputType>
@@ -33,7 +33,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.5" />
+        <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.6" />
     </ItemGroup>
 
     <ItemGroup>
